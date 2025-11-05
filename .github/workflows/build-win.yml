@@ -1,0 +1,29 @@
+name: Build Windows Portable
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-win:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies and build executable
+        run: |
+          py -3.11 -m pip install -U pip pyinstaller
+          py -3.11 -m PyInstaller -F -w -n WuziQ -p . src\ui_tk.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: WuziQ-windows
+          path: dist/WuziQ.exe

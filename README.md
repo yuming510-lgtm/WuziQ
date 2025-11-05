@@ -26,6 +26,34 @@ remote development environments—simply forward port 8000 and open it from your
 local browser. The page lets you click cells to place stones, undo moves, reset
 the board, or change the AI side.
 
+## Running the Desktop UI
+
+The Tkinter-powered desktop client provides an offline experience with mouse
+input, undo/reset controls, and AI side toggling. Launch it with:
+
+```bash
+python -m src.ui_tk --size 15 --ai white
+```
+
+The window highlights the latest move and displays whose turn it is along the
+top bar. Buttons at the bottom let you undo the last turn (rewinding paired AI
+and player moves), reset the match, or cycle the AI side between off/black/white.
+
+![WuziQ desktop UI](assets/desktop_screenshot.png)
+
+### Windows portable build
+
+Run the helper script to produce a standalone `WuziQ.exe` using PyInstaller on
+Windows 11:
+
+```bat
+scripts\build_win.bat
+```
+
+The same steps are executed automatically in CI by the
+`.github/workflows/build-win.yml` workflow, which uploads the packaged binary as
+a build artifact.
+
 ## Running the Game (CLI)
 
 You can start a terminal match using either of the following commands:
