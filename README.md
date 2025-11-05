@@ -5,12 +5,30 @@ A command-line Gomoku implementation written in pure Python. The game defaults t
 
 ## Installation & Requirements
 
-The project uses only the Python standard library. Ensure Python 3.10+ is
-available (for type annotations used in the code).
+The core game logic depends only on the Python standard library. To use the web
+interface install the additional dependency listed in `requirements.txt`:
 
-## Running the Game
+```bash
+pip install -r requirements.txt
+```
 
-You can start a match using either of the following commands:
+## Running the Web UI
+
+Launch the lightweight Flask server and open the exposed address (default
+`http://127.0.0.1:8000`) in a browser:
+
+```bash
+python -m src.webapp
+```
+
+The server binds to `0.0.0.0:8000`, making it suitable for Codespaces or other
+remote development environments—simply forward port 8000 and open it from your
+local browser. The page lets you click cells to place stones, undo moves, reset
+the board, or change the AI side.
+
+## Running the Game (CLI)
+
+You can start a terminal match using either of the following commands:
 
 ```bash
 python -m src.cli

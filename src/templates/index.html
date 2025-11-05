@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WuziQ Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header>
+      <h1>WuziQ</h1>
+      <p class="tagline">Play minimalist Gomoku in your browser.</p>
+    </header>
+    <main>
+      <section class="controls">
+        <div class="status" id="status-text">Loading…</div>
+        <div class="messages" id="message"></div>
+        <div class="control-row">
+          <button id="undo-btn" type="button">Undo</button>
+          <button id="reset-btn" type="button">Reset</button>
+        </div>
+        <div class="control-row">
+          <label>
+            Board size
+            <input id="size-input" type="number" min="5" max="25" value="15" />
+          </label>
+          <label>
+            AI side
+            <select id="ai-select">
+              <option value="off">Off</option>
+              <option value="black">Black</option>
+              <option value="white">White</option>
+            </select>
+          </label>
+        </div>
+      </section>
+      <section class="board-wrapper">
+        <div id="board" class="board" role="grid" aria-label="Gomoku board"></div>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </body>
+</html>
