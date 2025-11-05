@@ -29,21 +29,39 @@ Optional flags:
   python -m src.cli --size 10
   ```
 
-During play, enter moves such as `H8` (column letter, row number) or
-space-separated numeric coordinates like `8 7`. Enter `quit` or `exit` to end
-the session early.
+- `--ai {off,black,white}` — enable a simple AI opponent. `black` lets the AI
+  play first, `white` makes the AI respond to the human's black stones. The
+  default is `off` (two human players).
+
+During play you can enter moves such as `H8` (column letter, row number) or
+space-separated numeric coordinates like `8 7`. Game commands are prefixed with a
+colon:
+
+- `:undo` — undo the previous move (in AI games this rewinds the AI and human
+  moves together).
+- `:save filename.json` — store the current game state to disk.
+- `:load filename.json` — resume a saved game.
+- `:quit` — abort the match.
 
 ## Example Gameplay
 
 ```
 Minimalist Gomoku
-Board size: 15x15
+Board size: 10x10
 
-    A B C D E F G H I J K L M N O
- 1  . . . . . . . . . . . . . . .
- 2  . . . . . . . . . . . . . . .
+    A B C D E F G H I J
+ 1  . . . . . . . . . .
+ 2  . . . . . . . . . .
  ...
 Player B, enter your move: H8
+
+AI (W) plays H9.
+
+Player B, enter your move: :save demo.json
+Game saved to demo.json.
+
+Player B, enter your move: :undo
+Undid the latest AI and player moves to maintain turn order.
 ```
 
 ## Running Tests
