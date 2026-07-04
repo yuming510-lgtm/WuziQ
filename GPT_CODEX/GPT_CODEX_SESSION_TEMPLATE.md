@@ -85,3 +85,13 @@ SESSION_GOAL:
 ## SESSION_CLOSE_SUMMARY
 
 等待会话结束后填写。
+
+---
+
+## TODAY_WEATHER
+
+地点：东京，日本  
+日期：2026-07-04  
+记录时间：09:45 JST  
+天气内容：用于验证 GitHub Markdown 文件的 GPT 写入与更新链路。  
+备注：后续正式使用时，可将真实天气源结果或其他测试内容写入本区域。
