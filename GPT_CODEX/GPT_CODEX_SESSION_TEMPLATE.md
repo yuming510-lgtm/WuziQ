@@ -4,8 +4,8 @@
 
 ### USER_CONTROL
 
-- [x] RUN
-- [ ] PAUSE
+- [ ] RUN
+- [x] PAUSE
 - [ ] STOP
 
 ### SESSION_STATUS
