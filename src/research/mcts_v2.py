@@ -46,17 +46,18 @@ def _other(player: Player) -> Player:
     return "W" if player == "B" else "B"
 
 
-def _flip_player(player: Player) -> Player:
-    return _other(player)
-
-
 def paired_opening(
     board_size: int,
     seed: int,
     opening_plies: int = 4,
     color_swap: bool = False,
 ) -> list[tuple[Player, Coordinate]]:
-    """Create a reproducible four-ply opening; paired games swap colors only."""
+    """Create a reproducible B-W-B-W opening shared by both games in a pair.
+
+    ``color_swap`` remains accepted for compatibility with saved schedules, but
+    the opening itself never changes sides. The paired schedule swaps only the
+    model assigned to black and white, which also swaps who makes the fifth ply.
+    """
 
     if board_size < 5:
         raise ValueError("Board size must be at least 5")
@@ -85,8 +86,6 @@ def paired_opening(
         player: Player = "W" if ply % 2 else "B"
         opening.append((player, rng.choice(sorted(nearby))))
 
-    if color_swap:
-        return [(_flip_player(player), coord) for player, coord in opening]
     return opening
 
 

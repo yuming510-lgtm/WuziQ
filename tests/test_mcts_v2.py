@@ -273,7 +273,7 @@ def _small_runner_config(games_per_matchup: int = 2) -> dict:
     }
 
 
-def test_v2_opening_family_is_diverse_and_color_swap_preserves_coordinates() -> None:
+def test_v2_opening_family_is_diverse_and_pair_keeps_opening_colors() -> None:
     runner = _v2_runner()
     openings = [
         tuple((row, col) for _, (row, col) in runner.paired_opening(9, seed))
@@ -283,10 +283,23 @@ def test_v2_opening_family_is_diverse_and_color_swap_preserves_coordinates() -> 
     swapped = runner.paired_opening(9, 510, color_swap=True)
 
     assert len(set(openings)) >= 90
-    assert [coord for _, coord in first] == [coord for _, coord in swapped]
-    assert [player for player, _ in swapped] == [
-        "W" if player == "B" else "B" for player, _ in first
-    ]
+    assert swapped == first
+
+
+def test_v2_paired_schedule_swaps_models_and_fifth_ply_owner_only() -> None:
+    runner = _v2_runner()
+    schedule = runner.build_schedule(_small_runner_config())
+    first, swapped = schedule
+
+    opening0 = runner.paired_opening(9, first["opening_seed"], color_swap=False)
+    opening1 = runner.paired_opening(9, swapped["opening_seed"], color_swap=True)
+    assert opening1 == opening0
+    assert first["black_model"] == swapped["white_model"]
+    assert first["white_model"] == swapped["black_model"]
+    assert first["black_model"] != swapped["black_model"]
+    assert first["black_model"] == "A"
+    assert swapped["black_model"] == "D1"
+    assert first["black_model"] != swapped["black_model"]  # fifth ply changes model
 
 
 def test_v2_schedule_ids_are_unique_and_fair_budgets_match() -> None:

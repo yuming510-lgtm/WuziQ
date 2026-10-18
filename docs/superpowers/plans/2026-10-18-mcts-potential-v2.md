@@ -29,7 +29,7 @@
 - D2's immediate win and forced block must work even when rollout budget is zero/very small; pin with tactical board tests.
 - An interrupted rollout must not be backpropagated or counted as a completed simulation; pin with separate completed/truncated counters.
 - Root expansion must visit all tactical candidates before reusing budget on only a subset; pin with a bounded deterministic simulation test.
-- Resume and paired color swaps must be idempotent and use the same opening coordinates with swapped colors; pin with unique-ID and schedule tests.
+- Resume and paired seat swaps must be idempotent and use the same B-W-B-W opening; swap only which model owns black/white so the fifth-ply model changes; pin with unique-ID and schedule tests.
 
 ---
 

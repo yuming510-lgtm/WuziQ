@@ -1,0 +1,93 @@
+{
+  "as_of_utc": "2026-10-18T05:25:46+00:00",
+  "corrected_code_commit": "f2ebacc710b304a30fadd083e76f8bcca4c21334",
+  "scheduled_games": 2960,
+  "completed_retained_games": 1000,
+  "remaining_games": 1960,
+  "per_phase_remaining_games": {
+    "fair-9x9-50ms": 300,
+    "fair-9x9-200ms": 300,
+    "fair-9x9-1s": 300,
+    "fair-9x9-5s": 500,
+    "extreme-9x9-d2-200ms-vs-c-50ms": 100,
+    "extreme-9x9-d2-1s-vs-c-50ms": 100,
+    "extreme-9x9-d2-5s-vs-c-50ms": 100,
+    "fair-15x15-50ms-supplement": 120,
+    "fair-15x15-1s-supplement": 120,
+    "extreme-15x15-d2-1s-vs-c-50ms-supplement": 20
+  },
+  "remaining_seconds_estimate": 22311.652796574734,
+  "remaining_hours_estimate": 6.197681332381871,
+  "planning_hours_with_1_5x_margin": 9.296521998572805,
+  "estimate_basis": "V1 V2 preflight serial-game pilot component estimates scaled to exact remaining schedule; benchmark rerun on corrected optimized D2 confirms budget-limited calls remain near configured wall time; updated fixed-target D2 throughput 10,000 in 50.55s and 100,000 in 476.31s is a separate performance test, not included in tournament estimate.",
+  "corrected_performance_resources": {
+    "cpu_count": 3,
+    "memory_total_bytes": 10452471808,
+    "memory_available_bytes": 9860407296,
+    "disk_total_bytes": 33770192896,
+    "disk_used_bytes": 34983936,
+    "disk_free_bytes": 32000446464
+  },
+  "mcts_actual_simulation_checks": [
+    {
+      "model": "D1",
+      "requested": 1000,
+      "actual": 1000,
+      "seconds": 17.788332,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "requested": 10000,
+      "actual": 10000,
+      "seconds": 50.546196,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "requested": 100000,
+      "actual": 100000,
+      "seconds": 476.312242,
+      "timed_out": false
+    }
+  ],
+  "current_raw_jsonl_bytes": 5617692,
+  "projected_final_raw_jsonl_bytes": 13793303.999999998,
+  "projected_formal_jsonl_MiB": 13.154319763183592,
+  "drive_snapshot_verified": true,
+  "drive_snapshot_game_count": 1000,
+  "resource_policy": "single sequential runner; 1 CPU; 3 vCPU available; 9.7 GiB RAM; 9.2 GiB available before formal resume; 30 GiB disk free; per-game fsync and ID dedupe.",
+  "live_estimate_after_1904_games": {
+    "as_of_utc": "2026-10-18T06:36:06.552968+00:00",
+    "games_completed": 1904,
+    "remaining_games": 1056,
+    "observed_current_phase": "fair-9x9-5s",
+    "observed_matchups": {
+      "A-D1": {
+        "completed": 100,
+        "mean_game_thinking_seconds": 40.3,
+        "mean_moves": 21.1
+      },
+      "A-D2": {
+        "completed": 4,
+        "mean_game_thinking_seconds": 142.5,
+        "mean_moves": 66.0,
+        "note": "3 of 4 games ended in full-board draws; the fourth ended in 21 moves"
+      }
+    },
+    "remaining_wallclock_estimate_hours": {
+      "central": 24.0,
+      "planning_upper": 36.0
+    },
+    "cpu": {
+      "workers": 1,
+      "expected_core_hours": {
+        "central": 24,
+        "upper": 36
+      }
+    },
+    "memory_expected": "Below 0.2 GiB; runner RSS measured at about 55 MiB before this update.",
+    "storage_expected": "About 14 MiB final raw per-game JSONL, plus small summaries and code; over 30 GiB free.",
+    "basis": "The earlier 9.3h estimate underweighted long 5s games. Revised from observed D1-vs-A (100 games) and D2-vs-A (4 games) thinking time, configured remaining matchups and short-budget pilot phases. The estimate is a planning range, not a completion guarantee; continue recalculating from completed phase rows."
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "board_size": 9,
+  "code_commit": "f2ebacc710b304a30fadd083e76f8bcca4c21334",
+  "jobs": [
+    {
+      "max_seconds": 30.0,
+      "model": "D1",
+      "requested_simulations": 1000
+    },
+    {
+      "max_seconds": 120.0,
+      "model": "D2",
+      "requested_simulations": 10000
+    },
+    {
+      "max_seconds": 750.0,
+      "model": "D2",
+      "requested_simulations": 100000
+    }
+  ],
+  "position_id": "opening-9x9",
+  "results": [
+    {
+      "actual_simulations": 1000,
+      "elapsed_seconds": 17.78833207400021,
+      "max_seconds": 30.0,
+      "model": "D1",
+      "move": [
+        5,
+        5
+      ],
+      "nodes": 46685,
+      "requested_simulations": 1000,
+      "rollout_plies": 44736,
+      "seed": 11952664453774101008,
+      "terminal_simulations": 1000,
+      "timed_out": false,
+      "tree_depth": 2,
+      "truncated_simulations": 0,
+      "wall_seconds": 17.78839492499992
+    },
+    {
+      "actual_simulations": 10000,
+      "elapsed_seconds": 50.54619643299975,
+      "max_seconds": 120.0,
+      "model": "D2",
+      "move": [
+        5,
+        4
+      ],
+      "nodes": 461975,
+      "requested_simulations": 10000,
+      "rollout_plies": 434674,
+      "seed": 4917224807458613225,
+      "terminal_simulations": 10000,
+      "timed_out": false,
+      "tree_depth": 3,
+      "truncated_simulations": 0,
+      "wall_seconds": 50.54625760199997
+    },
+    {
+      "actual_simulations": 100000,
+      "elapsed_seconds": 476.3122411130007,
+      "max_seconds": 750.0,
+      "model": "D2",
+      "move": [
+        3,
+        4
+      ],
+      "nodes": 4411666,
+      "requested_simulations": 100000,
+      "rollout_plies": 4089262,
+      "seed": 8004726062643427969,
+      "terminal_simulations": 100000,
+      "timed_out": false,
+      "tree_depth": 5,
+      "truncated_simulations": 0,
+      "wall_seconds": 476.31238748299984
+    }
+  ],
+  "seed_basis": 20261018
+}

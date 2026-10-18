@@ -1,0 +1,57 @@
+{
+  "label": "corrected-pairing preflight; invalid-pairing timings are workload-only and never outcome evidence",
+  "timestamp_utc": "2026-10-18T07:09:40Z",
+  "scheduled_games": 2960,
+  "games_by_board": {
+    "9": 2700,
+    "15": 260
+  },
+  "compute_environment": {
+    "cpu_model": "Intel Xeon Platinum 8573C",
+    "visible_vcpus": 3,
+    "estimated_active_workers": 1,
+    "ram_total_gib": 9.7,
+    "ram_available_gib": 9.2,
+    "observed_previous_runner_rss_mib": 62,
+    "disk_free_gib": 30,
+    "gpu_required": false
+  },
+  "storage_estimate": {
+    "active_jsonl_uncompressed_mb": 30,
+    "snapshot_zip_mb": 5,
+    "available_disk_gib": 30,
+    "basis": "12 MiB uncompressed for 1918 completed games, extrapolated with margin"
+  },
+  "timing_sample": {
+    "games": 1918,
+    "phase_summary": {
+      "fair-9x9-1s": {
+        "games_observed": 600,
+        "mean_recorded_search_seconds_per_game": 8.25,
+        "summed_recorded_search_hours": 1.375
+      },
+      "fair-9x9-200ms": {
+        "games_observed": 600,
+        "mean_recorded_search_seconds_per_game": 1.53,
+        "summed_recorded_search_hours": 0.256
+      },
+      "fair-9x9-50ms": {
+        "games_observed": 600,
+        "mean_recorded_search_seconds_per_game": 0.38,
+        "summed_recorded_search_hours": 0.064
+      },
+      "fair-9x9-5s": {
+        "games_observed": 118,
+        "mean_recorded_search_seconds_per_game": 55.68,
+        "summed_recorded_search_hours": 1.825
+      }
+    },
+    "sample_warning": "Superseded pairing run; timing only; outcome data excluded."
+  },
+  "wall_clock_estimate": {
+    "central_hours": 27,
+    "upper_hours": 39,
+    "basis": "At 1904 games, observed remaining workload estimate was 24h central / 36h upper for the remaining 1056. The superseded 1904-game prefix consumed about 3.0 recorded search-hours, which must be rerun under corrected pairing; rounded full-run estimate is 27h / 39h. Most uncertainty is the high-budget 5-second D2 games."
+  },
+  "resource_estimate": "One CPU core near 100% for most runtime; about 60-100 MiB resident memory; no GPU; under 50 MiB expected storage. At least one 24-hour Drive snapshot attempt is expected."
+}
