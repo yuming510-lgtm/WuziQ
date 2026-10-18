@@ -1,0 +1,1474 @@
+{
+  "9": {
+    "scope": "main",
+    "board_size": 9,
+    "results": {
+      "game_count": 1200,
+      "models": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "win_matrix": {
+        "A": {
+          "A": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "B": {
+            "games": 200,
+            "wins": 5,
+            "losses": 65,
+            "draws": 130,
+            "score_rate": 0.35
+          },
+          "C": {
+            "games": 200,
+            "wins": 0,
+            "losses": 90,
+            "draws": 110,
+            "score_rate": 0.275
+          },
+          "D": {
+            "games": 200,
+            "wins": 188,
+            "losses": 1,
+            "draws": 11,
+            "score_rate": 0.9675
+          }
+        },
+        "B": {
+          "A": {
+            "games": 200,
+            "wins": 65,
+            "losses": 5,
+            "draws": 130,
+            "score_rate": 0.65
+          },
+          "B": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "C": {
+            "games": 200,
+            "wins": 1,
+            "losses": 199,
+            "draws": 0,
+            "score_rate": 0.005
+          },
+          "D": {
+            "games": 200,
+            "wins": 198,
+            "losses": 2,
+            "draws": 0,
+            "score_rate": 0.99
+          }
+        },
+        "C": {
+          "A": {
+            "games": 200,
+            "wins": 90,
+            "losses": 0,
+            "draws": 110,
+            "score_rate": 0.725
+          },
+          "B": {
+            "games": 200,
+            "wins": 199,
+            "losses": 1,
+            "draws": 0,
+            "score_rate": 0.995
+          },
+          "C": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D": {
+            "games": 200,
+            "wins": 200,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 1.0
+          }
+        },
+        "D": {
+          "A": {
+            "games": 200,
+            "wins": 1,
+            "losses": 188,
+            "draws": 11,
+            "score_rate": 0.0325
+          },
+          "B": {
+            "games": 200,
+            "wins": 2,
+            "losses": 198,
+            "draws": 0,
+            "score_rate": 0.01
+          },
+          "C": {
+            "games": 200,
+            "wins": 0,
+            "losses": 200,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pairwise": {
+        "A-B": {
+          "models": {
+            "A": {
+              "games": 200,
+              "wins": 5,
+              "losses": 65,
+              "draws": 130,
+              "win_rate": 0.025,
+              "pure_win_rate": 0.025,
+              "pure_win_rate_ci95": [
+                0.006944444444444444,
+                0.050347222222222224
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.010724719651761267,
+                0.05717834040664198
+              ],
+              "decisive_win_rate": 0.07142857142857142,
+              "decisive_win_rate_ci95": [
+                0.030894217037847033,
+                0.15655412217095316
+              ],
+              "score_rate": 0.35,
+              "score_rate_ci95": [
+                0.2713827730429293,
+                0.41560625789141403
+              ],
+              "moves": 6007,
+              "average_seconds_per_move": 0.0004502700486087721,
+              "average_nodes_per_move": 43.80705843182953,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 0.0,
+              "timed_out_moves": 1,
+              "illegal_moves": 0
+            },
+            "B": {
+              "games": 200,
+              "wins": 65,
+              "losses": 5,
+              "draws": 130,
+              "win_rate": 0.325,
+              "pure_win_rate": 0.325,
+              "pure_win_rate_ci95": [
+                0.17879182449494951,
+                0.5006589330808077
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.26391571539234293,
+                0.39268014883970037
+              ],
+              "decisive_win_rate": 0.9285714285714286,
+              "decisive_win_rate_ci95": [
+                0.8434458778290468,
+                0.969105782962153
+              ],
+              "score_rate": 0.65,
+              "score_rate_ci95": [
+                0.5883019649621212,
+                0.7296115451388887
+              ],
+              "moves": 6025,
+              "average_seconds_per_move": 0.04756532741742606,
+              "average_nodes_per_move": 659.8844813278008,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.3870539419087138,
+              "timed_out_moves": 5765,
+              "illegal_moves": 0
+            }
+          },
+          "games": 200,
+          "wins_first": 5,
+          "wins_second": 65,
+          "draws": 130,
+          "score_intervals_overlap": false
+        },
+        "A-C": {
+          "models": {
+            "A": {
+              "games": 200,
+              "wins": 0,
+              "losses": 90,
+              "draws": 110,
+              "win_rate": 0.0,
+              "pure_win_rate": 0.0,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.0,
+                0.018845326377266564
+              ],
+              "decisive_win_rate": 0.0,
+              "decisive_win_rate_ci95": [
+                3.469446951953614e-18,
+                0.04093562556432677
+              ],
+              "score_rate": 0.275,
+              "score_rate_ci95": [
+                0.2508680555555556,
+                0.3106060606060606
+              ],
+              "moves": 5080,
+              "average_seconds_per_move": 0.0004321462781487796,
+              "average_nodes_per_move": 44.124409448818895,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 0.0,
+              "timed_out_moves": 0,
+              "illegal_moves": 0
+            },
+            "C": {
+              "games": 200,
+              "wins": 90,
+              "losses": 0,
+              "draws": 110,
+              "win_rate": 0.45,
+              "pure_win_rate": 0.45,
+              "pure_win_rate_ci95": [
+                0.3784722222222222,
+                0.5
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.3826406840224836,
+                0.5192438486152431
+              ],
+              "decisive_win_rate": 1.0,
+              "decisive_win_rate_ci95": [
+                0.9590643744356734,
+                1.0
+              ],
+              "score_rate": 0.725,
+              "score_rate_ci95": [
+                0.6905776515151515,
+                0.7491319444444444
+              ],
+              "moves": 5089,
+              "average_seconds_per_move": 0.046994113134014304,
+              "average_nodes_per_move": 381.7508351346041,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 2.1173118490862644,
+              "timed_out_moves": 4745,
+              "illegal_moves": 0
+            }
+          },
+          "games": 200,
+          "wins_first": 0,
+          "wins_second": 90,
+          "draws": 110,
+          "score_intervals_overlap": false
+        },
+        "A-D": {
+          "models": {
+            "A": {
+              "games": 200,
+              "wins": 188,
+              "losses": 1,
+              "draws": 11,
+              "win_rate": 0.94,
+              "pure_win_rate": 0.94,
+              "pure_win_rate_ci95": [
+                0.8958333333333333,
+                0.96875
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.8980683070423372,
+                0.9653478057456681
+              ],
+              "decisive_win_rate": 0.9947089947089947,
+              "decisive_win_rate_ci95": [
+                0.970643094555003,
+                0.9990653962621839
+              ],
+              "score_rate": 0.9675,
+              "score_rate_ci95": [
+                0.9405273437499999,
+                0.984375
+              ],
+              "moves": 2520,
+              "average_seconds_per_move": 0.0005868248765864337,
+              "average_nodes_per_move": 61.53968253968254,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 0.0,
+              "timed_out_moves": 0,
+              "illegal_moves": 0
+            },
+            "D": {
+              "games": 200,
+              "wins": 1,
+              "losses": 188,
+              "draws": 11,
+              "win_rate": 0.005,
+              "pure_win_rate": 0.005,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.015625
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.0008831687156009762,
+                0.027773704397892923
+              ],
+              "decisive_win_rate": 0.005291005291005291,
+              "decisive_win_rate_ci95": [
+                0.0009346037378160626,
+                0.029356905444997007
+              ],
+              "score_rate": 0.0325,
+              "score_rate_ci95": [
+                0.016059027777777776,
+                0.06032986111111111
+              ],
+              "moves": 2430,
+              "average_seconds_per_move": 0.04922143369959128,
+              "average_nodes_per_move": 225.3761316872428,
+              "average_simulations_per_move": 69.49670781893005,
+              "average_completed_depth": 1.1197530864197531,
+              "timed_out_moves": 2421,
+              "illegal_moves": 0
+            }
+          },
+          "games": 200,
+          "wins_first": 188,
+          "wins_second": 1,
+          "draws": 11,
+          "score_intervals_overlap": false
+        },
+        "B-C": {
+          "models": {
+            "B": {
+              "games": 200,
+              "wins": 1,
+              "losses": 199,
+              "draws": 0,
+              "win_rate": 0.005,
+              "pure_win_rate": 0.005,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.015625
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.0008831687156009762,
+                0.027773704397892923
+              ],
+              "decisive_win_rate": 0.005,
+              "decisive_win_rate_ci95": [
+                0.0008831687156009762,
+                0.027773704397892923
+              ],
+              "score_rate": 0.005,
+              "score_rate_ci95": [
+                0.0,
+                0.015625
+              ],
+              "moves": 1078,
+              "average_seconds_per_move": 0.04910167200185994,
+              "average_nodes_per_move": 781.7940630797774,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.0,
+              "timed_out_moves": 1078,
+              "illegal_moves": 0
+            },
+            "C": {
+              "games": 200,
+              "wins": 199,
+              "losses": 1,
+              "draws": 0,
+              "win_rate": 0.995,
+              "pure_win_rate": 0.995,
+              "pure_win_rate_ci95": [
+                0.984375,
+                1.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.9722262956021069,
+                0.9991168312843989
+              ],
+              "decisive_win_rate": 0.995,
+              "decisive_win_rate_ci95": [
+                0.9722262956021069,
+                0.9991168312843989
+              ],
+              "score_rate": 0.995,
+              "score_rate_ci95": [
+                0.984375,
+                1.0
+              ],
+              "moves": 1177,
+              "average_seconds_per_move": 0.04903750601273866,
+              "average_nodes_per_move": 385.83857264231096,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 2.044180118946474,
+              "timed_out_moves": 1177,
+              "illegal_moves": 0
+            }
+          },
+          "games": 200,
+          "wins_first": 1,
+          "wins_second": 199,
+          "draws": 0,
+          "score_intervals_overlap": false
+        },
+        "B-D": {
+          "models": {
+            "B": {
+              "games": 200,
+              "wins": 198,
+              "losses": 2,
+              "draws": 0,
+              "win_rate": 0.99,
+              "pure_win_rate": 0.99,
+              "pure_win_rate_ci95": [
+                0.9791666666666667,
+                1.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.9642782382838231,
+                0.9972533418664555
+              ],
+              "decisive_win_rate": 0.99,
+              "decisive_win_rate_ci95": [
+                0.9642782382838231,
+                0.9972533418664555
+              ],
+              "score_rate": 0.99,
+              "score_rate_ci95": [
+                0.9809027777777778,
+                1.0
+              ],
+              "moves": 872,
+              "average_seconds_per_move": 0.04904282796559483,
+              "average_nodes_per_move": 782.1353211009174,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.0,
+              "timed_out_moves": 872,
+              "illegal_moves": 0
+            },
+            "D": {
+              "games": 200,
+              "wins": 2,
+              "losses": 198,
+              "draws": 0,
+              "win_rate": 0.01,
+              "pure_win_rate": 0.01,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.020833333333333332
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.0027466581335444384,
+                0.035721761716176796
+              ],
+              "decisive_win_rate": 0.01,
+              "decisive_win_rate_ci95": [
+                0.0027466581335444384,
+                0.035721761716176796
+              ],
+              "score_rate": 0.01,
+              "score_rate_ci95": [
+                0.0,
+                0.020833333333333332
+              ],
+              "moves": 774,
+              "average_seconds_per_move": 0.049939207521961695,
+              "average_nodes_per_move": 162.26485788113695,
+              "average_simulations_per_move": 23.811369509043928,
+              "average_completed_depth": 1.2739018087855296,
+              "timed_out_moves": 774,
+              "illegal_moves": 0
+            }
+          },
+          "games": 200,
+          "wins_first": 198,
+          "wins_second": 2,
+          "draws": 0,
+          "score_intervals_overlap": false
+        },
+        "C-D": {
+          "models": {
+            "C": {
+              "games": 200,
+              "wins": 200,
+              "losses": 0,
+              "draws": 0,
+              "win_rate": 1.0,
+              "pure_win_rate": 1.0,
+              "pure_win_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.9811546736227335,
+                1.0
+              ],
+              "decisive_win_rate": 1.0,
+              "decisive_win_rate_ci95": [
+                0.9811546736227335,
+                1.0
+              ],
+              "score_rate": 1.0,
+              "score_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "moves": 880,
+              "average_seconds_per_move": 0.04903010398295671,
+              "average_nodes_per_move": 406.53636363636366,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.9977272727272728,
+              "timed_out_moves": 880,
+              "illegal_moves": 0
+            },
+            "D": {
+              "games": 200,
+              "wins": 0,
+              "losses": 200,
+              "draws": 0,
+              "win_rate": 0.0,
+              "pure_win_rate": 0.0,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.0,
+                0.018845326377266564
+              ],
+              "decisive_win_rate": 0.0,
+              "decisive_win_rate_ci95": [
+                0.0,
+                0.018845326377266564
+              ],
+              "score_rate": 0.0,
+              "score_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "moves": 780,
+              "average_seconds_per_move": 0.04918717346539114,
+              "average_nodes_per_move": 160.26153846153846,
+              "average_simulations_per_move": 22.31153846153846,
+              "average_completed_depth": 1.2525641025641026,
+              "timed_out_moves": 780,
+              "illegal_moves": 0
+            }
+          },
+          "games": 200,
+          "wins_first": 200,
+          "wins_second": 0,
+          "draws": 0,
+          "score_intervals_overlap": false
+        }
+      },
+      "ranking": [
+        {
+          "model": "C",
+          "games": 600,
+          "wins": 489,
+          "losses": 1,
+          "draws": 110,
+          "win_rate": 0.815,
+          "pure_win_rate": 0.815,
+          "pure_win_rate_ci95": [
+            0.7911931818181818,
+            0.8310185185185185
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.7819605807929769,
+            0.8440315475683916
+          ],
+          "decisive_win_rate": 0.9979591836734694,
+          "decisive_win_rate_ci95": [
+            0.988531733453399,
+            0.9996396549216398
+          ],
+          "score_rate": 0.9066666666666666,
+          "score_rate_ci95": [
+            0.8954650673400674,
+            0.9146412037037037
+          ],
+          "moves": 7146,
+          "average_seconds_per_move": 0.047581399079344264,
+          "average_nodes_per_move": 385.47635040582145,
+          "average_simulations_per_move": 0.0,
+          "average_completed_depth": 2.0905401623285753,
+          "timed_out_moves": 6802,
+          "illegal_moves": 0
+        },
+        {
+          "model": "B",
+          "games": 600,
+          "wins": 264,
+          "losses": 206,
+          "draws": 130,
+          "win_rate": 0.44,
+          "pure_win_rate": 0.44,
+          "pure_win_rate_ci95": [
+            0.3877314814814815,
+            0.5027448968855217
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.40078790423541655,
+            0.4799754998862277
+          ],
+          "decisive_win_rate": 0.5617021276595745,
+          "decisive_win_rate_ci95": [
+            0.5165236195026031,
+            0.6058801907177005
+          ],
+          "score_rate": 0.5483333333333333,
+          "score_rate_ci95": [
+            0.5233970565025253,
+            0.5789930555555556
+          ],
+          "moves": 7975,
+          "average_seconds_per_move": 0.04793455123435683,
+          "average_nodes_per_move": 689.730407523511,
+          "average_simulations_per_move": 0.0,
+          "average_completed_depth": 1.2924137931034483,
+          "timed_out_moves": 7715,
+          "illegal_moves": 0
+        },
+        {
+          "model": "A",
+          "games": 600,
+          "wins": 193,
+          "losses": 156,
+          "draws": 251,
+          "win_rate": 0.32166666666666666,
+          "pure_win_rate": 0.32166666666666666,
+          "pure_win_rate_ci95": [
+            0.30324074074074076,
+            0.3344907407407407
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.2855266131737779,
+            0.3600757268544421
+          ],
+          "decisive_win_rate": 0.5530085959885387,
+          "decisive_win_rate_ci95": [
+            0.500551394515925,
+            0.6043115661000567
+          ],
+          "score_rate": 0.5308333333333334,
+          "score_rate_ci95": [
+            0.4965277777777778,
+            0.561027593644781
+          ],
+          "moves": 13607,
+          "average_seconds_per_move": 0.0004687935594904466,
+          "average_nodes_per_move": 47.20959800102888,
+          "average_simulations_per_move": 0.0,
+          "average_completed_depth": 0.0,
+          "timed_out_moves": 1,
+          "illegal_moves": 0
+        },
+        {
+          "model": "D",
+          "games": 600,
+          "wins": 3,
+          "losses": 586,
+          "draws": 11,
+          "win_rate": 0.005,
+          "pure_win_rate": 0.005,
+          "pure_win_rate_ci95": [
+            0.0011574074074074073,
+            0.008680555555555556
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.001701877658278012,
+            0.014596206345285686
+          ],
+          "decisive_win_rate": 0.0050933786078098476,
+          "decisive_win_rate_ci95": [
+            0.0017336886384169796,
+            0.01486680155042909
+          ],
+          "score_rate": 0.014166666666666666,
+          "score_rate_ci95": [
+            0.006944444444444444,
+            0.023003472222222224
+          ],
+          "moves": 3984,
+          "average_seconds_per_move": 0.049354173146337915,
+          "average_nodes_per_move": 200.36671686746988,
+          "average_simulations_per_move": 51.38303212851405,
+          "average_completed_depth": 1.1757028112449799,
+          "timed_out_moves": 3975,
+          "illegal_moves": 0
+        }
+      ],
+      "color_advantage": {
+        "games": 1200,
+        "black_wins": 533,
+        "white_wins": 416,
+        "draws": 251,
+        "black_score_rate": 0.54875,
+        "black_score_rate_ci95": [
+          0.5285406144781145,
+          0.5730613425925926
+        ]
+      }
+    }
+  },
+  "15": {
+    "scope": "supplement",
+    "board_size": 15,
+    "results": {
+      "game_count": 120,
+      "models": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "win_matrix": {
+        "A": {
+          "A": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "B": {
+            "games": 20,
+            "wins": 4,
+            "losses": 16,
+            "draws": 0,
+            "score_rate": 0.2
+          },
+          "C": {
+            "games": 20,
+            "wins": 6,
+            "losses": 13,
+            "draws": 1,
+            "score_rate": 0.325
+          },
+          "D": {
+            "games": 20,
+            "wins": 20,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 1.0
+          }
+        },
+        "B": {
+          "A": {
+            "games": 20,
+            "wins": 16,
+            "losses": 4,
+            "draws": 0,
+            "score_rate": 0.8
+          },
+          "B": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "C": {
+            "games": 20,
+            "wins": 3,
+            "losses": 17,
+            "draws": 0,
+            "score_rate": 0.15
+          },
+          "D": {
+            "games": 20,
+            "wins": 20,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 1.0
+          }
+        },
+        "C": {
+          "A": {
+            "games": 20,
+            "wins": 13,
+            "losses": 6,
+            "draws": 1,
+            "score_rate": 0.675
+          },
+          "B": {
+            "games": 20,
+            "wins": 17,
+            "losses": 3,
+            "draws": 0,
+            "score_rate": 0.85
+          },
+          "C": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D": {
+            "games": 20,
+            "wins": 20,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 1.0
+          }
+        },
+        "D": {
+          "A": {
+            "games": 20,
+            "wins": 0,
+            "losses": 20,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "B": {
+            "games": 20,
+            "wins": 0,
+            "losses": 20,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "C": {
+            "games": 20,
+            "wins": 0,
+            "losses": 20,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pairwise": {
+        "A-B": {
+          "models": {
+            "A": {
+              "games": 20,
+              "wins": 4,
+              "losses": 16,
+              "draws": 0,
+              "win_rate": 0.2,
+              "pure_win_rate": 0.2,
+              "pure_win_rate_ci95": [
+                0.07142857142857142,
+                0.32142857142857145
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.08065766257979806,
+                0.4160174322518935
+              ],
+              "decisive_win_rate": 0.2,
+              "decisive_win_rate_ci95": [
+                0.08065766257979806,
+                0.4160174322518935
+              ],
+              "score_rate": 0.2,
+              "score_rate_ci95": [
+                0.07142857142857142,
+                0.32142857142857145
+              ],
+              "moves": 297,
+              "average_seconds_per_move": 0.001844622050498784,
+              "average_nodes_per_move": 208.56228956228955,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 0.0,
+              "timed_out_moves": 0,
+              "illegal_moves": 0
+            },
+            "B": {
+              "games": 20,
+              "wins": 16,
+              "losses": 4,
+              "draws": 0,
+              "win_rate": 0.8,
+              "pure_win_rate": 0.8,
+              "pure_win_rate_ci95": [
+                0.6785714285714286,
+                0.9285714285714286
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.5839825677481065,
+                0.9193423374202019
+              ],
+              "decisive_win_rate": 0.8,
+              "decisive_win_rate_ci95": [
+                0.5839825677481065,
+                0.9193423374202019
+              ],
+              "score_rate": 0.8,
+              "score_rate_ci95": [
+                0.6785714285714286,
+                0.9285714285714286
+              ],
+              "moves": 303,
+              "average_seconds_per_move": 0.04911230981188415,
+              "average_nodes_per_move": 225.7161716171617,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.0,
+              "timed_out_moves": 303,
+              "illegal_moves": 0
+            }
+          },
+          "games": 20,
+          "wins_first": 4,
+          "wins_second": 16,
+          "draws": 0,
+          "score_intervals_overlap": false
+        },
+        "A-C": {
+          "models": {
+            "A": {
+              "games": 20,
+              "wins": 6,
+              "losses": 13,
+              "draws": 1,
+              "win_rate": 0.3,
+              "pure_win_rate": 0.3,
+              "pure_win_rate_ci95": [
+                0.14285714285714285,
+                0.42857142857142855
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.1454772448676043,
+                0.5189728183535234
+              ],
+              "decisive_win_rate": 0.3157894736842105,
+              "decisive_win_rate_ci95": [
+                0.15364379087792282,
+                0.5398959232467252
+              ],
+              "score_rate": 0.325,
+              "score_rate_ci95": [
+                0.14285714285714285,
+                0.44642857142857145
+              ],
+              "moves": 408,
+              "average_seconds_per_move": 0.0015882858529496344,
+              "average_nodes_per_move": 180.02450980392157,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 0.0,
+              "timed_out_moves": 0,
+              "illegal_moves": 0
+            },
+            "C": {
+              "games": 20,
+              "wins": 13,
+              "losses": 6,
+              "draws": 1,
+              "win_rate": 0.65,
+              "pure_win_rate": 0.65,
+              "pure_win_rate_ci95": [
+                0.5357142857142857,
+                0.8571428571428571
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.4328542766852363,
+                0.8188081758989179
+              ],
+              "decisive_win_rate": 0.6842105263157895,
+              "decisive_win_rate_ci95": [
+                0.4601040767532747,
+                0.8463562091220771
+              ],
+              "score_rate": 0.675,
+              "score_rate_ci95": [
+                0.5535714285714286,
+                0.8571428571428571
+              ],
+              "moves": 411,
+              "average_seconds_per_move": 0.048996923231152546,
+              "average_nodes_per_move": 200.8661800486618,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.1167883211678833,
+              "timed_out_moves": 409,
+              "illegal_moves": 0
+            }
+          },
+          "games": 20,
+          "wins_first": 6,
+          "wins_second": 13,
+          "draws": 1,
+          "score_intervals_overlap": false
+        },
+        "A-D": {
+          "models": {
+            "A": {
+              "games": 20,
+              "wins": 20,
+              "losses": 0,
+              "draws": 0,
+              "win_rate": 1.0,
+              "pure_win_rate": 1.0,
+              "pure_win_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.8388748419471808,
+                1.0
+              ],
+              "decisive_win_rate": 1.0,
+              "decisive_win_rate_ci95": [
+                0.8388748419471808,
+                1.0
+              ],
+              "score_rate": 1.0,
+              "score_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "moves": 254,
+              "average_seconds_per_move": 0.001953043484254665,
+              "average_nodes_per_move": 208.8031496062992,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 0.0,
+              "timed_out_moves": 0,
+              "illegal_moves": 0
+            },
+            "D": {
+              "games": 20,
+              "wins": 0,
+              "losses": 20,
+              "draws": 0,
+              "win_rate": 0.0,
+              "pure_win_rate": 0.0,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                1.3877787807814457e-17,
+                0.1611251580528193
+              ],
+              "decisive_win_rate": 0.0,
+              "decisive_win_rate_ci95": [
+                1.3877787807814457e-17,
+                0.1611251580528193
+              ],
+              "score_rate": 0.0,
+              "score_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "moves": 244,
+              "average_seconds_per_move": 0.04933782476229464,
+              "average_nodes_per_move": 77.02049180327869,
+              "average_simulations_per_move": 6.745901639344262,
+              "average_completed_depth": 1.0,
+              "timed_out_moves": 244,
+              "illegal_moves": 0
+            }
+          },
+          "games": 20,
+          "wins_first": 20,
+          "wins_second": 0,
+          "draws": 0,
+          "score_intervals_overlap": false
+        },
+        "B-C": {
+          "models": {
+            "B": {
+              "games": 20,
+              "wins": 3,
+              "losses": 17,
+              "draws": 0,
+              "win_rate": 0.15,
+              "pure_win_rate": 0.15,
+              "pure_win_rate_ci95": [
+                0.03571428571428571,
+                0.35714285714285715
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.052368745896216595,
+                0.3604188647407569
+              ],
+              "decisive_win_rate": 0.15,
+              "decisive_win_rate_ci95": [
+                0.052368745896216595,
+                0.3604188647407569
+              ],
+              "score_rate": 0.15,
+              "score_rate_ci95": [
+                0.03571428571428571,
+                0.35714285714285715
+              ],
+              "moves": 97,
+              "average_seconds_per_move": 0.049153733082455554,
+              "average_nodes_per_move": 224.36082474226805,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.0,
+              "timed_out_moves": 97,
+              "illegal_moves": 0
+            },
+            "C": {
+              "games": 20,
+              "wins": 17,
+              "losses": 3,
+              "draws": 0,
+              "win_rate": 0.85,
+              "pure_win_rate": 0.85,
+              "pure_win_rate_ci95": [
+                0.6428571428571429,
+                0.9642857142857143
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.6395811352592431,
+                0.9476312541037835
+              ],
+              "decisive_win_rate": 0.85,
+              "decisive_win_rate_ci95": [
+                0.6395811352592431,
+                0.9476312541037835
+              ],
+              "score_rate": 0.85,
+              "score_rate_ci95": [
+                0.6428571428571429,
+                0.9642857142857143
+              ],
+              "moves": 104,
+              "average_seconds_per_move": 0.04908090350000713,
+              "average_nodes_per_move": 200.0,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.4423076923076923,
+              "timed_out_moves": 104,
+              "illegal_moves": 0
+            }
+          },
+          "games": 20,
+          "wins_first": 3,
+          "wins_second": 17,
+          "draws": 0,
+          "score_intervals_overlap": false
+        },
+        "B-D": {
+          "models": {
+            "B": {
+              "games": 20,
+              "wins": 20,
+              "losses": 0,
+              "draws": 0,
+              "win_rate": 1.0,
+              "pure_win_rate": 1.0,
+              "pure_win_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.8388748419471808,
+                1.0
+              ],
+              "decisive_win_rate": 1.0,
+              "decisive_win_rate_ci95": [
+                0.8388748419471808,
+                1.0
+              ],
+              "score_rate": 1.0,
+              "score_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "moves": 83,
+              "average_seconds_per_move": 0.04913705724096192,
+              "average_nodes_per_move": 228.02409638554218,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.0,
+              "timed_out_moves": 83,
+              "illegal_moves": 0
+            },
+            "D": {
+              "games": 20,
+              "wins": 0,
+              "losses": 20,
+              "draws": 0,
+              "win_rate": 0.0,
+              "pure_win_rate": 0.0,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                1.3877787807814457e-17,
+                0.1611251580528193
+              ],
+              "decisive_win_rate": 0.0,
+              "decisive_win_rate_ci95": [
+                1.3877787807814457e-17,
+                0.1611251580528193
+              ],
+              "score_rate": 0.0,
+              "score_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "moves": 73,
+              "average_seconds_per_move": 0.049409944712339254,
+              "average_nodes_per_move": 103.76712328767124,
+              "average_simulations_per_move": 18.753424657534246,
+              "average_completed_depth": 1.1506849315068493,
+              "timed_out_moves": 73,
+              "illegal_moves": 0
+            }
+          },
+          "games": 20,
+          "wins_first": 20,
+          "wins_second": 0,
+          "draws": 0,
+          "score_intervals_overlap": false
+        },
+        "C-D": {
+          "models": {
+            "C": {
+              "games": 20,
+              "wins": 20,
+              "losses": 0,
+              "draws": 0,
+              "win_rate": 1.0,
+              "pure_win_rate": 1.0,
+              "pure_win_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                0.8388748419471808,
+                1.0
+              ],
+              "decisive_win_rate": 1.0,
+              "decisive_win_rate_ci95": [
+                0.8388748419471808,
+                1.0
+              ],
+              "score_rate": 1.0,
+              "score_rate_ci95": [
+                1.0,
+                1.0
+              ],
+              "moves": 83,
+              "average_seconds_per_move": 0.04911112579516321,
+              "average_nodes_per_move": 189.81927710843374,
+              "average_simulations_per_move": 0.0,
+              "average_completed_depth": 1.2771084337349397,
+              "timed_out_moves": 83,
+              "illegal_moves": 0
+            },
+            "D": {
+              "games": 20,
+              "wins": 0,
+              "losses": 20,
+              "draws": 0,
+              "win_rate": 0.0,
+              "pure_win_rate": 0.0,
+              "pure_win_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "pure_win_rate_wilson_ci95": [
+                1.3877787807814457e-17,
+                0.1611251580528193
+              ],
+              "decisive_win_rate": 0.0,
+              "decisive_win_rate_ci95": [
+                1.3877787807814457e-17,
+                0.1611251580528193
+              ],
+              "score_rate": 0.0,
+              "score_rate_ci95": [
+                0.0,
+                0.0
+              ],
+              "moves": 73,
+              "average_seconds_per_move": 0.04932068053423716,
+              "average_nodes_per_move": 109.57534246575342,
+              "average_simulations_per_move": 20.36986301369863,
+              "average_completed_depth": 1.1643835616438356,
+              "timed_out_moves": 73,
+              "illegal_moves": 0
+            }
+          },
+          "games": 20,
+          "wins_first": 20,
+          "wins_second": 0,
+          "draws": 0,
+          "score_intervals_overlap": false
+        }
+      },
+      "ranking": [
+        {
+          "model": "C",
+          "games": 60,
+          "wins": 50,
+          "losses": 9,
+          "draws": 1,
+          "win_rate": 0.8333333333333334,
+          "pure_win_rate": 0.8333333333333334,
+          "pure_win_rate_ci95": [
+            0.7619047619047619,
+            0.9047619047619048
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.7196838683638547,
+            0.9068682302080855
+          ],
+          "decisive_win_rate": 0.847457627118644,
+          "decisive_win_rate_ci95": [
+            0.7348201621622644,
+            0.9176153600140352
+          ],
+          "score_rate": 0.8416666666666667,
+          "score_rate_ci95": [
+            0.7678571428571429,
+            0.9107142857142857
+          ],
+          "moves": 598,
+          "average_seconds_per_move": 0.0490273793528478,
+          "average_nodes_per_move": 199.18227424749165,
+          "average_simulations_per_move": 0.0,
+          "average_completed_depth": 1.1956521739130435,
+          "timed_out_moves": 596,
+          "illegal_moves": 0
+        },
+        {
+          "model": "B",
+          "games": 60,
+          "wins": 39,
+          "losses": 21,
+          "draws": 0,
+          "win_rate": 0.65,
+          "pure_win_rate": 0.65,
+          "pure_win_rate_ci95": [
+            0.619047619047619,
+            0.7261904761904762
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.5236261884175486,
+            0.7583222559398244
+          ],
+          "decisive_win_rate": 0.65,
+          "decisive_win_rate_ci95": [
+            0.5236261884175486,
+            0.7583222559398244
+          ],
+          "score_rate": 0.65,
+          "score_rate_ci95": [
+            0.619047619047619,
+            0.7261904761904762
+          ],
+          "moves": 483,
+          "average_seconds_per_move": 0.04912488143478039,
+          "average_nodes_per_move": 225.84057971014494,
+          "average_simulations_per_move": 0.0,
+          "average_completed_depth": 1.0,
+          "timed_out_moves": 483,
+          "illegal_moves": 0
+        },
+        {
+          "model": "A",
+          "games": 60,
+          "wins": 30,
+          "losses": 29,
+          "draws": 1,
+          "win_rate": 0.5,
+          "pure_win_rate": 0.5,
+          "pure_win_rate_ci95": [
+            0.42857142857142855,
+            0.5357142857142857
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.3773502424155577,
+            0.6226497575844423
+          ],
+          "decisive_win_rate": 0.5084745762711864,
+          "decisive_win_rate_ci95": [
+            0.38435143059389665,
+            0.6315616309225984
+          ],
+          "score_rate": 0.5083333333333333,
+          "score_rate_ci95": [
+            0.4345238095238095,
+            0.5416666666666666
+          ],
+          "moves": 959,
+          "average_seconds_per_move": 0.001764281983318326,
+          "average_nodes_per_move": 196.48488008342022,
+          "average_simulations_per_move": 0.0,
+          "average_completed_depth": 0.0,
+          "timed_out_moves": 0,
+          "illegal_moves": 0
+        },
+        {
+          "model": "D",
+          "games": 60,
+          "wins": 0,
+          "losses": 60,
+          "draws": 0,
+          "win_rate": 0.0,
+          "pure_win_rate": 0.0,
+          "pure_win_rate_ci95": [
+            0.0,
+            0.0
+          ],
+          "pure_win_rate_wilson_ci95": [
+            0.0,
+            0.06017185214208983
+          ],
+          "decisive_win_rate": 0.0,
+          "decisive_win_rate_ci95": [
+            0.0,
+            0.06017185214208983
+          ],
+          "score_rate": 0.0,
+          "score_rate_ci95": [
+            0.0,
+            0.0
+          ],
+          "moves": 390,
+          "average_seconds_per_move": 0.049348115089743516,
+          "average_nodes_per_move": 88.12051282051281,
+          "average_simulations_per_move": 11.543589743589743,
+          "average_completed_depth": 1.058974358974359,
+          "timed_out_moves": 390,
+          "illegal_moves": 0
+        }
+      ],
+      "color_advantage": {
+        "games": 120,
+        "black_wins": 67,
+        "white_wins": 52,
+        "draws": 1,
+        "black_score_rate": 0.5625,
+        "black_score_rate_ci95": [
+          0.49404761904761907,
+          0.6279761904761905
+        ]
+      }
+    }
+  }
+}

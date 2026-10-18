@@ -252,12 +252,18 @@ def format_board(board: GomokuBoard) -> str:
     return "\n".join(rows)
 
 
-def select_ai_move(board: GomokuBoard, ai_player: Player, opponent: Player) -> Coordinate:
+def select_ai_move(
+    board: GomokuBoard,
+    ai_player: Player,
+    opponent: Player,
+    rng: random.Random | None = None,
+) -> Coordinate:
     """Return a coordinate for the AI player using a lightweight heuristic."""
 
     if board.is_full():
         raise ValueError("Board is full; no AI move is possible.")
 
+    rng = rng or random  # Preserve the legacy module-level random behavior by default.
     center = (board.size // 2, board.size // 2)
     if not board.history and board.get(center) is None:
         return center
@@ -305,12 +311,12 @@ def select_ai_move(board: GomokuBoard, ai_player: Player, opponent: Player) -> C
             score += adjacency * 100
 
             # Mild random factor to diversify otherwise identical choices.
-            score += random.random()
+            score += rng.random()
 
             candidates.append(coord)
             scores.append(score)
 
     max_score = max(scores)
     best_indices = [idx for idx, value in enumerate(scores) if value == max_score]
-    choice_index = random.choice(best_indices)
+    choice_index = rng.choice(best_indices)
     return candidates[choice_index]

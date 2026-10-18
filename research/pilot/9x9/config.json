@@ -1,0 +1,35 @@
+{
+  "base_seed": 5102026,
+  "draw_score": 0.5,
+  "experiment_id": "wuziq-four-ai-round-robin-v1",
+  "illegal_move_rule": "The first illegal move forfeits the game immediately; never repair it silently.",
+  "models": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "opening_plies": 2,
+  "opening_policy": "center-plus-seeded-neighbor",
+  "phases": [
+    {
+      "board_size": 9,
+      "games_per_matchup": 200,
+      "name": "main-9x9"
+    },
+    {
+      "board_size": 15,
+      "games_per_matchup": 20,
+      "name": "supplement-15x15"
+    }
+  ],
+  "search": {
+    "candidate_radius": 2,
+    "max_depth": 4,
+    "mcts_rollout_max_plies": 24,
+    "mcts_simulations": 10000,
+    "time_limit_seconds": 0.05,
+    "uct_constant": 1.4142135623730951
+  },
+  "timeout_rule": "Accept and record the last completed legal result or legal fallback; timeout alone is not a loss."
+}

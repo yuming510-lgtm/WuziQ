@@ -128,3 +128,55 @@ pytest -q
 - **Command Line Loop:** the CLI alternates between players, printing the board
   after each valid move and exiting when either a player wins or the board fills
   up.
+
+## Four-AI Research Study
+
+The research branch adds four independently selectable opponents while reusing
+the existing board and win rules:
+
+- **A:** the original heuristic rule AI (baseline)
+- **B:** plain Minimax
+- **C:** Minimax with Alpha-Beta pruning
+- **D:** UCT Monte Carlo Tree Search without a neural network
+
+The web UI lets a player choose A, B, C, or D. The same selector is available
+to automated matches. B and C share candidate generation, move ordering,
+evaluation, and configurable depth; only C prunes. The reproducible tournament
+configuration is `configs/four_ai_experiment.json`. Each game is appended to a
+JSONL file and progress is atomically recorded, so rerunning the command resumes
+without counting completed game IDs twice.
+
+Run or resume the configured 9x9 round robin and 15x15 supplement from the
+repository root:
+
+```bash
+python -m src.research.runner --config configs/four_ai_experiment.json --output research/results
+```
+
+Recompute summary tables and confidence intervals from the saved games:
+
+```bash
+python scripts/summarize_four_ai.py
+```
+
+Replay all saved moves and verify that the six pairings, paired color swaps,
+unique IDs, winners, and terminations match the configuration:
+
+```bash
+python scripts/validate_four_ai_results.py
+```
+
+Re-run the fixed-depth Minimax/Alpha-Beta equivalence and node-count study, plus
+the equal-time tournament summary:
+
+```bash
+python scripts/run_four_ai_efficiency.py \
+  --config configs/four_ai_experiment.json \
+  --games research/results/9x9_games.jsonl \
+  --output research/results/efficiency.json
+```
+
+The raw records, metrics, preflight estimate, recovery drill, and Chinese
+research report are saved under `research/`. This project performs algorithm
+development and match evaluation; it does not train a neural network or produce
+training checkpoints.

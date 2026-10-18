@@ -7,10 +7,12 @@ from typing import Any, Dict, Optional
 
 from flask import Flask, jsonify, render_template, request
 
-from .gomoku import Coordinate, GomokuBoard, Player, select_ai_move
+from .ai import SearchConfig, choose_move
+from .gomoku import Coordinate, GomokuBoard, Player
 
 
 _VALID_AI_MODES = {"off", "black", "white"}
+_VALID_AI_MODELS = {"A", "B", "C", "D"}
 
 
 def _opponent(player: Player) -> Player:
@@ -24,13 +26,15 @@ class GameState:
     board: GomokuBoard
     current_player: Player = "B"
     ai_mode: str = "off"
+    ai_model: str = "A"
     winner: Optional[str] = None
     last_move: Optional[Coordinate] = None
 
-    def reset(self, size: int, ai_mode: str) -> None:
+    def reset(self, size: int, ai_mode: str, ai_model: str = "A") -> None:
         self.board = GomokuBoard(size)
         self.current_player = "B"
         self.ai_mode = ai_mode
+        self.ai_model = ai_model
         self.winner = None
         self.last_move = None
 
@@ -67,6 +71,7 @@ def create_app() -> Flask:
             "board": board_snapshot,
             "current_player": state.current_player,
             "ai_side": state.ai_mode,
+            "ai_model": state.ai_model,
             "winner": state.winner,
             "is_full": state.board.is_full(),
             "can_undo": bool(state.board.history),
@@ -83,7 +88,14 @@ def create_app() -> Flask:
                 return
             opponent = _opponent(ai_player)
             try:
-                coord = select_ai_move(state.board, ai_player, opponent)
+                result = choose_move(
+                    state.board,
+                    ai_player,
+                    state.ai_model,
+                    SearchConfig(),
+                    seed=state.board.size * 1_000_003 + len(state.board.history),
+                )
+                coord = result.move
             except ValueError:
                 # No moves possible; treat as a draw if the board is full.
                 state.winner = state.winner or "draw"
@@ -162,6 +174,7 @@ def create_app() -> Flask:
         payload = request.get_json(silent=True) or {}
         size = state.board.size
         ai_side = state.ai_mode
+        ai_model = state.ai_model
         if "size" in payload:
             try:
                 size = int(payload["size"])
@@ -169,10 +182,14 @@ def create_app() -> Flask:
                 return jsonify({"error": "Size must be an integer."}), 400
         if "ai_side" in payload:
             ai_side = str(payload["ai_side"])
+        if "ai_model" in payload:
+            ai_model = str(payload["ai_model"]).upper()
         if ai_side not in _VALID_AI_MODES:
             return jsonify({"error": "Invalid ai_side value."}), 400
+        if ai_model not in _VALID_AI_MODELS:
+            return jsonify({"error": "Invalid ai_model value."}), 400
         try:
-            state.reset(size, ai_side)
+            state.reset(size, ai_side, ai_model)
         except ValueError as exc:
             return jsonify({"error": str(exc)}), 400
         apply_ai_moves_if_needed()
@@ -181,12 +198,18 @@ def create_app() -> Flask:
     @app.post("/config")
     def post_config():  # type: ignore[override]
         payload = request.get_json(silent=True)
-        if not payload or "ai_side" not in payload:
-            return jsonify({"error": "Missing ai_side value."}), 400
-        ai_side = str(payload["ai_side"])
-        if ai_side not in _VALID_AI_MODES:
-            return jsonify({"error": "Invalid ai_side value."}), 400
-        state.ai_mode = ai_side
+        if not payload or not ({"ai_side", "ai_model"} & payload.keys()):
+            return jsonify({"error": "Missing ai_side or ai_model value."}), 400
+        if "ai_side" in payload:
+            ai_side = str(payload["ai_side"])
+            if ai_side not in _VALID_AI_MODES:
+                return jsonify({"error": "Invalid ai_side value."}), 400
+            state.ai_mode = ai_side
+        if "ai_model" in payload:
+            ai_model = str(payload["ai_model"]).upper()
+            if ai_model not in _VALID_AI_MODELS:
+                return jsonify({"error": "Invalid ai_model value."}), 400
+            state.ai_model = ai_model
         apply_ai_moves_if_needed()
         return jsonify(build_payload())
 

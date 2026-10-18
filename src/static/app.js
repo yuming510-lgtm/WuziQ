@@ -5,6 +5,7 @@ const undoButton = document.getElementById("undo-btn");
 const resetButton = document.getElementById("reset-btn");
 const sizeInput = document.getElementById("size-input");
 const aiSelect = document.getElementById("ai-select");
+const aiModelSelect = document.getElementById("ai-model-select");
 
 let currentState = null;
 
@@ -28,6 +29,7 @@ function renderState(state) {
   statusElement.textContent = buildStatusText(state);
   sizeInput.value = size;
   aiSelect.value = state.ai_side;
+  aiModelSelect.value = state.ai_model;
 
   boardElement.style.setProperty("--board-size", size);
   boardElement.innerHTML = "";
@@ -109,11 +111,14 @@ undoButton.addEventListener("click", () => postAction("/undo"));
 resetButton.addEventListener("click", () => {
   const size = Number(sizeInput.value) || currentState?.size || 15;
   const aiSide = aiSelect.value;
-  postAction("/reset", { size, ai_side: aiSide });
+  postAction("/reset", { size, ai_side: aiSide, ai_model: aiModelSelect.value });
 });
 aiSelect.addEventListener("change", () => {
   const aiSide = aiSelect.value;
   postAction("/config", { ai_side: aiSide });
+});
+aiModelSelect.addEventListener("change", () => {
+  postAction("/config", { ai_model: aiModelSelect.value });
 });
 
 document.addEventListener("DOMContentLoaded", () => {

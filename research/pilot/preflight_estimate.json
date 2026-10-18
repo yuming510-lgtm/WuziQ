@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "experiment_id": "wuziq-four-ai-round-robin-v1",
+  "config": {
+    "experiment_id": "wuziq-four-ai-round-robin-v1",
+    "base_seed": 5102026,
+    "models": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "search": {
+      "max_depth": 4,
+      "time_limit_seconds": 0.05,
+      "mcts_simulations": 10000,
+      "mcts_rollout_max_plies": 24,
+      "candidate_radius": 2,
+      "uct_constant": 1.4142135623730951
+    },
+    "opening_policy": "center-plus-seeded-neighbor",
+    "opening_plies": 2,
+    "timeout_rule": "Accept and record the last completed legal result or legal fallback; timeout alone is not a loss.",
+    "illegal_move_rule": "The first illegal move forfeits the game immediately; never repair it silently.",
+    "draw_score": 0.5,
+    "phases": [
+      {
+        "name": "main-9x9",
+        "board_size": 9,
+        "games_per_matchup": 200
+      },
+      {
+        "name": "supplement-15x15",
+        "board_size": 15,
+        "games_per_matchup": 20
+      }
+    ]
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "cpu_affinity_count": 3,
+    "memory_available_bytes": 9877544960,
+    "disk_available_bytes": 32022704128,
+    "memory_available_bytes_after_pilot": 9876783104,
+    "process_max_rss_kib": 33932,
+    "disk_available_bytes_after_pilot": 32022552576,
+    "move_budget_seconds": 0.05
+  },
+  "microbenchmark": {
+    "probe_positions": 6,
+    "model_decisions": 24,
+    "records": [
+      {
+        "board_size": 9,
+        "position_id": "p000",
+        "position_seed": 1499488133817554813,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "A",
+        "move": [
+          5,
+          3
+        ],
+        "elapsed_seconds": 0.0007313539999813656,
+        "nodes": 79,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": false
+      },
+      {
+        "board_size": 9,
+        "position_id": "p000",
+        "position_seed": 1499488133817554813,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "B",
+        "move": [
+          3,
+          4
+        ],
+        "elapsed_seconds": 0.049006610000105866,
+        "nodes": 770,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p000",
+        "position_seed": 1499488133817554813,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "C",
+        "move": [
+          3,
+          3
+        ],
+        "elapsed_seconds": 0.04902031499977966,
+        "nodes": 455,
+        "completed_depth": 2,
+        "cutoffs": 76,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p000",
+        "position_seed": 1499488133817554813,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "D",
+        "move": [
+          4,
+          5
+        ],
+        "elapsed_seconds": 0.04926842999998371,
+        "nodes": 159,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 7,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p001",
+        "position_seed": 8013795303293889919,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "A",
+        "move": [
+          2,
+          2
+        ],
+        "elapsed_seconds": 0.0007289000000127999,
+        "nodes": 77,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": false
+      },
+      {
+        "board_size": 9,
+        "position_id": "p001",
+        "position_seed": 8013795303293889919,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "B",
+        "move": [
+          3,
+          4
+        ],
+        "elapsed_seconds": 0.049009125999873504,
+        "nodes": 752,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p001",
+        "position_seed": 8013795303293889919,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "C",
+        "move": [
+          3,
+          5
+        ],
+        "elapsed_seconds": 0.04909291099988877,
+        "nodes": 326,
+        "completed_depth": 2,
+        "cutoffs": 64,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p001",
+        "position_seed": 8013795303293889919,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "D",
+        "move": [
+          3,
+          5
+        ],
+        "elapsed_seconds": 0.04933980500004509,
+        "nodes": 146,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 6,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p002",
+        "position_seed": 4453521990494087919,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "A",
+        "move": [
+          3,
+          6
+        ],
+        "elapsed_seconds": 0.0007153940000534931,
+        "nodes": 75,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": false
+      },
+      {
+        "board_size": 9,
+        "position_id": "p002",
+        "position_seed": 4453521990494087919,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "B",
+        "move": [
+          5,
+          4
+        ],
+        "elapsed_seconds": 0.04907135200005541,
+        "nodes": 723,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p002",
+        "position_seed": 4453521990494087919,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "C",
+        "move": [
+          3,
+          4
+        ],
+        "elapsed_seconds": 0.04904353400002037,
+        "nodes": 337,
+        "completed_depth": 2,
+        "cutoffs": 68,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 9,
+        "position_id": "p002",
+        "position_seed": 4453521990494087919,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "D",
+        "move": [
+          0,
+          5
+        ],
+        "elapsed_seconds": 0.049046320000115884,
+        "nodes": 150,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 6,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p000",
+        "position_seed": 17121730786285426568,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "A",
+        "move": [
+          8,
+          7
+        ],
+        "elapsed_seconds": 0.001972819000002346,
+        "nodes": 223,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": false
+      },
+      {
+        "board_size": 15,
+        "position_id": "p000",
+        "position_seed": 17121730786285426568,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "B",
+        "move": [
+          8,
+          7
+        ],
+        "elapsed_seconds": 0.0491167499999392,
+        "nodes": 233,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p000",
+        "position_seed": 17121730786285426568,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "C",
+        "move": [
+          8,
+          7
+        ],
+        "elapsed_seconds": 0.04911730899993927,
+        "nodes": 201,
+        "completed_depth": 1,
+        "cutoffs": 22,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p000",
+        "position_seed": 17121730786285426568,
+        "stone_count": 2,
+        "to_move": "B",
+        "model": "D",
+        "move": [
+          6,
+          7
+        ],
+        "elapsed_seconds": 0.04907465900009811,
+        "nodes": 117,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 5,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p001",
+        "position_seed": 16427414407764790560,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "A",
+        "move": [
+          10,
+          9
+        ],
+        "elapsed_seconds": 0.0019688709999172715,
+        "nodes": 221,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": false
+      },
+      {
+        "board_size": 15,
+        "position_id": "p001",
+        "position_seed": 16427414407764790560,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "B",
+        "move": [
+          8,
+          6
+        ],
+        "elapsed_seconds": 0.04909072999998898,
+        "nodes": 233,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p001",
+        "position_seed": 16427414407764790560,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "C",
+        "move": [
+          8,
+          6
+        ],
+        "elapsed_seconds": 0.04904279600009431,
+        "nodes": 220,
+        "completed_depth": 1,
+        "cutoffs": 3,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p001",
+        "position_seed": 16427414407764790560,
+        "stone_count": 4,
+        "to_move": "B",
+        "model": "D",
+        "move": [
+          9,
+          5
+        ],
+        "elapsed_seconds": 0.04943186500008778,
+        "nodes": 100,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 4,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p002",
+        "position_seed": 7800857255561266792,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "A",
+        "move": [
+          4,
+          9
+        ],
+        "elapsed_seconds": 0.001788819000012154,
+        "nodes": 219,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": false
+      },
+      {
+        "board_size": 15,
+        "position_id": "p002",
+        "position_seed": 7800857255561266792,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "B",
+        "move": [
+          6,
+          7
+        ],
+        "elapsed_seconds": 0.04906322200008617,
+        "nodes": 238,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p002",
+        "position_seed": 7800857255561266792,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "C",
+        "move": [
+          6,
+          7
+        ],
+        "elapsed_seconds": 0.04913181799997801,
+        "nodes": 219,
+        "completed_depth": 1,
+        "cutoffs": 2,
+        "simulations": 0,
+        "timed_out": true
+      },
+      {
+        "board_size": 15,
+        "position_id": "p002",
+        "position_seed": 7800857255561266792,
+        "stone_count": 6,
+        "to_move": "B",
+        "model": "D",
+        "move": [
+          11,
+          4
+        ],
+        "elapsed_seconds": 0.049057923999953346,
+        "nodes": 75,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "simulations": 3,
+        "timed_out": true
+      }
+    ]
+  },
+  "pilot_runs": [
+    {
+      "board_size": 9,
+      "new_games": 12,
+      "wall_seconds": 7.112587810999912,
+      "average_seconds_per_game": 0.5927156509166593,
+      "jsonl_bytes": 52894,
+      "average_bytes_per_game": 4407.833333333333,
+      "average_moves_per_game": 21.0,
+      "timeout_count": 141
+    },
+    {
+      "board_size": 15,
+      "new_games": 12,
+      "wall_seconds": 6.830697364999878,
+      "average_seconds_per_game": 0.5692247804166565,
+      "jsonl_bytes": 52081,
+      "average_bytes_per_game": 4340.083333333333,
+      "average_moves_per_game": 20.583333333333332,
+      "timeout_count": 134
+    }
+  ],
+  "fixed_depth_pilot": {
+    "positions": 8,
+    "depth": 2,
+    "wall_seconds": 1.5427573090000806,
+    "average_nodes_minimax": 2444.0,
+    "average_nodes_alpha_beta": 211.125,
+    "average_prune_ratio": 0.9077745877256647
+  },
+  "estimate": {
+    "total_games": 1320,
+    "serial_seconds_without_buffer": 781.1085120589901,
+    "serial_hours_without_buffer": 0.2169745866830528,
+    "serial_hours_with_50_percent_buffer": 0.3254618800245792,
+    "estimated_research_storage_bytes": 9262762,
+    "storage_basis": "pilot JSONL bytes/game × scheduled games, 25% data margin, 2 MB for summaries/config/report",
+    "time_basis": "measured wall seconds/game per board size × six matchups × configured games per matchup, plus fixed-depth study; 50% execution margin"
+  }
+}
