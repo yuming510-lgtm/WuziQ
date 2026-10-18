@@ -414,6 +414,7 @@ def test_v2_run_records_the_source_commit_for_recovery(tmp_path: Path) -> None:
 
     assert saved["code_commit"] == expected_commit
     assert progress["code_commit"] == expected_commit
+    assert progress["games_completed"] == 0
 
 
 def test_v2_cli_exposes_reproducible_config_and_output_options() -> None:

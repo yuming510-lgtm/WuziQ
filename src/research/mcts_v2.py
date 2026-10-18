@@ -480,6 +480,7 @@ def run_experiment(
         "experiment_id": config["experiment_id"],
         "code_commit": config["code_commit"],
         "scheduled_games": len(schedule),
+        "games_completed": total,
         "games_completed_this_run": games_completed_this_run,
         "games_completed_total": total,
         "remaining_games": len(schedule) - total,
