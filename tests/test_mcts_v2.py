@@ -528,7 +528,13 @@ def test_formal_v2_config_pre_registers_both_mcts_models_and_all_opponents() -> 
     fair_9x9 = [spec for spec in schedule if spec["board_size"] == 9 and spec["track"] == "fair"]
     pairs = {tuple(spec["matchup"]) for spec in fair_9x9}
 
-    assert len(schedule) == 2960
+    assert len(schedule) == 400
+    assert all(
+        len([spec for spec in schedule if spec["phase_name"] == phase["name"]])
+        == len(phase["matchups"]) * phase["games_per_matchup"]
+        for phase in config["phases"]
+    )
+    assert all(phase["games_per_matchup"] == 10 for phase in config["phases"])
     assert pairs == {
         ("A", "D1"), ("B", "D1"), ("C", "D1"),
         ("A", "D2"), ("B", "D2"), ("C", "D2"),

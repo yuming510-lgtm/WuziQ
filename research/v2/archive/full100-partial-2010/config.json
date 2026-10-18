@@ -1,0 +1,326 @@
+{
+  "ablation_budgets_seconds": [
+    0.05,
+    0.2,
+    1.0
+  ],
+  "ablation_simulations": 10000,
+  "base_seed": 20261018,
+  "benchmark_budgets_seconds": [
+    0.05,
+    0.2,
+    1.0,
+    5.0,
+    10.0
+  ],
+  "code_commit": "88f6493fed0a34835a855a9e9a5edc6107aea8b2",
+  "experiment_id": "wuziq-mcts-potential-v2-paired-seat-swap",
+  "max_seconds_per_simulation_target": 15,
+  "models": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "D1",
+    "D2"
+  ],
+  "opening_plies": 4,
+  "opening_policy": "seeded-four-ply-B-W-B-W-shared-within-pair; swap-only-model-color-assignment",
+  "phases": [
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 0.05
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D1",
+          "A"
+        ],
+        [
+          "D1",
+          "B"
+        ],
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "A"
+        ],
+        [
+          "D2",
+          "B"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "fair-9x9-50ms",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 0.2
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D1",
+          "A"
+        ],
+        [
+          "D1",
+          "B"
+        ],
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "A"
+        ],
+        [
+          "D2",
+          "B"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "fair-9x9-200ms",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 1.0
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D1",
+          "A"
+        ],
+        [
+          "D1",
+          "B"
+        ],
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "A"
+        ],
+        [
+          "D2",
+          "B"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "fair-9x9-1s",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 5.0
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D1",
+          "A"
+        ],
+        [
+          "D1",
+          "B"
+        ],
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "A"
+        ],
+        [
+          "D2",
+          "B"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "fair-9x9-5s",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 0.2
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "extreme-9x9-d2-200ms-vs-c-50ms",
+      "track": "extreme"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 1.0
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "extreme-9x9-d2-1s-vs-c-50ms",
+      "track": "extreme"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 5.0
+      },
+      "games_per_matchup": 100,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "extreme-9x9-d2-5s-vs-c-50ms",
+      "track": "extreme"
+    },
+    {
+      "board_size": 15,
+      "budget_seconds_by_model": {
+        "default": 0.05
+      },
+      "games_per_matchup": 20,
+      "matchups": [
+        [
+          "D1",
+          "A"
+        ],
+        [
+          "D1",
+          "B"
+        ],
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "A"
+        ],
+        [
+          "D2",
+          "B"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "fair-15x15-50ms-supplement",
+      "track": "fair"
+    },
+    {
+      "board_size": 15,
+      "budget_seconds_by_model": {
+        "default": 1.0
+      },
+      "games_per_matchup": 20,
+      "matchups": [
+        [
+          "D1",
+          "A"
+        ],
+        [
+          "D1",
+          "B"
+        ],
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "A"
+        ],
+        [
+          "D2",
+          "B"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "fair-15x15-1s-supplement",
+      "track": "fair"
+    },
+    {
+      "board_size": 15,
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 1.0
+      },
+      "games_per_matchup": 20,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "extreme-15x15-d2-1s-vs-c-50ms-supplement",
+      "track": "extreme"
+    }
+  ],
+  "schedule_revision": "fixed-paired-model-seat-swap-v2",
+  "search": {
+    "candidate_radius": 2,
+    "max_depth": 4,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_node_reuse": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_tactical_root": true,
+    "mcts_rollout_max_plies": 24,
+    "mcts_simulations": 1000000,
+    "time_limit_seconds": 0.05,
+    "uct_constant": 1.4142135623730951
+  },
+  "simulation_targets": [
+    100,
+    1000,
+    10000,
+    100000
+  ],
+  "v1_reference_branch": "research/four-ai-gomoku",
+  "v1_reference_commit": "44faa4a4956b5c644b29b9cf922c3922d092489f"
+}
