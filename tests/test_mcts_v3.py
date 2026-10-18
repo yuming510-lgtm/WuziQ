@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.ai import SearchConfig, choose_move
+from src.ai import SearchConfig, SearchResult, choose_move
 from src.gomoku import GomokuBoard
 
 
@@ -122,3 +122,37 @@ def test_v3_schedule_rejects_wrong_opponent_budget() -> None:
         assert "0.05" in str(error)
     else:
         raise AssertionError("high-compute schedule accepted an opponent budget other than 50 ms")
+
+
+def test_v3_game_runner_uses_persistent_mcts_agent_for_d3(monkeypatch) -> None:
+    runner = _runner()
+    config = _v3_config()
+    spec = runner.build_schedule(config)[0]
+    calls = []
+
+    def fake_mcts(agent, board, player, settings, seed):
+        calls.append((player, seed))
+        move = next(
+            (row, col)
+            for row in range(board.size)
+            for col in range(board.size)
+            if board.get((row, col)) is None
+        )
+        return SearchResult(move, 0, 0, 2, 0, 1, 0.001, False)
+
+    def fake_other_model(board, player, model, settings, seed):
+        move = next(
+            (row, col)
+            for row in range(board.size)
+            for col in range(board.size)
+            if board.get((row, col)) is None
+        )
+        return SearchResult(move, 0, 0, 0, 0, 0, 0.001, False)
+
+    monkeypatch.setattr(runner.MCTSAgent, "choose_move", fake_mcts)
+    monkeypatch.setattr(runner, "choose_move", fake_other_model)
+
+    record = runner.run_game(spec, config)
+
+    assert calls
+    assert any(move["model"] == "D3" and move["simulations"] == 1 for move in record["moves"])
