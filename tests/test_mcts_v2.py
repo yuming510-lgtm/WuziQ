@@ -3,12 +3,15 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+import importlib
+import subprocess
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.ai import SearchConfig, choose_move, generate_candidates
 from src.gomoku import GomokuBoard
 from src.research.mcts_d2 import MCTSAgent, _Node, _uct_child
+from src.ai import SearchResult
 
 
 def test_d1_matches_original_uct_when_the_rollout_horizon_is_already_full() -> None:
@@ -181,3 +184,155 @@ def test_d2_uct_selects_unvisited_nodes_without_dividing_by_zero() -> None:
     parent.children = [first, second]
 
     assert _uct_child(parent, 1.4142135623730951) is first
+
+
+def _v2_runner():
+    return importlib.import_module("src.research.mcts_v2")
+
+
+def _small_runner_config(games_per_matchup: int = 2) -> dict:
+    return {
+        "experiment_id": "wuziq-mcts-v2-test",
+        "base_seed": 20261018,
+        "opening_plies": 4,
+        "search": {"max_depth": 1, "time_limit_seconds": 0, "mcts_simulations": 2},
+        "phases": [
+            {
+                "name": "fair-5x5-50ms",
+                "track": "fair",
+                "board_size": 5,
+                "games_per_matchup": games_per_matchup,
+                "matchups": [["A", "D1"]],
+                "budget_seconds_by_model": {"default": 0.05},
+            }
+        ],
+    }
+
+
+def test_v2_opening_family_is_diverse_and_color_swap_preserves_coordinates() -> None:
+    runner = _v2_runner()
+    openings = [
+        tuple((row, col) for _, (row, col) in runner.paired_opening(9, seed))
+        for seed in range(100)
+    ]
+    first = runner.paired_opening(9, 510)
+    swapped = runner.paired_opening(9, 510, color_swap=True)
+
+    assert len(set(openings)) >= 90
+    assert [coord for _, coord in first] == [coord for _, coord in swapped]
+    assert [player for player, _ in swapped] == [
+        "W" if player == "B" else "B" for player, _ in first
+    ]
+
+
+def test_v2_schedule_ids_are_unique_and_fair_budgets_match() -> None:
+    runner = _v2_runner()
+    config = _small_runner_config()
+    config["phases"].append(
+        {
+            "name": "fair-5x5-200ms",
+            "track": "fair",
+            "board_size": 5,
+            "games_per_matchup": 2,
+            "matchups": [["A", "D1"]],
+            "budget_seconds_by_model": {"default": 0.2},
+        }
+    )
+    schedule = runner.build_schedule(config)
+    ids = [spec["game_id"] for spec in schedule]
+
+    assert len(ids) == len(set(ids))
+    assert len({spec["opening_index"] for spec in schedule}) >= 1
+    fair = [spec for spec in schedule if spec["track"] == "fair"]
+    assert all(
+        len(set(spec["budget_seconds_by_model"].values())) == 1 for spec in fair
+    )
+
+
+def test_v2_extreme_schedule_keeps_c_at_v1_budget() -> None:
+    runner = _v2_runner()
+    config = _small_runner_config()
+    config["phases"] = [
+        {
+            "name": "extreme-5x5-d2-1s-vs-c-50ms",
+            "track": "extreme",
+            "board_size": 5,
+            "games_per_matchup": 2,
+            "matchups": [["D2", "C"]],
+            "budget_seconds_by_model": {"D2": 1.0, "C": 0.05},
+        }
+    ]
+
+    schedule = runner.build_schedule(config)
+
+    assert len(schedule) == 2
+    assert all(spec["budget_seconds_by_model"]["C"] == 0.05 for spec in schedule)
+    assert all(spec["budget_seconds_by_model"]["D2"] == 1.0 for spec in schedule)
+
+
+def test_v2_runner_records_legal_timeouts_without_forfeiting(monkeypatch) -> None:
+    runner = _v2_runner()
+    config = _small_runner_config()
+    spec = runner.build_schedule(config)[0]
+
+    def timed_out_legal_move(board, player, model, settings, seed):
+        move = next(
+            (row, col)
+            for row in range(board.size)
+            for col in range(board.size)
+            if board.get((row, col)) is None
+        )
+        return SearchResult(
+            move, 0, 0, 0, 0, 0, settings.time_limit_seconds + 0.01, True, (move,)
+        )
+
+    monkeypatch.setattr(runner, "choose_move", timed_out_legal_move)
+    record = runner.run_game(spec, config)
+
+    assert record["timeout_count"] > 0
+    assert record["termination"] != "illegal_move_forfeit"
+
+
+def test_v2_runner_forfeits_on_the_first_illegal_move(monkeypatch) -> None:
+    runner = _v2_runner()
+    config = _small_runner_config()
+    spec = runner.build_schedule(config)[0]
+
+    def illegal_move(board, player, model, settings, seed):
+        return SearchResult((board.size, board.size), 0, 0, 0, 0, 0, 0.001, False)
+
+    monkeypatch.setattr(runner, "choose_move", illegal_move)
+    record = runner.run_game(spec, config)
+
+    assert record["termination"] == "illegal_move_forfeit"
+    assert record["winner_model"] in spec["matchup"]
+    assert record["moves"][-1]["illegal"] is True
+
+
+def test_v2_runner_resume_fills_remaining_ids_without_duplicates(tmp_path: Path) -> None:
+    runner = _v2_runner()
+    config = _small_runner_config()
+    first = runner.run_experiment(config, tmp_path, max_games=1)
+    second = runner.run_experiment(config, tmp_path)
+    third = runner.run_experiment(config, tmp_path)
+
+    assert first["games_completed_this_run"] == 1
+    assert second["games_completed_this_run"] == 1
+    assert third["games_completed_this_run"] == 0
+    assert second["games_completed_total"] == 2
+    assert third["games_completed_total"] == 2
+
+
+def test_v2_cli_exposes_reproducible_config_and_output_options() -> None:
+    script = Path(__file__).resolve().parents[1] / "scripts" / "run_mcts_v2.py"
+    completed = subprocess.run(
+        [sys.executable, str(script), "--help"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert completed.returncode == 0
+    assert "--config" in completed.stdout
+    assert "--output-dir" in completed.stdout
+    assert "--max-games" in completed.stdout
