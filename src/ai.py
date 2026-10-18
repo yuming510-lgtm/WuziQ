@@ -1,7 +1,7 @@
 """Deterministic, budgeted Gomoku move selectors for four research models."""
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import lru_cache
 import math
 import random
@@ -13,7 +13,7 @@ from .gomoku import Coordinate, GomokuBoard, Player, select_ai_move
 
 WIN_SCORE = 1_000_000_000_000
 _INFINITY = WIN_SCORE * 2
-_MODEL_NAMES = {"A", "B", "C", "D"}
+_MODEL_NAMES = {"A", "B", "C", "D", "D1"}
 _DIRECTIONS = ((0, 1), (1, 0), (1, 1), (1, -1))
 _WINDOW_WEIGHTS = (0, 1, 8, 100, 2_000, 0)
 _DEADLINE_RESERVE_SECONDS = 0.001
@@ -60,6 +60,12 @@ class SearchResult:
     # For C this is a proven subset of root optima: the selected move is exact,
     # while unverified equal-value fail-low bounds and other ties are omitted.
     optimal_moves: tuple[Coordinate, ...] = field(default_factory=tuple)
+    rollout_plies: int = 0
+    terminal_simulations: int = 0
+    truncated_simulations: int = 0
+    root_candidates: int = 0
+    root_min_visits: int = 0
+    reused_nodes: int = 0
 
     @property
     def score(self) -> int:
@@ -438,7 +444,7 @@ def _rollout(
     rng: random.Random,
     config: SearchConfig,
     deadline: float,
-) -> tuple[float, int]:
+) -> tuple[float, int, bool]:
     plies = 0
     max_plies = min(
         board.size * board.size - len(board.history), config.mcts_rollout_max_plies
@@ -448,7 +454,7 @@ def _rollout(
         opponent = _other(to_move)
         moves = _rollout_moves(board, config.candidate_radius)
         if not moves:
-            return 0.5, plies
+            return 0.5, plies, True
         winning = [coord for coord in moves if board.check_victory(coord, to_move)]
         blocking = [] if winning else [
             coord for coord in moves if board.check_victory(coord, opponent)
@@ -458,13 +464,13 @@ def _rollout(
         board.place_stone(to_move, coord)
         plies += 1
         if board.check_victory(coord, to_move):
-            return (1.0 if to_move == root_player else 0.0), plies
+            return (1.0 if to_move == root_player else 0.0), plies, True
         if len(board.history) >= board.size * board.size:
-            return 0.5, plies
+            return 0.5, plies, True
         to_move = opponent
     score = evaluate_board(board, root_player)
     estimate = 0.5 + 0.5 * math.tanh(score / 2_500.0)
-    return estimate, plies
+    return estimate, plies, False
 
 
 def _search_mcts(
@@ -505,6 +511,10 @@ def _search_mcts(
     simulations = 0
     nodes = 0
     max_depth = 0
+    rollout_plies_total = 0
+    terminal_simulations = 0
+    truncated_simulations = 0
+    root_candidate_count = len(root.unexpanded)
     timed_out = False
     base_history_length = len(board.history)
 
@@ -561,7 +571,7 @@ def _search_mcts(
                     )
 
             if not terminal:
-                rollout_value, rollout_plies = _rollout(
+                rollout_value, rollout_plies, rollout_terminal = _rollout(
                     board,
                     _other(node.player_just_moved),
                     player,
@@ -570,7 +580,10 @@ def _search_mcts(
                     deadline,
                 )
                 iteration_nodes += rollout_plies
+                rollout_plies_total += rollout_plies
             else:
+                rollout_plies = 0
+                rollout_terminal = True
                 rollout_value = (
                     0.5
                     if winner is None
@@ -578,6 +591,10 @@ def _search_mcts(
                 )
 
             simulations += 1
+            if rollout_terminal:
+                terminal_simulations += 1
+            else:
+                truncated_simulations += 1
             nodes += iteration_nodes
             max_depth = max(max_depth, len(path) - 1)
             cursor: _MCTSNode | None = node
@@ -634,6 +651,14 @@ def _search_mcts(
         elapsed_seconds=time.perf_counter() - started,
         timed_out=timed_out,
         optimal_moves=optimal_moves,
+        rollout_plies=rollout_plies_total,
+        terminal_simulations=terminal_simulations,
+        truncated_simulations=truncated_simulations,
+        root_candidates=root_candidate_count,
+        root_min_visits=min(
+            [child.visits for child in root.children]
+            + [0] * max(0, root_candidate_count - len(root.children))
+        ),
     )
 
 
@@ -683,4 +708,8 @@ def choose_move(
             seed,
             use_alpha_beta=normalized_model == "C",
         )
+    if normalized_model == "D1":
+        remaining_cells = board.size * board.size - len(board.history)
+        d1_settings = replace(settings, mcts_rollout_max_plies=max(1, remaining_cells))
+        return _search_mcts(board, player, d1_settings, seed)
     return _search_mcts(board, player, settings, seed)
