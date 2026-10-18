@@ -100,41 +100,30 @@ def _immediate_tactics(
     wins: list[Coordinate] = []
     blocks: list[Coordinate] = []
     for row, col in candidates:
-        own_length = 1
-        opponent_length = 1
+        own_wins = False
+        opponent_wins = False
         for dr, dc in _DIRECTIONS:
-            for sign in (-1, 1):
-                next_row = row + sign * dr
-                next_col = col + sign * dc
-                if (
-                    0 <= next_row < size
-                    and 0 <= next_col < size
-                    and grid[next_row][next_col] == player
-                ):
+            for stone, is_own in ((player, True), (opponent, False)):
+                length = 1
+                for sign in (-1, 1):
+                    next_row = row + sign * dr
+                    next_col = col + sign * dc
                     while (
                         0 <= next_row < size
                         and 0 <= next_col < size
-                        and grid[next_row][next_col] == player
+                        and grid[next_row][next_col] == stone
                     ):
-                        own_length += 1
+                        length += 1
                         next_row += sign * dr
                         next_col += sign * dc
-                elif (
-                    0 <= next_row < size
-                    and 0 <= next_col < size
-                    and grid[next_row][next_col] == opponent
-                ):
-                    while (
-                        0 <= next_row < size
-                        and 0 <= next_col < size
-                        and grid[next_row][next_col] == opponent
-                    ):
-                        opponent_length += 1
-                        next_row += sign * dr
-                        next_col += sign * dc
-        if own_length >= 5:
+                if length >= 5:
+                    if is_own:
+                        own_wins = True
+                    else:
+                        opponent_wins = True
+        if own_wins:
             wins.append((row, col))
-        elif opponent_length >= 5:
+        elif opponent_wins:
             blocks.append((row, col))
     return wins, blocks
 
