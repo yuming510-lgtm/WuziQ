@@ -18,7 +18,7 @@ from .checkpoint import append_game, load_game_records, write_json_atomic
 from .mcts_d2 import MCTSAgent
 
 
-_MODEL_NAMES = {"A", "B", "C", "D1", "D2"}
+_MODEL_NAMES = {"A", "B", "C", "D1", "D2", "D3"}
 
 
 def _current_code_commit() -> str:
@@ -129,8 +129,8 @@ def build_schedule(config: dict[str, Any]) -> list[dict[str, Any]]:
     for phase in phases:
         phase_name = _phase_slug(phase["name"])
         track = str(phase["track"]).lower()
-        if track not in {"fair", "extreme"}:
-            raise ValueError("track must be fair or extreme")
+        if track not in {"fair", "extreme", "high-compute"}:
+            raise ValueError("track must be fair, extreme, or high-compute")
         board_size = int(phase["board_size"])
         games_per_matchup = int(phase["games_per_matchup"])
         if board_size < 5:
@@ -160,11 +160,29 @@ def build_schedule(config: dict[str, Any]) -> list[dict[str, Any]]:
                     raise ValueError("extreme track is reserved for D2 versus V1 C")
                 if budgets["C"] != 0.05:
                     raise ValueError("extreme-track C budget must remain at V1's 0.05 seconds")
+            if track == "high-compute":
+                if "D3" not in pair or len(set(pair) & {"A", "B", "C"}) != 1:
+                    raise ValueError("high-compute track is reserved for D3 versus A, B, or C")
+                opponent = next(model for model in pair if model != "D3")
+                if budgets[opponent] != 0.05:
+                    raise ValueError("high-compute opponent budget must remain at 0.05 seconds")
+                if budgets["D3"] not in {10.0, 20.0, 50.0}:
+                    raise ValueError("high-compute D3 budget must be 10, 20, or 50 seconds")
+                if games_per_matchup != 6:
+                    raise ValueError("high-compute conditions must contain exactly 6 games")
+                seeds = config.get("opening_seeds")
+                if not isinstance(seeds, list) or len(seeds) != 3:
+                    raise ValueError("high-compute config must register exactly 3 opening_seeds")
+                if len({int(seed) for seed in seeds}) != 3:
+                    raise ValueError("high-compute opening_seeds must be unique")
 
             for opening_index in range(games_per_matchup // 2):
-                opening_seed = derive_seed(
-                    base_seed, "opening", phase_name, board_size, opening_index
-                )
+                if track == "high-compute":
+                    opening_seed = int(config["opening_seeds"][opening_index])
+                else:
+                    opening_seed = derive_seed(
+                        base_seed, "opening", phase_name, board_size, opening_index
+                    )
                 for color_swap in (False, True):
                     black_model, white_model = pair
                     if color_swap:
@@ -266,7 +284,7 @@ def run_game(spec: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
 
     models = tuple(spec["matchup"])
     settings = {model: _search_config(config, spec, model) for model in models}
-    agents = {model: MCTSAgent() for model in models if model == "D2"}
+    agents = {model: MCTSAgent() for model in models if model in {"D2", "D3"}}
     current_player: Player = _other(opening[-1][0])
     winner_color: Player | None = None
     winner_model: str | None = None
@@ -278,7 +296,7 @@ def run_game(spec: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
         seed = derive_seed(
             int(spec["game_seed"]), "move", len(board.history), model, current_player
         )
-        if model == "D2":
+        if model in {"D2", "D3"}:
             result = agents[model].choose_move(board, current_player, settings[model], seed)
         else:
             result = choose_move(board, current_player, model, settings[model], seed)

@@ -13,7 +13,7 @@ from .gomoku import Coordinate, GomokuBoard, Player, select_ai_move
 
 WIN_SCORE = 1_000_000_000_000
 _INFINITY = WIN_SCORE * 2
-_MODEL_NAMES = {"A", "B", "C", "D", "D1", "D2"}
+_MODEL_NAMES = {"A", "B", "C", "D", "D1", "D2", "D3"}
 _DIRECTIONS = ((0, 1), (1, 0), (1, 1), (1, -1))
 _WINDOW_WEIGHTS = (0, 1, 8, 100, 2_000, 0)
 _DEADLINE_RESERVE_SECONDS = 0.001
@@ -716,7 +716,7 @@ def choose_move(
         remaining_cells = board.size * board.size - len(board.history)
         d1_settings = replace(settings, mcts_rollout_max_plies=max(1, remaining_cells))
         return _search_mcts(board, player, d1_settings, seed)
-    if normalized_model == "D2":
+    if normalized_model in {"D2", "D3"}:
         from .research.mcts_d2 import MCTSAgent
 
         return MCTSAgent().choose_move(board, player, settings, seed)
