@@ -1,0 +1,108 @@
+{
+  "experiment_id": "wuziq-mcts-potential-v2",
+  "base_seed": 20261018,
+  "v1_reference_branch": "research/four-ai-gomoku",
+  "v1_reference_commit": "44faa4a4956b5c644b29b9cf922c3922d092489f",
+  "opening_policy": "four-ply-center-neighborhood-seeded-paired-color-swap",
+  "opening_plies": 4,
+  "models": ["A", "B", "C", "D", "D1", "D2"],
+  "search": {
+    "max_depth": 4,
+    "time_limit_seconds": 0.05,
+    "mcts_simulations": 1000000,
+    "mcts_rollout_max_plies": 24,
+    "candidate_radius": 2,
+    "uct_constant": 1.4142135623730951,
+    "mcts_d2_tactical_root": true,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_node_reuse": true
+  },
+  "simulation_targets": [100, 1000, 10000, 100000],
+  "max_seconds_per_simulation_target": 15,
+  "benchmark_budgets_seconds": [0.05, 0.2, 1.0, 5.0, 10.0],
+  "ablation_budgets_seconds": [0.05, 0.2, 1.0],
+  "ablation_simulations": 10000,
+  "phases": [
+    {
+      "name": "fair-9x9-50ms",
+      "track": "fair",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D1", "A"], ["D1", "B"], ["D1", "C"], ["D2", "A"], ["D2", "B"], ["D2", "C"]],
+      "budget_seconds_by_model": {"default": 0.05}
+    },
+    {
+      "name": "fair-9x9-200ms",
+      "track": "fair",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D1", "A"], ["D1", "B"], ["D1", "C"], ["D2", "A"], ["D2", "B"], ["D2", "C"]],
+      "budget_seconds_by_model": {"default": 0.2}
+    },
+    {
+      "name": "fair-9x9-1s",
+      "track": "fair",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D1", "A"], ["D1", "B"], ["D1", "C"], ["D2", "A"], ["D2", "B"], ["D2", "C"]],
+      "budget_seconds_by_model": {"default": 1.0}
+    },
+    {
+      "name": "fair-9x9-5s",
+      "track": "fair",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D1", "A"], ["D1", "B"], ["D1", "C"], ["D2", "A"], ["D2", "B"], ["D2", "C"]],
+      "budget_seconds_by_model": {"default": 5.0}
+    },
+    {
+      "name": "extreme-9x9-d2-200ms-vs-c-50ms",
+      "track": "extreme",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D2", "C"]],
+      "budget_seconds_by_model": {"D2": 0.2, "C": 0.05}
+    },
+    {
+      "name": "extreme-9x9-d2-1s-vs-c-50ms",
+      "track": "extreme",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D2", "C"]],
+      "budget_seconds_by_model": {"D2": 1.0, "C": 0.05}
+    },
+    {
+      "name": "extreme-9x9-d2-5s-vs-c-50ms",
+      "track": "extreme",
+      "board_size": 9,
+      "games_per_matchup": 100,
+      "matchups": [["D2", "C"]],
+      "budget_seconds_by_model": {"D2": 5.0, "C": 0.05}
+    },
+    {
+      "name": "fair-15x15-50ms-supplement",
+      "track": "fair",
+      "board_size": 15,
+      "games_per_matchup": 20,
+      "matchups": [["D1", "A"], ["D1", "B"], ["D1", "C"], ["D2", "A"], ["D2", "B"], ["D2", "C"]],
+      "budget_seconds_by_model": {"default": 0.05}
+    },
+    {
+      "name": "fair-15x15-1s-supplement",
+      "track": "fair",
+      "board_size": 15,
+      "games_per_matchup": 20,
+      "matchups": [["D1", "A"], ["D1", "B"], ["D1", "C"], ["D2", "A"], ["D2", "B"], ["D2", "C"]],
+      "budget_seconds_by_model": {"default": 1.0}
+    },
+    {
+      "name": "extreme-15x15-d2-1s-vs-c-50ms-supplement",
+      "track": "extreme",
+      "board_size": 15,
+      "games_per_matchup": 20,
+      "matchups": [["D2", "C"]],
+      "budget_seconds_by_model": {"D2": 1.0, "C": 0.05}
+    }
+  ]
+}

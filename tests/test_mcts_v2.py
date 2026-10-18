@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 import importlib
 import subprocess
+import json
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -186,6 +187,69 @@ def test_d2_uct_selects_unvisited_nodes_without_dividing_by_zero() -> None:
     assert _uct_child(parent, 1.4142135623730951) is first
 
 
+def test_d2_fast_candidates_preserve_the_shared_radius_candidate_set() -> None:
+    module = importlib.import_module("src.research.mcts_d2")
+    board = GomokuBoard(7)
+    for player, coord in [
+        ("B", (3, 3)),
+        ("W", (3, 4)),
+        ("B", (4, 3)),
+        ("W", (2, 4)),
+    ]:
+        board.place_stone(player, coord)
+
+    fast = module._d2_candidates(board, "B", "W", radius=2)
+    shared = generate_candidates(board, "B", "W", radius=2)
+
+    assert set(fast) == set(shared)
+    assert len(fast) == len(set(fast))
+
+
+def test_d2_inline_win_check_matches_board_rules_for_every_empty_cell() -> None:
+    module = importlib.import_module("src.research.mcts_d2")
+    board = GomokuBoard(9)
+    for player, coord in [
+        ("B", (4, 1)),
+        ("B", (4, 2)),
+        ("B", (4, 3)),
+        ("B", (4, 4)),
+        ("W", (2, 2)),
+        ("W", (3, 3)),
+        ("W", (5, 5)),
+    ]:
+        board.place_stone(player, coord)
+
+    for row in range(board.size):
+        for col in range(board.size):
+            if board.get((row, col)) is not None:
+                continue
+            for player in ("B", "W"):
+                assert module._would_win_fast(board, (row, col), player) == (
+                    board.potential_line_length((row, col), player) >= 5
+                )
+
+
+def test_d2_combined_tactical_scan_matches_individual_win_and_block_checks() -> None:
+    module = importlib.import_module("src.research.mcts_d2")
+    board = GomokuBoard(9)
+    for col in range(1, 5):
+        board.place_stone("B", (4, col))
+    for row in range(2, 6):
+        board.place_stone("W", (row, 7))
+    candidates = module._d2_candidates(board, "B", "W", radius=2)
+
+    wins, blocks = module._immediate_tactics(board, candidates, "B")
+    expected_wins = [coord for coord in candidates if module._would_win_fast(board, coord, "B")]
+    expected_blocks = [
+        coord
+        for coord in candidates
+        if coord not in expected_wins and module._would_win_fast(board, coord, "W")
+    ]
+
+    assert set(wins) == set(expected_wins)
+    assert set(blocks) == set(expected_blocks)
+
+
 def _v2_runner():
     return importlib.import_module("src.research.mcts_v2")
 
@@ -336,3 +400,87 @@ def test_v2_cli_exposes_reproducible_config_and_output_options() -> None:
     assert "--config" in completed.stdout
     assert "--output-dir" in completed.stdout
     assert "--max-games" in completed.stdout
+
+
+def test_fixed_simulation_benchmark_records_actual_completed_count() -> None:
+    benchmark = importlib.import_module("src.research.mcts_v2_benchmark")
+    board = GomokuBoard(5)
+    board.place_stone("B", (2, 2))
+    board.place_stone("W", (2, 3))
+
+    records = benchmark.benchmark_position(
+        board,
+        "B",
+        models=("D1", "D2"),
+        target_simulations=(3,),
+        max_seconds=10,
+        base_seed=871,
+    )
+
+    assert {item["requested_simulations"] for item in records} == {3}
+    assert {item["actual_simulations"] for item in records} == {3}
+    assert all(item["elapsed_seconds"] > 0 for item in records)
+
+
+def test_d2_ablation_variants_cover_each_engine_optimization() -> None:
+    ablation = importlib.import_module("src.research.mcts_v2_ablation")
+    variants = ablation.ablation_variants()
+
+    assert set(variants) == {
+        "full",
+        "no_root_tactics",
+        "no_fair_root",
+        "no_tactical_rollout",
+        "no_node_reuse",
+    }
+    assert variants["no_root_tactics"]["mcts_d2_tactical_root"] is False
+    assert variants["no_fair_root"]["mcts_d2_fair_root"] is False
+    assert variants["no_tactical_rollout"]["mcts_d2_tactical_rollout"] is False
+    assert variants["no_node_reuse"]["mcts_d2_node_reuse"] is False
+
+
+def test_ablation_runner_records_d1_d2_features_and_reuse_probe() -> None:
+    ablation = importlib.import_module("src.research.mcts_v2_ablation")
+    board = GomokuBoard(5)
+    board.place_stone("B", (2, 2))
+    board.place_stone("W", (2, 3))
+
+    result = ablation.run_ablation(
+        [{"position_id": "reuse-test", "board": board, "player": "B"}],
+        budgets_seconds=(10,),
+        simulations=8,
+        base_seed=92,
+    )
+
+    assert any(row["model"] == "D1" for row in result["rows"])
+    assert any(row["variant"] == "full" for row in result["rows"])
+    assert any(row["variant"] == "no_tactical_rollout" for row in result["rows"])
+
+
+def test_v2_snapshot_local_drill_verifies_restore_and_keeps_other_files(
+    tmp_path: Path,
+) -> None:
+    snapshot = importlib.import_module("src.research.mcts_v2_snapshot")
+    unrelated = tmp_path / "unrelated.txt"
+    unrelated.write_text("keep", encoding="utf-8")
+
+    result = snapshot.run_local_restore_drill(tmp_path)
+
+    assert result["restore_verified"] is True
+    assert result["checksum_corruption_rejected"] is True
+    assert unrelated.read_text(encoding="utf-8") == "keep"
+
+
+def test_formal_v2_config_pre_registers_both_mcts_models_and_all_opponents() -> None:
+    runner = _v2_runner()
+    config_path = Path(__file__).resolve().parents[1] / "configs" / "mcts_potential_v2.json"
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    schedule = runner.build_schedule(config)
+    fair_9x9 = [spec for spec in schedule if spec["board_size"] == 9 and spec["track"] == "fair"]
+    pairs = {tuple(spec["matchup"]) for spec in fair_9x9}
+
+    assert len(schedule) == 2960
+    assert pairs == {
+        ("A", "D1"), ("B", "D1"), ("C", "D1"),
+        ("A", "D2"), ("B", "D2"), ("C", "D2"),
+    }

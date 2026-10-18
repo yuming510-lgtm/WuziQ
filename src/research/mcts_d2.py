@@ -15,9 +15,10 @@ from ..ai import (
     _check_deadline,
     _first_legal_move,
     _other,
-    generate_candidates,
 )
 from ..gomoku import Coordinate, GomokuBoard, Player
+
+_DIRECTIONS = ((0, 1), (1, 0), (1, 1), (1, -1))
 
 
 @dataclass
@@ -30,6 +31,112 @@ class _Node:
     visits: int = 0
     wins: float = 0.0
     initialized: bool = False
+
+
+def _d2_candidates(
+    board: GomokuBoard,
+    player: Player,
+    opponent: Player,
+    radius: int,
+) -> list[Coordinate]:
+    """Generate the same local candidate set without expensive priority scoring."""
+
+    del player, opponent
+    if not board.history:
+        return [(board.size // 2, board.size // 2)]
+    nearby: set[Coordinate] = set()
+    for _, (row, col) in board.history:
+        for dr in range(-radius, radius + 1):
+            for dc in range(-radius, radius + 1):
+                candidate = row + dr, col + dc
+                if (
+                    0 <= candidate[0] < board.size
+                    and 0 <= candidate[1] < board.size
+                    and board.grid[candidate[0]][candidate[1]] is None
+                ):
+                    nearby.add(candidate)
+    if not nearby:
+        nearby = {
+            (row, col)
+            for row in range(board.size)
+            for col in range(board.size)
+            if board.grid[row][col] is None
+        }
+    return sorted(nearby)
+
+
+def _would_win_fast(board: GomokuBoard, coord: Coordinate, player: Player) -> bool:
+    """Inline the game's four-direction line count for rollout hot paths."""
+
+    row, col = coord
+    grid = board.grid
+    size = board.size
+    for dr, dc in _DIRECTIONS:
+        length = 1
+        for sign in (-1, 1):
+            next_row = row + sign * dr
+            next_col = col + sign * dc
+            while (
+                0 <= next_row < size
+                and 0 <= next_col < size
+                and grid[next_row][next_col] == player
+            ):
+                length += 1
+                if length >= 5:
+                    return True
+                next_row += sign * dr
+                next_col += sign * dc
+    return False
+
+
+def _immediate_tactics(
+    board: GomokuBoard, candidates: list[Coordinate], player: Player
+) -> tuple[list[Coordinate], list[Coordinate]]:
+    """Find current wins and opponent threats in one shared four-ray scan."""
+
+    opponent = _other(player)
+    grid = board.grid
+    size = board.size
+    wins: list[Coordinate] = []
+    blocks: list[Coordinate] = []
+    for row, col in candidates:
+        own_length = 1
+        opponent_length = 1
+        for dr, dc in _DIRECTIONS:
+            for sign in (-1, 1):
+                next_row = row + sign * dr
+                next_col = col + sign * dc
+                if (
+                    0 <= next_row < size
+                    and 0 <= next_col < size
+                    and grid[next_row][next_col] == player
+                ):
+                    while (
+                        0 <= next_row < size
+                        and 0 <= next_col < size
+                        and grid[next_row][next_col] == player
+                    ):
+                        own_length += 1
+                        next_row += sign * dr
+                        next_col += sign * dc
+                elif (
+                    0 <= next_row < size
+                    and 0 <= next_col < size
+                    and grid[next_row][next_col] == opponent
+                ):
+                    while (
+                        0 <= next_row < size
+                        and 0 <= next_col < size
+                        and grid[next_row][next_col] == opponent
+                    ):
+                        opponent_length += 1
+                        next_row += sign * dr
+                        next_col += sign * dc
+        if own_length >= 5:
+            wins.append((row, col))
+        elif opponent_length >= 5:
+            blocks.append((row, col))
+    return wins, blocks
 
 
 def _uct_child(node: _Node, exploration: float) -> _Node:
@@ -99,16 +206,7 @@ def _rollout(
 
         opponent = _other(to_move)
         if config.mcts_d2_tactical_rollout:
-            winning = [
-                coord
-                for coord in moves
-                if board.potential_line_length(coord, to_move) >= 5
-            ]
-            blocking = [] if winning else [
-                coord
-                for coord in moves
-                if board.potential_line_length(coord, opponent) >= 5
-            ]
+            winning, blocking = _immediate_tactics(board, moves, to_move)
             choices = winning or blocking or moves
         else:
             choices = moves
@@ -204,18 +302,14 @@ class MCTSAgent:
 
         deadline = started + max(0.0, config.time_limit_seconds - 0.001)
         rng = random.Random(seed)
-        candidates = generate_candidates(
+        candidates = _d2_candidates(
             board, player, _other(player), radius=config.candidate_radius
         )
         if not candidates:
             raise ValueError("Board has no legal move")
 
         if config.mcts_d2_tactical_root:
-            winning = [
-                coord
-                for coord in candidates
-                if board.potential_line_length(coord, player) >= 5
-            ]
+            winning, threats = _immediate_tactics(board, candidates, player)
             if winning:
                 move = min(winning)
                 result = SearchResult(
@@ -232,12 +326,6 @@ class MCTSAgent:
                 )
                 self._remember(board, player, move, None)
                 return result
-            opponent = _other(player)
-            threats = [
-                coord
-                for coord in candidates
-                if board.potential_line_length(coord, opponent) >= 5
-            ]
             if len(threats) == 1:
                 move = threats[0]
                 result = SearchResult(
@@ -330,7 +418,7 @@ class MCTSAgent:
                 if not terminal:
                     if not node.initialized:
                         to_move = _other(node.player_just_moved)
-                        node.unexpanded = generate_candidates(
+                        node.unexpanded = _d2_candidates(
                             board,
                             to_move,
                             _other(to_move),
@@ -355,7 +443,7 @@ class MCTSAgent:
                             terminal = True
                         else:
                             next_player = _other(to_move)
-                            child.unexpanded = generate_candidates(
+                            child.unexpanded = _d2_candidates(
                                 board,
                                 next_player,
                                 to_move,
