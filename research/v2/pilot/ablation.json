@@ -1,0 +1,4655 @@
+{
+  "seed": 20261018,
+  "simulation_cap": 10000,
+  "rows": [
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "opening-9x9",
+      "move": [
+        1,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049345679000907694,
+      "simulations": 3,
+      "nodes": 102,
+      "tree_depth": 1,
+      "rollout_plies": 99,
+      "terminal_simulations": 3,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "opening-9x9",
+      "move": [
+        1,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04912590999992972,
+      "simulations": 13,
+      "nodes": 307,
+      "tree_depth": 2,
+      "rollout_plies": 281,
+      "terminal_simulations": 13,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        7
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049059095999837155,
+      "simulations": 16,
+      "nodes": 309,
+      "tree_depth": 2,
+      "rollout_plies": 277,
+      "terminal_simulations": 16,
+      "truncated_simulations": 0,
+      "root_candidates": 49,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04928082100013853,
+      "simulations": 14,
+      "nodes": 343,
+      "tree_depth": 2,
+      "rollout_plies": 315,
+      "terminal_simulations": 14,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04909023300024273,
+      "simulations": 17,
+      "nodes": 353,
+      "tree_depth": 2,
+      "rollout_plies": 319,
+      "terminal_simulations": 17,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0490565020008944,
+      "simulations": 19,
+      "nodes": 383,
+      "tree_depth": 1,
+      "rollout_plies": 364,
+      "terminal_simulations": 19,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04904030800025794,
+      "simulations": 51,
+      "nodes": 2581,
+      "tree_depth": 2,
+      "rollout_plies": 2479,
+      "terminal_simulations": 51,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049069755999880726,
+      "simulations": 58,
+      "nodes": 2556,
+      "tree_depth": 2,
+      "rollout_plies": 2440,
+      "terminal_simulations": 58,
+      "truncated_simulations": 0,
+      "root_candidates": 50,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04927742200015928,
+      "simulations": 19,
+      "nodes": 453,
+      "tree_depth": 2,
+      "rollout_plies": 415,
+      "terminal_simulations": 19,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049142455000037444,
+      "simulations": 17,
+      "nodes": 437,
+      "tree_depth": 2,
+      "rollout_plies": 403,
+      "terminal_simulations": 17,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "opening-9x9",
+      "move": [
+        1,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1992943909990572,
+      "simulations": 12,
+      "nodes": 563,
+      "tree_depth": 1,
+      "rollout_plies": 551,
+      "terminal_simulations": 12,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19920479400025215,
+      "simulations": 84,
+      "nodes": 1983,
+      "tree_depth": 2,
+      "rollout_plies": 1815,
+      "terminal_simulations": 84,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19905223199930333,
+      "simulations": 94,
+      "nodes": 2006,
+      "tree_depth": 2,
+      "rollout_plies": 1818,
+      "terminal_simulations": 94,
+      "truncated_simulations": 0,
+      "root_candidates": 50,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19909926999935124,
+      "simulations": 85,
+      "nodes": 2091,
+      "tree_depth": 2,
+      "rollout_plies": 1921,
+      "terminal_simulations": 85,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1990643690005527,
+      "simulations": 90,
+      "nodes": 1979,
+      "tree_depth": 2,
+      "rollout_plies": 1799,
+      "terminal_simulations": 90,
+      "truncated_simulations": 0,
+      "root_candidates": 55,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.199122363999777,
+      "simulations": 88,
+      "nodes": 2055,
+      "tree_depth": 2,
+      "rollout_plies": 1930,
+      "terminal_simulations": 88,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19917426999927557,
+      "simulations": 96,
+      "nodes": 2132,
+      "tree_depth": 2,
+      "rollout_plies": 1993,
+      "terminal_simulations": 96,
+      "truncated_simulations": 0,
+      "root_candidates": 53,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "opening-9x9",
+      "move": [
+        4,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19905145399934554,
+      "simulations": 197,
+      "nodes": 9481,
+      "tree_depth": 2,
+      "rollout_plies": 9087,
+      "terminal_simulations": 197,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 2,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        1,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19905516799917677,
+      "simulations": 228,
+      "nodes": 10263,
+      "tree_depth": 2,
+      "rollout_plies": 9807,
+      "terminal_simulations": 228,
+      "truncated_simulations": 0,
+      "root_candidates": 55,
+      "root_min_visits": 2,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19911900000079186,
+      "simulations": 88,
+      "nodes": 2104,
+      "tree_depth": 2,
+      "rollout_plies": 1928,
+      "terminal_simulations": 88,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1992008920005901,
+      "simulations": 90,
+      "nodes": 1997,
+      "tree_depth": 2,
+      "rollout_plies": 1817,
+      "terminal_simulations": 90,
+      "truncated_simulations": 0,
+      "root_candidates": 50,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990551509999932,
+      "simulations": 55,
+      "nodes": 2801,
+      "tree_depth": 2,
+      "rollout_plies": 2742,
+      "terminal_simulations": 55,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "opening-9x9",
+      "move": [
+        3,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991238130005513,
+      "simulations": 425,
+      "nodes": 10194,
+      "tree_depth": 2,
+      "rollout_plies": 9344,
+      "terminal_simulations": 425,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 4,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        1,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.999058363999211,
+      "simulations": 792,
+      "nodes": 11204,
+      "tree_depth": 2,
+      "rollout_plies": 9620,
+      "terminal_simulations": 792,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 7,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "opening-9x9",
+      "move": [
+        4,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991688689988223,
+      "simulations": 458,
+      "nodes": 10544,
+      "tree_depth": 2,
+      "rollout_plies": 9628,
+      "terminal_simulations": 458,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 4,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        1,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991113460000633,
+      "simulations": 513,
+      "nodes": 10048,
+      "tree_depth": 2,
+      "rollout_plies": 9022,
+      "terminal_simulations": 513,
+      "truncated_simulations": 0,
+      "root_candidates": 63,
+      "root_min_visits": 4,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "opening-9x9",
+      "move": [
+        3,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991657710015716,
+      "simulations": 439,
+      "nodes": 10363,
+      "tree_depth": 2,
+      "rollout_plies": 9536,
+      "terminal_simulations": 439,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 4,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.999100699000337,
+      "simulations": 455,
+      "nodes": 10235,
+      "tree_depth": 2,
+      "rollout_plies": 9382,
+      "terminal_simulations": 455,
+      "truncated_simulations": 0,
+      "root_candidates": 57,
+      "root_min_visits": 4,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "opening-9x9",
+      "move": [
+        6,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990541489987663,
+      "simulations": 927,
+      "nodes": 43866,
+      "tree_depth": 2,
+      "rollout_plies": 42012,
+      "terminal_simulations": 927,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 8,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        4,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9992257859994425,
+      "simulations": 889,
+      "nodes": 40979,
+      "tree_depth": 2,
+      "rollout_plies": 39201,
+      "terminal_simulations": 889,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 8,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "opening-9x9",
+      "move": [
+        3,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991278289999173,
+      "simulations": 364,
+      "nodes": 8783,
+      "tree_depth": 2,
+      "rollout_plies": 8055,
+      "terminal_simulations": 364,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 5,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "opening-9x9",
+      "move": [
+        0,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990440590008802,
+      "simulations": 526,
+      "nodes": 10766,
+      "tree_depth": 2,
+      "rollout_plies": 9714,
+      "terminal_simulations": 526,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 5,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "midgame-9x9",
+      "move": [
+        6,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049223882000660524,
+      "simulations": 3,
+      "nodes": 101,
+      "tree_depth": 1,
+      "rollout_plies": 98,
+      "terminal_simulations": 3,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049040840998713975,
+      "simulations": 23,
+      "nodes": 483,
+      "tree_depth": 2,
+      "rollout_plies": 437,
+      "terminal_simulations": 23,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00017569100054970477,
+      "simulations": 0,
+      "nodes": 59,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049045626999941305,
+      "simulations": 25,
+      "nodes": 480,
+      "tree_depth": 2,
+      "rollout_plies": 430,
+      "terminal_simulations": 25,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049274597000476206,
+      "simulations": 43,
+      "nodes": 440,
+      "tree_depth": 2,
+      "rollout_plies": 354,
+      "terminal_simulations": 43,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04909409199899528,
+      "simulations": 21,
+      "nodes": 407,
+      "tree_depth": 1,
+      "rollout_plies": 386,
+      "terminal_simulations": 21,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04904367699964496,
+      "simulations": 60,
+      "nodes": 2227,
+      "tree_depth": 2,
+      "rollout_plies": 2107,
+      "terminal_simulations": 60,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00016049899932113476,
+      "simulations": 0,
+      "nodes": 59,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049081577999459114,
+      "simulations": 29,
+      "nodes": 496,
+      "tree_depth": 2,
+      "rollout_plies": 438,
+      "terminal_simulations": 29,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04906935700091708,
+      "simulations": 34,
+      "nodes": 484,
+      "tree_depth": 2,
+      "rollout_plies": 416,
+      "terminal_simulations": 34,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "midgame-9x9",
+      "move": [
+        7,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19914433200028725,
+      "simulations": 11,
+      "nodes": 518,
+      "tree_depth": 1,
+      "rollout_plies": 507,
+      "terminal_simulations": 11,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19910178700047254,
+      "simulations": 114,
+      "nodes": 1924,
+      "tree_depth": 2,
+      "rollout_plies": 1696,
+      "terminal_simulations": 114,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0001643880004849052,
+      "simulations": 0,
+      "nodes": 61,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "midgame-9x9",
+      "move": [
+        3,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19904326799951377,
+      "simulations": 106,
+      "nodes": 1981,
+      "tree_depth": 2,
+      "rollout_plies": 1769,
+      "terminal_simulations": 106,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19910947999960626,
+      "simulations": 110,
+      "nodes": 1895,
+      "tree_depth": 2,
+      "rollout_plies": 1675,
+      "terminal_simulations": 110,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "midgame-9x9",
+      "move": [
+        2,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19911610999952245,
+      "simulations": 109,
+      "nodes": 1933,
+      "tree_depth": 2,
+      "rollout_plies": 1776,
+      "terminal_simulations": 109,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0001607710000826046,
+      "simulations": 0,
+      "nodes": 59,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "midgame-9x9",
+      "move": [
+        5,
+        7
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19904798999959894,
+      "simulations": 238,
+      "nodes": 9391,
+      "tree_depth": 2,
+      "rollout_plies": 8915,
+      "terminal_simulations": 238,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19904387499991572,
+      "simulations": 229,
+      "nodes": 8800,
+      "tree_depth": 2,
+      "rollout_plies": 8342,
+      "terminal_simulations": 229,
+      "truncated_simulations": 0,
+      "root_candidates": 63,
+      "root_min_visits": 2,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19905190800091077,
+      "simulations": 114,
+      "nodes": 1989,
+      "tree_depth": 2,
+      "rollout_plies": 1761,
+      "terminal_simulations": 114,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00016341999980795663,
+      "simulations": 0,
+      "nodes": 63,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 63,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.999341094000556,
+      "simulations": 63,
+      "nodes": 2686,
+      "tree_depth": 2,
+      "rollout_plies": 2621,
+      "terminal_simulations": 63,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991050179996819,
+      "simulations": 568,
+      "nodes": 9957,
+      "tree_depth": 2,
+      "rollout_plies": 8821,
+      "terminal_simulations": 568,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 5,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00016902800052776001,
+      "simulations": 0,
+      "nodes": 61,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "midgame-9x9",
+      "move": [
+        2,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991592919996037,
+      "simulations": 572,
+      "nodes": 10002,
+      "tree_depth": 2,
+      "rollout_plies": 8858,
+      "terminal_simulations": 572,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 5,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        3,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990636589991482,
+      "simulations": 912,
+      "nodes": 9293,
+      "tree_depth": 2,
+      "rollout_plies": 7469,
+      "terminal_simulations": 912,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 8,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "midgame-9x9",
+      "move": [
+        2,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991092789987306,
+      "simulations": 547,
+      "nodes": 9524,
+      "tree_depth": 2,
+      "rollout_plies": 8491,
+      "terminal_simulations": 547,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 5,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0002030790001299465,
+      "simulations": 0,
+      "nodes": 59,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "midgame-9x9",
+      "move": [
+        3,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990499510004156,
+      "simulations": 1155,
+      "nodes": 44711,
+      "tree_depth": 2,
+      "rollout_plies": 42401,
+      "terminal_simulations": 1155,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 9,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        6,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991631920001964,
+      "simulations": 1219,
+      "nodes": 43459,
+      "tree_depth": 2,
+      "rollout_plies": 41021,
+      "terminal_simulations": 1219,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 9,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990659480008617,
+      "simulations": 549,
+      "nodes": 9337,
+      "tree_depth": 2,
+      "rollout_plies": 8239,
+      "terminal_simulations": 549,
+      "truncated_simulations": 0,
+      "root_candidates": 61,
+      "root_min_visits": 6,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "midgame-9x9",
+      "move": [
+        1,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0001655470005061943,
+      "simulations": 0,
+      "nodes": 59,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 59,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-win-9x9",
+      "move": [
+        3,
+        1
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.049200685001778766,
+      "simulations": 3,
+      "nodes": 120,
+      "tree_depth": 1,
+      "rollout_plies": 117,
+      "terminal_simulations": 3,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.387400000880007e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-win-9x9",
+      "move": [
+        2,
+        0
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.04902566199962166,
+      "simulations": 90,
+      "nodes": 592,
+      "tree_depth": 2,
+      "rollout_plies": 416,
+      "terminal_simulations": 90,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 2,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-win-9x9",
+      "move": [
+        0,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049034179999580374,
+      "simulations": 74,
+      "nodes": 546,
+      "tree_depth": 2,
+      "rollout_plies": 400,
+      "terminal_simulations": 74,
+      "truncated_simulations": 0,
+      "root_candidates": 35,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.752199988113716e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.0465001297416165e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 5.9873000282095745e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-win-9x9",
+      "move": [
+        2,
+        2
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.1990963099997316,
+      "simulations": 12,
+      "nodes": 463,
+      "tree_depth": 1,
+      "rollout_plies": 451,
+      "terminal_simulations": 12,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.466800161637366e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-win-9x9",
+      "move": [
+        2,
+        0
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.19904550299906987,
+      "simulations": 434,
+      "nodes": 2755,
+      "tree_depth": 2,
+      "rollout_plies": 1905,
+      "terminal_simulations": 434,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 12,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-win-9x9",
+      "move": [
+        0,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19908265300000494,
+      "simulations": 319,
+      "nodes": 2286,
+      "tree_depth": 2,
+      "rollout_plies": 1657,
+      "terminal_simulations": 319,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 5,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.077599912008736e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.1018999986117706e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.0616999689955264e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-win-9x9",
+      "move": [
+        2,
+        0
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.9991349820011237,
+      "simulations": 681,
+      "nodes": 3929,
+      "tree_depth": 2,
+      "rollout_plies": 2620,
+      "terminal_simulations": 681,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 22,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.0001375560004817089,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.9990353419998428,
+      "simulations": 1660,
+      "nodes": 14720,
+      "tree_depth": 3,
+      "rollout_plies": 10747,
+      "terminal_simulations": 1660,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 51,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.3133000114467e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.161099918244872e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-win-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.034599937265739e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.0491199609987234,
+      "simulations": 26,
+      "nodes": 125,
+      "tree_depth": 1,
+      "rollout_plies": 99,
+      "terminal_simulations": 26,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00012626100033230614,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-block-9x9",
+      "move": [
+        2,
+        2
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.049076186998718185,
+      "simulations": 37,
+      "nodes": 533,
+      "tree_depth": 2,
+      "rollout_plies": 459,
+      "terminal_simulations": 37,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-block-9x9",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0490839899994171,
+      "simulations": 37,
+      "nodes": 558,
+      "tree_depth": 2,
+      "rollout_plies": 484,
+      "terminal_simulations": 37,
+      "truncated_simulations": 0,
+      "root_candidates": 41,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.799800030421466e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00024458300140395295,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 8.757499927014578e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-block-9x9",
+      "move": [
+        2,
+        3
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.1992079149986239,
+      "simulations": 35,
+      "nodes": 575,
+      "tree_depth": 2,
+      "rollout_plies": 531,
+      "terminal_simulations": 35,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.073300002957694e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-block-9x9",
+      "move": [
+        5,
+        2
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.19916226399982406,
+      "simulations": 152,
+      "nodes": 2464,
+      "tree_depth": 2,
+      "rollout_plies": 2160,
+      "terminal_simulations": 152,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 4,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-block-9x9",
+      "move": [
+        3,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1991122430008545,
+      "simulations": 127,
+      "nodes": 2205,
+      "tree_depth": 2,
+      "rollout_plies": 1951,
+      "terminal_simulations": 127,
+      "truncated_simulations": 0,
+      "root_candidates": 38,
+      "root_min_visits": 2,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.333100074902177e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.338599996524863e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 5.874100133951288e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-block-9x9",
+      "move": [
+        2,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.9990417469998647,
+      "simulations": 86,
+      "nodes": 3006,
+      "tree_depth": 2,
+      "rollout_plies": 2860,
+      "terminal_simulations": 86,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 2,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 8.103200161713175e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.9993009240006359,
+      "simulations": 815,
+      "nodes": 12496,
+      "tree_depth": 3,
+      "rollout_plies": 10810,
+      "terminal_simulations": 815,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 18,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-block-9x9",
+      "move": [
+        2,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991099090002535,
+      "simulations": 628,
+      "nodes": 11859,
+      "tree_depth": 2,
+      "rollout_plies": 10603,
+      "terminal_simulations": 628,
+      "truncated_simulations": 0,
+      "root_candidates": 35,
+      "root_min_visits": 12,
+      "reused_nodes": 2,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.40470004529925e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 9.626999963074923e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-block-9x9",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": [
+        4,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 5.90939998801332e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "opening-15x15",
+      "move": [
+        8,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.050524877000498236,
+      "simulations": 0,
+      "nodes": 0,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        9
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04914182500033348,
+      "simulations": 8,
+      "nodes": 259,
+      "tree_depth": 2,
+      "rollout_plies": 243,
+      "terminal_simulations": 8,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        3,
+        9
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04911249100041459,
+      "simulations": 9,
+      "nodes": 250,
+      "tree_depth": 2,
+      "rollout_plies": 232,
+      "terminal_simulations": 9,
+      "truncated_simulations": 0,
+      "root_candidates": 55,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04914149800060841,
+      "simulations": 10,
+      "nodes": 305,
+      "tree_depth": 2,
+      "rollout_plies": 285,
+      "terminal_simulations": 10,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        2,
+        7
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04913849599870446,
+      "simulations": 9,
+      "nodes": 253,
+      "tree_depth": 2,
+      "rollout_plies": 235,
+      "terminal_simulations": 9,
+      "truncated_simulations": 0,
+      "root_candidates": 62,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        10
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049176058999364614,
+      "simulations": 10,
+      "nodes": 245,
+      "tree_depth": 1,
+      "rollout_plies": 235,
+      "terminal_simulations": 10,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        10
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04905203800080926,
+      "simulations": 13,
+      "nodes": 1245,
+      "tree_depth": 2,
+      "rollout_plies": 1219,
+      "terminal_simulations": 13,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049113641000076314,
+      "simulations": 11,
+      "nodes": 1282,
+      "tree_depth": 2,
+      "rollout_plies": 1260,
+      "terminal_simulations": 11,
+      "truncated_simulations": 0,
+      "root_candidates": 51,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04920826499983377,
+      "simulations": 10,
+      "nodes": 258,
+      "tree_depth": 2,
+      "rollout_plies": 238,
+      "terminal_simulations": 10,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04919578299995919,
+      "simulations": 7,
+      "nodes": 233,
+      "tree_depth": 2,
+      "rollout_plies": 219,
+      "terminal_simulations": 7,
+      "truncated_simulations": 0,
+      "root_candidates": 62,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "opening-15x15",
+      "move": [
+        8,
+        11
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1997950109998783,
+      "simulations": 2,
+      "nodes": 214,
+      "tree_depth": 1,
+      "rollout_plies": 212,
+      "terminal_simulations": 2,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19910804800019832,
+      "simulations": 32,
+      "nodes": 1051,
+      "tree_depth": 2,
+      "rollout_plies": 987,
+      "terminal_simulations": 32,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19917305400122132,
+      "simulations": 43,
+      "nodes": 1065,
+      "tree_depth": 2,
+      "rollout_plies": 979,
+      "terminal_simulations": 43,
+      "truncated_simulations": 0,
+      "root_candidates": 56,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19908591100102058,
+      "simulations": 46,
+      "nodes": 1155,
+      "tree_depth": 2,
+      "rollout_plies": 1063,
+      "terminal_simulations": 46,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        1,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19908897300047101,
+      "simulations": 30,
+      "nodes": 941,
+      "tree_depth": 2,
+      "rollout_plies": 881,
+      "terminal_simulations": 30,
+      "truncated_simulations": 0,
+      "root_candidates": 63,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19911998899988248,
+      "simulations": 37,
+      "nodes": 1063,
+      "tree_depth": 2,
+      "rollout_plies": 1025,
+      "terminal_simulations": 37,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        3,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19994201699955738,
+      "simulations": 42,
+      "nodes": 1013,
+      "tree_depth": 1,
+      "rollout_plies": 971,
+      "terminal_simulations": 42,
+      "truncated_simulations": 0,
+      "root_candidates": 52,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1992952399996284,
+      "simulations": 55,
+      "nodes": 4680,
+      "tree_depth": 2,
+      "rollout_plies": 4570,
+      "terminal_simulations": 55,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        4,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19913518500106875,
+      "simulations": 48,
+      "nodes": 4565,
+      "tree_depth": 2,
+      "rollout_plies": 4469,
+      "terminal_simulations": 48,
+      "truncated_simulations": 0,
+      "root_candidates": 55,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        9
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19950043900098535,
+      "simulations": 28,
+      "nodes": 923,
+      "tree_depth": 2,
+      "rollout_plies": 867,
+      "terminal_simulations": 28,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        3,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19914527000037197,
+      "simulations": 29,
+      "nodes": 862,
+      "tree_depth": 2,
+      "rollout_plies": 804,
+      "terminal_simulations": 29,
+      "truncated_simulations": 0,
+      "root_candidates": 46,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 1.000193837999177,
+      "simulations": 14,
+      "nodes": 1090,
+      "tree_depth": 1,
+      "rollout_plies": 1076,
+      "terminal_simulations": 14,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "opening-15x15",
+      "move": [
+        5,
+        9
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9993460460009373,
+      "simulations": 164,
+      "nodes": 5000,
+      "tree_depth": 2,
+      "rollout_plies": 4672,
+      "terminal_simulations": 164,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        4,
+        11
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990737160005665,
+      "simulations": 199,
+      "nodes": 4589,
+      "tree_depth": 2,
+      "rollout_plies": 4191,
+      "terminal_simulations": 199,
+      "truncated_simulations": 0,
+      "root_candidates": 55,
+      "root_min_visits": 2,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "opening-15x15",
+      "move": [
+        10,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990583319995494,
+      "simulations": 176,
+      "nodes": 5033,
+      "tree_depth": 2,
+      "rollout_plies": 4681,
+      "terminal_simulations": 176,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        8
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991386820001935,
+      "simulations": 214,
+      "nodes": 5915,
+      "tree_depth": 2,
+      "rollout_plies": 5487,
+      "terminal_simulations": 214,
+      "truncated_simulations": 0,
+      "root_candidates": 46,
+      "root_min_visits": 3,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991063670004223,
+      "simulations": 204,
+      "nodes": 5990,
+      "tree_depth": 2,
+      "rollout_plies": 5618,
+      "terminal_simulations": 204,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        4,
+        5
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9991849289999664,
+      "simulations": 201,
+      "nodes": 5677,
+      "tree_depth": 2,
+      "rollout_plies": 5328,
+      "terminal_simulations": 201,
+      "truncated_simulations": 0,
+      "root_candidates": 53,
+      "root_min_visits": 2,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990525359989988,
+      "simulations": 291,
+      "nodes": 27390,
+      "tree_depth": 2,
+      "rollout_plies": 26808,
+      "terminal_simulations": 291,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 6,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        9,
+        7
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9990989899997658,
+      "simulations": 302,
+      "nodes": 26633,
+      "tree_depth": 2,
+      "rollout_plies": 26029,
+      "terminal_simulations": 302,
+      "truncated_simulations": 0,
+      "root_candidates": 48,
+      "root_min_visits": 4,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "opening-15x15",
+      "move": [
+        6,
+        11
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9992369310002687,
+      "simulations": 192,
+      "nodes": 5655,
+      "tree_depth": 2,
+      "rollout_plies": 5271,
+      "terminal_simulations": 192,
+      "truncated_simulations": 0,
+      "root_candidates": 36,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse-reuse-probe",
+      "position_id": "opening-15x15",
+      "move": [
+        3,
+        9
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9993204900001729,
+      "simulations": 205,
+      "nodes": 5530,
+      "tree_depth": 2,
+      "rollout_plies": 5120,
+      "terminal_simulations": 205,
+      "truncated_simulations": 0,
+      "root_candidates": 55,
+      "root_min_visits": 2,
+      "reused_nodes": 0,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "midgame-15x15",
+      "move": [
+        2,
+        14
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04965398499916773,
+      "simulations": 1,
+      "nodes": 10,
+      "tree_depth": 1,
+      "rollout_plies": 9,
+      "terminal_simulations": 1,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00044213299952389207,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "midgame-15x15",
+      "move": [
+        0,
+        2
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04919267500008573,
+      "simulations": 36,
+      "nodes": 181,
+      "tree_depth": 2,
+      "rollout_plies": 109,
+      "terminal_simulations": 36,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "midgame-15x15",
+      "move": [
+        0,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.04915716699906625,
+      "simulations": 41,
+      "nodes": 189,
+      "tree_depth": 2,
+      "rollout_plies": 107,
+      "terminal_simulations": 41,
+      "truncated_simulations": 0,
+      "root_candidates": 167,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0003314690002298448,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00032206399919232354,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00031290799961425364,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "midgame-15x15",
+      "move": [
+        1,
+        4
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.1994574210002611,
+      "simulations": 4,
+      "nodes": 201,
+      "tree_depth": 1,
+      "rollout_plies": 197,
+      "terminal_simulations": 4,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00033643999995547347,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "midgame-15x15",
+      "move": [
+        0,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19935244299995247,
+      "simulations": 136,
+      "nodes": 694,
+      "tree_depth": 2,
+      "rollout_plies": 422,
+      "terminal_simulations": 136,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "midgame-15x15",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19916693499908433,
+      "simulations": 138,
+      "nodes": 702,
+      "tree_depth": 2,
+      "rollout_plies": 426,
+      "terminal_simulations": 138,
+      "truncated_simulations": 0,
+      "root_candidates": 172,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0003534540010150522,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.000545160999536165,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00034860699997807387,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "midgame-15x15",
+      "move": [
+        2,
+        7
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9997720129995287,
+      "simulations": 17,
+      "nodes": 999,
+      "tree_depth": 1,
+      "rollout_plies": 982,
+      "terminal_simulations": 17,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0003408799984754296,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "midgame-15x15",
+      "move": [
+        0,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9992164579998644,
+      "simulations": 762,
+      "nodes": 3863,
+      "tree_depth": 2,
+      "rollout_plies": 2339,
+      "terminal_simulations": 762,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "midgame-15x15",
+      "move": [
+        0,
+        1
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9992351620003319,
+      "simulations": 770,
+      "nodes": 3915,
+      "tree_depth": 2,
+      "rollout_plies": 2375,
+      "terminal_simulations": 770,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 3,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00034714200046437327,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.0003411779998714337,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "midgame-15x15",
+      "move": [
+        10,
+        6
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.00031516699891653843,
+      "simulations": 0,
+      "nodes": 169,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 169,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-win-15x15",
+      "move": [
+        5,
+        0
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.04911879599967506,
+      "simulations": 2,
+      "nodes": 34,
+      "tree_depth": 1,
+      "rollout_plies": 32,
+      "terminal_simulations": 2,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.620299948030151e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-win-15x15",
+      "move": [
+        5,
+        0
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.04909739400136459,
+      "simulations": 108,
+      "nodes": 671,
+      "tree_depth": 2,
+      "rollout_plies": 459,
+      "terminal_simulations": 108,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-win-15x15",
+      "move": [
+        3,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.05444826100028877,
+      "simulations": 42,
+      "nodes": 362,
+      "tree_depth": 2,
+      "rollout_plies": 279,
+      "terminal_simulations": 42,
+      "truncated_simulations": 0,
+      "root_candidates": 46,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.670599916309584e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00015360799989139196,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00010098200073116459,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-win-15x15",
+      "move": [
+        8,
+        1
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.19937327899970114,
+      "simulations": 6,
+      "nodes": 295,
+      "tree_depth": 1,
+      "rollout_plies": 289,
+      "terminal_simulations": 6,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.851699956518132e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-win-15x15",
+      "move": [
+        5,
+        1
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.19970437899974058,
+      "simulations": 434,
+      "nodes": 2655,
+      "tree_depth": 2,
+      "rollout_plies": 1806,
+      "terminal_simulations": 434,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 11,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-win-15x15",
+      "move": [
+        3,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19909417800045048,
+      "simulations": 183,
+      "nodes": 1433,
+      "tree_depth": 2,
+      "rollout_plies": 1071,
+      "terminal_simulations": 183,
+      "truncated_simulations": 0,
+      "root_candidates": 46,
+      "root_min_visits": 3,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.0001346869994449662,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.504700104414951e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.208699960552622e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-win-15x15",
+      "move": [
+        5,
+        0
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.9998821810004301,
+      "simulations": 24,
+      "nodes": 1442,
+      "tree_depth": 1,
+      "rollout_plies": 1418,
+      "terminal_simulations": 24,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00010652700075297616,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.999111172000994,
+      "simulations": 1444,
+      "nodes": 12245,
+      "tree_depth": 3,
+      "rollout_plies": 8890,
+      "terminal_simulations": 1444,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 45,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 7.127099888748489e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.128200038801879e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-win-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 5.8690999139798805e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-block-15x15",
+      "move": [
+        5,
+        2
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.049091778999354574,
+      "simulations": 11,
+      "nodes": 22,
+      "tree_depth": 1,
+      "rollout_plies": 11,
+      "terminal_simulations": 11,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00010087400005431846,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-block-15x15",
+      "move": [
+        5,
+        1
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.04915272600010212,
+      "simulations": 30,
+      "nodes": 452,
+      "tree_depth": 2,
+      "rollout_plies": 392,
+      "terminal_simulations": 30,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-block-15x15",
+      "move": [
+        3,
+        0
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.049085066999396076,
+      "simulations": 27,
+      "nodes": 420,
+      "tree_depth": 2,
+      "rollout_plies": 366,
+      "terminal_simulations": 27,
+      "truncated_simulations": 0,
+      "root_candidates": 35,
+      "root_min_visits": 0,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.824100091762375e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00014467500113823917,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.234700049390085e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-block-15x15",
+      "move": [
+        5,
+        0
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.2001138739997259,
+      "simulations": 30,
+      "nodes": 319,
+      "tree_depth": 2,
+      "rollout_plies": 285,
+      "terminal_simulations": 30,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 8.049899952311534e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.1990423679999367,
+      "simulations": 120,
+      "nodes": 1881,
+      "tree_depth": 2,
+      "rollout_plies": 1641,
+      "terminal_simulations": 120,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 3,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-block-15x15",
+      "move": [
+        4,
+        3
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.19920364300014626,
+      "simulations": 70,
+      "nodes": 1464,
+      "tree_depth": 2,
+      "rollout_plies": 1324,
+      "terminal_simulations": 70,
+      "truncated_simulations": 0,
+      "root_candidates": 38,
+      "root_min_visits": 1,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00015540899948973674,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.624800153076649e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.312900040938985e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D1",
+      "variant": "high-compute-baseline",
+      "position_id": "forced-block-15x15",
+      "move": [
+        5,
+        1
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.999557682998784,
+      "simulations": 43,
+      "nodes": 909,
+      "tree_depth": 2,
+      "rollout_plies": 849,
+      "terminal_simulations": 43,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 1,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "full",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.00012446599976101425,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics",
+      "position_id": "forced-block-15x15",
+      "move": [
+        6,
+        5
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": false,
+      "elapsed_seconds": 0.9990431559999706,
+      "simulations": 376,
+      "nodes": 6441,
+      "tree_depth": 2,
+      "rollout_plies": 5689,
+      "terminal_simulations": 376,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 9,
+      "reused_nodes": 0,
+      "timed_out": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_root_tactics-reuse-probe",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        9
+      ],
+      "expected_move": null,
+      "expected_move_found": null,
+      "elapsed_seconds": 0.9992160750007315,
+      "simulations": 273,
+      "nodes": 5511,
+      "tree_depth": 2,
+      "rollout_plies": 4965,
+      "terminal_simulations": 273,
+      "truncated_simulations": 0,
+      "root_candidates": 52,
+      "root_min_visits": 4,
+      "reused_nodes": 1,
+      "timed_out": true,
+      "replayed_opponent_reply": true
+    },
+    {
+      "model": "D2",
+      "variant": "no_fair_root",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 0.0001453949989809189,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_tactical_rollout",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.610799937334377e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    },
+    {
+      "model": "D2",
+      "variant": "no_node_reuse",
+      "position_id": "forced-block-15x15",
+      "move": [
+        7,
+        4
+      ],
+      "expected_move": [
+        7,
+        4
+      ],
+      "expected_move_found": true,
+      "elapsed_seconds": 6.398899859050289e-05,
+      "simulations": 0,
+      "nodes": 26,
+      "tree_depth": 0,
+      "rollout_plies": 0,
+      "terminal_simulations": 0,
+      "truncated_simulations": 0,
+      "root_candidates": 26,
+      "root_min_visits": 0,
+      "reused_nodes": 0,
+      "timed_out": false
+    }
+  ]
+}

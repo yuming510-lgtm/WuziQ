@@ -1,0 +1,40 @@
+{
+  "basis": "20 completed pilot games; wall clock estimated as serial sum of per-game recorded thinking_seconds_total, not including small file I/O overhead",
+  "pilot_games": 20,
+  "scheduled_formal_games": 2960,
+  "pilot_mean_game_record_bytes": 4659.9,
+  "projected_raw_jsonl_bytes": 13793304,
+  "projected_raw_jsonl_MiB": 13.15,
+  "components_seconds": {
+    "9x9_fair_50ms_seconds": 212.60412765122965,
+    "9x9_fair_200ms_seconds": 836.2537513492498,
+    "9x9_fair_1s_seconds": 4496.779675199286,
+    "9x9_fair_5s_seconds": 18196.50911040044,
+    "9x9_extreme_200ms_seconds": 139.37562522487497,
+    "9x9_extreme_1s_seconds": 321.79763359981735,
+    "9x9_extreme_5s_seconds": 3032.751518400073,
+    "15x15_fair_50ms_seconds": 41.23701419975987,
+    "15x15_fair_1s_seconds": 719.9268308999672,
+    "15x15_extreme_1s_seconds": 119.98780514999453
+  },
+  "estimated_cpu_wall_seconds": 28117.2,
+  "estimated_cpu_wall_hours": 7.81,
+  "planning_estimate_with_1_5x_variance_margin_hours": 11.72,
+  "storage_budget_with_twofold_margin_MiB": 26.31,
+  "method_limitations": "Pilot sample sizes are 2–4 games per condition; 5s and cross-matchup projections are uncertain. The formal run retains all preregistered games and will report actual time.",
+  "environment": {
+    "cpu": "3 vCPU, Intel Xeon Platinum 8573C",
+    "memory_total_GiB": 9.7,
+    "memory_available_GiB": 9.2,
+    "swap": "none",
+    "workspace_disk_total_GiB": 32,
+    "workspace_disk_available_GiB": 30,
+    "formal_execution": "single-process sequential; game JSONL is fsynced after each completed game"
+  },
+  "drive_preflight": {
+    "read_write_restore_verified": true,
+    "uploaded_drill_file_id": "1MNsKYNxA5GuRLAhTEEas4uoW1yWTAYXW",
+    "sha256": "d8619b415ef3e6b6f32aa9fac34baeb19bbc425808b407c081fab54105e68977",
+    "drill_file_deleted_after_verified_restore": true
+  }
+}

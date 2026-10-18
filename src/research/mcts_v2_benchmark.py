@@ -85,7 +85,9 @@ def representative_positions(seed: int = 5102026) -> list[dict[str, Any]]:
         for name, threat_player in (("forced-win", "B"), ("forced-block", "W")):
             tactical = GomokuBoard(size)
             row = size // 2
-            start = max(0, size // 2 - 2)
+            # The edge removes one endpoint, leaving exactly one winning/blocking
+            # square so this is a genuine forced-block test rather than a double threat.
+            start = 0
             for col in range(start, start + 4):
                 tactical.place_stone(threat_player, (row, col))
             positions.append(

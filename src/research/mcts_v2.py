@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import random
 import re
+import subprocess
 import sys
 from typing import Any, Iterable
 
@@ -18,6 +19,18 @@ from .mcts_d2 import MCTSAgent
 
 
 _MODEL_NAMES = {"A", "B", "C", "D1", "D2"}
+
+
+def _current_code_commit() -> str:
+    repo_root = Path(__file__).resolve().parents[2]
+    completed = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return completed.stdout.strip()
 
 
 def derive_seed(base_seed: int, *parts: object) -> int:
@@ -377,8 +390,17 @@ def run_game(spec: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
 
 def _load_config(config_source: dict[str, Any] | str | Path) -> dict[str, Any]:
     if isinstance(config_source, dict):
-        return deepcopy(config_source)
-    return json.loads(Path(config_source).read_text(encoding="utf-8"))
+        config = deepcopy(config_source)
+    else:
+        config = json.loads(Path(config_source).read_text(encoding="utf-8"))
+    current_commit = _current_code_commit()
+    recorded_commit = config.get("code_commit")
+    if recorded_commit is not None and recorded_commit != current_commit:
+        raise ValueError(
+            f"Current code commit {current_commit} differs from recorded {recorded_commit}"
+        )
+    config["code_commit"] = current_commit
+    return config
 
 
 def _record_files(output_dir: Path) -> list[Path]:
@@ -445,6 +467,7 @@ def run_experiment(
             root / "progress.json",
             {
                 "experiment_id": config["experiment_id"],
+                "code_commit": config["code_commit"],
                 "scheduled_games": len(schedule),
                 "games_completed": len(completed_ids),
                 "remaining_games": len(schedule) - len(completed_ids),
@@ -456,6 +479,7 @@ def run_experiment(
     total = len(completed_ids)
     progress = {
         "experiment_id": config["experiment_id"],
+        "code_commit": config["code_commit"],
         "scheduled_games": len(schedule),
         "games_completed_this_run": games_completed_this_run,
         "games_completed_total": total,

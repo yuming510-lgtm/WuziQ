@@ -387,6 +387,22 @@ def test_v2_runner_resume_fills_remaining_ids_without_duplicates(tmp_path: Path)
     assert third["games_completed_total"] == 2
 
 
+def test_v2_run_records_the_source_commit_for_recovery(tmp_path: Path) -> None:
+    runner = _v2_runner()
+    config = _small_runner_config()
+    root = Path(__file__).resolve().parents[1]
+    expected_commit = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=root, text=True
+    ).strip()
+
+    runner.run_experiment(config, tmp_path, max_games=0)
+    saved = json.loads((tmp_path / "config.json").read_text(encoding="utf-8"))
+    progress = json.loads((tmp_path / "progress.json").read_text(encoding="utf-8"))
+
+    assert saved["code_commit"] == expected_commit
+    assert progress["code_commit"] == expected_commit
+
+
 def test_v2_cli_exposes_reproducible_config_and_output_options() -> None:
     script = Path(__file__).resolve().parents[1] / "scripts" / "run_mcts_v2.py"
     completed = subprocess.run(
@@ -455,6 +471,25 @@ def test_ablation_runner_records_d1_d2_features_and_reuse_probe() -> None:
     assert any(row["model"] == "D1" for row in result["rows"])
     assert any(row["variant"] == "full" for row in result["rows"])
     assert any(row["variant"] == "no_tactical_rollout" for row in result["rows"])
+
+
+def test_d2_ablation_tactical_cases_accept_any_valid_win_or_unique_block() -> None:
+    benchmark = importlib.import_module("src.research.mcts_v2_benchmark")
+    ablation = importlib.import_module("src.research.mcts_v2_ablation")
+    positions = [
+        position
+        for position in benchmark.representative_positions(81)
+        if "forced-" in position["position_id"] and position["board"].size == 9
+    ]
+    result = ablation.run_ablation(
+        positions, budgets_seconds=(10,), simulations=2, base_seed=81
+    )
+    full_rows = [
+        row for row in result["rows"] if row["model"] == "D2" and row["variant"] == "full"
+    ]
+
+    assert len(full_rows) == 2
+    assert all(row["expected_move_found"] is True for row in full_rows)
 
 
 def test_v2_snapshot_local_drill_verifies_restore_and_keeps_other_files(

@@ -1,0 +1,137 @@
+{
+  "base_seed": 20261018,
+  "experiment_id": "wuziq-mcts-potential-v2-preflight",
+  "opening_plies": 4,
+  "phases": [
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 0.05
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-fair-9x9-50ms",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 0.2
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-fair-9x9-200ms",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 1.0
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D1",
+          "C"
+        ],
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-fair-9x9-1s",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "default": 5.0
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-fair-9x9-5s",
+      "track": "fair"
+    },
+    {
+      "board_size": 9,
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 1.0
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-extreme-9x9-d2-1s-vs-c-50ms",
+      "track": "extreme"
+    },
+    {
+      "board_size": 15,
+      "budget_seconds_by_model": {
+        "default": 0.05
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-fair-15x15-50ms",
+      "track": "fair"
+    },
+    {
+      "board_size": 15,
+      "budget_seconds_by_model": {
+        "default": 1.0
+      },
+      "games_per_matchup": 2,
+      "matchups": [
+        [
+          "D2",
+          "C"
+        ]
+      ],
+      "name": "pilot-fair-15x15-1s",
+      "track": "fair"
+    }
+  ],
+  "search": {
+    "candidate_radius": 2,
+    "max_depth": 4,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_node_reuse": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_tactical_root": true,
+    "mcts_rollout_max_plies": 24,
+    "mcts_simulations": 1000000,
+    "time_limit_seconds": 0.05,
+    "uct_constant": 1.4142135623730951
+  }
+}
