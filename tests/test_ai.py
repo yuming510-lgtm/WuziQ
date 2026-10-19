@@ -90,6 +90,65 @@ def test_minimax_and_alpha_beta_agree_at_same_fixed_depth() -> None:
     assert alpha_beta.nodes <= minimax.nodes
 
 
+def test_minimax_and_alpha_beta_keep_per_depth_metrics_and_equal_scores() -> None:
+    engine = _engine()
+    board = GomokuBoard(5)
+    for player, coord in [
+        ("B", (2, 2)),
+        ("W", (2, 3)),
+        ("B", (3, 2)),
+        ("W", (1, 3)),
+    ]:
+        board.place_stone(player, coord)
+    config = engine.SearchConfig(max_depth=3, time_limit_seconds=5)
+
+    minimax = engine.choose_move(board, "B", "B", config, seed=19)
+    alpha_beta = engine.choose_move(board, "B", "C", config, seed=19)
+
+    assert [row.depth for row in minimax.depth_iterations] == [1, 2, 3]
+    assert [row.depth for row in alpha_beta.depth_iterations] == [1, 2, 3]
+    assert [row.root_value for row in minimax.depth_iterations] == [
+        row.root_value for row in alpha_beta.depth_iterations
+    ]
+    assert all(row.nodes > 0 for row in minimax.depth_iterations)
+    assert all(row.elapsed_seconds >= 0 for row in alpha_beta.depth_iterations)
+    assert minimax.nodes == sum(row.nodes for row in minimax.depth_iterations)
+    assert alpha_beta.nodes == sum(row.nodes for row in alpha_beta.depth_iterations)
+    assert alpha_beta.cutoffs == sum(row.cutoffs for row in alpha_beta.depth_iterations)
+    assert minimax.root_candidates == alpha_beta.root_candidates > 0
+
+
+def test_timeout_discards_partial_iteration_and_returns_last_complete_result(monkeypatch) -> None:
+    engine = _engine()
+    board = GomokuBoard(5)
+    board.place_stone("B", (2, 2))
+    board.place_stone("W", (2, 3))
+    original_search_root = engine._search_root
+    calls = 0
+
+    def complete_one_then_timeout(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise engine._SearchTimeout
+        return original_search_root(*args, **kwargs)
+
+    monkeypatch.setattr(engine, "_search_root", complete_one_then_timeout)
+    result = engine.choose_move(
+        board,
+        "B",
+        "B",
+        engine.SearchConfig(max_depth=5, time_limit_seconds=10),
+        seed=33,
+    )
+
+    assert result.timed_out
+    assert result.completed_depth == 1
+    assert len(result.depth_iterations) == 1
+    assert result.move == result.depth_iterations[0].move
+    assert result.root_value == result.depth_iterations[0].root_value
+
+
 def test_board_evaluator_does_not_rescan_each_cell_through_getter() -> None:
     engine = _engine()
 

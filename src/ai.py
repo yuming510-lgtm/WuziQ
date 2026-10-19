@@ -50,6 +50,18 @@ class SearchConfig:
 
 
 @dataclass(frozen=True)
+class DepthIteration:
+    """Metrics for one fully completed minimax search depth."""
+
+    depth: int
+    root_value: int
+    move: Coordinate
+    nodes: int
+    cutoffs: int
+    elapsed_seconds: float
+
+
+@dataclass(frozen=True)
 class SearchResult:
     """Move plus comparable counters collected while choosing it."""
 
@@ -70,6 +82,7 @@ class SearchResult:
     root_candidates: int = 0
     root_min_visits: int = 0
     reused_nodes: int = 0
+    depth_iterations: tuple[DepthIteration, ...] = field(default_factory=tuple)
 
     @property
     def score(self) -> int:
@@ -354,6 +367,8 @@ def _search_minimax(
     best_move = fallback
     root_value = evaluate_board(board, player)
     optimal_moves: tuple[Coordinate, ...] = (fallback,)
+    depth_iterations: list[DepthIteration] = []
+    root_moves: list[Coordinate] = []
     timed_out = False
     try:
         root_moves = _candidate_moves(
@@ -363,7 +378,15 @@ def _search_minimax(
             raise ValueError("Board has no legal move")
         best_move = root_moves[0]
         optimal_moves = (best_move,)
-        for depth in range(1, config.max_depth + 1):
+    except _SearchTimeout:
+        timed_out = True
+
+    for depth in range(1, config.max_depth + 1):
+        if timed_out or not root_moves:
+            break
+        iteration_started = time.perf_counter()
+        iteration_counters = [0, 0]
+        try:
             value, best_moves = _search_root(
                 board,
                 player,
@@ -372,14 +395,30 @@ def _search_minimax(
                 config,
                 deadline,
                 use_alpha_beta,
-                counters,
+                iteration_counters,
             )
-            completed_depth = depth
-            root_value = value
-            optimal_moves = best_moves
-            best_move = best_moves[0]
-    except _SearchTimeout:
-        timed_out = True
+        except _SearchTimeout:
+            # Keep partial work visible in totals, but never treat it as a result.
+            counters[0] += iteration_counters[0]
+            counters[1] += iteration_counters[1]
+            timed_out = True
+            break
+        counters[0] += iteration_counters[0]
+        counters[1] += iteration_counters[1]
+        completed_depth = depth
+        root_value = value
+        optimal_moves = best_moves
+        best_move = best_moves[0]
+        depth_iterations.append(
+            DepthIteration(
+                depth=depth,
+                root_value=value,
+                move=best_move,
+                nodes=iteration_counters[0],
+                cutoffs=iteration_counters[1],
+                elapsed_seconds=time.perf_counter() - iteration_started,
+            )
+        )
 
     return SearchResult(
         move=best_move,
@@ -391,6 +430,8 @@ def _search_minimax(
         elapsed_seconds=time.perf_counter() - started,
         timed_out=timed_out,
         optimal_moves=optimal_moves,
+        root_candidates=len(root_moves),
+        depth_iterations=tuple(depth_iterations),
     )
 
 
