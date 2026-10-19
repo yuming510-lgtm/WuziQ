@@ -1,0 +1,175 @@
+{
+  "experiment_id": "wuziq-mcts-high-compute-v3",
+  "benchmarked_at_utc": "2026-10-18T23:46:34Z",
+  "code_commit": "2ca4d9f2107914cd45abb05b75320ed3158d7daa",
+  "position": {
+    "board_size": 9,
+    "to_move": "B",
+    "move_count": 12,
+    "stones": [
+      {
+        "player": "B",
+        "row": 4,
+        "col": 4
+      },
+      {
+        "player": "W",
+        "row": 6,
+        "col": 3
+      },
+      {
+        "player": "B",
+        "row": 7,
+        "col": 5
+      },
+      {
+        "player": "W",
+        "row": 6,
+        "col": 1
+      },
+      {
+        "player": "B",
+        "row": 2,
+        "col": 2
+      },
+      {
+        "player": "W",
+        "row": 3,
+        "col": 5
+      },
+      {
+        "player": "B",
+        "row": 1,
+        "col": 4
+      },
+      {
+        "player": "W",
+        "row": 5,
+        "col": 6
+      },
+      {
+        "player": "B",
+        "row": 3,
+        "col": 1
+      },
+      {
+        "player": "W",
+        "row": 0,
+        "col": 4
+      },
+      {
+        "player": "B",
+        "row": 6,
+        "col": 7
+      },
+      {
+        "player": "W",
+        "row": 2,
+        "col": 6
+      }
+    ]
+  },
+  "resources": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "logical_cpu_count": 3,
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cgroup_cpu_quota_cores": 2.0,
+    "load_average_1_5_15m": [
+      0.79736328125,
+      0.39599609375,
+      0.1728515625
+    ],
+    "memory_total_bytes": 10452471808,
+    "memory_available_bytes": 9812545536,
+    "cgroup_memory_limit_bytes": 8589934592,
+    "workspace_disk_total_bytes": 33770192896,
+    "workspace_disk_used_bytes": 58400768,
+    "workspace_disk_free_bytes": 31977029632
+  },
+  "benchmarks": [
+    {
+      "budget_seconds": 10.0,
+      "move": [
+        5,
+        5
+      ],
+      "simulations": 2183,
+      "simulations_per_second": 218.3105196198533,
+      "tree_depth": 2,
+      "elapsed_seconds": 9.999518135000017,
+      "timed_out": true,
+      "root_candidates": 69
+    },
+    {
+      "budget_seconds": 20.0,
+      "move": [
+        3,
+        8
+      ],
+      "simulations": 4301,
+      "simulations_per_second": 215.05954666532094,
+      "tree_depth": 3,
+      "elapsed_seconds": 19.999112184000296,
+      "timed_out": true,
+      "root_candidates": 69
+    },
+    {
+      "budget_seconds": 50.0,
+      "move": [
+        3,
+        3
+      ],
+      "simulations": 11354,
+      "simulations_per_second": 227.08383695384276,
+      "tree_depth": 3,
+      "elapsed_seconds": 49.999155168000016,
+      "timed_out": true,
+      "root_candidates": 69
+    }
+  ],
+  "estimate": {
+    "official_games": 54,
+    "condition_count": 9,
+    "games_per_condition": 6,
+    "historical_turn_basis": {
+      "A": {
+        "calibration_games": 10,
+        "D2_moves_per_game": 29.3,
+        "opponent_moves_per_game": 29.6,
+        "calibration_track": "V2 9×9 fair 5-second games"
+      },
+      "B": {
+        "calibration_games": 10,
+        "D2_moves_per_game": 6.7,
+        "opponent_moves_per_game": 7.2,
+        "calibration_track": "V2 9×9 fair 5-second games"
+      },
+      "C": {
+        "calibration_games": 10,
+        "D2_moves_per_game": 5.8,
+        "opponent_moves_per_game": 6.3,
+        "calibration_track": "V2 9×9 fair 5-second games"
+      }
+    },
+    "measured_seconds_per_d3_move_by_budget": {
+      "10": 9.999518135000017,
+      "20": 19.999112184000296,
+      "50": 49.999155168000016
+    },
+    "estimated_d3_moves_by_budget": {
+      "10": 250.79999999999998,
+      "20": 250.79999999999998,
+      "50": 250.79999999999998
+    },
+    "estimated_d3_compute_seconds": 20063.44460013968,
+    "estimated_opponent_compute_seconds": 38.790000000000006,
+    "estimated_total_seconds": 20102.23460013968,
+    "estimated_total_minutes": 335.03724333566134,
+    "estimated_total_hours": 5.583954055594355,
+    "estimate_note": "Planning estimate only: uses V2 5-second average move counts and one measured representative D3 think time per budget; outcomes and turn counts can change.",
+    "v2_calibration_average_bytes_per_game": 8935.966666666667,
+    "estimated_raw_game_storage_bytes": 579050
+  },
+  "preflight_wall_seconds": 80.02662869999995
+}

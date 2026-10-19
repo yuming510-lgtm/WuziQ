@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "game_count": 54,
+  "phase_count": 9,
+  "bootstrap_samples": 10000,
+  "bootstrap_seed": 20261019,
+  "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+  "phases": {
+    "d3-10s-vs-a": {
+      "phase_name": "d3-10s-vs-a",
+      "opponent_model": "A",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 10.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 6,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.5,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.0,
+          0.5614970317550454
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "moves": 231,
+        "thinking_seconds_total": 2199.9339374690003,
+        "average_seconds_per_move": 9.523523538826842,
+        "simulations_total": 13384793,
+        "average_simulations_per_move": 57942.82683982684,
+        "simulations_per_thinking_second": 6084.179516499053,
+        "average_tree_depth": 3.2987012987012987,
+        "max_tree_depth": 7,
+        "tree_depth_counts": {
+          "0": 9,
+          "1": 3,
+          "2": 3,
+          "3": 156,
+          "4": 29,
+          "5": 20,
+          "6": 8,
+          "7": 3
+        },
+        "search_timeout_flags": 216,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 7,
+        "score_points_per_thinking_second": 0.0013636773127157931
+      },
+      "opponent": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 6,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.5,
+        "score_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "moves": 231,
+        "thinking_seconds_total": 0.09973228899707465,
+        "average_seconds_per_move": 0.000431741510809847,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 0.0,
+        "max_tree_depth": 0,
+        "tree_depth_counts": {
+          "0": 231
+        },
+        "search_timeout_flags": 0,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 0
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 0,
+          "losses": 0,
+          "draws": 3,
+          "score_rate": 0.5
+        },
+        "white": {
+          "games": 3,
+          "wins": 0,
+          "losses": 0,
+          "draws": 3,
+          "score_rate": 0.5
+        }
+      },
+      "win_matrix": {
+        "A": {
+          "A": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 0,
+            "losses": 0,
+            "draws": 6,
+            "score_rate": 0.5
+          }
+        },
+        "D3": {
+          "A": {
+            "games": 6,
+            "wins": 0,
+            "losses": 0,
+            "draws": 6,
+            "score_rate": 0.5
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "A-D3": 3
+      }
+    },
+    "d3-10s-vs-b": {
+      "phase_name": "d3-10s-vs-b",
+      "opponent_model": "B",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 10.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 2,
+        "losses": 4,
+        "draws": 0,
+        "pure_win_rate": 0.3333333333333333,
+        "score_rate": 0.3333333333333333,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.06149194472039632,
+          0.7923403991979523
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.06149194472039632,
+          0.7923403991979523
+        ],
+        "moves": 41,
+        "thinking_seconds_total": 289.98095600800025,
+        "average_seconds_per_move": 7.072706244097567,
+        "simulations_total": 156780,
+        "average_simulations_per_move": 3823.9024390243903,
+        "simulations_per_thinking_second": 540.656193973216,
+        "average_tree_depth": 2.1219512195121952,
+        "max_tree_depth": 3,
+        "tree_depth_counts": {
+          "0": 12,
+          "3": 29
+        },
+        "search_timeout_flags": 29,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 1,
+        "score_points_per_thinking_second": 0.006897004643107743
+      },
+      "opponent": {
+        "wins": 4,
+        "losses": 2,
+        "draws": 0,
+        "pure_win_rate": 0.6666666666666666,
+        "score_rate": 0.6666666666666666,
+        "score_rate_paired_wilson_ci95": [
+          0.20765960080204782,
+          0.9385080552796038
+        ],
+        "moves": 42,
+        "thinking_seconds_total": 2.0633976169965536,
+        "average_seconds_per_move": 0.04912851469039413,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 1.0,
+        "max_tree_depth": 1,
+        "tree_depth_counts": {
+          "1": 42
+        },
+        "search_timeout_flags": 42,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 2
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "draws": 0,
+          "score_rate": 0.3333333333333333
+        },
+        "white": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "draws": 0,
+          "score_rate": 0.3333333333333333
+        }
+      },
+      "win_matrix": {
+        "B": {
+          "B": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 4,
+            "losses": 2,
+            "draws": 0,
+            "score_rate": 0.6666666666666666
+          }
+        },
+        "D3": {
+          "B": {
+            "games": 6,
+            "wins": 2,
+            "losses": 4,
+            "draws": 0,
+            "score_rate": 0.3333333333333333
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "B-D3": 3
+      }
+    },
+    "d3-10s-vs-c": {
+      "phase_name": "d3-10s-vs-c",
+      "opponent_model": "C",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 10.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 1,
+        "losses": 5,
+        "draws": 0,
+        "pure_win_rate": 0.16666666666666666,
+        "score_rate": 0.16666666666666666,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.01765279427865346,
+          0.6900118935580435
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.01765279427865346,
+          0.6900118935580435
+        ],
+        "moves": 45,
+        "thinking_seconds_total": 329.9812568210018,
+        "average_seconds_per_move": 7.332916818244485,
+        "simulations_total": 181691,
+        "average_simulations_per_move": 4037.5777777777776,
+        "simulations_per_thinking_second": 550.6100611604077,
+        "average_tree_depth": 2.1555555555555554,
+        "max_tree_depth": 3,
+        "tree_depth_counts": {
+          "0": 12,
+          "2": 2,
+          "3": 31
+        },
+        "search_timeout_flags": 33,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 3,
+        "score_points_per_thinking_second": 0.003030475153752292
+      },
+      "opponent": {
+        "wins": 5,
+        "losses": 1,
+        "draws": 0,
+        "pure_win_rate": 0.8333333333333334,
+        "score_rate": 0.8333333333333334,
+        "score_rate_paired_wilson_ci95": [
+          0.3099881064419566,
+          0.9823472057213466
+        ],
+        "moves": 47,
+        "thinking_seconds_total": 2.318847610998091,
+        "average_seconds_per_move": 0.049337183212725344,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 1.6808510638297873,
+        "max_tree_depth": 2,
+        "tree_depth_counts": {
+          "1": 15,
+          "2": 32
+        },
+        "search_timeout_flags": 47,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 5
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 0,
+          "losses": 3,
+          "draws": 0,
+          "score_rate": 0.0
+        },
+        "white": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "draws": 0,
+          "score_rate": 0.3333333333333333
+        }
+      },
+      "win_matrix": {
+        "C": {
+          "C": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 5,
+            "losses": 1,
+            "draws": 0,
+            "score_rate": 0.8333333333333334
+          }
+        },
+        "D3": {
+          "C": {
+            "games": 6,
+            "wins": 1,
+            "losses": 5,
+            "draws": 0,
+            "score_rate": 0.16666666666666666
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "C-D3": 3
+      }
+    },
+    "d3-20s-vs-a": {
+      "phase_name": "d3-20s-vs-a",
+      "opponent_model": "A",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 20.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 2,
+        "losses": 0,
+        "draws": 4,
+        "pure_win_rate": 0.3333333333333333,
+        "score_rate": 0.6666666666666666,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.06149194472039632,
+          0.7923403991979523
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.20765960080204782,
+          0.9385080552796038
+        ],
+        "moves": 192,
+        "thinking_seconds_total": 3495.352006803003,
+        "average_seconds_per_move": 18.20495836876564,
+        "simulations_total": 13332505,
+        "average_simulations_per_move": 69440.13020833333,
+        "simulations_per_thinking_second": 3814.3525956902045,
+        "average_tree_depth": 3.2239583333333335,
+        "max_tree_depth": 7,
+        "tree_depth_counts": {
+          "0": 14,
+          "1": 2,
+          "2": 2,
+          "3": 125,
+          "4": 20,
+          "5": 19,
+          "6": 7,
+          "7": 3
+        },
+        "search_timeout_flags": 170,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 8,
+        "score_points_per_thinking_second": 0.001144376873120304
+      },
+      "opponent": {
+        "wins": 0,
+        "losses": 2,
+        "draws": 4,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.3333333333333333,
+        "score_rate_paired_wilson_ci95": [
+          0.06149194472039632,
+          0.7923403991979523
+        ],
+        "moves": 191,
+        "thinking_seconds_total": 0.101217920993804,
+        "average_seconds_per_move": 0.0005299367591298638,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 0.0,
+        "max_tree_depth": 0,
+        "tree_depth_counts": {
+          "0": 191
+        },
+        "search_timeout_flags": 0,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 0
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 1,
+          "losses": 0,
+          "draws": 2,
+          "score_rate": 0.6666666666666666
+        },
+        "white": {
+          "games": 3,
+          "wins": 1,
+          "losses": 0,
+          "draws": 2,
+          "score_rate": 0.6666666666666666
+        }
+      },
+      "win_matrix": {
+        "A": {
+          "A": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 0,
+            "losses": 2,
+            "draws": 4,
+            "score_rate": 0.3333333333333333
+          }
+        },
+        "D3": {
+          "A": {
+            "games": 6,
+            "wins": 2,
+            "losses": 0,
+            "draws": 4,
+            "score_rate": 0.6666666666666666
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "A-D3": 3
+      }
+    },
+    "d3-20s-vs-b": {
+      "phase_name": "d3-20s-vs-b",
+      "opponent_model": "B",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 20.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 3,
+        "losses": 3,
+        "draws": 0,
+        "pure_win_rate": 0.5,
+        "score_rate": 0.5,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "moves": 39,
+        "thinking_seconds_total": 559.9837441789987,
+        "average_seconds_per_move": 14.358557543051248,
+        "simulations_total": 295139,
+        "average_simulations_per_move": 7567.666666666667,
+        "simulations_per_thinking_second": 527.0492278891204,
+        "average_tree_depth": 2.1538461538461537,
+        "max_tree_depth": 3,
+        "tree_depth_counts": {
+          "0": 11,
+          "3": 28
+        },
+        "search_timeout_flags": 28,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 2,
+        "score_points_per_thinking_second": 0.00535729837014885
+      },
+      "opponent": {
+        "wins": 3,
+        "losses": 3,
+        "draws": 0,
+        "pure_win_rate": 0.5,
+        "score_rate": 0.5,
+        "score_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "moves": 39,
+        "thinking_seconds_total": 1.9175063789953128,
+        "average_seconds_per_move": 0.04916683023064905,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 1.0,
+        "max_tree_depth": 1,
+        "tree_depth_counts": {
+          "1": 39
+        },
+        "search_timeout_flags": 39,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 3
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "draws": 0,
+          "score_rate": 0.3333333333333333
+        },
+        "white": {
+          "games": 3,
+          "wins": 2,
+          "losses": 1,
+          "draws": 0,
+          "score_rate": 0.6666666666666666
+        }
+      },
+      "win_matrix": {
+        "B": {
+          "B": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 3,
+            "losses": 3,
+            "draws": 0,
+            "score_rate": 0.5
+          }
+        },
+        "D3": {
+          "B": {
+            "games": 6,
+            "wins": 3,
+            "losses": 3,
+            "draws": 0,
+            "score_rate": 0.5
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "B-D3": 3
+      }
+    },
+    "d3-20s-vs-c": {
+      "phase_name": "d3-20s-vs-c",
+      "opponent_model": "C",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 20.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 3,
+        "losses": 2,
+        "draws": 1,
+        "pure_win_rate": 0.5,
+        "score_rate": 0.5833333333333334,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.16416520970429233,
+          0.9089186183365336
+        ],
+        "moves": 81,
+        "thinking_seconds_total": 1197.5647878689997,
+        "average_seconds_per_move": 14.784750467518515,
+        "simulations_total": 3740680,
+        "average_simulations_per_move": 46181.234567901236,
+        "simulations_per_thinking_second": 3123.5721339605625,
+        "average_tree_depth": 2.4814814814814814,
+        "max_tree_depth": 7,
+        "tree_depth_counts": {
+          "0": 20,
+          "1": 1,
+          "3": 48,
+          "4": 7,
+          "5": 3,
+          "6": 1,
+          "7": 1
+        },
+        "search_timeout_flags": 59,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 2,
+        "score_points_per_thinking_second": 0.002922597620983877
+      },
+      "opponent": {
+        "wins": 2,
+        "losses": 3,
+        "draws": 1,
+        "pure_win_rate": 0.3333333333333333,
+        "score_rate": 0.4166666666666667,
+        "score_rate_paired_wilson_ci95": [
+          0.09108138166346652,
+          0.8358347902957077
+        ],
+        "moves": 80,
+        "thinking_seconds_total": 3.9111325130033947,
+        "average_seconds_per_move": 0.048889156412542434,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 1.925,
+        "max_tree_depth": 4,
+        "tree_depth_counts": {
+          "1": 17,
+          "2": 55,
+          "3": 5,
+          "4": 3
+        },
+        "search_timeout_flags": 77,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 3
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 2,
+          "losses": 0,
+          "draws": 1,
+          "score_rate": 0.8333333333333334
+        },
+        "white": {
+          "games": 3,
+          "wins": 1,
+          "losses": 2,
+          "draws": 0,
+          "score_rate": 0.3333333333333333
+        }
+      },
+      "win_matrix": {
+        "C": {
+          "C": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 2,
+            "losses": 3,
+            "draws": 1,
+            "score_rate": 0.4166666666666667
+          }
+        },
+        "D3": {
+          "C": {
+            "games": 6,
+            "wins": 3,
+            "losses": 2,
+            "draws": 1,
+            "score_rate": 0.5833333333333334
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "C-D3": 3
+      }
+    },
+    "d3-50s-vs-a": {
+      "phase_name": "d3-50s-vs-a",
+      "opponent_model": "A",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 50.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 3,
+        "losses": 0,
+        "draws": 3,
+        "pure_win_rate": 0.5,
+        "score_rate": 0.75,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.2560926803174621,
+          0.9631588038050152
+        ],
+        "moves": 154,
+        "thinking_seconds_total": 7149.099958248995,
+        "average_seconds_per_move": 46.42272700161685,
+        "simulations_total": 13693048,
+        "average_simulations_per_move": 88915.8961038961,
+        "simulations_per_thinking_second": 1915.3527129244103,
+        "average_tree_depth": 3.5454545454545454,
+        "max_tree_depth": 8,
+        "tree_depth_counts": {
+          "0": 5,
+          "1": 1,
+          "2": 2,
+          "3": 87,
+          "4": 31,
+          "5": 17,
+          "6": 8,
+          "7": 1,
+          "8": 2
+        },
+        "search_timeout_flags": 139,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 8,
+        "score_points_per_thinking_second": 0.0006294498644976521
+      },
+      "opponent": {
+        "wins": 0,
+        "losses": 3,
+        "draws": 3,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.25,
+        "score_rate_paired_wilson_ci95": [
+          0.03684119619498483,
+          0.743907319682538
+        ],
+        "moves": 153,
+        "thinking_seconds_total": 0.0742815350095043,
+        "average_seconds_per_move": 0.0004855002288202895,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 0.0,
+        "max_tree_depth": 0,
+        "tree_depth_counts": {
+          "0": 153
+        },
+        "search_timeout_flags": 0,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 0
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 2,
+          "losses": 0,
+          "draws": 1,
+          "score_rate": 0.8333333333333334
+        },
+        "white": {
+          "games": 3,
+          "wins": 1,
+          "losses": 0,
+          "draws": 2,
+          "score_rate": 0.6666666666666666
+        }
+      },
+      "win_matrix": {
+        "A": {
+          "A": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 0,
+            "losses": 3,
+            "draws": 3,
+            "score_rate": 0.25
+          }
+        },
+        "D3": {
+          "A": {
+            "games": 6,
+            "wins": 3,
+            "losses": 0,
+            "draws": 3,
+            "score_rate": 0.75
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "A-D3": 3
+      }
+    },
+    "d3-50s-vs-b": {
+      "phase_name": "d3-50s-vs-b",
+      "opponent_model": "B",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 50.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 6,
+        "losses": 0,
+        "draws": 0,
+        "pure_win_rate": 1.0,
+        "score_rate": 1.0,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "moves": 43,
+        "thinking_seconds_total": 1499.9841810309954,
+        "average_seconds_per_move": 34.883353047232454,
+        "simulations_total": 744970,
+        "average_simulations_per_move": 17324.883720930233,
+        "simulations_per_thinking_second": 496.6519043473873,
+        "average_tree_depth": 2.3255813953488373,
+        "max_tree_depth": 5,
+        "tree_depth_counts": {
+          "0": 13,
+          "3": 22,
+          "4": 6,
+          "5": 2
+        },
+        "search_timeout_flags": 30,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 1,
+        "score_points_per_thinking_second": 0.004000042184362221
+      },
+      "opponent": {
+        "wins": 0,
+        "losses": 6,
+        "draws": 0,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.0,
+        "score_rate_paired_wilson_ci95": [
+          0.0,
+          0.5614970317550454
+        ],
+        "moves": 40,
+        "thinking_seconds_total": 1.963722598986351,
+        "average_seconds_per_move": 0.049093064974658776,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 1.0,
+        "max_tree_depth": 1,
+        "tree_depth_counts": {
+          "1": 40
+        },
+        "search_timeout_flags": 40,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 1
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "draws": 0,
+          "score_rate": 1.0
+        },
+        "white": {
+          "games": 3,
+          "wins": 3,
+          "losses": 0,
+          "draws": 0,
+          "score_rate": 1.0
+        }
+      },
+      "win_matrix": {
+        "B": {
+          "B": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 0,
+            "losses": 6,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        },
+        "D3": {
+          "B": {
+            "games": 6,
+            "wins": 6,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 1.0
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "B-D3": 3
+      }
+    },
+    "d3-50s-vs-c": {
+      "phase_name": "d3-50s-vs-c",
+      "opponent_model": "C",
+      "interval_method": "approximate paired-block Wilson-style 95% interval; each of only three paired opening blocks contributes its fractional mean score as a Bernoulli success count, so coverage is not calibrated for the paired-score distribution",
+      "board_size": 9,
+      "games": 6,
+      "D3_budget_seconds": 50.0,
+      "opponent_budget_seconds": 0.05,
+      "D3": {
+        "wins": 2,
+        "losses": 2,
+        "draws": 2,
+        "pure_win_rate": 0.3333333333333333,
+        "score_rate": 0.5,
+        "pure_win_rate_paired_wilson_ci95": [
+          0.06149194472039632,
+          0.7923403991979523
+        ],
+        "score_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "moves": 122,
+        "thinking_seconds_total": 5006.990850936996,
+        "average_seconds_per_move": 41.04090861423767,
+        "simulations_total": 9569308,
+        "average_simulations_per_move": 78436.95081967213,
+        "simulations_per_thinking_second": 1911.1894319138257,
+        "average_tree_depth": 3.098360655737705,
+        "max_tree_depth": 7,
+        "tree_depth_counts": {
+          "0": 18,
+          "1": 1,
+          "2": 1,
+          "3": 53,
+          "4": 36,
+          "5": 8,
+          "6": 3,
+          "7": 2
+        },
+        "search_timeout_flags": 97,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 6,
+        "score_points_per_thinking_second": 0.0005991622691778211
+      },
+      "opponent": {
+        "wins": 2,
+        "losses": 2,
+        "draws": 2,
+        "pure_win_rate": 0.3333333333333333,
+        "score_rate": 0.5,
+        "score_rate_paired_wilson_ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "moves": 122,
+        "thinking_seconds_total": 5.983274041012919,
+        "average_seconds_per_move": 0.04904322984436819,
+        "simulations_total": 0,
+        "average_simulations_per_move": 0.0,
+        "simulations_per_thinking_second": 0.0,
+        "average_tree_depth": 1.9508196721311475,
+        "max_tree_depth": 4,
+        "tree_depth_counts": {
+          "1": 26,
+          "2": 83,
+          "3": 6,
+          "4": 7
+        },
+        "search_timeout_flags": 115,
+        "illegal_moves": 0,
+        "actual_over_budget_moves": 6
+      },
+      "D3_color_split": {
+        "black": {
+          "games": 3,
+          "wins": 2,
+          "losses": 0,
+          "draws": 1,
+          "score_rate": 0.8333333333333334
+        },
+        "white": {
+          "games": 3,
+          "wins": 0,
+          "losses": 2,
+          "draws": 1,
+          "score_rate": 0.16666666666666666
+        }
+      },
+      "win_matrix": {
+        "C": {
+          "C": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          },
+          "D3": {
+            "games": 6,
+            "wins": 2,
+            "losses": 2,
+            "draws": 2,
+            "score_rate": 0.5
+          }
+        },
+        "D3": {
+          "C": {
+            "games": 6,
+            "wins": 2,
+            "losses": 2,
+            "draws": 2,
+            "score_rate": 0.5
+          },
+          "D3": {
+            "games": 0,
+            "wins": 0,
+            "losses": 0,
+            "draws": 0,
+            "score_rate": 0.0
+          }
+        }
+      },
+      "pair_counts": {
+        "C-D3": 3
+      }
+    }
+  },
+  "budget_trend": {
+    "A": [
+      {
+        "budget_seconds": 10.0,
+        "games": 6,
+        "score_rate": 0.5,
+        "ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "average_simulations_per_move": 57942.82683982684,
+        "average_seconds_per_move": 9.523523538826842,
+        "average_tree_depth": 3.2987012987012987
+      },
+      {
+        "budget_seconds": 20.0,
+        "games": 6,
+        "score_rate": 0.6666666666666666,
+        "ci95": [
+          0.20765960080204782,
+          0.9385080552796038
+        ],
+        "average_simulations_per_move": 69440.13020833333,
+        "average_seconds_per_move": 18.20495836876564,
+        "average_tree_depth": 3.2239583333333335
+      },
+      {
+        "budget_seconds": 50.0,
+        "games": 6,
+        "score_rate": 0.75,
+        "ci95": [
+          0.2560926803174621,
+          0.9631588038050152
+        ],
+        "average_simulations_per_move": 88915.8961038961,
+        "average_seconds_per_move": 46.42272700161685,
+        "average_tree_depth": 3.5454545454545454
+      }
+    ],
+    "B": [
+      {
+        "budget_seconds": 10.0,
+        "games": 6,
+        "score_rate": 0.3333333333333333,
+        "ci95": [
+          0.06149194472039632,
+          0.7923403991979523
+        ],
+        "average_simulations_per_move": 3823.9024390243903,
+        "average_seconds_per_move": 7.072706244097567,
+        "average_tree_depth": 2.1219512195121952
+      },
+      {
+        "budget_seconds": 20.0,
+        "games": 6,
+        "score_rate": 0.5,
+        "ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "average_simulations_per_move": 7567.666666666667,
+        "average_seconds_per_move": 14.358557543051248,
+        "average_tree_depth": 2.1538461538461537
+      },
+      {
+        "budget_seconds": 50.0,
+        "games": 6,
+        "score_rate": 1.0,
+        "ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "average_simulations_per_move": 17324.883720930233,
+        "average_seconds_per_move": 34.883353047232454,
+        "average_tree_depth": 2.3255813953488373
+      }
+    ],
+    "C": [
+      {
+        "budget_seconds": 10.0,
+        "games": 6,
+        "score_rate": 0.16666666666666666,
+        "ci95": [
+          0.01765279427865346,
+          0.6900118935580435
+        ],
+        "average_simulations_per_move": 4037.5777777777776,
+        "average_seconds_per_move": 7.332916818244485,
+        "average_tree_depth": 2.1555555555555554
+      },
+      {
+        "budget_seconds": 20.0,
+        "games": 6,
+        "score_rate": 0.5833333333333334,
+        "ci95": [
+          0.16416520970429233,
+          0.9089186183365336
+        ],
+        "average_simulations_per_move": 46181.234567901236,
+        "average_seconds_per_move": 14.784750467518515,
+        "average_tree_depth": 2.4814814814814814
+      },
+      {
+        "budget_seconds": 50.0,
+        "games": 6,
+        "score_rate": 0.5,
+        "ci95": [
+          0.1253344719102632,
+          0.8746655280897369
+        ],
+        "average_simulations_per_move": 78436.95081967213,
+        "average_seconds_per_move": 41.04090861423767,
+        "average_tree_depth": 3.098360655737705
+      }
+    ]
+  },
+  "experiment_id": "wuziq-mcts-high-compute-v3",
+  "code_commit": "ff6aa837cf2d38268485fab51548c0e8327eb56d",
+  "validation": {
+    "game_count": 54,
+    "scheduled_game_count": 54,
+    "unique_game_ids": 54,
+    "missing_game_count": 0,
+    "complete": true,
+    "illegal_moves": 0,
+    "replayed_placements": 2109,
+    "termination_counts": {
+      "five_in_row": 38,
+      "full_board": 16
+    },
+    "paired_opening_groups": 27,
+    "unpaired_opening_group_count": 0,
+    "unpaired_opening_group_ids": [],
+    "unique_opening_positions_by_board": {
+      "9": 3
+    },
+    "missing_game_id_sample": []
+  }
+}
