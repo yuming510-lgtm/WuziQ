@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "abc_search_compute_v4_2026-10-19",
+  "search_code_commit": "2a8504c1954388fe488d59e6177fa5c0986af087",
+  "final_record_count": 252,
+  "final_unique_run_count": 252,
+  "actual_matrix_wall_seconds": 1903.905213707003,
+  "preflight_wall_seconds": 777.14838169,
+  "valid_total_wall_seconds": 2681.053595397003,
+  "valid_total_wall_minutes": 44.68422658995005,
+  "estimated_official_wall_seconds": 1898.8755361289586,
+  "estimate_error_seconds": 5.029677578044357,
+  "estimate_error_percent": 0.2648766326358515,
+  "superseded_first_pass": {
+    "reason": "A deadline-boundary audit found completed layers accepted just after the cutoff; these first-pass records are not part of the final 252-run data.",
+    "preflight_wall_seconds": 777.8038807740013,
+    "matrix_wall_seconds": 1904.9506086859983,
+    "raw_jsonl_sha256": "08bb45157920056e2c65aeca32ef426b172ee0769e0658fae1c40c4071aec7a0",
+    "raw_record_count": 252
+  },
+  "superseded_total_wall_seconds": 2682.7544894599996,
+  "all_measurement_wall_seconds": 5363.8080848570025,
+  "all_measurement_wall_minutes": 89.39680141428337,
+  "over_budget_count": 2,
+  "max_overrun_seconds": 0.005431687997770496,
+  "over_budget_run_ids": [
+    "attack_open_four__B__05000ms",
+    "opening_08__B__01000ms"
+  ],
+  "note": "The superseded first pass is documented for audit but excluded from all final statistics."
+}

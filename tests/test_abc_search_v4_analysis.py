@@ -97,6 +97,7 @@ def test_summary_and_node_savings_use_complete_shared_depths() -> None:
     assert b["run_count"] == c["run_count"] == 1
     assert b["mean_nodes"] == 1200
     assert c["mean_cutoffs"] == 36
+    assert c["cutoff_ratio"] == pytest.approx(36 / 400)
     assert savings["shared_position_depth_pairs"] == 2
     assert savings["mean_node_reduction_ratio"] > 0
 
@@ -109,6 +110,20 @@ def test_full_validation_rejects_missing_matrix_rows() -> None:
 
     with pytest.raises(ValueError, match="missing run IDs"):
         analysis.validate_runs(_pair(config), config, require_complete=True)
+
+
+def test_validator_reports_wall_clock_budget_overruns_without_hiding_them() -> None:
+    import src.research.abc_search_v4 as runner
+
+    analysis = _module()
+    config = runner.load_config(CONFIG_PATH)
+    records = _pair(config)
+    records[0]["elapsed_seconds"] = 0.053
+
+    result = analysis.validate_runs(records, config, require_complete=False)
+
+    assert result["over_budget_count"] == 1
+    assert result["max_overrun_seconds"] == pytest.approx(0.003)
 
 
 def test_complete_report_writes_summary_and_all_trend_charts(tmp_path: Path) -> None:
@@ -160,12 +175,28 @@ def test_complete_report_writes_summary_and_all_trend_charts(tmp_path: Path) -> 
     report = tmp_path / "report_zh.md"
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter("always")
-        result = analysis.write_report(config, records, report, tmp_path / "figures")
+        result = analysis.write_report(
+            config,
+            records,
+            report,
+            tmp_path / "figures",
+            execution={
+                "actual_matrix_wall_seconds": 12.5,
+                "preflight_wall_seconds": 3.2,
+                "valid_total_wall_seconds": 15.7,
+                "valid_total_wall_minutes": 15.7 / 60,
+            },
+        )
 
     assert result["validation"]["complete"]
     assert result["summary"]["actual_run_count"] == 252
-    assert len(result["figures"]) == 5
+    assert len(result["figures"]) == 6
     assert all(Path(path).is_file() and Path(path).stat().st_size > 1000 for path in result["figures"])
     assert (tmp_path / "summary.json").is_file()
-    assert "直接攻防着法检查" in report.read_text(encoding="utf-8")
+    report_text = report.read_text(encoding="utf-8")
+    assert "直接攻防着法检查" in report_text
+    assert "12.500 秒" in report_text
+    assert "B/C 实际耗时与超时" in report_text
+    assert "B 超时" in report_text
+    assert "C 超时" in report_text
     assert not [warning for warning in caught if issubclass(warning.category, UserWarning)]

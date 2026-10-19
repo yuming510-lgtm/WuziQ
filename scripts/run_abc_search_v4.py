@@ -63,6 +63,8 @@ def main(argv: list[str] | None = None) -> int:
         records = load_run_records(records_path)
         preflight_path = args.results / "preflight.json"
         preflight_data = json.loads(preflight_path.read_text(encoding="utf-8")) if preflight_path.exists() else {}
+        execution_path = args.results / "execution.json"
+        execution = json.loads(execution_path.read_text(encoding="utf-8")) if execution_path.exists() else None
         estimate = preflight_data.get("estimate", {})
         report_preflight = {
             "estimated_seconds": estimate.get("estimated_official_compute_seconds", 0),
@@ -75,6 +77,7 @@ def main(argv: list[str] | None = None) -> int:
             args.figures,
             preflight=report_preflight if preflight_data else None,
             resources=preflight_data.get("resources_after"),
+            execution=execution,
         )
         print(json.dumps({"report": result["report"], "figures": result["figures"]}, ensure_ascii=False, indent=2))
         return 0

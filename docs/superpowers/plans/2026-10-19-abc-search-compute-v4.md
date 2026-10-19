@@ -90,17 +90,17 @@
 - Create: `research/v4/results/preflight.json`
 - Create: `research/v4/results/summary.json`
 - Create: `research/v4/figures/*.png`
-- Create: `research/v4/report_zh.md`
+- Create: `research/v4/results/report_zh.md`
 - Modify: `README.md` only if needed for reproducibility instructions
 
 **Interfaces:**
 - Uses Task 2's stable run schedule and Task 3's validators/plots/snapshot functions.
 
-- [ ] **Step 1:** Record visible CPU, memory, cgroup, and disk resources; run representative B/C budget probes and estimate full wall time/storage.
-- [ ] **Step 2:** Validate the Drive recovery drill, then run all uncompleted IDs sequentially; persist each row immediately.
-- [ ] **Step 3:** Validate exactly 252 unique records, legal moves, depth traces, and every matching B/C completed-depth root score.
-- [ ] **Step 4:** Generate seven-budget tables, trends, Chinese report, and rerun the full repository suite.
-- [ ] **Step 5:** Commit data and report as `research: publish ABC compute expansion V4`.
+- [x] **Step 1:** Record visible CPU, memory, cgroup, and disk resources; run representative B/C budget probes and estimate full wall time/storage.
+- [x] **Step 2:** Validate the Drive recovery drill, then run all uncompleted IDs sequentially; persist each row immediately.
+- [x] **Step 3:** Validate exactly 252 unique records, legal moves, depth traces, and every matching B/C completed-depth root score.
+- [x] **Step 4:** Generate seven-budget tables, trends, Chinese report, and rerun the full repository suite.
+- [x] **Step 5:** Commit data and report as `research: publish ABC compute expansion V4`.
 
 ### Task 5: Final review and independent V4 push
 

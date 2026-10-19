@@ -48,6 +48,11 @@ def validate_runs(
             raise ValueError(f"Incorrect remaining-cell depth limit: {run_id}")
         if float(record.get("elapsed_seconds", -1)) < 0:
             raise ValueError(f"Negative elapsed time: {run_id}")
+        if (
+            float(record["elapsed_seconds"]) > budget_ms / 1_000.0
+            and not bool(record.get("timed_out", False))
+        ):
+            raise ValueError(f"Over-budget run is not marked timed_out: {run_id}")
         move = record.get("move")
         if (
             not isinstance(move, list)
@@ -117,6 +122,20 @@ def validate_runs(
                         f"{depth} for {position_id}/{budget_ms}ms: "
                         f"{minimax[depth]['root_value']} != {alpha_beta[depth]['root_value']}"
                     )
+    over_budget = [
+        {
+            "run_id": str(record["run_id"]),
+            "model": str(record["model"]),
+            "budget_ms": int(record["budget_ms"]),
+            "elapsed_seconds": float(record["elapsed_seconds"]),
+            "overrun_seconds": float(record["elapsed_seconds"])
+            - int(record["budget_ms"]) / 1_000.0,
+            "timed_out": bool(record.get("timed_out", False)),
+        }
+        for record in rows
+        if float(record["elapsed_seconds"]) > int(record["budget_ms"]) / 1_000.0
+    ]
+    over_budget.sort(key=lambda row: row["overrun_seconds"], reverse=True)
     return {
         "checked_runs": len(rows),
         "expected_runs": len(ids),
@@ -124,6 +143,11 @@ def validate_runs(
         "missing_run_ids": missing,
         "shared_depth_comparisons": comparisons,
         "score_mismatch_count": 0,
+        "over_budget_count": len(over_budget),
+        "max_overrun_seconds": max(
+            (row["overrun_seconds"] for row in over_budget), default=0.0
+        ),
+        "over_budget_runs": over_budget,
         "complete": not missing,
     }
 
@@ -145,6 +169,7 @@ def summarize_runs(records: Iterable[dict[str, Any]], config: dict[str, Any]) ->
             nodes = [int(row.get("nodes", 0)) for row in subset]
             depths = [int(row.get("completed_depth", 0)) for row in subset]
             cutoffs = [int(row.get("cutoffs", 0)) for row in subset]
+            total_nodes = sum(nodes)
             by_model_budget[model][str(budget)] = {
                 "run_count": len(subset),
                 "mean_elapsed_seconds": statistics.fmean(times) if times else None,
@@ -158,6 +183,7 @@ def summarize_runs(records: Iterable[dict[str, Any]], config: dict[str, Any]) ->
                 if subset
                 else None,
                 "mean_cutoffs": statistics.fmean(cutoffs) if cutoffs else None,
+                "cutoff_ratio": sum(cutoffs) / total_nodes if total_nodes else 0.0,
                 "timeout_count": sum(bool(row.get("timed_out")) for row in subset),
             }
 
@@ -292,6 +318,13 @@ def make_plots(
         "nodes_per_second.png", "B/C 平均节点吞吐", "节点/秒", "mean_nodes_per_second", log_y=True
     )
 
+    save_series(
+        "alpha_beta_cutoff_ratio.png",
+        "Alpha-Beta 剪枝事件占总节点比例",
+        "剪枝事件 / 总节点",
+        "cutoff_ratio",
+    )
+
     fig, axis = plt.subplots(figsize=(8, 4.6), constrained_layout=True)
     ratios = [summary["alpha_beta_node_savings"][str(budget)]["mean_node_reduction_ratio"] for budget in budgets]
     axis.plot(labels, ratios, marker="o", color="#6e56cf")
@@ -329,6 +362,7 @@ def write_report(
     *,
     preflight: dict[str, Any] | None = None,
     resources: dict[str, Any] | None = None,
+    execution: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Validate a complete dataset, emit plots/summary JSON, and write a Chinese report."""
 
@@ -342,13 +376,14 @@ def write_report(
         f"- 实验：`{config['experiment_id']}`；9×9 棋盘；固定局面：{len(config['positions'])} 个。",
         f"- 实际记录：{len(rows)}/{len(expected_run_ids(config))} 条，唯一 run ID；共同完整深度评分比较 {validation['shared_depth_comparisons']} 次，差异 0 次。",
         "- 本轮测量搜索效率和固定局面的战术选择，不包含 AI 对战胜率，也不进行模型训练。",
+        "- 当前运行环境未暴露本会话的 Codex 基础模型与推理强度字段，无法独立核实“Luna / Max”配置；算法和实验数据均来自本地仓库代码实际运行。",
         "- A 使用原规则选择器，仅测量实际决策时间；没有人为等待。B 为纯 Minimax，C 为相同 Minimax 加 Alpha-Beta。",
         "- B/C 按相同候选集、排序和评价函数迭代加深；每条记录的最大深度等于局面剩余空格数。超时层不会覆盖上一个完整层结果。",
         "",
         "## 七档预算汇总",
         "",
-        "| 预算 | A 平均实际耗时 | B 深度 / 节点 / 节点每秒 | C 深度 / 节点 / 节点每秒 | C 剪枝事件 | C 相同完整层节点减少 | C 超时数 |",
-        "|---:|---:|---:|---:|---:|---:|---:|",
+        "| 预算 | A 平均实际耗时 | B 深度 / 节点 / 节点每秒 | C 深度 / 节点 / 节点每秒 | C 剪枝事件 | C 剪枝比例 | C 相同完整层节点减少 | C 超时数 |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for budget in EXPECTED_BUDGETS_MS:
         a = summary["by_model_budget"]["A"][str(budget)]
@@ -361,17 +396,48 @@ def write_report(
             f"| {budget}ms | {fmt(a['mean_elapsed_seconds'] * 1000 if a['mean_elapsed_seconds'] is not None else None, 2)}ms | "
             f"{fmt(b['mean_completed_depth'], 2)} / {fmt(b['mean_nodes'], 0)} / {fmt(b['mean_nodes_per_second'], 0)} | "
             f"{fmt(c['mean_completed_depth'], 2)} / {fmt(c['mean_nodes'], 0)} / {fmt(c['mean_nodes_per_second'], 0)} | "
-            f"{fmt(c['mean_cutoffs'], 1)} | {fmt(saving * 100 if saving is not None else None, 1)}% | {c['timeout_count']} |"
+            f"{fmt(c['mean_cutoffs'], 1)} | {fmt(c['cutoff_ratio'] * 100, 2)}% | "
+            f"{fmt(saving * 100 if saving is not None else None, 1)}% | {c['timeout_count']} |"
         )
     report.extend(
         [
             "",
-            "表中的平均深度、节点数与吞吐量按该模型和预算下的固定局面计算。节点数含超时不完整层的已完成工作；报告另用逐层轨迹隔离完整层节点。剪枝事件是 Alpha-Beta 触发的 cutoff 次数。节点减少比例只比较 B/C 在同一局面、同一预算、同一完整深度的节点数。",
+            "### B/C 实际耗时与超时",
+            "",
+            "| 预算 | A 平均耗时 | B 平均耗时 | B 超时 | C 平均耗时 | C 超时 |",
+            "|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for budget in EXPECTED_BUDGETS_MS:
+        values = {
+            model: summary["by_model_budget"][model][str(budget)]
+            for model in EXPECTED_MODELS
+        }
+        report.append(
+            f"| {budget}ms | "
+            f"{values['A']['mean_elapsed_seconds'] * 1000:.3f}ms | "
+            f"{values['B']['mean_elapsed_seconds'] * 1000:.3f}ms | "
+            f"{values['B']['timeout_count']}/12 | "
+            f"{values['C']['mean_elapsed_seconds'] * 1000:.3f}ms | "
+            f"{values['C']['timeout_count']}/12 |"
+        )
+    report.extend(
+        [
+            "",
+            "表中的平均深度、节点数与吞吐量按该模型和预算下的固定局面计算。节点数含超时不完整层的已完成工作；报告另用逐层轨迹隔离完整层节点。剪枝比例定义为该预算全部 cutoff 次数除以全部节点数。节点减少比例只比较 B/C 在同一局面、同一预算、同一完整深度的节点数。",
             "",
             "## 搜索深度与算力趋势",
             "",
             f"C 在 10 秒及以上预算中有 {summary['c_runs_above_depth_four_at_10s_plus']}/{summary['c_runs_at_10s_plus']} 个实测 run 完成超过 4 层。该数值仅覆盖固定局面，不能外推为对弈胜率。",
             "预算从 50ms 增加到 50s 后，需同时查看完成深度和有效节点；若搜索在更高预算仍常超时，说明候选树增长很快。若深度或节点增长放缓，应结合局面分支数理解，不能仅凭预算标签推断搜索已穷尽。",
+            f"B 的平均完整深度从 50ms 的 {summary['by_model_budget']['B']['50']['mean_completed_depth']:.2f} 层增加到 50s 的 {summary['by_model_budget']['B']['50000']['mean_completed_depth']:.2f} 层；C 从 {summary['by_model_budget']['C']['50']['mean_completed_depth']:.2f} 层增加到 {summary['by_model_budget']['C']['50000']['mean_completed_depth']:.2f} 层。C 在 10s、20s、50s 下分别有 "
+            + "、".join(
+                f"{sum(int(row.get('completed_depth', 0)) > 4 for row in rows if row.get('model') == 'C' and int(row.get('budget_ms', 0)) == budget)}/12"
+                for budget in (10_000, 20_000, 50_000)
+            )
+            + " 个局面超过 4 层。",
+            f"C 的 50s 平均完整深度为 {summary['by_model_budget']['C']['50000']['mean_completed_depth']:.2f} 层，比 20s 的 {summary['by_model_budget']['C']['20000']['mean_completed_depth']:.2f} 层高 {summary['by_model_budget']['C']['50000']['mean_completed_depth'] - summary['by_model_budget']['C']['20000']['mean_completed_depth']:.2f} 层；平均节点数则从 {summary['by_model_budget']['C']['20000']['mean_nodes']:.0f} 增至 {summary['by_model_budget']['C']['50000']['mean_nodes']:.0f}。这是固定局面集合上的收益递减信号，不能视为整体棋力饱和的证明。",
+            f"C 的单节点吞吐量约为 {summary['by_model_budget']['C']['50000']['mean_nodes_per_second']:.0f} 节点/秒，低于 B 的 {summary['by_model_budget']['B']['50000']['mean_nodes_per_second']:.0f} 节点/秒；Alpha-Beta 的收益来自更少节点达到相同完整深度，而不是每个节点执行得更快。",
             "",
             "## 图表",
             "",
@@ -379,6 +445,24 @@ def write_report(
     )
     for path in figure_paths:
         report.append(f"- `{Path(path).name}`")
+    report.extend(["", "## 典型开局、中局和残局", "", "以下为预先指定局面在高预算下的实测；耗时为秒，括号内为所选落点。残局 C 搜索到剩余空格上限后提前结束。", "", "| 局面 | 模型 | 10s：层/秒/节点/落点 | 20s：层/秒/节点/落点 | 50s：层/秒/节点/落点 |", "|---|:---:|---:|---:|---:|"])
+    selected_positions = ("opening_08", "midgame_24", "late_44", "late_58", "attack_open_four", "defense_block_four")
+    record_index = {
+        (str(row["position_id"]), str(row["model"]), int(row["budget_ms"])): row
+        for row in rows
+    }
+    for position_id in selected_positions:
+        for model in ("B", "C"):
+            cells = []
+            for budget in (10_000, 20_000, 50_000):
+                row = record_index.get((position_id, model, budget))
+                if row is None:
+                    cells.append("—")
+                else:
+                    cells.append(
+                        f"{int(row['completed_depth'])}/{float(row['elapsed_seconds']):.2f}/{int(row['nodes'])}/({row['move'][0]},{row['move'][1]})"
+                    )
+            report.append(f"| {position_id} | {model} | " + " | ".join(cells) + " |")
     tactical_rates = summary["tactical_choice_rates"]
     report.extend(
         [
@@ -400,6 +484,18 @@ def write_report(
     report.extend(["", "## 固定局面与复现", "", "局面着法序列、预算、候选半径和随机种子规则均保存在 `configs/abc_search_compute_v4.json`。原始每次测量保存在 `results/search_runs.jsonl`；运行器逐条写入并 `fsync`，按稳定 run ID 跳过已完成记录。"])
     if preflight:
         report.extend(["", "## 运行前估算", "", f"预检估算总耗时：{float(preflight.get('estimated_seconds', 0)):.1f} 秒（{float(preflight.get('estimated_minutes', 0)):.2f} 分钟）；完整实验实际耗时见 `preflight.json` 与进度记录。"])
+    if execution:
+        report.extend(
+            [
+                "",
+                "## 实际运行时间与截止偏差",
+                "",
+                f"修正版本正式矩阵实测 {float(execution.get('actual_matrix_wall_seconds', 0)):.3f} 秒；修正版本预检实测 {float(execution.get('preflight_wall_seconds', 0)):.3f} 秒；两者合计 {float(execution.get('valid_total_wall_seconds', 0)):.3f} 秒（{float(execution.get('valid_total_wall_minutes', 0)):.2f} 分钟）。",
+                f"首轮因截止边界问题而废弃的预检和矩阵共耗时 {float(execution.get('superseded_total_wall_seconds', 0)):.3f} 秒；这些数据未计入本报告统计。含复核重跑在内，所有预检与矩阵实测合计 {float(execution.get('all_measurement_wall_seconds', 0)):.3f} 秒（{float(execution.get('all_measurement_wall_minutes', 0)):.2f} 分钟）。",
+                f"最终记录中有 {validation['over_budget_count']} 条实测 wall-clock 略超名义预算，最大超出 {validation['max_overrun_seconds'] * 1000:.3f} 毫秒；均保留原始耗时并计入超时统计。迭代只有在截止前完整结束才更新根结果，操作系统调度和返回路径可能造成少量 wall-clock 偏差。",
+                f"最终有效矩阵相对预检的墙钟误差为 {float(execution.get('estimate_error_seconds', 0)):.2f} 秒（{float(execution.get('estimate_error_percent', 0)):.2f}%）。",
+            ]
+        )
     if resources:
         report.extend(["", "## 实验资源", "", f"- CPU：{resources.get('logical_cpu_count')} 个逻辑核，cgroup 配额 {resources.get('cgroup_cpu_quota_cores')} 核。", f"- 可用内存：{resources.get('memory_available_bytes')} bytes；cgroup 上限：{resources.get('cgroup_memory_limit_bytes')} bytes。", f"- 工作区可用磁盘：{resources.get('workspace_disk_free_bytes')} bytes。"])
     report.extend(["", "## 结论边界", "", "B/C 根评分一致性只验证相同完整搜索深度下的实现正确性；Alpha-Beta 的主要收益是减少达到同一深度的搜索工作量。更深搜索会改变启发式有限深度选择，但本实验没有随机抽样对手赛或统计棋力设计，不把这些搜索指标写成胜率或稳定强弱结论。"])
@@ -409,7 +505,7 @@ def write_report(
     output.write_text("\n".join(report) + "\n", encoding="utf-8")
     summary_path = output.parent / "summary.json"
     summary_path.write_text(
-        json.dumps({"validation": validation, **summary}, ensure_ascii=False, indent=2) + "\n",
+        json.dumps({"validation": validation, **summary, "execution": execution}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     return {"validation": validation, "summary": summary, "figures": figure_paths, "report": str(output)}
