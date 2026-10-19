@@ -170,3 +170,19 @@ def test_runner_truncates_only_corrupt_final_jsonl_tail(tmp_path: Path) -> None:
 
     assert len(records) == 1
     assert records_path.read_bytes().endswith(b"\n")
+
+
+def test_runner_rejects_corrupt_completed_row_before_advancing_progress(tmp_path: Path) -> None:
+    runner = _module()
+    runner.run_matrix(CONFIG_PATH, tmp_path, max_new_runs=1)
+    records_path = tmp_path / "search_runs.jsonl"
+    progress_path = tmp_path / "progress.json"
+    previous_progress = progress_path.read_bytes()
+    record = json.loads(records_path.read_text(encoding="utf-8"))
+    record["config_sha256"] = "corrupt-config"
+    records_path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="(?i)config hash mismatch"):
+        runner.run_matrix(CONFIG_PATH, tmp_path, max_new_runs=1)
+
+    assert progress_path.read_bytes() == previous_progress

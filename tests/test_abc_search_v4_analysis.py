@@ -24,7 +24,11 @@ def _module():
 
 
 def _pair(config, *, c_score: int = 100):
+    import src.research.abc_search_v4 as runner
+
     position_id = config["positions"][0]["position_id"]
+    position = config["positions"][0]
+    config_hash = runner._canonical_hash(config)
     rows = []
     for model, root2, nodes, cutoffs in [
         ("B", 100, 1200, 0),
@@ -34,26 +38,33 @@ def _pair(config, *, c_score: int = 100):
             {
                 "run_id": f"{position_id}__{model}__00050ms",
                 "position_id": position_id,
-                "category": "opening",
+                "category": position["category"],
                 "board_size": 9,
                 "plies": 4,
                 "model": model,
                 "budget_ms": 50,
+                "experiment_id": config["experiment_id"],
+                "config_sha256": config_hash,
+                "code_commit": "a" * 40,
+                "to_move": position["to_move"],
+                "seed": runner.derive_seed(config["base_seed"], position_id, model),
                 "completed_depth": 2,
                 "max_depth_limit": 77,
                 "root_value": root2,
                 "move": [0, 0],
                 "nodes": nodes,
+                "nodes_per_second": nodes / 0.05,
                 "completed_depth_nodes": nodes,
                 "partial_iteration_nodes": 0,
                 "cutoffs": cutoffs,
                 "completed_depth_cutoffs": cutoffs,
                 "partial_iteration_cutoffs": 0,
+                "root_candidates": 1,
                 "elapsed_seconds": 0.05,
                 "timed_out": True,
                 "depth_iterations": [
-                    {"depth": 1, "root_value": 10, "move": [0, 0], "nodes": 20, "cutoffs": 0},
-                    {"depth": 2, "root_value": root2, "move": [0, 0], "nodes": nodes - 20, "cutoffs": cutoffs},
+                    {"depth": 1, "root_value": 10, "move": [0, 0], "nodes": 20, "cutoffs": 0, "elapsed_seconds": 0.01},
+                    {"depth": 2, "root_value": root2, "move": [0, 0], "nodes": nodes - 20, "cutoffs": cutoffs, "elapsed_seconds": 0.04},
                 ],
             }
         )
@@ -85,6 +96,7 @@ def test_validator_rejects_b_c_score_disagreement_at_common_depth() -> None:
 
 def test_summary_and_node_savings_use_complete_shared_depths() -> None:
     import src.research.abc_search_v4 as runner
+    from src.ai import WIN_SCORE
 
     analysis = _module()
     config = runner.load_config(CONFIG_PATH)
@@ -100,6 +112,17 @@ def test_summary_and_node_savings_use_complete_shared_depths() -> None:
     assert c["cutoff_ratio"] == pytest.approx(36 / 400)
     assert savings["shared_position_depth_pairs"] == 2
     assert savings["mean_node_reduction_ratio"] > 0
+    assert c["terminal_score_run_count"] == 0
+    assert c["nonterminal_depth_run_count"] == 1
+    assert c["mean_nonterminal_completed_depth"] == 2
+
+    terminal_rows = _pair(config)
+    terminal_rows[1]["root_value"] = WIN_SCORE
+    terminal_rows[1]["depth_iterations"][-1]["root_value"] = WIN_SCORE
+    terminal = analysis.summarize_runs(terminal_rows, config)["by_model_budget"]["C"]["50"]
+    assert terminal["terminal_score_run_count"] == 1
+    assert terminal["nonterminal_depth_run_count"] == 0
+    assert terminal["mean_nonterminal_completed_depth"] is None
 
 
 def test_full_validation_rejects_missing_matrix_rows() -> None:
@@ -119,11 +142,49 @@ def test_validator_reports_wall_clock_budget_overruns_without_hiding_them() -> N
     config = runner.load_config(CONFIG_PATH)
     records = _pair(config)
     records[0]["elapsed_seconds"] = 0.053
+    records[0]["nodes_per_second"] = records[0]["nodes"] / records[0]["elapsed_seconds"]
 
     result = analysis.validate_runs(records, config, require_complete=False)
 
     assert result["over_budget_count"] == 1
     assert result["max_overrun_seconds"] == pytest.approx(0.003)
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("config_sha256", "bad", "(?i)config hash mismatch"),
+        ("seed", -1, "(?i)seed mismatch"),
+        ("to_move", "Z", "(?i)to_move mismatch"),
+        ("category", "late_game", "(?i)category mismatch"),
+        ("cutoffs", -1, "(?i)cutoff total mismatch"),
+        ("nodes_per_second", -2.0, "(?i)invalid nodes_per_second"),
+    ],
+)
+def test_validator_rejects_corrupt_provenance_and_accounting(
+    field: str, value: object, message: str
+) -> None:
+    import src.research.abc_search_v4 as runner
+
+    analysis = _module()
+    config = runner.load_config(CONFIG_PATH)
+    records = _pair(config)
+    records[0][field] = value
+
+    with pytest.raises(ValueError, match=message):
+        analysis.validate_runs(records, config, require_complete=False)
+
+
+def test_validator_rejects_mixed_code_revisions() -> None:
+    import src.research.abc_search_v4 as runner
+
+    analysis = _module()
+    config = runner.load_config(CONFIG_PATH)
+    records = _pair(config)
+    records[1]["code_commit"] = "b" * 40
+
+    with pytest.raises(ValueError, match="mixed code commits"):
+        analysis.validate_runs(records, config, require_complete=False)
 
 
 def test_complete_report_writes_summary_and_all_trend_charts(tmp_path: Path) -> None:
@@ -154,6 +215,11 @@ def test_complete_report_writes_summary_and_all_trend_charts(tmp_path: Path) -> 
                         "plies": len(position["moves"]),
                         "model": model,
                         "budget_ms": budget,
+                        "experiment_id": config["experiment_id"],
+                        "config_sha256": runner._canonical_hash(config),
+                        "code_commit": "f" * 40,
+                        "to_move": position["to_move"],
+                        "seed": runner.derive_seed(config["base_seed"], position["position_id"], model),
                         "max_depth_limit": 81 - len(position["moves"]),
                         "elapsed_seconds": 0.001,
                         "move": move,
@@ -161,10 +227,14 @@ def test_complete_report_writes_summary_and_all_trend_charts(tmp_path: Path) -> 
                         "completed_depth": 0,
                         "depth_iterations": [],
                         "nodes": 0,
+                        "nodes_per_second": 0.0,
                         "completed_depth_nodes": 0,
                         "partial_iteration_nodes": 0,
                         "cutoffs": 0,
                         "completed_depth_cutoffs": 0,
+                        "partial_iteration_cutoffs": 0,
+                        "root_candidates": 1,
+                        "timed_out": False,
                         "tactical_expected_moves": expected,
                         "tactical_move_matches_expected": (
                             move in expected if expected is not None else None
@@ -199,4 +269,6 @@ def test_complete_report_writes_summary_and_all_trend_charts(tmp_path: Path) -> 
     assert "B/C 实际耗时与超时" in report_text
     assert "B 超时" in report_text
     assert "C 超时" in report_text
+    assert "完成迭代深度上限" in report_text
+    assert "非终局评分局面" in report_text
     assert not [warning for warning in caught if issubclass(warning.category, UserWarning)]

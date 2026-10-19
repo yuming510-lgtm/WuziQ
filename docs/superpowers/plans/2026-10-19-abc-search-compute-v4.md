@@ -107,7 +107,7 @@
 **Files:**
 - Review all V4 changes against the V3 merge base.
 
-- [ ] **Step 1:** Build the review package and request a fresh whole-branch review.
-- [ ] **Step 2:** Fix any Critical/Important findings test-first; record deferred Minor findings.
+- [x] **Step 1:** Build the review package and request a fresh whole-branch review.
+- [x] **Step 2:** Fix all Important findings test-first; log the deferred Minor timestamp issue.
 - [ ] **Step 3:** Run the final full suite and `git status`/history checks.
 - [ ] **Step 4:** Push `research/abc-compute-v4` and verify the remote branch resolves to the final commit SHA.

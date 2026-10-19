@@ -86,7 +86,11 @@ def restore_snapshot(snapshot_path: str | Path, destination: str | Path) -> dict
             raise ValueError(f"Snapshot checksum mismatch: {name}")
 
     output = Path(destination)
-    output.mkdir(parents=True, exist_ok=True)
+    if output.exists():
+        if not output.is_dir() or any(output.iterdir()):
+            raise ValueError("Snapshot restore destination must be empty")
+    else:
+        output.mkdir(parents=True)
     for name, data in contents.items():
         target = output / name
         descriptor, temporary_name = tempfile.mkstemp(

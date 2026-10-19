@@ -68,3 +68,22 @@ def test_snapshot_restore_rejects_checksum_mismatch(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="checksum mismatch"):
         snapshot.restore_snapshot(altered, tmp_path / "invalid-restore")
+
+
+def test_snapshot_restore_rejects_stale_files_in_destination(tmp_path: Path) -> None:
+    snapshot = _module()
+    config = tmp_path / "config.json"
+    progress = tmp_path / "progress.json"
+    config.write_text('{"experiment_id":"v4"}\n', encoding="utf-8")
+    progress.write_text('{"completed_runs":0}\n', encoding="utf-8")
+    archive = tmp_path / "initial-checkpoint.zip"
+    snapshot.create_snapshot(config, progress, tmp_path / "missing-runs.jsonl", "a" * 40, archive)
+    destination = tmp_path / "restore"
+    destination.mkdir()
+    stale_runs = destination / "search_runs.jsonl"
+    stale_runs.write_text('{"run_id":"opening__A__00050ms"}\n', encoding="utf-8")
+
+    with pytest.raises(ValueError, match="destination must be empty"):
+        snapshot.restore_snapshot(archive, destination)
+
+    assert stale_runs.read_text(encoding="utf-8") == '{"run_id":"opening__A__00050ms"}\n'

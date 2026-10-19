@@ -333,14 +333,49 @@ def run_matrix(
     all_ids = expected_run_ids(config)
     records_path = output / "search_runs.jsonl"
     records = load_run_records(records_path, all_ids)
+    from .abc_search_v4_analysis import validate_runs
+
+    validate_runs(records, config, require_complete=False)
     completed = {str(record["run_id"]) for record in records}
     planned = len(all_ids)
     skipped = len(completed)
+    record_code_commits = {str(record["code_commit"]) for record in records}
+    if len(record_code_commits) > 1:
+        raise ValueError("Existing runs contain mixed code commits")
+    current_code_commit = _code_commit()
+    stored_code_commit = next(iter(record_code_commits), current_code_commit)
+    if completed and len(completed) < planned and stored_code_commit != current_code_commit:
+        raise ValueError(
+            "Existing partial results use a different code commit; refusing to mix revisions"
+        )
+
+    progress_path = output / "progress.json"
+    if progress_path.exists():
+        progress = json.loads(progress_path.read_text(encoding="utf-8"))
+        if (
+            progress.get("schema_version") != 1
+            or progress.get("experiment_id") != config["experiment_id"]
+            or progress.get("config_sha256") != config_hash
+            or int(progress.get("planned_runs", -1)) != planned
+        ):
+            raise ValueError("Existing progress metadata does not match the configured matrix")
+        progress_ids = progress.get("completed_ids")
+        if not isinstance(progress_ids, list) or any(not isinstance(item, str) for item in progress_ids):
+            raise ValueError("Existing progress completed_ids must be a string list")
+        if len(progress_ids) != len(set(progress_ids)):
+            raise ValueError("Existing progress contains duplicate run IDs")
+        if not set(progress_ids).issubset(completed):
+            raise ValueError("Progress references runs missing from the durable JSONL")
+        if int(progress.get("completed_runs", -1)) != len(progress_ids):
+            raise ValueError("Progress completed run count does not match its IDs")
+        if records and progress.get("code_commit") != stored_code_commit:
+            raise ValueError("Progress code commit does not match durable run records")
+
     next_progress = {
         "schema_version": 1,
         "experiment_id": config["experiment_id"],
         "config_sha256": config_hash,
-        "code_commit": _code_commit(),
+        "code_commit": stored_code_commit,
         "planned_runs": planned,
         "completed_runs": len(completed),
         "completed_ids": sorted(completed),
@@ -350,7 +385,7 @@ def run_matrix(
 
     started = time.perf_counter()
     new_runs = 0
-    code_commit = _code_commit()
+    code_commit = stored_code_commit
     budget_by_id: dict[str, tuple[dict[str, Any], str, int]] = {}
     for position in config["positions"]:
         for model in EXPECTED_MODELS:

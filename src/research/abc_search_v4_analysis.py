@@ -3,11 +3,21 @@ from __future__ import annotations
 
 from collections import defaultdict
 import json
+import math
 from pathlib import Path
+import re
 import statistics
 from typing import Any, Iterable
 
-from .abc_search_v4 import EXPECTED_BUDGETS_MS, EXPECTED_MODELS, expected_run_ids, make_run_id
+from ..ai import WIN_SCORE
+from .abc_search_v4 import (
+    EXPECTED_BUDGETS_MS,
+    EXPECTED_MODELS,
+    _canonical_hash,
+    derive_seed,
+    expected_run_ids,
+    make_run_id,
+)
 
 
 def validate_runs(
@@ -22,7 +32,9 @@ def validate_runs(
     ids = expected_run_ids(config)
     allowed = set(ids)
     positions = {str(row["position_id"]): row for row in config["positions"]}
+    expected_config_hash = _canonical_hash(config)
     seen: set[str] = set()
+    code_commits: set[str] = set()
     pair_rows: dict[tuple[str, int, str], dict[int, dict[str, Any]]] = defaultdict(dict)
     for record in rows:
         run_id = str(record.get("run_id", ""))
@@ -40,16 +52,36 @@ def validate_runs(
             raise ValueError(f"Unknown position in run {run_id}")
         if run_id != make_run_id(position_id, model, budget_ms):
             raise ValueError(f"Run ID does not match record fields: {run_id}")
+        if record.get("experiment_id") != config["experiment_id"]:
+            raise ValueError(f"Experiment ID mismatch: {run_id}")
+        if record.get("config_sha256") != expected_config_hash:
+            raise ValueError(f"Config hash mismatch: {run_id}")
+        if record.get("category") != positions[position_id]["category"]:
+            raise ValueError(f"Category mismatch: {run_id}")
+        if record.get("to_move") != positions[position_id]["to_move"]:
+            raise ValueError(f"to_move mismatch: {run_id}")
+        if int(record.get("seed", -1)) != derive_seed(
+            int(config["base_seed"]), position_id, model
+        ):
+            raise ValueError(f"Seed mismatch: {run_id}")
+        code_commit = str(record.get("code_commit", ""))
+        if not re.fullmatch(r"[0-9a-f]{40}", code_commit):
+            raise ValueError(f"Invalid code commit provenance: {run_id}")
+        code_commits.add(code_commit)
         if int(record.get("board_size", -1)) != 9:
             raise ValueError(f"Non-9x9 run record: {run_id}")
         if int(record.get("plies", -1)) != len(positions[position_id]["moves"]):
             raise ValueError(f"Position ply count mismatch: {run_id}")
         if int(record.get("max_depth_limit", -1)) != 81 - int(record["plies"]):
             raise ValueError(f"Incorrect remaining-cell depth limit: {run_id}")
-        if float(record.get("elapsed_seconds", -1)) < 0:
-            raise ValueError(f"Negative elapsed time: {run_id}")
+        elapsed = float(record.get("elapsed_seconds", -1))
+        nodes_per_second = float(record.get("nodes_per_second", -1))
+        if not math.isfinite(elapsed) or elapsed < 0:
+            raise ValueError(f"Invalid elapsed time: {run_id}")
+        if not math.isfinite(nodes_per_second) or nodes_per_second < 0:
+            raise ValueError(f"Invalid nodes_per_second: {run_id}")
         if (
-            float(record["elapsed_seconds"]) > budget_ms / 1_000.0
+            elapsed > budget_ms / 1_000.0
             and not bool(record.get("timed_out", False))
         ):
             raise ValueError(f"Over-budget run is not marked timed_out: {run_id}")
@@ -66,21 +98,27 @@ def validate_runs(
         if tuple(map(int, move)) in occupied:
             raise ValueError(f"Occupied move coordinate in run {run_id}")
         expected_tactical_moves = positions[position_id].get("expected_best_moves")
+        if record.get("tactical_expected_moves") != expected_tactical_moves:
+            raise ValueError(f"Tactical expectation mismatch: {run_id}")
         if expected_tactical_moves is not None:
-            if record.get("tactical_expected_moves") != expected_tactical_moves:
-                raise ValueError(f"Tactical expectation mismatch: {run_id}")
             expected_match = list(map(int, move)) in expected_tactical_moves
             if record.get("tactical_move_matches_expected") is not expected_match:
                 raise ValueError(f"Tactical result flag mismatch: {run_id}")
 
         depth_rows = record.get("depth_iterations", [])
         completed_depth = int(record.get("completed_depth", -1))
+        max_depth_limit = int(record.get("max_depth_limit", -1))
+        if completed_depth > max_depth_limit:
+            raise ValueError(f"Completed depth exceeds remaining-cell limit: {run_id}")
         depths = [int(depth.get("depth", -1)) for depth in depth_rows]
         if completed_depth != len(depth_rows) or depths != list(range(1, completed_depth + 1)):
             raise ValueError(f"Incomplete or nonsequential depth trace in run {run_id}")
         for depth in depth_rows:
             if int(depth.get("nodes", -1)) < 0 or int(depth.get("cutoffs", -1)) < 0:
                 raise ValueError(f"Negative depth counter in run {run_id}")
+            depth_elapsed = float(depth.get("elapsed_seconds", -1))
+            if not math.isfinite(depth_elapsed) or depth_elapsed < 0:
+                raise ValueError(f"Invalid per-depth elapsed time in run {run_id}")
             if int(depth.get("depth", 0)) > 0 and not isinstance(depth.get("root_value"), int):
                 raise ValueError(f"Missing integer root score in run {run_id}")
         if completed_depth:
@@ -91,6 +129,7 @@ def validate_runs(
         if model in {"B", "C"}:
             complete_nodes = sum(int(row["nodes"]) for row in depth_rows)
             complete_cutoffs = sum(int(row["cutoffs"]) for row in depth_rows)
+            partial_cutoffs = int(record.get("partial_iteration_cutoffs", -1))
             if int(record.get("completed_depth_nodes", -1)) != complete_nodes:
                 raise ValueError(f"Completed-depth node total mismatch: {run_id}")
             if int(record.get("partial_iteration_nodes", -1)) < 0:
@@ -101,12 +140,38 @@ def validate_runs(
                 raise ValueError(f"Total node count does not reconcile: {run_id}")
             if int(record.get("completed_depth_cutoffs", -1)) != complete_cutoffs:
                 raise ValueError(f"Completed-depth cutoff total mismatch: {run_id}")
+            if partial_cutoffs < 0 or int(record.get("cutoffs", -1)) != complete_cutoffs + partial_cutoffs:
+                raise ValueError(f"Cutoff total mismatch: {run_id}")
+        elif (
+            int(record.get("nodes", -1)) != 0
+            or int(record.get("cutoffs", -1)) != 0
+            or completed_depth != 0
+            or depth_rows
+        ):
+            raise ValueError(f"Rule-only model has search counters: {run_id}")
+        nodes = int(record.get("nodes", -1))
+        root_candidates = int(record.get("root_candidates", -1))
+        if nodes < 0 or root_candidates < 0:
+            raise ValueError(f"Negative search counter in run {run_id}")
+        expected_nps = nodes / elapsed if elapsed > 0 else 0.0
+        if not math.isclose(nodes_per_second, expected_nps, rel_tol=1e-9, abs_tol=1e-9):
+            raise ValueError(f"nodes_per_second mismatch: {run_id}")
+        expected_tactical_moves = positions[position_id].get("expected_best_moves")
+        expected_tactical_match = (
+            list(map(int, move)) in expected_tactical_moves
+            if expected_tactical_moves is not None
+            else None
+        )
+        if record.get("tactical_move_matches_expected") is not expected_tactical_match:
+            raise ValueError(f"Tactical result flag mismatch: {run_id}")
         for depth in depth_rows:
             pair_rows[(position_id, budget_ms, model)][int(depth["depth"])] = depth
 
     missing = sorted(allowed - seen)
     if require_complete and missing:
         raise ValueError(f"V4 benchmark has {len(missing)} missing run IDs")
+    if len(code_commits) > 1:
+        raise ValueError("V4 result set contains mixed code commits")
 
     comparisons = 0
     for position in config["positions"]:
@@ -169,6 +234,11 @@ def summarize_runs(records: Iterable[dict[str, Any]], config: dict[str, Any]) ->
             nodes = [int(row.get("nodes", 0)) for row in subset]
             depths = [int(row.get("completed_depth", 0)) for row in subset]
             cutoffs = [int(row.get("cutoffs", 0)) for row in subset]
+            nonterminal_depths = [
+                int(row.get("completed_depth", 0))
+                for row in subset
+                if abs(int(row.get("root_value", 0))) < WIN_SCORE
+            ]
             total_nodes = sum(nodes)
             by_model_budget[model][str(budget)] = {
                 "run_count": len(subset),
@@ -184,6 +254,13 @@ def summarize_runs(records: Iterable[dict[str, Any]], config: dict[str, Any]) ->
                 else None,
                 "mean_cutoffs": statistics.fmean(cutoffs) if cutoffs else None,
                 "cutoff_ratio": sum(cutoffs) / total_nodes if total_nodes else 0.0,
+                "terminal_score_run_count": sum(
+                    abs(int(row.get("root_value", 0))) >= WIN_SCORE for row in subset
+                ),
+                "nonterminal_depth_run_count": len(nonterminal_depths),
+                "mean_nonterminal_completed_depth": (
+                    statistics.fmean(nonterminal_depths) if nonterminal_depths else None
+                ),
                 "timeout_count": sum(bool(row.get("timed_out")) for row in subset),
             }
 
@@ -312,7 +389,12 @@ def make_plots(
         plt.close(fig)
         paths.append(str(path))
 
-    save_series("depth_by_budget.png", "B/C 平均完整搜索深度", "完成深度（ply）", "mean_completed_depth")
+    save_series(
+        "depth_by_budget.png",
+        "B/C 平均完成迭代深度上限",
+        "完成的迭代深度上限（ply）",
+        "mean_completed_depth",
+    )
     save_series("nodes_by_budget.png", "B/C 平均搜索节点数", "节点数", "mean_nodes", log_y=True)
     save_series(
         "nodes_per_second.png", "B/C 平均节点吞吐", "节点/秒", "mean_nodes_per_second", log_y=True
@@ -382,7 +464,7 @@ def write_report(
         "",
         "## 七档预算汇总",
         "",
-        "| 预算 | A 平均实际耗时 | B 深度 / 节点 / 节点每秒 | C 深度 / 节点 / 节点每秒 | C 剪枝事件 | C 剪枝比例 | C 相同完整层节点减少 | C 超时数 |",
+        "| 预算 | A 平均实际耗时 | B 完成迭代上限 / 节点 / 节点每秒 | C 完成迭代上限 / 节点 / 节点每秒 | C 剪枝事件 | C 剪枝比例 | C 相同完整层节点减少 | C 超时数 |",
         "|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for budget in EXPECTED_BUDGETS_MS:
@@ -424,19 +506,19 @@ def write_report(
     report.extend(
         [
             "",
-            "表中的平均深度、节点数与吞吐量按该模型和预算下的固定局面计算。节点数含超时不完整层的已完成工作；报告另用逐层轨迹隔离完整层节点。剪枝比例定义为该预算全部 cutoff 次数除以全部节点数。节点减少比例只比较 B/C 在同一局面、同一预算、同一完整深度的节点数。",
+            "表中的深度是已完成迭代的名义深度上限，不是所有递归分支实际走到的最大 ply；节点数与吞吐量按该模型和预算下的固定局面计算。节点数含超时不完整层的已完成工作；报告另用逐层轨迹隔离完整层节点。剪枝比例定义为该预算全部 cutoff 次数除以全部节点数。节点减少比例只比较 B/C 在同一局面、同一预算、同一完整深度的节点数。",
             "",
             "## 搜索深度与算力趋势",
             "",
-            f"C 在 10 秒及以上预算中有 {summary['c_runs_above_depth_four_at_10s_plus']}/{summary['c_runs_at_10s_plus']} 个实测 run 完成超过 4 层。该数值仅覆盖固定局面，不能外推为对弈胜率。",
+            f"C 在 10 秒及以上预算中有 {summary['c_runs_above_depth_four_at_10s_plus']}/{summary['c_runs_at_10s_plus']} 个实测 run 完成超过 4 层的迭代深度上限。该数值仅覆盖固定局面，不能外推为对弈胜率。",
             "预算从 50ms 增加到 50s 后，需同时查看完成深度和有效节点；若搜索在更高预算仍常超时，说明候选树增长很快。若深度或节点增长放缓，应结合局面分支数理解，不能仅凭预算标签推断搜索已穷尽。",
-            f"B 的平均完整深度从 50ms 的 {summary['by_model_budget']['B']['50']['mean_completed_depth']:.2f} 层增加到 50s 的 {summary['by_model_budget']['B']['50000']['mean_completed_depth']:.2f} 层；C 从 {summary['by_model_budget']['C']['50']['mean_completed_depth']:.2f} 层增加到 {summary['by_model_budget']['C']['50000']['mean_completed_depth']:.2f} 层。C 在 10s、20s、50s 下分别有 "
+            f"B 的平均已完成迭代深度上限从 50ms 的 {summary['by_model_budget']['B']['50']['mean_completed_depth']:.2f} 增加到 50s 的 {summary['by_model_budget']['B']['50000']['mean_completed_depth']:.2f}；C 从 {summary['by_model_budget']['C']['50']['mean_completed_depth']:.2f} 增加到 {summary['by_model_budget']['C']['50000']['mean_completed_depth']:.2f}。C 在 10s、20s、50s 下分别有 "
             + "、".join(
                 f"{sum(int(row.get('completed_depth', 0)) > 4 for row in rows if row.get('model') == 'C' and int(row.get('budget_ms', 0)) == budget)}/12"
                 for budget in (10_000, 20_000, 50_000)
             )
             + " 个局面超过 4 层。",
-            f"C 的 50s 平均完整深度为 {summary['by_model_budget']['C']['50000']['mean_completed_depth']:.2f} 层，比 20s 的 {summary['by_model_budget']['C']['20000']['mean_completed_depth']:.2f} 层高 {summary['by_model_budget']['C']['50000']['mean_completed_depth'] - summary['by_model_budget']['C']['20000']['mean_completed_depth']:.2f} 层；平均节点数则从 {summary['by_model_budget']['C']['20000']['mean_nodes']:.0f} 增至 {summary['by_model_budget']['C']['50000']['mean_nodes']:.0f}。这是固定局面集合上的收益递减信号，不能视为整体棋力饱和的证明。",
+            f"C 的 50s 平均已完成迭代深度上限为 {summary['by_model_budget']['C']['50000']['mean_completed_depth']:.2f}，比 20s 的 {summary['by_model_budget']['C']['20000']['mean_completed_depth']:.2f} 高 {summary['by_model_budget']['C']['50000']['mean_completed_depth'] - summary['by_model_budget']['C']['20000']['mean_completed_depth']:.2f}；平均节点数则从 {summary['by_model_budget']['C']['20000']['mean_nodes']:.0f} 增至 {summary['by_model_budget']['C']['50000']['mean_nodes']:.0f}。这是固定局面集合上的收益递减信号，不能视为整体棋力饱和的证明。",
             f"C 的单节点吞吐量约为 {summary['by_model_budget']['C']['50000']['mean_nodes_per_second']:.0f} 节点/秒，低于 B 的 {summary['by_model_budget']['B']['50000']['mean_nodes_per_second']:.0f} 节点/秒；Alpha-Beta 的收益来自更少节点达到相同完整深度，而不是每个节点执行得更快。",
             "",
             "## 图表",
@@ -445,7 +527,36 @@ def write_report(
     )
     for path in figure_paths:
         report.append(f"- `{Path(path).name}`")
-    report.extend(["", "## 典型开局、中局和残局", "", "以下为预先指定局面在高预算下的实测；耗时为秒，括号内为所选落点。残局 C 搜索到剩余空格上限后提前结束。", "", "| 局面 | 模型 | 10s：层/秒/节点/落点 | 20s：层/秒/节点/落点 | 50s：层/秒/节点/落点 |", "|---|:---:|---:|---:|---:|"])
+    report.extend(
+        [
+            "",
+            "## 排除终局评分的 C 搜索深度",
+            "",
+            "`±WIN_SCORE` 表示根搜索已找到终局结果；这类 run 的完成迭代深度上限可能明显高于实际递归路径。下表只汇总非终局评分局面，即最终根评分未达到终局分数的局面。",
+            "",
+            "| 预算 | 非终局评分 run | 平均已完成迭代深度上限 | 终局评分 run |",
+            "|---:|---:|---:|---:|",
+        ]
+    )
+    for budget in EXPECTED_BUDGETS_MS:
+        c = summary["by_model_budget"]["C"][str(budget)]
+        mean_depth = c["mean_nonterminal_completed_depth"]
+        mean_text = "—" if mean_depth is None else f"{mean_depth:.2f}"
+        report.append(
+            f"| {budget}ms | {c['nonterminal_depth_run_count']}/12 | "
+            f"{mean_text} | {c['terminal_score_run_count']}/12 |"
+        )
+    report.extend(
+        [
+            "",
+            "## 典型开局、中局和残局",
+            "",
+            "以下为预先指定局面在高预算下的实测；列中深度为完整迭代深度上限，耗时为秒，括号内为所选落点。终局节点可能使递归分支在到达该上限前提前返回。",
+            "",
+            "| 局面 | 模型 | 10s：迭代上限/秒/节点/落点 | 20s：迭代上限/秒/节点/落点 | 50s：迭代上限/秒/节点/落点 |",
+            "|---|:---:|---:|---:|---:|",
+        ]
+    )
     selected_positions = ("opening_08", "midgame_24", "late_44", "late_58", "attack_open_four", "defense_block_four")
     record_index = {
         (str(row["position_id"]), str(row["model"]), int(row["budget_ms"])): row
@@ -463,6 +574,12 @@ def write_report(
                         f"{int(row['completed_depth'])}/{float(row['elapsed_seconds']):.2f}/{int(row['nodes'])}/({row['move'][0]},{row['move'][1]})"
                     )
             report.append(f"| {position_id} | {model} | " + " | ".join(cells) + " |")
+    report.extend(
+        [
+            "",
+            "`late_44` 的 C 结果为迭代上限 37，`late_58` 为 23；两者在第 1 层根评分已达到 `WIN_SCORE`，其后每层节点数停在 72 和 45。原始记录不包含递归调用路径长度，因此不能据此说搜索实际展开了 37/23 个额外 ply；它记录的是这些迭代上限均已完成。",
+        ]
+    )
     tactical_rates = summary["tactical_choice_rates"]
     report.extend(
         [

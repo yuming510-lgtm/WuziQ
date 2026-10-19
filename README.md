@@ -180,3 +180,17 @@ The raw records, metrics, preflight estimate, recovery drill, and Chinese
 research report are saved under `research/`. This project performs algorithm
 development and match evaluation; it does not train a neural network or produce
 training checkpoints.
+
+V4 measures A/B/C search performance on 12 fixed 9x9 positions at seven time
+budgets. Reproduce its preflight, resumable measurements, or validated report
+from the repository root with:
+
+```bash
+python scripts/run_abc_search_v4.py preflight
+python scripts/run_abc_search_v4.py run
+python scripts/run_abc_search_v4.py analyze
+```
+
+The V4 config, 252 raw measurements, summary, trend figures, recovery metadata,
+and Chinese report are under `configs/abc_search_compute_v4.json` and
+`research/v4/`.
