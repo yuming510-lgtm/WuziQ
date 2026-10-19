@@ -41,11 +41,11 @@
 - Produces `DepthIteration(depth, root_value, move, nodes, cutoffs, elapsed_seconds)` and `SearchResult.depth_iterations`.
 - Existing B/C search entry points remain unchanged; run configurations may set `max_depth` to remaining cells.
 
-- [ ] **Step 1:** Add failing tests for completed per-depth rows, matching B/C root scores, and preservation of the last complete depth under a very short deadline.
-- [ ] **Step 2:** Run those tests and confirm the missing telemetry fails.
-- [ ] **Step 3:** Add immutable depth rows; count each iteration independently and include partial timed-out work only in total counters.
-- [ ] **Step 4:** Run targeted AI tests and confirm all telemetry/deadline assertions pass.
-- [ ] **Step 5:** Commit as `feat: record iterative search depth metrics`.
+- [x] **Step 1:** Add failing tests for completed per-depth rows, matching B/C root scores, and preservation of the last complete depth under a very short deadline.
+- [x] **Step 2:** Run those tests and confirm the missing telemetry fails.
+- [x] **Step 3:** Add immutable depth rows; count each iteration independently and include partial timed-out work only in total counters.
+- [x] **Step 4:** Run targeted AI tests and confirm all telemetry/deadline assertions pass.
+- [x] **Step 5:** Commit as `feat: record iterative search depth metrics`.
 
 ### Task 2: Frozen positions, matrix runner, and resumable raw records
 
@@ -58,11 +58,11 @@
 - Produces `load_config(path)`, `run_matrix(config_path, results_dir, max_new_runs=None)`, and fixed `run_id` generation.
 - The config contains exactly 12 or more validated 9×9 histories and seven budget labels.
 
-- [ ] **Step 1:** Add failing tests for fixed-position legality, the full 252-ID schedule, fsynced unique appends, and resume skipping.
-- [ ] **Step 2:** Run the focused tests and verify expected missing-interface failures.
-- [ ] **Step 3:** Freeze twelve position histories and implement validation, deterministic seeds, per-run timing, checkpointing, and resume.
-- [ ] **Step 4:** Run focused runner tests, including board restoration and malformed/duplicate records.
-- [ ] **Step 5:** Commit as `feat: add resumable ABC compute benchmark`.
+- [x] **Step 1:** Add failing tests for fixed-position legality, the full 252-ID schedule, fsynced unique appends, and resume skipping.
+- [x] **Step 2:** Run the focused tests and verify expected missing-interface failures.
+- [x] **Step 3:** Freeze twelve position histories and implement validation, deterministic seeds, per-run timing, checkpointing, and resume.
+- [x] **Step 4:** Run focused runner tests, including board restoration and malformed/duplicate records.
+- [x] **Step 5:** Commit as `feat: add resumable ABC compute benchmark`.
 
 ### Task 3: Preflight, snapshot drill, result validation, plots, and report
 
@@ -76,11 +76,11 @@
 - Produces analysis/consistency validation, metrics tables and charts; produces `create_snapshot(...)` and `restore_snapshot(...)` with SHA-256 verification.
 - Report consumes the runner's `search_runs.jsonl` and references only complete verified records.
 
-- [ ] **Step 1:** Add failing tests for root-score agreement checks, summary metric definitions, and checksum-verified restore.
-- [ ] **Step 2:** Run focused tests and confirm failures before implementation.
-- [ ] **Step 3:** Implement analysis and minimal recovery archive for config, progress, run data, and code version.
-- [ ] **Step 4:** Run tests and execute a real Drive upload/read/hash/restore/delete drill on a tiny archive.
-- [ ] **Step 5:** Commit as `feat: analyze and recover ABC benchmark runs`.
+- [x] **Step 1:** Add failing tests for root-score agreement checks, summary metric definitions, and checksum-verified restore.
+- [x] **Step 2:** Run focused tests and confirm failures before implementation.
+- [x] **Step 3:** Implement analysis and minimal recovery archive for config, progress, run data, and code version.
+- [x] **Step 4:** Run tests and execute a real Drive upload/read/hash/restore/delete drill on a tiny archive.
+- [x] **Step 5:** Commit as `feat: analyze and recover ABC benchmark runs`.
 
 ### Task 4: Preflight-calibrated full matrix and V4 deliverables
 
