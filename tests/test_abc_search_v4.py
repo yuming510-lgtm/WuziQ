@@ -36,6 +36,29 @@ def test_frozen_matrix_has_twelve_legal_nonterminal_positions_and_252_run_ids() 
     }
 
 
+def test_direct_tactical_positions_freeze_expected_win_and_forced_block() -> None:
+    runner = _module()
+    config = runner.load_config(CONFIG_PATH)
+    positions = {row["position_id"]: row for row in config["positions"]}
+
+    assert positions["attack_open_four"]["expected_best_moves"] == [[4, 1], [4, 6]]
+    assert positions["defense_block_four"]["expected_best_moves"] == [[4, 4]]
+
+
+@pytest.mark.parametrize("position_id", ["attack_open_four", "defense_block_four"])
+@pytest.mark.parametrize("model", ["B", "C"])
+def test_minimax_models_take_the_frozen_immediate_win_or_forced_block(
+    position_id: str, model: str
+) -> None:
+    runner = _module()
+    config = runner.load_config(CONFIG_PATH)
+    position = next(row for row in config["positions"] if row["position_id"] == position_id)
+
+    result = runner._run_one(config, "test-config", "test-code", position, model, 50)
+
+    assert result["tactical_move_matches_expected"] is True
+
+
 def test_matrix_rejects_terminal_position(tmp_path: Path) -> None:
     runner = _module()
     config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))

@@ -78,6 +78,25 @@ def load_config(path: str | Path) -> dict[str, Any]:
             board.place_stone(player, coordinate)
             if board.check_victory(coordinate, player):
                 raise ValueError(f"Position {position_id} contains a terminal win")
+        expected_moves = position.get("expected_best_moves")
+        if expected_moves is not None:
+            if not isinstance(expected_moves, list) or not expected_moves:
+                raise ValueError(f"Position {position_id} has an empty tactical expectation")
+            occupied = {
+                (int(move["row"]), int(move["col"])) for move in moves
+            }
+            normalized_expected: set[tuple[int, int]] = set()
+            for coordinate in expected_moves:
+                if (
+                    not isinstance(coordinate, list)
+                    or len(coordinate) != 2
+                    or any(int(value) < 0 or int(value) >= 9 for value in coordinate)
+                ):
+                    raise ValueError(f"Position {position_id} has an invalid tactical coordinate")
+                cell = tuple(map(int, coordinate))
+                if cell in occupied or cell in normalized_expected:
+                    raise ValueError(f"Position {position_id} has an occupied/duplicate tactical move")
+                normalized_expected.add(cell)
         expected_to_move = "B" if len(moves) % 2 == 0 else "W"
         if position.get("to_move") != expected_to_move:
             raise ValueError(f"Position {position_id} has incorrect to_move value")
@@ -284,6 +303,12 @@ def _run_one(
         "root_candidates": int(result.root_candidates),
         "elapsed_seconds": float(elapsed),
         "timed_out": bool(result.timed_out or elapsed > budget_ms / 1_000.0),
+        "tactical_expected_moves": position.get("expected_best_moves"),
+        "tactical_move_matches_expected": (
+            list(result.move) in position["expected_best_moves"]
+            if position.get("expected_best_moves") is not None
+            else None
+        ),
     }
 
 
