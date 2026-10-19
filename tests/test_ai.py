@@ -6,6 +6,7 @@ import importlib.util
 import random
 from pathlib import Path
 import sys
+import time
 
 import pytest
 
@@ -147,6 +148,32 @@ def test_timeout_discards_partial_iteration_and_returns_last_complete_result(mon
     assert len(result.depth_iterations) == 1
     assert result.move == result.depth_iterations[0].move
     assert result.root_value == result.depth_iterations[0].root_value
+
+
+def test_deadline_crossed_after_root_return_does_not_accept_late_iteration(monkeypatch) -> None:
+    engine = _engine()
+    board = GomokuBoard(5)
+    board.place_stone("B", (2, 2))
+    board.place_stone("W", (2, 3))
+    original_search_root = engine._search_root
+
+    def return_after_deadline(*args, **kwargs):
+        result = original_search_root(*args, **kwargs)
+        time.sleep(0.02)
+        return result
+
+    monkeypatch.setattr(engine, "_search_root", return_after_deadline)
+    result = engine.choose_move(
+        board,
+        "B",
+        "B",
+        engine.SearchConfig(max_depth=4, time_limit_seconds=0.01),
+        seed=34,
+    )
+
+    assert result.timed_out
+    assert result.completed_depth == 0
+    assert result.depth_iterations == ()
 
 
 def test_board_evaluator_does_not_rescan_each_cell_through_getter() -> None:

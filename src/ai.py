@@ -17,6 +17,9 @@ _MODEL_NAMES = {"A", "B", "C", "D", "D1", "D2", "D3"}
 _DIRECTIONS = ((0, 1), (1, 0), (1, 1), (1, -1))
 _WINDOW_WEIGHTS = (0, 1, 8, 100, 2_000, 0)
 _DEADLINE_RESERVE_SECONDS = 0.001
+_MINIMAX_DEADLINE_RESERVE_MIN_SECONDS = 0.005
+_MINIMAX_DEADLINE_RESERVE_MAX_SECONDS = 0.025
+_MINIMAX_DEADLINE_RESERVE_PER_SECOND = 0.001
 
 
 @dataclass(frozen=True)
@@ -102,6 +105,19 @@ def _other(player: Player) -> Player:
 def _check_deadline(deadline: float | None) -> None:
     if deadline is not None and time.perf_counter() >= deadline:
         raise _SearchTimeout
+
+
+def _minimax_deadline(started: float, budget_seconds: float) -> float:
+    """Reserve return-path time so an over-budget partial layer is not accepted."""
+
+    reserve = min(
+        _MINIMAX_DEADLINE_RESERVE_MAX_SECONDS,
+        max(
+            _MINIMAX_DEADLINE_RESERVE_MIN_SECONDS,
+            budget_seconds * _MINIMAX_DEADLINE_RESERVE_PER_SECOND,
+        ),
+    )
+    return started + max(0.0, budget_seconds - reserve)
 
 
 def _first_legal_move(board: GomokuBoard) -> Coordinate:
@@ -355,9 +371,7 @@ def _search_minimax(
     use_alpha_beta: bool,
 ) -> SearchResult:
     started = time.perf_counter()
-    deadline = started + max(
-        0.0, config.time_limit_seconds - _DEADLINE_RESERVE_SECONDS
-    )
+    deadline = _minimax_deadline(started, config.time_limit_seconds)
     fallback = _first_legal_move(board)
     if config.time_limit_seconds == 0:
         return SearchResult(fallback, evaluate_board(board, player), 0, 0, 0, 0, 0.0, True)
@@ -397,6 +411,8 @@ def _search_minimax(
                 use_alpha_beta,
                 iteration_counters,
             )
+            # A final leaf/evaluation can finish just after the last inner deadline check.
+            _check_deadline(deadline)
         except _SearchTimeout:
             # Keep partial work visible in totals, but never treat it as a result.
             counters[0] += iteration_counters[0]
