@@ -269,6 +269,9 @@ def test_report_generation_includes_historical_v1_to_v4_context(tmp_path) -> Non
     assert "V1–V4 历史结果" in report
     assert "A–B" in report and "B–D" in report and "C–D" in report
     assert "34.0 秒" in report
+    assert "正式运行实耗" in report
+    assert "A 黑棋高 100.0 个百分点" in report
+    assert "A 的 `nodes` 是剩余空位数" in report
     assert "Drive 恢复演练未验证" in report
     assert "复用 V3 **0 局**" in report
     assert (tmp_path / "figures" / "matchup_score_rates.svg").is_file()
@@ -296,6 +299,7 @@ def test_preflight_persists_estimate_and_commit_metadata(tmp_path, monkeypatch) 
     assert result["official_games_started"] == 0
     assert re.fullmatch(r"[0-9a-f]{40}", result["base_code_commit"])
     assert len(result["benchmarks"]) == 4
+    assert "non-comparable" in result["benchmarks"][0]["nodes_semantics"]
 
 
 def test_historical_game_loader_never_truncates_a_corrupt_tail(tmp_path) -> None:

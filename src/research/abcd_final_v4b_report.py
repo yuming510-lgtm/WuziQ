@@ -165,7 +165,7 @@ def _historical_markdown(history: dict[str, Any]) -> str:
         if row["opponent"] in {"B", "C"}:
             budget = row["budget_seconds_by_model"]
             lines.append(
-                f"| V2 | D2 vs {row['opponent']} | {row['wins']} 胜 / {row['draws']} 平 / {row['losses']} 负（得分率 {_pct(row['score_rate'])}） | D2 {budget['D2']:.3g}s，对手 {budget[row['opponent']]:.3g}s；{row['games']} 局 |"
+                f"| V2 | D2 vs {row['opponent']} | {row['wins']} 胜 / {row['draws']} 平 / {row['losses']} 负（得分率 {_pct(row['score_rate'])}） | 阶段 `{row['phase']}`；D2 {budget['D2']:.3g}s，对手 {budget[row['opponent']]:.3g}s；{row['games']} 局 |"
             )
     for row in history["V3_D3_20s_conditions"]:
         lines.append(
@@ -222,18 +222,33 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
             f"| {rank} | {model} | {item['wins']}-{item['draws']}-{item['losses']} | {_pct(item['win_rate'])} | {_pct(item['score_rate'])} {_ci(item['paired_wilson_95_ci'])} |"
         )
 
+    color_effects = []
+    for model, item in summary["models"].items():
+        black_score = item["color"]["black"]["score_rate"]
+        white_score = item["color"]["white"]["score_rate"]
+        delta_points = (black_score - white_score) * 100
+        if delta_points > 0:
+            color_effects.append(f"{model} 黑棋高 {delta_points:.1f} 个百分点")
+        elif delta_points < 0:
+            color_effects.append(f"{model} 白棋高 {-delta_points:.1f} 个百分点")
+        else:
+            color_effects.append(f"{model} 黑白相同")
+    color_effect_text = "；".join(color_effects)
+
     usage_lines = [
-        "| 模型 | 决策数 | 平均耗时/步 | 平均节点/步 | 完成深度均值（范围） | 剪枝数 | 模拟数/步 | 模拟/秒 | 树深最大 | 超时 |",
+        "| 模型 | 决策数 | 平均耗时/步 | 平均节点计数/步（口径见注） | B/C 完整迭代层或 D 树深（均值/范围） | 剪枝数 | 模拟数/步 | 模拟/秒 | 树深最大 | 超时 |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for model in ("A", "B", "C", "D"):
         item = summary["usage"][model]
-        depth_range = f"{item['average_completed_depth']:.2f}（{item['min_completed_depth']}–{item['max_completed_depth']}）"
         if model == "A":
+            depth_range = "—（规则 AI）"
             node_count = "不适用（原规则计数非搜索节点）"
         elif model == "D":
+            depth_range = f"{item['average_tree_depth']:.2f}（最大树路径，{item['min_completed_depth']}–{item['max_completed_depth']}）"
             node_count = f"{item['average_nodes_per_move']:.1f}（树操作+rollout）"
         else:
+            depth_range = f"{item['average_completed_depth']:.2f}（{item['min_completed_depth']}–{item['max_completed_depth']}）"
             node_count = f"{item['average_nodes_per_move']:.1f}"
         usage_lines.append(
             f"| {model} | {item['moves']} | {item['average_seconds_per_move']:.4f}s | {node_count} | {depth_range} | {item['cutoffs_total']} | {item['average_simulations_per_move']:.1f} | {item['simulations_per_second']:.1f} | {item['max_tree_depth']} | {item['timeouts']} |"
@@ -268,6 +283,8 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
             )
 
     pred = preflight["estimate"]
+    estimated_seconds = float(pred.get("estimated_formal_run_seconds", pred["estimated_formal_run_minutes"] * 60.0))
+    estimate_ratio = elapsed_total / estimated_seconds if estimated_seconds else 0.0
     resource = preflight["resources"]
     d_usage = summary["usage"]["D_new_v4b"]
     d_vs_c = summary["matchups"].get("C-D", {})
@@ -302,9 +319,9 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
             f"复用原因记录：`{reason}`。"
         )
     reuse_sample_note = (
-        f"A–D 中 {reused_count} 局来自 V3 历史记录，其余为 V4B 新跑。"
+        f"A–D 中 {reused_count} 局复用自 V3，其余为本轮新跑"
         if reused_count
-        else "A–D 六局均为 V4B 新跑。"
+        else "A–D 六局均为本轮新跑"
     )
     drive_status = _drive_recovery_status(results)
     report = f"""# V4B：ABCD 最终对弈总结
@@ -313,7 +330,7 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
 
 本轮完成 **{validation['validated_games']} 局**：新增 **{validation['new_games']} 局**，复用 V3 **{validation['reused_v3_games']} 局**。六组对阵均各 6 局，每个固定开局交换黑白一次。正式运行累计耗时 **{elapsed_total:.1f} 秒**（另有预检 {preflight.get('preflight_elapsed_seconds', 0):.1f} 秒）。
 
-V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_pct(d_c)}**。{conclusion} D20 每步实际完成 **{d_usage['average_simulations_per_move']:.0f} 次模拟**（共 {d_usage['simulations_total']:,} 次；新跑局平均 {d_usage['simulations_per_second']:.0f} 次/秒），平均耗时 {d_usage['average_seconds_per_move']:.2f} 秒。MCTS每步约为 B/C 预算的 100 倍；结果属于非等算力挑战。
+V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_pct(d_c)}**。{conclusion} D20 每步实际完成 **{d_usage['average_simulations_per_move']:.0f} 次模拟**（共 {d_usage['simulations_total']:,} 次；新跑局平均 {d_usage['simulations_per_second']:.0f} 次/秒），平均耗时 {d_usage['average_seconds_per_move']:.2f} 秒。MCTS 每步预算约为 B/C 的 100 倍；结果属于非等算力挑战。
 
 本报告没有神经网络训练；A/B/C/D 都是规则或搜索算法。本环境无法读取 Codex 会话的模型档位，因此不能独立核验 Codex 6.0 Luna / Max 配置。
 
@@ -330,15 +347,18 @@ V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_p
 | 项目 | 实测值 |
 |---|---:|
 | CPU | {resource.get('cpu_model', '未知')}；逻辑 CPU {resource.get('logical_cpus')}；容器 CPU 配额 {resource.get('cgroup_cpu_quota_cores')} 核 |
-| 内存 | cgroup 上限 {resource.get('cgroup_memory_limit_bytes', 0)/1024**3:.1f} GiB；可用内存 {resource.get('memory_available_bytes', 0)/1024**3:.1f} GiB |
+| 内存 | cgroup 上限 {resource.get('cgroup_memory_limit_bytes', 0)/1024**3:.1f} GiB；宿主机可用内存 {resource.get('memory_available_bytes', 0)/1024**3:.1f} GiB |
 | 工作区可用磁盘 | {resource.get('workspace_disk_free_bytes', 0)/1024**3:.1f} GiB |
 | 正式任务预估 | {pred['estimated_formal_run_minutes']:.1f} 分钟；含 25% MCTS 对局长度余量范围约 {pred['estimated_formal_run_range_minutes'][0]:.1f}–{pred['estimated_formal_run_range_minutes'][1]:.1f} 分钟 |
+| 正式运行实耗 | {elapsed_total/60:.1f} 分钟；为点估算的 {estimate_ratio:.2f} 倍 |
 | 12 局 D20 全部打满盘的松上界 | {pred['D20_fullboard_theoretical_ceiling_seconds_for_12_new_D_games']/3600:.2f} 小时 |
 | 结果与恢复包预计存储 | {preflight['storage_estimate']['estimated_final_recovery_bundle_bytes']/1024**2:.2f} MiB |
 
-预检在 V3 注册开局 731091 的同一 4 手局面上各测一次 A/B/C/D，不计入正式对局。D3 测得 {next(row['simulations'] for row in preflight['benchmarks'] if row['model']=='D'):,} 次模拟、{next(row['elapsed_seconds_wall'] for row in preflight['benchmarks'] if row['model']=='D'):.2f} 秒；A/B/C 的实测深度、节点、剪枝和落点保存在 `preflight.json`。时间估算使用 V3 已记录的 D20 对 B/C 各 6 局真实耗时和走子数，并对更强的 200ms 对手增加 25% 余量。
+预检在 V3 注册开局 731091 的同一 4 手局面上各测一次 A/B/C/D，不计入正式对局。D3 测得 {next(row['simulations'] for row in preflight['benchmarks'] if row['model']=='D'):,} 次模拟、{next(row['elapsed_seconds_wall'] for row in preflight['benchmarks'] if row['model']=='D'):.2f} 秒；B/C 的搜索深度、节点、剪枝与落点，以及 A 的用时和规则落点保存在 `preflight.json`。A 的 `nodes` 是剩余空位数，不作为搜索节点。实际正式运行耗时为预估的 {estimate_ratio:.2f} 倍；12 局新 D20 对 B/C 共消耗 {d_usage['thinking_seconds_total']:.1f} 秒，明显高于 V3 标定及余量对应的估算，部分对局接近满盘。估算使用 V3 的 D20 对 B/C 各 6 局真实耗时和走子数，并对 200ms 对手增加 25% 余量。
 
-{drive_status} 恢复包只含恢复必需的配置、进度、棋谱、复用审计和代码版本；未操作 V1–V4 的 Drive 快照。
+{drive_status}
+
+恢复包只含恢复必需的配置、进度、棋谱、复用审计和代码版本；未操作 V1–V4 的 Drive 快照。
 
 ## V3 六局复用核验
 
@@ -363,13 +383,15 @@ V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_p
 
 ## 四模型总排名与先后手
 
-每个模型共 18 局；排名仅按本轮样本得分率排序，不能视为稳定棋力定论。
+每个模型共 18 局，黑白各 9 局；排名仅按本轮样本得分率排序，不能视为稳定棋力定论。
 
 {chr(10).join(model_lines)}
 
 | 模型 | 黑棋得分率（局数） | 白棋得分率（局数） |
 |---|---:|---:|
 {chr(10).join(f"| {model} | {_pct(item['color']['black']['score_rate'])}（{item['color']['black']['games']}） | {_pct(item['color']['white']['score_rate'])}（{item['color']['white']['games']}） |" for model, item in summary['models'].items())}
+
+本样本按黑白比较：{color_effect_text}。每种颜色各 9 局且对手组合不完全相同，先手差异仅作描述。
 
 ## 搜索深度与计算成本
 
@@ -381,8 +403,6 @@ V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_p
 
 V4 固定局面基准中，B 从 50ms 到 200ms 的平均深度由 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['50']['mean_completed_depth']:.2f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['200']['mean_completed_depth']:.2f}，平均节点由 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['50']['mean_nodes']:.0f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['200']['mean_nodes']:.0f}；C 的平均深度由 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['50']['mean_completed_depth']:.2f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['200']['mean_completed_depth']:.2f}，节点由 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['50']['mean_nodes']:.0f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['200']['mean_nodes']:.0f}。这是相同局面上的搜索预算变化，不代表胜率本身的因果变化。
 
-| V4 固定局面搜索 | 预算 | 平均耗时 | 深度 | 节点 | 节点/秒 | 剪枝 |
-|---|---:|---:|---:|---:|---:|---:|
 {chr(10).join(v4_lines)}
 
 V4B 实际对局中，B/C 节点、深度和 C 剪枝数如上表。两者不在同一条独立固定局面序列上逐状态逐节点比较，所以对局汇总只能描述实际使用量；B/C 算法效率因果结论沿用 V4 的相同局面验证。D20s 新跑局实际完成 {d_usage['simulations_total']:,} 次模拟、平均 {d_usage['average_simulations_per_move']:.0f} 次/步；树深最大 {d_usage['max_tree_depth']}，树复用节点累计 {d_usage['reused_nodes_total']:,}。历史复用的六局另见 `model_usage.csv` 中 `D_v3_reused` 行。
@@ -402,9 +422,9 @@ V3 对 B/C 的对手计算预算为 50ms，V4B 为 200ms；V4B 的 B/C 又都显
 ## 结论与限制
 
 1. 本轮新增 {validation['new_games']} 局、V3 复用 {validation['reused_v3_games']} 局；A–D 复用来源和核验结果见上文及 `reuse_audit.json`。
-2. D 能否挑战 B/C，应分别看 B200ms 和 C200ms 两组的 6 局配对结果；C 是最强传统搜索对手。本轮 {conclusion}
+2. D 能否挑战 B/C，应分别看 B200ms 和 C200ms 两组的 6 局配对结果；C 是最强传统搜索对手。{conclusion} C 与 D 的总模型区间有重叠，排名仍受小样本不确定性限制。
 3. D 的每步计算时间约为 B/C 的 100 倍。即便 D20 获得更多模拟，也不能直接称其性价比更高；按每秒模拟数及每局思考总时长一起看。
-4. 仅三个开局、每组六局（{reuse_sample_note}），统计区间宽、配对块数少。没有对先后手、开局或偶然战术做种子筛选；结果不支持稳定等级宣称。
+4. 仅三个开局、每组六局；{reuse_sample_note}。统计区间宽、配对块数少。没有对先后手、开局或偶然战术做种子筛选；结果不支持稳定等级宣称。
 5. 本轮只做 9×9。没有 15×15 验证，也没有训练或 checkpoint。
 
 ## 复现与文件

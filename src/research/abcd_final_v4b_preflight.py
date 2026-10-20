@@ -180,6 +180,12 @@ def run_preflight(
             {
                 "model": model,
                 "engine": "MCTSAgent/D3" if model == "D" else model,
+                "nodes_semantics": {
+                    "A": "non-comparable: original rule AI API counter is remaining empty cells, not search nodes",
+                    "B": "Minimax visited search nodes",
+                    "C": "Alpha-Beta visited search nodes",
+                    "D": "MCTS tree operations plus rollout plies; simulations reported separately",
+                }[model],
                 "budget_seconds": float(settings.time_limit_seconds),
                 "move": list(result.move),
                 "elapsed_seconds_reported": float(result.elapsed_seconds),
