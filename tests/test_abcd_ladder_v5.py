@@ -49,6 +49,14 @@ def test_frozen_schedule_has_sixty_unique_groups_and_120_games():
     assert len(config["opening_catalog"]) == 12
 
 
+def test_config_requires_hash_pins_for_all_decision_engines():
+    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    config["engine_sha256"].pop("src/ai.py")
+
+    with pytest.raises(ValueError, match="engine_sha256 must pin exactly"):
+        load_config(config)
+
+
 def test_every_group_uses_one_opening_and_swaps_model_colors():
     groups = build_schedule(load_config(CONFIG))
 
@@ -137,6 +145,17 @@ def test_failed_route_cannot_be_reactivated_by_a_later_result():
 
     with pytest.raises(ValueError, match="after every route"):
         derive_routes(first_failed + [_game_result(game, "A") for game in later_group["games"]], config)
+
+
+def test_a_route_failure_records_the_opponents_actual_budget_rung():
+    config = load_config(CONFIG)
+    group = build_schedule(config)[0]
+    records = [_game_result(game, "B") for game in group["games"]]
+
+    route = derive_routes(records, config)["routes"]["A>B"]
+
+    assert route["status"] == "failed"
+    assert route["failed_budget"] == "50ms"
 
 
 def test_all_drawn_maximum_schedule_completes_every_route():

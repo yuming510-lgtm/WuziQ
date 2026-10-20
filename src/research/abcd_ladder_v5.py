@@ -21,6 +21,7 @@ _MODELS = ("A", "B", "C", "D")
 _MATCHUPS = (("A", "B"), ("A", "C"), ("A", "D"), ("B", "C"), ("B", "D"), ("C", "D"))
 _BUDGET_LABELS = ("50ms", "200ms", "1s", "5s", "10s", "20s", "50s")
 _BUDGET_SECONDS = (0.05, 0.2, 1.0, 5.0, 10.0, 20.0, 50.0)
+_REQUIRED_ENGINE_PINS = {"src/ai.py", "src/gomoku.py", "src/research/mcts_d2.py"}
 
 
 def _canonical_json(value: Any) -> str:
@@ -99,7 +100,10 @@ def load_config(config_source: str | Path | dict[str, Any]) -> dict[str, Any]:
     if int(config.get("d_search", {}).get("max_depth", 0)) != 4:
         raise ValueError("V5 D must retain the verified V4C MCTS configuration")
     root = _project_root()
-    for relative, expected in config.get("engine_sha256", {}).items():
+    engine_pins = config.get("engine_sha256", {})
+    if set(engine_pins) != _REQUIRED_ENGINE_PINS:
+        raise ValueError("engine_sha256 must pin exactly src/ai.py, src/gomoku.py, and src/research/mcts_d2.py")
+    for relative, expected in engine_pins.items():
         path = root / relative
         if not path.is_file() or _sha256(path.read_bytes()) != expected:
             raise ValueError(f"Pinned V1-V4C decision engine changed: {relative}")
@@ -432,7 +436,7 @@ def derive_routes(records: list[dict[str, Any]], config: dict[str, Any]) -> dict
                 highest[route_id] = str(group["rung_budget_label"])
             else:
                 active[route_id] = False
-                failed_at[route_id] = str(group["challenger_budget_label"])
+                failed_at[route_id] = str(group["rung_budget_label"])
 
     for route_id, groups in route_groups.items():
         levels: list[dict[str, Any]] = []
