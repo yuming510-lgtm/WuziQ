@@ -1,0 +1,297 @@
+{
+  "V1_9x9_pairwise_50ms": {
+    "A-B": {
+      "A": {
+        "draws": 130,
+        "games": 200,
+        "losses": 65,
+        "pure_win_rate": 0.025,
+        "score_rate": 0.35,
+        "score_rate_ci95": [
+          0.2713827730429293,
+          0.41560625789141403
+        ],
+        "wins": 5
+      },
+      "B": {
+        "draws": 130,
+        "games": 200,
+        "losses": 5,
+        "pure_win_rate": 0.325,
+        "score_rate": 0.65,
+        "score_rate_ci95": [
+          0.5883019649621212,
+          0.7296115451388887
+        ],
+        "wins": 65
+      }
+    },
+    "A-C": {
+      "A": {
+        "draws": 110,
+        "games": 200,
+        "losses": 90,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.275,
+        "score_rate_ci95": [
+          0.2508680555555556,
+          0.3106060606060606
+        ],
+        "wins": 0
+      },
+      "C": {
+        "draws": 110,
+        "games": 200,
+        "losses": 0,
+        "pure_win_rate": 0.45,
+        "score_rate": 0.725,
+        "score_rate_ci95": [
+          0.6905776515151515,
+          0.7491319444444444
+        ],
+        "wins": 90
+      }
+    },
+    "A-D": {
+      "A": {
+        "draws": 11,
+        "games": 200,
+        "losses": 1,
+        "pure_win_rate": 0.94,
+        "score_rate": 0.9675,
+        "score_rate_ci95": [
+          0.9405273437499999,
+          0.984375
+        ],
+        "wins": 188
+      },
+      "D": {
+        "draws": 11,
+        "games": 200,
+        "losses": 188,
+        "pure_win_rate": 0.005,
+        "score_rate": 0.0325,
+        "score_rate_ci95": [
+          0.016059027777777776,
+          0.06032986111111111
+        ],
+        "wins": 1
+      }
+    },
+    "B-C": {
+      "B": {
+        "draws": 0,
+        "games": 200,
+        "losses": 199,
+        "pure_win_rate": 0.005,
+        "score_rate": 0.005,
+        "score_rate_ci95": [
+          0.0,
+          0.015625
+        ],
+        "wins": 1
+      },
+      "C": {
+        "draws": 0,
+        "games": 200,
+        "losses": 1,
+        "pure_win_rate": 0.995,
+        "score_rate": 0.995,
+        "score_rate_ci95": [
+          0.984375,
+          1.0
+        ],
+        "wins": 199
+      }
+    },
+    "B-D": {
+      "B": {
+        "draws": 0,
+        "games": 200,
+        "losses": 2,
+        "pure_win_rate": 0.99,
+        "score_rate": 0.99,
+        "score_rate_ci95": [
+          0.9809027777777778,
+          1.0
+        ],
+        "wins": 198
+      },
+      "D": {
+        "draws": 0,
+        "games": 200,
+        "losses": 198,
+        "pure_win_rate": 0.01,
+        "score_rate": 0.01,
+        "score_rate_ci95": [
+          0.0,
+          0.020833333333333332
+        ],
+        "wins": 2
+      }
+    },
+    "C-D": {
+      "C": {
+        "draws": 0,
+        "games": 200,
+        "losses": 0,
+        "pure_win_rate": 1.0,
+        "score_rate": 1.0,
+        "score_rate_ci95": [
+          1.0,
+          1.0
+        ],
+        "wins": 200
+      },
+      "D": {
+        "draws": 0,
+        "games": 200,
+        "losses": 200,
+        "pure_win_rate": 0.0,
+        "score_rate": 0.0,
+        "score_rate_ci95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0
+      }
+    }
+  },
+  "V2_9x9_D2_conditions": [
+    {
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 1.0
+      },
+      "draws": 0,
+      "games": 10,
+      "losses": 10,
+      "mean_seconds_per_move": 0.975576241237875,
+      "mean_simulations_per_move": 532.2142857142857,
+      "opponent": "C",
+      "phase": "extreme-9x9-d2-1s-vs-c-50ms",
+      "score_rate": 0.0,
+      "track": "extreme",
+      "wins": 0
+    },
+    {
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 0.2
+      },
+      "draws": 0,
+      "games": 10,
+      "losses": 10,
+      "mean_seconds_per_move": 0.18890789184605147,
+      "mean_simulations_per_move": 115.71794871794872,
+      "opponent": "C",
+      "phase": "extreme-9x9-d2-200ms-vs-c-50ms",
+      "score_rate": 0.0,
+      "track": "extreme",
+      "wins": 0
+    },
+    {
+      "budget_seconds_by_model": {
+        "C": 0.05,
+        "D2": 5.0
+      },
+      "draws": 0,
+      "games": 10,
+      "losses": 9,
+      "mean_seconds_per_move": 4.509549433425581,
+      "mean_simulations_per_move": 2654.8688524590166,
+      "opponent": "C",
+      "phase": "extreme-9x9-d2-5s-vs-c-50ms",
+      "score_rate": 0.1,
+      "track": "extreme",
+      "wins": 1
+    }
+  ],
+  "V3_D3_20s_conditions": [
+    {
+      "D3_budget_seconds": 20.0,
+      "average_seconds_per_move": 18.20495836876564,
+      "average_simulations_per_move": 69440.13020833333,
+      "draws": 4,
+      "games": 6,
+      "losses": 0,
+      "opponent": "A",
+      "opponent_budget_seconds": 0.05,
+      "phase": "d3-20s-vs-a",
+      "score_rate": 0.6666666666666666,
+      "wins": 2
+    },
+    {
+      "D3_budget_seconds": 20.0,
+      "average_seconds_per_move": 14.358557543051248,
+      "average_simulations_per_move": 7567.666666666667,
+      "draws": 0,
+      "games": 6,
+      "losses": 3,
+      "opponent": "B",
+      "opponent_budget_seconds": 0.05,
+      "phase": "d3-20s-vs-b",
+      "score_rate": 0.5,
+      "wins": 3
+    },
+    {
+      "D3_budget_seconds": 20.0,
+      "average_seconds_per_move": 14.784750467518515,
+      "average_simulations_per_move": 46181.234567901236,
+      "draws": 1,
+      "games": 6,
+      "losses": 2,
+      "opponent": "C",
+      "opponent_budget_seconds": 0.05,
+      "phase": "d3-20s-vs-c",
+      "score_rate": 0.5833333333333334,
+      "wins": 3
+    }
+  ],
+  "V4_BC_50_vs_200ms_fixed_positions": {
+    "B": {
+      "200": {
+        "cutoff_ratio": 0.0,
+        "mean_completed_depth": 1.3333333333333333,
+        "mean_cutoffs": 0.0,
+        "mean_elapsed_seconds": 0.19505530933201953,
+        "mean_nodes": 2527.3333333333335,
+        "mean_nodes_per_second": 12957.038727037017,
+        "run_count": 12,
+        "timeout_count": 12
+      },
+      "50": {
+        "cutoff_ratio": 0.0,
+        "mean_completed_depth": 1.0833333333333333,
+        "mean_cutoffs": 0.0,
+        "mean_elapsed_seconds": 0.04503032166636937,
+        "mean_nodes": 593.0,
+        "mean_nodes_per_second": 13168.97378530157,
+        "run_count": 12,
+        "timeout_count": 12
+      }
+    },
+    "C": {
+      "200": {
+        "cutoff_ratio": 0.14470018170805574,
+        "mean_completed_depth": 4.0,
+        "mean_cutoffs": 199.08333333333334,
+        "mean_elapsed_seconds": 0.19544930200087643,
+        "mean_nodes": 1375.8333333333333,
+        "mean_nodes_per_second": 7046.439264294809,
+        "run_count": 12,
+        "timeout_count": 12
+      },
+      "50": {
+        "cutoff_ratio": 0.19340193704600483,
+        "mean_completed_depth": 1.9166666666666667,
+        "mean_cutoffs": 53.25,
+        "mean_elapsed_seconds": 0.045402423082729605,
+        "mean_nodes": 275.3333333333333,
+        "mean_nodes_per_second": 6081.7920842048625,
+        "run_count": 12,
+        "timeout_count": 12
+      }
+    }
+  }
+}

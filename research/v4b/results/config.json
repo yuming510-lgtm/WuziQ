@@ -1,0 +1,171 @@
+{
+  "a_policy": "unchanged rule selector; use a 50ms timeout marker only, never sleep or wait",
+  "ab_search": {
+    "candidate_radius": 2,
+    "max_depth": 81,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_node_reuse": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_tactical_root": true,
+    "mcts_rollout_max_plies": 24,
+    "mcts_simulations": 1000000,
+    "uct_constant": 1.4142135623730951
+  },
+  "base_seed": 20261020,
+  "based_on": [
+    "research/abc-compute-v4",
+    "research/mcts-high-compute-v3"
+  ],
+  "board_size": 9,
+  "budgets_seconds_by_model": {
+    "A": 0.05,
+    "B": 0.2,
+    "C": 0.2,
+    "D": 20.0
+  },
+  "d3_search": {
+    "candidate_radius": 2,
+    "max_depth": 4,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_node_reuse": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_tactical_root": true,
+    "mcts_rollout_max_plies": 24,
+    "mcts_simulations": 1000000,
+    "time_limit_seconds": 20.0,
+    "uct_constant": 1.4142135623730951
+  },
+  "d_engine": {
+    "agent_lifetime": "one persistent MCTSAgent per D player per game",
+    "display_model": "D",
+    "implementation_model": "D3",
+    "implementation_module": "src.research.mcts_d2.MCTSAgent"
+  },
+  "experiment_id": "wuziq-abcd-final-v4b-2026-10-20",
+  "games_per_matchup": 6,
+  "implementation_commit": "166025d34d02fdd3940598b3d128fe2099d2f121",
+  "inference_limits": {
+    "neural_network_or_rl": false,
+    "sample_size_warning": "Six games per matchup and three paired opening blocks are exploratory; confidence intervals are descriptive and not proof of stable ranking.",
+    "winsorized_or_synthetic_data": false
+  },
+  "matchups": [
+    [
+      "A",
+      "B"
+    ],
+    [
+      "A",
+      "C"
+    ],
+    [
+      "B",
+      "C"
+    ],
+    [
+      "A",
+      "D"
+    ],
+    [
+      "B",
+      "D"
+    ],
+    [
+      "C",
+      "D"
+    ]
+  ],
+  "models": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "opening_catalog": {
+    "731091": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        6,
+        3
+      ],
+      [
+        "B",
+        7,
+        5
+      ],
+      [
+        "W",
+        6,
+        1
+      ]
+    ],
+    "731092": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        2,
+        5
+      ],
+      [
+        "B",
+        0,
+        6
+      ],
+      [
+        "W",
+        4,
+        6
+      ]
+    ],
+    "731093": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        3,
+        2
+      ],
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        6,
+        3
+      ]
+    ]
+  },
+  "opening_plies": 4,
+  "opening_policy": "V3-registered-four-ply-openings; fixed B-W-B-W stones; each model matchup swaps model colors once per opening",
+  "opening_seeds": [
+    731091,
+    731092,
+    731093
+  ],
+  "reuse_v3": {
+    "enabled": true,
+    "mcts_d2_source_sha256": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991",
+    "normalize_source_model_D3_to": "D",
+    "require_exactly_games": 6,
+    "source_code_commit": "ff6aa837cf2d38268485fab51548c0e8327eb56d",
+    "source_config": "research/v3/results/config.json",
+    "source_experiment_id": "wuziq-mcts-high-compute-v3",
+    "source_games": "research/v3/results/9x9_d3-20s-vs-a_games.jsonl"
+  },
+  "schema_version": 1,
+  "timeout_policy": "Use the returned legal move even when timed_out is true; flag budget overrun; an invalid move forfeits immediately."
+}

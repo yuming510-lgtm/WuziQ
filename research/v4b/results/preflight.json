@@ -1,0 +1,235 @@
+{
+  "base_code_commit": "b949a123e10a9e16ed419627a5ad4e10473b0b79",
+  "benchmarked_at_utc": "2026-10-20T07:42:18Z",
+  "benchmarks": [
+    {
+      "budget_seconds": 0.05,
+      "completed_depth": 0,
+      "cutoffs": 0,
+      "elapsed_seconds_reported": 0.0007208930001070257,
+      "elapsed_seconds_wall": 0.000951967000219156,
+      "engine": "A",
+      "model": "A",
+      "move": [
+        6,
+        2
+      ],
+      "nodes": 77,
+      "simulations": 0,
+      "simulations_per_second": 0.0,
+      "timed_out": false,
+      "tree_depth": 0,
+      "nodes_semantics": "non-comparable: original rule AI API counter is remaining empty cells, not search nodes"
+    },
+    {
+      "budget_seconds": 0.2,
+      "completed_depth": 2,
+      "cutoffs": 0,
+      "elapsed_seconds_reported": 0.19503208700007235,
+      "elapsed_seconds_wall": 0.19504884899833996,
+      "engine": "B",
+      "model": "B",
+      "move": [
+        6,
+        4
+      ],
+      "nodes": 3062,
+      "simulations": 0,
+      "simulations_per_second": 0.0,
+      "timed_out": true,
+      "tree_depth": 2,
+      "nodes_semantics": "Minimax visited search nodes"
+    },
+    {
+      "budget_seconds": 0.2,
+      "completed_depth": 2,
+      "cutoffs": 157,
+      "elapsed_seconds_reported": 0.195023530999606,
+      "elapsed_seconds_wall": 0.1950406739997561,
+      "engine": "C",
+      "model": "C",
+      "move": [
+        6,
+        4
+      ],
+      "nodes": 2050,
+      "simulations": 0,
+      "simulations_per_second": 0.0,
+      "timed_out": true,
+      "tree_depth": 2,
+      "nodes_semantics": "Alpha-Beta visited search nodes"
+    },
+    {
+      "budget_seconds": 20.0,
+      "completed_depth": 3,
+      "cutoffs": 0,
+      "elapsed_seconds_reported": 19.999376164998466,
+      "elapsed_seconds_wall": 19.99946200500017,
+      "engine": "MCTSAgent/D3",
+      "model": "D",
+      "move": [
+        7,
+        4
+      ],
+      "nodes": 173551,
+      "simulations": 3749,
+      "simulations_per_second": 187.4558470759324,
+      "timed_out": true,
+      "tree_depth": 3,
+      "nodes_semantics": "MCTS tree operations plus rollout plies; simulations reported separately"
+    }
+  ],
+  "estimate": {
+    "D20_fullboard_theoretical_ceiling_seconds_for_12_new_D_games": 9360.0,
+    "D3_turn_cost_uncertainty_margin_fraction": 0.25,
+    "basis": "V3 actual D3-20s-vs-B/C games at 50ms for turn counts and D3 think time; B/C 200ms opponent work; A/B/C-only games bounded by all remaining moves.",
+    "estimate_warning": "Turn counts can change at 200ms. The full-board ceiling is intentionally loose; this estimate is anchored to all twelve existing V3 D20-vs-B/C games and includes a 25% margin.",
+    "estimated_200ms_opponent_think_seconds": 23.8,
+    "estimated_ABC_games_seconds_upper_bound": 186.0,
+    "estimated_D_games_wall_compute_seconds": 2226.685665059998,
+    "estimated_formal_run_minutes": 40.21142775099997,
+    "estimated_formal_run_range_minutes": [
+      40.21142775099997,
+      50.26428468874996
+    ],
+    "estimated_formal_run_seconds": 2412.685665059998,
+    "historical_D3_seconds_by_opponent_for_six_games": {
+      "B": 559.9837441789987,
+      "C": 1197.5647878689997
+    },
+    "historical_D3_seconds_total": 1757.5485320479984,
+    "historical_opponent_move_count": 119
+  },
+  "experiment_id": "wuziq-abcd-final-v4b-2026-10-20",
+  "official_games_started": 0,
+  "position": {
+    "board_size": 9,
+    "opening_moves": [
+      {
+        "col": 4,
+        "player": "B",
+        "row": 4
+      },
+      {
+        "col": 3,
+        "player": "W",
+        "row": 6
+      },
+      {
+        "col": 5,
+        "player": "B",
+        "row": 7
+      },
+      {
+        "col": 1,
+        "player": "W",
+        "row": 6
+      }
+    ],
+    "opening_seed": 731091,
+    "to_move": "B"
+  },
+  "preflight_elapsed_seconds": 20.401801112000612,
+  "preflight_only": true,
+  "preflight_seed_policy": "fixed seed derived from V4B base seed, model, and opening 731091",
+  "resources": {
+    "cgroup_cpu_quota_cores": 2.0,
+    "cgroup_memory_limit_bytes": 8589934592,
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "load_average_1_5_15m": [
+      0.3173828125,
+      0.13330078125,
+      0.04296875
+    ],
+    "logical_cpus": 3,
+    "memory_available_bytes": 9842401280,
+    "memory_total_bytes": 10452471808,
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "process_max_rss_bytes": 36274176,
+    "python": "3.12.14",
+    "workspace_disk_free_bytes": 31937716224,
+    "workspace_disk_total_bytes": 33770192896
+  },
+  "storage_estimate": {
+    "available_workspace_disk_bytes": 31937716224,
+    "estimated_final_recovery_bundle_bytes": 3266687,
+    "historical_files": [
+      {
+        "bytes": 140743,
+        "path": "research/v3/results/9x9_d3-20s-vs-a_games.jsonl"
+      },
+      {
+        "bytes": 38758,
+        "path": "research/v3/results/9x9_d3-20s-vs-b_games.jsonl"
+      },
+      {
+        "bytes": 66401,
+        "path": "research/v3/results/9x9_d3-20s-vs-c_games.jsonl"
+      }
+    ]
+  },
+  "v3_D20_calibration": {
+    "B": {
+      "D3_moves_by_game": [
+        4,
+        3,
+        6,
+        9,
+        9,
+        8
+      ],
+      "D3_seconds_by_game": [
+        79.99673702899781,
+        59.99734828700093,
+        59.997804922000796,
+        139.99544296699787,
+        99.99674170800063,
+        119.99966926600064
+      ],
+      "D3_simulations_total": 295139,
+      "D3_total_seconds": 559.9837441789987,
+      "historical_file": "research/v3/results/9x9_d3-20s-vs-b_games.jsonl",
+      "historical_games": 6,
+      "opponent_moves_total": 39,
+      "wall_time_per_game_seconds": [
+        80.24317470699498,
+        60.144447503000265,
+        60.29203290199803,
+        140.43672554399927,
+        100.44050104600137,
+        120.34436885600007
+      ]
+    },
+    "C": {
+      "D3_moves_by_game": [
+        6,
+        39,
+        16,
+        6,
+        5,
+        9
+      ],
+      "D3_seconds_by_game": [
+        99.9959203340004,
+        617.5623090390036,
+        179.9936550129969,
+        99.99613165900155,
+        80.01918848999958,
+        119.99758333399768
+      ],
+      "D3_simulations_total": 3740680,
+      "D3_total_seconds": 1197.5647878689997,
+      "historical_file": "research/v3/results/9x9_d3-20s-vs-c_games.jsonl",
+      "historical_games": 6,
+      "opponent_moves_total": 80,
+      "wall_time_per_game_seconds": [
+        100.34085246200084,
+        619.3397963710031,
+        180.778654234,
+        100.24121701800141,
+        80.38458009299939,
+        120.39082020399837
+      ]
+    }
+  }
+}
