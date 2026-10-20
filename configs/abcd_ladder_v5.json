@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "wuziq-abcd-ladder-v5-2026-10-20",
+  "base_seed": 20261021,
+  "based_on_branch": "research/bcd-high-compute-v4c",
+  "based_on_commit": "178b7d3bcee1962a2d3e2d44fcffcb656210e6b7",
+  "board_size": 9,
+  "models": ["A", "B", "C", "D"],
+  "budgets_seconds_by_model": {"A": null, "B": 0.05, "C": 0.05, "D": 0.05},
+  "budget_ladder": [
+    {"label": "50ms", "seconds": 0.05},
+    {"label": "200ms", "seconds": 0.2},
+    {"label": "1s", "seconds": 1.0},
+    {"label": "5s", "seconds": 5.0},
+    {"label": "10s", "seconds": 10.0},
+    {"label": "20s", "seconds": 20.0},
+    {"label": "50s", "seconds": 50.0}
+  ],
+  "matchups": [["A", "B"], ["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"], ["C", "D"]],
+  "games_per_group": 2,
+  "opening_plies": 4,
+  "opening_seeds": [731101, 731102, 731103, 731104, 731105, 731106, 731107, 731108, 731109, 731110, 731111, 731112],
+  "opening_catalog": {
+    "731101": [["B", 4, 4], ["W", 6, 3], ["B", 7, 5], ["W", 6, 1]],
+    "731102": [["B", 4, 4], ["W", 2, 5], ["B", 0, 6], ["W", 4, 6]],
+    "731103": [["B", 4, 4], ["W", 3, 2], ["B", 5, 4], ["W", 6, 3]],
+    "731104": [["B", 4, 4], ["W", 4, 6], ["B", 3, 5], ["W", 1, 4]],
+    "731105": [["B", 4, 4], ["W", 2, 2], ["B", 3, 6], ["W", 5, 2]],
+    "731106": [["B", 4, 4], ["W", 5, 6], ["B", 2, 4], ["W", 1, 6]],
+    "731107": [["B", 3, 4], ["W", 5, 3], ["B", 6, 6], ["W", 2, 1]],
+    "731108": [["B", 4, 3], ["W", 3, 5], ["B", 5, 4], ["W", 6, 2]],
+    "731109": [["B", 3, 3], ["W", 4, 5], ["B", 6, 4], ["W", 2, 3]],
+    "731110": [["B", 5, 4], ["W", 3, 6], ["B", 1, 4], ["W", 6, 1]],
+    "731111": [["B", 2, 5], ["W", 6, 3], ["B", 3, 2], ["W", 5, 6]],
+    "731112": [["B", 6, 4], ["W", 2, 4], ["B", 5, 5], ["W", 3, 3]]
+  },
+  "opening_assignment": "round-robin by fixed pair index, rung and internal direction; each two-game group uses one identical opening with model colors swapped",
+  "promotion_rule": "A challenger advances when its total score over the paired two games is at least 1.0 (win=1, draw=0.5, loss=0); a failed route is never reactivated",
+  "internal_ladder_rule": "For B/C/D pairs, the shared 50ms-vs-50ms result evaluates both directions. Later X-to-Y levels use X at the current rung against Y fixed at 50ms; the reciprocal route is separate and is run only if active.",
+  "a_policy": "unchanged rule selector, natural elapsed time, no artificial sleep and no configured per-move deadline",
+  "timeout_policy": "Use a returned legal move after timeout and record it; an illegal move forfeits; incomplete games are never counted.",
+  "random_seed_policy": "Stable SHA-256 seed derivation from base seed and unique group/game/move IDs; frozen before execution.",
+  "ab_search": {
+    "candidate_radius": 2,
+    "max_depth": 81,
+    "time_limit_seconds": 0.05,
+    "mcts_simulations": 1000000,
+    "mcts_rollout_max_plies": 24,
+    "uct_constant": 1.4142135623730951,
+    "mcts_d2_tactical_root": true,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_node_reuse": true
+  },
+  "d_search": {
+    "candidate_radius": 2,
+    "max_depth": 4,
+    "time_limit_seconds": 0.05,
+    "mcts_simulations": 1000000,
+    "mcts_rollout_max_plies": 24,
+    "uct_constant": 1.4142135623730951,
+    "mcts_d2_tactical_root": true,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_node_reuse": true
+  },
+  "engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991"
+  },
+  "algorithm_constraints": {
+    "A": "Existing heuristic rule selector; natural runtime.",
+    "B": "Existing pure Minimax iterative deepening and deadlines; no Alpha-Beta.",
+    "C": "Same B evaluation, candidate generation, ordering and iterative deepening; only Alpha-Beta is enabled.",
+    "D": "Unchanged V4C MCTSAgent, tactical rules and cross-move tree reuse; only the current rung budget changes.",
+    "neural_network_or_reinforcement_learning": false
+  },
+  "inference_limits": {
+    "maximum_groups": 60,
+    "maximum_games": 120,
+    "all_games_new": true,
+    "historical_results_in_v5_score": false,
+    "sample_warning": "Each advancement decision uses two games from one fixed opening with swapped colors. This is exploratory; passing does not establish stable superiority."
+  }
+}
