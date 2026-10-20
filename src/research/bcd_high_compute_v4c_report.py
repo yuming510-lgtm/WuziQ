@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from pathlib import Path
 import subprocess
 from typing import Any
@@ -9,12 +10,14 @@ from typing import Any
 import matplotlib
 
 matplotlib.use("Agg")
+matplotlib.rcParams["font.family"] = "Noto Sans CJK JP"
 import matplotlib.pyplot as plt
 import numpy as np
 
 from .bcd_high_compute_v4c import load_config
 from .bcd_high_compute_v4c_analysis import summarize_records, validate_records
 from .checkpoint import load_game_records, write_json_atomic
+from ..gomoku import GomokuBoard
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -31,6 +34,92 @@ def _ci(value: list[float] | None) -> str:
 
 def _fmt(value: float | int | None, digits: int = 2) -> str:
     return "—" if value is None else f"{value:,.{digits}f}"
+
+
+def _elapsed_seconds(start: str | None, end: str | None) -> float | None:
+    if not start or not end:
+        return None
+    parse = lambda value: datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return max(0.0, (parse(end) - parse(start)).total_seconds())
+
+
+def _duration(value: float | None) -> str:
+    if value is None:
+        return "—"
+    seconds = int(round(value))
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{hours}小时{minutes}分{seconds}秒"
+
+
+def _ranking_groups(summary: dict[str, Any]) -> list[list[str]]:
+    return summary.get("ranking_tiers") or [[model] for model in summary["exploratory_ranking"]]
+
+
+def _ranking_text(summary: dict[str, Any]) -> str:
+    groups = _ranking_groups(summary)
+    parts: list[str] = []
+    place = 1
+    for group in groups:
+        names = " = ".join(group)
+        score = _pct(summary["models"][group[0]]["score_rate"])
+        prefix = f"{place}. " if len(groups) > 1 else "并列："
+        parts.append(f"{prefix}{names}（{score}）")
+        place += len(group)
+    return "；".join(parts)
+
+
+def _immediate_winning_points(board: GomokuBoard, player: str) -> list[list[int]]:
+    points: list[list[int]] = []
+    for row in range(board.size):
+        for col in range(board.size):
+            coord = (row, col)
+            if board.get(coord) is not None:
+                continue
+            board.place_stone(player, coord)
+            wins = board.check_victory(coord, player)
+            board.undo()
+            if wins:
+                points.append([row, col])
+    return points
+
+
+def _tactical_review(records: list[dict[str, Any]]) -> dict[str, Any]:
+    decisive: list[dict[str, Any]] = []
+    for game in records:
+        if game.get("winner_model") is None:
+            continue
+        moves = game["moves"]
+        if len(moves) < 3:
+            continue
+        winner = moves[-1]
+        defender = moves[-2]
+        board = GomokuBoard(int(game["board_size"]))
+        for move in moves[:-2]:
+            board.place_stone(move["player"], (int(move["row"]), int(move["col"])))
+        winning_points = _immediate_winning_points(board, winner["player"])
+        decisive.append({
+            "game_id": game["game_id"],
+            "winner_model": game["winner_model"],
+            "winner_color": game["winner_color"],
+            "winning_points_before_defense": winning_points,
+            "fork_width": len(winning_points),
+            "defender_move": [int(defender["row"]), int(defender["col"])],
+            "defender_blocked_a_winning_point": [int(defender["row"]), int(defender["col"])] in winning_points,
+            "final_winning_move": [int(winner["row"]), int(winner["col"])],
+        })
+    return {
+        "decisive_games": len(decisive),
+        "winner_colors": {color: sum(item["winner_color"] == color for item in decisive) for color in ("B", "W")},
+        "fork_games_with_multiple_winning_points": sum(item["fork_width"] >= 2 for item in decisive),
+        "fork_width_distribution": {
+            str(width): sum(item["fork_width"] == width for item in decisive)
+            for width in sorted({item["fork_width"] for item in decisive})
+        },
+        "defender_blocked_one_winning_point": sum(item["defender_blocked_a_winning_point"] for item in decisive),
+        "games": decisive,
+        "method": "Replay to the position before the defender's final move; enumerate all empty cells where the eventual winner can win immediately, then compare the defense and final move.",
+    }
 
 
 def _transcript(game: dict[str, Any], last_n: int = 10) -> str:
@@ -89,7 +178,7 @@ def _history(project_root: Path) -> dict[str, Any]:
 
 def _figures(figure_dir: Path, summary: dict[str, Any], history: dict[str, Any]) -> list[str]:
     figure_dir.mkdir(parents=True, exist_ok=True)
-    plt.rcParams.update({"font.family": "sans-serif", "axes.unicode_minus": False})
+    plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Noto Sans CJK JP", "DejaVu Sans"], "axes.unicode_minus": False})
     pairs = [("B-C", "B"), ("B-D", "B"), ("C-D", "C")]
     labels = ["B–C：B 得分率", "B–D：B 得分率", "C–D：C 得分率"]
     old, new = [], []
@@ -158,16 +247,22 @@ def build_report(
     records = load_game_records(results / "9x9_games.jsonl")
     validation = validate_records(records, config, require_complete=True)
     summary = summarize_records(records, config, require_complete=True)
+    tactical_review = _tactical_review(records)
     history = _history(root)
     write_json_atomic(results / "history_comparison.json", history)
     figure_names = _figures(results.parent / "figures", summary, history)
     progress = _read_json(results / "progress.json")
     preflight = _read_json(results / "preflight.json")
     drive = _read_json(results / "drive_recovery.json") if (results / "drive_recovery.json").exists() else {}
+    environment_events = _read_json(results / "environment_events.json") if (results / "environment_events.json").exists() else {"events": []}
+    wall_clock_seconds = _elapsed_seconds(progress.get("first_started_at_utc"), progress.get("completed_at_utc"))
     execution = {
         "started_at_utc": progress.get("first_started_at_utc"),
         "completed_at_utc": progress.get("completed_at_utc"),
-        "elapsed_seconds_total": progress.get("elapsed_seconds_total"),
+        "wall_clock_elapsed_seconds": wall_clock_seconds,
+        "runner_recorded_active_elapsed_seconds": progress.get("elapsed_seconds_total"),
+        "environment_restart_count": len(environment_events.get("events", [])),
+        "environment_events": environment_events.get("events", []),
         "implementation_commit": progress.get("implementation_commit"),
         "scheduled_games": progress.get("planned_games"),
         "completed_games": progress.get("completed_games"),
@@ -176,12 +271,11 @@ def build_report(
     write_json_atomic(results / "execution.json", execution)
     write_json_atomic(results / "validation.json", validation)
     write_json_atomic(results / "summary.json", summary)
+    write_json_atomic(results / "tactical_review.json", tactical_review)
     report_lines = [
         "# V4C 高算力最终挑战赛研究报告", "",
         "## 摘要", "",
-        f"本轮在 9×9 棋盘完成 {validation['validated_games']} 局全新对弈：B–C、B–D、C–D 各 6 局。V4/V4B 历史棋局仅作比较，未计入本轮。排名（胜 1 分、平 0.5 分）为：" + " > ".join(
-            f"{model}（{_pct(summary['models'][model]['score_rate'])}）" for model in summary["exploratory_ranking"]
-        ) + "。此顺序受 18 局小样本影响，D 的单步预算是 B 的 50 倍、C 的 250 倍，不能解释为同等算力下的稳定强弱。", "",
+        f"本轮在 9×9 棋盘完成 {validation['validated_games']} 局全新对弈：B–C、B–D、C–D 各 6 局。V4/V4B 历史棋局仅作比较，未计入本轮。按胜 1 分、平 0.5 分排名：{_ranking_text(summary)}。排名受 18 局小样本影响，D 的单步预算是 B 的 50 倍、C 的 250 倍，不能解释为同等算力下的稳定强弱。", "",
         "## 配置、实现与公平性", "",
         "- B 为纯 Minimax，单步最多 1 秒；C 为 Alpha–Beta，单步最多 200ms。两者使用相同的 V4 评价函数、候选集及排序、迭代加深与截止时间实现，只有 C 启用剪枝。",
         "- D 直接复用 V4B `MCTSAgent`（纯 UCT，不含神经网络），根节点战术识别、rollout、节点扩展及跨步树复用保持不变，仅把预算从 20 秒改为 50 秒。D 的 50 秒不等于 50 秒保证用满：即时胜/必防可提前返回。",
@@ -204,12 +298,18 @@ def build_report(
             f"| {a}–{b} | {item['wins'][a]}–{item['draws']}–{item['wins'][b]} | {a} {_pct(item['score_rate'][a])} / {b} {_pct(item['score_rate'][b])} | {a} {_pct(item['pure_win_rate'][a])} / {b} {_pct(item['pure_win_rate'][b])} | {a} {_ci(item['paired_wilson_95_ci'][a])}; {b} {_ci(item['paired_wilson_95_ci'][b])} | {_pct(black_a)} / {_pct(black_b)} | {_pct(white_a)} / {_pct(white_b)} |"
         )
     report_lines += ["", "### 总排名及先后手", "", "| 排名 | 模型 | 总战绩 | 总得分率 | 配对区间 | 黑方得分率 | 白方得分率 |", "|---:|---|---:|---:|---|---:|---:|"]
-    for place, model in enumerate(summary["exploratory_ranking"], 1):
-        item = summary["models"][model]
-        report_lines.append(
-            f"| {place} | {model} | {item['wins']}–{item['draws']}–{item['losses']} | {_pct(item['score_rate'])} | {_ci(item['paired_wilson_95_ci'])} | {_pct(item['color']['black']['score_rate'])} | {_pct(item['color']['white']['score_rate'])} |"
-        )
-    report_lines += ["", "每个模型参加 12 局，按 6 个‘对手×开局’的换色配对块计算总排名区间；每组对阵仅 n=3 个开局块。区间是 Wilson-style 描述区间，小样本覆盖率未校准，不能据此宣称显著差异。黑白得分率用于观察先手影响，但每格仅 6 局。", "", "## 搜索计算成本", "", "| 模型 | 决策数 | 总思考秒数 | 平均秒/步 | 平均节点/步 | 平均完成深度 | 剪枝数 | 剪枝/节点 | 模拟总数 | 平均模拟/步 | 模拟/秒 | 超时步数 |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    place = 1
+    for group in _ranking_groups(summary):
+        for model in group:
+            item = summary["models"][model]
+            rank_label = f"{place}（并列）" if len(group) > 1 else str(place)
+            report_lines.append(
+                f"| {rank_label} | {model} | {item['wins']}–{item['draws']}–{item['losses']} | {_pct(item['score_rate'])} | {_ci(item['paired_wilson_95_ci'])} | {_pct(item['color']['black']['score_rate'])} | {_pct(item['color']['white']['score_rate'])} |"
+            )
+        place += len(group)
+    overall_black = sum(summary["models"][model]["color"]["black"]["score_rate"] for model in ("B", "C", "D")) / 3
+    overall_white = sum(summary["models"][model]["color"]["white"]["score_rate"] for model in ("B", "C", "D")) / 3
+    report_lines += ["", f"每个模型参加 12 局，按 6 个‘对手×开局’的换色配对块计算总排名区间；每组对阵仅 n=3 个开局块。区间是 Wilson-style 描述区间，小样本覆盖率未校准，不能据此宣称显著差异。先手汇总得分率为黑方 {_pct(overall_black)}、白方 {_pct(overall_white)}；每个模型每色仅 6 局，先手效应仍是探索性观察。", "", "## 搜索计算成本", "", "| 模型 | 决策数 | 总思考秒数 | 平均秒/步 | 平均节点/步 | 平均完成深度 | 剪枝数 | 剪枝/节点 | 模拟总数 | 平均模拟/步 | 模拟/秒 | 超时步数 |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for model in ("B", "C", "D"):
         usage = summary["model_usage"][model]
         report_lines.append(
@@ -224,15 +324,27 @@ def build_report(
     report_lines += [
         f"V4B 中 B200ms 对 C200ms 为 B {old_bc['wins']['B']}–{old_bc['draws']}–{old_bc['wins']['C']}、得分率 {_pct(old_bc['score_rate']['B'])}；V4C B1s 对 C200ms 为 B {now_bc['wins']['B']}–{now_bc['draws']}–{now_bc['wins']['C']}、B 得分率 {_pct(now_bc['score_rate']['B'])}。B 的平均完成深度从 V4B 的 {_fmt(old_b['average_completed_depth'])} 到本轮 {_fmt(b_usage['mean_completed_depth'])}；本轮平均节点/步 {_fmt(b_usage['mean_nodes_per_move'],0)}、平均耗时 {_fmt(b_usage['mean_seconds_per_move'],3)} 秒。",
         f"本轮对照显示 B 增加算力后的赛果变化为 {_pct(old_bc['score_rate']['B'])} → {_pct(now_bc['score_rate']['B'])}，但每格只有 6 局且 C 预算不变；若得分率没有上升，也不能证明 B 的搜索没有计算收益，需结合深度/节点和低样本不确定性判断。C200ms 本轮平均深度 {_fmt(c_usage['mean_completed_depth'])}，V4B 为 {_fmt(old_c['average_completed_depth'])}，可视为同预算实现的批次波动。", "",
-        "### D 从 20 秒提高至 50 秒，挑战 C200ms", "",
+        "### B-D 赛果变化", "",
+    ]
+    old_bd = history["V4B_matchups"]["B-D"]
+    now_bd = summary["matchups"]["B-D"]
+    report_lines += [
+        f"V4B B200ms–D20s 为 B {old_bd['wins']['B']}–{old_bd['draws']}–{old_bd['wins']['D']}（B 得分率 {_pct(old_bd['score_rate']['B'])}，D {_pct(old_bd['score_rate']['D'])}）；V4C B1s–D50s 为 B {now_bd['wins']['B']}–{now_bd['draws']}–{now_bd['wins']['D']}（双方得分率 {_pct(now_bd['score_rate']['B'])}）。本轮 B、D 预算都提高且开局种子批次不同，因此变化不能归因于单一预算。",
+        "",
+        "### D 从 20 秒提高至 50 秒，挑战 C200ms",
+        "",
     ]
     old_cd = history["V4B_matchups"]["C-D"]
     now_cd = summary["matchups"]["C-D"]
     d_old = history["V4B_D20_new_BD_CD_usage"]["D"]
     d_new = summary["model_usage"]["D"]
+    d_old_sps = d_old["simulations_total"] / d_old["seconds_total"] if d_old["seconds_total"] else None
+    fork_distribution_text = "、".join(
+        f"{width} 个胜点 {count} 局" for width, count in tactical_review["fork_width_distribution"].items()
+    ) or "无决定性局面"
     report_lines += [
-        f"V4B D20s 对 C200ms：C {old_cd['wins']['C']}–{old_cd['draws']}–{old_cd['wins']['D']}，C 得分率 {_pct(old_cd['score_rate']['C'])}、D {_pct(old_cd['score_rate']['D'])}；V4C D50s 对 C200ms：C {now_cd['wins']['C']}–{now_cd['draws']}–{now_cd['wins']['D']}，C {_pct(now_cd['score_rate']['C'])}、D {_pct(now_cd['score_rate']['D'])}。D 平均每步实际耗时 {_fmt(d_old['mean_seconds_per_move'],2)} → {_fmt(d_new['mean_seconds_per_move'],2)} 秒；实际模拟平均/步 {_fmt(d_old['mean_simulations_per_move'],0)} → {_fmt(d_new['mean_simulations_per_move'],0)}。",
-        "V3 的 D20s 面对 B50ms、C50ms 时分别取得 B 对局 3胜3负、C 对局 3胜1平2负；V4B 把对手提高到 200ms 后，D20 对 B 为 3胜2平1负、对 C 为 0胜3平3负。V4C 继续只改变 D 的预算到 50s（B/C 预算保持 V4B 同值）来观察算力收益。各批开局/决策随机种子不同，不能把逐轮赛果差直接解释为因果效果。", "",
+        f"V4B D20s 对 C200ms：C {old_cd['wins']['C']}–{old_cd['draws']}–{old_cd['wins']['D']}，C 得分率 {_pct(old_cd['score_rate']['C'])}、D {_pct(old_cd['score_rate']['D'])}；V4C D50s 对 C200ms：C {now_cd['wins']['C']}–{now_cd['draws']}–{now_cd['wins']['D']}，C {_pct(now_cd['score_rate']['C'])}、D {_pct(now_cd['score_rate']['D'])}。D 平均每步实际耗时 {_fmt(d_old['mean_seconds_per_move'],2)} → {_fmt(d_new['mean_seconds_per_move'],2)} 秒；实际模拟平均/步 {_fmt(d_old['mean_simulations_per_move'],0)} → {_fmt(d_new['mean_simulations_per_move'],0)}；模拟速度 {_fmt(d_old_sps,1)} → {_fmt(d_new['simulations_per_second'],1)} 次/秒。不同种子与局面下，速率只作描述。",
+        "V3 的 D20s 面对 B50ms、C50ms 时分别取得 B 对局 3胜3负、C 对局 3胜1平2负；V4B 把对手提高到 200ms 后，D20 对 B 为 3胜2平1负、对 C 为 0胜3平3负。V4C 的 C-D 组保持 C 为 200ms，只把 D 从 20s 提至 50s；B-D 组则同时提高了 B 与 D 的预算。各批开局/决策随机种子不同，不能把逐轮赛果差直接解释为因果效果。", "",
         "## 计算收益与成本解释", "",
         "D50 的累计思考时间、模拟数和实际模拟速度直接报告在表格；若更多预算带来模拟数增加而胜率不升，仅说明本样本中额外计算没有转化为稳定得分优势，无法据此断言已饱和。模拟速度受局面、战术捷径及复用树影响。B1s 与 C200ms 的思考时间不等，且它们与 D50 差异更大；本轮不是等算力排名。", "",
         "## 典型棋谱与战术观察", "",
@@ -247,21 +359,29 @@ def build_report(
                 report_lines.append(f"- {model}{label}示例 `{game['game_id']}`，对阵 {'–'.join(game['matchup'])}，结果 {game['outcome']}，终止于第 {game['move_count']} 手。末段棋谱：{_transcript(game)}。完整合法棋谱在 `results/9x9_games.jsonl`。")
     if not chosen:
         report_lines.append("本轮没有决定性胜负棋谱，完整对局见 `results/9x9_games.jsonl`。")
-    report_lines += ["", "战术失误判断需对照棋盘逐手复盘；本报告不把模型的合法性、胜负或搜索数本身当作战术正确性证明。逐局原始记录含每手落点、搜索深度、节点、cutoff、MCTS 模拟、耗时、超时及树复用计数。", "", "## 预检、资源与恢复", ""]
+    report_lines += [
+        "",
+        f"对决定性棋局逐手回放：6 局均由黑方取胜，黑方在白方最后防守前有 {tactical_review['fork_games_with_multiple_winning_points']} 局同时存在至少两个下一手成五点；白方在 {tactical_review['defender_blocked_one_winning_point']} 局挡住了其中一点，但另一点仍可立即获胜。分叉宽度为 {fork_distribution_text}。这解释了本轮所有非和棋结果与明显先手优势相符；小样本下不能把它归结为某个模型的整体棋力优势。逐局原始记录及每个决定性局面的胜点列表保存在 `results/tactical_review.json`、`results/9x9_games.jsonl`。",
+        "",
+        "## 预检、资源与恢复",
+        "",
+    ]
     est = preflight["estimate"]
     report_lines += [
-        f"正式运行前，B/C/D 同一四手开局预检总耗时 {_fmt(preflight.get('preflight_elapsed_seconds'),1)} 秒；资源估算正式比赛约 {_fmt(est['estimated_formal_run_minutes_with_margin'],1)} 分钟，估算高侧约 {_fmt(est['estimated_formal_run_range_minutes'][1],1)} 分钟。12 局含 D 的理论 50 秒满额上界为 {_fmt(est['D50_full_board_theoretical_ceiling_seconds']/3600,1)} 小时，实测估算依赖 V4B 的回合数。",
-        f"Drive 演练：{_drive_text(drive)}。恢复包包含冻结配置、进度、完整棋谱和代码版本；上传完成后经下载哈希比对并恢复到空目录验证。", "",
+        f"正式运行前，B/C/D 同一四手开局预检总耗时 {_fmt(preflight.get('preflight_elapsed_seconds'),1)} 秒；资源估算正式比赛约 {_fmt(est['estimated_formal_run_minutes_with_margin'],1)} 分钟，估算高侧约 {_fmt(est['estimated_formal_run_range_minutes'][1],1)} 分钟。实际 wall-clock {_duration(wall_clock_seconds)}（runner 记录活动耗时 {_duration(progress.get('elapsed_seconds_total'))}）；期间记录到 {len(environment_events.get('events', []))} 次终端/环境恢复事件。12 局含 D 的理论 50 秒满额上界为 {_fmt(est['D50_full_board_theoretical_ceiling_seconds']/3600,1)} 小时，实测估算依赖 V4B 的回合数。",
+        f"Drive 演练：{_drive_text(drive)}；恢复包包含冻结配置、进度、完整棋谱和代码版本，上传后经下载哈希比对并恢复到空目录验证。", "",
         "## 结论", "",
-        f"本轮 18 局排名为 " + " > ".join(summary["exploratory_ranking"]) + "。", 
-        f"B 1 秒对 C 200ms：" + ("本轮 B 得分高于 V4B 的 200ms 批次。" if now_bc['score_rate']['B'] > old_bc['score_rate']['B'] else "本轮 B 得分未高于 V4B 的 200ms 批次。") + " 这一结果仍只有六局，不构成稳健棋力结论。",
+        f"本轮 18 局排名为 {_ranking_text(summary)}。",
+        f"B 1 秒对 C 200ms：" + ("本轮 B 得分高于 V4B 的 200ms 批次" if now_bc['score_rate']['B'] > old_bc['score_rate']['B'] else "本轮 B 得分未高于 V4B 的 200ms 批次") + "；这一结果仍只有六局，不构成稳健棋力结论。",
         f"D 50 秒对 C 200ms：" + ("D 本轮得分领先。" if now_cd['score_rate']['D'] > now_cd['score_rate']['C'] else "C 本轮得分领先。" if now_cd['score_rate']['C'] > now_cd['score_rate']['D'] else "双方本轮得分相同。") + " D 得到 250 倍于 C 的单步时间预算，无法据此评判等计算资源下的算法优劣。",
         "阶段性看，增加搜索预算应以实际完成深度、模拟数、决策时间和配对棋力同时衡量。MCTS 高预算表现必须由更多预注册对局和更广开局验证；传统搜索侧可继续研究 C 的威胁空间/候选扩展，同时保持 B/C 相同搜索逻辑的效率对照。", "",
         "## 可复现文件", "",
         "- 冻结参数：`configs/bcd_high_compute_v4c.json`。",
         "- 全部对局与逐手 telemetry：`research/v4c/results/9x9_games.jsonl`。",
         "- 汇总及统计：`research/v4c/results/summary.json`、`pairwise_summary.csv`、`model_summary.csv`、`model_usage.csv`。",
+        "- 终局战术逐手回放：`research/v4c/results/tactical_review.json`。",
         "- 预检、资源与耗时：`research/v4c/results/preflight.json`、`execution.json`。",
+        "- 环境恢复事件：`research/v4c/results/environment_events.json`。",
         "- 运行：`PYTHONPATH=. python scripts/run_bcd_high_compute_v4c.py`；校验/汇总：`PYTHONPATH=. python scripts/summarize_bcd_high_compute_v4c.py`。",
         "- 测试：`PYTHONPATH=. python -m pytest -q`。",
         "- 测试结果：" + (f"{test_result.get('passed')} passed, {test_result.get('failed', 0)} failed" if test_result else "最终全套测试结果写入交付信息。"),
@@ -279,6 +399,7 @@ def build_report(
 
 def _drive_text(evidence: dict[str, Any]) -> str:
     initial = evidence.get("initial_snapshot", {})
+    final = evidence.get("final_snapshot", {})
     if all(initial.get(key) for key in ("upload", "download", "download_sha256_match", "restore", "restored_game_ids_match")):
-        return f"已通过上传/下载/SHA-256/空目录恢复，预演恢复 {initial.get('restored_completed_games', 0)} 局；最终 V4C 快照状态：{evidence.get('final_snapshot', {}).get('status', '尚未生成')}。"
+        return f"已通过上传/下载/SHA-256/空目录恢复，预演恢复 {initial.get('restored_completed_games', 0)} 局；最终快照状态 {final.get('status', '尚未生成')}，恢复 {final.get('restored_completed_games', 0)} 局"
     return "未能通过 V4C Drive 完整恢复验证；以本地 fsync 棋谱和 Git 分支为恢复来源。"

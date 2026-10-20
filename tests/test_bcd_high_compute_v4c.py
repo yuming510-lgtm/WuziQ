@@ -8,7 +8,12 @@ import pytest
 
 from src.ai import SearchConfig, SearchResult, choose_move
 from src.research import bcd_high_compute_v4c as v4c
-from src.research.bcd_high_compute_v4c_analysis import validate_game_record, validate_records
+from src.research.bcd_high_compute_v4c_analysis import (
+    summarize_records,
+    validate_game_record,
+    validate_records,
+    write_analysis,
+)
 from src.research.bcd_high_compute_v4c_snapshot import create_snapshot, restore_snapshot
 
 
@@ -159,8 +164,25 @@ def test_result_records_must_be_complete_and_color_paired() -> None:
     assert result["complete"] is True
     assert result["validated_games"] == 18
     assert result["new_games"] == 18
+    summary = summarize_records(rows, config)
+    assert summary["ranking_tiers"] == [["B", "C", "D"]]
     with pytest.raises(ValueError, match="duplicate"):
         validate_records(rows + [rows[0]], config, require_complete=False)
+
+
+def test_write_analysis_loads_jsonl_and_writes_summary_files(tmp_path) -> None:
+    config = _config()
+    records = [_winning_record(spec, config) for spec in v4c.build_schedule(config)]
+    (tmp_path / "9x9_games.jsonl").write_text(
+        "".join(json.dumps(record) + "\n" for record in records), encoding="utf-8"
+    )
+
+    summary = write_analysis(tmp_path, config)
+
+    assert summary["game_count"] == 18
+    assert (tmp_path / "summary.json").is_file()
+    assert (tmp_path / "pairwise_summary.csv").is_file()
+    assert (tmp_path / "model_summary.csv").is_file()
 
 
 def test_v4c_snapshot_round_trip_verifies_hash_and_ids(tmp_path) -> None:

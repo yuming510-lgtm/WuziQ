@@ -1,0 +1,139 @@
+{
+  "base_code_commit": "f1a1c38c80feff6138b70618aabce5f47ebdf6f6",
+  "benchmarked_at_utc": "2026-10-20T14:57:43Z",
+  "benchmarks": [
+    {
+      "budget_seconds": 1.0,
+      "completed_depth": 2,
+      "cutoffs": 0,
+      "elapsed_seconds_reported": 0.9950435319988173,
+      "elapsed_seconds_wall": 0.995073614998546,
+      "model": "B",
+      "move": [
+        6,
+        4
+      ],
+      "nodes": 15421,
+      "simulations": 0,
+      "simulations_per_second": 0.0,
+      "timed_out": true
+    },
+    {
+      "budget_seconds": 0.2,
+      "completed_depth": 2,
+      "cutoffs": 160,
+      "elapsed_seconds_reported": 0.19505277500138618,
+      "elapsed_seconds_wall": 0.19507898400479462,
+      "model": "C",
+      "move": [
+        6,
+        4
+      ],
+      "nodes": 2238,
+      "simulations": 0,
+      "simulations_per_second": 0.0,
+      "timed_out": true
+    },
+    {
+      "budget_seconds": 50.0,
+      "completed_depth": 3,
+      "cutoffs": 0,
+      "elapsed_seconds_reported": 49.99923438599944,
+      "elapsed_seconds_wall": 49.99926154100103,
+      "model": "D",
+      "move": [
+        7,
+        4
+      ],
+      "nodes": 465028,
+      "simulations": 10128,
+      "simulations_per_second": 202.5631017029332,
+      "timed_out": true
+    }
+  ],
+  "estimate": {
+    "D50_full_board_theoretical_ceiling_seconds": 23400,
+    "V4B_D20_elapsed_seconds": 4184.9911327739865,
+    "V4B_D20_moves_at_or_above_19s": 205,
+    "V4B_quick_D_move_seconds_held_constant": 85.11867169899051,
+    "V4C_D50_scaled_slow_move_seconds": 10250.0,
+    "V4C_estimated_D50_seconds": 10335.11867169899,
+    "calibration_D20_moves": 249,
+    "calibration_games": 12,
+    "calibration_source": "V4B research/v4b/results/9x9_games.jsonl, new B-D and C-D games only",
+    "estimated_B1s_moves_in_BC_games": 108,
+    "estimated_B1s_opponent_moves_in_BD_games": 109,
+    "estimated_BC_game_search_seconds": 130.0,
+    "estimated_C200ms_moves_in_BC_games": 110,
+    "estimated_C200ms_opponent_moves_in_CD_games": 139,
+    "estimated_formal_run_minutes_with_margin": 220.87330566039563,
+    "estimated_formal_run_range_minutes": [
+      220.87330566039563,
+      287.1352973585143
+    ],
+    "estimated_formal_run_seconds_with_margin": 13252.398339623738,
+    "estimated_opponent_search_seconds_in_D_games": 136.8,
+    "long_game_risk": "If C-D reaches long draws, twelve D games could approach the 6.5-hour full-board D-turn ceiling; estimate uses V4B observed turn counts and marks a 30% high-side range.",
+    "runtime_uncertainty_margin_fraction": 0.25
+  },
+  "experiment_id": "wuziq-bcd-high-compute-v4c-2026-10-20",
+  "model_configuration_verification": {
+    "B_C_search_engine_source_hashes_pinned": true,
+    "D_algorithm_unchanged_except_budget": true,
+    "D_mcts_source_sha256": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991"
+  },
+  "official_games_started": 0,
+  "position": {
+    "board_size": 9,
+    "opening_moves": [
+      {
+        "col": 4,
+        "player": "B",
+        "row": 4
+      },
+      {
+        "col": 3,
+        "player": "W",
+        "row": 6
+      },
+      {
+        "col": 5,
+        "player": "B",
+        "row": 7
+      },
+      {
+        "col": 1,
+        "player": "W",
+        "row": 6
+      }
+    ],
+    "opening_seed": 731091,
+    "to_move": "B"
+  },
+  "preflight_elapsed_seconds": 51.210477713997534,
+  "preflight_only": true,
+  "resources": {
+    "cgroup_cpu_quota_cores": 2.0,
+    "cgroup_memory_limit_bytes": 8589934592,
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "load_average_1_5_15m": [
+      0.60009765625,
+      0.18115234375,
+      0.05712890625
+    ],
+    "logical_cpus": 3,
+    "memory_available_bytes": 9779724288,
+    "memory_total_bytes": 10452471808,
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "process_max_rss_bytes": 58929152,
+    "python": "3.12.14",
+    "workspace_disk_free_bytes": 31901675520,
+    "workspace_disk_total_bytes": 33770192896
+  },
+  "storage_estimate": {
+    "available_workspace_disk_bytes": 31901675520,
+    "estimated_total_artifacts_bytes": 2000000,
+    "estimated_v4c_jsonl_bytes": 335564,
+    "historical_v4b_jsonl_bytes": 671129
+  }
+}

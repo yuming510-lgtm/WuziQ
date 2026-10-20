@@ -1,0 +1,162 @@
+{
+  "V3_D20_vs_B50ms_C50ms": {
+    "B": {
+      "D3_budget_seconds": 20.0,
+      "D3_draws": 0,
+      "D3_losses": 3,
+      "D3_mean_simulations": 7567.666666666667,
+      "D3_score_rate": 0.5,
+      "D3_simulations": 295139,
+      "D3_thinking_seconds": 559.9837441789987,
+      "D3_wins": 3,
+      "games": 6,
+      "opponent_budget_seconds": 0.05
+    },
+    "C": {
+      "D3_budget_seconds": 20.0,
+      "D3_draws": 1,
+      "D3_losses": 2,
+      "D3_mean_simulations": 46181.234567901236,
+      "D3_score_rate": 0.5833333333333334,
+      "D3_simulations": 3740680,
+      "D3_thinking_seconds": 1197.5647878689997,
+      "D3_wins": 3,
+      "games": 6,
+      "opponent_budget_seconds": 0.05
+    }
+  },
+  "V4B_200ms_search": {
+    "B": {
+      "average_completed_depth": 1.8756345177664975,
+      "average_cutoffs_per_move": 0.0,
+      "average_nodes_per_move": 2438.167512690355,
+      "average_seconds_per_move": 0.18790598364471475,
+      "average_simulations_per_move": 0.0,
+      "average_tree_depth": 1.8756345177664975,
+      "cutoff_to_node_ratio": 0.0,
+      "cutoffs_total": 0,
+      "games": 18,
+      "illegal_moves": 0,
+      "max_completed_depth": 5,
+      "max_tree_depth": 5,
+      "min_completed_depth": 1,
+      "model": "B",
+      "moves": 394,
+      "node_metric_semantics": "Minimax visited search nodes",
+      "nodes_total": 960638,
+      "reused_nodes_total": 0,
+      "search_nodes_comparable": true,
+      "simulations_per_second": 0.0,
+      "simulations_total": 0,
+      "source_type": "all",
+      "thinking_seconds_total": 74.03495755601762,
+      "timeouts": 376
+    },
+    "C": {
+      "average_completed_depth": 2.489311163895487,
+      "average_cutoffs_per_move": 167.04038004750595,
+      "average_nodes_per_move": 1534.5558194774346,
+      "average_seconds_per_move": 0.18540832494302792,
+      "average_simulations_per_move": 0.0,
+      "average_tree_depth": 2.489311163895487,
+      "cutoff_to_node_ratio": 0.10885259299618605,
+      "cutoffs_total": 70324,
+      "games": 18,
+      "illegal_moves": 0,
+      "max_completed_depth": 7,
+      "max_tree_depth": 7,
+      "min_completed_depth": 1,
+      "model": "C",
+      "moves": 421,
+      "node_metric_semantics": "Alpha-Beta visited search nodes",
+      "nodes_total": 646048,
+      "reused_nodes_total": 0,
+      "search_nodes_comparable": true,
+      "simulations_per_second": 0.0,
+      "simulations_total": 0,
+      "source_type": "all",
+      "thinking_seconds_total": 78.05690480101475,
+      "timeouts": 394
+    }
+  },
+  "V4B_D20_new_BD_CD_usage": {
+    "B": {
+      "cutoffs_total": 0,
+      "decisions": 109,
+      "mean_depth": 1.889908256880734,
+      "mean_seconds_per_move": 0.1885552009999136,
+      "mean_simulations_per_move": 0.0,
+      "seconds_total": 20.552516908990583,
+      "simulations_total": 0
+    },
+    "C": {
+      "cutoffs_total": 22449,
+      "decisions": 139,
+      "mean_depth": 2.4820143884892087,
+      "mean_seconds_per_move": 0.1854948026546795,
+      "mean_simulations_per_move": 0.0,
+      "seconds_total": 25.78377756900045,
+      "simulations_total": 0
+    },
+    "D": {
+      "cutoffs_total": 0,
+      "decisions": 249,
+      "mean_depth": 2.9437751004016066,
+      "mean_seconds_per_move": 16.8071933043132,
+      "mean_simulations_per_move": 70349.88353413655,
+      "seconds_total": 4184.9911327739865,
+      "simulations_total": 17517121
+    }
+  },
+  "V4B_matchups": {
+    "B-C": {
+      "draws": 2,
+      "first_model": "B",
+      "pure_win_rate": {
+        "B": 0.0,
+        "C": 0.6666666666666666
+      },
+      "score_rate": {
+        "B": 0.16666666666666666,
+        "C": 0.8333333333333334
+      },
+      "wins": {
+        "B": 0,
+        "C": 4
+      }
+    },
+    "B-D": {
+      "draws": 2,
+      "first_model": "B",
+      "pure_win_rate": {
+        "B": 0.16666666666666666,
+        "D": 0.5
+      },
+      "score_rate": {
+        "B": 0.3333333333333333,
+        "D": 0.6666666666666666
+      },
+      "wins": {
+        "B": 1,
+        "D": 3
+      }
+    },
+    "C-D": {
+      "draws": 3,
+      "first_model": "C",
+      "pure_win_rate": {
+        "C": 0.5,
+        "D": 0.0
+      },
+      "score_rate": {
+        "C": 0.75,
+        "D": 0.25
+      },
+      "wins": {
+        "C": 3,
+        "D": 0
+      }
+    }
+  },
+  "V4B_new_D_games": 12
+}

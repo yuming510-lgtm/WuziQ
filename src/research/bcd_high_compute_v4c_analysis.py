@@ -10,6 +10,7 @@ from typing import Any, Iterable
 
 from ..gomoku import GomokuBoard, Player
 from .bcd_high_compute_v4c import build_schedule, load_config
+from .checkpoint import load_game_records
 
 _Z95 = 1.959963984540054
 _METRICS = (
@@ -320,6 +321,14 @@ def summarize_records(records: Iterable[dict[str, Any]], config: dict[str, Any],
             "color": model_colors,
         }
     ranking = sorted(models, key=lambda model: (-float(models[model]["score_rate"] or 0), -int(models[model]["wins"]), model))
+    ranking_tiers: list[list[str]] = []
+    previous_key: tuple[float, int] | None = None
+    for model in ranking:
+        key = (round(float(models[model]["score_rate"] or 0), 12), int(models[model]["wins"]))
+        if key != previous_key:
+            ranking_tiers.append([])
+            previous_key = key
+        ranking_tiers[-1].append(model)
     return {
         "experiment_id": load_config(config)["experiment_id"],
         "validation": validation,
@@ -328,6 +337,7 @@ def summarize_records(records: Iterable[dict[str, Any]], config: dict[str, Any],
         "models": models,
         "model_usage": _model_usage(rows),
         "exploratory_ranking": ranking,
+        "ranking_tiers": ranking_tiers,
         "ranking_note": "18局、每组6局、每模型参与12局；区间以每个配对开局块为单位，仅作描述，且D获得明显更多算力。",
         "interval_method": "配对开局块 Wilson-style 描述性 95% 区间；每个对阵 n=3、总排名 n=6，不是经小样本校准的显著性检验。",
         "compute_fairness": "非对等算力挑战：B 1s/步、C 200ms/步、D 50s/步。",

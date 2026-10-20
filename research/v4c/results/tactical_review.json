@@ -1,0 +1,174 @@
+{
+  "decisive_games": 6,
+  "defender_blocked_one_winning_point": 6,
+  "fork_games_with_multiple_winning_points": 6,
+  "fork_width_distribution": {
+    "2": 4,
+    "3": 2
+  },
+  "games": [
+    {
+      "defender_blocked_a_winning_point": true,
+      "defender_move": [
+        2,
+        7
+      ],
+      "final_winning_move": [
+        6,
+        8
+      ],
+      "fork_width": 3,
+      "game_id": "v4c-9x9-b-c-o731091-s0",
+      "winner_color": "B",
+      "winner_model": "B",
+      "winning_points_before_defense": [
+        [
+          2,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          7
+        ]
+      ]
+    },
+    {
+      "defender_blocked_a_winning_point": true,
+      "defender_move": [
+        2,
+        7
+      ],
+      "final_winning_move": [
+        6,
+        8
+      ],
+      "fork_width": 3,
+      "game_id": "v4c-9x9-b-c-o731091-s1",
+      "winner_color": "B",
+      "winner_model": "C",
+      "winning_points_before_defense": [
+        [
+          2,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          7
+        ]
+      ]
+    },
+    {
+      "defender_blocked_a_winning_point": true,
+      "defender_move": [
+        1,
+        5
+      ],
+      "final_winning_move": [
+        6,
+        0
+      ],
+      "fork_width": 2,
+      "game_id": "v4c-9x9-b-d-o731093-s0",
+      "winner_color": "B",
+      "winner_model": "B",
+      "winning_points_before_defense": [
+        [
+          1,
+          5
+        ],
+        [
+          6,
+          0
+        ]
+      ]
+    },
+    {
+      "defender_blocked_a_winning_point": true,
+      "defender_move": [
+        3,
+        8
+      ],
+      "final_winning_move": [
+        8,
+        3
+      ],
+      "fork_width": 2,
+      "game_id": "v4c-9x9-b-d-o731093-s1",
+      "winner_color": "B",
+      "winner_model": "D",
+      "winning_points_before_defense": [
+        [
+          3,
+          8
+        ],
+        [
+          8,
+          3
+        ]
+      ]
+    },
+    {
+      "defender_blocked_a_winning_point": true,
+      "defender_move": [
+        6,
+        7
+      ],
+      "final_winning_move": [
+        1,
+        2
+      ],
+      "fork_width": 2,
+      "game_id": "v4c-9x9-c-d-o731091-s0",
+      "winner_color": "B",
+      "winner_model": "C",
+      "winning_points_before_defense": [
+        [
+          1,
+          2
+        ],
+        [
+          6,
+          7
+        ]
+      ]
+    },
+    {
+      "defender_blocked_a_winning_point": true,
+      "defender_move": [
+        5,
+        8
+      ],
+      "final_winning_move": [
+        0,
+        3
+      ],
+      "fork_width": 2,
+      "game_id": "v4c-9x9-c-d-o731091-s1",
+      "winner_color": "B",
+      "winner_model": "D",
+      "winning_points_before_defense": [
+        [
+          0,
+          3
+        ],
+        [
+          5,
+          8
+        ]
+      ]
+    }
+  ],
+  "method": "Replay to the position before the defender's final move; enumerate all empty cells where the eventual winner can win immediately, then compare the defense and final move.",
+  "winner_colors": {
+    "B": 6,
+    "W": 0
+  }
+}
