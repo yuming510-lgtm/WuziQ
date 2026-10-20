@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "wuziq-bcd-high-compute-v4c-2026-10-20",
+  "base_seed": 20261020,
+  "based_on_branch": "research/abcd-final-v4b",
+  "based_on_commit": "1d4f11c0165209d17de3c076470860a490986aad",
+  "board_size": 9,
+  "models": ["B", "C", "D"],
+  "matchups": [["B", "C"], ["B", "D"], ["C", "D"]],
+  "games_per_matchup": 6,
+  "opening_plies": 4,
+  "opening_seeds": [731091, 731092, 731093],
+  "opening_catalog": {
+    "731091": [["B", 4, 4], ["W", 6, 3], ["B", 7, 5], ["W", 6, 1]],
+    "731092": [["B", 4, 4], ["W", 2, 5], ["B", 0, 6], ["W", 4, 6]],
+    "731093": [["B", 4, 4], ["W", 3, 2], ["B", 5, 4], ["W", 6, 3]]
+  },
+  "budgets_seconds_by_model": {"B": 1.0, "C": 0.2, "D": 50.0},
+  "timeout_policy": "Use the returned legal move after a search timeout and record the timeout; an illegal move forfeits immediately; incomplete games are never counted.",
+  "random_seed_policy": "Stable SHA-256 derivation from base_seed, the V4C game ID, move index, model, and player; all seeds are frozen before play.",
+  "ab_search": {
+    "candidate_radius": 2,
+    "max_depth": 81,
+    "time_limit_seconds": 0.2,
+    "mcts_simulations": 1000000,
+    "mcts_rollout_max_plies": 24,
+    "uct_constant": 1.4142135623730951,
+    "mcts_d2_tactical_root": true,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_node_reuse": true
+  },
+  "d_search": {
+    "candidate_radius": 2,
+    "max_depth": 4,
+    "time_limit_seconds": 50.0,
+    "mcts_simulations": 1000000,
+    "mcts_rollout_max_plies": 24,
+    "uct_constant": 1.4142135623730951,
+    "mcts_d2_tactical_root": true,
+    "mcts_d2_fair_root": true,
+    "mcts_d2_tactical_rollout": true,
+    "mcts_d2_node_reuse": true
+  },
+  "engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991"
+  },
+  "algorithm_constraints": {
+    "B": "Pure Minimax with iterative deepening and deadline; no alpha-beta pruning.",
+    "C": "Same V4 evaluation, candidate set/order, and iterative-deepening search as B; only alpha-beta pruning enabled.",
+    "D": "V4B D2 pure UCT MCTS implementation and tactics/tree reuse unchanged; only time_limit_seconds changes from 20 to 50.",
+    "neural_network_or_reinforcement_learning": false
+  },
+  "inference_limits": {
+    "planned_games": 18,
+    "all_games_new": true,
+    "reuse_historical_games": false,
+    "sample_size_warning": "Six games per matchup and three paired opening blocks are exploratory; paired intervals are descriptive and not evidence of stable strength ranking.",
+    "compute_warning": "D receives 50 seconds per move while B receives 1 second and C receives 0.2 seconds; this is intentionally unequal compute."
+  }
+}
