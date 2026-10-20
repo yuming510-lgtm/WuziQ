@@ -23,6 +23,43 @@ def _ci(interval: list[float] | None) -> str:
     return "—" if interval is None else f"[{100*interval[0]:.1f}%, {100*interval[1]:.1f}%]"
 
 
+def _drive_recovery_status(results: Path) -> str:
+    """Describe only Drive operations backed by the persisted verification evidence."""
+
+    evidence_path = results / "drive_recovery.json"
+    if not evidence_path.is_file():
+        return "Drive 恢复演练未验证：没有找到包含实测操作结果的 `drive_recovery.json`。"
+    evidence = _load(evidence_path)
+
+    def verified(snapshot: dict[str, Any] | None) -> bool:
+        return bool(
+            snapshot
+            and snapshot.get("upload") == "success"
+            and snapshot.get("download") == "success"
+            and snapshot.get("download_sha256_match") is True
+            and snapshot.get("restore") == "success"
+            and snapshot.get("restored_game_ids_match") is True
+        )
+
+    final_snapshot = evidence.get("final_snapshot")
+    if (
+        verified(final_snapshot)
+        and evidence.get("previous_snapshot_deleted") is True
+        and evidence.get("drive_single_snapshot_verified") is True
+    ):
+        return (
+            "Drive 最终快照已完成上传、下载、SHA-256 校验和空目录恢复，恢复棋局 ID 一致；"
+            "新快照验证后已删除上一版，且已核实仅剩一份最新有效 V4B 快照。"
+        )
+    initial_snapshot = evidence.get("initial_snapshot")
+    if verified(initial_snapshot):
+        return (
+            "Drive 初始恢复演练已验证上传、下载、SHA-256 和恢复棋局 ID；"
+            "最终进度快照及旧版替换状态尚未完成核验。"
+        )
+    return "Drive 恢复演练未验证：保存的证据不足以证明完整上传、下载、校验和恢复流程。"
+
+
 def _historical_summary(project_root: Path) -> dict[str, Any]:
     v1_summary = _load(project_root / "research/results/summary.json")["9"]["results"]
     v1 = {}
@@ -153,6 +190,12 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
     preflight = _load(results / "preflight.json")
     execution_path = results / "execution.json"
     execution = _load(execution_path) if execution_path.exists() else _load(results / "progress.json")
+    elapsed_total = float(
+        execution.get(
+            "wall_seconds_accumulated",
+            execution.get("elapsed_seconds_total", execution.get("wall_seconds_this_invocation", execution.get("elapsed_seconds_this_run", 0.0))),
+        )
+    )
     current_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True).stdout.strip()
 
     matchup_lines = [
@@ -186,8 +229,14 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
     for model in ("A", "B", "C", "D"):
         item = summary["usage"][model]
         depth_range = f"{item['average_completed_depth']:.2f}（{item['min_completed_depth']}–{item['max_completed_depth']}）"
+        if model == "A":
+            node_count = "不适用（原规则计数非搜索节点）"
+        elif model == "D":
+            node_count = f"{item['average_nodes_per_move']:.1f}（树操作+rollout）"
+        else:
+            node_count = f"{item['average_nodes_per_move']:.1f}"
         usage_lines.append(
-            f"| {model} | {item['moves']} | {item['average_seconds_per_move']:.4f}s | {item['average_nodes_per_move']:.1f} | {depth_range} | {item['cutoffs_total']} | {item['average_simulations_per_move']:.1f} | {item['simulations_per_second']:.1f} | {item['max_tree_depth']} | {item['timeouts']} |"
+            f"| {model} | {item['moves']} | {item['average_seconds_per_move']:.4f}s | {node_count} | {depth_range} | {item['cutoffs_total']} | {item['average_simulations_per_move']:.1f} | {item['simulations_per_second']:.1f} | {item['max_tree_depth']} | {item['timeouts']} |"
         )
 
     v4_lines = [
@@ -237,11 +286,32 @@ def build_report(results_dir: str | Path, project_root: str | Path | None = None
         conclusion = "在这 6 局探索性样本里，D20 与 C200ms 得分持平；目前不能判断谁更强。"
     else:
         conclusion = "在这 6 局探索性样本里，D20 对 C200ms 的得分率低于一半；这组样本没有显示 MCTS 突破 Alpha-Beta。"
+    reused_count = int(validation["reused_v3_games"])
+    if reuse_audit.get("verified") and reused_count:
+        reuse_detail = (
+            f"A–D 的 {reused_count} 局复用自 V3。复用源 `{reuse_audit.get('source_games')}`，"
+            f"V3 源 commit `{reuse_audit.get('source_code_commit')}`。V3 整套 54 局重放验证通过；"
+            f"D3 引擎源码 SHA-256 为 `{reuse_audit.get('current_mcts_d2_sha256')}`，与 V3 commit 中源码一致。"
+            "复用记录保留原始棋谱、时间、模拟数、树深、种子和超时数据；规范化副本将 D3 映射为 D，"
+            "并用 `source_game_id`、逐局 SHA-256 与 `v3_reused_games.jsonl` 保存来源证据。"
+        )
+    else:
+        reason = reuse_audit.get("verification_error") or reuse_audit.get("reason") or "V3 复用未通过来源核验"
+        reuse_detail = (
+            f"V3 历史对局未复用（0 局）；本轮 A–D 六局均按 V4B 配置新跑。"
+            f"复用原因记录：`{reason}`。"
+        )
+    reuse_sample_note = (
+        f"A–D 中 {reused_count} 局来自 V3 历史记录，其余为 V4B 新跑。"
+        if reused_count
+        else "A–D 六局均为 V4B 新跑。"
+    )
+    drive_status = _drive_recovery_status(results)
     report = f"""# V4B：ABCD 最终对弈总结
 
 ## 执行结论
 
-本轮完成 **{validation['validated_games']} 局**：新增 **{validation['new_games']} 局**，复用 V3 **{validation['reused_v3_games']} 局**。六组对阵均各 6 局，每个固定开局交换黑白一次。正式运行实际耗时 **{execution.get('wall_seconds_this_invocation', execution.get('elapsed_seconds_this_run', 0)):.1f} 秒**（另有预检 {preflight.get('preflight_elapsed_seconds', 0):.1f} 秒）。
+本轮完成 **{validation['validated_games']} 局**：新增 **{validation['new_games']} 局**，复用 V3 **{validation['reused_v3_games']} 局**。六组对阵均各 6 局，每个固定开局交换黑白一次。正式运行累计耗时 **{elapsed_total:.1f} 秒**（另有预检 {preflight.get('preflight_elapsed_seconds', 0):.1f} 秒）。
 
 V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_pct(d_c)}**。{conclusion} D20 每步实际完成 **{d_usage['average_simulations_per_move']:.0f} 次模拟**（共 {d_usage['simulations_total']:,} 次；新跑局平均 {d_usage['simulations_per_second']:.0f} 次/秒），平均耗时 {d_usage['average_seconds_per_move']:.2f} 秒。MCTS每步约为 B/C 预算的 100 倍；结果属于非等算力挑战。
 
@@ -268,11 +338,11 @@ V4B 条件下 D20 对 B200ms 得分率为 **{_pct(d_b)}**，对 C200ms 为 **{_p
 
 预检在 V3 注册开局 731091 的同一 4 手局面上各测一次 A/B/C/D，不计入正式对局。D3 测得 {next(row['simulations'] for row in preflight['benchmarks'] if row['model']=='D'):,} 次模拟、{next(row['elapsed_seconds_wall'] for row in preflight['benchmarks'] if row['model']=='D'):.2f} 秒；A/B/C 的实测深度、节点、剪枝和落点保存在 `preflight.json`。时间估算使用 V3 已记录的 D20 对 B/C 各 6 局真实耗时和走子数，并对更强的 200ms 对手增加 25% 余量。
 
-Google Drive 已完成本轮专属恢复包的上传、下载、SHA-256 校验和隔离目录恢复演练。恢复包只含恢复必需的配置、进度、棋谱、复用审计和代码版本；Drive 上只保留最新有效 V4B 恢复包，不触碰 V1–V4 的快照。
+{drive_status} 恢复包只含恢复必需的配置、进度、棋谱、复用审计和代码版本；未操作 V1–V4 的 Drive 快照。
 
 ## V3 六局复用核验
 
-复用源：`{reuse_audit.get('source_games')}`，V3 源 commit `{reuse_audit.get('source_code_commit')}`。V3 整套 54 局重放验证通过；D3 引擎源码 SHA-256 为 `{reuse_audit.get('current_mcts_d2_sha256')}`，与 V3 commit 中源码一致。六局各自保持原始棋谱、时间、模拟数、搜索树深、种子和超时数据；规范化副本将历史模型名 D3 映射为 V4B 的 D，并通过 `source_game_id`、逐局 SHA-256 和 `v3_reused_games.jsonl` 保留来源证据。A–D 的六局是历史复用，不计入新增。
+{reuse_detail}
 
 ## 六组完整胜负结果
 
@@ -305,6 +375,8 @@ Google Drive 已完成本轮专属恢复包的上传、下载、SHA-256 校验�
 
 {chr(10).join(usage_lines)}
 
+节点口径：A 接口的 `nodes` 是剩余空格数，不是搜索节点，因此表中不比较；B/C 是 Minimax 搜索访问节点；D 计数含 MCTS 树操作与 rollout 落子数，不能直接与 B/C 节点数等同。D 的实际模拟次数另列，可作为其主要计算量。
+
 ![各模型平均单步成本](../figures/model_search_cost.svg)
 
 V4 固定局面基准中，B 从 50ms 到 200ms 的平均深度由 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['50']['mean_completed_depth']:.2f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['200']['mean_completed_depth']:.2f}，平均节点由 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['50']['mean_nodes']:.0f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['B']['200']['mean_nodes']:.0f}；C 的平均深度由 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['50']['mean_completed_depth']:.2f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['200']['mean_completed_depth']:.2f}，节点由 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['50']['mean_nodes']:.0f} 增至 {history['V4_BC_50_vs_200ms_fixed_positions']['C']['200']['mean_nodes']:.0f}。这是相同局面上的搜索预算变化，不代表胜率本身的因果变化。
@@ -329,10 +401,10 @@ V3 对 B/C 的对手计算预算为 50ms，V4B 为 200ms；V4B 的 B/C 又都显
 
 ## 结论与限制
 
-1. A–D 历史六局与 V3 D20 对 A 的来源、开局、颜色、预算及棋谱完全匹配，因此合法复用；其余 30 局是 V4B 新运行。
+1. 本轮新增 {validation['new_games']} 局、V3 复用 {validation['reused_v3_games']} 局；A–D 复用来源和核验结果见上文及 `reuse_audit.json`。
 2. D 能否挑战 B/C，应分别看 B200ms 和 C200ms 两组的 6 局配对结果；C 是最强传统搜索对手。本轮 {conclusion}
 3. D 的每步计算时间约为 B/C 的 100 倍。即便 D20 获得更多模拟，也不能直接称其性价比更高；按每秒模拟数及每局思考总时长一起看。
-4. 仅三个开局、每组六局，且 A–D 来自 V3，统计区间宽、配对块数少。没有对先后手、开局或偶然战术做种子筛选；结果不支持稳定等级宣称。
+4. 仅三个开局、每组六局（{reuse_sample_note}），统计区间宽、配对块数少。没有对先后手、开局或偶然战术做种子筛选；结果不支持稳定等级宣称。
 5. 本轮只做 9×9。没有 15×15 验证，也没有训练或 checkpoint。
 
 ## 复现与文件
@@ -343,7 +415,7 @@ V3 对 B/C 的对手计算预算为 50ms，V4B 为 200ms；V4B 的 B/C 又都显
 - 原始数据：`research/v4b/results/9x9_games.jsonl`；V3 源记录副本：`research/v4b/results/v3_reused_games.jsonl`
 - 统计表：`pairwise_summary.csv`、`model_summary.csv`、`model_usage.csv`；机器可读汇总：`summary.json`、`history_comparison.json`
 - 恢复包校验：`python scripts/restore_abcd_final_v4b_snapshot.py <snapshot.zip> <empty-destination>`
-- 分支提交：`{current_commit}`（最终数据报告提交会更新此值）
+- 报告生成时源码 HEAD：`{current_commit}`；V4B 交付分支最终提交见仓库 HEAD。
 """
     (results / "report_zh.md").write_text(report, encoding="utf-8")
     return {

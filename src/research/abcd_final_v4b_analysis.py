@@ -53,6 +53,8 @@ def validate_game_record(
     spec = expected_spec or by_id.get(game_id)
     if spec is None or game_id != str(spec["game_id"]):
         raise ValueError(f"Game has an unknown or mismatched ID: {game_id}")
+    if record.get("experiment_id") != frozen["experiment_id"]:
+        raise ValueError(f"Game {game_id} has a mismatched experiment_id")
     for key in ("board_size", "opening_index", "opening_seed", "color_swap", "black_model", "white_model", "pair_id"):
         if record.get(key) != spec.get(key):
             raise ValueError(f"Game {game_id} disagrees with schedule field {key}")
@@ -68,6 +70,8 @@ def validate_game_record(
             raise ValueError(f"Game {game_id} has a mismatched deterministic game seed")
     elif tuple(spec["matchup"]) != ("A", "D") or not record.get("source_game_id") or not record.get("source_game_record_sha256"):
         raise ValueError(f"Game {game_id} has invalid V3 reuse provenance")
+    elif record.get("source_experiment_id") != frozen["reuse_v3"]["source_experiment_id"]:
+        raise ValueError(f"Game {game_id} has a mismatched source_experiment_id")
 
     moves = record.get("moves")
     if not isinstance(moves, list) or len(moves) < 4:
@@ -113,6 +117,18 @@ def validate_game_record(
         if move.get("illegal"):
             if is_opening or index != len(moves) - 1:
                 raise ValueError(f"Game {game_id} has a nonterminal illegal move")
+            attempted = move.get("attempted_move")
+            if attempted is None:
+                raise ValueError(f"Game {game_id} illegal forfeit is missing attempted_move")
+            if (
+                isinstance(attempted, (tuple, list))
+                and len(attempted) == 2
+                and type(attempted[0]) is int
+                and type(attempted[1]) is int
+                and board.in_bounds(attempted[0], attempted[1])
+                and board.get((attempted[0], attempted[1])) is None
+            ):
+                raise ValueError(f"Game {game_id} attempted_move is legal but marked illegal")
             winner_color = _other(current)
             winner_model = record["black_model"] if winner_color == "B" else record["white_model"]
             termination = "illegal_move_forfeit"
@@ -291,6 +307,12 @@ def _usage_summary(games: list[dict[str, Any]], model: str, source_type: str | N
     simulations = sum(int(move.get("simulations", 0)) for move in moves)
     depths = [int(move.get("completed_depth", 0)) for move in moves]
     tree_depths = [int(move.get("tree_depth", 0)) for move in moves]
+    node_metric_semantics = {
+        "A": "non-comparable: original rule AI API counter is remaining empty cells, not searched nodes",
+        "B": "Minimax visited search nodes",
+        "C": "Alpha-Beta visited search nodes",
+        "D": "MCTS tree selection/expansion operations plus rollout plies; simulation count reported separately",
+    }[model]
     return {
         "model": model,
         "source_type": source_type or "all",
@@ -300,6 +322,8 @@ def _usage_summary(games: list[dict[str, Any]], model: str, source_type: str | N
         "average_seconds_per_move": seconds / len(moves) if moves else 0.0,
         "average_nodes_per_move": nodes / len(moves) if moves else 0.0,
         "nodes_total": nodes,
+        "node_metric_semantics": node_metric_semantics,
+        "search_nodes_comparable": model in {"B", "C"},
         "average_cutoffs_per_move": cutoffs / len(moves) if moves else 0.0,
         "cutoffs_total": cutoffs,
         "cutoff_to_node_ratio": cutoffs / nodes if nodes else 0.0,
@@ -445,25 +469,27 @@ def _match_chart(summary: dict[str, Any], path: Path) -> None:
 def _model_usage_chart(summary: dict[str, Any], path: Path) -> None:
     width, height = 1000, 510
     models = ("A", "B", "C", "D")
+    minimax_models = ("B", "C")
     colors = {"A": "#3b82f6", "B": "#f97316", "C": "#8b5cf6", "D": "#0f9d72"}
-    max_nodes = max(summary["usage"][model]["average_nodes_per_move"] for model in models) or 1
+    max_nodes = max(summary["usage"][model]["average_nodes_per_move"] for model in minimax_models) or 1
     max_seconds = max(summary["usage"][model]["average_seconds_per_move"] for model in models) or 1
     bits = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#ffffff"/>',
         '<text x="32" y="42" font-family="sans-serif" font-size="24" font-weight="700" fill="#172033">对局中的平均单步搜索成本</text>',
-        '<text x="32" y="66" font-family="sans-serif" font-size="13" fill="#596579">左：搜索节点/模拟次数；右：真实思考秒数。D 为 20 秒 MCTS，A 不等待。</text>',
+        '<text x="32" y="66" font-family="sans-serif" font-size="13" fill="#596579">左：B/C Minimax 搜索节点；右：各模型真实思考秒数。A 节点计数无可比性，D 模拟次数见表格。</text>',
     ]
     left_x, right_x, y_top, chart_h = 110, 580, 100, 315
     for panel_x, metric, maximum, title in (
-        (left_x, "average_nodes_per_move", max_nodes, "节点或模拟次数 / 步"),
+        (left_x, "average_nodes_per_move", max_nodes, "B/C 搜索节点 / 步"),
         (right_x, "average_seconds_per_move", max_seconds, "实际耗时 / 步"),
     ):
         bits.append(f'<text x="{panel_x}" y="{y_top-16}" font-family="sans-serif" font-size="15" font-weight="600" fill="#172033">{title}</text>')
         for tick in range(0, 101, 25):
             x = panel_x + 330 * tick / 100
             bits.append(f'<line x1="{x:.1f}" y1="{y_top}" x2="{x:.1f}" y2="{y_top+chart_h}" stroke="#e5e9f0"/>')
-        for index, model in enumerate(models):
+        panel_models = minimax_models if metric == "average_nodes_per_move" else models
+        for index, model in enumerate(panel_models):
             usage = summary["usage"][model]
             value = float(usage[metric])
             y = y_top + 18 + index * 70

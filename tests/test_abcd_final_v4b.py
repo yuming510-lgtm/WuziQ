@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 
 import pytest
 
 from src.ai import SearchResult
 from src.research import abcd_final_v4b as v4b
-from src.research.abcd_final_v4b_analysis import summarize_records, validate_records
+from src.research.abcd_final_v4b_analysis import summarize_records, validate_game_record, validate_records
+from src.research import abcd_final_v4b_preflight as preflight
 from src.research.abcd_final_v4b_report import build_report
 from src.research.abcd_final_v4b_snapshot import create_snapshot, restore_snapshot
 
@@ -59,6 +61,8 @@ def test_v3_d20_vs_a_records_are_reused_only_after_full_provenance_check() -> No
     assert audit["source_code_commit"] == "ff6aa837cf2d38268485fab51548c0e8327eb56d"
     assert audit["reused_games"] == 6
     assert len(records) == 6
+    assert all(record["experiment_id"] == config["experiment_id"] for record in records)
+    assert all(record["source_experiment_id"] == "wuziq-mcts-high-compute-v3" for record in records)
     assert {record["matchup"][1] for record in records} == {"D"}
     assert all(record["source_type"] == "reused_v3" for record in records)
     assert all(record["budget_seconds_by_model"]["D"] == 20.0 for record in records)
@@ -127,6 +131,10 @@ def test_illegal_move_is_recorded_as_a_forfeit_without_crashing(monkeypatch) -> 
     assert record["winner_model"] == "A"
     assert record["moves"][-1]["illegal"] is True
     assert "row" not in record["moves"][-1]
+    validate_game_record(record, config, spec)
+    record["moves"][-1]["attempted_move"] = [0, 0]
+    with pytest.raises(ValueError, match="attempted_move"):
+        validate_game_record(record, config, spec)
 
 
 def test_experiment_resume_skips_completed_unique_ids(tmp_path, monkeypatch) -> None:
@@ -229,6 +237,7 @@ def test_full_match_analysis_has_all_pairings_and_descriptive_paired_intervals()
     assert list(summary["matchups"]) == ["A-B", "A-C", "B-C", "A-D", "B-D", "C-D"]
     assert all(summary["matchups"][pair]["games"] == 6 for pair in summary["matchups"])
     assert all(len(summary["matchups"][pair]["paired_wilson_95_ci"]["A" if pair.startswith("A-") else pair[0]]) == 2 for pair in summary["matchups"])
+    assert "non-comparable" in summary["usage"]["A"]["node_metric_semantics"]
 
 
 def test_report_generation_includes_historical_v1_to_v4_context(tmp_path) -> None:
@@ -251,7 +260,7 @@ def test_report_generation_includes_historical_v1_to_v4_context(tmp_path) -> Non
     (results / "9x9_games.jsonl").write_text("".join(json.dumps(row) + "\n" for row in records), encoding="utf-8")
     (results / "reuse_audit.json").write_text(json.dumps({"verified": False, "reused_games": 0}), encoding="utf-8")
     (results / "preflight.json").write_text(json.dumps({"estimate": {"estimated_formal_run_minutes": 1.0, "estimated_formal_run_range_minutes": [1.0, 1.25], "D20_fullboard_theoretical_ceiling_seconds_for_12_new_D_games": 10}, "resources": {}, "benchmarks": [{"model": "D", "simulations": 1000, "elapsed_seconds_wall": 20}], "preflight_elapsed_seconds": 20, "storage_estimate": {"estimated_final_recovery_bundle_bytes": 1000}}), encoding="utf-8")
-    (results / "execution.json").write_text(json.dumps({"wall_seconds_this_invocation": 12}), encoding="utf-8")
+    (results / "execution.json").write_text(json.dumps({"wall_seconds_this_invocation": 12, "wall_seconds_accumulated": 34}), encoding="utf-8")
 
     output = build_report(results, ROOT)
 
@@ -259,4 +268,42 @@ def test_report_generation_includes_historical_v1_to_v4_context(tmp_path) -> Non
     report = (results / "report_zh.md").read_text(encoding="utf-8")
     assert "V1–V4 历史结果" in report
     assert "A–B" in report and "B–D" in report and "C–D" in report
+    assert "34.0 秒" in report
+    assert "Drive 恢复演练未验证" in report
+    assert "复用 V3 **0 局**" in report
     assert (tmp_path / "figures" / "matchup_score_rates.svg").is_file()
+
+
+def test_preflight_persists_estimate_and_commit_metadata(tmp_path, monkeypatch) -> None:
+    config = _config()
+
+    class FakeMCTSAgent:
+        def choose_move(self, board, player, search_config, seed):
+            return SearchResult((4, 3), 0, 12, 2, 0, 5, 0.001, False)
+
+    def fake_choose_move(board, player, model, search_config, seed):
+        return SearchResult((4, 3), 0, 12, 2, 0, 0, 0.001, False)
+
+    monkeypatch.setattr(preflight, "MCTSAgent", FakeMCTSAgent)
+    monkeypatch.setattr(preflight, "choose_move", fake_choose_move)
+    monkeypatch.setattr(preflight, "_historical_calibration", lambda root: {"B": {"D3_total_seconds": 10, "opponent_moves_total": 10}, "C": {"D3_total_seconds": 20, "opponent_moves_total": 20}})
+    monkeypatch.setattr(preflight, "_resource_snapshot", lambda directory: {"workspace_disk_free_bytes": 123456})
+
+    output = tmp_path / "preflight.json"
+    result = preflight.run_preflight(config, output, project_root=ROOT)
+
+    assert output.is_file()
+    assert result["official_games_started"] == 0
+    assert re.fullmatch(r"[0-9a-f]{40}", result["base_code_commit"])
+    assert len(result["benchmarks"]) == 4
+
+
+def test_historical_game_loader_never_truncates_a_corrupt_tail(tmp_path) -> None:
+    path = tmp_path / "historic.jsonl"
+    original = b'{"game_id":"good"}\nnot-json\n'
+    path.write_bytes(original)
+
+    with pytest.raises(ValueError, match="Invalid historical JSONL"):
+        v4b.read_historical_games(path)
+
+    assert path.read_bytes() == original

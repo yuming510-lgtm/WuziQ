@@ -7,13 +7,14 @@ from pathlib import Path
 import platform
 import resource
 import shutil
+import subprocess
 import time
 from typing import Any
 
 from ..ai import choose_move
 from ..gomoku import GomokuBoard, Player
-from .abcd_final_v4b import derive_seed, load_config, settings_for_model
-from .checkpoint import load_game_records, write_json_atomic
+from .abcd_final_v4b import derive_seed, load_config, read_historical_games, settings_for_model
+from .checkpoint import write_json_atomic
 from .mcts_d2 import MCTSAgent
 
 
@@ -71,7 +72,7 @@ def _historical_calibration(root: Path) -> dict[str, Any]:
     rows: dict[str, list[dict[str, Any]]] = {}
     for opponent in ("B", "C"):
         path = root / "research/v3/results" / f"9x9_d3-20s-vs-{opponent.lower()}_games.jsonl"
-        games = load_game_records(path)
+        games = read_historical_games(path)
         if len(games) != 6:
             raise ValueError(f"V3 D20 vs {opponent} calibration needs six games; found {len(games)}")
         if any(

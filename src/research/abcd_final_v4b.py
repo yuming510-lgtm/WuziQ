@@ -33,6 +33,29 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def read_historical_games(path: str | Path) -> list[dict[str, Any]]:
+    """Read legacy JSONL without invoking checkpoint repair or modifying source data."""
+
+    source = Path(path)
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for line_number, raw_line in enumerate(source.read_bytes().splitlines(), 1):
+        if not raw_line.strip():
+            continue
+        try:
+            row = json.loads(raw_line)
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            raise ValueError(f"Invalid historical JSONL at {source}:{line_number}: {exc}") from exc
+        if not isinstance(row, dict) or not row.get("game_id"):
+            raise ValueError(f"Invalid historical JSONL record at {source}:{line_number}: missing game_id")
+        identifier = str(row["game_id"])
+        if identifier in seen:
+            raise ValueError(f"Duplicate historical game_id {identifier} in {source}")
+        seen.add(identifier)
+        rows.append(row)
+    return rows
+
+
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
@@ -341,6 +364,7 @@ def _normalize_v3_record(
     source_id = str(source["game_id"])
     normalized.update(
         {
+            "experiment_id": config["experiment_id"],
             "game_id": spec["game_id"],
             "matchup": list(spec["matchup"]),
             "black_model": _model_alias(str(source["black_model"])),
@@ -399,7 +423,7 @@ def load_v3_reuse(config: dict[str, Any], project_root: str | Path) -> tuple[lis
     all_v3_rows = [
         row
         for path in sorted((root / "research/v3/results").glob("*_games.jsonl"))
-        for row in load_game_records(path)
+        for row in read_historical_games(path)
     ]
     from .mcts_v3_analysis import validate_v3_records
 
