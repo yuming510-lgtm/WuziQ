@@ -284,6 +284,7 @@ def derive_state(
             group_records = by_group.get(group_id, [])
             if (route_id, index) in evaluated:
                 level_state = dict(evaluated[(route_id, index)])
+                level_state["level_index"] = index
                 level_state["opponent_budget_label"] = level["opponent_budget_label"]
             elif state["failed_level"] is not None and index > int(state["failed_level"]):
                 level_state = {
@@ -291,6 +292,7 @@ def derive_state(
                     "score": None,
                     "games": len(group_records),
                     "group_id": group_id,
+                    "level_index": index,
                     "opponent_budget_label": level["opponent_budget_label"],
                     "reason": f"route_failed_at_level_{state['failed_level']}",
                 }
@@ -300,6 +302,7 @@ def derive_state(
                     "score": None,
                     "games": len(group_records),
                     "group_id": group_id,
+                    "level_index": index,
                     "opponent_budget_label": level["opponent_budget_label"],
                 }
             else:
@@ -308,6 +311,7 @@ def derive_state(
                     "score": None,
                     "games": len(group_records),
                     "group_id": group_id,
+                    "level_index": index,
                     "opponent_budget_label": level["opponent_budget_label"],
                 }
             levels.append(level_state)

@@ -45,6 +45,12 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
+def _wall_seconds(started_at: str, ended_at: str | None = None) -> float:
+    start = datetime.fromisoformat(started_at.replace("Z", "+00:00"))
+    end = datetime.fromisoformat((ended_at or _utc_now()).replace("Z", "+00:00"))
+    return max(0.0, (end - start).total_seconds())
+
+
 def repository_commit(root: str | Path | None = None) -> str:
     project_root = Path(root or _project_root())
     return subprocess.run(["git", "rev-parse", "HEAD"], cwd=project_root, check=True,
@@ -237,8 +243,10 @@ def run_experiment(
             "games_completed_this_run": games_this_run,
             "groups_completed_this_run": groups_this_run,
             "elapsed_seconds_total": previous_seconds + time.perf_counter() - started,
+            "elapsed_wall_seconds_total": _wall_seconds(first_started),
             "first_started_at_utc": first_started,
             "last_started_at_utc": _utc_now(),
+            "completed_at_utc": _utc_now() if current_state["complete"] else None,
             "updated_at_utc": _utc_now(),
         }
         write_json_atomic(progress_path, payload)
