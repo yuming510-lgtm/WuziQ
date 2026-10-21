@@ -73,6 +73,8 @@ def _validate_payload(files: dict[str, bytes]) -> tuple[list[str], dict[str, Any
     expected_progress = {
         "completed_games": len(ids),
         "completed_groups": derived["completed_groups"],
+        "inferred_groups": derived["inferred_groups"],
+        "partial_observation_groups": derived["partial_observation_groups"],
         "pending_group_id": derived["pending_group_id"],
         "complete": derived["complete"],
         "routes": derived["routes"],
