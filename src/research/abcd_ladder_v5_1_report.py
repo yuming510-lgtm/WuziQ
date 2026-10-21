@@ -252,10 +252,10 @@ def build_report(
         f"按完整 9×9 盘面预算的保守上限 {float(estimate.get('configured_full_board_budget_ceiling_hours', 0.0)):.2f} 小时。",
         f"所需棋谱空间估计 {float(estimate.get('estimated_storage_bytes_for_all_336_games', 0))/(1024**2):.1f} MiB。",
     ]
-    if drive.get("status"):
-        drive_status = str(drive["status"])
-    elif drive.get("round_trip", {}).get("sha256_match") and drive.get("round_trip", {}).get("empty_directory_restore"):
-        drive_status = "已验证 Drive 上传、下载、SHA-256 和空目录恢复"
+    round_trip = drive.get("round_trip", {})
+    if (round_trip.get("upload_success") and round_trip.get("download_success")
+            and round_trip.get("sha256_match") and round_trip.get("empty_directory_restore")):
+        drive_status = "Drive 快照已上传、回下载、SHA-256 校验一致并成功恢复"
     else:
         drive_status = "Drive 恢复演练未记录"
     if drive.get("latest_snapshot"):
@@ -263,11 +263,11 @@ def build_report(
         drive_status += (
             f"；最新有效快照 `{latest.get('name','V5.1 snapshot')}`，"
             f"SHA-256 `{latest.get('sha256','未记录')}`，含 {latest.get('completed_games','?')} 局，"
-            f"专用文件夹文件数 {drive.get('files_remaining','未记录')}。"
+            f"专用文件夹当前有 {drive.get('files_remaining','未记录')} 个文件"
         )
     family_order = "、".join(f"{family}（{_pct(stats.get('score_rate'))}）" for family, stats in ranking)
     summary_text = (
-        f"本轮目前完成 {analysis['actual_groups']} 组、{analysis['actual_games']} 局配对对局；"
+        f"本轮完成 {analysis['actual_groups']} 组、{analysis['actual_games']} 局配对对局；"
         f"另有 {analysis['validation']['partial_observation_games']} 局未配对观察记录（不计入战绩）。"
         f"复用 V5 {analysis['actual_metrics']['actual_reused_groups']} 组、"
         f"{analysis['actual_metrics']['actual_reused_games']} 局；66 条独立路线中 "
@@ -278,7 +278,12 @@ def build_report(
         if analysis["actual_games"] else "当前没有已完成对局。"
     )
     completed_status = "完整完成" if analysis["complete"] else "未完成（只作进度预览，不能发布为最终成绩）"
-    drive_section = f"恢复快照：{drive_status}。新快照先上传、回下载并实际恢复校验后，才会移除上一份 V5.1 快照。"
+    drive_section = (
+        f"恢复快照：{drive_status}。完成上传、下载、哈希及恢复验证后已删除旧版；"
+        f"专用文件夹当前只保留一份最新有效快照。"
+        if drive.get("folder_verified_after_old_snapshot_deletion")
+        else f"恢复快照：{drive_status}。"
+    )
     route_summary = analysis["route_state"]["routes"]
 
     lines = [
@@ -291,6 +296,7 @@ def build_report(
         "B、C、D 的独立版本预算为 50ms、200ms、1s、5s、10s、20s、50s。A 为单一自然时间版本。路线固定挑战者版本，只逐档提高对手预算；A 路线逐档面对对手的七个版本。只安排跨家族比赛。",
         "同一预算配对只运行一次并可供两条方向相反的路线共享；每条实测路线只在自己的两局合计得分至少 1 分时升级。对局使用预注册的 12 个合法开局池和固定种子，每组相同开局换色。V5 精确匹配的对局只在其配对组到达可执行时才物化。",
         "依照追加的早停规则，若固定挑战者未通过某家族的较低预算版本，则该路线不再实测更高预算；反向路线中高于已败低档的版本标为“推断通过”，不计为实战胜场、得分率或对局。此推断采用“更高预算版本不弱于低预算版本”的单调性假设；已有完整棋局仍按真实结果保留，未配对观察保留原始记录但不计赛果。",
+        "赛程剪枝规则在实验运行中途追加。修正规则前已经完成的 A–B200ms 至 50s 六组、A–C200ms 至 20s 五组均保留为真实棋谱，可供尚未淘汰的反向路线共享，但不计入 A 已失败路线的晋级得分；A–C50s 已开始的一局作为未配对观察保留。规则更新后未再启动这些被低档失败支配的对局。",
         "V1–V5 的决策引擎代码未修改；V5.1 只增加独立预算版本赛程、恢复、验证和统计代码。", "",
         "### 运行资源与耗时预估", "", *preflight_lines, "", drive_section, "",
         "运行器使用唯一 game ID、JSONL 每局 fsync、progress 原子替换；每局回放检查合法性、五连胜和计数，配对齐全后才推进路线。恢复时按棋谱重建路线，而不是信任缓存的晋级结果。", "",
@@ -348,7 +354,7 @@ def build_report(
         "- `results/schedule.json` 与 `results/reuse_manifest.json`：完整 168 格赛程及每条历史复用来源。",
         "- `results/9x9_games.jsonl`：所有已完成棋谱及逐步搜索指标；每局包含唯一 ID。",
         "- `results/progress.json`：66 条路线、组状态和恢复进度。",
-        "- `results/summary.json`、CSV 和 `figures/ladder_gradient.svg`：可重算统计与趋势图。",
+        "- `analysis/summary.json`、CSV 和 `figures/ladder_gradient.svg`：可重算统计与趋势图。",
         "- 运行脚本：`scripts/run_abcd_ladder_v5_1.py`；分析脚本：`scripts/summarize_abcd_ladder_v5_1.py`。",
         "", "本轮是传统规则与搜索算法的开发和对弈研究；没有神经网络训练，也不生成训练 checkpoint。", "",
     ])

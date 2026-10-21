@@ -1,0 +1,493 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1470" height="1847" viewBox="0 0 1470 1847">
+<rect width="100%" height="100%" fill="#fff"/>
+<style>text{font-family:Arial,"Noto Sans CJK SC",sans-serif;fill:#17212e}.title{font-size:22px;font-weight:700}.small{font-size:12px}.route{font-size:12px;font-weight:600}.muted{fill:#667085}</style>
+<text x="24" y="32" class="title">V5.1 ABCD 各预算版本独立挑战边界</text>
+<text x="24" y="56" class="small muted">绿点为实测通过，红叉为实测失败，蓝菱形为按低档失利推断，灰方块为另一方向已有实测，空心点为未执行。</text>
+<text x="24" y="78" class="small muted">实测档为两局、同开局换色；推断档不算对局，不作实战胜率。</text>
+<line x1="285.0" y1="98" x2="285.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="285.0" y="103" text-anchor="middle" class="small">natural</text>
+<line x1="425.0" y1="98" x2="425.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="425.0" y="103" text-anchor="middle" class="small">50ms</text>
+<line x1="565.0" y1="98" x2="565.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="565.0" y="103" text-anchor="middle" class="small">200ms</text>
+<line x1="705.0" y1="98" x2="705.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="705.0" y="103" text-anchor="middle" class="small">1s</text>
+<line x1="845.0" y1="98" x2="845.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="845.0" y="103" text-anchor="middle" class="small">5s</text>
+<line x1="985.0" y1="98" x2="985.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="985.0" y="103" text-anchor="middle" class="small">10s</text>
+<line x1="1125.0" y1="98" x2="1125.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="1125.0" y="103" text-anchor="middle" class="small">20s</text>
+<line x1="1265.0" y1="98" x2="1265.0" y2="1799" stroke="#e5eaf0" stroke-dasharray="3 4"/>
+<text x="1265.0" y="103" text-anchor="middle" class="small">50s</text>
+<text x="18" y="126" class="route">A&gt;B</text>
+<line x1="285.0" y1="122" x2="1265.0" y2="122" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="122" r="7" fill="#dc2626"/>
+<path d="M422.0,119 L428.0,125 M428.0,119 L422.0,125" stroke="#fff" stroke-width="1.6"/>
+<rect x="560.0" y="117" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="700.0" y="117" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="840.0" y="117" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="980.0" y="117" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1120.0" y="117" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1260.0" y="117" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<text x="1279" y="126" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="151" class="route">B@50ms&gt;A</text>
+<line x1="285.0" y1="147" x2="1265.0" y2="147" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="147" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="151" class="small">过至 natural</text>
+<text x="18" y="176" class="route">B@200ms&gt;A</text>
+<line x1="285.0" y1="172" x2="1265.0" y2="172" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="172" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="176" class="small">过至 natural</text>
+<text x="18" y="201" class="route">B@1s&gt;A</text>
+<line x1="285.0" y1="197" x2="1265.0" y2="197" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="197" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="201" class="small">过至 natural</text>
+<text x="18" y="226" class="route">B@5s&gt;A</text>
+<line x1="285.0" y1="222" x2="1265.0" y2="222" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="222" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="226" class="small">过至 natural</text>
+<text x="18" y="251" class="route">B@10s&gt;A</text>
+<line x1="285.0" y1="247" x2="1265.0" y2="247" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="247" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="251" class="small">过至 natural</text>
+<text x="18" y="276" class="route">B@20s&gt;A</text>
+<line x1="285.0" y1="272" x2="1265.0" y2="272" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="272" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="276" class="small">过至 natural</text>
+<text x="18" y="301" class="route">B@50s&gt;A</text>
+<line x1="285.0" y1="297" x2="1265.0" y2="297" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="297" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="301" class="small">过至 natural</text>
+<text x="18" y="326" class="route">A&gt;C</text>
+<line x1="285.0" y1="322" x2="1265.0" y2="322" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="322" r="7" fill="#dc2626"/>
+<path d="M422.0,319 L428.0,325 M428.0,319 L422.0,325" stroke="#fff" stroke-width="1.6"/>
+<rect x="560.0" y="317" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="700.0" y="317" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="840.0" y="317" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="980.0" y="317" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1120.0" y="317" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<text x="1279" y="326" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="351" class="route">C@50ms&gt;A</text>
+<line x1="285.0" y1="347" x2="1265.0" y2="347" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="347" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="351" class="small">过至 natural</text>
+<text x="18" y="376" class="route">C@200ms&gt;A</text>
+<line x1="285.0" y1="372" x2="1265.0" y2="372" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="372" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="376" class="small">过至 natural</text>
+<text x="18" y="401" class="route">C@1s&gt;A</text>
+<line x1="285.0" y1="397" x2="1265.0" y2="397" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="397" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="401" class="small">过至 natural</text>
+<text x="18" y="426" class="route">C@5s&gt;A</text>
+<line x1="285.0" y1="422" x2="1265.0" y2="422" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="422" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="426" class="small">过至 natural</text>
+<text x="18" y="451" class="route">C@10s&gt;A</text>
+<line x1="285.0" y1="447" x2="1265.0" y2="447" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="447" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="451" class="small">过至 natural</text>
+<text x="18" y="476" class="route">C@20s&gt;A</text>
+<line x1="285.0" y1="472" x2="1265.0" y2="472" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="472" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="476" class="small">过至 natural</text>
+<text x="18" y="501" class="route">C@50s&gt;A</text>
+<line x1="285.0" y1="497" x2="1265.0" y2="497" stroke="#d8dee8" stroke-width="1"/>
+<path d="M285.0,490 L292.0,497 L285.0,504 L278.0,497 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="501" class="small">过至 natural</text>
+<text x="18" y="526" class="route">A&gt;D</text>
+<line x1="285.0" y1="522" x2="1265.0" y2="522" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="522" r="6" fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="522" r="6" fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="522" r="6" fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="522" r="6" fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="522" r="7" fill="#dc2626"/>
+<path d="M982.0,519 L988.0,525 M988.0,519 L982.0,525" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="526" class="small">过至 5s；败于 10s</text>
+<text x="18" y="551" class="route">D@50ms&gt;A</text>
+<line x1="285.0" y1="547" x2="1265.0" y2="547" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="547" r="7" fill="#dc2626"/>
+<path d="M282.0,544 L288.0,550 M288.0,544 L282.0,550" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="551" class="small">过至 未通过；败于 natural</text>
+<text x="18" y="576" class="route">D@200ms&gt;A</text>
+<line x1="285.0" y1="572" x2="1265.0" y2="572" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="572" r="7" fill="#dc2626"/>
+<path d="M282.0,569 L288.0,575 M288.0,569 L282.0,575" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="576" class="small">过至 未通过；败于 natural</text>
+<text x="18" y="601" class="route">D@1s&gt;A</text>
+<line x1="285.0" y1="597" x2="1265.0" y2="597" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="597" r="7" fill="#dc2626"/>
+<path d="M282.0,594 L288.0,600 M288.0,594 L282.0,600" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="601" class="small">过至 未通过；败于 natural</text>
+<text x="18" y="626" class="route">D@5s&gt;A</text>
+<line x1="285.0" y1="622" x2="1265.0" y2="622" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="622" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="626" class="small">过至 natural</text>
+<text x="18" y="651" class="route">D@10s&gt;A</text>
+<line x1="285.0" y1="647" x2="1265.0" y2="647" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="285.0" cy="647" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="651" class="small">过至 natural</text>
+<text x="18" y="676" class="route">D@20s&gt;A</text>
+<line x1="285.0" y1="672" x2="1265.0" y2="672" stroke="#d8dee8" stroke-width="1"/>
+<path d="M285.0,665 L292.0,672 L285.0,679 L278.0,672 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="676" class="small">过至 natural</text>
+<text x="18" y="701" class="route">D@50s&gt;A</text>
+<line x1="285.0" y1="697" x2="1265.0" y2="697" stroke="#d8dee8" stroke-width="1"/>
+<path d="M285.0,690 L292.0,697 L285.0,704 L278.0,697 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="701" class="small">过至 natural</text>
+<text x="18" y="726" class="route">B@50ms&gt;C</text>
+<line x1="285.0" y1="722" x2="1265.0" y2="722" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="722" r="7" fill="#dc2626"/>
+<path d="M422.0,719 L428.0,725 M428.0,719 L422.0,725" stroke="#fff" stroke-width="1.6"/>
+<rect x="560.0" y="717" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="700.0" y="717" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="840.0" y="717" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="980.0" y="717" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1120.0" y="717" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1260.0" y="717" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<text x="1279" y="726" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="751" class="route">C@50ms&gt;B</text>
+<line x1="285.0" y1="747" x2="1265.0" y2="747" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="747" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="747" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="747" r="7" fill="#dc2626"/>
+<path d="M702.0,744 L708.0,750 M708.0,744 L702.0,750" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="751" class="small">过至 200ms；败于 1s</text>
+<text x="18" y="776" class="route">C@200ms&gt;B</text>
+<line x1="285.0" y1="772" x2="1265.0" y2="772" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="772" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,765 L572.0,772 L565.0,779 L558.0,772 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="772" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="772" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="772" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="772" r="7" fill="#dc2626"/>
+<path d="M1122.0,769 L1128.0,775 M1128.0,769 L1122.0,775" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="776" class="small">过至 10s；败于 20s</text>
+<text x="18" y="801" class="route">C@1s&gt;B</text>
+<line x1="285.0" y1="797" x2="1265.0" y2="797" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="797" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,790 L572.0,797 L565.0,804 L558.0,797 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="797" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="797" r="7" fill="#dc2626"/>
+<path d="M842.0,794 L848.0,800 M848.0,794 L842.0,800" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="801" class="small">过至 1s；败于 5s</text>
+<text x="18" y="826" class="route">C@5s&gt;B</text>
+<line x1="285.0" y1="822" x2="1265.0" y2="822" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="822" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,815 L572.0,822 L565.0,829 L558.0,822 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,815 L712.0,822 L705.0,829 L698.0,822 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="822" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,815 L992.0,822 L985.0,829 L978.0,822 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="822" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="822" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="826" class="small">过至 50s</text>
+<text x="18" y="851" class="route">C@10s&gt;B</text>
+<line x1="285.0" y1="847" x2="1265.0" y2="847" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="847" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,840 L572.0,847 L565.0,854 L558.0,847 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,840 L712.0,847 L705.0,854 L698.0,847 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="847" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,840 L992.0,847 L985.0,854 L978.0,847 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="847" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,840 L1272.0,847 L1265.0,854 L1258.0,847 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="851" class="small">过至 50s</text>
+<text x="18" y="876" class="route">C@20s&gt;B</text>
+<line x1="285.0" y1="872" x2="1265.0" y2="872" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="872" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,865 L572.0,872 L565.0,879 L558.0,872 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,865 L712.0,872 L705.0,879 L698.0,872 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="872" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,865 L992.0,872 L985.0,879 L978.0,872 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,865 L1132.0,872 L1125.0,879 L1118.0,872 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,865 L1272.0,872 L1265.0,879 L1258.0,872 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="876" class="small">过至 50s</text>
+<text x="18" y="901" class="route">C@50s&gt;B</text>
+<line x1="285.0" y1="897" x2="1265.0" y2="897" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="897" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,890 L572.0,897 L565.0,904 L558.0,897 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,890 L712.0,897 L705.0,904 L698.0,897 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,890 L852.0,897 L845.0,904 L838.0,897 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,890 L992.0,897 L985.0,904 L978.0,897 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,890 L1132.0,897 L1125.0,904 L1118.0,897 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,890 L1272.0,897 L1265.0,904 L1258.0,897 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="901" class="small">过至 50s</text>
+<text x="18" y="926" class="route">B@200ms&gt;C</text>
+<line x1="285.0" y1="922" x2="1265.0" y2="922" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="922" r="7" fill="#dc2626"/>
+<path d="M422.0,919 L428.0,925 M428.0,919 L422.0,925" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="926" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="951" class="route">B@1s&gt;C</text>
+<line x1="285.0" y1="947" x2="1265.0" y2="947" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="947" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="947" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="947" r="7" fill="#dc2626"/>
+<path d="M702.0,944 L708.0,950 M708.0,944 L702.0,950" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="951" class="small">过至 200ms；败于 1s</text>
+<text x="18" y="976" class="route">B@5s&gt;C</text>
+<line x1="285.0" y1="972" x2="1265.0" y2="972" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,965 L432.0,972 L425.0,979 L418.0,972 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="972" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="972" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="972" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="972" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="972" r="7" fill="#dc2626"/>
+<path d="M1122.0,969 L1128.0,975 M1128.0,969 L1122.0,975" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="976" class="small">过至 10s；败于 20s</text>
+<text x="18" y="1001" class="route">B@10s&gt;C</text>
+<line x1="285.0" y1="997" x2="1265.0" y2="997" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,990 L432.0,997 L425.0,1004 L418.0,997 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="997" r="7" fill="#dc2626"/>
+<path d="M562.0,994 L568.0,1000 M568.0,994 L562.0,1000" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1001" class="small">过至 50ms；败于 200ms</text>
+<text x="18" y="1026" class="route">B@20s&gt;C</text>
+<line x1="285.0" y1="1022" x2="1265.0" y2="1022" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,1015 L432.0,1022 L425.0,1029 L418.0,1022 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1022" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1015 L712.0,1022 L705.0,1029 L698.0,1022 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="1022" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1022" r="7" fill="#dc2626"/>
+<path d="M982.0,1019 L988.0,1025 M988.0,1019 L982.0,1025" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1026" class="small">过至 5s；败于 10s</text>
+<text x="18" y="1051" class="route">B@50s&gt;C</text>
+<line x1="285.0" y1="1047" x2="1265.0" y2="1047" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,1040 L432.0,1047 L425.0,1054 L418.0,1047 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1040 L572.0,1047 L565.0,1054 L558.0,1047 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1040 L712.0,1047 L705.0,1054 L698.0,1047 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="1047" r="7" fill="#dc2626"/>
+<path d="M842.0,1044 L848.0,1050 M848.0,1044 L842.0,1050" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1051" class="small">过至 1s；败于 5s</text>
+<text x="18" y="1076" class="route">B@50ms&gt;D</text>
+<line x1="285.0" y1="1072" x2="1265.0" y2="1072" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1072" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1072" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="1072" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="1072" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1072" r="7" fill="#dc2626"/>
+<path d="M982.0,1069 L988.0,1075 M988.0,1069 L982.0,1075" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1076" class="small">过至 5s；败于 10s</text>
+<text x="18" y="1101" class="route">D@50ms&gt;B</text>
+<line x1="285.0" y1="1097" x2="1265.0" y2="1097" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1097" r="7" fill="#dc2626"/>
+<path d="M422.0,1094 L428.0,1100 M428.0,1094 L422.0,1100" stroke="#fff" stroke-width="1.6"/>
+<rect x="560.0" y="1092" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="700.0" y="1092" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="840.0" y="1092" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="980.0" y="1092" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1120.0" y="1092" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1260.0" y="1092" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<text x="1279" y="1101" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1126" class="route">D@200ms&gt;B</text>
+<line x1="285.0" y1="1122" x2="1265.0" y2="1122" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1122" r="7" fill="#dc2626"/>
+<path d="M422.0,1119 L428.0,1125 M428.0,1119 L422.0,1125" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1126" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1151" class="route">D@1s&gt;B</text>
+<line x1="285.0" y1="1147" x2="1265.0" y2="1147" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1147" r="7" fill="#dc2626"/>
+<path d="M422.0,1144 L428.0,1150 M428.0,1144 L422.0,1150" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1151" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1176" class="route">D@5s&gt;B</text>
+<line x1="285.0" y1="1172" x2="1265.0" y2="1172" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1172" r="7" fill="#dc2626"/>
+<path d="M422.0,1169 L428.0,1175 M428.0,1169 L422.0,1175" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1176" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1201" class="route">D@10s&gt;B</text>
+<line x1="285.0" y1="1197" x2="1265.0" y2="1197" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1197" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1197" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="1197" r="7" fill="#dc2626"/>
+<path d="M702.0,1194 L708.0,1200 M708.0,1194 L702.0,1200" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1201" class="small">过至 200ms；败于 1s</text>
+<text x="18" y="1226" class="route">D@20s&gt;B</text>
+<line x1="285.0" y1="1222" x2="1265.0" y2="1222" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,1215 L432.0,1222 L425.0,1229 L418.0,1222 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1222" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="1222" r="7" fill="#dc2626"/>
+<path d="M702.0,1219 L708.0,1225 M708.0,1219 L702.0,1225" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1226" class="small">过至 200ms；败于 1s</text>
+<text x="18" y="1251" class="route">D@50s&gt;B</text>
+<line x1="285.0" y1="1247" x2="1265.0" y2="1247" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,1240 L432.0,1247 L425.0,1254 L418.0,1247 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1247" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="1247" r="7" fill="#dc2626"/>
+<path d="M702.0,1244 L708.0,1250 M708.0,1244 L702.0,1250" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1251" class="small">过至 200ms；败于 1s</text>
+<text x="18" y="1276" class="route">B@200ms&gt;D</text>
+<line x1="285.0" y1="1272" x2="1265.0" y2="1272" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1272" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1265 L572.0,1272 L565.0,1279 L558.0,1272 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1265 L712.0,1272 L705.0,1279 L698.0,1272 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1265 L852.0,1272 L845.0,1279 L838.0,1272 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1272" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="1272" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="1272" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1276" class="small">过至 50s</text>
+<text x="18" y="1301" class="route">B@1s&gt;D</text>
+<line x1="285.0" y1="1297" x2="1265.0" y2="1297" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1297" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1290 L572.0,1297 L565.0,1304 L558.0,1297 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1290 L712.0,1297 L705.0,1304 L698.0,1297 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1290 L852.0,1297 L845.0,1304 L838.0,1297 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1297" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="1297" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="1297" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1301" class="small">过至 50s</text>
+<text x="18" y="1326" class="route">B@5s&gt;D</text>
+<line x1="285.0" y1="1322" x2="1265.0" y2="1322" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1322" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1315 L572.0,1322 L565.0,1329 L558.0,1322 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1315 L712.0,1322 L705.0,1329 L698.0,1322 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1315 L852.0,1322 L845.0,1329 L838.0,1322 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1315 L992.0,1322 L985.0,1329 L978.0,1322 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1315 L1132.0,1322 L1125.0,1329 L1118.0,1322 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,1315 L1272.0,1322 L1265.0,1329 L1258.0,1322 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1326" class="small">过至 50s</text>
+<text x="18" y="1351" class="route">B@10s&gt;D</text>
+<line x1="285.0" y1="1347" x2="1265.0" y2="1347" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1347" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1340 L572.0,1347 L565.0,1354 L558.0,1347 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1340 L712.0,1347 L705.0,1354 L698.0,1347 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1340 L852.0,1347 L845.0,1354 L838.0,1347 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1340 L992.0,1347 L985.0,1354 L978.0,1347 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1340 L1132.0,1347 L1125.0,1354 L1118.0,1347 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,1340 L1272.0,1347 L1265.0,1354 L1258.0,1347 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1351" class="small">过至 50s</text>
+<text x="18" y="1376" class="route">B@20s&gt;D</text>
+<line x1="285.0" y1="1372" x2="1265.0" y2="1372" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1372" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1365 L572.0,1372 L565.0,1379 L558.0,1372 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1365 L712.0,1372 L705.0,1379 L698.0,1372 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1365 L852.0,1372 L845.0,1379 L838.0,1372 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1365 L992.0,1372 L985.0,1379 L978.0,1372 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1365 L1132.0,1372 L1125.0,1379 L1118.0,1372 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,1365 L1272.0,1372 L1265.0,1379 L1258.0,1372 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1376" class="small">过至 50s</text>
+<text x="18" y="1401" class="route">B@50s&gt;D</text>
+<line x1="285.0" y1="1397" x2="1265.0" y2="1397" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1397" r="6" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1390 L572.0,1397 L565.0,1404 L558.0,1397 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1390 L712.0,1397 L705.0,1404 L698.0,1397 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1390 L852.0,1397 L845.0,1404 L838.0,1397 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1390 L992.0,1397 L985.0,1404 L978.0,1397 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1390 L1132.0,1397 L1125.0,1404 L1118.0,1397 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,1390 L1272.0,1397 L1265.0,1404 L1258.0,1397 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1401" class="small">过至 50s</text>
+<text x="18" y="1426" class="route">C@50ms&gt;D</text>
+<line x1="285.0" y1="1422" x2="1265.0" y2="1422" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1422" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1422" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="1422" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="1422" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1422" r="7" fill="#dc2626"/>
+<path d="M982.0,1419 L988.0,1425 M988.0,1419 L982.0,1425" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1426" class="small">过至 5s；败于 10s</text>
+<text x="18" y="1451" class="route">D@50ms&gt;C</text>
+<line x1="285.0" y1="1447" x2="1265.0" y2="1447" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1447" r="7" fill="#dc2626"/>
+<path d="M422.0,1444 L428.0,1450 M428.0,1444 L422.0,1450" stroke="#fff" stroke-width="1.6"/>
+<rect x="560.0" y="1442" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="700.0" y="1442" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="840.0" y="1442" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="980.0" y="1442" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1120.0" y="1442" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<rect x="1260.0" y="1442" width="10" height="10" fill="#94a3b8" stroke="#fff"/>
+<text x="1279" y="1451" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1476" class="route">D@200ms&gt;C</text>
+<line x1="285.0" y1="1472" x2="1265.0" y2="1472" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1472" r="7" fill="#dc2626"/>
+<path d="M422.0,1469 L428.0,1475 M428.0,1469 L422.0,1475" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1476" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1501" class="route">D@1s&gt;C</text>
+<line x1="285.0" y1="1497" x2="1265.0" y2="1497" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1497" r="7" fill="#dc2626"/>
+<path d="M422.0,1494 L428.0,1500 M428.0,1494 L422.0,1500" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1501" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1526" class="route">D@5s&gt;C</text>
+<line x1="285.0" y1="1522" x2="1265.0" y2="1522" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1522" r="7" fill="#dc2626"/>
+<path d="M422.0,1519 L428.0,1525 M428.0,1519 L422.0,1525" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1526" class="small">过至 未通过；败于 50ms</text>
+<text x="18" y="1551" class="route">D@10s&gt;C</text>
+<line x1="285.0" y1="1547" x2="1265.0" y2="1547" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1547" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1547" r="7" fill="#dc2626"/>
+<path d="M562.0,1544 L568.0,1550 M568.0,1544 L562.0,1550" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1551" class="small">过至 50ms；败于 200ms</text>
+<text x="18" y="1576" class="route">D@20s&gt;C</text>
+<line x1="285.0" y1="1572" x2="1265.0" y2="1572" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,1565 L432.0,1572 L425.0,1579 L418.0,1572 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1572" r="7" fill="#dc2626"/>
+<path d="M562.0,1569 L568.0,1575 M568.0,1569 L562.0,1575" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1576" class="small">过至 50ms；败于 200ms</text>
+<text x="18" y="1601" class="route">D@50s&gt;C</text>
+<line x1="285.0" y1="1597" x2="1265.0" y2="1597" stroke="#d8dee8" stroke-width="1"/>
+<path d="M425.0,1590 L432.0,1597 L425.0,1604 L418.0,1597 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="565.0" cy="1597" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="705.0" cy="1597" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="845.0" cy="1597" r="6" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1597" r="7" fill="#dc2626"/>
+<path d="M982.0,1594 L988.0,1600 M988.0,1594 L982.0,1600" stroke="#fff" stroke-width="1.6"/>
+<text x="1279" y="1601" class="small">过至 5s；败于 10s</text>
+<text x="18" y="1626" class="route">C@200ms&gt;D</text>
+<line x1="285.0" y1="1622" x2="1265.0" y2="1622" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1622" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1615 L572.0,1622 L565.0,1629 L558.0,1622 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1615 L712.0,1622 L705.0,1629 L698.0,1622 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1615 L852.0,1622 L845.0,1629 L838.0,1622 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="985.0" cy="1622" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1125.0" cy="1622" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="1622" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1626" class="small">过至 50s</text>
+<text x="18" y="1651" class="route">C@1s&gt;D</text>
+<line x1="285.0" y1="1647" x2="1265.0" y2="1647" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1647" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1640 L572.0,1647 L565.0,1654 L558.0,1647 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1640 L712.0,1647 L705.0,1654 L698.0,1647 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1640 L852.0,1647 L845.0,1654 L838.0,1647 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1640 L992.0,1647 L985.0,1654 L978.0,1647 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1640 L1132.0,1647 L1125.0,1654 L1118.0,1647 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="1647" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1651" class="small">过至 50s</text>
+<text x="18" y="1676" class="route">C@5s&gt;D</text>
+<line x1="285.0" y1="1672" x2="1265.0" y2="1672" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1672" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1665 L572.0,1672 L565.0,1679 L558.0,1672 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1665 L712.0,1672 L705.0,1679 L698.0,1672 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1665 L852.0,1672 L845.0,1679 L838.0,1672 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1665 L992.0,1672 L985.0,1679 L978.0,1672 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1665 L1132.0,1672 L1125.0,1679 L1118.0,1672 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="1672" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1676" class="small">过至 50s</text>
+<text x="18" y="1701" class="route">C@10s&gt;D</text>
+<line x1="285.0" y1="1697" x2="1265.0" y2="1697" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1697" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1690 L572.0,1697 L565.0,1704 L558.0,1697 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1690 L712.0,1697 L705.0,1704 L698.0,1697 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1690 L852.0,1697 L845.0,1704 L838.0,1697 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1690 L992.0,1697 L985.0,1704 L978.0,1697 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1690 L1132.0,1697 L1125.0,1704 L1118.0,1697 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<circle cx="1265.0" cy="1697" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1701" class="small">过至 50s</text>
+<text x="18" y="1726" class="route">C@20s&gt;D</text>
+<line x1="285.0" y1="1722" x2="1265.0" y2="1722" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1722" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1715 L572.0,1722 L565.0,1729 L558.0,1722 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1715 L712.0,1722 L705.0,1729 L698.0,1722 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1715 L852.0,1722 L845.0,1729 L838.0,1722 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1715 L992.0,1722 L985.0,1729 L978.0,1722 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1715 L1132.0,1722 L1125.0,1729 L1118.0,1722 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,1715 L1272.0,1722 L1265.0,1729 L1258.0,1722 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1726" class="small">过至 50s</text>
+<text x="18" y="1751" class="route">C@50s&gt;D</text>
+<line x1="285.0" y1="1747" x2="1265.0" y2="1747" stroke="#d8dee8" stroke-width="1"/>
+<circle cx="425.0" cy="1747" r="6" fill="#d97706" stroke="#fff" stroke-width="1.5"/>
+<path d="M565.0,1740 L572.0,1747 L565.0,1754 L558.0,1747 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M705.0,1740 L712.0,1747 L705.0,1754 L698.0,1747 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M845.0,1740 L852.0,1747 L845.0,1754 L838.0,1747 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M985.0,1740 L992.0,1747 L985.0,1754 L978.0,1747 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1125.0,1740 L1132.0,1747 L1125.0,1754 L1118.0,1747 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<path d="M1265.0,1740 L1272.0,1747 L1265.0,1754 L1258.0,1747 Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>
+<text x="1279" y="1751" class="small">过至 50s</text>
+</svg>

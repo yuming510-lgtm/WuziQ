@@ -1,0 +1,2375 @@
+{
+  "benchmark": {
+    "benchmark_wall_seconds": 258.60933113700594,
+    "cases": [
+      {
+        "budget_label": "natural",
+        "budget_seconds": null,
+        "completed_depth": 0,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.0007333619869314134,
+        "measured_wall_seconds": 0.0009641889919294044,
+        "model": "A",
+        "nodes": 77,
+        "simulations": 0,
+        "timed_out": false,
+        "tree_depth": 0
+      },
+      {
+        "budget_label": "50ms",
+        "budget_seconds": 0.05,
+        "completed_depth": 1,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.04502312099793926,
+        "measured_wall_seconds": 0.04503919700800907,
+        "model": "B",
+        "nodes": 707,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 1
+      },
+      {
+        "budget_label": "200ms",
+        "budget_seconds": 0.2,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.1950117369997315,
+        "measured_wall_seconds": 0.1950277740106685,
+        "model": "B",
+        "nodes": 3130,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "1s",
+        "budget_seconds": 1.0,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.9950184129993431,
+        "measured_wall_seconds": 0.9950409619923448,
+        "model": "B",
+        "nodes": 15408,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "5s",
+        "budget_seconds": 5.0,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 4.995031553989975,
+        "measured_wall_seconds": 4.995054869010346,
+        "model": "B",
+        "nodes": 77277,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "10s",
+        "budget_seconds": 10.0,
+        "completed_depth": 3,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 9.990237023012014,
+        "measured_wall_seconds": 9.99070079100784,
+        "model": "B",
+        "nodes": 137478,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 3
+      },
+      {
+        "budget_label": "20s",
+        "budget_seconds": 20.0,
+        "completed_depth": 3,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 19.980367319993093,
+        "measured_wall_seconds": 19.980802385995048,
+        "model": "B",
+        "nodes": 263600,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 3
+      },
+      {
+        "budget_label": "50s",
+        "budget_seconds": 50.0,
+        "completed_depth": 3,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 49.97625137399882,
+        "measured_wall_seconds": 49.976363809997565,
+        "model": "B",
+        "nodes": 675194,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 3
+      },
+      {
+        "budget_label": "50ms",
+        "budget_seconds": 0.05,
+        "completed_depth": 2,
+        "cutoffs": 73,
+        "legal_move": true,
+        "measured_seconds": 0.04501812499074731,
+        "measured_wall_seconds": 0.04504655300115701,
+        "model": "C",
+        "nodes": 328,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "200ms",
+        "budget_seconds": 0.2,
+        "completed_depth": 2,
+        "cutoffs": 162,
+        "legal_move": true,
+        "measured_seconds": 0.19501123900408857,
+        "measured_wall_seconds": 0.19502946799912024,
+        "model": "C",
+        "nodes": 2331,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "1s",
+        "budget_seconds": 1.0,
+        "completed_depth": 3,
+        "cutoffs": 1195,
+        "legal_move": true,
+        "measured_seconds": 0.9952116409986047,
+        "measured_wall_seconds": 0.9956303669896442,
+        "model": "C",
+        "nodes": 9789,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 3
+      },
+      {
+        "budget_label": "5s",
+        "budget_seconds": 5.0,
+        "completed_depth": 4,
+        "cutoffs": 7823,
+        "legal_move": true,
+        "measured_seconds": 4.995195976996911,
+        "measured_wall_seconds": 4.995587796991458,
+        "model": "C",
+        "nodes": 35935,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 4
+      },
+      {
+        "budget_label": "10s",
+        "budget_seconds": 10.0,
+        "completed_depth": 4,
+        "cutoffs": 10549,
+        "legal_move": true,
+        "measured_seconds": 9.990210058997036,
+        "measured_wall_seconds": 9.990544589003548,
+        "model": "C",
+        "nodes": 82262,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 4
+      },
+      {
+        "budget_label": "20s",
+        "budget_seconds": 20.0,
+        "completed_depth": 5,
+        "cutoffs": 15382,
+        "legal_move": true,
+        "measured_seconds": 19.980061203998048,
+        "measured_wall_seconds": 19.980146630987292,
+        "model": "C",
+        "nodes": 207947,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 5
+      },
+      {
+        "budget_label": "50s",
+        "budget_seconds": 50.0,
+        "completed_depth": 5,
+        "cutoffs": 48800,
+        "legal_move": true,
+        "measured_seconds": 49.975144262993126,
+        "measured_wall_seconds": 49.975395692003076,
+        "model": "C",
+        "nodes": 493009,
+        "simulations": 0,
+        "timed_out": true,
+        "tree_depth": 5
+      },
+      {
+        "budget_label": "50ms",
+        "budget_seconds": 0.05,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.04928269499214366,
+        "measured_wall_seconds": 0.049467296004877426,
+        "model": "D",
+        "nodes": 475,
+        "simulations": 11,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "200ms",
+        "budget_seconds": 0.2,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.1990531390038086,
+        "measured_wall_seconds": 0.19907486299052835,
+        "model": "D",
+        "nodes": 2062,
+        "simulations": 46,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "1s",
+        "budget_seconds": 1.0,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 0.999110651013325,
+        "measured_wall_seconds": 0.9991299850080395,
+        "model": "D",
+        "nodes": 10578,
+        "simulations": 231,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "5s",
+        "budget_seconds": 5.0,
+        "completed_depth": 2,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 4.999151433003135,
+        "measured_wall_seconds": 4.99917111499235,
+        "model": "D",
+        "nodes": 53429,
+        "simulations": 1145,
+        "timed_out": true,
+        "tree_depth": 2
+      },
+      {
+        "budget_label": "10s",
+        "budget_seconds": 10.0,
+        "completed_depth": 3,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 9.999091308010975,
+        "measured_wall_seconds": 9.999111573997652,
+        "model": "D",
+        "nodes": 108193,
+        "simulations": 2337,
+        "timed_out": true,
+        "tree_depth": 3
+      },
+      {
+        "budget_label": "20s",
+        "budget_seconds": 20.0,
+        "completed_depth": 3,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 19.999103202004335,
+        "measured_wall_seconds": 19.99912478600163,
+        "model": "D",
+        "nodes": 216125,
+        "simulations": 4639,
+        "timed_out": true,
+        "tree_depth": 3
+      },
+      {
+        "budget_label": "50s",
+        "budget_seconds": 50.0,
+        "completed_depth": 3,
+        "cutoffs": 0,
+        "legal_move": true,
+        "measured_seconds": 49.99918844499916,
+        "measured_wall_seconds": 49.99922651400266,
+        "model": "D",
+        "nodes": 544314,
+        "simulations": 11723,
+        "timed_out": true,
+        "tree_depth": 3
+      }
+    ]
+  },
+  "checked_at_utc": "2026-10-21T03:24:05Z",
+  "code_commit": "7c405787b92c2fc6776c5629ec06b3cd18b0d69a",
+  "estimate": {
+    "configured_full_board_budget_ceiling_hours": 78.11050000000002,
+    "eligible_v5_reused_groups": 28,
+    "estimated_full_schedule_wall_hours_serial": 10.60019266186154,
+    "estimated_full_schedule_wall_seconds_serial": 38160.69358270154,
+    "estimated_new_games_if_all_routes_reach_50s": 280,
+    "estimated_new_groups_if_all_routes_reach_50s": 140,
+    "estimated_storage_bytes_for_all_336_games": 2387280,
+    "estimation_method": "每个未复用配对组按V5同家族对局的实际平均非开局着数估计；双方各自使用本次相同开局实测每步耗时；另列77个剩余格的配置时间极端上界。",
+    "group_estimates": [
+      {
+        "estimated_compute_seconds_two_games": 4.208519628213253,
+        "group_id": "v5-1-9x9-a-natural-b-200ms-o731102",
+        "mean_nonopening_plies_per_game": 21.5,
+        "model_versions": {
+          "A": "natural",
+          "B": "200ms"
+        },
+        "pair": "A-B"
+      },
+      {
+        "estimated_compute_seconds_two_games": 21.408663162204903,
+        "group_id": "v5-1-9x9-a-natural-b-1s-o731103",
+        "mean_nonopening_plies_per_game": 21.5,
+        "model_versions": {
+          "A": "natural",
+          "B": "1s"
+        },
+        "pair": "A-B"
+      },
+      {
+        "estimated_compute_seconds_two_games": 107.40894569350348,
+        "group_id": "v5-1-9x9-a-natural-b-5s-o731104",
+        "mean_nonopening_plies_per_game": 21.5,
+        "model_versions": {
+          "A": "natural",
+          "B": "5s"
+        },
+        "pair": "A-B"
+      },
+      {
+        "estimated_compute_seconds_two_games": 214.80586327747733,
+        "group_id": "v5-1-9x9-a-natural-b-10s-o731105",
+        "mean_nonopening_plies_per_game": 21.5,
+        "model_versions": {
+          "A": "natural",
+          "B": "10s"
+        },
+        "pair": "A-B"
+      },
+      {
+        "estimated_compute_seconds_two_games": 429.5936646625705,
+        "group_id": "v5-1-9x9-a-natural-b-20s-o731106",
+        "mean_nonopening_plies_per_game": 21.5,
+        "model_versions": {
+          "A": "natural",
+          "B": "20s"
+        },
+        "pair": "A-B"
+      },
+      {
+        "estimated_compute_seconds_two_games": 1074.5051718236937,
+        "group_id": "v5-1-9x9-a-natural-b-50s-o731107",
+        "mean_nonopening_plies_per_game": 21.5,
+        "model_versions": {
+          "A": "natural",
+          "B": "50s"
+        },
+        "pair": "A-B"
+      },
+      {
+        "estimated_compute_seconds_two_games": 9.982974650542019,
+        "group_id": "v5-1-9x9-a-natural-c-200ms-o731105",
+        "mean_nonopening_plies_per_game": 51.0,
+        "model_versions": {
+          "A": "natural",
+          "C": "200ms"
+        },
+        "pair": "A-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 50.79319515226234,
+        "group_id": "v5-1-9x9-a-natural-c-1s-o731106",
+        "mean_nonopening_plies_per_game": 51.0,
+        "model_versions": {
+          "A": "natural",
+          "C": "1s"
+        },
+        "pair": "A-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 254.79239628817595,
+        "group_id": "v5-1-9x9-a-natural-c-5s-o731107",
+        "mean_nonopening_plies_per_game": 51.0,
+        "model_versions": {
+          "A": "natural",
+          "C": "5s"
+        },
+        "pair": "A-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 509.53811447018234,
+        "group_id": "v5-1-9x9-a-natural-c-10s-o731108",
+        "mean_nonopening_plies_per_game": 51.0,
+        "model_versions": {
+          "A": "natural",
+          "C": "10s"
+        },
+        "pair": "A-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 1019.0205228652339,
+        "group_id": "v5-1-9x9-a-natural-c-20s-o731109",
+        "mean_nonopening_plies_per_game": 51.0,
+        "model_versions": {
+          "A": "natural",
+          "C": "20s"
+        },
+        "pair": "A-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 2548.769758873983,
+        "group_id": "v5-1-9x9-a-natural-c-50s-o731110",
+        "mean_nonopening_plies_per_game": 51.0,
+        "model_versions": {
+          "A": "natural",
+          "C": "50s"
+        },
+        "pair": "A-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 499.99591409978166,
+        "group_id": "v5-1-9x9-a-natural-d-20s-o731112",
+        "mean_nonopening_plies_per_game": 25.0,
+        "model_versions": {
+          "A": "natural",
+          "D": "20s"
+        },
+        "pair": "A-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 1249.9980451746524,
+        "group_id": "v5-1-9x9-a-natural-d-50s-o731101",
+        "mean_nonopening_plies_per_game": 25.0,
+        "model_versions": {
+          "A": "natural",
+          "D": "50s"
+        },
+        "pair": "A-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 2.9660832945966313,
+        "group_id": "v5-1-9x9-b-200ms-c-50ms-o731111",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "50ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 4.819569632047205,
+        "group_id": "v5-1-9x9-b-200ms-c-200ms-o731112",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "200ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 14.707760313836584,
+        "group_id": "v5-1-9x9-b-200ms-c-1s-o731111",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "1s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 64.13613818010137,
+        "group_id": "v5-1-9x9-b-200ms-c-5s-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "5s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 125.8602407648172,
+        "group_id": "v5-1-9x9-b-200ms-c-10s-o731102",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "10s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 249.30625848518685,
+        "group_id": "v5-1-9x9-b-200ms-c-20s-o731101",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "20s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 619.9597848570546,
+        "group_id": "v5-1-9x9-b-200ms-c-50s-o731106",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "200ms",
+          "C": "50s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 12.851880076591833,
+        "group_id": "v5-1-9x9-b-1s-c-50ms-o731112",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "50ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 14.705366414042407,
+        "group_id": "v5-1-9x9-b-1s-c-200ms-o731108",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "200ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 24.593557095831784,
+        "group_id": "v5-1-9x9-b-1s-c-1s-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "1s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 74.02193496209657,
+        "group_id": "v5-1-9x9-b-1s-c-5s-o731112",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "5s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 135.7460375468124,
+        "group_id": "v5-1-9x9-b-1s-c-10s-o731102",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "10s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 259.19205526718207,
+        "group_id": "v5-1-9x9-b-1s-c-20s-o731111",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "20s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 629.8455816390498,
+        "group_id": "v5-1-9x9-b-1s-c-50s-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "1s",
+          "C": "50s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 62.28061389026178,
+        "group_id": "v5-1-9x9-b-5s-c-50ms-o731101",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "50ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 64.13410022771235,
+        "group_id": "v5-1-9x9-b-5s-c-200ms-o731104",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "200ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 74.02229090950173,
+        "group_id": "v5-1-9x9-b-5s-c-1s-o731107",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "1s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 123.45066877576652,
+        "group_id": "v5-1-9x9-b-5s-c-5s-o731106",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "5s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 185.17477136048237,
+        "group_id": "v5-1-9x9-b-5s-c-10s-o731104",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "10s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 308.62078908085203,
+        "group_id": "v5-1-9x9-b-5s-c-20s-o731108",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "20s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 679.2743154527197,
+        "group_id": "v5-1-9x9-b-5s-c-50s-o731107",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "5s",
+          "C": "50s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 124.00708147174842,
+        "group_id": "v5-1-9x9-b-10s-c-50ms-o731102",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "50ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 125.86056780919898,
+        "group_id": "v5-1-9x9-b-10s-c-200ms-o731101",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "200ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 135.74875849098837,
+        "group_id": "v5-1-9x9-b-10s-c-1s-o731106",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "1s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 185.17713635725315,
+        "group_id": "v5-1-9x9-b-10s-c-5s-o731108",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "5s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 246.90123894196898,
+        "group_id": "v5-1-9x9-b-10s-c-10s-o731111",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "10s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 370.3472566623386,
+        "group_id": "v5-1-9x9-b-10s-c-20s-o731106",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "20s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 741.0007830342064,
+        "group_id": "v5-1-9x9-b-10s-c-50s-o731102",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "10s",
+          "C": "50s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 247.4565487130146,
+        "group_id": "v5-1-9x9-b-20s-c-50ms-o731103",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "50ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 249.3100350504652,
+        "group_id": "v5-1-9x9-b-20s-c-200ms-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "200ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 259.19822573225457,
+        "group_id": "v5-1-9x9-b-20s-c-1s-o731110",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "1s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 308.62660359851935,
+        "group_id": "v5-1-9x9-b-20s-c-5s-o731112",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "5s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 370.35070618323516,
+        "group_id": "v5-1-9x9-b-20s-c-10s-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "10s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 493.7967239036048,
+        "group_id": "v5-1-9x9-b-20s-c-20s-o731101",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "20s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 864.4502502754726,
+        "group_id": "v5-1-9x9-b-20s-c-50s-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "20s",
+          "C": "50s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 618.1199730946569,
+        "group_id": "v5-1-9x9-b-50s-c-50ms-o731104",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "50ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 619.9734594321075,
+        "group_id": "v5-1-9x9-b-50s-c-200ms-o731103",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "200ms"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 629.8616501138968,
+        "group_id": "v5-1-9x9-b-50s-c-1s-o731107",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "1s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 679.2900279801615,
+        "group_id": "v5-1-9x9-b-50s-c-5s-o731110",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "5s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 741.0141305648774,
+        "group_id": "v5-1-9x9-b-50s-c-10s-o731102",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "10s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 864.4601482852471,
+        "group_id": "v5-1-9x9-b-50s-c-20s-o731109",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "20s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 1235.1136746571149,
+        "group_id": "v5-1-9x9-b-50s-c-50s-o731104",
+        "mean_nonopening_plies_per_game": 12.357142857142858,
+        "model_versions": {
+          "B": "50s",
+          "C": "50s"
+        },
+        "pair": "B-C"
+      },
+      {
+        "estimated_compute_seconds_two_games": 1.7259678385837884,
+        "group_id": "v5-1-9x9-b-50ms-d-200ms-o731107",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50ms",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 7.3835173877939395,
+        "group_id": "v5-1-9x9-b-50ms-d-1s-o731108",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50ms",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 35.66952006043617,
+        "group_id": "v5-1-9x9-b-50ms-d-5s-o731109",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50ms",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 71.0262377479916,
+        "group_id": "v5-1-9x9-b-50ms-d-10s-o731110",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50ms",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 141.7406075698018,
+        "group_id": "v5-1-9x9-b-50ms-d-20s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50ms",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 353.8840675024081,
+        "group_id": "v5-1-9x9-b-50ms-d-50s-o731112",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50ms",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 2.7866016231678907,
+        "group_id": "v5-1-9x9-b-200ms-d-200ms-o731108",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "200ms",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 8.444151172378042,
+        "group_id": "v5-1-9x9-b-200ms-d-1s-o731103",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "200ms",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 36.73015384502027,
+        "group_id": "v5-1-9x9-b-200ms-d-5s-o731106",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "200ms",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 72.08687153257571,
+        "group_id": "v5-1-9x9-b-200ms-d-10s-o731103",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "200ms",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 142.8012413543859,
+        "group_id": "v5-1-9x9-b-200ms-d-20s-o731108",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "200ms",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 354.94470128699214,
+        "group_id": "v5-1-9x9-b-200ms-d-50s-o731102",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "200ms",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 8.443791689165144,
+        "group_id": "v5-1-9x9-b-1s-d-200ms-o731108",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "1s",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 14.101341238375296,
+        "group_id": "v5-1-9x9-b-1s-d-1s-o731102",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "1s",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 42.387343911017524,
+        "group_id": "v5-1-9x9-b-1s-d-5s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "1s",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 77.74406159857296,
+        "group_id": "v5-1-9x9-b-1s-d-10s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "1s",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 148.45843142038314,
+        "group_id": "v5-1-9x9-b-1s-d-20s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "1s",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 360.6018913529894,
+        "group_id": "v5-1-9x9-b-1s-d-50s-o731102",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "1s",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 36.72959890045604,
+        "group_id": "v5-1-9x9-b-5s-d-200ms-o731106",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "5s",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 42.38714844966619,
+        "group_id": "v5-1-9x9-b-5s-d-1s-o731106",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "5s",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 70.67315112230841,
+        "group_id": "v5-1-9x9-b-5s-d-5s-o731103",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "5s",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 106.02986880986386,
+        "group_id": "v5-1-9x9-b-5s-d-10s-o731101",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "5s",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 176.74423863167405,
+        "group_id": "v5-1-9x9-b-5s-d-20s-o731109",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "5s",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 388.8876985642803,
+        "group_id": "v5-1-9x9-b-5s-d-50s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "5s",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 72.05283757425474,
+        "group_id": "v5-1-9x9-b-10s-d-200ms-o731104",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "10s",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 77.7103871234649,
+        "group_id": "v5-1-9x9-b-10s-d-1s-o731108",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "10s",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 105.99638979610712,
+        "group_id": "v5-1-9x9-b-10s-d-5s-o731106",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "10s",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 141.35310748366257,
+        "group_id": "v5-1-9x9-b-10s-d-10s-o731103",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "10s",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 212.06747730547275,
+        "group_id": "v5-1-9x9-b-10s-d-20s-o731102",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "10s",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 424.210937238079,
+        "group_id": "v5-1-9x9-b-10s-d-50s-o731101",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "10s",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 142.69733038862094,
+        "group_id": "v5-1-9x9-b-20s-d-200ms-o731112",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "20s",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 148.3548799378311,
+        "group_id": "v5-1-9x9-b-20s-d-1s-o731109",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "20s",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 176.6408826104733,
+        "group_id": "v5-1-9x9-b-20s-d-5s-o731107",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "20s",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 211.99760029802874,
+        "group_id": "v5-1-9x9-b-20s-d-10s-o731109",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "20s",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 282.71197011983895,
+        "group_id": "v5-1-9x9-b-20s-d-20s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "20s",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 494.85543005244523,
+        "group_id": "v5-1-9x9-b-20s-d-50s-o731106",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "20s",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 354.81108191337574,
+        "group_id": "v5-1-9x9-b-50s-d-200ms-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50s",
+          "D": "200ms"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 360.46863146258585,
+        "group_id": "v5-1-9x9-b-50s-d-1s-o731101",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50s",
+          "D": "1s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 388.7546341352281,
+        "group_id": "v5-1-9x9-b-50s-d-5s-o731111",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50s",
+          "D": "5s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 424.11135182278355,
+        "group_id": "v5-1-9x9-b-50s-d-10s-o731107",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50s",
+          "D": "10s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 494.8257216445937,
+        "group_id": "v5-1-9x9-b-50s-d-20s-o731106",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50s",
+          "D": "20s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 706.9691815772,
+        "group_id": "v5-1-9x9-b-50s-d-50s-o731108",
+        "mean_nonopening_plies_per_game": 7.071428571428571,
+        "model_versions": {
+          "B": "50s",
+          "D": "50s"
+        },
+        "pair": "B-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 1.8305344799591694,
+        "group_id": "v5-1-9x9-c-50ms-d-200ms-o731110",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50ms",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 7.830965820030542,
+        "group_id": "v5-1-9x9-c-50ms-d-1s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50ms",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 37.83127168495412,
+        "group_id": "v5-1-9x9-c-50ms-d-5s-o731112",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50ms",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 75.33082074751292,
+        "group_id": "v5-1-9x9-c-50ms-d-10s-o731101",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50ms",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 150.33090995246312,
+        "group_id": "v5-1-9x9-c-50ms-d-20s-o731102",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50ms",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 375.3315492749243,
+        "group_id": "v5-1-9x9-c-50ms-d-50s-o731103",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50ms",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 2.955482835059229,
+        "group_id": "v5-1-9x9-c-200ms-d-200ms-o731108",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "200ms",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 8.955914175130602,
+        "group_id": "v5-1-9x9-c-200ms-d-1s-o731106",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "200ms",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 38.95622004005418,
+        "group_id": "v5-1-9x9-c-200ms-d-5s-o731109",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "200ms",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 76.45576910261298,
+        "group_id": "v5-1-9x9-c-200ms-d-10s-o731103",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "200ms",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 151.45585830756318,
+        "group_id": "v5-1-9x9-c-200ms-d-20s-o731107",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "200ms",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 376.4564976300244,
+        "group_id": "v5-1-9x9-c-200ms-d-50s-o731105",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "200ms",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 8.9569858500181,
+        "group_id": "v5-1-9x9-c-1s-d-200ms-o731110",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "1s",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 14.957417190089473,
+        "group_id": "v5-1-9x9-c-1s-d-1s-o731104",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "1s",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 44.95772305501305,
+        "group_id": "v5-1-9x9-c-1s-d-5s-o731104",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "1s",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 82.45727211757185,
+        "group_id": "v5-1-9x9-c-1s-d-10s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "1s",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 157.45736132252205,
+        "group_id": "v5-1-9x9-c-1s-d-20s-o731104",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "1s",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 382.45800064498326,
+        "group_id": "v5-1-9x9-c-1s-d-50s-o731105",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "1s",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 38.956868370005395,
+        "group_id": "v5-1-9x9-c-5s-d-200ms-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "5s",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 44.95729971007677,
+        "group_id": "v5-1-9x9-c-5s-d-1s-o731110",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "5s",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 74.95760557500034,
+        "group_id": "v5-1-9x9-c-5s-d-5s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "5s",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 112.45715463755914,
+        "group_id": "v5-1-9x9-c-5s-d-10s-o731107",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "5s",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 187.45724384250934,
+        "group_id": "v5-1-9x9-c-5s-d-20s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "5s",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 412.45788316497055,
+        "group_id": "v5-1-9x9-c-5s-d-50s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "5s",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 76.41947398500633,
+        "group_id": "v5-1-9x9-c-10s-d-200ms-o731105",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "10s",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 82.4199053250777,
+        "group_id": "v5-1-9x9-c-10s-d-1s-o731103",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "10s",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 112.42021119000128,
+        "group_id": "v5-1-9x9-c-10s-d-5s-o731112",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "10s",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 149.91976025256008,
+        "group_id": "v5-1-9x9-c-10s-d-10s-o731110",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "10s",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 224.91984945751028,
+        "group_id": "v5-1-9x9-c-10s-d-20s-o731107",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "10s",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 449.9204887799715,
+        "group_id": "v5-1-9x9-c-10s-d-50s-o731109",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "10s",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 151.34335757251392,
+        "group_id": "v5-1-9x9-c-20s-d-200ms-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "20s",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 157.3437889125853,
+        "group_id": "v5-1-9x9-c-20s-d-1s-o731106",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "20s",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 187.34409477750887,
+        "group_id": "v5-1-9x9-c-20s-d-5s-o731101",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "20s",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 224.84364384006767,
+        "group_id": "v5-1-9x9-c-20s-d-10s-o731105",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "20s",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 299.84373304501787,
+        "group_id": "v5-1-9x9-c-20s-d-20s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "20s",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 524.8443723674791,
+        "group_id": "v5-1-9x9-c-20s-d-50s-o731108",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "20s",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 376.306480514977,
+        "group_id": "v5-1-9x9-c-50s-d-200ms-o731105",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50s",
+          "D": "200ms"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 382.3069118550484,
+        "group_id": "v5-1-9x9-c-50s-d-1s-o731108",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50s",
+          "D": "1s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 412.30721771997196,
+        "group_id": "v5-1-9x9-c-50s-d-5s-o731103",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50s",
+          "D": "5s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 449.80676678253076,
+        "group_id": "v5-1-9x9-c-50s-d-10s-o731104",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50s",
+          "D": "10s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 524.806855987481,
+        "group_id": "v5-1-9x9-c-50s-d-20s-o731111",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50s",
+          "D": "20s"
+        },
+        "pair": "C-D"
+      },
+      {
+        "estimated_compute_seconds_two_games": 749.8074953099422,
+        "group_id": "v5-1-9x9-c-50s-d-50s-o731104",
+        "mean_nonopening_plies_per_game": 7.5,
+        "model_versions": {
+          "C": "50s",
+          "D": "50s"
+        },
+        "pair": "C-D"
+      }
+    ],
+    "maximum_single_game_budget_seconds": 3900.0
+  },
+  "experiment_id": "wuziq-abcd-independent-ladder-v5-1-2026-10-21",
+  "historical_turn_basis": {
+    "games": 56,
+    "groups": 28,
+    "mean_nonopening_plies_by_family_pair": {
+      "A-B": 21.5,
+      "A-C": 51.0,
+      "A-D": 25.0,
+      "B-C": 12.357142857142858,
+      "B-D": 7.071428571428571,
+      "C-D": 7.5
+    }
+  },
+  "human_readable_estimate": "預估全部仍需新跑约 140 组 / 280 局；按V5平均对局长度与本次逐档实测速度，单进程约 10.60 小时；配置预算的全棋盘上界约 78.11 小时。",
+  "preflight_elapsed_seconds": 258.73990218600375,
+  "resources_after": {
+    "cpu_count_visible": 3,
+    "disk": {
+      "free_bytes": 31857397760,
+      "total_bytes": 33770192896,
+      "used_bytes": 178032640
+    },
+    "memory": {
+      "memavailable_kib": 9504144,
+      "memtotal_kib": 10207492,
+      "swapfree_kib": 0,
+      "swaptotal_kib": 0
+    }
+  },
+  "resources_before": {
+    "cpu_count_visible": 3,
+    "disk": {
+      "free_bytes": 31857397760,
+      "total_bytes": 33770192896,
+      "used_bytes": 178032640
+    },
+    "memory": {
+      "memavailable_kib": 9560780,
+      "memtotal_kib": 10207492,
+      "swapfree_kib": 0,
+      "swaptotal_kib": 0
+    }
+  },
+  "schedule_audit": {
+    "duplicate_ids": false,
+    "eligible_v5_reuse_games": 56,
+    "eligible_v5_reuse_groups": 28,
+    "game_ids": 336,
+    "groups": 168,
+    "independent_routes": 66,
+    "v5_validation": {
+      "complete": true,
+      "games": 56,
+      "groups": 28,
+      "partial_groups": 0,
+      "routes": {
+        "A>B": {
+          "challenger": "A",
+          "failed_budget": "50ms",
+          "highest_passed_budget": null,
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-a-b-a-to-b-r00-o731101",
+              "opponent_budget": "50ms",
+              "score": 0.0,
+              "status": "failed"
+            },
+            {
+              "budget": "200ms",
+              "games": 0,
+              "group_id": "v5-9x9-a-b-a-to-b-r01-o731102",
+              "opponent_budget": "200ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "1s",
+              "games": 0,
+              "group_id": "v5-9x9-a-b-a-to-b-r02-o731103",
+              "opponent_budget": "1s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "5s",
+              "games": 0,
+              "group_id": "v5-9x9-a-b-a-to-b-r03-o731104",
+              "opponent_budget": "5s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "10s",
+              "games": 0,
+              "group_id": "v5-9x9-a-b-a-to-b-r04-o731105",
+              "opponent_budget": "10s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "20s",
+              "games": 0,
+              "group_id": "v5-9x9-a-b-a-to-b-r05-o731106",
+              "opponent_budget": "20s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "50s",
+              "games": 0,
+              "group_id": "v5-9x9-a-b-a-to-b-r06-o731107",
+              "opponent_budget": "50s",
+              "score": null,
+              "status": "skipped_after_failure"
+            }
+          ],
+          "opponent": "B",
+          "status": "failed"
+        },
+        "A>C": {
+          "challenger": "A",
+          "failed_budget": "50ms",
+          "highest_passed_budget": null,
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-a-c-a-to-c-r00-o731104",
+              "opponent_budget": "50ms",
+              "score": 0.5,
+              "status": "failed"
+            },
+            {
+              "budget": "200ms",
+              "games": 0,
+              "group_id": "v5-9x9-a-c-a-to-c-r01-o731105",
+              "opponent_budget": "200ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "1s",
+              "games": 0,
+              "group_id": "v5-9x9-a-c-a-to-c-r02-o731106",
+              "opponent_budget": "1s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "5s",
+              "games": 0,
+              "group_id": "v5-9x9-a-c-a-to-c-r03-o731107",
+              "opponent_budget": "5s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "10s",
+              "games": 0,
+              "group_id": "v5-9x9-a-c-a-to-c-r04-o731108",
+              "opponent_budget": "10s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "20s",
+              "games": 0,
+              "group_id": "v5-9x9-a-c-a-to-c-r05-o731109",
+              "opponent_budget": "20s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "50s",
+              "games": 0,
+              "group_id": "v5-9x9-a-c-a-to-c-r06-o731110",
+              "opponent_budget": "50s",
+              "score": null,
+              "status": "skipped_after_failure"
+            }
+          ],
+          "opponent": "C",
+          "status": "failed"
+        },
+        "A>D": {
+          "challenger": "A",
+          "failed_budget": "10s",
+          "highest_passed_budget": "5s",
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-a-d-a-to-d-r00-o731107",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "200ms",
+              "games": 2,
+              "group_id": "v5-9x9-a-d-a-to-d-r01-o731108",
+              "opponent_budget": "200ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "1s",
+              "games": 2,
+              "group_id": "v5-9x9-a-d-a-to-d-r02-o731109",
+              "opponent_budget": "1s",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "5s",
+              "games": 2,
+              "group_id": "v5-9x9-a-d-a-to-d-r03-o731110",
+              "opponent_budget": "5s",
+              "score": 1.0,
+              "status": "passed"
+            },
+            {
+              "budget": "10s",
+              "games": 2,
+              "group_id": "v5-9x9-a-d-a-to-d-r04-o731111",
+              "opponent_budget": "10s",
+              "score": 0.5,
+              "status": "failed"
+            },
+            {
+              "budget": "20s",
+              "games": 0,
+              "group_id": "v5-9x9-a-d-a-to-d-r05-o731112",
+              "opponent_budget": "20s",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "50s",
+              "games": 0,
+              "group_id": "v5-9x9-a-d-a-to-d-r06-o731101",
+              "opponent_budget": "50s",
+              "score": null,
+              "status": "skipped_after_failure"
+            }
+          ],
+          "opponent": "D",
+          "status": "failed"
+        },
+        "B>C": {
+          "challenger": "B",
+          "failed_budget": "50ms",
+          "highest_passed_budget": null,
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-shared-baseline-r00-o731110",
+              "opponent_budget": "50ms",
+              "score": 0.0,
+              "status": "failed"
+            },
+            {
+              "budget": "200ms",
+              "games": 0,
+              "group_id": "v5-9x9-b-c-b-to-c-r01-o731111",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "1s",
+              "games": 0,
+              "group_id": "v5-9x9-b-c-b-to-c-r02-o731112",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "5s",
+              "games": 0,
+              "group_id": "v5-9x9-b-c-b-to-c-r03-o731101",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "10s",
+              "games": 0,
+              "group_id": "v5-9x9-b-c-b-to-c-r04-o731102",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "20s",
+              "games": 0,
+              "group_id": "v5-9x9-b-c-b-to-c-r05-o731103",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "50s",
+              "games": 0,
+              "group_id": "v5-9x9-b-c-b-to-c-r06-o731104",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            }
+          ],
+          "opponent": "C",
+          "status": "failed"
+        },
+        "B>D": {
+          "challenger": "B",
+          "failed_budget": null,
+          "highest_passed_budget": "50s",
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-shared-baseline-r00-o731101",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "200ms",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-b-to-d-r01-o731102",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "1s",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-b-to-d-r02-o731103",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "5s",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-b-to-d-r03-o731104",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "10s",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-b-to-d-r04-o731105",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "20s",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-b-to-d-r05-o731106",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "50s",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-b-to-d-r06-o731107",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            }
+          ],
+          "opponent": "D",
+          "status": "completed"
+        },
+        "C>B": {
+          "challenger": "C",
+          "failed_budget": null,
+          "highest_passed_budget": "50s",
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-shared-baseline-r00-o731110",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "200ms",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-c-to-b-r01-o731104",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "1s",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-c-to-b-r02-o731105",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "5s",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-c-to-b-r03-o731106",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "10s",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-c-to-b-r04-o731107",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "20s",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-c-to-b-r05-o731108",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "50s",
+              "games": 2,
+              "group_id": "v5-9x9-b-c-c-to-b-r06-o731109",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            }
+          ],
+          "opponent": "B",
+          "status": "completed"
+        },
+        "C>D": {
+          "challenger": "C",
+          "failed_budget": null,
+          "highest_passed_budget": "50s",
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-shared-baseline-r00-o731104",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "200ms",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-c-to-d-r01-o731105",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "1s",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-c-to-d-r02-o731106",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "5s",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-c-to-d-r03-o731107",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "10s",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-c-to-d-r04-o731108",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "20s",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-c-to-d-r05-o731109",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            },
+            {
+              "budget": "50s",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-c-to-d-r06-o731110",
+              "opponent_budget": "50ms",
+              "score": 2.0,
+              "status": "passed"
+            }
+          ],
+          "opponent": "D",
+          "status": "completed"
+        },
+        "D>B": {
+          "challenger": "D",
+          "failed_budget": "50ms",
+          "highest_passed_budget": null,
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-b-d-shared-baseline-r00-o731101",
+              "opponent_budget": "50ms",
+              "score": 0.0,
+              "status": "failed"
+            },
+            {
+              "budget": "200ms",
+              "games": 0,
+              "group_id": "v5-9x9-b-d-d-to-b-r01-o731107",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "1s",
+              "games": 0,
+              "group_id": "v5-9x9-b-d-d-to-b-r02-o731108",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "5s",
+              "games": 0,
+              "group_id": "v5-9x9-b-d-d-to-b-r03-o731109",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "10s",
+              "games": 0,
+              "group_id": "v5-9x9-b-d-d-to-b-r04-o731110",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "20s",
+              "games": 0,
+              "group_id": "v5-9x9-b-d-d-to-b-r05-o731111",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "50s",
+              "games": 0,
+              "group_id": "v5-9x9-b-d-d-to-b-r06-o731112",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            }
+          ],
+          "opponent": "B",
+          "status": "failed"
+        },
+        "D>C": {
+          "challenger": "D",
+          "failed_budget": "50ms",
+          "highest_passed_budget": null,
+          "levels": [
+            {
+              "budget": "50ms",
+              "games": 2,
+              "group_id": "v5-9x9-c-d-shared-baseline-r00-o731104",
+              "opponent_budget": "50ms",
+              "score": 0.0,
+              "status": "failed"
+            },
+            {
+              "budget": "200ms",
+              "games": 0,
+              "group_id": "v5-9x9-c-d-d-to-c-r01-o731110",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "1s",
+              "games": 0,
+              "group_id": "v5-9x9-c-d-d-to-c-r02-o731111",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "5s",
+              "games": 0,
+              "group_id": "v5-9x9-c-d-d-to-c-r03-o731112",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "10s",
+              "games": 0,
+              "group_id": "v5-9x9-c-d-d-to-c-r04-o731101",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "20s",
+              "games": 0,
+              "group_id": "v5-9x9-c-d-d-to-c-r05-o731102",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            },
+            {
+              "budget": "50s",
+              "games": 0,
+              "group_id": "v5-9x9-c-d-d-to-c-r06-o731103",
+              "opponent_budget": "50ms",
+              "score": null,
+              "status": "skipped_after_failure"
+            }
+          ],
+          "opponent": "C",
+          "status": "failed"
+        }
+      },
+      "valid": true
+    }
+  }
+}

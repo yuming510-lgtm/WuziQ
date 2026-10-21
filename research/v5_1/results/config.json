@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "experiment_id": "wuziq-abcd-independent-ladder-v5-1-2026-10-21",
+  "based_on_branch": "research/abcd-ladder-v5",
+  "based_on_commit": "25e6fd7bd4063e4f11c3313f91ae5734a19f5d11",
+  "base_seed": 20261021,
+  "board_size": 9,
+  "families": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "budget_ladder": [
+    {
+      "label": "50ms",
+      "seconds": 0.05
+    },
+    {
+      "label": "200ms",
+      "seconds": 0.2
+    },
+    {
+      "label": "1s",
+      "seconds": 1.0
+    },
+    {
+      "label": "5s",
+      "seconds": 5.0
+    },
+    {
+      "label": "10s",
+      "seconds": 10.0
+    },
+    {
+      "label": "20s",
+      "seconds": 20.0
+    },
+    {
+      "label": "50s",
+      "seconds": 50.0
+    }
+  ],
+  "opening_plies": 4,
+  "opening_seeds": [
+    731101,
+    731102,
+    731103,
+    731104,
+    731105,
+    731106,
+    731107,
+    731108,
+    731109,
+    731110,
+    731111,
+    731112
+  ],
+  "opening_catalog": {
+    "731101": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        6,
+        3
+      ],
+      [
+        "B",
+        7,
+        5
+      ],
+      [
+        "W",
+        6,
+        1
+      ]
+    ],
+    "731102": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        2,
+        5
+      ],
+      [
+        "B",
+        0,
+        6
+      ],
+      [
+        "W",
+        4,
+        6
+      ]
+    ],
+    "731103": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        3,
+        2
+      ],
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        6,
+        3
+      ]
+    ],
+    "731104": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        4,
+        6
+      ],
+      [
+        "B",
+        3,
+        5
+      ],
+      [
+        "W",
+        1,
+        4
+      ]
+    ],
+    "731105": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        2,
+        2
+      ],
+      [
+        "B",
+        3,
+        6
+      ],
+      [
+        "W",
+        5,
+        2
+      ]
+    ],
+    "731106": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        5,
+        6
+      ],
+      [
+        "B",
+        2,
+        4
+      ],
+      [
+        "W",
+        1,
+        6
+      ]
+    ],
+    "731107": [
+      [
+        "B",
+        3,
+        4
+      ],
+      [
+        "W",
+        5,
+        3
+      ],
+      [
+        "B",
+        6,
+        6
+      ],
+      [
+        "W",
+        2,
+        1
+      ]
+    ],
+    "731108": [
+      [
+        "B",
+        4,
+        3
+      ],
+      [
+        "W",
+        3,
+        5
+      ],
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        6,
+        2
+      ]
+    ],
+    "731109": [
+      [
+        "B",
+        3,
+        3
+      ],
+      [
+        "W",
+        4,
+        5
+      ],
+      [
+        "B",
+        6,
+        4
+      ],
+      [
+        "W",
+        2,
+        3
+      ]
+    ],
+    "731110": [
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        3,
+        6
+      ],
+      [
+        "B",
+        1,
+        4
+      ],
+      [
+        "W",
+        6,
+        1
+      ]
+    ],
+    "731111": [
+      [
+        "B",
+        2,
+        5
+      ],
+      [
+        "W",
+        6,
+        3
+      ],
+      [
+        "B",
+        3,
+        2
+      ],
+      [
+        "W",
+        5,
+        6
+      ]
+    ],
+    "731112": [
+      [
+        "B",
+        6,
+        4
+      ],
+      [
+        "W",
+        2,
+        4
+      ],
+      [
+        "B",
+        5,
+        5
+      ],
+      [
+        "W",
+        3,
+        3
+      ]
+    ]
+  },
+  "opening_assignment": "V5-compatible deterministic axis assignment; SHA-256-derived interior grid assignment; fixed in the materialized schedule before official results.",
+  "engine_config_path": "configs/abcd_ladder_v5.json",
+  "engine_config_sha256": "df7fc19b56a3b593455339e37694a55e064dbad9ed9f9f7dc54827750630daaf",
+  "engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991"
+  },
+  "route_policy": "Each fixed challenger advances only against increasing opponent budgets. If it fails the paired threshold against opponent budget j, later opponent budgets are not played; reverse-route matchups against budgets above j are inferred as passed under the monotonic-budget assumption. Existing exact V5 results are reused when the relevant group is reached; actual complete results override inference. Independent challenger routes remain active unless their own level fails or is inferred.",
+  "promotion_rule": "Each route advances only if its two-game paired score is at least 1.0; score=wins+draws/2; score rate=score/2.",
+  "maximum_routes": 66,
+  "maximum_groups": 168,
+  "maximum_games": 336,
+  "v5_reuse_policy": "Reuse only fully replay-validated V5 groups with exact engine pins, algorithm settings, budget map, opening, colors, and game seed; never select by outcome.",
+  "sample_warning": "A two-game paired threshold on one opening is exploratory, not a stable strength claim.",
+  "neural_network_or_reinforcement_learning": false,
+  "dominance_inference_policy": {
+    "enabled": true,
+    "trigger": "fixed challenger scores below 1.0 paired points against opponent budget j",
+    "inference": "higher opponent budgets are presumed to pass against that same fixed challenger; no game, win, point, or rate is imputed",
+    "reverse_route": "infer the corresponding higher-budget opponent version as passed against the fixed challenger",
+    "exact_v5_reuse": "reuse a fully validated exact V5 group when an active route reaches it, including when it would otherwise be inferable",
+    "existing_actual_results": "retain complete games as observed; a single unpaired completed game is retained as an observation but excluded from all standings",
+    "assumption": "higher budget versions are treated as no weaker than lower budget versions for route pruning; inferred outcomes are not empirical findings"
+  }
+}
