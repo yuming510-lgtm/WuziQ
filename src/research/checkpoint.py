@@ -8,6 +8,8 @@ from pathlib import Path, PurePosixPath
 import tempfile
 from typing import Any, Iterable
 import zipfile
+from contextlib import contextmanager
+import fcntl
 
 
 def load_game_records(path: str | Path) -> list[dict[str, Any]]:
@@ -44,6 +46,19 @@ def load_game_records(path: str | Path) -> list[dict[str, Any]]:
         records.append(record)
         valid_offset += len(line)
     return records
+
+
+@contextmanager
+def artifact_lock(path: str | Path, *, shared: bool = False):
+    """Coordinate a live snapshot reader with the runner's append/progress transaction."""
+    lock_path = Path(path)
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("a+b") as handle:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_SH if shared else fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 def append_game(

@@ -13,7 +13,7 @@ from .abcd_ladder_v5 import _project_root
 from .abcd_ladder_v5_1 import engine_config, load_config
 from .abcd_ladder_v5_1_reuse import derive_state
 from .abcd_ladder_v5_1_runner import _validate_v51_record
-from .checkpoint import load_game_records, write_json_atomic
+from .checkpoint import artifact_lock, load_game_records
 
 _FILES = ("config.json", "schedule.json", "reuse_manifest.json", "progress.json", "9x9_games.jsonl")
 _ROOT = _project_root()
@@ -88,9 +88,10 @@ def create_snapshot(results_dir: str | Path, destination: str | Path) -> dict[st
     """Write a small zip containing only the inputs and completed game records."""
     root = Path(results_dir)
     source_files = {name: root / name for name in _FILES}
-    if any(not path.is_file() for path in source_files.values()):
-        raise FileNotFoundError("V5.1 snapshot requires config, schedule, reuse manifest, progress and game JSONL")
-    contents = {name: path.read_bytes() for name, path in source_files.items()}
+    with artifact_lock(root / ".v5_1_checkpoint.lock", shared=True):
+        if any(not path.is_file() for path in source_files.values()):
+            raise FileNotFoundError("V5.1 snapshot requires config, schedule, reuse manifest, progress and game JSONL")
+        contents = {name: path.read_bytes() for name, path in source_files.items()}
     ids, _ = _validate_payload(contents)
     manifest = {"schema_version": 1, "files": {name: _sha(data) for name, data in sorted(contents.items())}}
     output = Path(destination)

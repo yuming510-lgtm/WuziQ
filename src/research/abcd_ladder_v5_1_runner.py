@@ -15,7 +15,7 @@ from .abcd_ladder_v5 import _project_root, run_game as run_v5_game
 from .abcd_ladder_v5_analysis import validate_game_record as validate_v5_game
 from .abcd_ladder_v5_1 import build_schedule, engine_config, load_config
 from .abcd_ladder_v5_1_reuse import derive_state, prepare_v5_reuse
-from .checkpoint import append_game, load_game_records, write_json_atomic
+from .checkpoint import artifact_lock, append_game, load_game_records, write_json_atomic
 
 _V5_OUTPUT = "research/v5/results"
 _V5_CONFIG = "configs/abcd_ladder_v5.json"
@@ -283,11 +283,12 @@ def run_experiment(
             else:
                 record = game_runner(spec, engine, commit)
             _validate_v51_record(record, spec, engine)
-            append_game(records_path, record, existing_ids)
-            records.append(record)
-            present.add(identifier)
-            games_this_run += 1
-            progress = persist_progress()
+            with artifact_lock(root / ".v5_1_checkpoint.lock"):
+                append_game(records_path, record, existing_ids)
+                records.append(record)
+                present.add(identifier)
+                games_this_run += 1
+                progress = persist_progress()
             print(json.dumps({
                 "completed_games": len(existing_ids), "completed_groups": progress["completed_groups"],
                 "last_game_id": identifier, "winner": record.get("winner_model"),
