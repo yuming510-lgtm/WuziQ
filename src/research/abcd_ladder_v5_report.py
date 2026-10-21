@@ -94,6 +94,44 @@ def _history_section(results_dir: Path) -> str:
     return "\n".join(lines)
 
 
+def _interpretation_section(analysis: dict[str, Any], ranking: list[tuple[str, dict[str, Any]]]) -> str:
+    """Render observations from this analysis only; never embed a prior run's results."""
+    routes = analysis["route_state"]["routes"]
+    lines: list[str] = []
+    for route_id, route in routes.items():
+        highest = route.get("highest_passed_budget")
+        failed_budget = route.get("failed_budget")
+        if route.get("status") == "failed" and failed_budget:
+            failed = next((level for level in route["levels"] if level["budget"] == failed_budget), None)
+            score = failed.get("score") if failed else None
+            score_text = "未知" if score is None else f"{float(score):.1f}/2"
+            lines.append(f"- 路线 `{route_id}` 在 {failed_budget} 失败（挑战者得分 {score_text}），后续档未运行。")
+        elif route.get("status") == "completed":
+            lines.append(f"- 路线 `{route_id}` 通过全部预算档，最高为 {highest or '未记录'}。")
+        elif highest:
+            lines.append(f"- 路线 `{route_id}` 截至本报告已通过至 {highest}，后续档尚未完成。")
+        else:
+            lines.append(f"- 路线 `{route_id}` 尚无完整档位结果（状态：{route.get('status', '未知')}）。")
+
+    d_baseline_failures = [
+        route_id for route_id in ("D>B", "D>C")
+        if routes.get(route_id, {}).get("status") == "failed"
+        and routes.get(route_id, {}).get("failed_budget") == "50ms"
+    ]
+    if d_baseline_failures:
+        opponents = "、".join(route_id.split(">", 1)[1] for route_id in d_baseline_failures)
+        lines.append(
+            f"- D 在共享 50ms 基线对阵 {opponents} 未晋级；对应 D 的更高预算路线没有比赛，"
+            "因此本轮不能推断高预算 D 与这些对手的直接结果。"
+        )
+
+    if ranking:
+        rank_text = "、".join(f"{model} {_pct(stats.get('score_rate'))}" for model, stats in ranking)
+        lines.append(f"- 本轮非等预算混合样本的描述性得分率排序为：{rank_text}。")
+    lines.append("- 各家族的预算分布、对阵构成与有效局数不同；路线通过和汇总得分率均不是同算力的稳定强弱结论。")
+    return "\n".join(lines)
+
+
 def build_report(analysis: dict[str, Any], results_dir: str | Path, output_dir: str | Path) -> Path:
     results = Path(results_dir)
     output = Path(output_dir)
@@ -145,6 +183,7 @@ def build_report(analysis: dict[str, Any], results_dir: str | Path, output_dir: 
         )
 
     ranking = sorted(analysis["models"].items(), key=lambda row: (-float(row[1]["score_rate"] or 0), row[0]))
+    interpretation = _interpretation_section(analysis, ranking)
     rank_lines = ["| 排名（描述性） | 模型 | 胜–平–负 | 局数 | 得分率 | 95% 组级描述区间 |", "|---:|---|---:|---:|---:|---:|"]
     for place, (model, stats) in enumerate(ranking, start=1):
         rank_lines.append(
@@ -184,22 +223,73 @@ def build_report(analysis: dict[str, Any], results_dir: str | Path, output_dir: 
     progress = json.loads(progress_path.read_text(encoding="utf-8")) if progress_path.exists() else {}
     drive_path = results / "drive_recovery.json"
     drive = json.loads(drive_path.read_text(encoding="utf-8")) if drive_path.exists() else {}
+    preflight_path = results / "preflight.json"
+    preflight = json.loads(preflight_path.read_text(encoding="utf-8")) if preflight_path.exists() else {}
+    audit_path = results / "preliminary_attempt_audit.json"
+    audit = json.loads(audit_path.read_text(encoding="utf-8")) if audit_path.exists() else {}
+    events_path = results / "execution_events.json"
+    events = json.loads(events_path.read_text(encoding="utf-8")) if events_path.exists() else []
     elapsed = float(progress.get("elapsed_seconds_total", 0.0))
     wall_elapsed = float(progress.get("elapsed_wall_seconds_total", elapsed))
+    actual_metrics = analysis.get("actual_metrics", {})
+    thinking_elapsed = float(actual_metrics.get("ai_thinking_seconds", sum(float(row.get("thinking_seconds", 0.0)) for row in analysis["games"])))
     groups_played = int(analysis["actual_groups"])
     routes_advanced = sum(route["highest_passed_budget"] is not None for route in route_states.values())
     failed_routes = sum(route["status"] == "failed" for route in route_states.values())
     completed_routes = sum(route["status"] == "completed" for route in route_states.values())
     opening_usage = ", ".join(f"{seed}: {count}" for seed, count in analysis["opening_usage"].items())
-    drive_status = drive.get("status", "未写入 Drive 恢复演练结果")
+    start_time = str(progress.get("first_started_at_utc", "未记录"))
+    end_time = str(progress.get("completed_at_utc") or progress.get("updated_at_utc") or "未记录")
+    estimate = preflight.get("estimate", {})
+    estimate_minutes = estimate.get("estimated_full_schedule_wall_minutes")
+    ceiling_hours = estimate.get("configured_budget_sum_full_board_ceiling_hours")
+    preflight_elapsed = float(preflight.get("preflight_elapsed_seconds", 0.0))
+    if drive.get("status"):
+        drive_status = str(drive["status"])
+    elif drive.get("round_trip", {}).get("sha256_match") and drive.get("round_trip", {}).get("empty_directory_restore"):
+        drive_status = "已验证上传、下载、SHA-256 与空目录恢复"
+    else:
+        drive_status = "未能确认 Drive 恢复演练结果"
+    latest_snapshot = drive.get("latest_snapshot", {})
+    snapshot_note = ""
+    if latest_snapshot:
+        snapshot_note = (
+            f"最终有效快照 `{latest_snapshot.get('drive_file_id', '未知')}`，"
+            f"SHA-256 `{latest_snapshot.get('sha256', '未记录')}`，包含 {latest_snapshot.get('completed_games', '未知')} 局；"
+            f"专用文件夹当前文件数 {drive.get('files_remaining', '未记录')}。"
+        )
+    audit_note = ""
+    if audit and not audit.get("counted_in_official_results", True):
+        audit_note = (
+            f"正式执行前的 {int(audit.get('completed_games', 0))} 局前测已作废且未计入正式成绩；"
+            "因审阅发现的运行器状态标注问题，之后按同一唯一 ID 重跑。"
+            "审计元数据与对局 ID 保存在 `preliminary_attempt_audit.json`。"
+        )
+    event_note = ""
+    if any(event.get("event") == "transient_exec_transport_disconnect" for event in events):
+        event_note = (
+            "执行期间命令通道曾短暂断开；工作区棋谱仍在，恢复后校验了 50 局记录并推进 Drive 快照，"
+            "没有丢失、回滚或重计对局。详见 `execution_events.json`。"
+        )
+    runtime_context = (
+        f"正式对局时间：{start_time} 至 {end_time}。"
+        f"预检耗时 {preflight_elapsed / 60:.2f} 分钟。"
+        if start_time != "未记录" else f"预检耗时 {preflight_elapsed / 60:.2f} 分钟。"
+    )
+    if estimate_minutes is not None:
+        runtime_context += f"预检按理论 60 组估算约 {float(estimate_minutes) / 60:.2f} 小时；"
+        if ceiling_hours is not None:
+            runtime_context += f"配置预算的全盘极端上限约 {float(ceiling_hours):.2f} 小时。"
 
     report = f"""# V5「ABCD 四大算法家族·全量程阶梯挑战赛」研究报告
 
-实验日期：2026-10-20。该轮为传统规则和搜索算法的开发与对弈评估；没有神经网络训练、强化学习或 checkpoint。
+{runtime_context}本轮为传统规则和搜索算法的开发与对弈评估；没有神经网络或强化学习训练。Drive 恢复快照用于保存配置、进度和棋谱，不是训练 checkpoint。
 
 ## 摘要
 
-本轮在 9×9 棋盘完成 **{analysis['actual_groups']} 组、{analysis['actual_games']} 局**（理论上限 60 组、120 局），完整挑战路线结束状态为：{routes_advanced} 条路线至少通过一档、{failed_routes} 条失败、{completed_routes} 条到达 50 秒档。有效对局计算耗时 {elapsed/3600:.2f} 小时，含快照与恢复操作的实验墙钟耗时 {wall_elapsed/3600:.2f} 小时。每组同一固定开局交换黑白，按两局得分至少 1 分晋级。完整逐档结果见下表和 [梯度图](figures/ladder_gradient.svg)。
+本轮在 9×9 棋盘完成 **{analysis['actual_groups']} 组、{analysis['actual_games']} 局**（理论上限 60 组、120 局），完整挑战路线结束状态为：{routes_advanced} 条路线至少通过一档、{failed_routes} 条失败、{completed_routes} 条到达 50 秒档。逐步思考时间合计 {thinking_elapsed/3600:.2f} 小时，运行器计算耗时 {elapsed/3600:.2f} 小时，含快照的正式实验墙钟耗时 {wall_elapsed/3600:.2f} 小时。较理论全量程估时更短，主要因为阶梯失败规则让部分路线提前停止。每组同一固定开局交换黑白，按两局得分至少 1 分晋级。完整逐档结果见下表和 [梯度图](figures/ladder_gradient.svg)。
+
+{audit_note}
 
 本报告把“路线通过”解释为该两局配对达到规则阈值。每档只有两局、单一开局，因此路线边界是探索性现象，不能当成稳定棋力排名或显著差异。
 
@@ -260,11 +350,21 @@ def build_report(analysis: dict[str, Any], results_dir: str | Path, output_dir: 
 
 B/C 的深度代表完整完成的迭代加深层；C 剪枝量以 Alpha-Beta cutoff 计，`cutoff/节点` 只是实现计数比率，不等于所有未访问子树节点的比例。D 同时报告实际模拟次数与模拟/秒；搜索预算配置值没有替代实际模拟计数。A 的均值是自然耗时。
 
+{int(analysis['actual_games'])} 局合计记录 {int(actual_metrics.get('search_nodes_total', 0)):,} 个实现口径的搜索节点和 {int(actual_metrics.get('mcts_simulations_total', 0)):,} 次 MCTS 模拟；B/C/D 的节点定义不同，不作直接横向比较。
+
+正式对局中记录了 {int(actual_metrics.get('deadline_hit_moves', sum(int(row.get('timeouts', 0)) for row in analysis['games'])))} 次搜索到达本步预算截止；这些是迭代加深/限时搜索按设计返回最近完整结果的事件，不代表整局超时或弃权。名义步时长超过分配预算的记录有 {int(actual_metrics.get('nominal_budget_overrun_moves', 0))} 步，其中超过 10ms 的有 {int(actual_metrics.get('budget_overrun_over_10ms_moves', 0))} 步。完整局面均使用合法返回着继续，原始步时长保留在棋谱中。
+
 ## 6. 与 V1–V4C 历史结果对照
 
 {_history_section(results)}
 
 历史实验的预算、开局池和样本设计不同；本轮得分和路线晋级不与历史局数合并。V5 用阶梯方式观察提高计算预算是否能让原本的路线继续通过，不能单独识别算法改进，因为本轮未修改决策逻辑。
+
+### V5 结果解释
+
+{interpretation}
+
+每组仅两局、使用一个固定开局；挑战通过只表示达到预设晋级阈值。两局样本和早停不支持稳定棋力或统计显著性结论。
 
 ## 7. 棋谱、错误与结论限制
 
@@ -277,14 +377,19 @@ B/C 的深度代表完整完成的迭代加深层；C 剪枝量以 Alpha-Beta cu
 ## 8. 资源、复现与恢复
 
 - 预检、环境资源和总耗时估算：`preflight.json`。
+- 预检环境为 {preflight.get('resources_after', {}).get('cpu_model', '未记录')}，{preflight.get('resources_after', {}).get('logical_cpus', '未记录')} 个逻辑 CPU、cgroup 配额 {preflight.get('resources_after', {}).get('cgroup_cpu_quota_cores', '未记录')} 核、内存上限 {float(preflight.get('resources_after', {}).get('cgroup_memory_limit_bytes', 0)) / (1024**3):.1f} GiB；估算存储 {float(estimate.get('estimated_storage_bytes', 0)) / (1024**2):.2f} MiB。
 - 唯一对局、随机种子、开局、完整棋谱：`9x9_games.jsonl`。
 - 路线与逐局进度：`progress.json`、`route_summary.csv`。
 - 可复算统计：`summary.json`、`group_summary.csv`、`game_summary.csv`、`pairwise_summary.csv`、`model_usage.csv`。
-- Drive 恢复验证：{drive_status}，详情见 `drive_recovery.json`。
+- Drive 恢复验证：{drive_status}；详情见 `drive_recovery.json`。
+- {snapshot_note or 'Drive 最新快照 ID、哈希与文件夹状态见 `drive_recovery.json` 和 `drive_recovery_checkpoints.jsonl`。'}
+- {event_note or '正式运行期间未记录执行环境中断。'}
+- 正式数据核对：{int(actual_metrics.get('unique_game_ids', analysis['actual_games']))} 个唯一对局 ID；终局分布 `five_in_row={analysis.get('actual_metrics', {}).get('terminations', {}).get('five_in_row', '见原始记录')}`、`full_board={analysis.get('actual_metrics', {}).get('terminations', {}).get('full_board', '见原始记录')}`；完整回放校验由汇总脚本执行。
 - 代码基于 V4C 分支并固定 `src/ai.py`、`src/gomoku.py`、`src/research/mcts_d2.py` 的 SHA-256；执行代码提交记录于 `progress.json`。
+- 预检先于审阅修正提交 {preflight.get('implementation_commit', '未记录')} 执行；其固定的三个决策引擎 SHA 与正式运行版本一致。报告/统计代码提交单独在最终分支中。
 - 配置及脚本：`configs/abcd_ladder_v5.json`、`python scripts/run_abcd_ladder_v5.py`、`python scripts/summarize_abcd_ladder_v5.py`。
 
 """
     report_path = output / "REPORT.md"
-    report_path.write_text(report, encoding="utf-8")
+    report_path.write_text(report.rstrip() + "\n", encoding="utf-8")
     return report_path

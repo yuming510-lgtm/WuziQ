@@ -1,0 +1,47 @@
+{
+  "comparisons": [
+    {
+      "finding": "完成 1200 局；B–C 为 B 1 胜、0 平、C 199 胜；报告综合排序为 C、B、A、D。",
+      "stage": "V1（9×9、50ms 基线）"
+    },
+    {
+      "finding": "10 局；D2 0 胜、0 平、10 负，得分率 0.0%。",
+      "stage": "V2 D2 vs C50ms（200ms）"
+    },
+    {
+      "finding": "10 局；D2 0 胜、0 平、10 负，得分率 0.0%。",
+      "stage": "V2 D2 vs C50ms（1s）"
+    },
+    {
+      "finding": "10 局；D2 1 胜、0 平、9 负，得分率 10.0%。",
+      "stage": "V2 D2 vs C50ms（5s）"
+    },
+    {
+      "finding": "6 局；D3 1 胜、0 平、5 负，得分率 16.7%。",
+      "stage": "V3 D310s vs C50ms"
+    },
+    {
+      "finding": "6 局；D3 3 胜、1 平、2 负，得分率 58.3%。",
+      "stage": "V3 D320s vs C50ms"
+    },
+    {
+      "finding": "6 局；D3 2 胜、2 平、2 负，得分率 50.0%。",
+      "stage": "V3 D350s vs C50ms"
+    },
+    {
+      "finding": "完成 252 个搜索测试；C 在 10–50 秒档中有 28/36 次超过深度 4，显示加时可越过原层数限制，但后续迭代的收益取决于局面。",
+      "stage": "V4 ABC 搜索预算性能"
+    },
+    {
+      "finding": "36 局探索赛，观测排序 C, D, B, A；C200ms、B200ms、D20s 的对阵只各 6 局，样本小且预算不等。",
+      "stage": "V4B（ABCD 最终对弈）"
+    },
+    {
+      "finding": "18 局；B-C、B-D、C-D 各为一胜、四平、一负（1–4–1），每组 6 局。",
+      "stage": "V4C（B1s / C200ms / D50s）"
+    }
+  ],
+  "historical_data_in_v5_score": false,
+  "note": "V1–V4C are historical context only; the V5 schedule and results are evaluated separately.",
+  "sources": "research/results/summary.json, research/v2/results/summary.json, research/v3/results/summary.json, research/v4/results/summary.json, research/v4b/results/summary.json, research/v4c/results/summary.json"
+}

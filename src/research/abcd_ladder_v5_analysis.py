@@ -348,6 +348,27 @@ def summarize_records(records: list[dict[str, Any]], config: dict[str, Any]) -> 
                 "route_status": route["status"], "highest_passed_budget": route["highest_passed_budget"] or "none",
                 "failed_budget": route["failed_budget"] or "none", **level,
             })
+    deadline_hit_moves = 0
+    nominal_budget_overruns = 0
+    over_10ms_budget_overruns = 0
+    actual_thinking_seconds = 0.0
+    total_nodes = total_simulations = 0
+    termination_counts: Counter[str] = Counter()
+    for record in records:
+        actual_thinking_seconds += float(record["thinking_seconds_total"])
+        total_nodes += int(record["search_nodes_total"])
+        total_simulations += int(record["simulations_total"])
+        termination_counts[str(record["termination"])] += 1
+        for move in record["moves"]:
+            model = move.get("model")
+            if model is None:
+                continue
+            deadline_hit_moves += int(bool(move.get("timed_out")))
+            budget = record["budget_seconds_by_model"].get(model)
+            if budget is not None:
+                overrun = float(move["elapsed_seconds"]) - float(budget)
+                nominal_budget_overruns += int(overrun > 0.0)
+                over_10ms_budget_overruns += int(overrun > 0.01)
     return {
         "experiment_id": frozen["experiment_id"],
         "board_size": 9,
@@ -358,6 +379,16 @@ def summarize_records(records: list[dict[str, Any]], config: dict[str, Any]) -> 
         "partial_groups": sum(len(rows) == 1 for rows in by_group.values()),
         "route_state": route_result,
         "models": model_summaries,
+        "actual_metrics": {
+            "ai_thinking_seconds": actual_thinking_seconds,
+            "deadline_hit_moves": deadline_hit_moves,
+            "nominal_budget_overrun_moves": nominal_budget_overruns,
+            "budget_overrun_over_10ms_moves": over_10ms_budget_overruns,
+            "search_nodes_total": total_nodes,
+            "mcts_simulations_total": total_simulations,
+            "terminations": dict(sorted(termination_counts.items())),
+            "unique_game_ids": len(games_by_id),
+        },
         "pairwise": pairwise,
         "groups": group_summaries,
         "games": game_summaries,
@@ -375,7 +406,7 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
             if key not in fields:
                 fields.append(key)
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
