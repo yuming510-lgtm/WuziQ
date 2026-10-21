@@ -235,6 +235,8 @@ def run_experiment(
             "maximum_games": 336,
             "completed_games": len(existing_ids),
             "completed_groups": current_state["completed_groups"],
+            "inferred_groups": current_state["inferred_groups"],
+            "partial_observation_groups": current_state["partial_observation_groups"],
             "completed_ids": sorted(existing_ids),
             "pending_group_id": current_state["pending_group_id"],
             "routes": current_state["routes"],
@@ -297,7 +299,9 @@ def run_experiment(
         if max_games is not None and games_this_run >= max_games:
             break
         progress = persist_progress()
-        if group_id in progress["groups"] and progress["groups"][group_id].get("status") == "played":
+        if group_id in progress["groups"] and progress["groups"][group_id].get("status") in {
+            "played", "played_after_route_stop"
+        }:
             groups_this_run += 1
             progress = persist_progress()
         elif progress["pending_group_id"] == group_id:

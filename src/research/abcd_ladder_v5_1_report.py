@@ -33,6 +33,8 @@ def _fmt_status(level: dict[str, Any]) -> str:
         "incomplete_pair": "配对未完成", "not_reached": "未到该档",
         "not_run_after_failure": "本路线失败后未跑",
         "shared_result_after_failure": "共享棋局已记，但本路线此前失败",
+        "inferred_pass": "◇ 按低档失利推断通过（0局）",
+        "partial_observation_after_failure": "未配对观察，不计分",
     }
     return labels.get(status, status) + points_text
 
@@ -48,8 +50,8 @@ def _gradient_svg(routes: dict[str, Any], path: Path) -> None:
         '<rect width="100%" height="100%" fill="#fff"/>',
         '<style>text{font-family:Arial,"Noto Sans CJK SC",sans-serif;fill:#17212e}.title{font-size:22px;font-weight:700}.small{font-size:12px}.route{font-size:12px;font-weight:600}.muted{fill:#667085}</style>',
         '<text x="24" y="32" class="title">V5.1 ABCD 各预算版本独立挑战边界</text>',
-        '<text x="24" y="56" class="small muted">每行是一条独立路线；绿点通过，红叉失败，灰方块表示共享结果曾产生但该路线此前已失败，空心点表示未执行。</text>',
-        '<text x="24" y="78" class="small muted">每档两局、同开局换色；横轴是对手预算（向 A 挑战时为自然耗时）。晋级只对该行路线生效。</text>',
+        '<text x="24" y="56" class="small muted">绿点为实测通过，红叉为实测失败，蓝菱形为按低档失利推断，灰方块为另一方向已有实测，空心点为未执行。</text>',
+        '<text x="24" y="78" class="small muted">实测档为两局、同开局换色；推断档不算对局，不作实战胜率。</text>',
     ]
     for index, label in enumerate(_AXIS):
         x = xs[index]
@@ -72,6 +74,8 @@ def _gradient_svg(routes: dict[str, Any], path: Path) -> None:
                 chunks.append(f'<path d="M{x-3:.1f},{y-3} L{x+3:.1f},{y+3} M{x+3:.1f},{y-3} L{x-3:.1f},{y+3}" stroke="#fff" stroke-width="1.6"/>')
             elif status == "shared_result_after_failure":
                 chunks.append(f'<rect x="{x-5:.1f}" y="{y-5}" width="10" height="10" fill="#94a3b8" stroke="#fff"/>')
+            elif status == "inferred_pass":
+                chunks.append(f'<path d="M{x:.1f},{y-7} L{x+7:.1f},{y} L{x:.1f},{y+7} L{x-7:.1f},{y} Z" fill="#60a5fa" stroke="#fff" stroke-width="1.5"/>')
             elif status == "incomplete_pair":
                 chunks.append(f'<circle cx="{x:.1f}" cy="{y}" r="6" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>')
             elif status in {"pending", "not_reached"}:
@@ -86,14 +90,15 @@ def _gradient_svg(routes: dict[str, Any], path: Path) -> None:
 
 
 def _route_table(analysis: dict[str, Any]) -> str:
-    lines = ["| 挑战者版本 → 对手家族 | 各对手预算档的独立结果 | 最高通过 | 首个失败档 |", "|---|---|---:|---:|"]
+    lines = ["| 挑战者版本 → 对手家族 | 各对手预算档结果 | 最高实测通过 | 最高（含推断）通过 | 首个实测失败档 |", "|---|---|---:|---:|---:|"]
     for route_id, route in analysis["route_state"]["routes"].items():
         levels = " → ".join(
             f"{level['opponent_budget_label']}：{_fmt_status(level)}"
             for level in route["levels"]
         )
         lines.append(
-            f"| `{route_id}` | {levels} | {route.get('highest_passed_budget') or '无'} "
+            f"| `{route_id}` | {levels} | {route.get('highest_actual_passed_budget') or '无'} "
+            f"| {route.get('highest_passed_budget') or '无'} "
             f"| {route.get('failed_budget') or '无（路线完成或未失败）'} |"
         )
     return "\n".join(lines)
@@ -262,7 +267,8 @@ def build_report(
         )
     family_order = "、".join(f"{family}（{_pct(stats.get('score_rate'))}）" for family, stats in ranking)
     summary_text = (
-        f"本轮目前完成 {analysis['actual_groups']} 组、{analysis['actual_games']} 局，"
+        f"本轮目前完成 {analysis['actual_groups']} 组、{analysis['actual_games']} 局配对对局；"
+        f"另有 {analysis['validation']['partial_observation_games']} 局未配对观察记录（不计入战绩）。"
         f"复用 V5 {analysis['actual_metrics']['actual_reused_groups']} 组、"
         f"{analysis['actual_metrics']['actual_reused_games']} 局；66 条独立路线中 "
         f"{sum(route['status']=='completed' for route in analysis['route_state']['routes'].values())} 条完成，"
@@ -283,19 +289,20 @@ def build_report(
         "## 1. 赛制、实现与公平性", "",
         "A、B、C、D 分别使用原规则 AI、纯 Minimax、Minimax + Alpha-Beta、冻结的纯 UCT MCTS 与 V4C 战术规则。A 自然耗时；B/C 使用相同候选集、顺序、评价与迭代加深，C 只增加 Alpha-Beta。没有针对对手的规则，也没有训练。",
         "B、C、D 的独立版本预算为 50ms、200ms、1s、5s、10s、20s、50s。A 为单一自然时间版本。路线固定挑战者版本，只逐档提高对手预算；A 路线逐档面对对手的七个版本。只安排跨家族比赛。",
-        "同一预算配对只运行一次并可供两条方向相反的路线共享；每条路线只在自己的两个局合计得分至少 1 分时升级。对局使用预注册的 12 个合法开局池和固定种子，每组相同开局换色。V5 精确匹配的对局只在其配对组到达可执行时才物化，不能用于提前判胜。",
+        "同一预算配对只运行一次并可供两条方向相反的路线共享；每条实测路线只在自己的两局合计得分至少 1 分时升级。对局使用预注册的 12 个合法开局池和固定种子，每组相同开局换色。V5 精确匹配的对局只在其配对组到达可执行时才物化。",
+        "依照追加的早停规则，若固定挑战者未通过某家族的较低预算版本，则该路线不再实测更高预算；反向路线中高于已败低档的版本标为“推断通过”，不计为实战胜场、得分率或对局。此推断采用“更高预算版本不弱于低预算版本”的单调性假设；已有完整棋局仍按真实结果保留，未配对观察保留原始记录但不计赛果。",
         "V1–V5 的决策引擎代码未修改；V5.1 只增加独立预算版本赛程、恢复、验证和统计代码。", "",
         "### 运行资源与耗时预估", "", *preflight_lines, "", drive_section, "",
         "运行器使用唯一 game ID、JSONL 每局 fsync、progress 原子替换；每局回放检查合法性、五连胜和计数，配对齐全后才推进路线。恢复时按棋谱重建路线，而不是信任缓存的晋级结果。", "",
         "## 2. 66 条独立挑战路线", "",
-        "表中每条 B/C/D@预算路线都有独立状态。`共享结果已记但该路线此前已失败`表示另一条尚存路线需要同一物理对局；该结果没有复活或推进已失败路线。未运行档位不赋胜负。", "",
+        "表中每条 B/C/D@预算路线都有独立状态。实测通过/失败来自两局配对；“按低档失利推断通过”是零对局的赛程剪枝结果；最高实测通过与最高（含推断）通过分开列示。", "",
         _route_table(analysis), "",
         "![V5.1 各固定版本的独立预算挑战边界](figures/ladder_gradient.svg)", "",
         "## 3. 六类家族对阵胜负矩阵", "",
         "以下胜负与得分率由全部实际对局计算；95% 区间以每个两局配对组的得分率为观察单位，采用 Wilson 近似，仅作描述。开局种类有限且路线按两局早停，区间不消除选择偏差。", "",
         _family_pair_table(analysis), "",
-        "## 4. 168 个精确预算对局格", "",
-        "每一行对应唯一模型版本组合。标记为未执行的格子没有填胜负、积分或得分率；若因一条路线失败而同一组被另一条路线需要，完整结果仍保存，但失败路线单独标注不计入。实际棋谱和每步搜索数据见 `9x9_games.jsonl` 及 CSV。", "",
+        "## 4. 168 个潜在精确预算对局格", "",
+        "每一行对应唯一模型版本组合。未执行或推断的格子没有胜负、积分或得分率；完整棋谱进入赛果统计，未配对观察保存在原始 JSONL 和 CSV，只计资源消耗、不计胜负矩阵。", "",
         _version_matchup_table(analysis), "",
         "## 5. 家族和预算版本的描述性排名", "",
         "### 家族总体汇总", "", ranking_table, "",
@@ -334,7 +341,7 @@ def build_report(
         "## 9. V1–V5 历史对照与 V5 积分修正", "", _history_section(analysis, results), "",
         "同一预算版本在不同对局中可能因对手预算、开局和颜色交换而出现不同胜负。V5.1 中固定预算模型对每个对手版本使用预注册开局分配，双局门槛只反映该开局的一次探索性配对，不是稳定等级。", "",
         "## 10. 结论与下一步", "",
-        "V5.1 修正了 V5 把低预算失败传播到同家族高预算版本的赛制问题。每一个预算版本作为独立挑战者，并通过共享物理对局避免重复计算；失败只终止当前路线。", "",
+        "V5.1 按追加规则把低档失利对更高预算对手版本的支配关系标为推断，从而省去无效高档赛局；只有完整实测配对进入战绩排名。已完成的旧逻辑对局照实保留。推断通过不等于实战验证，也不能证明预算收益严格单调。", "",
         "应以具体版本路线和实际资源统计作为结果。家族汇总排名受到预算与早停造成的不同样本构成影响，不能直接当作等预算对抗结论。两局一档、固定开局与平局计半晋级带来较高偶然性；后续若要建立稳定能力排序，应增加独立开局数并在预算层内做完整成对赛。", "",
         "## 11. 可复现材料", "",
         "- `configs/abcd_ladder_v5_1.json`：预算、开局池、确定性随机种子和 V5 引擎哈希。",

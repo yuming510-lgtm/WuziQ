@@ -177,8 +177,15 @@ def validate_records(
     state = derive_state(records, frozen, groups)
     if require_complete and not state["complete"]:
         raise ValueError(f"V5.1 route graph has not completed at {state['pending_group_id']}")
-    if require_complete and any(len(rows) != 2 for rows in rows_by_group.values()):
-        raise ValueError("V5.1 has an incomplete color-swapped pair")
+    if require_complete:
+        for group_id, rows in rows_by_group.items():
+            if len(rows) == 2:
+                continue
+            if len(rows) == 1 and state["groups"].get(group_id, {}).get("status") in {
+                "inferred_dominated_partial_observation", "partial_observation_after_route_stop"
+            }:
+                continue
+            raise ValueError(f"V5.1 has an incomplete, unadjudicated color-swapped pair: {group_id}")
     actual_reused_games = sum(row.get("source_type") == "reused_v5" for row in records)
     actual_reused_groups = sum(
         len(rows) == 2 and all(row.get("source_type") == "reused_v5" for row in rows)
@@ -199,6 +206,8 @@ def validate_records(
         "games": len(records),
         "groups": sum(len(rows) == 2 for rows in rows_by_group.values()),
         "partial_groups": sum(len(rows) == 1 for rows in rows_by_group.values()),
+        "partial_observation_games": sum(len(rows) for rows in rows_by_group.values() if len(rows) == 1),
+        "inferred_groups": state["inferred_groups"],
         "unique_game_ids": len(seen),
         "reused_games": actual_reused_games,
         "reused_groups": actual_reused_groups,
@@ -284,6 +293,11 @@ def summarize_records(
     for row in records:
         game_rows_by_group[str(row["group_id"])].append(row)
     groups_by_id = {str(group["group_id"]): group for group in groups}
+    scored_game_ids = {
+        str(row["game_id"])
+        for group_rows in game_rows_by_group.values() if len(group_rows) == 2
+        for row in group_rows
+    }
 
     model_counts = {family: {"games": 0, "wins": 0, "draws": 0, "losses": 0, "points": 0.0,
                              "black_games": 0, "black_points": 0.0, "white_games": 0, "white_points": 0.0}
@@ -303,35 +317,36 @@ def summarize_records(
         first, second = row["pair"]
         winner = row.get("winner_model")
         versions = row["model_versions"]
-        for family in (first, second):
-            result = model_result_points([row], family)
-            entry = model_counts[family]
-            for key in ("wins", "draws", "losses"):
-                entry[key] += result[key]
-            entry["games"] += 1
-            entry["points"] += result["points"]
-            side = "black" if row["black_model"] == family else "white"
-            entry[f"{side}_games"] += 1
-            entry[f"{side}_points"] += result["points"]
-            side_stats[family][f"{side}_games"] += 1
-            side_stats[family][f"{side}_points"] += result["points"]
-            if family == "A":
-                label = "natural"
-            else:
-                label = next(rung["label"] for rung in frozen["budget_ladder"]
-                             if float(rung["seconds"]) == float(row["budget_seconds_by_model"][family]))
-            version = version_counts[(family, label)]
-            version["games"] += 1
-            version["wins"] += result["wins"]
-            version["draws"] += result["draws"]
-            version["losses"] += result["losses"]
-            version["points"] += result["points"]
-        black_winner = row.get("winner_color") == "B"
-        white_winner = row.get("winner_color") == "W"
-        if black_winner:
-            side_stats[row["black_model"]]["black_wins"] += 1
-        if white_winner:
-            side_stats[row["white_model"]]["white_wins"] += 1
+        if str(row["game_id"]) in scored_game_ids:
+            for family in (first, second):
+                result = model_result_points([row], family)
+                entry = model_counts[family]
+                for key in ("wins", "draws", "losses"):
+                    entry[key] += result[key]
+                entry["games"] += 1
+                entry["points"] += result["points"]
+                side = "black" if row["black_model"] == family else "white"
+                entry[f"{side}_games"] += 1
+                entry[f"{side}_points"] += result["points"]
+                side_stats[family][f"{side}_games"] += 1
+                side_stats[family][f"{side}_points"] += result["points"]
+                if family == "A":
+                    label = "natural"
+                else:
+                    label = next(rung["label"] for rung in frozen["budget_ladder"]
+                                 if float(rung["seconds"]) == float(row["budget_seconds_by_model"][family]))
+                version = version_counts[(family, label)]
+                version["games"] += 1
+                version["wins"] += result["wins"]
+                version["draws"] += result["draws"]
+                version["losses"] += result["losses"]
+                version["points"] += result["points"]
+            black_winner = row.get("winner_color") == "B"
+            white_winner = row.get("winner_color") == "W"
+            if black_winner:
+                side_stats[row["black_model"]]["black_wins"] += 1
+            if white_winner:
+                side_stats[row["white_model"]]["white_wins"] += 1
         group_id = str(row["group_id"])
         game_summaries.append({
             "game_id": row["game_id"], "group_id": group_id, "pair": _pair_key(row["pair"]),
@@ -428,7 +443,8 @@ def summarize_records(
             group_id = str(level["group_id"])
             rows = route_level_group_rows.get((route_id, int(level.get("level_index", -1))), [])
             # Each scheduled route rung corresponds to exactly one paired group.
-            counts = model_result_points(rows, str(route["challenger_family"])) if rows else None
+            counts = model_result_points(rows, str(route["challenger_family"])) \
+                if rows and level["status"] in {"passed", "failed"} else None
             route_rows.append({
                 "route_id": route_id,
                 "challenger_family": route["challenger_family"],
@@ -544,7 +560,8 @@ def summarize_records(
         "experiment_id": frozen["experiment_id"],
         "board_size": 9,
         "maximum_routes": 66, "maximum_groups": 168, "maximum_games": 336,
-        "actual_games": len(records), "actual_groups": len(group_summaries),
+        "actual_games": sum(int(group["games"]) for group in group_summaries),
+        "recorded_game_rows": len(records), "actual_groups": len(group_summaries),
         "partial_groups": validation["partial_groups"],
         "complete": validation["complete"],
         "route_state": state,
@@ -575,6 +592,10 @@ def summarize_records(
             "actual_reused_groups": validation["reused_groups"],
             "eligible_v5_reuse_groups": validation["eligible_v5_reuse_groups"],
             "unique_game_ids": len(game_by_id),
+            "scored_games": sum(int(group["games"]) for group in group_summaries),
+            "unpaired_observation_games": validation["partial_observation_games"],
+            "inferred_groups": state["inferred_groups"],
+            "partial_observation_groups": state["partial_observation_groups"],
             "terminations": dict(sorted(Counter(row["termination"] for row in records).items())),
         },
         "history_v5_score_audit": audit_v5_report_scores(

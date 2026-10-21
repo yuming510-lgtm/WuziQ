@@ -71,3 +71,66 @@ def test_results_after_first_unfinished_active_group_are_rejected():
 
     with pytest.raises(ValueError, match="after an unfinished active group"):
         derive_state(later_records, config, schedule)
+
+
+def test_low_opponent_loss_infers_higher_opponent_versions_without_games():
+    config = load_config(CONFIG)
+    schedule = build_schedule(config)
+    ab50 = next(
+        group for group in schedule
+        if group["pair"] == ["A", "B"] and group["model_versions"]["B"] == "50ms"
+    )
+
+    state = derive_state(_records(ab50, ["B", "B"]), config, schedule)
+
+    assert state["routes"]["A>B"]["status"] == "failed"
+    assert state["routes"]["A>B"]["levels"][1]["status"] == "not_run_after_failure"
+    assert state["routes"]["B@200ms>A"]["levels"][0]["status"] == "inferred_pass"
+    assert state["routes"]["B@200ms>A"]["levels"][0]["games"] == 0
+    assert state["groups"]["v5-1-9x9-a-natural-b-200ms-o731102"]["status"] == "inferred_dominated"
+
+
+def test_search_family_low_budget_loss_infers_higher_budget_reverse_matchups():
+    config = load_config(CONFIG)
+    schedule = [
+        group for group in build_schedule(config)
+        if group["pair"] == ["B", "C"]
+    ]
+    bc50 = next(
+        group for group in schedule
+        if group["model_versions"] == {"B": "50ms", "C": "50ms"}
+    )
+    bc200 = next(
+        group for group in schedule
+        if group["model_versions"] == {"B": "50ms", "C": "200ms"}
+    )
+    records = _records(bc50, ["C", "C"])
+
+    state = derive_state(records, config, schedule)
+
+    assert state["routes"]["B@50ms>C"]["status"] == "failed"
+    assert state["routes"]["C@200ms>B"]["levels"][0]["status"] == "inferred_pass"
+    assert state["routes"]["C@200ms>B"]["levels"][0]["games"] == 0
+    assert state["groups"][bc200["group_id"]]["status"] == "inferred_dominated"
+    assert state["pending_group_id"] != bc200["group_id"]
+
+
+def test_partial_game_in_an_inferred_group_is_preserved_but_not_scored():
+    config = load_config(CONFIG)
+    schedule = build_schedule(config)
+    ab50 = next(
+        group for group in schedule
+        if group["pair"] == ["A", "B"] and group["model_versions"]["B"] == "50ms"
+    )
+    ab200 = next(
+        group for group in schedule
+        if group["pair"] == ["A", "B"] and group["model_versions"]["B"] == "200ms"
+    )
+    records = _records(ab50, ["B", "B"]) + _records(ab200, ["B", "A"])
+    records = records[:-1]
+
+    state = derive_state(records, config, schedule)
+
+    assert state["groups"][ab200["group_id"]]["status"] == "inferred_dominated_partial_observation"
+    assert state["pending_group_id"] == "v5-1-9x9-a-natural-c-50ms-o731104"
+    assert state["routes"]["B@200ms>A"]["levels"][0]["status"] == "inferred_pass"

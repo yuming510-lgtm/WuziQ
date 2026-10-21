@@ -207,6 +207,59 @@ def derive_state(
     pending_group_id: str | None = None
     complete = True
     processed_groups = 0
+    inferred_groups = 0
+    partial_observation_groups = 0
+
+    def dominated_source(group: dict[str, Any], route_id: str) -> dict[str, Any] | None:
+        """Return the lower-budget loss that dominates this higher opponent rung.
+
+        When challenger X at a fixed budget lost its route against Y@budget[j],
+        the tournament's monotonic-budget assumption treats higher Y budgets as
+        already decided wins over that same X version. Such results are labeled
+        as inferences, never as played games.
+        """
+        refs = [ref for ref in group["route_refs"] if str(ref["route_id"]) != route_id]
+        if len(refs) != 1:
+            return None
+        reverse_id = str(refs[0]["route_id"])
+        reverse_spec = route_specs.get(reverse_id)
+        if reverse_spec is None:
+            return None
+        failed_level = runtime[reverse_id]["failed_level"]
+        if failed_level is None:
+            return None
+        challenger = route_specs[route_id]
+        if challenger["challenger_family"] == "A":
+            return None
+        challenger_budget_index = next(
+            i for i, item in enumerate(frozen["budget_ladder"])
+            if item["label"] == challenger["challenger_version"]
+        )
+        if challenger_budget_index <= int(failed_level):
+            return None
+        source_group_id = str(reverse_spec["levels"][int(failed_level)]["group_id"])
+        return {
+            "source_route_id": reverse_id,
+            "source_group_id": source_group_id,
+            "source_failed_level": int(failed_level),
+            "higher_opponent_budget": challenger["challenger_budget_label"],
+            "rule": "higher_opponent_budget_assumed_to_dominate_after_lower_budget_failure",
+        }
+
+    def apply_inferred_pass(route_id: str, level_index: int, source: dict[str, Any]) -> None:
+        evaluated[(route_id, level_index)] = {
+            "status": "inferred_pass",
+            "score": None,
+            "wins": None,
+            "draws": None,
+            "losses": None,
+            "games": 0,
+            "group_id": route_specs[route_id]["levels"][level_index]["group_id"],
+            "inference": source,
+        }
+        state = runtime[route_id]
+        state["next_level"] += 1
+        state["highest_passed"] = level_index
     for schedule_index, group in enumerate(groups):
         group_id = str(group["group_id"])
         rows = by_group.get(group_id, [])
@@ -215,12 +268,39 @@ def derive_state(
             if runtime[ref["route_id"]]["active"]
             and runtime[ref["route_id"]]["next_level"] == int(ref["level_index"])
         ]
-        if rows and not active_refs:
-            raise ValueError(f"V5.1 group {group_id} has results but no referenced route is active")
+        inferable = {
+            str(ref["route_id"]): dominated_source(group, str(ref["route_id"]))
+            for ref in active_refs
+        }
+        reusable_exact_group = group.get("source_type") == "reused_v5"
         if not rows and not active_refs:
             group_states[group_id] = {"status": "skipped_no_active_route", "games": 0}
             continue
-        if not rows or len(rows) == 1:
+        if len(rows) == 1 and active_refs and all(inferable.values()) and not reusable_exact_group:
+            for ref in active_refs:
+                route_id = str(ref["route_id"])
+                apply_inferred_pass(route_id, int(ref["level_index"]), inferable[route_id])
+            partial_observation_groups += 1
+            group_states[group_id] = {
+                "status": "inferred_dominated_partial_observation",
+                "games": 1,
+                "active_route_ids": [str(ref["route_id"]) for ref in active_refs],
+                "inferences": inferable,
+                "unpaired_observation_game_ids": [str(rows[0].get("game_id"))],
+            }
+            continue
+        if len(rows) == 1 and not active_refs:
+            partial_observation_groups += 1
+            group_states[group_id] = {
+                "status": "partial_observation_after_route_stop",
+                "games": 1,
+                "active_route_ids": [],
+                "unpaired_observation_game_ids": [str(rows[0].get("game_id"))],
+            }
+            continue
+        if len(rows) == 1 or (
+            not rows and active_refs and (not all(inferable.values()) or reusable_exact_group)
+        ):
             pending_group_id = group_id
             complete = False
             group_states[group_id] = {
@@ -239,6 +319,30 @@ def derive_state(
                     ],
                 }
             break
+        if not rows and active_refs:
+            for ref in active_refs:
+                route_id = str(ref["route_id"])
+                apply_inferred_pass(route_id, int(ref["level_index"]), inferable[route_id])
+            inferred_groups += 1
+            group_states[group_id] = {
+                "status": "inferred_dominated",
+                "games": 0,
+                "active_route_ids": [str(ref["route_id"]) for ref in active_refs],
+                "inferences": inferable,
+            }
+            continue
+        if rows and not active_refs:
+            if len(rows) != 2:
+                raise ValueError(f"Unpaired V5.1 results after routes stopped at {group_id}")
+            by_id = {str(row["game_id"]): row for row in rows}
+            expected = {str(game["game_id"]) for game in group["games"]}
+            if len(by_id) != 2 or set(by_id) != expected:
+                raise ValueError(f"V5.1 group {group_id} is missing or mismatches its color-swapped pair")
+            processed_groups += 1
+            group_states[group_id] = {
+                "status": "played_after_route_stop", "games": 2, "active_route_ids": []
+            }
+            continue
         by_id = {str(row["game_id"]): row for row in rows}
         expected = {str(game["game_id"]) for game in group["games"]}
         if len(by_id) != 2 or set(by_id) != expected:
@@ -288,7 +392,11 @@ def derive_state(
                 level_state["opponent_budget_label"] = level["opponent_budget_label"]
             elif state["failed_level"] is not None and index > int(state["failed_level"]):
                 level_state = {
-                    "status": "shared_result_after_failure" if group_records else "not_run_after_failure",
+                    "status": (
+                        "shared_result_after_failure" if len(group_records) == 2
+                        else "partial_observation_after_failure" if group_records
+                        else "not_run_after_failure"
+                    ),
                     "score": None,
                     "games": len(group_records),
                     "group_id": group_id,
@@ -322,12 +430,23 @@ def derive_state(
         else:
             status = "active"
         failed_index = state["failed_level"]
+        actual_passed = [
+            index for (candidate_route, index), result in evaluated.items()
+            if candidate_route == route_id and result["status"] == "passed"
+        ]
         route_states[route_id] = {
             **spec,
             "status": status,
             "highest_passed_budget": (
                 spec["levels"][int(state["highest_passed"])]["opponent_budget_label"]
                 if state["highest_passed"] is not None else None
+            ),
+            "highest_actual_passed_budget": (
+                spec["levels"][max(actual_passed)]["opponent_budget_label"] if actual_passed else None
+            ),
+            "inferred_passed_levels": sum(
+                result["status"] == "inferred_pass"
+                for (candidate_route, _), result in evaluated.items() if candidate_route == route_id
             ),
             "failed_budget": (
                 spec["levels"][int(failed_index)]["opponent_budget_label"]
@@ -342,6 +461,8 @@ def derive_state(
         "groups": group_states,
         "pending_group_id": pending_group_id,
         "completed_groups": processed_groups,
+        "inferred_groups": inferred_groups,
+        "partial_observation_groups": partial_observation_groups,
         "completed_games": sum(len(rows) for rows in by_group.values()),
         "complete": complete,
     }

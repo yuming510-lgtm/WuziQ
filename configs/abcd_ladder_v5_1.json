@@ -330,12 +330,21 @@
     "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
     "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991"
   },
-  "route_policy": "Each A route advances by target family budget. Every B/C/D budget version is an independent challenger. Cross-family version matchups are played once and referenced by both applicable routes.",
+  "route_policy": "Each fixed challenger advances only against increasing opponent budgets. If it fails the paired threshold against opponent budget j, later opponent budgets are not played; reverse-route matchups against budgets above j are inferred as passed under the monotonic-budget assumption. Existing exact V5 results are reused when the relevant group is reached; actual complete results override inference. Independent challenger routes remain active unless their own level fails or is inferred.",
   "promotion_rule": "Each route advances only if its two-game paired score is at least 1.0; score=wins+draws/2; score rate=score/2.",
   "maximum_routes": 66,
   "maximum_groups": 168,
   "maximum_games": 336,
   "v5_reuse_policy": "Reuse only fully replay-validated V5 groups with exact engine pins, algorithm settings, budget map, opening, colors, and game seed; never select by outcome.",
   "sample_warning": "A two-game paired threshold on one opening is exploratory, not a stable strength claim.",
-  "neural_network_or_reinforcement_learning": false
+  "neural_network_or_reinforcement_learning": false,
+  "dominance_inference_policy": {
+    "enabled": true,
+    "trigger": "fixed challenger scores below 1.0 paired points against opponent budget j",
+    "inference": "higher opponent budgets are presumed to pass against that same fixed challenger; no game, win, point, or rate is imputed",
+    "reverse_route": "infer the corresponding higher-budget opponent version as passed against the fixed challenger",
+    "exact_v5_reuse": "reuse a fully validated exact V5 group when an active route reaches it, including when it would otherwise be inferable",
+    "existing_actual_results": "retain complete games as observed; a single unpaired completed game is retained as an observation but excluded from all standings",
+    "assumption": "higher budget versions are treated as no weaker than lower budget versions for route pruning; inferred outcomes are not empirical findings"
+  }
 }

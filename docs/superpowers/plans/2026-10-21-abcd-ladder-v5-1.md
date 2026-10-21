@@ -15,20 +15,22 @@
 - The board is 9×9; A is natural-time; B/C/D fixed budgets are 50ms, 200ms, 1s, 5s, 10s, 20s, 50s.
 - Same-family games are forbidden; each pair is two games on one frozen legal opening with colors swapped.
 - A route advances only when its own two-game points are at least 1.0; score equals wins plus half draws.
-- One physical version matchup runs at most once and may feed two routes; route failures never deactivate other versions.
+- One physical version matchup runs at most once and may feed two routes; a route's actual failure never deactivates a different fixed challenger version.
+- User steering update: when a fixed challenger fails a lower opponent budget, do not play its higher opponent budget levels; infer the reverse higher-budget versions pass against that same challenger under the stated monotonic-budget assumption. Mark inference separately from actual games and exclude it from standings. Reuse any exact V5 matchup when an active route reaches it.
 - Do not change `src/ai.py`, `src/gomoku.py`, or `src/research/mcts_d2.py` decision behavior.
 - Reuse V5 results only after exact condition and full replay checks; never choose reuse by outcome.
 - Save each complete game once, update route state atomically after groups, and resume by unique game ID.
 - Drive must have exactly one latest valid V5.1 snapshot, with old V5 files untouched.
-- Do not infer unplayed matchups or describe two-game promotions as stable rankings.
+- Do not label inferred dominated outcomes as played, and do not describe two-game promotions as stable rankings.
 
 ## Review Focus
 
 1. A route fails while its counterpart still needs a shared game — test that the shared game runs and only the active route advances.
-2. A paired group is interrupted after one game — test that the same first ID is retained, the second game resumes, and promotion waits for both.
-3. A V5 row differs in any frozen condition — test that it is rejected for reuse and does not enter V5.1 counts.
-4. Mixed W/D/L pairwise rows — test both models' cumulative points equal wins + draws/2 and rates use actual games.
-5. Budget-grid route ordering and opening assignment — test all 66 ladders are monotone, acyclic, unique, deterministic, and distributed over the frozen pool.
+2. A challenger loses to a lower opponent budget — test that higher opponent rungs are skipped and the reverse higher-budget routes are marked as zero-game inferences, never fabricated wins.
+3. A paired group is interrupted after one game — test that the same first ID is retained, the second game resumes, and promotion waits for both unless the level becomes inferable.
+4. A V5 row differs in any frozen condition — test that it is rejected for reuse and does not enter V5.1 counts.
+5. Mixed W/D/L pairwise rows — test both models' cumulative points equal wins + draws/2 and rates use actual games.
+6. Budget-grid route ordering and opening assignment — test all 66 ladders are monotone, acyclic, unique, deterministic, and distributed over the frozen pool.
 
 ---
 
