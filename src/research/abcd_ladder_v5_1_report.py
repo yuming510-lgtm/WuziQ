@@ -272,8 +272,8 @@ def build_report(
         f"复用 V5 {analysis['actual_metrics']['actual_reused_groups']} 组、"
         f"{analysis['actual_metrics']['actual_reused_games']} 局；66 条独立路线中 "
         f"{sum(route['status']=='completed' for route in analysis['route_state']['routes'].values())} 条完成，"
-        f"{sum(route['status']=='failed' for route in analysis['route_state']['routes'].values())} 条失败，"
-        f"其余未到终态。AI 实际思考时间合计 {actual_seconds/3600:.2f} 小时；"
+        f"{sum(route['status']=='failed' for route in analysis['route_state']['routes'].values())} 条在失败档终止。"
+        f"AI 实际思考时间合计 {actual_seconds/3600:.2f} 小时；"
         f"运行器墙钟 {wall_seconds/3600:.2f} 小时，累计有效运行 {runtime_seconds/3600:.2f} 小时。"
         if analysis["actual_games"] else "当前没有已完成对局。"
     )
