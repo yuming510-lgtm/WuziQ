@@ -1,0 +1,950 @@
+{
+  "schema_version": 1,
+  "experiment_id": "wuziq-advanced-search-v6-2026-10-22",
+  "benchmark_position_id": "vct_cross_three",
+  "benchmark_position_fixture_sha256": "ae578864f70f01b0b14ca6862a7206cd3512fee0c2ca48833aa2722e54eb7280",
+  "seed": 6042026,
+  "environment": {
+    "cpu_logical": 3,
+    "disk_total_bytes": 33770192896,
+    "disk_free_bytes": 31810326528,
+    "cpu_physical": 3,
+    "memory_total_bytes": 10452471808,
+    "memory_available_bytes": 9751142400
+  },
+  "benchmark_wall_seconds": 38.89882141199996,
+  "benchmark_rows": [
+    {
+      "model": "A",
+      "budget_label": "natural",
+      "budget_seconds": null,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.000721176999832096,
+      "nodes": 73,
+      "completed_depth": 0,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {}
+    },
+    {
+      "model": "B",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.04554228400002103,
+      "nodes": 410,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "B",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.19516132699982336,
+      "nodes": 2425,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "B",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.9953414649999104,
+      "nodes": 12711,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "B",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 4.995018644999618,
+      "nodes": 67019,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "C",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.045013839999683114,
+      "nodes": 167,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 36,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "C",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.19504593100009515,
+      "nodes": 1655,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 113,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "C",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.9956588529998953,
+      "nodes": 6335,
+      "completed_depth": 3,
+      "tree_depth": 3,
+      "cutoffs": 590,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "C",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 4.995268958999986,
+      "nodes": 30693,
+      "completed_depth": 4,
+      "tree_depth": 4,
+      "cutoffs": 5904,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "D",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        0,
+        3
+      ],
+      "elapsed_seconds": 0.04913424999995186,
+      "nodes": 446,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 11,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "D",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        0,
+        1
+      ],
+      "elapsed_seconds": 0.19907887499994104,
+      "nodes": 1261,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 34,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "D",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        2,
+        3
+      ],
+      "elapsed_seconds": 0.9991511220000575,
+      "nodes": 9786,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 273,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "D",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        5,
+        2
+      ],
+      "elapsed_seconds": 5.0019529229998625,
+      "nodes": 46412,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 1359,
+      "timed_out": true,
+      "stats": {}
+    },
+    {
+      "model": "E1",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.0013337099999262136,
+      "nodes": 1,
+      "completed_depth": 0,
+      "tree_depth": 0,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 0,
+        "critical_defenses": 0,
+        "max_attack_depth": 0,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E1",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.0010274900000695197,
+      "nodes": 1,
+      "completed_depth": 0,
+      "tree_depth": 0,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 0,
+        "critical_defenses": 0,
+        "max_attack_depth": 0,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E1",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.00528127300003689,
+      "nodes": 1,
+      "completed_depth": 0,
+      "tree_depth": 0,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 0,
+        "critical_defenses": 0,
+        "max_attack_depth": 0,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E1",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.0033720269998411823,
+      "nodes": 1,
+      "completed_depth": 0,
+      "tree_depth": 0,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 0,
+        "critical_defenses": 0,
+        "max_attack_depth": 0,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E2",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.04010039200011306,
+      "nodes": 7,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 422,
+        "critical_defenses": 6,
+        "max_attack_depth": 1,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E2",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.17510941699993054,
+      "nodes": 37,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 2522,
+        "critical_defenses": 36,
+        "max_attack_depth": 1,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E2",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.6988230289998683,
+      "nodes": 73,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 5112,
+        "critical_defenses": 72,
+        "max_attack_depth": 1,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": true
+      }
+    },
+    {
+      "model": "E2",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.6853053459999501,
+      "nodes": 73,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": false,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 5112,
+        "critical_defenses": 72,
+        "max_attack_depth": 1,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": true
+      }
+    },
+    {
+      "model": "E3",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.04021441699978823,
+      "nodes": 1,
+      "completed_depth": 0,
+      "tree_depth": 0,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 0,
+        "critical_defenses": 0,
+        "max_attack_depth": 0,
+        "threat_nodes": 0,
+        "dependency_edges": 0,
+        "defense_conflicts": 0,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E3",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.1753790959996877,
+      "nodes": 2,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 72,
+        "critical_defenses": 1,
+        "max_attack_depth": 1,
+        "threat_nodes": 33,
+        "dependency_edges": 100,
+        "defense_conflicts": 436,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E3",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.9752382460001172,
+      "nodes": 6,
+      "completed_depth": 5,
+      "tree_depth": 5,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 2448,
+        "critical_defenses": 5,
+        "max_attack_depth": 5,
+        "threat_nodes": 179,
+        "dependency_edges": 2151,
+        "defense_conflicts": 725,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E3",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 4.9758064659999945,
+      "nodes": 44,
+      "completed_depth": 8,
+      "tree_depth": 8,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "defense_nodes": 4658,
+        "critical_defenses": 43,
+        "max_attack_depth": 8,
+        "threat_nodes": 645,
+        "dependency_edges": 13892,
+        "defense_conflicts": 3791,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E4",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.04010800500009282,
+      "nodes": 37,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "expanded_nodes": 37,
+        "generated_nodes": 2474,
+        "defense_expansions": 2376,
+        "proof_number": 72,
+        "disproof_number": 33,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E4",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.17512879300011264,
+      "nodes": 63,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "expanded_nodes": 63,
+        "generated_nodes": 3282,
+        "defense_expansions": 2376,
+        "proof_number": 72,
+        "disproof_number": 33,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E4",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 0.9751367489998302,
+      "nodes": 277,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "expanded_nodes": 277,
+        "generated_nodes": 9935,
+        "defense_expansions": 2376,
+        "proof_number": 72,
+        "disproof_number": 99,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E4",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        1,
+        2
+      ],
+      "elapsed_seconds": 4.975129718000062,
+      "nodes": 1189,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "fallback": "A",
+        "expanded_nodes": 1189,
+        "generated_nodes": 39543,
+        "defense_expansions": 2376,
+        "proof_number": 72,
+        "disproof_number": 403,
+        "node_limit_hit": false,
+        "certificate_verified": false
+      }
+    },
+    {
+      "model": "E5",
+      "budget_label": "50ms",
+      "budget_seconds": 0.05,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.040605011000025115,
+      "nodes": 50,
+      "completed_depth": 1,
+      "tree_depth": 1,
+      "cutoffs": 0,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "tt_hits": 0,
+        "pvs_researches": 1,
+        "extensions": 0,
+        "tt_size": 0,
+        "depth_iterations": [
+          {
+            "depth": 1,
+            "root_value": 744,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 47,
+            "elapsed_seconds": 0.03309942099986074
+          }
+        ],
+        "zobrist_root": 2401749687503214160,
+        "pvs": true,
+        "transposition_table": true,
+        "move_ordering": true,
+        "tactical_extensions": true
+      }
+    },
+    {
+      "model": "E5",
+      "budget_label": "200ms",
+      "budget_seconds": 0.2,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.17511964899995291,
+      "nodes": 223,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 67,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "tt_hits": 0,
+        "pvs_researches": 2,
+        "extensions": 23,
+        "tt_size": 68,
+        "depth_iterations": [
+          {
+            "depth": 1,
+            "root_value": 744,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 47,
+            "elapsed_seconds": 0.032110681000176555
+          },
+          {
+            "depth": 2,
+            "root_value": 428,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 187,
+            "elapsed_seconds": 0.10583981699983269
+          }
+        ],
+        "zobrist_root": 2401749687503214160,
+        "pvs": true,
+        "transposition_table": true,
+        "move_ordering": true,
+        "tactical_extensions": true
+      }
+    },
+    {
+      "model": "E5",
+      "budget_label": "1s",
+      "budget_seconds": 1.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 0.9751002440002594,
+      "nodes": 1133,
+      "completed_depth": 2,
+      "tree_depth": 2,
+      "cutoffs": 685,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "tt_hits": 48,
+        "pvs_researches": 3,
+        "extensions": 599,
+        "tt_size": 654,
+        "depth_iterations": [
+          {
+            "depth": 1,
+            "root_value": 744,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 47,
+            "elapsed_seconds": 0.03222158199969272
+          },
+          {
+            "depth": 2,
+            "root_value": 428,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 187,
+            "elapsed_seconds": 0.10758675500028403
+          }
+        ],
+        "zobrist_root": 2401749687503214160,
+        "pvs": true,
+        "transposition_table": true,
+        "move_ordering": true,
+        "tactical_extensions": true
+      }
+    },
+    {
+      "model": "E5",
+      "budget_label": "5s",
+      "budget_seconds": 5.0,
+      "position_id": "vct_cross_three",
+      "move": [
+        4,
+        4
+      ],
+      "elapsed_seconds": 4.97509802400009,
+      "nodes": 7209,
+      "completed_depth": 3,
+      "tree_depth": 3,
+      "cutoffs": 3106,
+      "simulations": 0,
+      "timed_out": true,
+      "stats": {
+        "tt_hits": 1033,
+        "pvs_researches": 3,
+        "extensions": 1654,
+        "tt_size": 2090,
+        "depth_iterations": [
+          {
+            "depth": 1,
+            "root_value": 744,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 47,
+            "elapsed_seconds": 0.03253393800014237
+          },
+          {
+            "depth": 2,
+            "root_value": 428,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 187,
+            "elapsed_seconds": 0.10324926099974618
+          },
+          {
+            "depth": 3,
+            "root_value": 999999999996,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 6403,
+            "elapsed_seconds": 4.291433007000251
+          }
+        ],
+        "zobrist_root": 2401749687503214160,
+        "pvs": true,
+        "transposition_table": true,
+        "move_ordering": true,
+        "tactical_extensions": true
+      }
+    }
+  ],
+  "reuse_manifest_counts": {
+    "source_records": 147,
+    "full_groups": 73,
+    "reused_groups": 73,
+    "reused_games": 146,
+    "partial_games_excluded": [
+      "v5-1-9x9-a-natural-c-50s-o731110-s0"
+    ]
+  },
+  "historical_v5_1_game_count": 147,
+  "historical_v6_reused_average_game_plies": 26.698630136986303,
+  "storage_estimate": {
+    "v5_1_raw_bytes": 1524758,
+    "v5_1_average_record_bytes": 10372.503401360544,
+    "v6_record_size_multiplier": 4.0,
+    "v6_conservative_average_record_bytes": 41490.013605442175,
+    "maximum_v6_games": 2856,
+    "maximum_raw_game_records_bytes": 118495478.85714285,
+    "full_schedule_json_bytes": 2697685,
+    "estimated_uncompressed_outputs_bytes": 141193163.85714287,
+    "estimated_uncompressed_outputs_mib": 134.65229402269637,
+    "assumption": "four times the measured V5.1 average raw game record size to allow for V6 per-move metrics and verified tactical certificates, plus schedule and 20 MB for config/progress/report/CSV/plots"
+  },
+  "estimate": {
+    "reachable_unique_groups_from_current_routes": 1260,
+    "current_frontier_groups": 360,
+    "current_reused_groups": 73,
+    "current_reused_games": 146,
+    "theoretical_max_groups": 1428,
+    "theoretical_max_games": 2856,
+    "max_additional_games_after_reuse": 2710,
+    "scenarios": {
+      "optimistic": {
+        "groups_assumed": 360,
+        "avg_total_plies_per_game_assumed": 20.0,
+        "estimated_wall_seconds_serial": 13841.536030719428,
+        "estimated_wall_hours_serial": 3.8448711196442855,
+        "assumption": "only the current route frontier runs; historical 9x9 game length is shortened to 20 plies; >5s decisions are capped at the measured 5s cost"
+      },
+      "central": {
+        "groups_assumed": 630,
+        "avg_total_plies_per_game_assumed": 26.698630136986303,
+        "estimated_wall_seconds_serial": 253415.7684105932,
+        "estimated_wall_hours_serial": 70.39326900294256,
+        "assumption": "half of currently reachable groups run; V5.1 reused-game average length is used; 10-50s searches scale from observed 5s behavior or consume their full budget if 5s timed out"
+      },
+      "conservative": {
+        "groups_assumed": 1260,
+        "avg_total_plies_per_game_assumed": 81.0,
+        "estimated_wall_seconds_serial": 2314646.4874521387,
+        "estimated_wall_hours_serial": 642.9573576255941,
+        "assumption": "all currently reachable groups run to a full 81-ply board; every search move consumes its full configured budget"
+      }
+    }
+  }
+}

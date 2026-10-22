@@ -1,0 +1,930 @@
+{
+  "schema_version": 1,
+  "positions": [
+    "opening_731101",
+    "blocked_four_pseudo_win",
+    "empty_edge_no_proof"
+  ],
+  "depth_limit": 3,
+  "budget_seconds": 2.0,
+  "variants": [
+    "E5_PVS_only",
+    "E5_TT_only",
+    "E5_all",
+    "E5_base",
+    "E5_extensions_only",
+    "E5_ordering_only"
+  ],
+  "rows": [
+    {
+      "position_id": "opening_731101",
+      "variant": "E5_base",
+      "move": [
+        6,
+        4
+      ],
+      "root_value": 0,
+      "nodes": 2573,
+      "cutoffs": 166,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9773042359997817,
+      "timed_out": true,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 56,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.021212574999935896
+        },
+        {
+          "depth": 2,
+          "root_value": 0,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 221,
+          "elapsed_seconds": 0.07850800100004562
+        }
+      ],
+      "zobrist_root": 2864220857425114316,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "opening_731101",
+      "variant": "E5_PVS_only",
+      "move": [
+        6,
+        4
+      ],
+      "root_value": 0,
+      "nodes": 2891,
+      "cutoffs": 215,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9751296220001677,
+      "timed_out": true,
+      "tt_hits": 0,
+      "pvs_researches": 6,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 56,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 47,
+          "elapsed_seconds": 0.04157799199992951
+        },
+        {
+          "depth": 2,
+          "root_value": 0,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 268,
+          "elapsed_seconds": 0.226356904000113
+        }
+      ],
+      "zobrist_root": 2864220857425114316,
+      "pvs": true,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "opening_731101",
+      "variant": "E5_TT_only",
+      "move": [
+        5,
+        3
+      ],
+      "root_value": 247,
+      "nodes": 2758,
+      "cutoffs": 171,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.6332633470001383,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 178,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 56,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.024024396000186243
+        },
+        {
+          "depth": 2,
+          "root_value": 0,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 221,
+          "elapsed_seconds": 0.09197027899972454
+        },
+        {
+          "depth": 3,
+          "root_value": 247,
+          "move": [
+            5,
+            3
+          ],
+          "nodes": 2758,
+          "elapsed_seconds": 1.5152779609998106
+        }
+      ],
+      "zobrist_root": 2864220857425114316,
+      "pvs": false,
+      "transposition_table": true,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "opening_731101",
+      "variant": "E5_ordering_only",
+      "move": [
+        5,
+        3
+      ],
+      "root_value": 247,
+      "nodes": 3595,
+      "cutoffs": 266,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.9033323140001812,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 56,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.01913107000018499
+        },
+        {
+          "depth": 2,
+          "root_value": 0,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 331,
+          "elapsed_seconds": 0.1675425590001396
+        },
+        {
+          "depth": 3,
+          "root_value": 247,
+          "move": [
+            5,
+            3
+          ],
+          "nodes": 3595,
+          "elapsed_seconds": 1.715077138000197
+        }
+      ],
+      "zobrist_root": 2864220857425114316,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": true,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "opening_731101",
+      "variant": "E5_extensions_only",
+      "move": [
+        6,
+        4
+      ],
+      "root_value": 0,
+      "nodes": 1704,
+      "cutoffs": 150,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9771893130000535,
+      "timed_out": true,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 56,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.028003997999803687
+        },
+        {
+          "depth": 2,
+          "root_value": 0,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 221,
+          "elapsed_seconds": 0.12508260000004157
+        }
+      ],
+      "zobrist_root": 2864220857425114316,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": true
+    },
+    {
+      "position_id": "opening_731101",
+      "variant": "E5_all",
+      "move": [
+        6,
+        4
+      ],
+      "root_value": 0,
+      "nodes": 2209,
+      "cutoffs": 388,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9759995440003877,
+      "timed_out": true,
+      "tt_hits": 148,
+      "pvs_researches": 18,
+      "extensions": 0,
+      "tt_size": 255,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 56,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 47,
+          "elapsed_seconds": 0.06003663000001325
+        },
+        {
+          "depth": 2,
+          "root_value": 0,
+          "move": [
+            6,
+            4
+          ],
+          "nodes": 331,
+          "elapsed_seconds": 0.38638678600000276
+        }
+      ],
+      "zobrist_root": 2864220857425114316,
+      "pvs": true,
+      "transposition_table": true,
+      "move_ordering": true,
+      "tactical_extensions": true
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "variant": "E5_base",
+      "move": [
+        3,
+        5
+      ],
+      "root_value": 343,
+      "nodes": 3184,
+      "cutoffs": 203,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.8953294220000316,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 105,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.025344954999582114
+        },
+        {
+          "depth": 2,
+          "root_value": 34,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 185,
+          "elapsed_seconds": 0.06696549399975993
+        },
+        {
+          "depth": 3,
+          "root_value": 343,
+          "move": [
+            3,
+            5
+          ],
+          "nodes": 3184,
+          "elapsed_seconds": 1.7986978219996672
+        }
+      ],
+      "zobrist_root": 3638466478017112397,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "variant": "E5_PVS_only",
+      "move": [
+        3,
+        4
+      ],
+      "root_value": 34,
+      "nodes": 2500,
+      "cutoffs": 247,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9750190670001757,
+      "timed_out": true,
+      "tt_hits": 0,
+      "pvs_researches": 8,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 105,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.02612340799987578
+        },
+        {
+          "depth": 2,
+          "root_value": 34,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 187,
+          "elapsed_seconds": 0.08605168299982324
+        }
+      ],
+      "zobrist_root": 3638466478017112397,
+      "pvs": true,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "variant": "E5_TT_only",
+      "move": [
+        3,
+        5
+      ],
+      "root_value": 343,
+      "nodes": 3184,
+      "cutoffs": 203,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.9100767290001386,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 213,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 105,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.028274232000057964
+        },
+        {
+          "depth": 2,
+          "root_value": 34,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 185,
+          "elapsed_seconds": 0.07558836199996222
+        },
+        {
+          "depth": 3,
+          "root_value": 343,
+          "move": [
+            3,
+            5
+          ],
+          "nodes": 3184,
+          "elapsed_seconds": 1.8049188609998055
+        }
+      ],
+      "zobrist_root": 3638466478017112397,
+      "pvs": false,
+      "transposition_table": true,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "variant": "E5_ordering_only",
+      "move": [
+        3,
+        4
+      ],
+      "root_value": 34,
+      "nodes": 2328,
+      "cutoffs": 185,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9750669689997267,
+      "timed_out": true,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 105,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.022526429000208736
+        },
+        {
+          "depth": 2,
+          "root_value": 34,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 192,
+          "elapsed_seconds": 0.09468854999977339
+        }
+      ],
+      "zobrist_root": 3638466478017112397,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": true,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "variant": "E5_extensions_only",
+      "move": [
+        3,
+        4
+      ],
+      "root_value": 34,
+      "nodes": 2463,
+      "cutoffs": 189,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9751439130000108,
+      "timed_out": true,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 105,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.049890989999767044
+        },
+        {
+          "depth": 2,
+          "root_value": 34,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 185,
+          "elapsed_seconds": 0.12047648800034949
+        }
+      ],
+      "zobrist_root": 3638466478017112397,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": true
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "variant": "E5_all",
+      "move": [
+        3,
+        4
+      ],
+      "root_value": 34,
+      "nodes": 1430,
+      "cutoffs": 197,
+      "completed_depth": 2,
+      "elapsed_seconds": 1.9767400310001904,
+      "timed_out": true,
+      "tt_hits": 2,
+      "pvs_researches": 2,
+      "extensions": 0,
+      "tt_size": 198,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 105,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 45,
+          "elapsed_seconds": 0.030274708999968425
+        },
+        {
+          "depth": 2,
+          "root_value": 34,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 193,
+          "elapsed_seconds": 0.13833624800008693
+        }
+      ],
+      "zobrist_root": 3638466478017112397,
+      "pvs": true,
+      "transposition_table": true,
+      "move_ordering": true,
+      "tactical_extensions": true
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "variant": "E5_base",
+      "move": [
+        2,
+        2
+      ],
+      "root_value": 123,
+      "nodes": 1899,
+      "cutoffs": 118,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.1432452029998785,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 29,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 32,
+          "elapsed_seconds": 0.01865929399991728
+        },
+        {
+          "depth": 2,
+          "root_value": -2,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 285,
+          "elapsed_seconds": 0.16930349799986288
+        },
+        {
+          "depth": 3,
+          "root_value": 123,
+          "move": [
+            2,
+            2
+          ],
+          "nodes": 1899,
+          "elapsed_seconds": 0.9539203799999996
+        }
+      ],
+      "zobrist_root": 18051794274759754053,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "variant": "E5_PVS_only",
+      "move": [
+        2,
+        2
+      ],
+      "root_value": 123,
+      "nodes": 2184,
+      "cutoffs": 157,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.1635469610000655,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 28,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 29,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 34,
+          "elapsed_seconds": 0.021064010999907623
+        },
+        {
+          "depth": 2,
+          "root_value": -2,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 406,
+          "elapsed_seconds": 0.12346911499980706
+        },
+        {
+          "depth": 3,
+          "root_value": 123,
+          "move": [
+            2,
+            2
+          ],
+          "nodes": 2184,
+          "elapsed_seconds": 1.015751463000015
+        }
+      ],
+      "zobrist_root": 18051794274759754053,
+      "pvs": true,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "variant": "E5_TT_only",
+      "move": [
+        2,
+        2
+      ],
+      "root_value": 123,
+      "nodes": 1899,
+      "cutoffs": 118,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.120253742999921,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 132,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 29,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 32,
+          "elapsed_seconds": 0.01033141700008855
+        },
+        {
+          "depth": 2,
+          "root_value": -2,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 285,
+          "elapsed_seconds": 0.12525234099985028
+        },
+        {
+          "depth": 3,
+          "root_value": 123,
+          "move": [
+            2,
+            2
+          ],
+          "nodes": 1899,
+          "elapsed_seconds": 0.9834955139999693
+        }
+      ],
+      "zobrist_root": 18051794274759754053,
+      "pvs": false,
+      "transposition_table": true,
+      "move_ordering": false,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "variant": "E5_ordering_only",
+      "move": [
+        2,
+        2
+      ],
+      "root_value": 123,
+      "nodes": 2011,
+      "cutoffs": 163,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.0570984500000122,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 29,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 32,
+          "elapsed_seconds": 0.01058528200019282
+        },
+        {
+          "depth": 2,
+          "root_value": -2,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 136,
+          "elapsed_seconds": 0.04627963900020404
+        },
+        {
+          "depth": 3,
+          "root_value": 123,
+          "move": [
+            2,
+            2
+          ],
+          "nodes": 2011,
+          "elapsed_seconds": 0.9987667989998954
+        }
+      ],
+      "zobrist_root": 18051794274759754053,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": true,
+      "tactical_extensions": false
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "variant": "E5_extensions_only",
+      "move": [
+        2,
+        2
+      ],
+      "root_value": 123,
+      "nodes": 1899,
+      "cutoffs": 118,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.5886356179998984,
+      "timed_out": false,
+      "tt_hits": 0,
+      "pvs_researches": 0,
+      "extensions": 0,
+      "tt_size": 0,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 29,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 32,
+          "elapsed_seconds": 0.014435934000175621
+        },
+        {
+          "depth": 2,
+          "root_value": -2,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 285,
+          "elapsed_seconds": 0.15262913900005515
+        },
+        {
+          "depth": 3,
+          "root_value": 123,
+          "move": [
+            2,
+            2
+          ],
+          "nodes": 1899,
+          "elapsed_seconds": 1.4201653690001876
+        }
+      ],
+      "zobrist_root": 18051794274759754053,
+      "pvs": false,
+      "transposition_table": false,
+      "move_ordering": false,
+      "tactical_extensions": true
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "variant": "E5_all",
+      "move": [
+        2,
+        2
+      ],
+      "root_value": 123,
+      "nodes": 1784,
+      "cutoffs": 179,
+      "completed_depth": 3,
+      "elapsed_seconds": 1.0878088920003393,
+      "timed_out": false,
+      "tt_hits": 2,
+      "pvs_researches": 2,
+      "extensions": 0,
+      "tt_size": 180,
+      "depth_iterations": [
+        {
+          "depth": 1,
+          "root_value": 29,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 32,
+          "elapsed_seconds": 0.020267833000161772
+        },
+        {
+          "depth": 2,
+          "root_value": -2,
+          "move": [
+            3,
+            4
+          ],
+          "nodes": 137,
+          "elapsed_seconds": 0.0659008609995908
+        },
+        {
+          "depth": 3,
+          "root_value": 123,
+          "move": [
+            2,
+            2
+          ],
+          "nodes": 1784,
+          "elapsed_seconds": 0.9996946019996358
+        }
+      ],
+      "zobrist_root": 18051794274759754053,
+      "pvs": true,
+      "transposition_table": true,
+      "move_ordering": true,
+      "tactical_extensions": true
+    }
+  ]
+}

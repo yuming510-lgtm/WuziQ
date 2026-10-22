@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "board_size": 9,
+  "description": "Frozen alternating, nonterminal tactical fixtures. Proof claims are checked by complete-defense certificate replay.",
+  "positions": [
+    {
+      "position_id": "opening_731101",
+      "category": "opening",
+      "to_move": "B",
+      "moves": [["B", 4, 4], ["W", 6, 3], ["B", 7, 5], ["W", 6, 1]],
+      "expectation": "no_required_proof"
+    },
+    {
+      "position_id": "immediate_win",
+      "category": "attack",
+      "to_move": "B",
+      "moves": [["B", 4, 1], ["W", 0, 0], ["B", 4, 2], ["W", 0, 2], ["B", 4, 3], ["W", 1, 1], ["B", 4, 4], ["W", 1, 3]],
+      "expectation": "must_win_now",
+      "winning_moves": [[4, 0], [4, 5]]
+    },
+    {
+      "position_id": "immediate_block",
+      "category": "defense",
+      "to_move": "B",
+      "moves": [["B", 0, 0], ["W", 2, 0], ["B", 0, 2], ["W", 2, 1], ["B", 1, 1], ["W", 2, 2], ["B", 1, 3], ["W", 2, 3]],
+      "expectation": "must_block",
+      "blocking_moves": [[2, 4]]
+    },
+    {
+      "position_id": "vcf_open_four",
+      "category": "continuous_attack",
+      "to_move": "B",
+      "moves": [["B", 4, 3], ["W", 0, 0], ["B", 4, 4], ["W", 0, 2], ["B", 4, 5], ["W", 1, 1]],
+      "expectation": "must_prove",
+      "proof_family": "VCF",
+      "proof_required_models": ["E1", "E2", "E3", "E4"],
+      "validation_budget_seconds": 0.5
+    },
+    {
+      "position_id": "vcf_edge_open_four",
+      "category": "edge_attack",
+      "to_move": "B",
+      "moves": [["B", 0, 3], ["W", 8, 0], ["B", 0, 4], ["W", 8, 2], ["B", 0, 5], ["W", 7, 1]],
+      "expectation": "must_prove",
+      "proof_family": "VCF",
+      "proof_required_models": ["E1", "E2", "E3", "E4"],
+      "validation_budget_seconds": 0.5
+    },
+    {
+      "position_id": "vct_cross_three",
+      "category": "multi_threat_attack",
+      "to_move": "B",
+      "moves": [["B", 4, 3], ["W", 0, 0], ["B", 4, 5], ["W", 0, 2], ["B", 3, 4], ["W", 1, 1], ["B", 5, 4], ["W", 1, 3]],
+      "expectation": "must_prove",
+      "proof_family": "VCT",
+      "proof_required_models": ["E2"],
+      "validation_budget_seconds": 2.0
+    },
+    {
+      "position_id": "counterwin_refutes_vcf",
+      "category": "counterattack",
+      "to_move": "B",
+      "moves": [["B", 4, 3], ["W", 0, 0], ["B", 4, 4], ["W", 0, 1], ["B", 4, 5], ["W", 0, 2], ["B", 7, 7], ["W", 0, 3]],
+      "expectation": "must_not_prove"
+    },
+    {
+      "position_id": "blocked_four_pseudo_win",
+      "category": "false_threat",
+      "to_move": "B",
+      "moves": [["B", 4, 3], ["W", 4, 2], ["B", 4, 4], ["W", 4, 6], ["B", 4, 5], ["W", 0, 0]],
+      "expectation": "every_proof_must_verify"
+    },
+    {
+      "position_id": "white_vcf_open_four",
+      "category": "continuous_attack",
+      "to_move": "W",
+      "moves": [["B", 0, 0], ["W", 4, 3], ["B", 0, 2], ["W", 4, 4], ["B", 1, 1], ["W", 4, 5], ["B", 8, 8]],
+      "expectation": "must_prove",
+      "proof_family": "VCF",
+      "proof_required_models": ["E1", "E2", "E3", "E4"],
+      "validation_budget_seconds": 0.5
+    },
+    {
+      "position_id": "edge_mandatory_block",
+      "category": "edge_defense",
+      "to_move": "B",
+      "moves": [["B", 8, 0], ["W", 0, 0], ["B", 8, 2], ["W", 0, 1], ["B", 7, 1], ["W", 0, 2], ["B", 7, 3], ["W", 0, 3]],
+      "expectation": "must_block",
+      "blocking_moves": [[0, 4]]
+    },
+    {
+      "position_id": "cross_defense",
+      "category": "defense",
+      "to_move": "B",
+      "moves": [["B", 0, 0], ["W", 4, 3], ["B", 0, 2], ["W", 4, 5], ["B", 1, 1], ["W", 3, 4], ["B", 1, 3], ["W", 5, 4]],
+      "expectation": "every_proof_must_verify"
+    },
+    {
+      "position_id": "empty_edge_no_proof",
+      "category": "false_threat",
+      "to_move": "B",
+      "moves": [["B", 0, 0], ["W", 0, 8], ["B", 1, 2], ["W", 1, 6]],
+      "expectation": "no_required_proof"
+    }
+  ]
+}
