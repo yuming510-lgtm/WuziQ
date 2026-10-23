@@ -27,6 +27,49 @@ def _group_key(group: dict[str, Any]) -> tuple[Any, ...]:
     )
 
 
+def empty_reuse_manifest(config: dict[str, Any]) -> dict[str, Any]:
+    """Return the deterministic manifest used when history reuse is disabled."""
+    return {
+        "source_experiment_id": None,
+        "source_commit": None,
+        "source_config_sha256": None,
+        "source_schedule_sha256": None,
+        "source_records_sha256": None,
+        "source_record_count": 0,
+        "source_full_groups": 0,
+        "source_partial_games_excluded": [],
+        "v6_reused_groups": 0,
+        "v6_reused_games": 0,
+        "engine_sha256": config["v5_1_engine_sha256"],
+        "groups": [],
+        "rejections": [],
+        "selection_rule": "No history import requested.",
+    }
+
+
+def reconstruct_frozen_schedule(
+    config: dict[str, Any],
+    saved_schedule: list[dict[str, Any]],
+    saved_manifest: dict[str, Any],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Rebuild and verify the schedule including its exact reuse decoration."""
+    from .schedule import build_schedule
+
+    base_schedule, _routes = build_schedule(config)
+    if saved_manifest.get("source_experiment_id") is None:
+        expected_schedule = base_schedule
+        expected_manifest = empty_reuse_manifest(config)
+    else:
+        expected_schedule, expected_manifest, _records = prepare_v5_1_reuse(
+            base_schedule, config
+        )
+    if canonical(saved_schedule) != canonical(expected_schedule):
+        raise ValueError("Saved V6 schedule differs from its deterministic source and reuse manifest")
+    if canonical(saved_manifest) != canonical(expected_manifest):
+        raise ValueError("Saved V6 reuse manifest differs from its exact source audit")
+    return expected_schedule, expected_manifest
+
+
 def prepare_v5_1_reuse(
     schedule: list[dict[str, Any]],
     config: dict[str, Any],

@@ -14,6 +14,7 @@ from src.research.checkpoint import load_game_records
 from src.research.v6.config import canonical, load_config, sha256
 from src.research.v6.schedule import build_schedule
 from src.research.v6.state import derive_state
+from src.research.v6.reuse import reconstruct_frozen_schedule
 from src.research.v6.validation import validate_records
 
 
@@ -24,10 +25,15 @@ def main() -> None:
     args = parser.parse_args()
     config = load_config(ROOT / args.config)
     results = ROOT / args.results_dir
-    schedule, routes = build_schedule(config)
+    _base_schedule, routes = build_schedule(config)
     saved_schedule = json.loads((results / "schedule.json").read_text(encoding="utf-8"))
-    if canonical(saved_schedule) != canonical(schedule):
-        raise SystemExit("saved schedule differs from deterministic V6 schedule")
+    saved_manifest = json.loads((results / "reuse_manifest.json").read_text(encoding="utf-8"))
+    try:
+        schedule, _verified_manifest = reconstruct_frozen_schedule(
+            config, saved_schedule, saved_manifest
+        )
+    except (ValueError, FileNotFoundError) as exc:
+        raise SystemExit(str(exc)) from exc
     records = load_game_records(results / "9x9_games.jsonl")
     replay = validate_records(records, schedule, require_complete_groups=True, verify_proofs=True)
     state = derive_state(records, schedule, routes)

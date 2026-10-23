@@ -1,0 +1,403 @@
+{
+  "base_seed": 20261022,
+  "based_on_branch": "research/abcd-ladder-v5-1",
+  "based_on_commit": "d71227c1ee4055e4cb0feee52673b117b20fd3b5",
+  "board_size": 9,
+  "branch": "research/advanced-search-v6",
+  "budget_ladder": [
+    {
+      "label": "50ms",
+      "seconds": 0.05
+    },
+    {
+      "label": "200ms",
+      "seconds": 0.2
+    },
+    {
+      "label": "1s",
+      "seconds": 1.0
+    },
+    {
+      "label": "5s",
+      "seconds": 5.0
+    },
+    {
+      "label": "10s",
+      "seconds": 10.0
+    },
+    {
+      "label": "20s",
+      "seconds": 20.0
+    },
+    {
+      "label": "50s",
+      "seconds": 50.0
+    }
+  ],
+  "dominance_assumption": "A fixed challenger that scores below 1.0 against an opponent family budget rung is not tested against higher budgets on that route; higher-rung failures are marked inferred only. Reciprocal route status is independently computed from shared games.",
+  "engine_config_path": "configs/abcd_ladder_v5_1.json",
+  "engine_config_sha256": "9968a61809a837da0a3319d14a3843f46617458472a46d1775ee83c00cd730fe",
+  "engine_files": [
+    "src/ai.py",
+    "src/gomoku.py",
+    "src/research/mcts_d2.py",
+    "src/research/v6/__init__.py",
+    "src/research/v6/engine.py",
+    "src/research/v6/e5.py",
+    "src/research/v6/pns.py",
+    "src/research/v6/tactics.py",
+    "src/research/v6/types.py"
+  ],
+  "engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991",
+    "src/research/v6/__init__.py": "495d95991a336c3600e9f3ce133b36b0bc0772f8c156769c7e044b7f9a7d6d70",
+    "src/research/v6/e5.py": "f64eeec75b1945995ceb6af7da08d808c008a279da3b71c44bef69b33fbf4e31",
+    "src/research/v6/engine.py": "4469ff87a51b2a3b83bf42c90f8a88da90797176052aafc97a0c5478f00c73a8",
+    "src/research/v6/pns.py": "dbf5b6cc9ea13c4097eb7640dcce18d3b0dd495a9a56f0198409c16d8ad65dc3",
+    "src/research/v6/tactics.py": "a15e5d114e30a472c1213a9d3aec11c0d867c2e9f3c67d5f47032e8b7d75f774",
+    "src/research/v6/types.py": "aef3c91107e3f2bb5183ef4f03e8053acdeb0ccc6a4e8c09f76f4bf876b8b9f1"
+  },
+  "experiment_id": "wuziq-advanced-search-v6-2026-10-22",
+  "experiment_mode": "exploratory paired budget ladder; actual, reused, inferred, and unrun states remain distinct",
+  "families": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5"
+  ],
+  "maximum_games": 2856,
+  "maximum_groups": 1428,
+  "maximum_routes": 456,
+  "neural_training": false,
+  "opening_assignment": "V5.1 formula for ABCD pairs; deterministic V6 pair-index grid for new family pairs",
+  "opening_catalog": {
+    "731101": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        6,
+        3
+      ],
+      [
+        "B",
+        7,
+        5
+      ],
+      [
+        "W",
+        6,
+        1
+      ]
+    ],
+    "731102": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        2,
+        5
+      ],
+      [
+        "B",
+        0,
+        6
+      ],
+      [
+        "W",
+        4,
+        6
+      ]
+    ],
+    "731103": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        3,
+        2
+      ],
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        6,
+        3
+      ]
+    ],
+    "731104": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        4,
+        6
+      ],
+      [
+        "B",
+        3,
+        5
+      ],
+      [
+        "W",
+        1,
+        4
+      ]
+    ],
+    "731105": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        2,
+        2
+      ],
+      [
+        "B",
+        3,
+        6
+      ],
+      [
+        "W",
+        5,
+        2
+      ]
+    ],
+    "731106": [
+      [
+        "B",
+        4,
+        4
+      ],
+      [
+        "W",
+        5,
+        6
+      ],
+      [
+        "B",
+        2,
+        4
+      ],
+      [
+        "W",
+        1,
+        6
+      ]
+    ],
+    "731107": [
+      [
+        "B",
+        3,
+        4
+      ],
+      [
+        "W",
+        5,
+        3
+      ],
+      [
+        "B",
+        6,
+        6
+      ],
+      [
+        "W",
+        2,
+        1
+      ]
+    ],
+    "731108": [
+      [
+        "B",
+        4,
+        3
+      ],
+      [
+        "W",
+        3,
+        5
+      ],
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        6,
+        2
+      ]
+    ],
+    "731109": [
+      [
+        "B",
+        3,
+        3
+      ],
+      [
+        "W",
+        4,
+        5
+      ],
+      [
+        "B",
+        6,
+        4
+      ],
+      [
+        "W",
+        2,
+        3
+      ]
+    ],
+    "731110": [
+      [
+        "B",
+        5,
+        4
+      ],
+      [
+        "W",
+        3,
+        6
+      ],
+      [
+        "B",
+        1,
+        4
+      ],
+      [
+        "W",
+        6,
+        1
+      ]
+    ],
+    "731111": [
+      [
+        "B",
+        2,
+        5
+      ],
+      [
+        "W",
+        6,
+        3
+      ],
+      [
+        "B",
+        3,
+        2
+      ],
+      [
+        "W",
+        5,
+        6
+      ]
+    ],
+    "731112": [
+      [
+        "B",
+        6,
+        4
+      ],
+      [
+        "W",
+        2,
+        4
+      ],
+      [
+        "B",
+        5,
+        5
+      ],
+      [
+        "W",
+        3,
+        3
+      ]
+    ]
+  },
+  "opening_plies": 4,
+  "opening_seeds": [
+    731101,
+    731102,
+    731103,
+    731104,
+    731105,
+    731106,
+    731107,
+    731108,
+    731109,
+    731110,
+    731111,
+    731112
+  ],
+  "pair_rules": {
+    "draw_points": 0.5,
+    "games_per_group": 2,
+    "loss_points": 0,
+    "route_pass_points": 1.0,
+    "same_opening": true,
+    "swap_colors": true,
+    "win_points": 1
+  },
+  "reuse_source": {
+    "experiment_id": "wuziq-abcd-independent-ladder-v5-1-2026-10-21",
+    "report": "research/v5_1/REPORT.md",
+    "results_dir": "research/v5_1/results",
+    "rule": "Reuse only complete paired groups whose V5.1 config, frozen ABCD engine hashes, model versions, budget, opening/seed, game seeds, colors and replay all agree."
+  },
+  "schema_version": 1,
+  "search_families": [
+    "B",
+    "C",
+    "D",
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5"
+  ],
+  "tactical_limits": {
+    "e5_extension_limit": 2,
+    "e5_max_depth": 24,
+    "e5_table_limit": 200000,
+    "max_attack_depth": 8,
+    "max_nodes": 50000,
+    "pns_max_nodes": 50000
+  },
+  "tactical_positions_path": "configs/v6/tactical_positions.json",
+  "tactical_positions_sha256": "142d23e77c53605e726cd504541452828559c2022ab0a8e9ee861dc702af074e",
+  "v5_1_base_seed": 20261021,
+  "v5_1_engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991"
+  }
+}

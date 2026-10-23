@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from copy import deepcopy
+
+import pytest
+
+from src.research.v6.config import canonical
 from src.research.v6.config import load_config
-from src.research.v6.reuse import prepare_v5_1_reuse
+from src.research.v6.reuse import prepare_v5_1_reuse, reconstruct_frozen_schedule
 from src.research.v6.schedule import build_schedule
 from src.research.v6.validation import validate_game_record
 
@@ -41,3 +46,19 @@ def test_outcome_never_changes_v5_1_reuse_eligibility() -> None:
     _, same_manifest, same_records = prepare_v5_1_reuse(schedule, config)
     assert same_manifest["groups"] == manifest["groups"]
     assert [record["winner_model"] for record in same_records if record["game_id"] in ids] == winners_before
+
+
+def test_reconstruction_accepts_exact_reuse_decoration_and_rejects_tampering() -> None:
+    config = load_config()
+    schedule, _routes = build_schedule(config)
+    frozen, manifest, _records = prepare_v5_1_reuse(schedule, config)
+
+    rebuilt, rebuilt_manifest = reconstruct_frozen_schedule(config, frozen, manifest)
+    assert canonical(rebuilt) == canonical(frozen)
+    assert canonical(rebuilt_manifest) == canonical(manifest)
+
+    tampered = deepcopy(frozen)
+    reused = next(group for group in tampered if group.get("reuse_source"))
+    reused["reuse_source"]["source_commit"] = "incorrect"
+    with pytest.raises(ValueError, match="deterministic source and reuse manifest"):
+        reconstruct_frozen_schedule(config, tampered, manifest)
