@@ -15,6 +15,12 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+CSV_FIELDS = (
+    "model", "position_id", "budget_seconds", "move", "legal", "elapsed_seconds",
+    "wall_seconds", "nodes", "completed_depth", "tree_depth", "cutoffs",
+    "simulations", "timed_out", "over_budget_seconds",
+)
+
 from src.ai import choose_move
 from src.gomoku import GomokuBoard
 from src.research.abcd_ladder_v5 import settings_for_model
@@ -124,10 +130,37 @@ def _estimates(config: dict, rows: list[dict], overall_plies: float, pair_plies:
     }
 
 
+def _write_benchmark_csv(path: Path, rows: list[dict]) -> None:
+    """Flatten the registered preflight fields and omit nested diagnostic metadata."""
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        for row in rows:
+            flattened = {key: row.get(key, "") for key in CSV_FIELDS}
+            flattened["move"] = json.dumps(row.get("move"), ensure_ascii=False)
+            flattened["legal"] = int(bool(row.get("legal")))
+            flattened["timed_out"] = int(bool(row.get("timed_out")))
+            writer.writerow(flattened)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="research/v6_2/preflight")
+    parser.add_argument("--reuse-benchmark-json", action="store_true")
     args = parser.parse_args()
+    output = ROOT / args.output_dir
+    if args.reuse_benchmark_json:
+        payload_path = output / "preflight.json"
+        payload = json.loads(payload_path.read_text(encoding="utf-8"))
+        _write_benchmark_csv(output / "benchmark_moves.csv", payload["benchmark_rows"])
+        print(json.dumps({
+            "event": "v6_2_preflight_csv_finalized",
+            "source_json": str(payload_path.relative_to(ROOT)),
+            "csv": str((output / "benchmark_moves.csv").relative_to(ROOT)),
+            "benchmark_wall_seconds": payload["benchmark_wall_seconds"],
+            "benchmark_reused": True,
+        }, ensure_ascii=False), flush=True)
+        return
     started = time.perf_counter()
     config = load_v6_2_config()
     v6 = load_v6_config()
@@ -208,15 +241,9 @@ def main() -> None:
         },
         "estimate": estimate,
     }
-    output = ROOT / args.output_dir
     output.mkdir(parents=True, exist_ok=True)
     write_json_atomic(output / "preflight.json", payload)
-    with (output / "benchmark_moves.csv").open("w", newline="", encoding="utf-8") as handle:
-        fields = ["model", "position_id", "budget_seconds", "move", "legal", "elapsed_seconds", "wall_seconds", "nodes", "completed_depth", "tree_depth", "cutoffs", "simulations", "timed_out", "over_budget_seconds"]
-        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
-        writer.writeheader()
-        for row in rows:
-            writer.writerow({**row, "move": json.dumps(row["move"]), "legal": int(row["legal"]), "timed_out": int(row["timed_out"])})
+    _write_benchmark_csv(output / "benchmark_moves.csv", rows)
     print(json.dumps({
         "event": "v6_2_preflight_complete",
         "wall_seconds": payload["benchmark_wall_seconds"],
