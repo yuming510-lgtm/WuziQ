@@ -77,6 +77,71 @@ def _fake_game(spec, _engine_config, _v6_config, implementation_commit):
     }
 
 
+def _draw_game(spec, implementation_commit="test-commit"):
+    """Build a replayable 81-ply draw with the frozen four-ply opening."""
+    from src.gomoku import GomokuBoard
+
+    pattern = (
+        "BBWBWBWWB", "BWBWWBWBW", "BWBWBWWBW", "WBWBBWBBW",
+        "WBWBBWBWB", "BWWBWBBWB", "BWBWWBWBW", "WWBWBWWBW",
+        "BBWBBWBBW",
+    )
+    board = GomokuBoard(9)
+    moves = []
+    used = set()
+
+    def add_move(player, row, col, model, opening):
+        board.place_stone(player, (row, col))
+        used.add((row, col))
+        moves.append({
+            "ply": len(moves), "player": player, "model": model,
+            "row": row, "col": col, "elapsed_seconds": 0.0,
+            "root_value": 0, "nodes": 0, "completed_depth": 0,
+            "tree_depth": 0, "cutoffs": 0, "simulations": 0,
+            "rollout_plies": 0, "terminal_simulations": 0,
+            "truncated_simulations": 0, "root_candidates": 0,
+            "root_min_visits": 0, "reused_nodes": 0, "timed_out": False,
+            "opening": opening, "proof_status": "not_applicable",
+            "proof_kind": None, "proof_certificate": None, "stats": {},
+        })
+
+    for opening in spec["opening"]:
+        add_move(opening["player"], opening["row"], opening["col"], None, True)
+
+    while not board.is_full():
+        player = "B" if len(moves) % 2 == 0 else "W"
+        model = spec["black_model"] if player == "B" else spec["white_model"]
+        target = next(
+            (row, col)
+            for row in range(9)
+            for col in range(9)
+            if (row, col) not in used and pattern[row][col] == player
+        )
+        add_move(player, *target, model, False)
+
+    return {
+        **spec,
+        "implementation_commit": implementation_commit,
+        "moves": moves,
+        "move_count": len(moves),
+        "winner_color": None,
+        "winner_model": None,
+        "outcome": "draw",
+        "termination": "full_board",
+        "timeout_count": 0,
+        "search_nodes_total": 0,
+        "simulations_total": 0,
+        "tree_depth_max": 0,
+        "search_depth_max": 0,
+        "cutoffs_total": 0,
+        "thinking_seconds_total": 0.0,
+        "proof_count": 0,
+        "proof_verified_count": 0,
+        "source_type": "new",
+        "source_game_id": None,
+    }
+
+
 def test_v6_2_runner_persists_six_games_and_rerun_does_not_duplicate(tmp_path: Path) -> None:
     config = load_v6_2_config()
     first = run_championship(
@@ -156,6 +221,21 @@ def test_validation_recomputes_round_robin_points_and_joint_champion() -> None:
     assert result["champions"] == ["C", "D", "E5"]
     for model, row in result["standings"].items():
         assert row["points"] == row["wins"] + row["draws"] / 2
+
+
+def test_pair_draw_is_counted_once_and_pair_points_match_real_scores() -> None:
+    config = load_v6_2_config()
+    schedule = build_schedule(config)
+    cd_specs = [spec for spec in schedule if spec["pair"] == ["C", "D"]]
+    records = [_fake_game(cd_specs[0], {}, {}, "test-commit"), _draw_game(cd_specs[1])]
+
+    result = validate_v6_2_records(records, schedule, require_complete=False)
+
+    pair = next(row for row in result["pair_results"] if row["pair"] == ["C", "D"])
+    assert pair["draws"] == 1
+    assert pair["points"] == {"C": 1.5, "D": 0.5}
+    assert result["standings"]["C"]["points"] == 1.5
+    assert result["standings"]["D"]["points"] == 0.5
 
 
 def test_validation_rejects_a_game_using_wrong_budget_or_duplicate_id() -> None:

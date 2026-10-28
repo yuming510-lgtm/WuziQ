@@ -125,8 +125,8 @@ def validate_v6_2_records(
                 for model in pair:
                     standings[model]["draws"] += 1
                     standings[model]["points"] += 0.5
-                    pair_result["draws"] += 1
                     pair_result["points"][model] += 0.5
+                pair_result["draws"] += 1
             else:
                 loser = pair[1] if winner == pair[0] else pair[0]
                 standings[winner]["wins"] += 1
