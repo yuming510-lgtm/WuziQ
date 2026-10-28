@@ -24,6 +24,8 @@ def aggregate_compute(records: list[dict[str, Any]]) -> dict[str, dict[str, Any]
             "max_tree_depth": 0,
             "timeouts": 0,
             "over_budget_moves": 0,
+            "total_overrun_seconds": 0.0,
+            "max_overrun_seconds": 0.0,
         }
         for model in MODELS
     }
@@ -41,7 +43,11 @@ def aggregate_compute(records: list[dict[str, Any]]) -> dict[str, dict[str, Any]
             row["max_search_depth"] = max(row["max_search_depth"], int(move.get("completed_depth", 0)))
             row["max_tree_depth"] = max(row["max_tree_depth"], int(move.get("tree_depth", 0)))
             row["timeouts"] += int(bool(move.get("timed_out")))
-            row["over_budget_moves"] += int(float(move.get("elapsed_seconds", 0.0)) > 200.0)
+            overrun = max(0.0, float(move.get("elapsed_seconds", 0.0)) - 200.0)
+            if overrun > 0.0:
+                row["over_budget_moves"] += 1
+                row["total_overrun_seconds"] += overrun
+                row["max_overrun_seconds"] = max(row["max_overrun_seconds"], overrun)
     for row in result.values():
         row["average_seconds_per_move"] = (
             row["thinking_seconds"] / row["moves"] if row["moves"] else 0.0
@@ -132,11 +138,23 @@ def build_report(
         ranks[model] = rank
 
     with (results_dir / "standings.csv").open("w", newline="", encoding="utf-8") as handle:
-        fields = ["rank", "model", "games", "wins", "draws", "losses", "points", "black_games", "black_wins", "white_games", "white_wins"]
+        fields = [
+            "rank", "model", "games", "wins", "draws", "losses", "points",
+            "black_games", "black_wins", "white_games", "white_wins", "moves",
+            "thinking_seconds", "nodes", "cutoffs", "simulations", "max_search_depth",
+            "max_tree_depth", "timeouts", "over_budget_moves", "max_overrun_ms",
+        ]
         writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         for model in order:
-            writer.writerow({"rank": ranks[model], "model": model, **{key: standings[model][key] for key in fields if key not in {"rank", "model"}}})
+            row = {
+                "rank": ranks[model],
+                "model": model,
+                **{key: standings[model][key] for key in fields if key in standings[model]},
+                **{key: usage[model][key] for key in fields if key in usage[model]},
+                "max_overrun_ms": usage[model]["max_overrun_seconds"] * 1000.0,
+            }
+            writer.writerow(row)
     with (results_dir / "pair_results.csv").open("w", newline="", encoding="utf-8") as handle:
         fields = ["group_id", "pair", "games", "C_wins", "D_wins", "E5_wins", "draws", "C_points", "D_points", "E5_points"]
         writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
@@ -183,11 +201,21 @@ def build_report(
         f"| {ranks[model]} | {model} | {standings[model]['wins']}–{standings[model]['draws']}–{standings[model]['losses']} | "
         f"{standings[model]['points']:g} | {usage[model]['thinking_seconds']:.1f} | {usage[model]['moves']} | "
         f"{usage[model]['nodes']} | {usage[model]['simulations']} | {usage[model]['max_search_depth']} | "
-        f"{usage[model]['max_tree_depth']} | {usage[model]['timeouts']} |"
+        f"{usage[model]['max_tree_depth']} | {usage[model]['timeouts']} | {usage[model]['over_budget_moves']} | "
+        f"{usage[model]['max_overrun_seconds'] * 1000:.3f} |"
         for model in order
     ]
+    decision_count = sum(row["moves"] for row in usage.values())
+    overrun_count = sum(row["over_budget_moves"] for row in usage.values())
+    total_overrun_ms = sum(row["total_overrun_seconds"] for row in usage.values()) * 1000.0
+    max_overrun_ms = max(row["max_overrun_seconds"] for row in usage.values()) * 1000.0
+    overrun_lines = [
+        f"| {model} | {usage[model]['moves']} | {usage[model]['over_budget_moves']} | "
+        f"{usage[model]['total_overrun_seconds'] * 1000:.3f} | {usage[model]['max_overrun_seconds'] * 1000:.3f} |"
+        for model in MODELS
+    ]
     estimate = preflight.get("estimate", {})
-    scenarios = estimate.get("scenarios_hours", {})
+    scenarios = estimate.get("scenarios_hours", estimate)
     preflight_rows = preflight.get("benchmark_rows", [])
     benchmark_lines = [
         f"| {row['model']} | {float(row['elapsed_seconds']):.2f} | {int(row['completed_depth'])} | {int(row['nodes'])} | {int(row['simulations'])} | {'是' if row['timed_out'] else '否'} |"
@@ -207,8 +235,8 @@ def build_report(
 |---|---|---:|
 {chr(10).join(pair_lines)}
 
-| 排名 | 棋手 | 胜–平–负 | 总积分 | 总思考秒数 | 搜索步数 | 节点数 | MCTS模拟数 | 最大完成深度 | 最大树深 | 超时步数 |
-|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 排名 | 棋手 | 胜–平–负 | 总积分 | 总思考秒数 | 搜索步数 | 节点数 | MCTS模拟数 | 最大完成深度 | 最大树深 | 超时步数 | 超200秒步数 | 最大超限毫秒 |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 {chr(10).join(ranking_lines)}
 
 | 对局ID | 黑–白 | 胜者 | 落子数 | 总思考秒数 | 节点 | MCTS模拟数 | 超时步数 |
@@ -216,6 +244,16 @@ def build_report(
 {chr(10).join(game_lines)}
 
 积分按原始棋谱逐局重算，每位模型满足 `胜 + 平/2`。黑白统计见 `results/standings.csv`，逐局数据见 `results/games.csv`。
+
+### 200秒实际计时核查
+
+六局共有 **{decision_count}** 个模型决策，其中 **{overrun_count}** 步实测超过200秒；累计超出 **{total_overrun_ms:.3f}毫秒**，最大单步超出 **{max_overrun_ms:.3f}毫秒**。所有这些步骤均带有超时标记。按棋手统计如下：
+
+| 棋手 | 决策数 | 超200秒步数 | 累计超限毫秒 | 最大超限毫秒 |
+|---|---:|---:|---:|---:|
+{chr(10).join(overrun_lines)}
+
+因此本轮的**配置预算相同**，但实际计时并非严格的硬截止：C超限1步、D超限3步、E5超限9步，最大超出71.756毫秒。超出幅度很小，但对时间上限的要求不能表述为完全无偏差；报告保留全部实测时间，并把它列为公平性限制。
 
 ![冠军积分与计算耗时](figures/champion_comparison.svg)
 

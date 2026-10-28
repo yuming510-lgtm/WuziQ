@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import csv
 import json
 from pathlib import Path
 
@@ -23,6 +24,9 @@ def test_compute_aggregation_uses_real_decision_rows_and_excludes_opening_moves(
             {"model": "D", "opening": False, "elapsed_seconds": 200.0, "nodes": 900,
              "cutoffs": 0, "simulations": 50_000, "completed_depth": 4,
              "tree_depth": 4, "timed_out": True},
+            {"model": "E5", "opening": False, "elapsed_seconds": 200.071756,
+             "nodes": 80, "cutoffs": 2, "simulations": 0, "completed_depth": 3,
+             "tree_depth": 3, "timed_out": True},
         ],
     }]
 
@@ -35,6 +39,9 @@ def test_compute_aggregation_uses_real_decision_rows_and_excludes_opening_moves(
     assert result["D"]["simulations"] == 50_000
     assert result["D"]["timeouts"] == 1
     assert result["D"]["max_tree_depth"] == 4
+    assert result["D"]["over_budget_moves"] == 0
+    assert result["E5"]["over_budget_moves"] == 1
+    assert round(result["E5"]["max_overrun_seconds"] * 1000, 3) == 71.756
 
 
 def test_champion_svg_renders_score_and_compute_comparisons() -> None:
@@ -74,7 +81,7 @@ def test_report_builder_writes_consistent_results_from_validated_games(tmp_path:
     preflight = {
         "base_seed": config["base_seed"],
         "position_id": "test fixture",
-        "estimate": {"scenarios_hours": {"optimistic": 1.0, "central": 2.0, "conservative": 3.0}},
+        "estimate": {"optimistic": 1.0, "central": 2.0, "conservative": 3.0},
         "benchmark_rows": [],
     }
     environment = {"cpu_logical": 3, "cpu_physical": 3, "memory_total_bytes": 1000, "disk_free_bytes": 1000}
@@ -88,5 +95,9 @@ def test_report_builder_writes_consistent_results_from_validated_games(tmp_path:
     assert result["champions"] == ["C", "D", "E5"]
     assert "v6.2-9x9-c-d-o731201-s0" in report
     assert "探索性" in report
+    assert "乐观 **1.00小时**、中性 **2.00小时**、保守 **3.00小时**" in report
     assert (tmp_path / "report/results/standings.csv").is_file()
     assert (tmp_path / "report/figures/champion_comparison.svg").is_file()
+    with (tmp_path / "report/results/standings.csv").open(encoding="utf-8") as handle:
+        standings_rows = list(csv.DictReader(handle))
+    assert {"moves", "nodes", "simulations", "over_budget_moves", "max_overrun_ms"} <= set(standings_rows[0])
