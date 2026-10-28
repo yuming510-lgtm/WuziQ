@@ -1,0 +1,169 @@
+{
+  "base_seed": 20261028,
+  "benchmark_rows": [
+    {
+      "board_unchanged": true,
+      "budget_seconds": 200.0,
+      "completed_depth": 6,
+      "cutoffs": 183075,
+      "elapsed_seconds": 199.97520309599997,
+      "legal": true,
+      "model": "C",
+      "move": [
+        4,
+        4
+      ],
+      "nodes": 2225747,
+      "over_budget_seconds": 0.0,
+      "position_fixture_sha256": "ae578864f70f01b0b14ca6862a7206cd3512fee0c2ca48833aa2722e54eb7280",
+      "position_id": "vct_cross_three",
+      "simulations": 0,
+      "stats": {},
+      "timed_out": true,
+      "to_move": "B",
+      "tree_depth": 6,
+      "wall_seconds": 199.97581232899984
+    },
+    {
+      "board_unchanged": true,
+      "budget_seconds": 200.0,
+      "completed_depth": 4,
+      "cutoffs": 0,
+      "elapsed_seconds": 199.99941912200006,
+      "legal": true,
+      "model": "D",
+      "move": [
+        4,
+        4
+      ],
+      "nodes": 2343319,
+      "over_budget_seconds": 0.0,
+      "position_fixture_sha256": "ae578864f70f01b0b14ca6862a7206cd3512fee0c2ca48833aa2722e54eb7280",
+      "position_id": "vct_cross_three",
+      "simulations": 73873,
+      "stats": {},
+      "timed_out": true,
+      "to_move": "B",
+      "tree_depth": 4,
+      "wall_seconds": 199.99980836300006
+    },
+    {
+      "board_unchanged": true,
+      "budget_seconds": 200.0,
+      "completed_depth": 4,
+      "cutoffs": 5152,
+      "elapsed_seconds": 5.893438742999933,
+      "legal": true,
+      "model": "E5",
+      "move": [
+        4,
+        4
+      ],
+      "nodes": 10298,
+      "over_budget_seconds": 0.0,
+      "position_fixture_sha256": "ae578864f70f01b0b14ca6862a7206cd3512fee0c2ca48833aa2722e54eb7280",
+      "position_id": "vct_cross_three",
+      "simulations": 0,
+      "stats": {
+        "depth_iterations": [
+          {
+            "depth": 1,
+            "elapsed_seconds": 0.027982414999996763,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 47,
+            "root_value": 744
+          },
+          {
+            "depth": 2,
+            "elapsed_seconds": 0.09131909899997481,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 187,
+            "root_value": 428
+          },
+          {
+            "depth": 3,
+            "elapsed_seconds": 3.753226743999903,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 6403,
+            "root_value": 999999999996
+          },
+          {
+            "depth": 4,
+            "elapsed_seconds": 2.018198984000037,
+            "move": [
+              4,
+              4
+            ],
+            "nodes": 10298,
+            "root_value": 999999999996
+          }
+        ],
+        "extensions": 1705,
+        "move_ordering": true,
+        "pvs": true,
+        "pvs_researches": 3,
+        "tactical_extensions": true,
+        "transposition_table": true,
+        "tt_hits": 2034,
+        "tt_size": 3096,
+        "zobrist_root": 2401749687503214160
+      },
+      "timed_out": false,
+      "to_move": "B",
+      "tree_depth": 4,
+      "wall_seconds": 5.893900755999994
+    }
+  ],
+  "benchmark_wall_seconds": 407.05302707400006,
+  "environment": {
+    "cpu_logical": 3,
+    "cpu_physical": 3,
+    "disk_free_bytes": 31648538624,
+    "disk_total_bytes": 33770192896,
+    "memory_available_bytes": 9527238656,
+    "memory_total_bytes": 10452471808
+  },
+  "estimate": {
+    "assumptions": {
+      "central": "Use V6's overall mean game length; each model move consumes 75% of its measured 200-second preflight time, with a 50-second floor.",
+      "conservative": "All six games reach 81 plies; four registered opening plies are free, and every remaining decision consumes the full 200-second limit.",
+      "optimistic": "Use V6's pair-specific mean game length; each model move consumes 50% of its measured 200-second preflight time, with a 50-second floor.",
+      "wall_clock": "Games and decisions run serially on one process; no parallel speedup is assumed."
+    },
+    "central": 9.59,
+    "conservative": 25.67,
+    "historical_v6_average_plies_per_game": 53.34,
+    "historical_v6_pair_average_plies": {
+      "C-D": 19.32,
+      "C-E5": 32.69,
+      "D-E5": 37
+    },
+    "optimistic": 3.42,
+    "theoretical_max_decision_calls": 462,
+    "theoretical_max_wall_hours": 25.67
+  },
+  "experiment_id": "wuziq-champion-200s-v6-2-2026-10-28",
+  "historical_v6_game_count": 1018,
+  "position_fixture_sha256": "ae578864f70f01b0b14ca6862a7206cd3512fee0c2ca48833aa2722e54eb7280",
+  "position_id": "vct_cross_three",
+  "schema_version": 1,
+  "source_baseline_commit": "0c7e0e5881b8e0bcd2bdd8c07c247912ad86783d",
+  "storage_estimate": {
+    "disk_free_bytes": 31648538624,
+    "estimated_total_artifact_bytes": 5000000,
+    "historical_v6_average_record_bytes": 32042,
+    "six_game_raw_estimate_bytes": 769007
+  },
+  "benchmark_source_commit": "ad412ac4b0d0d565b26dcb255f389437f750ba1d",
+  "csv_export_recovery_commit": "e55ec298259177ccb451900f02399c4683ce7d29",
+  "csv_export_recovery": "All three 200-second measurements were saved before a DictWriter schema error; CSV was rebuilt from that saved JSON without repeating model decisions."
+}

@@ -1,0 +1,35 @@
+{
+  "folder_name": "WuziQ V6.2 Champion 200s",
+  "folder_id": "15JS6vyL0JKhbp5-Nki7EmcYRa27rd88j",
+  "folder_url": "https://drive.google.com/drive/folders/15JS6vyL0JKhbp5-Nki7EmcYRa27rd88j",
+  "probe": {
+    "file_id": "1h9-mzT347cBG-UbNQw-RdQlmrI3qP799",
+    "sha256": "8ba03986f20b848c3f22ab453502ea45ab9f15d977c66c24066f33af7be6a047",
+    "uploaded": true,
+    "downloaded": true,
+    "hash_verified": true,
+    "empty_directory_restore": true,
+    "deleted_after_probe": true
+  },
+  "latest_snapshot": {
+    "file_id": "1dKCU5ucn_k1mk7y7Ryyrh6QM7MMGu12i",
+    "file_name": "v6_2_recovery_6games.zip",
+    "sha256": "5bbabbd3f7e8aca1e3639196721a55e01933482bb7e8ba34bea0cc22dcba0d92",
+    "size_bytes": 18552,
+    "completed_games": 6,
+    "implementation_commit": "6412cede548e21170cc85281c3771807ca5f7f76",
+    "download_sha256": "5bbabbd3f7e8aca1e3639196721a55e01933482bb7e8ba34bea0cc22dcba0d92",
+    "empty_directory_restore": true,
+    "restore_verified": true
+  },
+  "previous_v6_2_snapshot_deleted_after_new_restore_verified": true,
+  "v6_snapshot_preserved": {
+    "folder_id": "190pb6fdnDlcDXkYjMxam-fPBU-flt9l7",
+    "file_id": "1my7uwj3gJDbquqtRhQ-jSzaF1NfH11_B",
+    "sha256": "da11bce4a0fbde597f5acd90c09c702f3348ee94aa65f4eff7d8e86ff9d916d7",
+    "verified_present": true
+  },
+  "rotation_policy": "Upload, fetch, SHA-256 verify, and restore the new snapshot before deleting the previous V6.2 snapshot; never modify V6 snapshots.",
+  "restore_command": "python scripts/restore_v6_2_snapshot.py --snapshot <downloaded-zip> --destination research/v6_2/recovered-results",
+  "updated_at_utc": "2026-10-28T14:20:00Z"
+}

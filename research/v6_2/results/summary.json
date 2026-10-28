@@ -1,0 +1,321 @@
+{
+  "games": 6,
+  "champions": [
+    "E5"
+  ],
+  "standings": {
+    "C": {
+      "games": 4,
+      "wins": 2,
+      "draws": 1,
+      "losses": 1,
+      "points": 2.5,
+      "black_games": 2,
+      "black_wins": 2,
+      "white_games": 2,
+      "white_wins": 0,
+      "thinking_seconds": 12936.32455615301,
+      "moves": 70,
+      "nodes": 97454320,
+      "cutoffs": 15996487,
+      "simulations": 0,
+      "max_search_depth": 12,
+      "max_tree_depth": 12,
+      "timeouts": 64,
+      "over_budget_moves": 1
+    },
+    "D": {
+      "games": 4,
+      "wins": 0,
+      "draws": 1,
+      "losses": 3,
+      "points": 0.5,
+      "black_games": 2,
+      "black_wins": 0,
+      "white_games": 2,
+      "white_wins": 0,
+      "thinking_seconds": 11062.283141202002,
+      "moves": 65,
+      "nodes": 178366506,
+      "cutoffs": 0,
+      "simulations": 12175285,
+      "max_search_depth": 8,
+      "max_tree_depth": 8,
+      "timeouts": 54,
+      "over_budget_moves": 3
+    },
+    "E5": {
+      "games": 4,
+      "wins": 3,
+      "draws": 0,
+      "losses": 1,
+      "points": 3.0,
+      "black_games": 2,
+      "black_wins": 2,
+      "white_games": 2,
+      "white_wins": 1,
+      "thinking_seconds": 8246.966261600985,
+      "moves": 52,
+      "nodes": 3661898,
+      "cutoffs": 1374202,
+      "simulations": 0,
+      "max_search_depth": 5,
+      "max_tree_depth": 5,
+      "timeouts": 41,
+      "over_budget_moves": 9
+    }
+  },
+  "compute": {
+    "C": {
+      "moves": 70,
+      "thinking_seconds": 12936.32455615301,
+      "nodes": 97454320,
+      "cutoffs": 15996487,
+      "simulations": 0,
+      "max_search_depth": 12,
+      "max_tree_depth": 12,
+      "timeouts": 64,
+      "over_budget_moves": 1,
+      "total_overrun_seconds": 0.01770677300009993,
+      "max_overrun_seconds": 0.01770677300009993,
+      "average_seconds_per_move": 184.80463651647156,
+      "nodes_per_second": 7533.385512784387,
+      "simulations_per_second": 0.0
+    },
+    "D": {
+      "moves": 65,
+      "thinking_seconds": 11062.283141202002,
+      "nodes": 178366506,
+      "cutoffs": 0,
+      "simulations": 12175285,
+      "max_search_depth": 8,
+      "max_tree_depth": 8,
+      "timeouts": 54,
+      "over_budget_moves": 3,
+      "total_overrun_seconds": 0.001544848999401438,
+      "max_overrun_seconds": 0.0009216299986292142,
+      "average_seconds_per_move": 170.18897140310773,
+      "nodes_per_second": 16123.842042667071,
+      "simulations_per_second": 1100.612309827125
+    },
+    "E5": {
+      "moves": 52,
+      "thinking_seconds": 8246.966261600985,
+      "nodes": 3661898,
+      "cutoffs": 1374202,
+      "simulations": 0,
+      "max_search_depth": 5,
+      "max_tree_depth": 5,
+      "timeouts": 41,
+      "over_budget_moves": 9,
+      "total_overrun_seconds": 0.16699800299466006,
+      "max_overrun_seconds": 0.07175556500078528,
+      "average_seconds_per_move": 158.59550503078816,
+      "nodes_per_second": 444.02970545063386,
+      "simulations_per_second": 0.0
+    }
+  },
+  "pair_results": [
+    {
+      "pair": [
+        "C",
+        "D"
+      ],
+      "group_id": "v6.2-9x9-c-d-o731201",
+      "games": 2,
+      "wins": {
+        "C": 1,
+        "D": 0
+      },
+      "draws": 1,
+      "losses": {
+        "C": 0,
+        "D": 1
+      },
+      "points": {
+        "C": 1.5,
+        "D": 0.5
+      }
+    },
+    {
+      "pair": [
+        "C",
+        "E5"
+      ],
+      "group_id": "v6.2-9x9-c-e5-o731201",
+      "games": 2,
+      "wins": {
+        "C": 1,
+        "E5": 1
+      },
+      "draws": 0,
+      "losses": {
+        "C": 1,
+        "E5": 1
+      },
+      "points": {
+        "C": 1.0,
+        "E5": 1.0
+      }
+    },
+    {
+      "pair": [
+        "D",
+        "E5"
+      ],
+      "group_id": "v6.2-9x9-d-e5-o731201",
+      "games": 2,
+      "wins": {
+        "D": 0,
+        "E5": 2
+      },
+      "draws": 0,
+      "losses": {
+        "D": 2,
+        "E5": 0
+      },
+      "points": {
+        "D": 0.0,
+        "E5": 2.0
+      }
+    }
+  ],
+  "validation": {
+    "valid": true,
+    "games": 6,
+    "groups": 3,
+    "partial_groups": 0,
+    "replayed_moves": 211,
+    "unique_ids": 6,
+    "standings": {
+      "C": {
+        "games": 4,
+        "wins": 2,
+        "draws": 1,
+        "losses": 1,
+        "points": 2.5,
+        "black_games": 2,
+        "black_wins": 2,
+        "white_games": 2,
+        "white_wins": 0,
+        "thinking_seconds": 12936.32455615301,
+        "moves": 70,
+        "nodes": 97454320,
+        "cutoffs": 15996487,
+        "simulations": 0,
+        "max_search_depth": 12,
+        "max_tree_depth": 12,
+        "timeouts": 64,
+        "over_budget_moves": 1
+      },
+      "D": {
+        "games": 4,
+        "wins": 0,
+        "draws": 1,
+        "losses": 3,
+        "points": 0.5,
+        "black_games": 2,
+        "black_wins": 0,
+        "white_games": 2,
+        "white_wins": 0,
+        "thinking_seconds": 11062.283141202002,
+        "moves": 65,
+        "nodes": 178366506,
+        "cutoffs": 0,
+        "simulations": 12175285,
+        "max_search_depth": 8,
+        "max_tree_depth": 8,
+        "timeouts": 54,
+        "over_budget_moves": 3
+      },
+      "E5": {
+        "games": 4,
+        "wins": 3,
+        "draws": 0,
+        "losses": 1,
+        "points": 3.0,
+        "black_games": 2,
+        "black_wins": 2,
+        "white_games": 2,
+        "white_wins": 1,
+        "thinking_seconds": 8246.966261600985,
+        "moves": 52,
+        "nodes": 3661898,
+        "cutoffs": 1374202,
+        "simulations": 0,
+        "max_search_depth": 5,
+        "max_tree_depth": 5,
+        "timeouts": 41,
+        "over_budget_moves": 9
+      }
+    },
+    "pair_results": [
+      {
+        "pair": [
+          "C",
+          "D"
+        ],
+        "group_id": "v6.2-9x9-c-d-o731201",
+        "games": 2,
+        "wins": {
+          "C": 1,
+          "D": 0
+        },
+        "draws": 1,
+        "losses": {
+          "C": 0,
+          "D": 1
+        },
+        "points": {
+          "C": 1.5,
+          "D": 0.5
+        }
+      },
+      {
+        "pair": [
+          "C",
+          "E5"
+        ],
+        "group_id": "v6.2-9x9-c-e5-o731201",
+        "games": 2,
+        "wins": {
+          "C": 1,
+          "E5": 1
+        },
+        "draws": 0,
+        "losses": {
+          "C": 1,
+          "E5": 1
+        },
+        "points": {
+          "C": 1.0,
+          "E5": 1.0
+        }
+      },
+      {
+        "pair": [
+          "D",
+          "E5"
+        ],
+        "group_id": "v6.2-9x9-d-e5-o731201",
+        "games": 2,
+        "wins": {
+          "D": 0,
+          "E5": 2
+        },
+        "draws": 0,
+        "losses": {
+          "D": 2,
+          "E5": 0
+        },
+        "points": {
+          "D": 0.0,
+          "E5": 2.0
+        }
+      }
+    ],
+    "champions": [
+      "E5"
+    ]
+  }
+}
