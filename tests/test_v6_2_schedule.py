@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from src.gomoku import GomokuBoard
@@ -29,9 +30,20 @@ def test_v6_2_config_pins_frozen_engines_and_fresh_common_opening() -> None:
         coord = (move["row"], move["col"])
         board.place_stone(move["player"], coord)
         assert not board.check_victory(coord, move["player"])
-    assert tuple((row, col) for _, row, col in v6["opening_catalog"]["731201"]) == tuple(
-        (move["row"], move["col"]) for move in opening
-    ) if "731201" in v6["opening_catalog"] else True
+    opening_key = tuple((move["player"], move["row"], move["col"]) for move in opening)
+    catalog = {
+        tuple((stone[0], int(stone[1]), int(stone[2])) for stone in stones)
+        for stones in v6["opening_catalog"].values()
+    }
+    assert opening_key not in catalog
+    history_path = ROOT / "research/v6/results/9x9_games.jsonl"
+    for line in history_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        game = json.loads(line)
+        recorded = game.get("opening", [])[:4]
+        recorded_key = tuple((stone["player"], int(stone["row"]), int(stone["col"])) for stone in recorded)
+        assert opening_key != recorded_key
     assert config["score_rule"] == {"win": 1.0, "draw": 0.5, "loss": 0.0, "tie": "joint_champion"}
 
 
