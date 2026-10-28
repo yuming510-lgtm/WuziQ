@@ -1,0 +1,86 @@
+{
+  "experiment_id": "wuziq-c-e5-champion-tiebreak-v6-3-2026-10-28",
+  "preflight_time_utc": "2026-10-28T22:14:36+00:00",
+  "preflight_budget_seconds_per_model": 3.0,
+  "preflight_elapsed_seconds": 5.980432740999959,
+  "measurements": [
+    {
+      "model": "C",
+      "budget_seconds": 3.0,
+      "elapsed_seconds": 2.9956644979999965,
+      "move": [
+        5,
+        4
+      ],
+      "legal": true,
+      "timed_out": true,
+      "completed_depth": 4,
+      "nodes": 21417,
+      "cutoffs": 4692,
+      "simulations": 0
+    },
+    {
+      "model": "E5",
+      "budget_seconds": 3.0,
+      "elapsed_seconds": 2.9779561660000127,
+      "move": [
+        5,
+        4
+      ],
+      "legal": true,
+      "timed_out": true,
+      "completed_depth": 2,
+      "nodes": 4083,
+      "cutoffs": 2830,
+      "simulations": 0
+    }
+  ],
+  "resource_snapshot": {
+    "logical_cpus": 3,
+    "memory_total_bytes": 10452471808,
+    "disk_free_bytes": 31561072640,
+    "disk_total_bytes": 33770192896
+  },
+  "drive_precheck": {
+    "folder_id": "1JyO_OUqnhrIA5cMslFH_UUhUZQj5aEAO",
+    "upload_download_sha_restore_delete": "passed via independent probe; archive-level restore will be verified before games"
+  },
+  "historical_v6_2_200s_reference": {
+    "direct_games": 2,
+    "both_models_budget_seconds": 200.0,
+    "C_E5_points": {
+      "C": 1.0,
+      "E5": 1.0
+    }
+  },
+  "duration_estimates": {
+    "optimistic": {
+      "four_games_seconds": 15998.597376500009,
+      "six_games_seconds": 23997.896064750013
+    },
+    "central": {
+      "four_games_seconds": 20437.642198894006,
+      "six_games_seconds": 30656.46329834101
+    },
+    "conservative": {
+      "four_games_seconds": 61600.0,
+      "six_games_seconds": 92400.0
+    },
+    "basis": {
+      "v6_2_direct_games_thinking_seconds": [
+        3999.6493441250022,
+        6219.1717553220005
+      ],
+      "v6_2_direct_games_moves": [
+        27,
+        37
+      ],
+      "per_new_game_optimistic": 3999.6493441250022,
+      "per_new_game_central": 5109.410549723501,
+      "max_model_decisions_per_full_game": 77,
+      "per_move_budget_seconds": 200.0,
+      "four_and_six_game_decision": "2 V6.3 openings (4 games), plus 1 additional paired opening only if the first four scores tie."
+    }
+  },
+  "official_games_excluded_from_preflight": true
+}
