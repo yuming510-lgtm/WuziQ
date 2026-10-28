@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT))
 
 from src.ai import choose_move
 from src.gomoku import GomokuBoard
-from src.research.abcd_ladder_v5_1 import settings_for_model
+from src.research.abcd_ladder_v5 import settings_for_model
 from src.research.checkpoint import write_json_atomic
 from src.research.mcts_d2 import MCTSAgent
 from src.research.v6.config import load_config as load_v6_config, v5_1_engine_settings
