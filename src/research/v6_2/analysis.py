@@ -190,7 +190,10 @@ def build_report(
         for row in pair_results
     ]
     game_lines = []
+    game_commit_counts: dict[str, int] = {}
     for game in records:
+        game_commit = str(game.get("implementation_commit", "unknown"))
+        game_commit_counts[game_commit] = game_commit_counts.get(game_commit, 0) + 1
         game_lines.append(
             f"| `{game['game_id']}` | {game['black_model']}（黑）–{game['white_model']}（白） | "
             f"{game.get('winner_model') or '和棋'} | {game['move_count']} | "
@@ -213,6 +216,10 @@ def build_report(
         f"| {model} | {usage[model]['moves']} | {usage[model]['over_budget_moves']} | "
         f"{usage[model]['total_overrun_seconds'] * 1000:.3f} | {usage[model]['max_overrun_seconds'] * 1000:.3f} |"
         for model in MODELS
+    ]
+    commit_lines = [
+        f"| `{commit}` | {count} |"
+        for commit, count in sorted(game_commit_counts.items())
     ]
     estimate = preflight.get("estimate", {})
     scenarios = estimate.get("scenarios_hours", estimate)
@@ -279,6 +286,12 @@ def build_report(
 ## 开局、棋谱与数据完整性
 
 三组共用新开局 `731201`：B(4,4)、W(3,5)、B(5,3)、W(2,6)。该四手序列通过9×9规则验证，并确认未出现在V6固定开局库及其1018份历史对局中。每组两局严格交换黑白，种子由基础种子 `{preflight.get('base_seed', '20261028')}` 和唯一对局ID确定。回放验收：**{validation.get('games', 0)}局、{validation.get('replayed_moves', 0)}手、{validation.get('unique_ids', 0)}个唯一ID、{validation.get('groups', 0)}组完整配对**；终局合法性由V6棋盘规则重放核验。单步实际耗时、完成深度、节点、剪枝和模拟次数保存在 `results/9x9_games.jsonl`。
+
+算法版本核验：六局逐局记录的执行提交如下。前两局之后的提交只修复了配对和棋计数校验与恢复记录；`src/research/v6/` 下的C、D、E5决策实现未更改，冻结算法与有效配置哈希保存在 `results/config.json`。本报告的预注册积分与200秒实际超限统计均从原始棋谱重算。
+
+| 对局执行提交 | 对局数 |
+|---|---:|
+{chr(10).join(commit_lines)}
 
 ## 复现与恢复
 
