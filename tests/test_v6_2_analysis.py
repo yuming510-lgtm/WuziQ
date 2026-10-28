@@ -1,6 +1,15 @@
 from __future__ import annotations
 
-from src.research.v6_2.analysis import aggregate_compute, render_champion_svg
+import importlib.util
+import json
+from pathlib import Path
+
+from src.research.checkpoint import load_game_records
+from src.research.v6_2.analysis import aggregate_compute, build_report, render_champion_svg
+from src.research.v6_2.config import load_v6_2_config
+from src.research.v6_2.runner import run_championship
+from src.research.v6_2.schedule import build_schedule
+from src.research.v6_2.validation import validate_v6_2_records
 
 
 def test_compute_aggregation_uses_real_decision_rows_and_excludes_opening_moves() -> None:
@@ -46,3 +55,38 @@ def test_champion_svg_renders_score_and_compute_comparisons() -> None:
     assert all(model in svg for model in ("C", "D", "E5"))
     assert "积分" in svg and "计算秒数" in svg
     assert "viewBox" in svg
+
+
+def test_report_builder_writes_consistent_results_from_validated_games(tmp_path: Path) -> None:
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location("v6_2_runner_test_fixtures", root / "tests/test_v6_2_runner.py")
+    assert spec is not None and spec.loader is not None
+    fixture_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(fixture_module)
+    output = tmp_path / "results"
+    config = load_v6_2_config()
+    run_championship(
+        config, output, game_runner=fixture_module._fake_game,
+        implementation_commit="test-commit",
+    )
+    records = load_game_records(output / "9x9_games.jsonl")
+    validation = validate_v6_2_records(records, build_schedule(config), require_complete=True)
+    preflight = {
+        "base_seed": config["base_seed"],
+        "position_id": "test fixture",
+        "estimate": {"scenarios_hours": {"optimistic": 1.0, "central": 2.0, "conservative": 3.0}},
+        "benchmark_rows": [],
+    }
+    environment = {"cpu_logical": 3, "cpu_physical": 3, "memory_total_bytes": 1000, "disk_free_bytes": 1000}
+
+    result = build_report(
+        records, validation, json.loads((output / "progress.json").read_text()),
+        preflight, environment, tmp_path / "report",
+    )
+
+    report = (tmp_path / "report/REPORT.md").read_text(encoding="utf-8")
+    assert result["champions"] == ["C", "D", "E5"]
+    assert "v6.2-9x9-c-d-o731201-s0" in report
+    assert "探索性" in report
+    assert (tmp_path / "report/results/standings.csv").is_file()
+    assert (tmp_path / "report/figures/champion_comparison.svg").is_file()
