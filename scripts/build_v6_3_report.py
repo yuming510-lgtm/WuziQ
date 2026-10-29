@@ -137,7 +137,7 @@ def _report(summary: dict, preflight: dict, games: list[dict], report_path: Path
         )
     lines.extend([
         "",
-        f"比赛运行墙钟 {summary['elapsed_wall_seconds'] / 3600:.2f} 小时，累计算法思考时间 {sum(summary['model_compute'][m]['thinking_seconds'] for m in ('C','E5')) / 3600:.2f} 小时；含短预检的可测时间约 {summary['total_measured_seconds_including_preflight'] / 3600:.2f} 小时。超时标记按引擎返回值或超出配置预算生成；实际超过200秒的步骤：C {over_budget['C']} 步、E5 {over_budget['E5']} 步，最大超限 {_fmt(maximum_overrun * 1000, 3)} 毫秒。超过上限的实测值保留，不作截断。",
+        f"从任务开始到四局全部完成的墙钟时间为 {summary['elapsed_wall_seconds'] / 3600:.2f} 小时；有效对局逐局运行时间合计 {summary['elapsed_compute_seconds'] / 3600:.2f} 小时，落子思考时间合计 {sum(summary['model_compute'][m]['thinking_seconds'] for m in ('C','E5')) / 3600:.2f} 小时；加上 {summary['preflight_seconds']:.2f} 秒预检后，实际有效执行时间约 {(summary['elapsed_compute_seconds'] + summary['preflight_seconds']) / 3600:.2f} 小时。墙钟时间包括环境中断、恢复和一次未完成且未计分的重赛尝试。超时标记按引擎返回值或超出配置预算生成；实际超过200秒的步骤：C {over_budget['C']} 步、E5 {over_budget['E5']} 步，最大超限 {_fmt(maximum_overrun * 1000, 3)} 毫秒。超过上限的实测值保留，不作截断。",
         "", "## 计算环境、预检与时间估算", "",
         f"逻辑 CPU：{resource.get('logical_cpus', '未知')}；内存：{resource.get('memory_total_bytes', 0)/1024**3:.2f} GiB；可用磁盘：{resource.get('disk_free_bytes', 0)/1024**3:.2f} GiB。赛前对 C 与 E5 各进行一次 {_fmt(preflight.get('preflight_budget_seconds_per_model', 0))} 秒预检，实测耗时分别为 "
         + "、".join(f"{m['model']} {_fmt(m['elapsed_seconds'])} 秒（深度 {m['completed_depth']}，节点 {m['nodes']:,}，合法落点 {m['move']}）" for m in preflight.get("measurements", [])) + ". 预检不计入正式对局。",
@@ -158,7 +158,7 @@ def _report(summary: dict, preflight: dict, games: list[dict], report_path: Path
         lines.append(f"- `{game['game_id']}`：{result}，终局方式 `{game['termination']}`；最后至多8手：{seq}。棋谱只支持本局落子与终局事实，不证明较早局面不存在其他必胜选择。")
     lines.extend([
         "",
-        "开局块按双方交换先后手成对，能直接呈现这两个具体开局上的颜色变化；两局同一开局仍不足以分离先手效应、引擎随机差异和局面因素。V6.2 的 731201 与本轮三个开局均按原始棋谱分别记录。",
+        "开局块按双方交换先后手成对，能直接呈现这两个具体开局上的颜色变化；两局同一开局仍不足以分离先手效应、引擎随机差异和局面因素。V6.2 的 731201 与本轮实际执行的 731301、731302 均按原始棋谱分别记录；预注册的 731303 因首轮未平分而未执行。",
         "", "## 图表与数据", "",
         "![积分对比](figures/score_comparison.svg)", "",
         "![搜索成本](figures/compute_comparison.svg)", "",

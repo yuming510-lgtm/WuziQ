@@ -1,0 +1,236 @@
+{
+  "experiment_id": "wuziq-c-e5-champion-tiebreak-v6-3-2026-10-28",
+  "baseline_commit": "f2af15017573383115246242e8b820d1a56c1e1e",
+  "engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991",
+    "src/research/v6/__init__.py": "495d95991a336c3600e9f3ce133b36b0bc0772f8c156769c7e044b7f9a7d6d70",
+    "src/research/v6/e5.py": "f64eeec75b1945995ceb6af7da08d808c008a279da3b71c44bef69b33fbf4e31",
+    "src/research/v6/engine.py": "4469ff87a51b2a3b83bf42c90f8a88da90797176052aafc97a0c5478f00c73a8",
+    "src/research/v6/pns.py": "dbf5b6cc9ea13c4097eb7640dcce18d3b0dd495a9a56f0198409c16d8ad65dc3",
+    "src/research/v6/tactics.py": "a15e5d114e30a472c1213a9d3aec11c0d867c2e9f3c67d5f47032e8b7d75f774",
+    "src/research/v6/types.py": "aef3c91107e3f2bb5183ef4f03e8053acdeb0ccc6a4e8c09f76f4bf876b8b9f1"
+  },
+  "new_games": 4,
+  "initial_games": 4,
+  "conditional_games": 0,
+  "tiebreak_status": "skipped_not_tied",
+  "champions": [
+    "C"
+  ],
+  "standings": {
+    "C": {
+      "games": 4,
+      "wins": 2,
+      "draws": 1,
+      "losses": 1,
+      "points": 2.5,
+      "black_games": 2,
+      "black_wins": 2,
+      "white_games": 2,
+      "white_wins": 0,
+      "decisions": 73,
+      "thinking_seconds": 13531.034000701944,
+      "nodes": 94015121,
+      "cutoffs": 16353276,
+      "simulations": 0,
+      "timeouts": 67,
+      "over_budget_moves": 0,
+      "max_search_depth": 12,
+      "max_tree_depth": 12
+    },
+    "E5": {
+      "games": 4,
+      "wins": 1,
+      "draws": 1,
+      "losses": 2,
+      "points": 1.5,
+      "black_games": 2,
+      "black_wins": 1,
+      "white_games": 2,
+      "white_wins": 0,
+      "decisions": 73,
+      "thinking_seconds": 12074.370398518971,
+      "nodes": 3996454,
+      "cutoffs": 1554448,
+      "simulations": 0,
+      "timeouts": 59,
+      "over_budget_moves": 16,
+      "max_search_depth": 24,
+      "max_tree_depth": 24
+    }
+  },
+  "model_compute": {
+    "C": {
+      "games": 4,
+      "wins": 2,
+      "draws": 1,
+      "losses": 1,
+      "points": 2.5,
+      "black_games": 2,
+      "black_wins": 2,
+      "white_games": 2,
+      "white_wins": 0,
+      "decisions": 73,
+      "thinking_seconds": 13531.034000701944,
+      "nodes": 94015121,
+      "cutoffs": 16353276,
+      "simulations": 0,
+      "timeouts": 67,
+      "over_budget_moves": 0,
+      "max_search_depth": 12,
+      "max_tree_depth": 12,
+      "average_seconds_per_decision": 185.356630146602,
+      "average_nodes_per_decision": 1287878.3698630137,
+      "average_cutoffs_per_decision": 224017.4794520548,
+      "average_completed_depth": 6.493150684931507,
+      "nodes_per_second": 6948.110617054307,
+      "cutoffs_per_node": 0.17394304050302717
+    },
+    "E5": {
+      "games": 4,
+      "wins": 1,
+      "draws": 1,
+      "losses": 2,
+      "points": 1.5,
+      "black_games": 2,
+      "black_wins": 1,
+      "white_games": 2,
+      "white_wins": 0,
+      "decisions": 73,
+      "thinking_seconds": 12074.370398518971,
+      "nodes": 3996454,
+      "cutoffs": 1554448,
+      "simulations": 0,
+      "timeouts": 59,
+      "over_budget_moves": 16,
+      "max_search_depth": 24,
+      "max_tree_depth": 24,
+      "average_seconds_per_decision": 165.40233422628728,
+      "average_nodes_per_decision": 54745.94520547945,
+      "average_cutoffs_per_decision": 21293.80821917808,
+      "average_completed_depth": 5.534246575342466,
+      "nodes_per_second": 330.98653330116497,
+      "cutoffs_per_node": 0.38895681021225315
+    }
+  },
+  "black_wins": {
+    "C": 2,
+    "E5": 1
+  },
+  "white_wins": {
+    "C": 0,
+    "E5": 0
+  },
+  "pair_blocks": [
+    {
+      "opening_id": "731301",
+      "C_points": 1.5,
+      "E5_points": 0.5,
+      "result": "C_ahead"
+    },
+    {
+      "opening_id": "731302",
+      "C_points": 1.0,
+      "E5_points": 1.0,
+      "result": "tied"
+    }
+  ],
+  "paired_block_descriptive": {
+    "opening_blocks": 2,
+    "C_ahead": 1,
+    "tied": 1,
+    "E5_ahead": 0,
+    "C_ahead_wilson_95_among_decisive_blocks": [
+      0.20654931437723745,
+      1.0
+    ],
+    "note": "Exploratory descriptive interval only; paired design and very small sample do not support a significance claim."
+  },
+  "combined_with_v6_2_direct": {
+    "C": {
+      "games": 6,
+      "wins": 3,
+      "draws": 1,
+      "losses": 2,
+      "points": 3.5,
+      "historical_v6_2_points": 1.0,
+      "v6_3_points": 2.5,
+      "thinking_seconds": 19130.39382443195
+    },
+    "E5": {
+      "games": 6,
+      "wins": 2,
+      "draws": 1,
+      "losses": 3,
+      "points": 2.5,
+      "historical_v6_2_points": 1.0,
+      "v6_3_points": 1.5,
+      "thinking_seconds": 16693.831674235968
+    }
+  },
+  "v6_2_direct_reference": {
+    "experiment_id": "wuziq-champion-200s-v6-2-2026-10-28",
+    "source_commit": "f2af15017573383115246242e8b820d1a56c1e1e",
+    "games": 2,
+    "opening_id": "731201",
+    "results": [
+      {
+        "game_id": "v6.2-9x9-c-e5-o731201-s0",
+        "black_model": "C",
+        "white_model": "E5",
+        "winner_model": "C",
+        "move_count": 27,
+        "thinking_seconds_total": 3999.6493441250022
+      },
+      {
+        "game_id": "v6.2-9x9-c-e5-o731201-s1",
+        "black_model": "E5",
+        "white_model": "C",
+        "winner_model": "E5",
+        "move_count": 37,
+        "thinking_seconds_total": 6219.1717553220005
+      }
+    ],
+    "standings": {
+      "C": {
+        "wins": 1,
+        "draws": 0,
+        "losses": 1,
+        "points": 1.0,
+        "thinking_seconds": 5599.359823730007,
+        "decisions": 28,
+        "nodes": 41162564,
+        "cutoffs": 6975163,
+        "timeouts": 28,
+        "over_budget": 1
+      },
+      "E5": {
+        "wins": 1,
+        "draws": 0,
+        "losses": 1,
+        "points": 1.0,
+        "thinking_seconds": 4619.461275716996,
+        "decisions": 28,
+        "nodes": 1788830,
+        "cutoffs": 719427,
+        "timeouts": 23,
+        "over_budget": 4
+      }
+    },
+    "full_validation_games": 6
+  },
+  "elapsed_wall_seconds": 47833.0,
+  "elapsed_compute_seconds": 25606.06636548,
+  "preflight_seconds": 5.980432740999959,
+  "total_measured_seconds_including_preflight": 47838.980432741,
+  "validation": {
+    "valid": true,
+    "games": 4,
+    "unique_ids": 4,
+    "replayed_moves": 162,
+    "complete": true
+  },
+  "implementation_commit": "dd1fc4a54083d2df403f7afaf13ced381573cbef"
+}

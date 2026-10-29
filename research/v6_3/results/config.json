@@ -1,0 +1,133 @@
+{
+  "base_seed": 20261028,
+  "board_size": 9,
+  "branch": "research/champion-tiebreak-v6-3",
+  "budget_seconds_by_model": {
+    "C": 200.0,
+    "E5": 200.0
+  },
+  "drive_folder_id": "1JyO_OUqnhrIA5cMslFH_UUhUZQj5aEAO",
+  "engine_config_sha256": "9968a61809a837da0a3319d14a3843f46617458472a46d1775ee83c00cd730fe",
+  "engine_sha256": {
+    "src/ai.py": "76e0b584c6b8e58bed545d3e5074732121500584f26845df63556defa76d1cce",
+    "src/gomoku.py": "1002581b7b2d89d1deb33f6cda684397bce0affe48c7b7db99f48ca0c3b870cd",
+    "src/research/mcts_d2.py": "9e5b552a6172f47db63bafe6c765b38be7aa519b7dfd11cc9c4a7de1af7d4991",
+    "src/research/v6/__init__.py": "495d95991a336c3600e9f3ce133b36b0bc0772f8c156769c7e044b7f9a7d6d70",
+    "src/research/v6/e5.py": "f64eeec75b1945995ceb6af7da08d808c008a279da3b71c44bef69b33fbf4e31",
+    "src/research/v6/engine.py": "4469ff87a51b2a3b83bf42c90f8a88da90797176052aafc97a0c5478f00c73a8",
+    "src/research/v6/pns.py": "dbf5b6cc9ea13c4097eb7640dcce18d3b0dd495a9a56f0198409c16d8ad65dc3",
+    "src/research/v6/tactics.py": "a15e5d114e30a472c1213a9d3aec11c0d867c2e9f3c67d5f47032e8b7d75f774",
+    "src/research/v6/types.py": "aef3c91107e3f2bb5183ef4f03e8053acdeb0ccc6a4e8c09f76f4bf876b8b9f1"
+  },
+  "experiment_id": "wuziq-c-e5-champion-tiebreak-v6-3-2026-10-28",
+  "games_per_opening": 2,
+  "initial_games": 4,
+  "initial_opening_ids": [
+    "731301",
+    "731302"
+  ],
+  "max_games": 6,
+  "model_versions": {
+    "C": "frozen-v6-c",
+    "E5": "frozen-v6-e5"
+  },
+  "models": [
+    "C",
+    "E5"
+  ],
+  "neural_training": false,
+  "openings": {
+    "731301": [
+      {
+        "col": 4,
+        "player": "B",
+        "row": 4
+      },
+      {
+        "col": 5,
+        "player": "W",
+        "row": 4
+      },
+      {
+        "col": 3,
+        "player": "B",
+        "row": 5
+      },
+      {
+        "col": 6,
+        "player": "W",
+        "row": 3
+      }
+    ],
+    "731302": [
+      {
+        "col": 3,
+        "player": "B",
+        "row": 4
+      },
+      {
+        "col": 4,
+        "player": "W",
+        "row": 2
+      },
+      {
+        "col": 5,
+        "player": "B",
+        "row": 5
+      },
+      {
+        "col": 2,
+        "player": "W",
+        "row": 6
+      }
+    ],
+    "731303": [
+      {
+        "col": 4,
+        "player": "B",
+        "row": 3
+      },
+      {
+        "col": 4,
+        "player": "W",
+        "row": 5
+      },
+      {
+        "col": 2,
+        "player": "B",
+        "row": 2
+      },
+      {
+        "col": 6,
+        "player": "W",
+        "row": 6
+      }
+    ]
+  },
+  "schema_version": 1,
+  "score_rule": {
+    "draw": 0.5,
+    "final_tie": "joint_champion",
+    "first_stage_tie": "play_conditional_opening",
+    "loss": 0.0,
+    "win": 1.0
+  },
+  "source_v6_2_commit": "f2af15017573383115246242e8b820d1a56c1e1e",
+  "tiebreak_opening_id": "731303",
+  "time_limit_seconds": 200.0,
+  "v6_2_reference": {
+    "experiment_id": "wuziq-champion-200s-v6-2-2026-10-28",
+    "historical_games": 2,
+    "historical_points": {
+      "C": 1.0,
+      "E5": 1.0
+    },
+    "pair": [
+      "C",
+      "E5"
+    ],
+    "results_path": "research/v6_2/results/9x9_games.jsonl"
+  },
+  "v6_algorithm_baseline_commit": "0c7e0e5881b8e0bcd2bdd8c07c247912ad86783d",
+  "v6_config_sha256": "3a005fdd6f87006a2f093f8f0963bebd482e7a40c7eef1989fdfe6bec3a7cc91"
+}
