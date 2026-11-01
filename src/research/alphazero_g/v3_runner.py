@@ -626,3 +626,21 @@ def run_v3_arm(
 
     return {**progress, "completed": int(progress["budgeted_environment_steps"]) == target, "target_node": target,
             "checkpoint": progress.get("last_checkpoint")}
+
+
+def initialize_v3_starts(root: str | Path) -> list[tuple[int, str]]:
+    """Create/verify every route-seed node-0 checkpoint before promotion state exists."""
+    root_path = Path(root).resolve()
+    config = load_v3_config(root_path)
+    first_node = int(config["stage_nodes"][0])
+    initialized: list[tuple[int, str]] = []
+    for seed in map(int, config["seeds"]):
+        for arm in ARMS:
+            result = run_v3_arm(
+                root_path, arm=arm, seed=seed, until_node=first_node, stop_after_games=0,
+            )
+            checkpoint = root_path / f"research/g_v3/checkpoints/{arm}/seed-{seed}/node_0.pt"
+            if not checkpoint.is_file() or int(result["budgeted_environment_steps"]) < 0:
+                raise ValueError(f"failed to initialize {arm} seed {seed} node-0 state")
+            initialized.append((seed, arm))
+    return initialized

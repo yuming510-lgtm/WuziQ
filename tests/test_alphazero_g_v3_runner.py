@@ -8,6 +8,7 @@ import torch
 from src.research.alphazero_g.v3_schedule import build_v3_schedule
 from src.research.alphazero_g.v3_runner import (
     initialize_v3_arm,
+    initialize_v3_starts,
     load_v3_state,
     run_v3_arm,
     save_v3_state,
@@ -27,20 +28,21 @@ def _state_hash(model):
     return hasher.hexdigest()
 
 
-def _test_root(path: Path, seed: int) -> Path:
+def _test_root(path: Path, seed: int | list[int]) -> Path:
     path.mkdir()
+    seeds = [int(seed)] if isinstance(seed, int) else list(map(int, seed))
     subprocess.run(["git", "init", "-q"], cwd=path, check=True)
     subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=path, check=True)
     subprocess.run(["git", "config", "user.name", "V3 test"], cwd=path, check=True)
     schedule = build_v3_schedule(
-        [seed], train_groups_per_seed=4, development_groups=12, blind_groups=20,
+        seeds, train_groups_per_seed=4, development_groups=12, blind_groups=20,
         excluded_openings=[],
     )
     schedule_path = path / "research/g_v3/config/openings.json"
     schedule_path.parent.mkdir(parents=True)
     schedule_path.write_text(json.dumps(schedule, sort_keys=True))
     config = json.loads((ROOT / "research/g_v3/config/experiment.json").read_text())
-    config["seeds"] = [seed]
+    config["seeds"] = seeds
     config["opening_schedule_sha256"] = hashlib.sha256(schedule_path.read_bytes()).hexdigest()
     unsigned = {key: value for key, value in config.items() if key != "config_sha256"}
     config["config_sha256"] = hashlib.sha256(
@@ -123,4 +125,26 @@ def test_interrupted_and_uninterrupted_game_batches_resume_to_identical_weights(
     split_ids = [json.loads(row)["game_id"] for row in split_games]
     whole_ids = [json.loads(row)["game_id"] for row in whole_games]
     assert split_ids == whole_ids
+
+
+def test_all_route_seed_initial_checkpoints_exist_before_first_promotion_state(tmp_path):
+    seeds = [510921, 510922]
+    root = _test_root(tmp_path / "multi_seed", seeds)
+    for arm in ("G0", "G-F2"):
+        result = run_v3_arm(root, arm=arm, seed=seeds[0], until_node=1000, stop_after_games=0)
+        assert result["budgeted_environment_steps"] == 0
+
+    from src.research.alphazero_g.v3_evaluation import _selection_state
+
+    import pytest
+    with pytest.raises(FileNotFoundError, match="seed-510922/node_0.pt"):
+        _selection_state(root, json.loads((root / "research/g_v3/config/experiment.json").read_text()))
+
+    initialized = initialize_v3_starts(root)
+    assert initialized == [(seed, arm) for seed in seeds for arm in ("G0", "G-F2")]
+    selection = _selection_state(root, json.loads((root / "research/g_v3/config/experiment.json").read_text()))
+    assert set(selection["champions"]) == {
+        f"{arm}:{seed}" for seed in seeds for arm in ("G0", "G-F2")
+    }
+    assert not list((root / "research/g_v3/results/selfplay").glob("*.jsonl"))
 

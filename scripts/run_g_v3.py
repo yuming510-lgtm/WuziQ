@@ -13,7 +13,9 @@ if str(ROOT) not in sys.path:
 
 from src.research.alphazero_g.v3_budget import BudgetExhausted
 from src.research.alphazero_g.v3_evaluation import run_v3_development, run_v3_tactical_stage, run_v3_blind
-from src.research.alphazero_g.v3_runner import ARMS, load_v3_config, run_v3_arm
+from src.research.alphazero_g.v3_runner import (
+    ARMS, initialize_v3_starts, load_v3_config, run_v3_arm,
+)
 
 
 def main() -> None:
@@ -32,7 +34,9 @@ def main() -> None:
     target_node = nodes[-1] if args.through_node is None else int(args.through_node)
     if target_node not in nodes:
         raise SystemExit(f"--through-node must be one of {nodes}")
+    initialized_starts = initialize_v3_starts(root)
     summary = {"status": "running", "through_node": target_node, "training": [], "evaluation": []}
+    summary["initialized_route_seeds"] = len(initialized_starts)
     for node in nodes:
         if node > target_node:
             break
