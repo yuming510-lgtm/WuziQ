@@ -63,11 +63,11 @@
 - `ReplayBuffer(capacity, seed).add_complete_game(game_id, rows)` atomically deduplicates complete games; `sample(batch_size)` samples games uniformly and positions within game deterministically.
 - Exact transition accounting stores exactly the configured prefix positions; a final over-quota episode is completed for a real outcome, with extra terminal-completion plies excluded from budgeted training steps and recorded as overhead.
 
-- [ ] **Step 1: Write failing tests** for legal completed games, alternating `+1/-1/0` values, visit-probability labels, game-ID idempotence, provenance rejection, D4-synchronous policy transforms and exact step-prefix/terminal-overrun accounting.
-- [ ] **Step 2: Run RED** on `tests/test_alphazero_g_selfplay.py`; expected failure because the self-play/replay API is absent.
-- [ ] **Step 3: Implement** complete game generation, fsynced JSONL persistence, game-level dedupe, bounded replay and deterministic batch selection.
-- [ ] **Step 4: Run GREEN** on the self-play tests; all labels must arise from the recorded network-guided search and terminal result.
-- [ ] **Step 5: Commit** `feat(g-v1): record self-play targets and replay`.
+- [x] **Step 1: Write failing tests** for legal completed games, alternating `+1/-1/0` values, visit-probability labels, game-ID idempotence, provenance rejection, D4-synchronous policy transforms and exact step-prefix/terminal-overrun accounting.
+- [x] **Step 2: Run RED** on `tests/test_alphazero_g_selfplay.py`; expected failure because the self-play/replay API is absent.
+- [x] **Step 3: Implement** complete game generation, fsynced JSONL persistence, game-level dedupe, bounded replay and deterministic batch selection.
+- [x] **Step 4: Run GREEN** on the self-play tests; all labels must arise from the recorded network-guided search and terminal result.
+- [x] **Step 5: Commit** `feat(g-v1): record self-play targets and replay`.
 
 ### Task 3: Dual-arm optimizer and exact resume checkpoints
 
