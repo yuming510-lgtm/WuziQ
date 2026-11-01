@@ -123,7 +123,7 @@ python -m pytest tests/test_alphazero_g_v2_*.py -q
 - G 检查点加载：`research/g_v2/checkpoints/selected_g_f2.pt`，通过 `load_g_checkpoint`，SHA-256 `5ac65c6be2fac6817e4918729a53c2e9518c7aace48a2c7191e4c05892548b0a`。
 - CPU 预算：3128.1/7200.0 秒，预算内 `True`。
 
-Drive 恢复快照：initial snapshot uploaded, downloaded, SHA-256 checked, and restored into an empty directory。本研究没有神经网络训练之外的模型训练目标；报告只汇总算法开发、监督自对弈优化和实战评估，不包含虚构的 G0、20k 节点或未执行成绩。
+Drive 恢复快照：final recovery snapshot uploaded, downloaded, SHA-256 verified, and restored into an empty directory; previous V2 snapshot removed only after verification; Drive V2 folder contains one latest valid snapshot。本研究没有神经网络训练之外的模型训练目标；报告只汇总算法开发、监督自对弈优化和实战评估，不包含虚构的 G0、20k 节点或未执行成绩。
 
 ## 附件
 
