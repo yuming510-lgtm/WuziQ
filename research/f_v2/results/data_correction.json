@@ -1,0 +1,47 @@
+{
+  "active_schedule_sha256": "2e5e2e8c9dc31e26b83ddb7d66f141da471cdc5eb146373cf8ec7b56b0edc3b6",
+  "archived_pre_fix_artifacts": [
+    "research/f_v2/results/diagnostics/dagger_annotations_precanonical_fix_precanonical_fix.jsonl",
+    "research/f_v2/results/diagnostics/dagger_progress_precanonical_fix.json"
+  ],
+  "downstream_impact": "The prepared training builder re-detected exact tactics from the canonical board and overwrote these labels before training. The frozen model training rows were therefore expected to be unaffected; their SHA-256 will be checked after regeneration.",
+  "final_blind_results": {
+    "F1": {
+      "draws": 18,
+      "losses": 14,
+      "score_rate": 0.425,
+      "score_rate_ci95": [
+        0.3375,
+        0.5125
+      ],
+      "wins": 8
+    },
+    "F2": {
+      "draws": 19,
+      "losses": 4,
+      "score_rate": 0.6625,
+      "score_rate_ci95": [
+        0.575,
+        0.75
+      ],
+      "wins": 17
+    }
+  },
+  "final_blind_schedule_sha256": "2e5e2e8c9dc31e26b83ddb7d66f141da471cdc5eb146373cf8ec7b56b0edc3b6",
+  "final_checkpoint_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
+  "final_selected_candidate_id": "tactical-30-0020",
+  "fresh_blind_group_count": 20,
+  "issue": "DAgger exact tactical action indices were stored in source-board orientation while the state was D4-canonicalized.",
+  "model_and_dev_action": "The pre-correction candidates, source annotations, training outputs, and 80 blind games are preserved under results/precorrection and are exploratory only. After fixing canonical tactical coordinates, annotation was rerun, a new deterministic opening schedule was frozen, and the final F1/F2 blind evaluation ran once on 20 fresh paired opening groups.",
+  "post_fix_annotation_rows": 911,
+  "post_fix_annotation_sha256": "5d3edb4d7aac6f6fc8e70d8d69bf0fc2a9c31cb74aee49faef5b38e9326c40c3",
+  "post_fix_reason_hash_changed": "The ordinary C/E5 200ms labels can vary slightly when regenerated under wall-clock cutoffs; the canonical tactic correction also caused the entire labeling pass to rerun. The exact source annotations are preserved and their SHA is recorded.",
+  "post_fix_train_sha256": {
+    "0.3": "943a8ed15423691e552867721a1a603544a84111f1f42aace44dfbc7c31a884d",
+    "0.4": "9ab0fabfa48e5935a4051e4e1383409e7aaf1041486d22a9abe10ed8513fa424"
+  },
+  "pre_fix_train_sha256": {
+    "0.3": "358e24ee7fe89b9cf357beb80ccb14920a3ccc6dd6537674db1df7e51987027d",
+    "0.4": "b19d410c7fe043d7b99aa6f8ca2a71595b4d9ffab6e31e3d6309f401048a4f2a"
+  }
+}

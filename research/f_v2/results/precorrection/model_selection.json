@@ -1,0 +1,1525 @@
+{
+  "best_30_candidate_id": "tactical-30-0020",
+  "candidates": {
+    "F1": {
+      "action_audit": {
+        "games": 16,
+        "mismatches": 0,
+        "network_actions": 352
+      },
+      "candidate_id": "F1",
+      "checkpoint": "research/f_v2/checkpoints/f1_reference.pt",
+      "checkpoint_sha256": "8d3cbeefb3b0ec75a4ec769b9852327f7411e8836f87a4add80d9cff2516e51f",
+      "draws": 6,
+      "games": 16,
+      "losses": 6,
+      "model_name": "F1",
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 2000,
+        "bootstrap_seed": 733301,
+        "by_color": {
+          "black": {
+            "draws": 3,
+            "games": 8,
+            "losses": 2,
+            "points": 4.5,
+            "score_rate": 0.5625,
+            "score_rate_ci95": [
+              0.3125,
+              0.8125
+            ],
+            "wins": 3
+          },
+          "white": {
+            "draws": 3,
+            "games": 8,
+            "losses": 4,
+            "points": 2.5,
+            "score_rate": 0.3125,
+            "score_rate_ci95": [
+              0.125,
+              0.5625
+            ],
+            "wins": 1
+          }
+        },
+        "draws": 6,
+        "games": 16,
+        "losses": 6,
+        "opening_group_scores": [
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s1461598009100763872-fb",
+              "f-v2-development-F1-vs-a-s1461598009100763872-fw"
+            ],
+            "group_id": "opening-12281dd79f4d16360cfd",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s16791533387351395703-fb",
+              "f-v2-development-F1-vs-a-s16791533387351395703-fw"
+            ],
+            "group_id": "opening-1ea8e992dd134efb9048",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s21668965196467995-fb",
+              "f-v2-development-F1-vs-a-s21668965196467995-fw"
+            ],
+            "group_id": "opening-ab7555b4727062e338a4",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s7989505844331443871-fb",
+              "f-v2-development-F1-vs-a-s7989505844331443871-fw"
+            ],
+            "group_id": "opening-b1c739723c3c9a1c8c64",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s13689425050063016386-fb",
+              "f-v2-development-F1-vs-a-s13689425050063016386-fw"
+            ],
+            "group_id": "opening-b4b4cd90738bc6692e53",
+            "score_rate": 0.5,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s1565870056938881484-fb",
+              "f-v2-development-F1-vs-a-s1565870056938881484-fw"
+            ],
+            "group_id": "opening-bde02f5622a2f6e53890",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s7130364234634434739-fb",
+              "f-v2-development-F1-vs-a-s7130364234634434739-fw"
+            ],
+            "group_id": "opening-d5d650f9e98a773977c6",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-F1-vs-a-s12901231012502754714-fb",
+              "f-v2-development-F1-vs-a-s12901231012502754714-fw"
+            ],
+            "group_id": "opening-f521ed1e4abf1700806c",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          }
+        ],
+        "opening_groups": 8,
+        "points": 7.0,
+        "score_rate": 0.4375,
+        "score_rate_ci95": [
+          0.3125,
+          0.5625
+        ],
+        "wins": 4
+      },
+      "points": 7.0,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/development/F1/matches.jsonl",
+      "score_rate": 0.4375,
+      "stage": "development",
+      "validation_policy_loss": 2.3372894987253585,
+      "wins": 4
+    },
+    "tactical-30-0010": {
+      "action_audit": {
+        "games": 16,
+        "mismatches": 0,
+        "network_actions": 490
+      },
+      "candidate_id": "tactical-30-0010",
+      "checkpoint": "research/f_v2/checkpoints/tactical-30/epoch-0010.pt",
+      "checkpoint_sha256": "9bb9374df73af0e768589445e1068d31417269883c9bdcf4282ee904889ffeec",
+      "draws": 11,
+      "games": 16,
+      "losses": 2,
+      "model_name": "F2",
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 2000,
+        "bootstrap_seed": 733301,
+        "by_color": {
+          "black": {
+            "draws": 5,
+            "games": 8,
+            "losses": 0,
+            "points": 5.5,
+            "score_rate": 0.6875,
+            "score_rate_ci95": [
+              0.5,
+              0.875
+            ],
+            "wins": 3
+          },
+          "white": {
+            "draws": 6,
+            "games": 8,
+            "losses": 2,
+            "points": 3.0,
+            "score_rate": 0.375,
+            "score_rate_ci95": [
+              0.1875,
+              0.5
+            ],
+            "wins": 0
+          }
+        },
+        "draws": 11,
+        "games": 16,
+        "losses": 2,
+        "opening_group_scores": [
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s1461598009100763872-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s1461598009100763872-fw"
+            ],
+            "group_id": "opening-12281dd79f4d16360cfd",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s16791533387351395703-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s16791533387351395703-fw"
+            ],
+            "group_id": "opening-1ea8e992dd134efb9048",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s21668965196467995-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s21668965196467995-fw"
+            ],
+            "group_id": "opening-ab7555b4727062e338a4",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s7989505844331443871-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s7989505844331443871-fw"
+            ],
+            "group_id": "opening-b1c739723c3c9a1c8c64",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s13689425050063016386-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s13689425050063016386-fw"
+            ],
+            "group_id": "opening-b4b4cd90738bc6692e53",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s1565870056938881484-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s1565870056938881484-fw"
+            ],
+            "group_id": "opening-bde02f5622a2f6e53890",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s7130364234634434739-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s7130364234634434739-fw"
+            ],
+            "group_id": "opening-d5d650f9e98a773977c6",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0010-vs-a-s12901231012502754714-fb",
+              "f-v2-development-tactical-30-0010-vs-a-s12901231012502754714-fw"
+            ],
+            "group_id": "opening-f521ed1e4abf1700806c",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          }
+        ],
+        "opening_groups": 8,
+        "points": 8.5,
+        "score_rate": 0.53125,
+        "score_rate_ci95": [
+          0.4375,
+          0.625
+        ],
+        "wins": 3
+      },
+      "points": 8.5,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/development/tactical-30-0010/matches.jsonl",
+      "score_rate": 0.53125,
+      "stage": "development",
+      "validation_policy_loss": 2.354139239642373,
+      "wins": 3
+    },
+    "tactical-30-0020": {
+      "action_audit": {
+        "games": 16,
+        "mismatches": 0,
+        "network_actions": 442
+      },
+      "candidate_id": "tactical-30-0020",
+      "checkpoint": "research/f_v2/checkpoints/tactical-30/epoch-0020.pt",
+      "checkpoint_sha256": "2e7202c67ab28e0dae2b735f3af33df5a74c56d9a31d3bd3bbe1db158679296e",
+      "draws": 9,
+      "games": 16,
+      "losses": 1,
+      "model_name": "F2",
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 2000,
+        "bootstrap_seed": 733301,
+        "by_color": {
+          "black": {
+            "draws": 1,
+            "games": 8,
+            "losses": 1,
+            "points": 6.5,
+            "score_rate": 0.8125,
+            "score_rate_ci95": [
+              0.5625,
+              1.0
+            ],
+            "wins": 6
+          },
+          "white": {
+            "draws": 8,
+            "games": 8,
+            "losses": 0,
+            "points": 4.0,
+            "score_rate": 0.5,
+            "score_rate_ci95": [
+              0.5,
+              0.5
+            ],
+            "wins": 0
+          }
+        },
+        "draws": 9,
+        "games": 16,
+        "losses": 1,
+        "opening_group_scores": [
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s1461598009100763872-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s1461598009100763872-fw"
+            ],
+            "group_id": "opening-12281dd79f4d16360cfd",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s16791533387351395703-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s16791533387351395703-fw"
+            ],
+            "group_id": "opening-1ea8e992dd134efb9048",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s21668965196467995-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s21668965196467995-fw"
+            ],
+            "group_id": "opening-ab7555b4727062e338a4",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s7989505844331443871-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s7989505844331443871-fw"
+            ],
+            "group_id": "opening-b1c739723c3c9a1c8c64",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s13689425050063016386-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s13689425050063016386-fw"
+            ],
+            "group_id": "opening-b4b4cd90738bc6692e53",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s1565870056938881484-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s1565870056938881484-fw"
+            ],
+            "group_id": "opening-bde02f5622a2f6e53890",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s7130364234634434739-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s7130364234634434739-fw"
+            ],
+            "group_id": "opening-d5d650f9e98a773977c6",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0020-vs-a-s12901231012502754714-fb",
+              "f-v2-development-tactical-30-0020-vs-a-s12901231012502754714-fw"
+            ],
+            "group_id": "opening-f521ed1e4abf1700806c",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          }
+        ],
+        "opening_groups": 8,
+        "points": 10.5,
+        "score_rate": 0.65625,
+        "score_rate_ci95": [
+          0.53125,
+          0.75
+        ],
+        "wins": 6
+      },
+      "points": 10.5,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/development/tactical-30-0020/matches.jsonl",
+      "score_rate": 0.65625,
+      "stage": "development",
+      "validation_policy_loss": 2.27071184862258,
+      "wins": 6
+    },
+    "tactical-30-0030": {
+      "action_audit": {
+        "games": 16,
+        "mismatches": 0,
+        "network_actions": 398
+      },
+      "candidate_id": "tactical-30-0030",
+      "checkpoint": "research/f_v2/checkpoints/tactical-30/epoch-0030.pt",
+      "checkpoint_sha256": "098efabf00bd86c1b71b52e80ebbfcc443bdc40693d514234605cc4a1ff38458",
+      "draws": 7,
+      "games": 16,
+      "losses": 4,
+      "model_name": "F2",
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 2000,
+        "bootstrap_seed": 733301,
+        "by_color": {
+          "black": {
+            "draws": 1,
+            "games": 8,
+            "losses": 2,
+            "points": 5.5,
+            "score_rate": 0.6875,
+            "score_rate_ci95": [
+              0.375,
+              0.9375
+            ],
+            "wins": 5
+          },
+          "white": {
+            "draws": 6,
+            "games": 8,
+            "losses": 2,
+            "points": 3.0,
+            "score_rate": 0.375,
+            "score_rate_ci95": [
+              0.1875,
+              0.5
+            ],
+            "wins": 0
+          }
+        },
+        "draws": 7,
+        "games": 16,
+        "losses": 4,
+        "opening_group_scores": [
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s1461598009100763872-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s1461598009100763872-fw"
+            ],
+            "group_id": "opening-12281dd79f4d16360cfd",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s16791533387351395703-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s16791533387351395703-fw"
+            ],
+            "group_id": "opening-1ea8e992dd134efb9048",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s21668965196467995-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s21668965196467995-fw"
+            ],
+            "group_id": "opening-ab7555b4727062e338a4",
+            "score_rate": 0.0,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s7989505844331443871-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s7989505844331443871-fw"
+            ],
+            "group_id": "opening-b1c739723c3c9a1c8c64",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s13689425050063016386-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s13689425050063016386-fw"
+            ],
+            "group_id": "opening-b4b4cd90738bc6692e53",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s1565870056938881484-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s1565870056938881484-fw"
+            ],
+            "group_id": "opening-bde02f5622a2f6e53890",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s7130364234634434739-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s7130364234634434739-fw"
+            ],
+            "group_id": "opening-d5d650f9e98a773977c6",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0030-vs-a-s12901231012502754714-fb",
+              "f-v2-development-tactical-30-0030-vs-a-s12901231012502754714-fw"
+            ],
+            "group_id": "opening-f521ed1e4abf1700806c",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          }
+        ],
+        "opening_groups": 8,
+        "points": 8.5,
+        "score_rate": 0.53125,
+        "score_rate_ci95": [
+          0.34375,
+          0.6875
+        ],
+        "wins": 5
+      },
+      "points": 8.5,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/development/tactical-30-0030/matches.jsonl",
+      "score_rate": 0.53125,
+      "stage": "development",
+      "validation_policy_loss": 2.2394178140843124,
+      "wins": 5
+    },
+    "tactical-30-0040": {
+      "action_audit": {
+        "games": 16,
+        "mismatches": 0,
+        "network_actions": 420
+      },
+      "candidate_id": "tactical-30-0040",
+      "checkpoint": "research/f_v2/checkpoints/tactical-30/epoch-0040.pt",
+      "checkpoint_sha256": "aec2e85fd91174e5d726f4762c80bac00e3bdcc293e2bb0fcdf766841dce87da",
+      "draws": 9,
+      "games": 16,
+      "losses": 2,
+      "model_name": "F2",
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 2000,
+        "bootstrap_seed": 733301,
+        "by_color": {
+          "black": {
+            "draws": 3,
+            "games": 8,
+            "losses": 1,
+            "points": 5.5,
+            "score_rate": 0.6875,
+            "score_rate_ci95": [
+              0.4375,
+              0.9375
+            ],
+            "wins": 4
+          },
+          "white": {
+            "draws": 6,
+            "games": 8,
+            "losses": 1,
+            "points": 4.0,
+            "score_rate": 0.5,
+            "score_rate_ci95": [
+              0.3125,
+              0.6875
+            ],
+            "wins": 1
+          }
+        },
+        "draws": 9,
+        "games": 16,
+        "losses": 2,
+        "opening_group_scores": [
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s1461598009100763872-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s1461598009100763872-fw"
+            ],
+            "group_id": "opening-12281dd79f4d16360cfd",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s16791533387351395703-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s16791533387351395703-fw"
+            ],
+            "group_id": "opening-1ea8e992dd134efb9048",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s21668965196467995-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s21668965196467995-fw"
+            ],
+            "group_id": "opening-ab7555b4727062e338a4",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s7989505844331443871-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s7989505844331443871-fw"
+            ],
+            "group_id": "opening-b1c739723c3c9a1c8c64",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s13689425050063016386-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s13689425050063016386-fw"
+            ],
+            "group_id": "opening-b4b4cd90738bc6692e53",
+            "score_rate": 1.0,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s1565870056938881484-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s1565870056938881484-fw"
+            ],
+            "group_id": "opening-bde02f5622a2f6e53890",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s7130364234634434739-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s7130364234634434739-fw"
+            ],
+            "group_id": "opening-d5d650f9e98a773977c6",
+            "score_rate": 0.0,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-development-tactical-30-0040-vs-a-s12901231012502754714-fb",
+              "f-v2-development-tactical-30-0040-vs-a-s12901231012502754714-fw"
+            ],
+            "group_id": "opening-f521ed1e4abf1700806c",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          }
+        ],
+        "opening_groups": 8,
+        "points": 9.5,
+        "score_rate": 0.59375,
+        "score_rate_ci95": [
+          0.375,
+          0.78125
+        ],
+        "wins": 5
+      },
+      "points": 9.5,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/development/tactical-30-0040/matches.jsonl",
+      "score_rate": 0.59375,
+      "stage": "development",
+      "validation_policy_loss": 2.256096217555929,
+      "wins": 5
+    }
+  },
+  "completed": true,
+  "run_40_trigger": false,
+  "runs": {
+    "tactical-30": {
+      "best_checkpoint": "/workspace/WuziQ-f-v2/research/f_v2/checkpoints/tactical-30/best.pt",
+      "best_checkpoint_sha256": "f876a74f646c118efa71a2df5403855b74f23c128b576e4ce24a4a7a90ded993",
+      "best_epoch": 37,
+      "candidate_checkpoints": [
+        "epoch-0010.pt",
+        "epoch-0020.pt",
+        "epoch-0030.pt",
+        "epoch-0040.pt"
+      ],
+      "config": {
+        "batch_size": 64,
+        "blocks": 2,
+        "board_size": 9,
+        "candidate_epochs": [
+          10,
+          20,
+          30,
+          40,
+          50,
+          60
+        ],
+        "channels": 32,
+        "checkpoint_every_updates": 25,
+        "cpu_threads": 3,
+        "device": "auto",
+        "epochs": 60,
+        "gradient_clip": 5.0,
+        "initial_checkpoint": "/workspace/WuziQ-f-v2/research/f_v2/checkpoints/f1_reference.pt",
+        "learning_rate": 0.0003,
+        "minimum_epochs": 30,
+        "minimum_improvement": 1e-05,
+        "minimum_learning_rate": 3e-05,
+        "patience": 12,
+        "run_name": "tactical-30",
+        "schema_version": 1,
+        "seed": 732201,
+        "tactical_share": 0.3,
+        "value_loss_weight": 1.0,
+        "weight_decay": 0.0001
+      },
+      "dataset_sha256": "358e24ee7fe89b9cf357beb80ccb14920a3ccc6dd6537674db1df7e51987027d",
+      "device": "cpu",
+      "elapsed_seconds": 318.125947926,
+      "expected_initial_checkpoint_sha256": "8d3cbeefb3b0ec75a4ec769b9852327f7411e8836f87a4add80d9cff2516e51f",
+      "history": [
+        {
+          "epoch": 1,
+          "learning_rate": 0.0003,
+          "train_policy_loss_last_batch": 1.8317511081695557,
+          "train_value_loss_last_batch": 0.24036000669002533,
+          "updates": 233,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3798721152864264,
+            "target_probability_mass": 0.2255479499530849,
+            "top1_accuracy": 0.33157894736842103,
+            "value_mae": 0.3033546766103347,
+            "value_mse": 0.2802710606779146
+          }
+        },
+        {
+          "epoch": 2,
+          "learning_rate": 0.00029981498719186745,
+          "train_policy_loss_last_batch": 1.4668910503387451,
+          "train_value_loss_last_batch": 0.1272774338722229,
+          "updates": 466,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.394796625692132,
+            "target_probability_mass": 0.22685544858817785,
+            "top1_accuracy": 0.3236842105263158,
+            "value_mae": 0.2851739329563683,
+            "value_mse": 0.2606172480181588
+          }
+        },
+        {
+          "epoch": 3,
+          "learning_rate": 0.00029926045587471686,
+          "train_policy_loss_last_batch": 1.3496936559677124,
+          "train_value_loss_last_batch": 0.21485409140586853,
+          "updates": 699,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.380987664857898,
+            "target_probability_mass": 0.23148859696413734,
+            "top1_accuracy": 0.3175438596491228,
+            "value_mae": 0.28086610121344596,
+            "value_mse": 0.2454311443137455
+          }
+        },
+        {
+          "epoch": 4,
+          "learning_rate": 0.0002983379259803436,
+          "train_policy_loss_last_batch": 1.5019099712371826,
+          "train_value_loss_last_batch": 0.0992259681224823,
+          "updates": 932,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.354654714128558,
+            "target_probability_mass": 0.23399533268374828,
+            "top1_accuracy": 0.3175438596491228,
+            "value_mae": 0.29015401653067735,
+            "value_mse": 0.27168992035546274
+          }
+        },
+        {
+          "epoch": 5,
+          "learning_rate": 0.0002970499260990638,
+          "train_policy_loss_last_batch": 1.3590840101242065,
+          "train_value_loss_last_batch": 0.08739647269248962,
+          "updates": 1165,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3597729970395704,
+            "target_probability_mass": 0.23937217261987634,
+            "top1_accuracy": 0.31491228070175437,
+            "value_mae": 0.29351715367670855,
+            "value_mse": 0.26145639025746464
+          }
+        },
+        {
+          "epoch": 6,
+          "learning_rate": 0.00029539998654902423,
+          "train_policy_loss_last_batch": 1.866137981414795,
+          "train_value_loss_last_batch": 0.14726613461971283,
+          "updates": 1398,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3563763968369784,
+            "target_probability_mass": 0.2448000640571416,
+            "top1_accuracy": 0.33596491228070174,
+            "value_mae": 0.2939072345501412,
+            "value_mse": 0.261191544681109
+          }
+        },
+        {
+          "epoch": 7,
+          "learning_rate": 0.0002933926296998458,
+          "train_policy_loss_last_batch": 1.6041384935379028,
+          "train_value_loss_last_batch": 0.1510142832994461,
+          "updates": 1631,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3484451432684037,
+            "target_probability_mass": 0.2483642021973649,
+            "top1_accuracy": 0.3394736842105263,
+            "value_mae": 0.30673362833540685,
+            "value_mse": 0.2911244586862657
+          }
+        },
+        {
+          "epoch": 8,
+          "learning_rate": 0.00029103335757712227,
+          "train_policy_loss_last_batch": 1.2242411375045776,
+          "train_value_loss_last_batch": 0.10852772742509842,
+          "updates": 1864,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3605941157275336,
+            "target_probability_mass": 0.2468602852756081,
+            "top1_accuracy": 0.33245614035087717,
+            "value_mae": 0.30110587738390515,
+            "value_mse": 0.2839055828849685
+          }
+        },
+        {
+          "epoch": 9,
+          "learning_rate": 0.00028832863678175116,
+          "train_policy_loss_last_batch": 1.5234168767929077,
+          "train_value_loss_last_batch": 0.19409866631031036,
+          "updates": 2097,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3104532868696737,
+            "target_probability_mass": 0.25072692214598646,
+            "top1_accuracy": 0.3429824561403509,
+            "value_mae": 0.2885783166714981,
+            "value_mse": 0.2541124812055136
+          }
+        },
+        {
+          "epoch": 10,
+          "learning_rate": 0.0002852858807654297,
+          "train_policy_loss_last_batch": 1.6534452438354492,
+          "train_value_loss_last_batch": 0.1449197232723236,
+          "updates": 2330,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.354139239642373,
+            "target_probability_mass": 0.2489126921296191,
+            "top1_accuracy": 0.33245614035087717,
+            "value_mae": 0.30333161662034525,
+            "value_mse": 0.2762436349180272
+          }
+        },
+        {
+          "epoch": 11,
+          "learning_rate": 0.0002819134295108993,
+          "train_policy_loss_last_batch": 1.314131259918213,
+          "train_value_loss_last_batch": 0.1190173402428627,
+          "updates": 2563,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.321299987314412,
+            "target_probability_mass": 0.2552109791687256,
+            "top1_accuracy": 0.35,
+            "value_mae": 0.31188738824347273,
+            "value_mse": 0.3059803648392247
+          }
+        },
+        {
+          "epoch": 12,
+          "learning_rate": 0.0002782205266726323,
+          "train_policy_loss_last_batch": 1.1953712701797485,
+          "train_value_loss_last_batch": 0.1791672557592392,
+          "updates": 2796,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2901235139294345,
+            "target_probability_mass": 0.25713962028147713,
+            "top1_accuracy": 0.34649122807017546,
+            "value_mae": 0.30026085047151385,
+            "value_mse": 0.270739547974919
+          }
+        },
+        {
+          "epoch": 13,
+          "learning_rate": 0.000274217294240618,
+          "train_policy_loss_last_batch": 1.6633890867233276,
+          "train_value_loss_last_batch": 0.20936211943626404,
+          "updates": 3029,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.334776178180248,
+            "target_probability_mass": 0.2583960307809576,
+            "top1_accuracy": 0.3447368421052632,
+            "value_mae": 0.30781785690091884,
+            "value_mse": 0.28750642815351707
+          }
+        },
+        {
+          "epoch": 14,
+          "learning_rate": 0.0002699147047966911,
+          "train_policy_loss_last_batch": 1.597367286682129,
+          "train_value_loss_last_batch": 0.14479997754096985,
+          "updates": 3262,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3114580386966463,
+            "target_probability_mass": 0.2604960265481822,
+            "top1_accuracy": 0.3570175438596491,
+            "value_mae": 0.31036889370201,
+            "value_mse": 0.29038801195478003
+          }
+        },
+        {
+          "epoch": 15,
+          "learning_rate": 0.0002653245514394483,
+          "train_policy_loss_last_batch": 1.4036060571670532,
+          "train_value_loss_last_batch": 0.06455487012863159,
+          "updates": 3495,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2735017142038774,
+            "target_probability_mass": 0.26351749416818054,
+            "top1_accuracy": 0.356140350877193,
+            "value_mae": 0.30787635062524554,
+            "value_mse": 0.3056542536421439
+          }
+        },
+        {
+          "epoch": 16,
+          "learning_rate": 0.000260459415460184,
+          "train_policy_loss_last_batch": 1.3138995170593262,
+          "train_value_loss_last_batch": 0.13471552729606628,
+          "updates": 3728,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.286477659723166,
+            "target_probability_mass": 0.26341915990684484,
+            "top1_accuracy": 0.356140350877193,
+            "value_mae": 0.31280445299806225,
+            "value_mse": 0.3042331927445256
+          }
+        },
+        {
+          "epoch": 17,
+          "learning_rate": 0.0002553326318584459,
+          "train_policy_loss_last_batch": 1.7353339195251465,
+          "train_value_loss_last_batch": 0.1157553642988205,
+          "updates": 3961,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2969358196672003,
+            "target_probability_mass": 0.2673617870660038,
+            "top1_accuracy": 0.3482456140350877,
+            "value_mae": 0.30128333550967734,
+            "value_mse": 0.2857868422257706
+          }
+        },
+        {
+          "epoch": 18,
+          "learning_rate": 0.00024995825279172814,
+          "train_policy_loss_last_batch": 1.154544472694397,
+          "train_value_loss_last_batch": 0.10387001186609268,
+          "updates": 4194,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2637531632403314,
+            "target_probability_mass": 0.26798073229463687,
+            "top1_accuracy": 0.35789473684210527,
+            "value_mae": 0.2942864210599637,
+            "value_mse": 0.2712043833216123
+          }
+        },
+        {
+          "epoch": 19,
+          "learning_rate": 0.0002443510090594839,
+          "train_policy_loss_last_batch": 1.3557215929031372,
+          "train_value_loss_last_batch": 0.10977206379175186,
+          "updates": 4427,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.3104928530818016,
+            "target_probability_mass": 0.2711947022403604,
+            "top1_accuracy": 0.34385964912280703,
+            "value_mae": 0.30101558196290984,
+            "value_mse": 0.2855918491558981
+          }
+        },
+        {
+          "epoch": 20,
+          "learning_rate": 0.00023852626972702872,
+          "train_policy_loss_last_batch": 1.1626136302947998,
+          "train_value_loss_last_batch": 0.047957297414541245,
+          "updates": 4660,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.27071184862258,
+            "target_probability_mass": 0.27434111511847414,
+            "top1_accuracy": 0.35175438596491226,
+            "value_mae": 0.2897956013257754,
+            "value_mse": 0.27109383475982174
+          }
+        },
+        {
+          "epoch": 21,
+          "learning_rate": 0.00023250000000000004,
+          "train_policy_loss_last_batch": 1.3487002849578857,
+          "train_value_loss_last_batch": 0.13957631587982178,
+          "updates": 4893,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2637427376391748,
+            "target_probability_mass": 0.2765109968790567,
+            "top1_accuracy": 0.3649122807017544,
+            "value_mae": 0.31137454928192027,
+            "value_mse": 0.3128326295593576
+          }
+        },
+        {
+          "epoch": 22,
+          "learning_rate": 0.00022628871746483884,
+          "train_policy_loss_last_batch": 1.622851848602295,
+          "train_value_loss_last_batch": 0.10804751515388489,
+          "updates": 5126,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2861182443002592,
+            "target_probability_mass": 0.27216222927831074,
+            "top1_accuracy": 0.3649122807017544,
+            "value_mae": 0.3049470784887314,
+            "value_mse": 0.303227065354236
+          }
+        },
+        {
+          "epoch": 23,
+          "learning_rate": 0.00021990944681523307,
+          "train_policy_loss_last_batch": 1.287192702293396,
+          "train_value_loss_last_batch": 0.14063942432403564,
+          "updates": 5359,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.260295551823117,
+            "target_probability_mass": 0.2741844935100712,
+            "top1_accuracy": 0.35175438596491226,
+            "value_mae": 0.30310997089211267,
+            "value_mse": 0.30553372770787474
+          }
+        },
+        {
+          "epoch": 24,
+          "learning_rate": 0.0002133796731886156,
+          "train_policy_loss_last_batch": 1.1210963726043701,
+          "train_value_loss_last_batch": 0.12777282297611237,
+          "updates": 5592,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2810034702655044,
+            "target_probability_mass": 0.27347071192362865,
+            "top1_accuracy": 0.3482456140350877,
+            "value_mae": 0.30289084422516965,
+            "value_mse": 0.2967661343695055
+          }
+        },
+        {
+          "epoch": 25,
+          "learning_rate": 0.00020671729424061793,
+          "train_policy_loss_last_batch": 1.1106864213943481,
+          "train_value_loss_last_batch": 0.09677301347255707,
+          "updates": 5825,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.254055976956519,
+            "target_probability_mass": 0.28090348665534787,
+            "top1_accuracy": 0.3570175438596491,
+            "value_mae": 0.3076990328534106,
+            "value_mse": 0.3020755964092923
+          }
+        },
+        {
+          "epoch": 26,
+          "learning_rate": 0.00019994057108884032,
+          "train_policy_loss_last_batch": 1.1452003717422485,
+          "train_value_loss_last_batch": 0.11620507389307022,
+          "updates": 6058,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.238596782747558,
+            "target_probability_mass": 0.2802271366383489,
+            "top1_accuracy": 0.3570175438596491,
+            "value_mae": 0.30177165305552384,
+            "value_mse": 0.2960420014212135
+          }
+        },
+        {
+          "epoch": 27,
+          "learning_rate": 0.0001930680782603975,
+          "train_policy_loss_last_batch": 1.4854403734207153,
+          "train_value_loss_last_batch": 0.07464829087257385,
+          "updates": 6291,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.246461985680058,
+            "target_probability_mass": 0.27735566117054283,
+            "top1_accuracy": 0.34649122807017546,
+            "value_mae": 0.30620180554539905,
+            "value_mse": 0.30305584906297844
+          }
+        },
+        {
+          "epoch": 28,
+          "learning_rate": 0.00018611865278043117,
+          "train_policy_loss_last_batch": 1.2349554300308228,
+          "train_value_loss_last_batch": 0.07220183312892914,
+          "updates": 6524,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.266483598469916,
+            "target_probability_mass": 0.28226956488923816,
+            "top1_accuracy": 0.3526315789473684,
+            "value_mae": 0.2895938382766377,
+            "value_mse": 0.2733891342270022
+          }
+        },
+        {
+          "epoch": 29,
+          "learning_rate": 0.0001791113425411332,
+          "train_policy_loss_last_batch": 0.9856060743331909,
+          "train_value_loss_last_batch": 0.15563911199569702,
+          "updates": 6757,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.234959890162715,
+            "target_probability_mass": 0.2831483425560643,
+            "top1_accuracy": 0.3605263157894737,
+            "value_mae": 0.3050855413915359,
+            "value_mse": 0.3018468144356525
+          }
+        },
+        {
+          "epoch": 30,
+          "learning_rate": 0.00017206535409279737,
+          "train_policy_loss_last_batch": 1.1984615325927734,
+          "train_value_loss_last_batch": 0.04099372401833534,
+          "updates": 6990,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2394178140843124,
+            "target_probability_mass": 0.2835660026522977,
+            "top1_accuracy": 0.362280701754386,
+            "value_mae": 0.3037458186309985,
+            "value_mse": 0.29404688084157554
+          }
+        },
+        {
+          "epoch": 31,
+          "learning_rate": 0.000165,
+          "train_policy_loss_last_batch": 0.9720829725265503,
+          "train_value_loss_last_batch": 0.0481601320207119,
+          "updates": 7223,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2640573945890075,
+            "target_probability_mass": 0.2865072398594445,
+            "top1_accuracy": 0.35789473684210527,
+            "value_mae": 0.32083437008269566,
+            "value_mse": 0.31716613427948337
+          }
+        },
+        {
+          "epoch": 32,
+          "learning_rate": 0.00015793464590720257,
+          "train_policy_loss_last_batch": 0.9738194346427917,
+          "train_value_loss_last_batch": 0.09365619719028473,
+          "updates": 7456,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2573151541296843,
+            "target_probability_mass": 0.2863490184540416,
+            "top1_accuracy": 0.3675438596491228,
+            "value_mae": 0.3069415770678397,
+            "value_mse": 0.3000212064114375
+          }
+        },
+        {
+          "epoch": 33,
+          "learning_rate": 0.0001508886574588668,
+          "train_policy_loss_last_batch": 1.2228373289108276,
+          "train_value_loss_last_batch": 0.07140246033668518,
+          "updates": 7689,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2652416226202865,
+            "target_probability_mass": 0.2851285824428232,
+            "top1_accuracy": 0.3587719298245614,
+            "value_mae": 0.30939543655153934,
+            "value_mse": 0.30162005127569164
+          }
+        },
+        {
+          "epoch": 34,
+          "learning_rate": 0.00014388134721956883,
+          "train_policy_loss_last_batch": 1.3807846307754517,
+          "train_value_loss_last_batch": 0.13057707250118256,
+          "updates": 7922,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.257739989244912,
+            "target_probability_mass": 0.28818704149120766,
+            "top1_accuracy": 0.37543859649122807,
+            "value_mae": 0.3044700509538974,
+            "value_mse": 0.2888763483520591
+          }
+        },
+        {
+          "epoch": 35,
+          "learning_rate": 0.00013693192173960247,
+          "train_policy_loss_last_batch": 1.0445483922958374,
+          "train_value_loss_last_batch": 0.06596535444259644,
+          "updates": 8155,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2635997169803757,
+            "target_probability_mass": 0.28401577758491486,
+            "top1_accuracy": 0.3649122807017544,
+            "value_mae": 0.3061838252451516,
+            "value_mse": 0.2960212260537591
+          }
+        },
+        {
+          "epoch": 36,
+          "learning_rate": 0.0001300594289111597,
+          "train_policy_loss_last_batch": 1.3594132661819458,
+          "train_value_loss_last_batch": 0.075747050344944,
+          "updates": 8388,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.253703195653144,
+            "target_probability_mass": 0.29108347290637443,
+            "top1_accuracy": 0.3736842105263158,
+            "value_mae": 0.3107768703937549,
+            "value_mse": 0.31507423575670784
+          }
+        },
+        {
+          "epoch": 37,
+          "learning_rate": 0.0001232827057593821,
+          "train_policy_loss_last_batch": 1.2592644691467285,
+          "train_value_loss_last_batch": 0.09063851088285446,
+          "updates": 8621,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2329262985215266,
+            "target_probability_mass": 0.29121049224508044,
+            "top1_accuracy": 0.37280701754385964,
+            "value_mae": 0.30148187498796913,
+            "value_mse": 0.30834679149531874
+          }
+        },
+        {
+          "epoch": 38,
+          "learning_rate": 0.00011662032681138445,
+          "train_policy_loss_last_batch": 1.2609257698059082,
+          "train_value_loss_last_batch": 0.16648292541503906,
+          "updates": 8854,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.241786647772645,
+            "target_probability_mass": 0.2928905602735125,
+            "top1_accuracy": 0.3701754385964912,
+            "value_mae": 0.2949354437096637,
+            "value_mse": 0.2857377879535748
+          }
+        },
+        {
+          "epoch": 39,
+          "learning_rate": 0.00011009055318476698,
+          "train_policy_loss_last_batch": 0.949495255947113,
+          "train_value_loss_last_batch": 0.042161647230386734,
+          "updates": 9087,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2562723130427846,
+            "target_probability_mass": 0.2922642511317112,
+            "top1_accuracy": 0.36666666666666664,
+            "value_mae": 0.3056423613789855,
+            "value_mse": 0.3011361785288107
+          }
+        },
+        {
+          "epoch": 40,
+          "learning_rate": 0.00010371128253516117,
+          "train_policy_loss_last_batch": 0.8582059741020203,
+          "train_value_loss_last_batch": 0.0664738118648529,
+          "updates": 9320,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.256096217555929,
+            "target_probability_mass": 0.291080850161489,
+            "top1_accuracy": 0.3684210526315789,
+            "value_mae": 0.30647069542679484,
+            "value_mse": 0.2994951635676972
+          }
+        },
+        {
+          "epoch": 41,
+          "learning_rate": 9.750000000000001e-05,
+          "train_policy_loss_last_batch": 1.1947332620620728,
+          "train_value_loss_last_batch": 0.12710535526275635,
+          "updates": 9553,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2509370925043823,
+            "target_probability_mass": 0.29026359003718216,
+            "top1_accuracy": 0.362280701754386,
+            "value_mae": 0.29887176501092894,
+            "value_mse": 0.2926264173297829
+          }
+        },
+        {
+          "epoch": 42,
+          "learning_rate": 9.147373027297136e-05,
+          "train_policy_loss_last_batch": 1.1052970886230469,
+          "train_value_loss_last_batch": 0.04393642023205757,
+          "updates": 9786,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.250247199182693,
+            "target_probability_mass": 0.2911433810499148,
+            "top1_accuracy": 0.36403508771929827,
+            "value_mae": 0.3035088179850279,
+            "value_mse": 0.30041859925796033
+          }
+        },
+        {
+          "epoch": 43,
+          "learning_rate": 8.564899094051613e-05,
+          "train_policy_loss_last_batch": 1.1805996894836426,
+          "train_value_loss_last_batch": 0.05942950397729874,
+          "updates": 10019,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.252887500170312,
+            "target_probability_mass": 0.292005040846389,
+            "top1_accuracy": 0.3587719298245614,
+            "value_mae": 0.29955489359823617,
+            "value_mse": 0.29429187973590454
+          }
+        },
+        {
+          "epoch": 44,
+          "learning_rate": 8.004174720827196e-05,
+          "train_policy_loss_last_batch": 1.2035932540893555,
+          "train_value_loss_last_batch": 0.03443582355976105,
+          "updates": 10252,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.249032801020229,
+            "target_probability_mass": 0.2965477490583062,
+            "top1_accuracy": 0.37456140350877193,
+            "value_mae": 0.2967659064287242,
+            "value_mse": 0.28356851640721364
+          }
+        },
+        {
+          "epoch": 45,
+          "learning_rate": 7.466736814155418e-05,
+          "train_policy_loss_last_batch": 1.3379626274108887,
+          "train_value_loss_last_batch": 0.09792793542146683,
+          "updates": 10485,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2479292025554236,
+            "target_probability_mass": 0.2935236090819161,
+            "top1_accuracy": 0.37894736842105264,
+            "value_mae": 0.3017472217248532,
+            "value_mse": 0.300019539643042
+          }
+        },
+        {
+          "epoch": 46,
+          "learning_rate": 6.954058453981609e-05,
+          "train_policy_loss_last_batch": 1.1432700157165527,
+          "train_value_loss_last_batch": 0.12359500676393509,
+          "updates": 10718,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.236728529417387,
+            "target_probability_mass": 0.29639588971478686,
+            "top1_accuracy": 0.3763157894736842,
+            "value_mae": 0.2975034722261562,
+            "value_mse": 0.2899524390603772
+          }
+        },
+        {
+          "epoch": 47,
+          "learning_rate": 6.467544856055181e-05,
+          "train_policy_loss_last_batch": 1.363664150238037,
+          "train_value_loss_last_batch": 0.044633135199546814,
+          "updates": 10951,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2408929748489754,
+            "target_probability_mass": 0.29745210030417646,
+            "top1_accuracy": 0.3763157894736842,
+            "value_mae": 0.301052446177167,
+            "value_mse": 0.29587166883114785
+          }
+        },
+        {
+          "epoch": 48,
+          "learning_rate": 6.008529520330893e-05,
+          "train_policy_loss_last_batch": 1.210742473602295,
+          "train_value_loss_last_batch": 0.0598813071846962,
+          "updates": 11184,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.258765861392532,
+            "target_probability_mass": 0.29702894423897847,
+            "top1_accuracy": 0.3763157894736842,
+            "value_mae": 0.30822058721854484,
+            "value_mse": 0.302666192489197
+          }
+        },
+        {
+          "epoch": 49,
+          "learning_rate": 5.578270575938211e-05,
+          "train_policy_loss_last_batch": 1.0005292892456055,
+          "train_value_loss_last_batch": 0.1007295623421669,
+          "updates": 11417,
+          "validation": {
+            "legal_prediction_rate": 1.0,
+            "policy_loss": 2.2451496190817317,
+            "target_probability_mass": 0.29736239418710747,
+            "top1_accuracy": 0.3798245614035088,
+            "value_mae": 0.29994033411517435,
+            "value_mse": 0.28908273877547275
+          }
+        }
+      ],
+      "initial_checkpoint_sha256": "8d3cbeefb3b0ec75a4ec769b9852327f7411e8836f87a4add80d9cff2516e51f",
+      "run_name": "tactical-30",
+      "state_checkpoint": "/workspace/WuziQ-f-v2/research/f_v2/checkpoints/tactical-30/training_state.pt",
+      "updates": 11417
+    }
+  },
+  "schedule_sha256": "5eed03bb2019a77a1bf8758a889b7a9d5d9e2983b1a18b9acb58a23623755ca3",
+  "schema_version": 1,
+  "selected_candidate_id": "tactical-30-0020",
+  "selected_checkpoint": "research/f_v2/checkpoints/best_f2.pt",
+  "selected_checkpoint_sha256": "2e7202c67ab28e0dae2b735f3af33df5a74c56d9a31d3bd3bbe1db158679296e",
+  "selected_development_score_rate": 0.65625,
+  "selected_validation_policy_loss": 2.27071184862258,
+  "selection_rule": "maximum paired development score; ties resolved by lower validation policy cross-entropy",
+  "started_at_epoch_seconds": 1793492200.6530282
+}

@@ -1,0 +1,2936 @@
+{
+  "blind_opening_group_ids": [
+    "opening-8c8ed3f5a2d4cde60581",
+    "opening-936618f59eb07daef85a",
+    "opening-8cc4ce5cff07383067b1",
+    "opening-981eaf87c27297024ed2",
+    "opening-7b99a6456c3f6225217d",
+    "opening-8001d9c2876c15e18c41",
+    "opening-f9a622138d943f328f18",
+    "opening-c08b60a00d11e510e9e6",
+    "opening-910d5837bc7beda728f5",
+    "opening-1e944b8080c407f0e4bf",
+    "opening-5c35cd18c7b8bae77870",
+    "opening-f92467522e1d5c7c93ca",
+    "opening-40729c19ed7af1e6fe6e",
+    "opening-0e681bc90aa07a9eca06",
+    "opening-03a3a7f8887121693a5f",
+    "opening-ee42a0afad658ae5361a",
+    "opening-8a193a76017c90741749",
+    "opening-ad0c976382c7cb16dfb7",
+    "opening-ad967a3dc7d017bbe4d0",
+    "opening-f897188ff01469057424"
+  ],
+  "blind_opening_groups": 20,
+  "blind_seed": 732702,
+  "decision_latency_ms": {
+    "F1": {
+      "mean_ms": 1.3750548722400675,
+      "median_ms": 0.8136719998219633,
+      "moves": 1088,
+      "p95_ms": 1.283309649784314
+    },
+    "F2": {
+      "mean_ms": 1.4132691363206926,
+      "median_ms": 0.7973529995979334,
+      "moves": 983,
+      "p95_ms": 1.181234699743072
+    }
+  },
+  "development_candidates": [
+    {
+      "candidate_id": "F1",
+      "draws": 6,
+      "losses": 6,
+      "score_rate": 0.4375,
+      "validation_policy_loss": 2.3372894987253585,
+      "wins": 4
+    },
+    {
+      "candidate_id": "tactical-30-0010",
+      "draws": 7,
+      "losses": 5,
+      "score_rate": 0.46875,
+      "validation_policy_loss": 2.3450736537977046,
+      "wins": 4
+    },
+    {
+      "candidate_id": "tactical-30-0020",
+      "draws": 9,
+      "losses": 0,
+      "score_rate": 0.71875,
+      "validation_policy_loss": 2.272687741250245,
+      "wins": 7
+    },
+    {
+      "candidate_id": "tactical-30-0030",
+      "draws": 4,
+      "losses": 5,
+      "score_rate": 0.5625,
+      "validation_policy_loss": 2.2258677739591803,
+      "wins": 7
+    },
+    {
+      "candidate_id": "tactical-30-0040",
+      "draws": 10,
+      "losses": 3,
+      "score_rate": 0.5,
+      "validation_policy_loss": 2.2349461519913523,
+      "wins": 3
+    }
+  ],
+  "experiment_id": "wuziq-imitation-learning-f-v2",
+  "paired_f2_minus_f1": {
+    "f2_minus_f1_ci95": [
+      0.1,
+      0.3625
+    ],
+    "mean_score_rate_difference": 0.2375,
+    "method": "paired percentile bootstrap resampling opening groups",
+    "opening_groups": 20
+  },
+  "policy_value_and_tactics": {
+    "F1": {
+      "checkpoint_sha256": "8d3cbeefb3b0ec75a4ec769b9852327f7411e8836f87a4add80d9cff2516e51f",
+      "legacy_blind_direct_tactics": {
+        "accuracy": 0.9320388349514563,
+        "by_kind": {
+          "block": {
+            "accuracy": 0.25,
+            "correct": 1,
+            "positions": 4,
+            "top3_accuracy": 0.5,
+            "top3_correct": 2,
+            "top5_accuracy": 1.0,
+            "top5_correct": 4
+          },
+          "win": {
+            "accuracy": 0.9595959595959596,
+            "correct": 95,
+            "positions": 99,
+            "top3_accuracy": 0.98989898989899,
+            "top3_correct": 98,
+            "top5_accuracy": 1.0,
+            "top5_correct": 99
+          }
+        },
+        "correct": 96,
+        "details": [
+          {
+            "correct": true,
+            "correct_actions": [
+              31,
+              76
+            ],
+            "kind": "win",
+            "predicted_action": 31,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              31
+            ],
+            "kind": "win",
+            "predicted_action": 31,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46
+            ],
+            "kind": "win",
+            "predicted_action": 46,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46,
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34,
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47,
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34,
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              60
+            ],
+            "kind": "block",
+            "predicted_action": 48,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              60
+            ],
+            "kind": "win",
+            "predicted_action": 62,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47,
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              44
+            ],
+            "kind": "win",
+            "predicted_action": 31,
+            "top3_correct": false,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 57,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              25,
+              65
+            ],
+            "kind": "win",
+            "predicted_action": 65,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              29,
+              34
+            ],
+            "kind": "win",
+            "predicted_action": 29,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              26
+            ],
+            "kind": "win",
+            "predicted_action": 26,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47,
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              29
+            ],
+            "kind": "win",
+            "predicted_action": 29,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46,
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              28,
+              78
+            ],
+            "kind": "win",
+            "predicted_action": 28,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              56,
+              61
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              18,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              14,
+              59
+            ],
+            "kind": "win",
+            "predicted_action": 59,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              14,
+              59
+            ],
+            "kind": "win",
+            "predicted_action": 59,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46,
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              48,
+              53
+            ],
+            "kind": "win",
+            "predicted_action": 48,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              12,
+              62
+            ],
+            "kind": "win",
+            "predicted_action": 12,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              13,
+              58
+            ],
+            "kind": "win",
+            "predicted_action": 13,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              12,
+              62
+            ],
+            "kind": "win",
+            "predicted_action": 62,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              11,
+              61
+            ],
+            "kind": "win",
+            "predicted_action": 11,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              11,
+              61
+            ],
+            "kind": "win",
+            "predicted_action": 61,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              65
+            ],
+            "kind": "win",
+            "predicted_action": 65,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              63
+            ],
+            "kind": "block",
+            "predicted_action": 16,
+            "top3_correct": false,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              17
+            ],
+            "kind": "block",
+            "predicted_action": 36,
+            "top3_correct": false,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              7
+            ],
+            "kind": "block",
+            "predicted_action": 7,
+            "top3_correct": true,
+            "top5_correct": true
+          }
+        ],
+        "positions": 103,
+        "top3_accuracy": 0.970873786407767,
+        "top3_correct": 100,
+        "top5_accuracy": 1.0,
+        "top5_correct": 103
+      },
+      "legacy_blind_policy_value": {
+        "inference_latency_ms": {
+          "mean": 0.6695154100316358,
+          "median": 0.30883099998391117,
+          "p95": 0.5139386497376107,
+          "sample_positions": 100
+        },
+        "legal_rate": 1.0,
+        "policy_loss": 1.8614944130579114,
+        "positions": 1394,
+        "target_probability_mass": 0.30763962765409175,
+        "top1_accuracy": 0.41606886657101866,
+        "value_mae": 0.08537343893600347,
+        "value_mse": 0.026443084469771807,
+        "value_positions": 1394,
+        "value_trained": true
+      },
+      "validation_policy_value": {
+        "inference_latency_ms": {
+          "mean": 0.698352589984097,
+          "median": 0.31736749974697887,
+          "p95": 0.4979875501703645,
+          "sample_positions": 100
+        },
+        "legal_rate": 1.0,
+        "policy_loss": 2.3372894987253585,
+        "positions": 1140,
+        "target_probability_mass": 0.22468833713695252,
+        "top1_accuracy": 0.3298245614035088,
+        "value_mae": 0.2872072943980272,
+        "value_mse": 0.25189771537364813,
+        "value_positions": 1140,
+        "value_trained": true
+      }
+    },
+    "F2": {
+      "checkpoint_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
+      "legacy_blind_direct_tactics": {
+        "accuracy": 0.9805825242718447,
+        "by_kind": {
+          "block": {
+            "accuracy": 0.75,
+            "correct": 3,
+            "positions": 4,
+            "top3_accuracy": 1.0,
+            "top3_correct": 4,
+            "top5_accuracy": 1.0,
+            "top5_correct": 4
+          },
+          "win": {
+            "accuracy": 0.98989898989899,
+            "correct": 98,
+            "positions": 99,
+            "top3_accuracy": 1.0,
+            "top3_correct": 99,
+            "top5_accuracy": 1.0,
+            "top5_correct": 99
+          }
+        },
+        "correct": 101,
+        "details": [
+          {
+            "correct": true,
+            "correct_actions": [
+              31,
+              76
+            ],
+            "kind": "win",
+            "predicted_action": 31,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              31
+            ],
+            "kind": "win",
+            "predicted_action": 31,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46
+            ],
+            "kind": "win",
+            "predicted_action": 46,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46,
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34,
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47,
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              34,
+              74
+            ],
+            "kind": "win",
+            "predicted_action": 74,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              60
+            ],
+            "kind": "block",
+            "predicted_action": 60,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              60
+            ],
+            "kind": "win",
+            "predicted_action": 60,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47,
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              44
+            ],
+            "kind": "win",
+            "predicted_action": 44,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 42,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 67,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 67,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 67,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22,
+              67
+            ],
+            "kind": "win",
+            "predicted_action": 67,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              22
+            ],
+            "kind": "win",
+            "predicted_action": 22,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              25,
+              65
+            ],
+            "kind": "win",
+            "predicted_action": 65,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              29,
+              34
+            ],
+            "kind": "win",
+            "predicted_action": 29,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              26
+            ],
+            "kind": "win",
+            "predicted_action": 26,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              47,
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 47,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              29
+            ],
+            "kind": "win",
+            "predicted_action": 29,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46,
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 46,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 66,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              52
+            ],
+            "kind": "win",
+            "predicted_action": 52,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              28,
+              78
+            ],
+            "kind": "win",
+            "predicted_action": 78,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              56,
+              61
+            ],
+            "kind": "win",
+            "predicted_action": 34,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              18,
+              68
+            ],
+            "kind": "win",
+            "predicted_action": 68,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 38,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              21,
+              66
+            ],
+            "kind": "win",
+            "predicted_action": 21,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              37,
+              42
+            ],
+            "kind": "win",
+            "predicted_action": 37,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              14,
+              59
+            ],
+            "kind": "win",
+            "predicted_action": 14,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              14,
+              59
+            ],
+            "kind": "win",
+            "predicted_action": 14,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              46,
+              51
+            ],
+            "kind": "win",
+            "predicted_action": 51,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              48,
+              53
+            ],
+            "kind": "win",
+            "predicted_action": 48,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              12,
+              62
+            ],
+            "kind": "win",
+            "predicted_action": 62,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              13,
+              58
+            ],
+            "kind": "win",
+            "predicted_action": 13,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              12,
+              62
+            ],
+            "kind": "win",
+            "predicted_action": 62,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              38,
+              43
+            ],
+            "kind": "win",
+            "predicted_action": 43,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              11,
+              61
+            ],
+            "kind": "win",
+            "predicted_action": 61,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              23
+            ],
+            "kind": "win",
+            "predicted_action": 23,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              11,
+              61
+            ],
+            "kind": "win",
+            "predicted_action": 61,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              65
+            ],
+            "kind": "win",
+            "predicted_action": 65,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": false,
+            "correct_actions": [
+              63
+            ],
+            "kind": "block",
+            "predicted_action": 16,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              17
+            ],
+            "kind": "block",
+            "predicted_action": 17,
+            "top3_correct": true,
+            "top5_correct": true
+          },
+          {
+            "correct": true,
+            "correct_actions": [
+              7
+            ],
+            "kind": "block",
+            "predicted_action": 7,
+            "top3_correct": true,
+            "top5_correct": true
+          }
+        ],
+        "positions": 103,
+        "top3_accuracy": 1.0,
+        "top3_correct": 103,
+        "top5_accuracy": 1.0,
+        "top5_correct": 103
+      },
+      "legacy_blind_policy_value": {
+        "inference_latency_ms": {
+          "mean": 0.33317427001293254,
+          "median": 0.3066945000682608,
+          "p95": 0.46141410002746847,
+          "sample_positions": 100
+        },
+        "legal_rate": 1.0,
+        "policy_loss": 1.811761032590196,
+        "positions": 1394,
+        "target_probability_mass": 0.3402391589852264,
+        "top1_accuracy": 0.430416068866571,
+        "value_mae": 0.09263533146477286,
+        "value_mse": 0.03164755698636909,
+        "value_positions": 1394,
+        "value_trained": true
+      },
+      "validation_policy_value": {
+        "inference_latency_ms": {
+          "mean": 0.690307649983879,
+          "median": 0.33583849995011406,
+          "p95": 0.517477099720054,
+          "sample_positions": 100
+        },
+        "legal_rate": 1.0,
+        "policy_loss": 2.272687741250245,
+        "positions": 1140,
+        "target_probability_mass": 0.2748212454177025,
+        "top1_accuracy": 0.35175438596491226,
+        "value_mae": 0.2955921162622154,
+        "value_mse": 0.2807033817415811,
+        "value_positions": 1140,
+        "value_trained": true
+      }
+    }
+  },
+  "results_paths": {
+    "F1": "research/f_v2/results/blind/matches_f1.jsonl",
+    "F2": "research/f_v2/results/blind/matches_f2.jsonl"
+  },
+  "schedule_sha256": "2e5e2e8c9dc31e26b83ddb7d66f141da471cdc5eb146373cf8ec7b56b0edc3b6",
+  "schema_version": 1,
+  "selected_candidate_id": "tactical-30-0020",
+  "selection_rule": "maximum paired development score; ties resolved by lower validation policy cross-entropy",
+  "vs_a": {
+    "F1": {
+      "action_audit": {
+        "games": 40,
+        "mismatches": 0,
+        "network_actions": 1088
+      },
+      "candidate_id": "F1",
+      "checkpoint_sha256": "8d3cbeefb3b0ec75a4ec769b9852327f7411e8836f87a4add80d9cff2516e51f",
+      "draws": 18,
+      "games": 40,
+      "losses": 14,
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 732301,
+        "by_color": {
+          "black": {
+            "draws": 8,
+            "games": 20,
+            "losses": 7,
+            "points": 9.0,
+            "score_rate": 0.45,
+            "score_rate_ci95": [
+              0.275,
+              0.625
+            ],
+            "wins": 5
+          },
+          "white": {
+            "draws": 10,
+            "games": 20,
+            "losses": 7,
+            "points": 8.0,
+            "score_rate": 0.4,
+            "score_rate_ci95": [
+              0.25,
+              0.55
+            ],
+            "wins": 3
+          }
+        },
+        "draws": 18,
+        "games": 40,
+        "losses": 14,
+        "opening_group_scores": [
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s1921040851678914038-fb",
+              "f-v2-blind-F1-vs-a-s1921040851678914038-fw"
+            ],
+            "group_id": "opening-03a3a7f8887121693a5f",
+            "score_rate": 0.5,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s15059618640499375299-fb",
+              "f-v2-blind-F1-vs-a-s15059618640499375299-fw"
+            ],
+            "group_id": "opening-0e681bc90aa07a9eca06",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s14085122763460026124-fb",
+              "f-v2-blind-F1-vs-a-s14085122763460026124-fw"
+            ],
+            "group_id": "opening-1e944b8080c407f0e4bf",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s11318774603969095867-fb",
+              "f-v2-blind-F1-vs-a-s11318774603969095867-fw"
+            ],
+            "group_id": "opening-40729c19ed7af1e6fe6e",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s4350036236527325807-fb",
+              "f-v2-blind-F1-vs-a-s4350036236527325807-fw"
+            ],
+            "group_id": "opening-5c35cd18c7b8bae77870",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s10789363566581462106-fb",
+              "f-v2-blind-F1-vs-a-s10789363566581462106-fw"
+            ],
+            "group_id": "opening-7b99a6456c3f6225217d",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s2470857635590727139-fb",
+              "f-v2-blind-F1-vs-a-s2470857635590727139-fw"
+            ],
+            "group_id": "opening-8001d9c2876c15e18c41",
+            "score_rate": 0.0,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s10119520939520970924-fb",
+              "f-v2-blind-F1-vs-a-s10119520939520970924-fw"
+            ],
+            "group_id": "opening-8a193a76017c90741749",
+            "score_rate": 0.75,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s6036190225359558816-fb",
+              "f-v2-blind-F1-vs-a-s6036190225359558816-fw"
+            ],
+            "group_id": "opening-8c8ed3f5a2d4cde60581",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s6693317441901585212-fb",
+              "f-v2-blind-F1-vs-a-s6693317441901585212-fw"
+            ],
+            "group_id": "opening-8cc4ce5cff07383067b1",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s1175908903192726121-fb",
+              "f-v2-blind-F1-vs-a-s1175908903192726121-fw"
+            ],
+            "group_id": "opening-910d5837bc7beda728f5",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s16937154459723437640-fb",
+              "f-v2-blind-F1-vs-a-s16937154459723437640-fw"
+            ],
+            "group_id": "opening-936618f59eb07daef85a",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s9049144692521438663-fb",
+              "f-v2-blind-F1-vs-a-s9049144692521438663-fw"
+            ],
+            "group_id": "opening-981eaf87c27297024ed2",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s2939051837018417258-fb",
+              "f-v2-blind-F1-vs-a-s2939051837018417258-fw"
+            ],
+            "group_id": "opening-ad0c976382c7cb16dfb7",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s1969288714698528-fb",
+              "f-v2-blind-F1-vs-a-s1969288714698528-fw"
+            ],
+            "group_id": "opening-ad967a3dc7d017bbe4d0",
+            "score_rate": 0.5,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s17347270243040589496-fb",
+              "f-v2-blind-F1-vs-a-s17347270243040589496-fw"
+            ],
+            "group_id": "opening-c08b60a00d11e510e9e6",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s13845950460514743987-fb",
+              "f-v2-blind-F1-vs-a-s13845950460514743987-fw"
+            ],
+            "group_id": "opening-ee42a0afad658ae5361a",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s7250885184873112667-fb",
+              "f-v2-blind-F1-vs-a-s7250885184873112667-fw"
+            ],
+            "group_id": "opening-f897188ff01469057424",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s7924478847520074652-fb",
+              "f-v2-blind-F1-vs-a-s7924478847520074652-fw"
+            ],
+            "group_id": "opening-f92467522e1d5c7c93ca",
+            "score_rate": 0.25,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F1-vs-a-s10383150727948895179-fb",
+              "f-v2-blind-F1-vs-a-s10383150727948895179-fw"
+            ],
+            "group_id": "opening-f9a622138d943f328f18",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          }
+        ],
+        "opening_groups": 20,
+        "points": 17.0,
+        "score_rate": 0.425,
+        "score_rate_ci95": [
+          0.3375,
+          0.5125
+        ],
+        "wins": 8
+      },
+      "points": 17.0,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/blind/matches_f1.jsonl",
+      "score_rate": 0.425,
+      "stage": "blind",
+      "wins": 8
+    },
+    "F2": {
+      "action_audit": {
+        "games": 40,
+        "mismatches": 0,
+        "network_actions": 983
+      },
+      "candidate_id": "F2",
+      "checkpoint_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
+      "draws": 19,
+      "games": 40,
+      "losses": 4,
+      "paired_statistics": {
+        "bootstrap_method": "percentile bootstrap resampling paired opening groups",
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 732301,
+        "by_color": {
+          "black": {
+            "draws": 6,
+            "games": 20,
+            "losses": 0,
+            "points": 17.0,
+            "score_rate": 0.85,
+            "score_rate_ci95": [
+              0.75,
+              0.95
+            ],
+            "wins": 14
+          },
+          "white": {
+            "draws": 13,
+            "games": 20,
+            "losses": 4,
+            "points": 9.5,
+            "score_rate": 0.475,
+            "score_rate_ci95": [
+              0.35,
+              0.6
+            ],
+            "wins": 3
+          }
+        },
+        "draws": 19,
+        "games": 40,
+        "losses": 4,
+        "opening_group_scores": [
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s1921040851678914038-fb",
+              "f-v2-blind-F2-vs-a-s1921040851678914038-fw"
+            ],
+            "group_id": "opening-03a3a7f8887121693a5f",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s15059618640499375299-fb",
+              "f-v2-blind-F2-vs-a-s15059618640499375299-fw"
+            ],
+            "group_id": "opening-0e681bc90aa07a9eca06",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s14085122763460026124-fb",
+              "f-v2-blind-F2-vs-a-s14085122763460026124-fw"
+            ],
+            "group_id": "opening-1e944b8080c407f0e4bf",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s11318774603969095867-fb",
+              "f-v2-blind-F2-vs-a-s11318774603969095867-fw"
+            ],
+            "group_id": "opening-40729c19ed7af1e6fe6e",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s4350036236527325807-fb",
+              "f-v2-blind-F2-vs-a-s4350036236527325807-fw"
+            ],
+            "group_id": "opening-5c35cd18c7b8bae77870",
+            "score_rate": 0.5,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s10789363566581462106-fb",
+              "f-v2-blind-F2-vs-a-s10789363566581462106-fw"
+            ],
+            "group_id": "opening-7b99a6456c3f6225217d",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s2470857635590727139-fb",
+              "f-v2-blind-F2-vs-a-s2470857635590727139-fw"
+            ],
+            "group_id": "opening-8001d9c2876c15e18c41",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s10119520939520970924-fb",
+              "f-v2-blind-F2-vs-a-s10119520939520970924-fw"
+            ],
+            "group_id": "opening-8a193a76017c90741749",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s6036190225359558816-fb",
+              "f-v2-blind-F2-vs-a-s6036190225359558816-fw"
+            ],
+            "group_id": "opening-8c8ed3f5a2d4cde60581",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s6693317441901585212-fb",
+              "f-v2-blind-F2-vs-a-s6693317441901585212-fw"
+            ],
+            "group_id": "opening-8cc4ce5cff07383067b1",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s1175908903192726121-fb",
+              "f-v2-blind-F2-vs-a-s1175908903192726121-fw"
+            ],
+            "group_id": "opening-910d5837bc7beda728f5",
+            "score_rate": 0.25,
+            "white_score": 0.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s16937154459723437640-fb",
+              "f-v2-blind-F2-vs-a-s16937154459723437640-fw"
+            ],
+            "group_id": "opening-936618f59eb07daef85a",
+            "score_rate": 1.0,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s9049144692521438663-fb",
+              "f-v2-blind-F2-vs-a-s9049144692521438663-fw"
+            ],
+            "group_id": "opening-981eaf87c27297024ed2",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s2939051837018417258-fb",
+              "f-v2-blind-F2-vs-a-s2939051837018417258-fw"
+            ],
+            "group_id": "opening-ad0c976382c7cb16dfb7",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s1969288714698528-fb",
+              "f-v2-blind-F2-vs-a-s1969288714698528-fw"
+            ],
+            "group_id": "opening-ad967a3dc7d017bbe4d0",
+            "score_rate": 0.75,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s17347270243040589496-fb",
+              "f-v2-blind-F2-vs-a-s17347270243040589496-fw"
+            ],
+            "group_id": "opening-c08b60a00d11e510e9e6",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s13845950460514743987-fb",
+              "f-v2-blind-F2-vs-a-s13845950460514743987-fw"
+            ],
+            "group_id": "opening-ee42a0afad658ae5361a",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s7250885184873112667-fb",
+              "f-v2-blind-F2-vs-a-s7250885184873112667-fw"
+            ],
+            "group_id": "opening-f897188ff01469057424",
+            "score_rate": 1.0,
+            "white_score": 1.0
+          },
+          {
+            "black_score": 1.0,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s7924478847520074652-fb",
+              "f-v2-blind-F2-vs-a-s7924478847520074652-fw"
+            ],
+            "group_id": "opening-f92467522e1d5c7c93ca",
+            "score_rate": 0.75,
+            "white_score": 0.5
+          },
+          {
+            "black_score": 0.5,
+            "game_ids": [
+              "f-v2-blind-F2-vs-a-s10383150727948895179-fb",
+              "f-v2-blind-F2-vs-a-s10383150727948895179-fw"
+            ],
+            "group_id": "opening-f9a622138d943f328f18",
+            "score_rate": 0.5,
+            "white_score": 0.5
+          }
+        ],
+        "opening_groups": 20,
+        "points": 26.5,
+        "score_rate": 0.6625,
+        "score_rate_ci95": [
+          0.575,
+          0.75
+        ],
+        "wins": 17
+      },
+      "points": 26.5,
+      "records_path": "/workspace/WuziQ-f-v2/research/f_v2/results/blind/matches_f2.jsonl",
+      "score_rate": 0.6625,
+      "stage": "blind",
+      "wins": 17
+    }
+  }
+}

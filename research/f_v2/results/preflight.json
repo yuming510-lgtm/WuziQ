@@ -1,0 +1,109 @@
+{
+  "estimate": {
+    "calculation": {
+      "annotation_seconds_per_label": 0.16098860225000067,
+      "data": "32 F1-vs-A paired-color games plus C/E5 labels at measured 200ms budget",
+      "evaluation": "8 opening groups per candidate, 6 candidate epochs/run; up to 288 dev/final games",
+      "pilot_game_seconds": 0.05622440550001784,
+      "seconds_per_update": 0.023303590010000333,
+      "training": "45 expected or 60 maximum epochs per run; 30% and 40% tactical mixes; max two runs"
+    },
+    "central_seconds": 504.05728388285814,
+    "conservative_seconds": 1469.5244185346644,
+    "data_seconds": 158.92405677200122,
+    "evaluation_seconds": 10.795085856003425,
+    "optimistic_seconds": 408.1415410944567,
+    "steps_per_epoch": 233
+  },
+  "f1_a_loss_analysis": {
+    "examples": [
+      {
+        "f_color": "B",
+        "game_id": "f-v1-match-9x9-f-vs-a-s4351464924012743302-fb",
+        "mistakes": [
+          {
+            "chosen": [
+              5,
+              5
+            ],
+            "kind": "missed_single_point_block",
+            "ply": 16,
+            "required_block": [
+              3,
+              0
+            ]
+          }
+        ],
+        "plies": 18
+      },
+      {
+        "f_color": "W",
+        "game_id": "f-v1-match-9x9-f-vs-a-s4351464924012743302-fw",
+        "mistakes": [
+          {
+            "chosen": [
+              4,
+              5
+            ],
+            "kind": "missed_immediate_win",
+            "ply": 21,
+            "winning_moves": [
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          {
+            "chosen": [
+              8,
+              4
+            ],
+            "kind": "missed_single_point_block",
+            "ply": 57,
+            "required_block": [
+              2,
+              8
+            ]
+          }
+        ],
+        "plies": 59
+      }
+    ],
+    "games": 2,
+    "missed_immediate_wins": 1,
+    "missed_single_point_blocks": 2
+  },
+  "f1_checkpoint_sha256": "8d3cbeefb3b0ec75a4ec769b9852327f7411e8836f87a4add80d9cff2516e51f",
+  "historical_train": {
+    "positions": 10332,
+    "tactical_by_kind": {
+      "block": 350,
+      "win": 431
+    },
+    "tactical_positions": 781
+  },
+  "pilot": {
+    "evaluation_games": 4,
+    "f1_turns_per_game": 30.5,
+    "max_teacher_annotation_seconds": 0.19544417399993108,
+    "mean_game_seconds": 0.05622440550001784,
+    "mean_teacher_annotation_seconds": 0.16098860225000067,
+    "seconds_per_update": 0.023303590010000333,
+    "teacher_annotations": 8,
+    "teacher_budget_seconds": 0.2,
+    "training_updates": 100
+  },
+  "resources": {
+    "cpu_logical": 3,
+    "cuda_available": false,
+    "device": "cpu",
+    "disk_free_bytes": 29888970752,
+    "memory_bytes": {
+      "MemAvailable": 9454571520,
+      "MemTotal": 10452459520
+    },
+    "torch_version": "2.15.0+cpu"
+  },
+  "schedule_sha256": "5eed03bb2019a77a1bf8758a889b7a9d5d9e2983b1a18b9acb58a23623755ca3"
+}

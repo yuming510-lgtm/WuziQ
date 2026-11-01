@@ -1,0 +1,30 @@
+{
+  "all_experiment_compute_seconds": 919.8268743038178,
+  "corrected_dataset_preparation_seconds": 12.8,
+  "corrected_label_regeneration_seconds": 106.8,
+  "data_collection_seconds": 117.8,
+  "dataset_preparation_seconds": 12.8,
+  "final_blind_runner_seconds": 11.0,
+  "main_pipeline_total_seconds": 449.37103018760683,
+  "measurement_basis": "Observed command wall times; selection pipeline from persisted start timestamp to model_selection.json mtime. Corrected totals exclude code authoring/tests; precorrection run preserved as exploratory and included separately in total compute.",
+  "precorrection_exploratory_pipeline_seconds": 470.455844116211,
+  "precorrection_training_seconds": 318.125947926,
+  "preflight_estimate_seconds": {
+    "calculation": {
+      "annotation_seconds_per_label": 0.16098860225000067,
+      "data": "32 F1-vs-A paired-color games plus C/E5 labels at measured 200ms budget",
+      "evaluation": "8 opening groups per candidate, 6 candidate epochs/run; up to 288 dev/final games",
+      "pilot_game_seconds": 0.05622440550001784,
+      "seconds_per_update": 0.023303590010000333,
+      "training": "45 expected or 60 maximum epochs per run; 30% and 40% tactical mixes; max two runs"
+    },
+    "central_seconds": 504.05728388285814,
+    "conservative_seconds": 1469.5244185346644,
+    "data_seconds": 158.92405677200122,
+    "evaluation_seconds": 10.795085856003425,
+    "optimistic_seconds": 408.1415410944567,
+    "steps_per_epoch": 233
+  },
+  "selection_pipeline_seconds": 318.7710301876068,
+  "training_seconds": 308.8570120020004
+}

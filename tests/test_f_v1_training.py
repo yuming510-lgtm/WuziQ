@@ -139,3 +139,61 @@ def test_resume_rejects_changed_dataset_instead_of_silently_mixing_runs(tmp_path
     changed = {"train": [row(0), row(3)], "validation": [row(2)]}
     with pytest.raises(ValueError, match="dataset fingerprint"):
         api.train(config, changed, tmp_path, resume=True)
+
+
+def test_f_v2_continuation_initializes_from_checkpoint_and_saves_epoch_candidates(tmp_path) -> None:
+    api = _api()
+    from src.research.imitation_f.model import PolicyValueNet, save_f_checkpoint, load_f_checkpoint
+
+    source = PolicyValueNet(channels=8, blocks=1, seed=731604)
+    initial = tmp_path / "f1.pt"
+    save_f_checkpoint(initial, source, {"frozen_reference": True})
+    initialized = PolicyValueNet(channels=8, blocks=1, seed=731605)
+    digest = api.initialize_from_checkpoint(initialized, initial)
+    expected = load_f_checkpoint(initial, device="cpu")
+    assert digest
+    assert all(torch.equal(initialized.state_dict()[key], expected.state_dict()[key]) for key in expected.state_dict())
+
+    def row(index: int) -> dict:
+        board = ["."] * 81
+        board[40] = "1"
+        target = [0.0] * 81
+        target[index] = 1.0
+        return {
+            "state_key": f"cont-{index}", "canonical_board": "".join(board),
+            "policy_target": target, "value_target": float(index % 2), "value_count": 1,
+        }
+
+    result = api.train(
+        {"seed": 731606, "epochs": 3, "minimum_epochs": 2, "batch_size": 2,
+         "channels": 8, "blocks": 1, "learning_rate": 0.0002,
+         "initial_checkpoint": str(initial), "patience": 1,
+         "minimum_improvement": 1e9, "candidate_epochs": [1, 2, 3],
+         "checkpoint_every_updates": 1},
+        {"train": [row(0), row(1)], "validation": [row(2)]},
+        tmp_path / "continued", resume=False,
+    )
+    assert len(result["history"]) == 2
+    assert (tmp_path / "continued" / "epoch-0001.pt").is_file()
+    assert (tmp_path / "continued" / "epoch-0002.pt").is_file()
+    assert result["initial_checkpoint_sha256"] == digest
+
+
+def test_f_v2_resume_rejects_changed_initial_weights_at_same_path(tmp_path) -> None:
+    api = _api()
+    from src.research.imitation_f.model import PolicyValueNet, save_f_checkpoint
+
+    initial = tmp_path / "f1.pt"
+    save_f_checkpoint(initial, PolicyValueNet(channels=8, blocks=1, seed=731607))
+    board = ["."] * 81
+    target = [0.0] * 81
+    target[0] = 1.0
+    row = {"state_key": "resume-init", "canonical_board": "".join(board),
+           "policy_target": target, "value_target": 0.0, "value_count": 1}
+    config = {"seed": 731608, "epochs": 1, "batch_size": 1, "channels": 8, "blocks": 1,
+              "initial_checkpoint": str(initial), "checkpoint_every_updates": 1}
+    destination = tmp_path / "continued"
+    api.train(config, {"train": [row], "validation": [row]}, destination, resume=False)
+    save_f_checkpoint(initial, PolicyValueNet(channels=8, blocks=1, seed=731609))
+    with pytest.raises(ValueError, match="initial checkpoint fingerprint"):
+        api.train(config, {"train": [row], "validation": [row]}, destination, resume=True)

@@ -14,7 +14,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from .model import PolicyValueNet, save_f_checkpoint, select_device
+from .model import PolicyValueNet, load_f_checkpoint, save_f_checkpoint, select_device
 
 
 def _rng_payload() -> dict[str, Any]:
@@ -81,6 +81,16 @@ def _fingerprint_rows(rows: list[dict[str, Any]]) -> str:
 def _fingerprint_config(config: dict[str, Any]) -> str:
     payload = json.dumps(config, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+def initialize_from_checkpoint(model: PolicyValueNet, checkpoint: str | Path) -> str:
+    """Load exact same-architecture weights and return the source checkpoint SHA-256."""
+    path = Path(checkpoint)
+    source = load_f_checkpoint(path, device="cpu")
+    if (source.board_size, source.channels, source.blocks) != (model.board_size, model.channels, model.blocks):
+        raise ValueError("initial checkpoint architecture does not match training model")
+    model.load_state_dict(source.state_dict(), strict=True)
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _encode_rows(rows: list[dict[str, Any]]) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
@@ -203,11 +213,6 @@ def train(
         raise ValueError("dataset must include train and validation partitions")
     train_rows = _read_rows(dataset["train"])
     validation_rows = _read_rows(dataset["validation"])
-    dataset_fingerprints = {
-        "train": _fingerprint_rows(train_rows),
-        "validation": _fingerprint_rows(validation_rows),
-    }
-    config_fingerprint = _fingerprint_config(config)
     train_data = _encode_rows(train_rows)
     val_data = _encode_rows(validation_rows)
     if len(train_data[0]) == 0 or len(val_data[0]) == 0:
@@ -219,6 +224,19 @@ def train(
         blocks=int(config.get("blocks", 2)),
         seed=seed,
     ).to(device)
+    initial_checkpoint = config.get("initial_checkpoint")
+    initial_checkpoint_sha256 = None
+    if initial_checkpoint:
+        initial_checkpoint_path = Path(initial_checkpoint)
+        if not initial_checkpoint_path.is_file():
+            raise FileNotFoundError(f"initial checkpoint not found: {initial_checkpoint_path}")
+        initial_checkpoint_sha256 = initialize_from_checkpoint(model, initial_checkpoint_path)
+    dataset_fingerprints = {
+        "train": _fingerprint_rows(train_rows),
+        "validation": _fingerprint_rows(validation_rows),
+        "initial_checkpoint": initial_checkpoint_sha256,
+    }
+    config_fingerprint = _fingerprint_config(config)
     learning_rate = float(config.get("learning_rate", 0.001))
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=learning_rate, weight_decay=float(config.get("weight_decay", 1e-4))
@@ -235,6 +253,10 @@ def train(
     batch_size = int(config.get("batch_size", 64))
     checkpoint_interval = max(1, int(config.get("checkpoint_every_updates", 25)))
     patience = max(1, int(config.get("patience", 5)))
+    minimum_epochs = max(1, min(epochs, int(config.get("minimum_epochs", 1))))
+    candidate_epochs = {int(value) for value in config.get("candidate_epochs", [])}
+    if any(value < 1 or value > epochs for value in candidate_epochs):
+        raise ValueError("candidate epochs must fall within the configured training budget")
 
     state: dict[str, Any] = {
         "epoch": 0, "sampler_order": [], "sampler_cursor": 0, "update_step": 0,
@@ -252,6 +274,8 @@ def train(
     elapsed_before_session = 0.0
     if resume and state_path.exists():
         existing = torch.load(state_path, map_location="cpu", weights_only=False)
+        if existing.get("dataset_fingerprints", {}).get("initial_checkpoint") != initial_checkpoint_sha256:
+            raise ValueError("training resume initial checkpoint fingerprint mismatch")
         if existing.get("dataset_fingerprints") != dataset_fingerprints:
             raise ValueError("training resume dataset fingerprint mismatch")
         if existing.get("config_fingerprint") != config_fingerprint:
@@ -293,7 +317,7 @@ def train(
         })
         save_training_state(state_path, state)
 
-    while epoch < epochs and bad_epochs < patience:
+    while epoch < epochs and (epoch < minimum_epochs or bad_epochs < patience):
         if not sampler_order:
             sampler_order = torch.randperm(len(train_data[0])).tolist()
             cursor = 0
@@ -348,6 +372,18 @@ def train(
             save_f_checkpoint(best_path, model, metadata)
         else:
             bad_epochs += 1
+        if epoch + 1 in candidate_epochs:
+            save_f_checkpoint(
+                checkpoint_dir / f"epoch-{epoch + 1:04d}.pt",
+                model,
+                {
+                    "seed": seed, "config": dict(config), "candidate_epoch": epoch + 1,
+                    "validation": validation, "dataset_counts": state["dataset_counts"],
+                    "device": str(device), "dataset_fingerprints": dataset_fingerprints,
+                    "config_fingerprint": config_fingerprint,
+                    "initial_checkpoint_sha256": initial_checkpoint_sha256,
+                },
+            )
         scheduler.step()
         epoch += 1
         sampler_order = []
@@ -373,5 +409,6 @@ def train(
         "history_path": history_path,
         "history": history,
         "device": str(device),
+        "initial_checkpoint_sha256": initial_checkpoint_sha256,
         "elapsed_seconds": float(state.get("elapsed_training_seconds", elapsed_before_session + time.perf_counter() - session_started)),
     }

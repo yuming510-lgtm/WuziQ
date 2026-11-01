@@ -1,0 +1,12 @@
+{
+  "archived_pre_fix_artifacts": [
+    "research/f_v2/results/diagnostics/dagger_annotations_precanonical_fix.jsonl",
+    "research/f_v2/results/diagnostics/dagger_progress_precanonical_fix.json"
+  ],
+  "downstream_impact": "The prepared training builder re-detected exact tactics from the canonical board and overwrote these labels before training. The frozen model training rows were therefore expected to be unaffected; their SHA-256 will be checked after regeneration.",
+  "issue": "DAgger exact tactical action indices were stored in source-board orientation while the state was D4-canonicalized.",
+  "pre_fix_train_sha256": {
+    "0.3": "358e24ee7fe89b9cf357beb80ccb14920a3ccc6dd6537674db1df7e51987027d",
+    "0.4": "b19d410c7fe043d7b99aa6f8ca2a71595b4d9ffab6e31e3d6309f401048a4f2a"
+  }
+}
