@@ -17,8 +17,6 @@ _DEFAULT_INCLUDE = (
     "scripts/preflight_g_v1.py",
     "scripts/register_g_v1_budget.py",
     "scripts/run_g_v1.py",
-    "scripts/evaluate_g_v1.py",
-    "scripts/report_g_v1.py",
     "scripts/create_g_v1_snapshot.py",
     "scripts/restore_g_v1_snapshot.py",
     "tests/test_alphazero_g_puct.py",
