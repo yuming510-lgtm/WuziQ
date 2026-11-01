@@ -5,7 +5,11 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import sys
 from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 from src.research.alphazero_g.v2_blind import run_v2_blind, summarize_v2_results
 from src.research.alphazero_g.v2_selection import _atomic_json, run_v2_growth
@@ -13,7 +17,7 @@ from src.research.alphazero_g.v2_selection import _atomic_json, run_v2_growth
 
 def main() -> dict[str, Any]:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--config", type=Path, default=Path("research/g_v2/config/experiment.json"))
     parser.add_argument("--growth-only", action="store_true", help="finish training/development but defer the blind run")
     args = parser.parse_args()
