@@ -1,0 +1,81 @@
+{
+  "base_commit": "6e2bf48aa6b630c0fa4f20284ceb3b5aab295080",
+  "batch_size": 16,
+  "blind_evaluation": {
+    "b_time_limit_seconds": 0.05,
+    "conditions": [
+      "F2-network",
+      "F2-PUCT64",
+      "G-F2-network",
+      "G-F2-PUCT64"
+    ],
+    "one_pass_only": true,
+    "opening_groups": 20,
+    "opponents": [
+      "A",
+      "B"
+    ],
+    "planned_games": 560
+  },
+  "board_size": 9,
+  "candidate_learning_rates": {
+    "lr_1e3": 0.001,
+    "lr_1e4": 0.0001,
+    "lr_3e5": 3e-05
+  },
+  "data_source": "own completed self-play only; no F labels, no C/E5 labels, no artificial rewards",
+  "development_selection": {
+    "development_groups": 8,
+    "max_puct_drop_vs_f2_on_a_or_b": 0.125,
+    "min_black_score": 0.5,
+    "min_white_score": 0.5,
+    "paired_bootstrap_ci_lower_minimum": 0.5,
+    "promotion_score_minimum": 0.625
+  },
+  "experiment_id": "wuziq-alphazero-g-v2",
+  "f2_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
+  "format_version": 1,
+  "hard_cpu_hour_cap": 2.0,
+  "network": {
+    "board_size": 9,
+    "channels": 32,
+    "input_planes": 3,
+    "policy_actions": 81,
+    "residual_blocks": 2
+  },
+  "opening_schedule_path": "research/g_v2/config/openings.json",
+  "opening_schedule_sha256": "047c4a03d32c0066a0114e3f7a4a118991e109f09187ab9d0d0067fc492248ee",
+  "optimizer": "AdamW",
+  "proposed_stage_environment_steps": [
+    1000,
+    1000,
+    3000,
+    5000,
+    10000
+  ],
+  "proposed_stage_nodes": [
+    1000,
+    2000,
+    5000,
+    10000,
+    20000
+  ],
+  "proposed_states_per_candidate": 20000,
+  "registered": false,
+  "replay_capacity": 20000,
+  "replay_sampling": "uniform by game then position; arm-isolated; self-play only",
+  "scheduler": "CosineAnnealingLR eta_min=0.2*initial_lr over registered updates",
+  "seed": 510701,
+  "simulations_per_move": 64,
+  "snapshot_intervals_hours": [
+    1,
+    2,
+    4,
+    6,
+    10,
+    16,
+    26
+  ],
+  "update_every_budgeted_states": 16,
+  "weight_decay": 0.0001
+}
