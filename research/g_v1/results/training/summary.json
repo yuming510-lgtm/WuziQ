@@ -1,0 +1,103 @@
+{
+  "G-F2": {
+    "active_cpu_seconds": 120.86977493099997,
+    "active_wall_seconds": 120.88381419900134,
+    "actual_environment_steps": 2055,
+    "actual_simulations": 131520,
+    "arm_id": "G-F2",
+    "budgeted_environment_steps": 2048,
+    "completed": true,
+    "completion_overrun_simulations": 448,
+    "completion_overrun_steps": 7,
+    "game_count": 250,
+    "optimizer_updates": 128,
+    "stage_update_counts": [
+      64,
+      64
+    ],
+    "steps_by_stage": [
+      1024,
+      1024
+    ],
+    "training_history": [
+      {
+        "budgeted_environment_steps": 1024,
+        "cpu_seconds": 0.5221753099999944,
+        "learning_rate": 0.0006000000000000008,
+        "policy_loss": 3.101087376475334,
+        "replay_positions": 1024,
+        "stage_index": 0,
+        "total_loss": 3.472926914691925,
+        "update_count": 64,
+        "updates": 64,
+        "value_loss": 0.37183953743078746,
+        "wall_seconds": 0.5222645469998497
+      },
+      {
+        "budgeted_environment_steps": 2048,
+        "cpu_seconds": 0.5510377580000068,
+        "learning_rate": 0.0002,
+        "policy_loss": 2.6175265815109015,
+        "replay_positions": 2048,
+        "stage_index": 1,
+        "total_loss": 2.811917617917061,
+        "update_count": 128,
+        "updates": 64,
+        "value_loss": 0.19439103174954653,
+        "wall_seconds": 0.5510360519997448
+      }
+    ]
+  },
+  "G0": {
+    "active_cpu_seconds": 132.45199298100005,
+    "active_wall_seconds": 132.48704142200086,
+    "actual_environment_steps": 2066,
+    "actual_simulations": 132224,
+    "arm_id": "G0",
+    "budgeted_environment_steps": 2048,
+    "completed": true,
+    "completion_overrun_simulations": 1152,
+    "completion_overrun_steps": 18,
+    "game_count": 69,
+    "optimizer_updates": 128,
+    "stage_update_counts": [
+      64,
+      64
+    ],
+    "steps_by_stage": [
+      1024,
+      1024
+    ],
+    "training_history": [
+      {
+        "budgeted_environment_steps": 1024,
+        "cpu_seconds": 0.5341727070000104,
+        "learning_rate": 0.0006000000000000008,
+        "policy_loss": 4.1622139774262905,
+        "replay_positions": 1024,
+        "stage_index": 0,
+        "total_loss": 5.086736977100372,
+        "update_count": 64,
+        "updates": 64,
+        "value_loss": 0.9245230006054044,
+        "wall_seconds": 0.5341802930001904
+      },
+      {
+        "budgeted_environment_steps": 2048,
+        "cpu_seconds": 0.5342506759999992,
+        "learning_rate": 0.0002,
+        "policy_loss": 4.124764338135719,
+        "replay_positions": 2048,
+        "stage_index": 1,
+        "total_loss": 5.060820393264294,
+        "update_count": 128,
+        "updates": 64,
+        "value_loss": 0.9360560486093163,
+        "wall_seconds": 0.5342428829999335
+      }
+    ]
+  },
+  "completed": true,
+  "total_active_cpu_seconds": 253.321767912,
+  "training_budget_equal": true
+}

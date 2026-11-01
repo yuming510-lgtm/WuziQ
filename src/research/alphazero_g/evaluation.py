@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import os
 import time
 from pathlib import Path
 from typing import Any
@@ -117,6 +119,7 @@ def play_evaluation_match(
     was_training = model.training
     model.eval()
     started = time.perf_counter()
+    cpu_started = time.process_time()
     agent_seconds = opponent_seconds = 0.0
     agent_simulations = agent_nodes = agent_network_evals = agent_max_depth = 0
     opponent_nodes = opponent_depth = opponent_cutoffs = 0
@@ -189,6 +192,7 @@ def play_evaluation_match(
         score = 0.5 if winner is None else 1.0 if winner == agent_color else 0.0
         return {
             "format_version": 1,
+            "source": "evaluation",
             "game_id": game_id,
             "opening_group_id": opening_group_id,
             "arm_id": arm_id,
@@ -209,6 +213,7 @@ def play_evaluation_match(
                 "agent_seconds": agent_seconds,
                 "opponent_seconds": opponent_seconds,
                 "total_wall_seconds": time.perf_counter() - started,
+                "total_cpu_seconds": time.process_time() - cpu_started,
                 "agent_simulations": agent_simulations,
                 "agent_nodes": agent_nodes,
                 "agent_network_evaluations": agent_network_evals,
@@ -222,6 +227,112 @@ def play_evaluation_match(
     finally:
         if was_training:
             model.train()
+
+
+def validate_match_record(match: dict[str, Any]) -> None:
+    """Replay a complete evaluation record and verify legality and its result."""
+    if match.get("completed") is not True or match.get("source") != "evaluation":
+        raise ValueError("only completed evaluation matches are valid records")
+    if match.get("format_version") != 1 or not match.get("game_id") or not match.get("opening_group_id"):
+        raise ValueError("evaluation match is missing identity metadata")
+    moves = match.get("moves")
+    if not isinstance(moves, list) or not moves or match.get("move_count") != len(moves):
+        raise ValueError("evaluation match move count is invalid")
+    opening = match.get("opening")
+    if not isinstance(opening, list):
+        raise ValueError("evaluation match opening is invalid")
+    board = GomokuBoard(9)
+    expected: Player = "B"
+    winner: Player | None = None
+    termination = ""
+    for index, move in enumerate(moves):
+        if move.get("player") != expected:
+            raise ValueError("evaluation match colors do not alternate")
+        coord = (int(move.get("row", -1)), int(move.get("col", -1)))
+        try:
+            board.place_stone(expected, coord)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("evaluation match contains an illegal move") from exc
+        if index < len(opening):
+            initial = opening[index]
+            if (initial.get("player"), int(initial.get("row", -1)), int(initial.get("col", -1))) != (
+                expected, coord[0], coord[1]
+            ) or move.get("opening") is not True:
+                raise ValueError("evaluation match opening does not match its move log")
+        elif move.get("opening") is True:
+            raise ValueError("evaluation match marks a later move as an opening move")
+        if board.check_victory(coord, expected):
+            winner, termination = expected, "five_in_row"
+            if index != len(moves) - 1:
+                raise ValueError("evaluation match continued after a win")
+        elif board.is_full():
+            winner, termination = None, "full_board"
+            if index != len(moves) - 1:
+                raise ValueError("evaluation match continued after a full-board draw")
+        expected = "W" if expected == "B" else "B"
+    if len(opening) >= len(moves):
+        raise ValueError("evaluation record contains no post-opening move")
+    if match.get("termination") != termination or match.get("winner_color") != winner:
+        raise ValueError("evaluation match terminal metadata does not match replay")
+    color = match.get("agent_color")
+    if color not in {"B", "W"}:
+        raise ValueError("evaluation match has invalid agent_color")
+    outcome = "draw" if winner is None else "win" if winner == color else "loss"
+    score = 0.5 if winner is None else 1.0 if winner == color else 0.0
+    if match.get("outcome_for_agent") != outcome or float(match.get("score_for_agent")) != score:
+        raise ValueError("evaluation match score does not match the replayed result")
+
+
+def append_evaluation_match(path: str | Path, match: dict[str, Any], seen_ids: set[str]) -> bool:
+    validate_match_record(match)
+    game_id = str(match["game_id"])
+    if game_id in seen_ids:
+        return False
+    payload = (json.dumps(match, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n").encode()
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    descriptor = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+    try:
+        offset = 0
+        while offset < len(payload):
+            written = os.write(descriptor, payload[offset:])
+            if written <= 0:
+                raise OSError("failed to append complete evaluation match")
+            offset += written
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    seen_ids.add(game_id)
+    return True
+
+
+def load_evaluation_log(path: str | Path) -> tuple[list[dict[str, Any]], set[str]]:
+    """Read legal completed matches and truncate an interrupted JSONL tail."""
+    target = Path(path)
+    if not target.exists():
+        return [], set()
+    raw = target.read_bytes()
+    last_newline = raw.rfind(b"\n")
+    complete = raw[:last_newline + 1] if last_newline >= 0 else b""
+    if len(complete) != len(raw):
+        with target.open("r+b") as handle:
+            handle.truncate(len(complete))
+            handle.flush()
+            os.fsync(handle.fileno())
+    matches: list[dict[str, Any]] = []
+    ids: set[str] = set()
+    for line_number, line in enumerate(complete.splitlines(), start=1):
+        try:
+            match = json.loads(line)
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            raise ValueError(f"invalid evaluation JSONL record at line {line_number}") from exc
+        validate_match_record(match)
+        game_id = str(match["game_id"])
+        if game_id in ids:
+            raise ValueError(f"duplicate evaluation game id: {game_id}")
+        matches.append(match)
+        ids.add(game_id)
+    return matches, ids
 
 
 def summarize_matches(matches: list[dict[str, Any]]) -> dict[str, Any]:

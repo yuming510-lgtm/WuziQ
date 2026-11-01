@@ -64,6 +64,7 @@ def _budgeted_game(game: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("self-play log has invalid budgeted_environment_steps")
     replay_game = copy.deepcopy(game)
     replay_game["experience_rows"] = copy.deepcopy(game["experience_rows"][:count])
+    replay_game["replay_prefix"] = True
     return replay_game
 
 

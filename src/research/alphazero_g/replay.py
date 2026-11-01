@@ -11,6 +11,8 @@ from typing import Any, Sequence
 
 import numpy as np
 
+from ...gomoku import GomokuBoard
+
 
 def _validate_game(game: dict[str, Any]) -> None:
     if game.get("completed") is not True or game.get("source") != "self_play":
@@ -30,8 +32,82 @@ def _validate_game(game: dict[str, Any]) -> None:
     if not isinstance(rows, list) or not rows:
         raise ValueError("complete self-play game has no training rows")
     move_count = game.get("move_count")
-    if isinstance(move_count, bool) or move_count != len(game.get("moves", [])):
+    moves = game.get("moves")
+    opening = game.get("opening")
+    if not isinstance(moves, list) or not isinstance(opening, list):
+        raise ValueError("self-play game is missing complete moves or opening")
+    if isinstance(move_count, bool) or move_count != len(moves):
         raise ValueError("move_count does not match complete move list")
+    total_steps = len(moves) - len(opening)
+    replay_prefix = game.get("replay_prefix") is True
+    budgeted_steps = game.get("budgeted_environment_steps")
+    if replay_prefix:
+        if isinstance(budgeted_steps, bool) or not isinstance(budgeted_steps, int) or len(rows) != budgeted_steps:
+            raise ValueError("replay prefix size does not match the budgeted environment-step count")
+        if not 0 <= len(rows) <= total_steps:
+            raise ValueError("replay prefix is longer than the completed game")
+    elif len(rows) != total_steps:
+        raise ValueError("self-play row count does not match non-opening plies")
+    board = GomokuBoard(9)
+    expected_player = "B"
+    row_index = 0
+    observed_winner: str | None = None
+    observed_termination = ""
+    for index, move in enumerate(moves):
+        if move.get("player") != expected_player:
+            raise ValueError("self-play moves do not alternate colors")
+        try:
+            coord = (int(move["row"]), int(move["col"]))
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError("self-play game contains an illegal move") from exc
+        if index < len(opening):
+            initial = opening[index]
+            if (initial.get("player"), int(initial.get("row", -1)), int(initial.get("col", -1))) != (
+                expected_player, coord[0], coord[1]
+            ) or move.get("opening") is not True:
+                raise ValueError("self-play opening does not match its move log")
+        else:
+            if move.get("opening") is True:
+                raise ValueError("self-play marks a later move as an opening move")
+            if row_index < len(rows):
+                row = rows[row_index]
+                canonical = "".join(
+                    "1" if cell == expected_player else "2" if cell == ("W" if expected_player == "B" else "B") else "."
+                    for line in board.grid for cell in line
+                )
+                if row.get("player") != expected_player or int(row.get("ply", -1)) != index:
+                    raise ValueError("self-play row side/ply does not match the move sequence")
+                if row.get("canonical_board") != canonical:
+                    raise ValueError("self-play state does not match its move sequence")
+            row_index += 1
+        try:
+            board.place_stone(expected_player, coord)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("self-play game contains an illegal move") from exc
+        if board.check_victory(coord, expected_player):
+            observed_winner, observed_termination = expected_player, "five_in_row"
+            if index != len(moves) - 1:
+                raise ValueError("self-play continued after a win")
+        elif board.is_full():
+            observed_winner, observed_termination = None, "full_board"
+            if index != len(moves) - 1:
+                raise ValueError("self-play continued after a draw")
+        expected_player = "W" if expected_player == "B" else "B"
+    if observed_termination != game.get("termination") or observed_winner != winner:
+        raise ValueError("self-play terminal result does not match move replay")
+    if "budgeted_environment_steps" in game:
+        budgeted = game["budgeted_environment_steps"]
+        if isinstance(budgeted, bool) or not isinstance(budgeted, int) or not 0 <= budgeted <= total_steps:
+            raise ValueError("self-play game has invalid budgeted_environment_steps")
+        if int(game.get("completion_overrun_steps", -1)) != total_steps - budgeted:
+            raise ValueError("self-play completion overrun does not match the terminal tail")
+        if replay_prefix and budgeted != len(rows):
+            raise ValueError("replay prefix does not contain exactly its budgeted states")
+    stats = game.get("stats", {})
+    if "simulations" in stats and int(stats["simulations"]) != sum(
+        int(move.get("simulations", 0)) for move in moves if not move.get("opening")
+    ):
+        raise ValueError("self-play simulation total does not match per-move records")
     for row in rows:
         if row.get("source") != "self_play":
             raise ValueError("replay rows must come from self-play, not self-play supervision")

@@ -1,0 +1,107 @@
+{
+  "blind_games": 64,
+  "blind_selection_sha256": "5177f776422f0b5b67a20781f9c8c32ea13810cdbec62f5954b19ad6f962650d",
+  "completed": true,
+  "new_matches": 256,
+  "phase": "all",
+  "selection": {
+    "arms": {
+      "G-F2": {
+        "candidates": [
+          {
+            "checkpoint_id": "initial",
+            "checkpoint_sha256": "7d563c5e145322678211112c311cd2a1b14a969dbaaaa2359fd5f95f51576029",
+            "mean_puct_score_over_opponents": 0.8125,
+            "opponent_score_rates": {
+              "A": 0.75,
+              "B": 0.75,
+              "F1": 1.0,
+              "F2": 0.75
+            }
+          },
+          {
+            "checkpoint_id": "stage-1",
+            "checkpoint_sha256": "3f2a8669419cebc660c0ba4a3e0c485f00b5c91144cffa3b4168062c67ad4bd8",
+            "mean_puct_score_over_opponents": 0.28125,
+            "opponent_score_rates": {
+              "A": 0.125,
+              "B": 0.0,
+              "F1": 0.75,
+              "F2": 0.25
+            }
+          },
+          {
+            "checkpoint_id": "stage-2",
+            "checkpoint_sha256": "f09d3f48bd5f7bd9c31667c2d29cbe8acbff3cea1a90dcfffcb0649d3896ab5b",
+            "mean_puct_score_over_opponents": 0.40625,
+            "opponent_score_rates": {
+              "A": 0.125,
+              "B": 0.0,
+              "F1": 1.0,
+              "F2": 0.5
+            }
+          }
+        ],
+        "checkpoint_id": "initial",
+        "checkpoint_sha256": "7d563c5e145322678211112c311cd2a1b14a969dbaaaa2359fd5f95f51576029",
+        "mean_puct_score_over_opponents": 0.8125,
+        "opponent_score_rates": {
+          "A": 0.75,
+          "B": 0.75,
+          "F1": 1.0,
+          "F2": 0.75
+        }
+      },
+      "G0": {
+        "candidates": [
+          {
+            "checkpoint_id": "initial",
+            "checkpoint_sha256": "68e4e0a14c9e8073f41aec816b15ce9fc6e8d5a063ff57aa866ab4d4f4a316ad",
+            "mean_puct_score_over_opponents": 0.0,
+            "opponent_score_rates": {
+              "A": 0.0,
+              "B": 0.0,
+              "F1": 0.0,
+              "F2": 0.0
+            }
+          },
+          {
+            "checkpoint_id": "stage-1",
+            "checkpoint_sha256": "8ca59bfa9f3f494704359a16ed71f03231df87845ea2affc446a411c2a8cd122",
+            "mean_puct_score_over_opponents": 0.0,
+            "opponent_score_rates": {
+              "A": 0.0,
+              "B": 0.0,
+              "F1": 0.0,
+              "F2": 0.0
+            }
+          },
+          {
+            "checkpoint_id": "stage-2",
+            "checkpoint_sha256": "6cfe81448b8da0c663861f9cbecd91143c560948f210ae7c5b075d1cbca7272e",
+            "mean_puct_score_over_opponents": 0.0,
+            "opponent_score_rates": {
+              "A": 0.0,
+              "B": 0.0,
+              "F1": 0.0,
+              "F2": 0.0
+            }
+          }
+        ],
+        "checkpoint_id": "initial",
+        "checkpoint_sha256": "68e4e0a14c9e8073f41aec816b15ce9fc6e8d5a063ff57aa866ab4d4f4a316ad",
+        "mean_puct_score_over_opponents": 0.0,
+        "opponent_score_rates": {
+          "A": 0.0,
+          "B": 0.0,
+          "F1": 0.0,
+          "F2": 0.0
+        }
+      }
+    },
+    "config_sha256": "6dfa8fa94bc53517810ac2f8b6002f23101e9057b0604b4688a24c671d0dc4b4",
+    "format_version": 1,
+    "schedule_sha256": "0d212359bf2cf7477fbc266a69132f3aef5308b6c1b3b23103b380793bc5ef12",
+    "selection_rule": "For each arm, select the checkpoint with the highest mean PUCT-mode score over A/B/F1/F2 on the fixed development opening pairs; ties select the earlier checkpoint. Network-mode results are diagnostic only."
+  }
+}

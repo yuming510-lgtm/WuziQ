@@ -5,7 +5,14 @@ import copy
 import pytest
 import torch
 
-from src.research.alphazero_g.evaluation import _network_move, play_evaluation_match, summarize_matches
+from src.research.alphazero_g.evaluation import (
+    _network_move,
+    append_evaluation_match,
+    load_evaluation_log,
+    play_evaluation_match,
+    summarize_matches,
+    validate_match_record,
+)
 from src.research.alphazero_g.experiment import build_g_schedule, register_g_budget, validate_g_schedule
 from src.research.alphazero_g.puct import PUCTConfig
 
@@ -57,7 +64,7 @@ def test_network_policy_masks_occupied_actions() -> None:
     assert move != (4, 4)
 
 
-def test_paired_match_is_complete_legal_and_records_mode_and_search_counts() -> None:
+def test_paired_match_is_complete_legal_and_records_mode_and_search_counts(tmp_path) -> None:
     model = FixedPolicyValue()
     game = play_evaluation_match(
         model,
@@ -70,6 +77,7 @@ def test_paired_match_is_complete_legal_and_records_mode_and_search_counts() -> 
     assert game["mode"] == "puct"
     assert game["termination"] in {"five_in_row", "full_board"}
     assert game["move_count"] == len(game["moves"])
+    validate_match_record(game)
     assert game["stats"]["agent_simulations"] == sum(
         move.get("simulations", 0) for move in game["moves"] if move.get("actor") == "agent"
     )
@@ -84,6 +92,16 @@ def test_paired_match_is_complete_legal_and_records_mode_and_search_counts() -> 
     summary = summarize_matches([game])
     assert summary["games"] == 1
     assert summary["points"] == game["score_for_agent"]
+    log = tmp_path / "matches.jsonl"
+    seen: set[str] = set()
+    assert append_evaluation_match(log, game, seen) is True
+    assert append_evaluation_match(log, game, seen) is False
+    with log.open("ab") as handle:
+        handle.write(b'{"partial":')
+    matches, restored_ids = load_evaluation_log(log)
+    assert len(matches) == 1
+    assert restored_ids == {"g-eval-test-01"}
+    assert log.read_bytes().endswith(b"\n")
 
 
 def test_budget_registration_requires_complete_measured_preflight_and_finite_cap() -> None:
