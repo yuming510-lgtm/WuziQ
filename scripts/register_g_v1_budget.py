@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 from src.research.alphazero_g.experiment import register_g_budget, validate_g_schedule
 
@@ -52,6 +53,7 @@ def main() -> None:
         "experiment_id": "wuziq-alphazero-lite-g-v1",
         "base_commit": "89fecf2a12c58cc27c985f588d5023ad9d198c80",
         "preflight_commit": preflight["code_commit"],
+        "training_code_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
         "preflight_sha256": hashlib.sha256(preflight_path.read_bytes()).hexdigest(),
         "opening_schedule_path": "research/g_v1/config/openings.json",
         "opening_schedule": schedule,
