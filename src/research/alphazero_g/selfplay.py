@@ -75,6 +75,7 @@ def play_selfplay_game(
     prior_training = model.training
     model.eval()
     started = time.perf_counter()
+    cpu_started = time.process_time()
     simulations_total = network_evaluations = expanded_nodes = tree_nodes = 0
     max_depth = 0
     step_times: list[float] = []
@@ -161,6 +162,8 @@ def play_selfplay_game(
                 "tree_nodes_sum": tree_nodes,
                 "max_search_depth": max_depth,
                 "mean_step_seconds": float(np.mean(step_times)) if step_times else 0.0,
+                "cpu_seconds": time.process_time() - cpu_started,
+                "wall_seconds": time.perf_counter() - started,
                 "cpu_wall_seconds": time.perf_counter() - started,
             },
         }

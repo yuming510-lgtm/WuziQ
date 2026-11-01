@@ -82,11 +82,11 @@
 - `save_g_checkpoint(path, model, metadata)` stores F-compatible policy/value weights; `save_g_training_state` atomically includes optimizer, scheduler, Python/NumPy/Torch/CUDA RNG, replay reference/index and progress for exact resume.
 - Both arms take the same `updates`, `batch_size`, replay capacity and self-play data quotas.
 
-- [ ] **Step 1: Write failing tests** for G0 deterministic initialization, G-F2 exact hash/equal weights, distinct initial arms, loss response to visit/value targets, teacher-data rejection, atomic checkpoint load and RNG/optimizer resume equivalence.
-- [ ] **Step 2: Run RED** on `tests/test_alphazero_g_training.py`; expected failure because G trainer/checkpoint helpers do not exist.
-- [ ] **Step 3: Implement** policy/value optimization and full hash-bound resumable state without editing F1/F2 training files.
-- [ ] **Step 4: Run GREEN** on the trainer file; a resumed next update must match an uninterrupted seeded next update.
-- [ ] **Step 5: Commit** `feat(g-v1): train independent self-play arms`.
+- [x] **Step 1: Write failing tests** for G0 deterministic initialization, G-F2 exact hash/equal weights, distinct initial arms, loss response to visit/value targets, teacher-data rejection, atomic checkpoint load and RNG/optimizer resume equivalence.
+- [x] **Step 2: Run RED** on `tests/test_alphazero_g_training.py`; expected failure because G trainer/checkpoint helpers do not exist.
+- [x] **Step 3: Implement** policy/value optimization and full hash-bound resumable state without editing F1/F2 training files.
+- [x] **Step 4: Run GREEN** on the trainer file; a resumed next update must match an uninterrupted seeded next update.
+- [x] **Step 5: Commit** `feat(g-v1): train independent self-play arms`.
 
 ### Task 4: Disjoint schedules, paired frozen-opponent evaluation
 
@@ -101,11 +101,11 @@
 - Frozen opponents are A natural rule AI, B pure Minimax with 50ms, and the exact frozen F1/F2 checkpoints. No C in V1 unless the registered resource estimate has ample headroom; default V1 omits C.
 - Match records include complete plies, per-move elapsed time, model mode, PUCT visits/sims/nodes/depth/entropy, opponent nodes/depth, outcome, seeds and budgeted/actual compute fields.
 
-- [ ] **Step 1: Write failing tests** for opening legality/disjointness/historical exclusions, deterministic hash, paired color swap, match-ID uniqueness, score accounting, pure-network masked argmax, and same-checkpoint network-vs-PUCT mode separation.
-- [ ] **Step 2: Run RED** on `tests/test_alphazero_g_experiment.py`; expected failure because G schedule/evaluator are absent.
-- [ ] **Step 3: Implement** frozen opponent adapters and paired game runner; ensure G inference contains only legal masking and policy/MCTS selection.
-- [ ] **Step 4: Run GREEN** on the experiment test file; replays confirm all four frozen opponents use unchanged checkpoint/code hashes.
-- [ ] **Step 5: Commit** `feat(g-v1): add paired self-play evaluation`.
+- [x] **Step 1: Write failing tests** for opening legality/disjointness/historical exclusions, deterministic hash, paired color swap, match-ID uniqueness, score accounting, pure-network masked argmax, and same-checkpoint network-vs-PUCT mode separation.
+- [x] **Step 2: Run RED** on `tests/test_alphazero_g_experiment.py`; expected failure because G schedule/evaluator are absent.
+- [x] **Step 3: Implement** frozen opponent adapters and paired game runner; ensure G inference contains only legal masking and policy/MCTS selection.
+- [x] **Step 4: Run GREEN** on the experiment test file; replays confirm all four frozen opponents use unchanged checkpoint/code hashes.
+- [x] **Step 5: Commit** `feat(g-v1): add paired self-play evaluation`.
 
 ### Task 5: Integrity-checked snapshots and G Drive recovery path
 
@@ -119,11 +119,11 @@
 - `restore_snapshot(archive, empty_directory)` rejects unsafe/duplicate paths, verifies size and SHA-256 for every file, and checks branch/base/config identity.
 - `next_snapshot_threshold(active_seconds)` returns cumulative thresholds 3600, 10800, 25200, 46800, 82800, 140400, then +26 hours.
 
-- [ ] **Step 1: Write failing tests** for round-trip restoration to an empty directory, tamper/hash failure, duplicate IDs/path rejection, nonempty destination rejection and every interval boundary.
-- [ ] **Step 2: Run RED** on `tests/test_alphazero_g_snapshot.py`; expected failure because G snapshots are absent.
-- [ ] **Step 3: Implement** safe manifest-based atomic archive/restore and active-compute threshold tracking.
-- [ ] **Step 4: Run GREEN**; all snapshot tests pass and a restored G-F2 checkpoint loads.
-- [ ] **Step 5: Commit** `feat(g-v1): add verified recovery snapshots`.
+- [x] **Step 1: Write failing tests** for round-trip restoration to an empty directory, tamper/hash failure, duplicate IDs/path rejection, nonempty destination rejection and every interval boundary.
+- [x] **Step 2: Run RED** on `tests/test_alphazero_g_snapshot.py`; expected failure because G snapshots are absent.
+- [x] **Step 3: Implement** safe manifest-based atomic archive/restore and active-compute threshold tracking.
+- [x] **Step 4: Run GREEN**; all snapshot tests pass and a restored G-F2 checkpoint loads.
+- [x] **Step 5: Commit** `feat(g-v1): add verified recovery snapshots`.
 
 ### Task 6: Full preflight and frozen, affordable budget registration
 

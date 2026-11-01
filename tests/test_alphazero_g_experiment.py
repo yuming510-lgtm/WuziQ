@@ -6,7 +6,7 @@ import pytest
 import torch
 
 from src.research.alphazero_g.evaluation import _network_move, play_evaluation_match, summarize_matches
-from src.research.alphazero_g.experiment import build_g_schedule, validate_g_schedule
+from src.research.alphazero_g.experiment import build_g_schedule, register_g_budget, validate_g_schedule
 from src.research.alphazero_g.puct import PUCTConfig
 
 
@@ -84,3 +84,41 @@ def test_paired_match_is_complete_legal_and_records_mode_and_search_counts() -> 
     summary = summarize_matches([game])
     assert summary["games"] == 1
     assert summary["points"] == game["score_for_agent"]
+
+
+def test_budget_registration_requires_complete_measured_preflight_and_finite_cap() -> None:
+    schedule = build_g_schedule(5303, 2, 2, 2)
+    preflight = {
+        "simulation_benchmarks": [
+            {"simulations": sims, "position_id": position, "mean_seconds": sims / 160.0}
+            for sims in (16, 32, 64) for position in ("opening", "middle", "tactical")
+        ],
+        "selfplay_games": [
+            {"arm_id": arm, "completed": True, "sample_positions": 40, "wall_seconds": 2.0}
+            for arm in ("G0", "G-F2") for _ in range(2)
+        ],
+        "training_updates": [
+            {"arm_id": arm, "completed": True, "updates": 2, "wall_seconds": 1.0}
+            for arm in ("G0", "G-F2")
+        ],
+    }
+    parameters = {
+        "simulations_per_move": 16,
+        "environment_steps_per_arm": 128,
+        "updates_per_arm": 16,
+        "batch_size": 16,
+        "replay_capacity": 512,
+        "stage_environment_steps": [64, 64],
+        "stage_updates": [8, 8],
+        "cpu_hour_cap": 10,
+    }
+    registered = register_g_budget(preflight, schedule, parameters)
+    assert registered["registered"] is True
+    assert registered["arms"]["G0"] == registered["arms"]["G-F2"]
+    assert registered["evaluation"]["blind_runs"] == 1
+    assert registered["evaluation"]["blind_games_per_selected_checkpoint"] == 64
+
+    with pytest.raises(ValueError, match="missing measured simulation_benchmarks"):
+        register_g_budget({**preflight, "simulation_benchmarks": []}, schedule, parameters)
+    with pytest.raises(ValueError, match="hard CPU-hour cap"):
+        register_g_budget(preflight, schedule, {**parameters, "cpu_hour_cap": 1e-9})
