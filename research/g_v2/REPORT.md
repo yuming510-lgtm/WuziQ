@@ -6,7 +6,7 @@
 - G-F2 PUCT-64 对冻结 F2 的成对得分率为 **0.200**，差值 -0.600，95% 配对开局区间 [0.100, 0.300]。
 - 按相同 64 模拟搜索比较，训练后 G-F2 得分率为 0.200，冻结 F2 为 0.800；差值 -0.600，因此本轮没有证明自我对弈学习带来棋力提升。
 - 固定 checkpoint 的搜索收益：F2 从裸网络 0.100 提高到 PUCT-64 0.900；G-F2 从 0.275 提高到 0.725。这是增加搜索带来的收益，不是网络训练增益。
-- 开发赛冠军仍为 `F2@0`；供盲测的最佳开发候选为 `lr_1e4@10000`。只有满足预注册冠军门槛的候选才替换 F2。
+- 开发赛冠军仍为 `F2@0`；送入盲测的是最终 10k 节点三个学习率候选中开发挑战排序最高的 `lr_1e4@10000`。这不是跨所有训练节点 checkpoint 的全局最优选择。只有满足预注册冠军门槛的候选才替换 F2。
 - 实际总 CPU 时间约 0.87 CPU 小时，活动墙钟约 0.84 小时；2 CPU 小时上限未扩大。20,000 状态节点为**未执行**，本轮每个学习率候选登记上限为 10,000 状态。
 
 ## 实验设计与计算预算
@@ -24,7 +24,7 @@
 | 1e-4 | 1309 | 10,000 | 10,017 | 17 | 625 | 663.3 | 完成 |
 | 1e-3 | 1296 | 10,000 | 10,008 | 8 | 625 | 679.9 | 完成 |
 
-实际环境步多于预算状态的部分来自完成当前整局以取得终局标签；超额状态未进入训练目标或经验池。三个候选实际完成 30,043 个环境步（登记预算 30,000），多出的 43 步仅为终局尾部。各节点损失、熵、价值误差、胜负颜色、完整局数与模拟数可从 [`growth.csv`](results/growth.csv)、`final_summary.json` 与逐局 JSONL 复算。
+实际环境步多于预算状态的部分来自完成当前整局以取得终局标签；超额状态未进入训练目标或经验池。三个候选实际完成 30,043 个环境步（登记预算 30,000），多出的 43 步仅为终局尾部。`growth.csv` 的 `selfplay_simulations` 是预算状态数乘以64，未包含终局尾步；按完整棋谱计入尾步后的真实模拟数依次为 641,152、641,088、640,512，合计 1,922,752。各节点损失、熵、价值误差、胜负颜色、完整局数与预算模拟数可从 [`growth.csv`](results/growth.csv)、`final_summary.json` 与逐局 JSONL 复算。
 
 ## 棋力随训练状态与CPU时间变化
 
@@ -39,7 +39,7 @@
 ## 开发赛与冠军晋级
 
 每个阶段的三个候选均挑战同一个冻结 incumbent，换色、成对开局。晋级门槛是得分率至少 0.625、配对开局 bootstrap 下界高于 0.5、黑白得分均不低于 0.5，并且对 A/B 的 PUCT 得分相对 F2 未下降超过 0.125。最终盲测不参与选择。
-当前 incumbent：`F2@0`。盲测候选：`lr_1e4@10000`（选择节点 10000）。如果没有候选通过晋级标准，冠军保留 F2，但仍盲测开发集上表现最好的候选。
+当前 incumbent：`F2@0`。盲测候选：`lr_1e4@10000`（选择节点 10000）。模型选择只在最终 10k 节点的三个学习率候选之间，按该阶段的冠军挑战得分、配对区间下界及预设学习率顺序排序；流程没有在 0、1k、2k、5k、10k 的全部 checkpoint 间做全局择优。早期阶段分数有波动，因此盲测结论只针对这个最终节点候选。如果没有候选通过晋级标准，冠军保留 F2。
 可加载的盲测候选另存于 [`checkpoints/selected_g_f2.pt`](checkpoints/selected_g_f2.pt)，其元数据和 SHA-256 在 `checkpoints/selected_g_f2.json`；文件沿用 `load_g_checkpoint` 接口。它是供后续复现实验使用的候选，并未取代F2冠军。
 
 开发集阶段得分率均按候选视角统计；每格为16局（8个配对开局、换色）：
@@ -123,7 +123,7 @@ python -m pytest tests/test_alphazero_g_v2_*.py -q
 - G 检查点加载：`research/g_v2/checkpoints/selected_g_f2.pt`，通过 `load_g_checkpoint`，SHA-256 `5ac65c6be2fac6817e4918729a53c2e9518c7aace48a2c7191e4c05892548b0a`。
 - CPU 预算：3128.1/7200.0 秒，预算内 `True`。
 
-Drive 恢复快照：final recovery snapshot uploaded, downloaded, SHA-256 verified, and restored into an empty directory; previous V2 snapshot removed only after verification; Drive V2 folder contains one latest valid snapshot。本研究没有神经网络训练之外的模型训练目标；报告只汇总算法开发、监督自对弈优化和实战评估，不包含虚构的 G0、20k 节点或未执行成绩。
+Drive 恢复快照：final recovery snapshot uploaded, downloaded, SHA-256 verified, and restored into an empty directory; previous V2 snapshot removed only after verification; Drive V2 folder contains one latest valid snapshot。本轮实际开展了神经网络自我对弈强化学习和实战评估；没有训练 G0，也没有运行 20k 节点，不报告未执行的成绩。
 
 ## 附件
 
