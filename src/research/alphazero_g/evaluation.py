@@ -124,6 +124,8 @@ def play_evaluation_match(
         frozen_model = frozen_model or load_frozen_opponent(opponent, device=device)
         frozen_model.to(selected_device)
         opponent_sha256 = getattr(frozen_model, "checkpoint_metadata", {}).get("checkpoint_sha256")
+        if opponent == "F2" and opponent_model is not None and opponent_sha256 != F2_SHA256:
+            raise ValueError("provided F2 model does not carry the frozen F2 checkpoint hash")
         if opponent_sha256 is None:
             state_hash = hashlib.sha256()
             for name, value in sorted(frozen_model.state_dict().items()):
@@ -133,7 +135,7 @@ def play_evaluation_match(
     puct = PUCTSearch(model, config=config or PUCTConfig(), device=device) if mode == "puct" else None
     opponent_puct = (
         PUCTSearch(frozen_model, config=config or PUCTConfig(), device=device)
-        if opponent == "MODEL" and opponent_mode == "puct" and frozen_model is not None else None
+        if opponent in {"F1", "F2", "MODEL"} and opponent_mode == "puct" and frozen_model is not None else None
     )
     ai_config = SearchConfig(time_limit_seconds=0.05) if opponent == "B" else SearchConfig(time_limit_seconds=1e9)
     rng = np.random.default_rng(int(seed))
@@ -189,7 +191,7 @@ def play_evaluation_match(
                 opponent_nodes += response.nodes
                 opponent_depth = max(opponent_depth, response.completed_depth)
                 opponent_cutoffs += response.cutoffs
-            elif opponent == "MODEL" and opponent_mode == "puct":
+            elif opponent in {"F1", "F2", "MODEL"} and opponent_mode == "puct":
                 assert opponent_puct is not None
                 result = opponent_puct.search(
                     board, to_move, int(opponent_simulations), add_root_noise=False,
@@ -238,7 +240,7 @@ def play_evaluation_match(
             "arm_id": arm_id,
             "mode": mode,
             "opponent": opponent,
-            "opponent_mode": opponent_mode if opponent == "MODEL" else "traditional",
+            "opponent_mode": opponent_mode if opponent in {"F1", "F2", "MODEL"} else "traditional",
             "opening": [dict(item) for item in opening],
             "agent_color": agent_color,
             "seed": int(seed),

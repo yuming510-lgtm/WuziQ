@@ -4,7 +4,7 @@ import shutil
 
 import pytest
 
-from src.research.alphazero_g.v3_config import register_v3_budget
+from src.research.alphazero_g.v3_config import evaluation_game_counts, register_v3_budget
 from src.research.alphazero_g.v3_schedule import build_v3_schedule
 
 
@@ -66,6 +66,8 @@ def test_budget_registration_is_hash_locked_and_idempotent(tmp_path):
     assert config["simulation_budget"] == 64
     assert config["bn_policy"] == "freeze"
     assert config["states_per_seed"] == 10000
+    assert config["runtime_estimate"]["evaluation_games"] == 4000
+    assert config["evaluation"]["opponent_aliases"]["G-F2:own_initial"] == "G-F2:F2@frozen"
     assert register_v3_budget(
         tmp_path, seeds=[510601, 510602], states_per_seed=10000,
         cpu_hour_cap=3.0, bn_policy="freeze",
@@ -76,6 +78,13 @@ def test_budget_registration_is_hash_locked_and_idempotent(tmp_path):
             tmp_path, seeds=[510601, 510602], states_per_seed=30000,
             cpu_hour_cap=8.0, bn_policy="freeze",
         )
+
+
+def test_registered_evaluation_count_includes_promotions_and_deduplicates_f2_initial():
+    assert evaluation_game_counts(
+        seed_count=2, stage_count=6, development_groups=4,
+        promotion_groups=12, blind_groups=20,
+    ) == {"development": 1984, "promotion": 576, "blind": 1440, "total": 4000}
 
 
 def test_budget_registration_rejects_unverified_initialization_and_bn_mode(tmp_path):

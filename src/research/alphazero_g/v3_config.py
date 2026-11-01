@@ -48,6 +48,36 @@ def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
         os.close(parent)
 
 
+def evaluation_game_counts(
+    *, seed_count: int, stage_count: int, development_groups: int,
+    promotion_groups: int, blind_groups: int,
+) -> dict[str, int]:
+    """Count real distinct games; G-F2's initial checkpoint is frozen F2."""
+    counts = (seed_count, stage_count, development_groups, promotion_groups, blind_groups)
+    if any(isinstance(value, bool) or int(value) != value or value < 0 for value in counts):
+        raise ValueError("evaluation plan counts must be nonnegative integers")
+    if min(seed_count, stage_count, development_groups, promotion_groups, blind_groups) < 1:
+        raise ValueError("evaluation plan counts must be positive")
+    distinct_matchups_per_route = {"G0": 5, "G-F2": 4}
+    paired_modes = 2
+    color_games = 2
+    milestone_matchups = sum(distinct_matchups_per_route.values())
+    baseline_matchups = 4 + 4
+    development = (
+        int(seed_count) * (int(stage_count) * milestone_matchups + baseline_matchups)
+        * int(development_groups) * paired_modes * color_games
+    )
+    promotion = (
+        int(seed_count) * int(stage_count) * 2 * int(promotion_groups) * color_games
+    )
+    blind = (
+        int(seed_count) * sum(distinct_matchups_per_route.values()) * int(blind_groups)
+        * paired_modes * color_games
+    )
+    return {"development": development, "promotion": promotion, "blind": blind,
+            "total": development + promotion + blind}
+
+
 def register_v3_budget(
     root: str | Path,
     *,
@@ -134,10 +164,21 @@ def register_v3_budget(
         states_per_seed=states_per_seed,
         seed_count=len(seeds),
         route_count=2,
-        total_evaluation_games=3520,
+        total_evaluation_games=4000,
     )
-    estimate["evaluation_games"] = 3520
-    estimate["estimate_basis"] = "6 dev nodes x 4 groups x 5 opponents x 2 modes x 2 colors x 4 route-seeds + final blind 20 groups x 5 opponents x 2 modes x 2 colors x 4 route-seeds"
+    counts = evaluation_game_counts(
+        seed_count=len(seeds), stage_count=6, development_groups=4,
+        promotion_groups=12, blind_groups=20,
+    )
+    estimate["evaluation_games"] = counts["total"]
+    estimate["evaluation_games_by_phase"] = counts
+    estimate["estimate_basis"] = (
+        "development: 6 trained nodes x 2 seeds x (5 G0 + 4 G-F2 distinct matchups), "
+        "plus node0 x 2 seeds x 8 baseline matchups, all x 4 groups x 2 modes x 2 colors; "
+        "promotion: 6 nodes x 2 routes x 2 seeds x "
+        "12 groups x 2 colors; blind: 2 seeds x (5 G0 + 4 G-F2 matchups) x "
+        "20 groups x 2 modes x 2 colors. G-F2 initial is the same frozen F2 checkpoint."
+    )
     if float(estimate["conservative_cpu_seconds"]) > float(cpu_hour_cap) * 3600:
         raise ValueError("conservative measured runtime estimate exceeds the registered CPU-hour cap")
 
@@ -184,6 +225,7 @@ def register_v3_budget(
             "b_time_limit_seconds": 0.05,
             "modes": ["network", "puct64"],
             "opponents": ["A", "B", "F2", "own_initial", "other_route"],
+            "opponent_aliases": {"G-F2:own_initial": "G-F2:F2@frozen"},
         },
         "promotion": {
             "min_score_rate": 0.625,
@@ -207,7 +249,115 @@ def register_v3_budget(
     if target.exists():
         old = json.loads(target.read_text(encoding="utf-8"))
         if old != payload:
+            amended = dict(old)
+            amended.pop("pre_training_amendments", None)
+            old_digest = amended.pop("config_sha256", None)
+            if old_digest == _sha(_canonical(amended)) and amended == payload:
+                return old
             raise ValueError("G V3 config is already registered with different values")
         return old
     _atomic_json(target, payload)
     return payload
+
+
+def amend_v3_evaluation_estimate_before_training(root: str | Path) -> dict[str, Any]:
+    """Correct the evaluation count before training, without changing train budget."""
+    root_path = Path(root).resolve()
+    config_path = root_path / "research/g_v3/config/experiment.json"
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    old_sha = config.get("config_sha256")
+    unsigned = {key: value for key, value in config.items() if key != "config_sha256"}
+    if old_sha != _sha(_canonical(unsigned)):
+        raise ValueError("cannot amend a G V3 config with an invalid registered hash")
+    formal_paths = (
+        root_path / "research/g_v3/results/selfplay",
+        root_path / "research/g_v3/results/evaluation",
+        root_path / "research/g_v3/checkpoints/G0",
+        root_path / "research/g_v3/checkpoints/G-F2",
+    )
+    if any(path.exists() and any(path.rglob("*.jsonl")) for path in formal_paths[:2]):
+        raise ValueError("evaluation estimate can only be amended before formal matches/training")
+    if any(path.exists() and any(path.rglob("training_state.pt")) for path in formal_paths[2:]):
+        raise ValueError("evaluation estimate can only be amended before formal training")
+    preflight_path = root_path / "research/g_v3/results/preflight/preflight.json"
+    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
+    counts = evaluation_game_counts(
+        seed_count=len(config["seeds"]), stage_count=len(config["stage_nodes"]),
+        development_groups=int(config["evaluation"]["milestone_opening_groups_per_opponent"]),
+        promotion_groups=int(config["promotion"]["opening_groups"]),
+        blind_groups=int(config["evaluation"]["blind_opening_groups_per_matchup_seed"]),
+    )
+    previous_evaluation_game_estimate = int(config["runtime_estimate"].get("evaluation_games", -1))
+    if (int(config["runtime_estimate"].get("evaluation_games", -1)) == counts["total"]
+            and config.get("evaluation", {}).get("opponent_aliases", {}).get(
+                "G-F2:own_initial") == "G-F2:F2@frozen"):
+        return config
+    state_rates = [
+        float(row["sample_positions"]) / float(row["cpu_seconds"])
+        for row in preflight["selfplay_games"] if int(row.get("sample_positions", 0)) > 0
+    ]
+    update_costs = [
+        float(row["cpu_seconds"]) / int(row["updates"])
+        for row in preflight["training_updates"] if int(row.get("updates", 0)) > 0
+    ]
+    evaluation_costs = [float(row["cpu_seconds"]) for row in preflight["evaluation_games"]
+                        if row.get("completed") is True]
+    estimate = estimate_v3_runtime(
+        states_per_cpu_second=float(statistics.median(state_rates)),
+        update_cpu_seconds=float(statistics.median(update_costs)),
+        evaluation_cpu_seconds_per_game=float(statistics.median(evaluation_costs)),
+        states_per_seed=int(config["states_per_seed"]), seed_count=len(config["seeds"]),
+        route_count=2, total_evaluation_games=counts["total"],
+    )
+    estimate["evaluation_games"] = counts["total"]
+    estimate["evaluation_games_by_phase"] = counts
+    estimate["estimate_basis"] = (
+        "development: 6 trained nodes x 2 seeds x (5 G0 + 4 G-F2 distinct matchups), "
+        "plus node0 x 2 seeds x 8 baseline matchups, all x 4 groups x 2 modes x 2 colors; "
+        "promotion: 6 nodes x 2 routes x 2 seeds x "
+        "12 groups x 2 colors; blind: 2 seeds x (5 G0 + 4 G-F2 matchups) x "
+        "20 groups x 2 modes x 2 colors. G-F2 initial is the same frozen F2 checkpoint."
+    )
+    if float(estimate["conservative_cpu_seconds"]) > float(config["hard_cpu_hour_cap"]) * 3600:
+        raise ValueError("corrected conservative runtime estimate exceeds the registered CPU cap")
+    preflight_old_sha = _sha(preflight_path.read_bytes())
+    preflight["runtime_estimate_10k_per_seed_each_route"]["evaluation_games"] = counts["total"]
+    preflight["runtime_estimate_10k_per_seed_each_route"]["evaluation_games_by_phase"] = counts
+    # Recompute the estimate from the same measured rates through the registered helper.
+    preflight["runtime_estimate_10k_per_seed_each_route"] = estimate_v3_runtime(
+        states_per_cpu_second=float(statistics.median(state_rates)),
+        update_cpu_seconds=float(statistics.median(update_costs)),
+        evaluation_cpu_seconds_per_game=float(statistics.median(evaluation_costs)),
+        states_per_seed=10_000, seed_count=len(config["seeds"]), route_count=2,
+        total_evaluation_games=counts["total"],
+    )
+    preflight["runtime_estimate_10k_per_seed_each_route"].update(
+        {"evaluation_games": counts["total"], "evaluation_games_by_phase": counts,
+         "estimate_basis": estimate["estimate_basis"]}
+    )
+    preflight["evaluation_games_estimate_basis"] = {
+        **counts,
+        "note": "Before formal training, corrected the schedule count to include node-0 baselines and every promotion while counting G-F2's identical initial/F2 checkpoint once.",
+    }
+    _atomic_json(preflight_path, preflight)
+    config["runtime_estimate"] = estimate
+    config["evaluation"]["opponent_aliases"] = {"G-F2:own_initial": "G-F2:F2@frozen"}
+    config["preflight_sha256"] = _sha(preflight_path.read_bytes())
+    reason = (
+        "The initial estimate omitted promotion games and counted G-F2's initial checkpoint separately from its identical frozen F2 weights."
+        if previous_evaluation_game_estimate == 3520 else
+        "The schedule estimate was extended to include node-0 development baselines; training budgets and evaluation rules remain unchanged."
+    )
+    config.setdefault("pre_training_amendments", []).append({
+        "previous_config_sha256": old_sha,
+        "previous_preflight_sha256": preflight_old_sha,
+        "reason": reason,
+        "formal_training_had_started": False,
+        "previous_evaluation_game_estimate": previous_evaluation_game_estimate,
+        "corrected_evaluation_game_estimate": counts["total"],
+        "timestamp_utc": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+    })
+    unsigned = {key: value for key, value in config.items() if key != "config_sha256"}
+    config["config_sha256"] = _sha(_canonical(unsigned))
+    _atomic_json(config_path, config)
+    return config

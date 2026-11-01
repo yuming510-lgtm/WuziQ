@@ -13,7 +13,7 @@
   "board_size": 9,
   "branch": "research/alphazero-g-v3",
   "channels": 32,
-  "config_sha256": "f665c6fc3e38f69d34d9e0eba423da0f78f62b2a1e429cecdeddb4cc5fd704b3",
+  "config_sha256": "2f4a48f5fe3ba8b63e498239280e54824b8c9a2f54b0154631616846f11c72ae",
   "evaluation": {
     "b_time_limit_seconds": 0.05,
     "blind_games_per_matchup_seed": 40,
@@ -23,6 +23,9 @@
       "network",
       "puct64"
     ],
+    "opponent_aliases": {
+      "G-F2:own_initial": "G-F2:F2@frozen"
+    },
     "opponents": [
       "A",
       "B",
@@ -40,7 +43,27 @@
   "opening_schedule_path": "research/g_v3/config/openings.json",
   "opening_schedule_sha256": "e5468eb43d86d5d68d727e18a9dd2a175491d12aeca876bd0cd5383e75f8f759",
   "optimizer": "AdamW",
-  "preflight_sha256": "734c3985c409e2569cad5365ea179fecfe5ba21702331a0b4fea1b83679292ec",
+  "pre_training_amendments": [
+    {
+      "corrected_evaluation_game_estimate": 3744,
+      "formal_training_had_started": false,
+      "previous_config_sha256": "f665c6fc3e38f69d34d9e0eba423da0f78f62b2a1e429cecdeddb4cc5fd704b3",
+      "previous_evaluation_game_estimate": 3520,
+      "previous_preflight_sha256": "734c3985c409e2569cad5365ea179fecfe5ba21702331a0b4fea1b83679292ec",
+      "reason": "The initial estimate omitted promotion games and counted G-F2's initial checkpoint separately from its identical frozen F2 weights.",
+      "timestamp_utc": "2026-11-01T23:31:02.089569+00:00"
+    },
+    {
+      "corrected_evaluation_game_estimate": 4000,
+      "formal_training_had_started": false,
+      "previous_config_sha256": "7d6298f32f5363c309f246561355a4abdcd43c246453805bb8bcddb9f813b1ff",
+      "previous_evaluation_game_estimate": 3744,
+      "previous_preflight_sha256": "b952719950d8ae5d962efa6817153ce0991a1388c61af9343e6abae51640311d",
+      "reason": "The schedule estimate was extended to include node-0 development baselines; training budgets and evaluation rules remain unchanged.",
+      "timestamp_utc": "2026-11-01T23:33:27.877588+00:00"
+    }
+  ],
+  "preflight_sha256": "da75183adc79ded6e611c2bcd81d5526e4e09410cb1c45132c268a81343d4b2e",
   "promotion": {
     "min_color_score_rate": 0.5,
     "min_score_rate": 0.625,
@@ -55,13 +78,19 @@
     "G-F2"
   ],
   "runtime_estimate": {
-    "central_cpu_seconds": 9189.326537937388,
-    "conservative_cpu_seconds": 16081.321441390428,
-    "estimate_basis": "6 dev nodes x 4 groups x 5 opponents x 2 modes x 2 colors x 4 route-seeds + final blind 20 groups x 5 opponents x 2 modes x 2 colors x 4 route-seeds",
+    "central_cpu_seconds": 9318.54748961739,
+    "conservative_cpu_seconds": 16307.45810683043,
+    "estimate_basis": "development: 6 trained nodes x 2 seeds x (5 G0 + 4 G-F2 distinct matchups), plus node0 x 2 seeds x 8 baseline matchups, all x 4 groups x 2 modes x 2 colors; promotion: 6 nodes x 2 routes x 2 seeds x 12 groups x 2 colors; blind: 2 seeds x (5 G0 + 4 G-F2 matchups) x 20 groups x 2 modes x 2 colors. G-F2 initial is the same frozen F2 checkpoint.",
     "estimated_optimizer_updates": 7500.0,
-    "evaluation_cpu_seconds": 947.620312320002,
-    "evaluation_games": 3520,
-    "optimistic_cpu_seconds": 6432.528576556171,
+    "evaluation_cpu_seconds": 1076.8412640000022,
+    "evaluation_games": 4000,
+    "evaluation_games_by_phase": {
+      "blind": 1440,
+      "development": 1984,
+      "promotion": 576,
+      "total": 4000
+    },
+    "optimistic_cpu_seconds": 6522.983242732172,
     "optimizer_cpu_seconds": 69.19046193750006,
     "selfplay_cpu_seconds": 8172.515763679887,
     "total_budgeted_states": 120000

@@ -227,7 +227,7 @@ def run_v3_preflight(root: str | Path, *, seed: int) -> dict[str, Any]:
         states_per_seed=10_000,
         seed_count=2,
         route_count=2,
-        total_evaluation_games=3_520,
+        total_evaluation_games=4_000,
     )
     return {
         "format_version": 1,
@@ -243,10 +243,11 @@ def run_v3_preflight(root: str | Path, *, seed: int) -> dict[str, Any]:
         "measured_evaluation_cpu_seconds_median": float(statistics.median(evaluation_costs)),
         "runtime_estimate_10k_per_seed_each_route": estimate,
         "evaluation_games_estimate_basis": {
-            "development": "4 groups x 2 colors x 5 opponents x 2 modes x 6 milestones x 4 arm-seed combinations = 1920",
-            "blind": "20 groups x 2 colors x 5 opponents x 2 modes x 4 arm-seed combinations = 1600",
-            "total": 3520,
-            "note": "Exploratory CPU estimate; later registered schedule may reduce optional opponents or milestones within the finite cap.",
+            "development": "4 groups x 2 colors x 2 modes x (6 trained milestones x 2 seeds x (5 G0 matchups + 4 G-F2 matchups) + node0 x 2 seeds x 8 baseline matchups) = 1984",
+            "promotion": "12 groups x 2 colors x 6 milestones x 2 routes x 2 seeds = 576",
+            "blind": "20 groups x 2 colors x 2 modes x 2 seeds x (5 G0 matchups + 4 G-F2 matchups; F2 is the G-F2 initial model) = 1440",
+            "total": 4000,
+            "note": "Corrected full evaluation schedule includes node0 baselines and every promotion and deduplicates the byte-identical G-F2 initial/F2 matchup.",
         },
         "measurements_wall_seconds": time.perf_counter() - started,
         "measurements_cpu_seconds": time.process_time() - cpu_started,

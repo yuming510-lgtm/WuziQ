@@ -38,10 +38,11 @@
     }
   ],
   "evaluation_games_estimate_basis": {
-    "blind": "20 groups x 2 colors x 5 opponents x 2 modes x 4 arm-seed combinations = 1600",
-    "development": "4 groups x 2 colors x 5 opponents x 2 modes x 6 milestones x 4 arm-seed combinations = 1920",
-    "note": "Exploratory CPU estimate; later registered schedule may reduce optional opponents or milestones within the finite cap.",
-    "total": 3520
+    "blind": 1440,
+    "development": 1984,
+    "note": "Before formal training, corrected the schedule count to include node-0 baselines and every promotion while counting G-F2's identical initial/F2 checkpoint once.",
+    "promotion": 576,
+    "total": 4000
   },
   "experiment_id": "wuziq-alphazero-g-v3-preflight",
   "format_version": 1,
@@ -69,11 +70,19 @@
     "torch_version": "2.15.0+cpu"
   },
   "runtime_estimate_10k_per_seed_each_route": {
-    "central_cpu_seconds": 3694.855720859131,
-    "conservative_cpu_seconds": 6465.9975115034795,
+    "central_cpu_seconds": 3824.0766725391313,
+    "conservative_cpu_seconds": 6692.13417694348,
+    "estimate_basis": "development: 6 trained nodes x 2 seeds x (5 G0 + 4 G-F2 distinct matchups), plus node0 x 2 seeds x 8 baseline matchups, all x 4 groups x 2 modes x 2 colors; promotion: 6 nodes x 2 routes x 2 seeds x 12 groups x 2 colors; blind: 2 seeds x (5 G0 + 4 G-F2 matchups) x 20 groups x 2 modes x 2 colors. G-F2 initial is the same frozen F2 checkpoint.",
     "estimated_optimizer_updates": 2500.0,
-    "evaluation_cpu_seconds": 947.620312320002,
-    "optimistic_cpu_seconds": 2586.3990046013914,
+    "evaluation_cpu_seconds": 1076.8412640000022,
+    "evaluation_games": 4000,
+    "evaluation_games_by_phase": {
+      "blind": 1440,
+      "development": 1984,
+      "promotion": 576,
+      "total": 4000
+    },
+    "optimistic_cpu_seconds": 2676.853670777392,
     "optimizer_cpu_seconds": 23.063487312500023,
     "selfplay_cpu_seconds": 2724.171921226629,
     "total_budgeted_states": 40000
