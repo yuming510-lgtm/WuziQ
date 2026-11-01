@@ -15,7 +15,7 @@
 - Board is 9×9 free Gomoku; network remains 32 channels, 2 residual blocks; training and evaluation search use exactly 64 PUCT simulations per move.
 - G V2 trains only from its own complete self-play game outcomes and visit distributions; teacher labels, F supervised data, and artificial tactical rewards remain zero.
 - Candidate LRs are exactly `1e-4`, `3e-5`, and `1e-3`, all initialized from F2 SHA-256 `50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257`.
-- Per-candidate state budget is 20,000 unless the preflight freezes a smaller equal budget under the 2 CPU-hour cap.
+- Per-candidate state budget is frozen at 10,000 from the measured preflight under the 2 CPU-hour cap; 20,000 is explicitly unexecuted.
 - Development-only promotion and the V2 blind opening schedule are registered before training; blind results cannot select or tune a model.
 - Every completed game and checkpoint is validated and atomically persisted; experiment IDs are unique and resume is idempotent.
 - V1 artifacts and `research/g_v1` are read-only inputs; V2 writes only under `research/g_v2` plus new V2 code/tests/docs.
@@ -90,16 +90,17 @@
 **Files:**
 - Create: `src/research/alphazero_g/v2_selection.py`
 - Create: `scripts/evaluate_g_v2_development.py`
+- Create: `scripts/run_g_v2_growth.py`
 - Test: `tests/test_alphazero_g_v2_selection.py`
 
 **Interfaces:**
 - Produces `run_v2_development(root: Path, checkpoint: Path, candidate_id: str, node: int, schedule: dict, seed: int) -> list[dict[str, Any]]` using pure network and PUCT64 versus frozen F2, A, and B (B fixed at 50 ms per move) on identical development opening/color pairs, plus `run_v2_champion_matches(..., opponent_checkpoint: Path, ...)` for paired PUCT64 challenger/incumbent games without modifying V1 evaluation code.
-- Produces `select_v2_champion(results: list[dict[str, Any]], incumbent_id: str, incumbent_checkpoint: Path) -> dict[str, Any]`, accepting development records only and enforcing the preregistered promotion thresholds and tie-break.
+- Produces `run_v2_champion_matches(...)` for arbitrary paired checkpoint play, `select_v2_champion(candidates: list[dict[str, Any]], incumbent: dict[str, Any], f2_baseline_matches: list[dict[str, Any]]) -> dict[str, Any]`, accepting development records only and enforcing the preregistered promotion thresholds/tie-break, and `run_v2_growth(root: Path, config: dict[str, Any]) -> dict[str, Any]` to train/evaluate/commit each node with resumable stage state.
 
-- [ ] **Step 1: Write failing tests** for paired 8-group score, generic checkpoint-vs-checkpoint color swaps, bootstrap CI, all promotion thresholds, incumbent retention, deterministic tie-break, and blind-record rejection.
-- [ ] **Step 2: Run** `pytest tests/test_alphazero_g_v2_selection.py -q`; confirm failures.
-- [ ] **Step 3: Implement** idempotent development match IDs, reuse V1 evaluation only for A/B/F2 matches, add a V2-owned PUCT64 paired-checkpoint matcher, record all search/timing stats, and atomically persist selection history. A candidate that becomes incumbent later challenges the checkpoint it displaced; other candidates challenge the current incumbent.
-- [ ] **Step 4: Run** tests with synthetic results plus real F2-vs-F2 and short candidate matches; validate all games through existing replay validation.
+- [x] **Step 1: Write failing tests** for paired 8-group score, generic checkpoint-vs-checkpoint color swaps, bootstrap CI, all promotion thresholds, incumbent retention, deterministic tie-break, stage idempotence and blind-record rejection.
+- [x] **Step 2: Run** the focused selection tests red before implementation and green afterward.
+- [x] **Step 3: Implement** idempotent development match IDs, a V2-owned PUCT64 paired-checkpoint matcher, search/timing stats, crash-safe stage history, a frozen incumbent per node and development-only model selection.
+- [x] **Step 4: Run** focused selector/matcher tests and validate every persisted game through existing replay validation. Full registered matches run after the initial verified recovery snapshot.
 
 ### Task 5: Final paired blind evaluation and statistical summaries
 
@@ -112,10 +113,10 @@
 - Produces `run_v2_blind(root: Path, config: dict[str, Any], schedule: dict[str, Any], checkpoints: dict[str, Path]) -> list[dict[str, Any]]` for F2 network, F2 PUCT64, selected G network, selected G PUCT64, and A/B comparisons; uses all 20 paired blind openings exactly once per registered comparison (560 games before duplicate elimination).
 - Produces `summarize_v2_results(matches: list[dict[str, Any]]) -> dict[str, Any]` with W/D/L, points, paired opening bootstrap 95% intervals, color-specific points, compute, and training-before/after deltas.
 
-- [ ] **Step 1: Write failing tests** for the 560-game schedule, swapped colors, unique IDs, F2/G checkpoint identity, paired bootstrap, color split, incomplete game rejection, and blind immutability.
-- [ ] **Step 2: Run** `pytest tests/test_alphazero_g_v2_blind.py -q`; confirm failures.
-- [ ] **Step 3: Implement** the fixed comparisons and deterministic game seeds; never pass blind records into the selector.
-- [ ] **Step 4: Run** on a temporary mini schedule, verify color pairs and complete game replay, then freeze full blind checksum.
+- [x] **Step 1: Write failing tests** for the 560-game schedule, swapped colors, unique IDs, F2/G checkpoint identity, paired bootstrap, color split, incomplete game rejection and blind immutability.
+- [x] **Step 2: Run** the new blind tests red before implementation and green afterward.
+- [x] **Step 3: Implement** fixed F2/G network and PUCT matchups, A/B challenges, deterministic game IDs, exact-budget accounting and paired summaries; blind records never enter selection.
+- [x] **Step 4: Run** a one-opening integration schedule and replay-validate each game. Full registered blind schedule runs after training.
 
 ### Task 6: V2 snapshot, restore, report and figures
 
@@ -131,11 +132,11 @@
 - Produces V2-only archive manifest with code commit, frozen F2 SHA, config/schedule hashes, all candidate checkpoint/state/log files, and exact resume progress; validates archive traversal, duplicate paths, hashes, and an empty-directory restore.
 - Produces `build_v2_report(root: Path) -> dict[str, Any]` and `render_v2_report(root: Path, summary: dict[str, Any]) -> None` for Chinese `REPORT.md`, CSV/JSON and three registered plots.
 
-- [ ] **Step 1: Write failing tests** for V1/V2 snapshot separation, manifest tampering, empty restore, required-file completeness, score math, and plotted milestone data consistency.
-- [ ] **Step 2: Run** the two new test files; confirm failures.
-- [ ] **Step 3: Implement** allowlisted V2 recovery only; require upload/download/hash/restore connector checks before deleting an older V2 Drive snapshot.
-- [ ] **Step 4: Implement** report generation with actual reached nodes and explicit `未执行` for unbudgeted nodes; produce state/game, CPU, and raw-network-vs-PUCT curves.
-- [ ] **Step 5: Validate** report values directly against source JSONL and verify all three plot files exist and have nonzero dimensions.
+- [x] **Step 1: Write failing tests** for V1/V2 snapshot separation, manifest tampering, empty restore, required-file completeness, score arithmetic and plotted milestone consistency.
+- [x] **Step 2: Run** snapshot/report tests red before implementation and green afterward.
+- [x] **Step 3: Implement** allowlisted V2 recovery, SHA-256 manifest validation, safe empty-directory restore and cumulative effective-runtime thresholds; actual Drive roundtrip remains before formal training.
+- [x] **Step 4: Implement** report generation with reached nodes and explicit `未执行` for 20,000, plus the three requested Chinese curves.
+- [x] **Step 5: Add** report/source consistency checks and nonempty figure checks; run them against final source data after formal evaluation.
 
 ### Task 7: Registered run, final validation, and GitHub delivery
 

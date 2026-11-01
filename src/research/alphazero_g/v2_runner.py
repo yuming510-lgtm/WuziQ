@@ -15,6 +15,7 @@ import torch
 from .replay import ReplayBuffer, append_complete_game, budgeted_prefix, load_game_log
 from .selfplay import play_selfplay_game
 from .training import GTrainer, initialize_arm, load_training_state, save_g_checkpoint, save_training_state
+from .v2_budget import ensure_cpu_room
 from .v2_schedule import validate_v2_schedule
 
 LR_IDS = {"lr_1e4", "lr_3e5", "lr_1e3"}
@@ -186,6 +187,7 @@ def run_v2_candidate(
     game_path = out_dir / "results/selfplay" / f"{lr_id}.jsonl"
     state_path = checkpoint_dir / "training_state.pt"
     progress_path = checkpoint_dir / "progress.json"
+    cpu_cap_seconds = float(config.get("hard_cpu_hour_cap", 2.0)) * 3600.0
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     games, seen_ids = load_game_log(game_path)
     saved_progress: dict[str, Any] = {}
@@ -237,6 +239,7 @@ def run_v2_candidate(
     if trainer.update_count > expected_updates:
         raise ValueError("saved candidate has more optimizer updates than its budgeted states allow")
     if expected_updates > trainer.update_count:
+        ensure_cpu_room(root_path, cpu_cap_seconds)
         metrics = trainer.train_updates(replay, updates=expected_updates - trainer.update_count,
                                         batch_size=int(config["batch_size"]))
         metric = {**metrics, "reason": "reconcile_durable_games_after_interruption"}
@@ -250,6 +253,7 @@ def run_v2_candidate(
     while int(progress["budgeted_environment_steps"]) < target:
         if stop_after_games is not None and games_run_this_call >= int(stop_after_games):
             return {**progress, "completed": False, "lr_id": lr_id, "target_node": target}
+        ensure_cpu_room(root_path, cpu_cap_seconds)
         current = int(progress["budgeted_environment_steps"])
         stage_index = next(index for index, node in enumerate(nodes) if current < node)
         stage_remaining = nodes[stage_index] - current
@@ -284,6 +288,7 @@ def run_v2_candidate(
         if trainer.update_count > target_updates:
             raise ValueError("optimizer update counter exceeded the registered sample cadence")
         if target_updates > trainer.update_count:
+            ensure_cpu_room(root_path, cpu_cap_seconds)
             metrics = trainer.train_updates(
                 replay, updates=target_updates - trainer.update_count, batch_size=int(config["batch_size"])
             )
