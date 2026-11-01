@@ -1,0 +1,90 @@
+{
+  "base_commit": "c95eb5aa919c769af11ea6b7fc22df2594ae1c28",
+  "batch_size": 16,
+  "bn_policy": "freeze",
+  "bn_probe_selection": {
+    "opening_groups": 8,
+    "states_per_route": 256,
+    "tie_default": "freeze",
+    "tie_score_rate_margin": 0.125,
+    "updates": 16
+  },
+  "bn_probe_sha256": "f52da3fbb79f7b6f5919f3de05667003a0e178b46bba55ef189037433b00f0f6",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v3",
+  "channels": 32,
+  "config_sha256": "f665c6fc3e38f69d34d9e0eba423da0f78f62b2a1e429cecdeddb4cc5fd704b3",
+  "evaluation": {
+    "b_time_limit_seconds": 0.05,
+    "blind_games_per_matchup_seed": 40,
+    "blind_opening_groups_per_matchup_seed": 20,
+    "milestone_opening_groups_per_opponent": 4,
+    "modes": [
+      "network",
+      "puct64"
+    ],
+    "opponents": [
+      "A",
+      "B",
+      "F2",
+      "own_initial",
+      "other_route"
+    ],
+    "promotion_opening_groups": 12
+  },
+  "experiment_id": "wuziq-alphazero-g-v3",
+  "f2_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
+  "format_version": 1,
+  "hard_cpu_hour_cap": 6.0,
+  "learning_rate": 0.0001,
+  "opening_schedule_path": "research/g_v3/config/openings.json",
+  "opening_schedule_sha256": "e5468eb43d86d5d68d727e18a9dd2a175491d12aeca876bd0cd5383e75f8f759",
+  "optimizer": "AdamW",
+  "preflight_sha256": "734c3985c409e2569cad5365ea179fecfe5ba21702331a0b4fea1b83679292ec",
+  "promotion": {
+    "min_color_score_rate": 0.5,
+    "min_score_rate": 0.625,
+    "opening_groups": 12,
+    "paired_bootstrap_lower_95_gt": 0.5
+  },
+  "registered": true,
+  "replay_capacity": 20000,
+  "residual_blocks": 2,
+  "routes": [
+    "G0",
+    "G-F2"
+  ],
+  "runtime_estimate": {
+    "central_cpu_seconds": 9189.326537937388,
+    "conservative_cpu_seconds": 16081.321441390428,
+    "estimate_basis": "6 dev nodes x 4 groups x 5 opponents x 2 modes x 2 colors x 4 route-seeds + final blind 20 groups x 5 opponents x 2 modes x 2 colors x 4 route-seeds",
+    "estimated_optimizer_updates": 7500.0,
+    "evaluation_cpu_seconds": 947.620312320002,
+    "evaluation_games": 3520,
+    "optimistic_cpu_seconds": 6432.528576556171,
+    "optimizer_cpu_seconds": 69.19046193750006,
+    "selfplay_cpu_seconds": 8172.515763679887,
+    "total_budgeted_states": 120000
+  },
+  "scheduler": "CosineAnnealingLR",
+  "seeds": [
+    510901,
+    510902
+  ],
+  "simulation_budget": 64,
+  "stage_nodes": [
+    1000,
+    2000,
+    5000,
+    10000,
+    20000,
+    30000
+  ],
+  "states_per_seed": 30000,
+  "training_opening_mix": {
+    "empty": 0.5,
+    "random4": 0.5
+  },
+  "update_every_budgeted_states": 16,
+  "weight_decay": 0.0001
+}

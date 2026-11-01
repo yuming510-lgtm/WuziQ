@@ -14,6 +14,7 @@ import torch.nn.functional as F
 
 from ..imitation_f.model import PolicyValueNet, load_f_checkpoint, save_f_checkpoint, select_device
 from .replay import ReplayBuffer, augment_sample
+from .v3_bn import set_bn_training_mode
 
 F2_SHA256 = "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257"
 
@@ -70,6 +71,7 @@ class GTrainer:
         weight_decay: float = 1e-4,
         expected_updates: int = 100,
         device: str = "cpu",
+        bn_mode: str = "update",
     ) -> None:
         if not np.isfinite(learning_rate) or learning_rate <= 0:
             raise ValueError("learning_rate must be finite and positive")
@@ -77,6 +79,8 @@ class GTrainer:
             raise ValueError("weight_decay must be finite and nonnegative")
         if isinstance(expected_updates, bool) or int(expected_updates) != expected_updates or expected_updates < 1:
             raise ValueError("expected_updates must be a positive integer")
+        if bn_mode not in {"update", "freeze"}:
+            raise ValueError("bn_mode must be 'update' or 'freeze'")
         self.device = select_device(device)
         self.model = model.to(self.device)
         self.optimizer = torch.optim.AdamW(
@@ -86,6 +90,7 @@ class GTrainer:
             self.optimizer, T_max=int(expected_updates), eta_min=float(learning_rate) * 0.2
         )
         self.expected_updates = int(expected_updates)
+        self.bn_mode = str(bn_mode)
         self.seed = int(seed)
         self.rng = np.random.default_rng(self.seed)
         self.update_count = 0
@@ -99,7 +104,7 @@ class GTrainer:
             raise ValueError("self-play replay must contain rows before training")
         if self.update_count + int(updates) > self.expected_updates:
             raise ValueError("training update count exceeds registered schedule")
-        self.model.train()
+        set_bn_training_mode(self.model, self.bn_mode)
         policy_losses: list[float] = []
         value_losses: list[float] = []
         total_losses: list[float] = []
@@ -169,6 +174,7 @@ class GTrainer:
             "expected_updates": self.expected_updates,
             "seed": self.seed,
             "augmentation_rng_state": self.rng.bit_generator.state,
+            "bn_mode": self.bn_mode,
         }
 
     def load_state_dict(self, state: dict[str, Any]) -> None:
@@ -179,6 +185,11 @@ class GTrainer:
         self.scheduler.load_state_dict(state["scheduler_state"])
         self.update_count = int(state["update_count"])
         self.rng.bit_generator.state = state["augmentation_rng_state"]
+        # V1/V2 checkpoints predate the explicit V3 control and used normal
+        # PyTorch train() behavior, so missing metadata means "update".
+        self.bn_mode = str(state.get("bn_mode", "update"))
+        if self.bn_mode not in {"update", "freeze"}:
+            raise ValueError("checkpoint contains an invalid BatchNorm mode")
 
 
 def save_g_checkpoint(path: str | Path, model: PolicyValueNet, metadata: dict[str, Any] | None = None) -> str:

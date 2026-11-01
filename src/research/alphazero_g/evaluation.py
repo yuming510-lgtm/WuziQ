@@ -74,6 +74,8 @@ def play_evaluation_match(
     agent_color: Player,
     seed: int,
     simulations: int = 16,
+    opponent_mode: str = "network",
+    opponent_simulations: int | None = None,
     config: PUCTConfig | None = None,
     opponent_model: PolicyValueNet | None = None,
     device: str = "cpu",
@@ -83,11 +85,18 @@ def play_evaluation_match(
         raise ValueError("game_id, opening_group_id and arm_id must be nonempty")
     if mode not in {"network", "puct"}:
         raise ValueError("mode must be 'network' or 'puct'")
+    if opponent_mode not in {"network", "puct"}:
+        raise ValueError("opponent_mode must be 'network' or 'puct'")
+    if opponent_simulations is None:
+        opponent_simulations = simulations
+    if isinstance(opponent_simulations, bool) or int(opponent_simulations) != opponent_simulations or opponent_simulations < 1:
+        if opponent_mode == "puct":
+            raise ValueError("opponent_simulations must be a positive integer for PUCT opponents")
     if agent_color not in {"B", "W"}:
         raise ValueError("agent_color must be B or W")
     opponent = opponent.upper()
-    if opponent not in {"A", "B", "F1", "F2"}:
-        raise ValueError("opponent must be A, B, F1, or F2")
+    if opponent not in {"A", "B", "F1", "F2", "MODEL"}:
+        raise ValueError("opponent must be A, B, F1, F2, or MODEL")
     board = GomokuBoard(9)
     expected = "B"
     moves: list[dict[str, Any]] = []
@@ -109,11 +118,23 @@ def play_evaluation_match(
     model.to(selected_device)
     frozen_model = opponent_model
     opponent_sha256 = None
-    if opponent in {"F1", "F2"}:
+    if opponent in {"F1", "F2", "MODEL"}:
+        if opponent == "MODEL" and frozen_model is None:
+            raise ValueError("MODEL opponent requires opponent_model")
         frozen_model = frozen_model or load_frozen_opponent(opponent, device=device)
         frozen_model.to(selected_device)
         opponent_sha256 = getattr(frozen_model, "checkpoint_metadata", {}).get("checkpoint_sha256")
+        if opponent_sha256 is None:
+            state_hash = hashlib.sha256()
+            for name, value in sorted(frozen_model.state_dict().items()):
+                state_hash.update(name.encode("utf-8"))
+                state_hash.update(value.detach().cpu().contiguous().numpy().tobytes())
+            opponent_sha256 = state_hash.hexdigest()
     puct = PUCTSearch(model, config=config or PUCTConfig(), device=device) if mode == "puct" else None
+    opponent_puct = (
+        PUCTSearch(frozen_model, config=config or PUCTConfig(), device=device)
+        if opponent == "MODEL" and opponent_mode == "puct" and frozen_model is not None else None
+    )
     ai_config = SearchConfig(time_limit_seconds=0.05) if opponent == "B" else SearchConfig(time_limit_seconds=1e9)
     rng = np.random.default_rng(int(seed))
     was_training = model.training
@@ -123,6 +144,7 @@ def play_evaluation_match(
     agent_seconds = opponent_seconds = 0.0
     agent_simulations = agent_nodes = agent_network_evals = agent_max_depth = 0
     opponent_nodes = opponent_depth = opponent_cutoffs = 0
+    opponent_simulation_total = opponent_network_evals = 0
     winner: Player | None = None
     termination = ""
     try:
@@ -167,6 +189,24 @@ def play_evaluation_match(
                 opponent_nodes += response.nodes
                 opponent_depth = max(opponent_depth, response.completed_depth)
                 opponent_cutoffs += response.cutoffs
+            elif opponent == "MODEL" and opponent_mode == "puct":
+                assert opponent_puct is not None
+                result = opponent_puct.search(
+                    board, to_move, int(opponent_simulations), add_root_noise=False,
+                    temperature=0.0, seed=int(rng.integers(0, 2**31 - 1)),
+                )
+                coord = result.move
+                extra = {
+                    "simulations": result.simulations,
+                    "nodes": result.tree_nodes,
+                    "network_evaluations": result.network_evaluations,
+                    "search_depth": result.max_depth,
+                    "root_value": result.root_value,
+                }
+                opponent_simulation_total += result.simulations
+                opponent_network_evals += result.network_evaluations
+                opponent_nodes += result.tree_nodes
+                opponent_depth = max(opponent_depth, result.max_depth)
             else:
                 if frozen_model is None:
                     raise RuntimeError("frozen model opponent is not loaded")
@@ -198,6 +238,7 @@ def play_evaluation_match(
             "arm_id": arm_id,
             "mode": mode,
             "opponent": opponent,
+            "opponent_mode": opponent_mode if opponent == "MODEL" else "traditional",
             "opening": [dict(item) for item in opening],
             "agent_color": agent_color,
             "seed": int(seed),
@@ -221,6 +262,8 @@ def play_evaluation_match(
                 "opponent_nodes": opponent_nodes,
                 "opponent_max_search_depth": opponent_depth,
                 "opponent_cutoffs": opponent_cutoffs,
+                "opponent_simulations": opponent_simulation_total,
+                "opponent_network_evaluations": opponent_network_evals,
             },
             "opponent_checkpoint_sha256": opponent_sha256,
         }

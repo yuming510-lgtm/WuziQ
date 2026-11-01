@@ -1,0 +1,406 @@
+{
+  "cpu_seconds": 213.29574768900002,
+  "evaluation_log": "research/g_v3/results/bn_probe/evaluation.jsonl",
+  "experiment_id": "wuziq-alphazero-g-v3-bn-probe",
+  "formal_training": false,
+  "format_version": 1,
+  "routes": {
+    "G-F2": {
+      "budgeted_states": 256,
+      "experience_games": 17,
+      "experience_positions": 256,
+      "modes": {
+        "freeze": {
+          "black_score_rate": 0.25,
+          "bn_running_stat_drift": {
+            "input_bn": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.0.bn1": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.0.bn2": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.1.bn1": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.1.bn2": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            }
+          },
+          "checkpoint": "research/g_v3/results/bn_probe/checkpoints/G-F2-seed-510901-freeze.pt",
+          "checkpoint_sha256": "0b0b1633228152c447548935719148af2092366bc3cadd880f261d36c480b6ef",
+          "evaluation_bn_buffers_equal_initial": true,
+          "paired_games": 16,
+          "puct_score_rate_vs_own_initial": 0.3125,
+          "training": {
+            "cpu_seconds": 0.15971765899999468,
+            "learning_rate": 2e-05,
+            "policy_loss": 3.6892825961112976,
+            "total_loss": 4.436115264892578,
+            "update_count": 16,
+            "updates": 16,
+            "value_loss": 0.7468326799571514,
+            "wall_seconds": 0.15970999300043331
+          },
+          "white_score_rate": 0.375
+        },
+        "restore_before_evaluation": {
+          "black_score_rate": 0.625,
+          "bn_running_stat_drift": {
+            "input_bn": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.4433253867644678,
+              "running_mean_max_abs": 0.2543131709098816,
+              "running_var_l2": 0.1788780566449498,
+              "running_var_max_abs": 0.06385598331689835
+            },
+            "trunk.0.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.2927092881292788,
+              "running_mean_max_abs": 0.11841022968292236,
+              "running_var_l2": 0.302803030703551,
+              "running_var_max_abs": 0.12544113397598267
+            },
+            "trunk.0.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.12501837149678827,
+              "running_mean_max_abs": 0.043248146772384644,
+              "running_var_l2": 0.16025007236329503,
+              "running_var_max_abs": 0.057768866419792175
+            },
+            "trunk.1.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.2570310569700492,
+              "running_mean_max_abs": 0.09409010410308838,
+              "running_var_l2": 0.7039504106446411,
+              "running_var_max_abs": 0.3488050699234009
+            },
+            "trunk.1.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.10267262168451623,
+              "running_mean_max_abs": 0.04536992311477661,
+              "running_var_l2": 0.24785592259269962,
+              "running_var_max_abs": 0.08539389073848724
+            }
+          },
+          "checkpoint": "research/g_v3/results/bn_probe/checkpoints/G-F2-seed-510901-restore_before_evaluation.pt",
+          "checkpoint_sha256": "25bdbb0e7eb1c25a8f5ab6b09cf24cd96b88d45805bd981ff17c3d55a9b9c62c",
+          "evaluation_bn_buffers_equal_initial": true,
+          "paired_games": 16,
+          "puct_score_rate_vs_own_initial": 0.5,
+          "training": {
+            "cpu_seconds": 0.14995096499998795,
+            "learning_rate": 2e-05,
+            "policy_loss": 4.640633210539818,
+            "total_loss": 5.392094239592552,
+            "update_count": 16,
+            "updates": 16,
+            "value_loss": 0.751461036503315,
+            "wall_seconds": 0.1499441170017235
+          },
+          "white_score_rate": 0.375
+        },
+        "update": {
+          "black_score_rate": 0.375,
+          "bn_running_stat_drift": {
+            "input_bn": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.44743004934410124,
+              "running_mean_max_abs": 0.256094753742218,
+              "running_var_l2": 0.18098127500413977,
+              "running_var_max_abs": 0.06579931825399399
+            },
+            "trunk.0.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.2958350549074807,
+              "running_mean_max_abs": 0.11487972736358643,
+              "running_var_l2": 0.32892884332145,
+              "running_var_max_abs": 0.14684444665908813
+            },
+            "trunk.0.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.1271132390345113,
+              "running_mean_max_abs": 0.045241981744766235,
+              "running_var_l2": 0.15085023743239445,
+              "running_var_max_abs": 0.055665746331214905
+            },
+            "trunk.1.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.26947162378776174,
+              "running_mean_max_abs": 0.08355951309204102,
+              "running_var_l2": 0.6483572732205647,
+              "running_var_max_abs": 0.3509340286254883
+            },
+            "trunk.1.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.09378677990623245,
+              "running_mean_max_abs": 0.044869571924209595,
+              "running_var_l2": 0.2805650566643034,
+              "running_var_max_abs": 0.10830278694629669
+            }
+          },
+          "checkpoint": "research/g_v3/results/bn_probe/checkpoints/G-F2-seed-510901-update.pt",
+          "checkpoint_sha256": "19511b6f071e335dd14d164b7d03b50c9bb184064065e0cb52a09e6c130f5b39",
+          "evaluation_bn_buffers_equal_initial": false,
+          "paired_games": 16,
+          "puct_score_rate_vs_own_initial": 0.3125,
+          "training": {
+            "cpu_seconds": 0.149397239999999,
+            "learning_rate": 2e-05,
+            "policy_loss": 4.181912839412689,
+            "total_loss": 4.890606239438057,
+            "update_count": 16,
+            "updates": 16,
+            "value_loss": 0.7086933851242065,
+            "wall_seconds": 0.14938989100483013
+          },
+          "white_score_rate": 0.25
+        }
+      },
+      "seed": 510901,
+      "selfplay_game_count": 17
+    },
+    "G0": {
+      "budgeted_states": 256,
+      "experience_games": 8,
+      "experience_positions": 256,
+      "modes": {
+        "freeze": {
+          "black_score_rate": 0.625,
+          "bn_running_stat_drift": {
+            "input_bn": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.0.bn1": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.0.bn2": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.1.bn1": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            },
+            "trunk.1.bn2": {
+              "num_batches_tracked_l2": 0.0,
+              "num_batches_tracked_max_abs": 0.0,
+              "running_mean_l2": 0.0,
+              "running_mean_max_abs": 0.0,
+              "running_var_l2": 0.0,
+              "running_var_max_abs": 0.0
+            }
+          },
+          "checkpoint": "research/g_v3/results/bn_probe/checkpoints/G0-seed-510901-freeze.pt",
+          "checkpoint_sha256": "f6d27d90abf34669962bc201ab4cf703c39bb16401d32a4b189283bb4e2dcacf",
+          "evaluation_bn_buffers_equal_initial": true,
+          "paired_games": 16,
+          "puct_score_rate_vs_own_initial": 0.5625,
+          "training": {
+            "cpu_seconds": 0.13247776099999697,
+            "learning_rate": 2e-05,
+            "policy_loss": 4.124335765838623,
+            "total_loss": 5.117438942193985,
+            "update_count": 16,
+            "updates": 16,
+            "value_loss": 0.9931032583117485,
+            "wall_seconds": 0.1324728609979502
+          },
+          "white_score_rate": 0.5
+        },
+        "restore_before_evaluation": {
+          "black_score_rate": 0.5,
+          "bn_running_stat_drift": {
+            "input_bn": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 1.159172171204718,
+              "running_mean_max_abs": 0.5274358987808228,
+              "running_var_l2": 4.407701614548462,
+              "running_var_max_abs": 0.7960228770971298
+            },
+            "trunk.0.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.9358060855740631,
+              "running_mean_max_abs": 0.47015219926834106,
+              "running_var_l2": 4.140954778911811,
+              "running_var_max_abs": 0.7555440068244934
+            },
+            "trunk.0.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.9076550908872167,
+              "running_mean_max_abs": 0.39033952355384827,
+              "running_var_l2": 4.1194455885827646,
+              "running_var_max_abs": 0.754266545176506
+            },
+            "trunk.1.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 1.8184187689766138,
+              "running_mean_max_abs": 0.6810954809188843,
+              "running_var_l2": 3.588380316535329,
+              "running_var_max_abs": 0.6828387379646301
+            },
+            "trunk.1.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.7820491198320985,
+              "running_mean_max_abs": 0.3942272365093231,
+              "running_var_l2": 4.095068957485448,
+              "running_var_max_abs": 0.7439099550247192
+            }
+          },
+          "checkpoint": "research/g_v3/results/bn_probe/checkpoints/G0-seed-510901-restore_before_evaluation.pt",
+          "checkpoint_sha256": "de62ecda88b3760777e6e36a54542593e166bc5d06429e2cfe0759b31810fd6c",
+          "evaluation_bn_buffers_equal_initial": true,
+          "paired_games": 16,
+          "puct_score_rate_vs_own_initial": 0.625,
+          "training": {
+            "cpu_seconds": 0.15076387899999588,
+            "learning_rate": 2e-05,
+            "policy_loss": 4.182362884283066,
+            "total_loss": 5.191705971956253,
+            "update_count": 16,
+            "updates": 16,
+            "value_loss": 1.009343147277832,
+            "wall_seconds": 0.1507674520034925
+          },
+          "white_score_rate": 0.75
+        },
+        "update": {
+          "black_score_rate": 0.75,
+          "bn_running_stat_drift": {
+            "input_bn": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 1.1622496248764163,
+              "running_mean_max_abs": 0.5303868055343628,
+              "running_var_l2": 4.410017739056911,
+              "running_var_max_abs": 0.7961689680814743
+            },
+            "trunk.0.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.9407638197852568,
+              "running_mean_max_abs": 0.47432395815849304,
+              "running_var_l2": 4.140032112224756,
+              "running_var_max_abs": 0.7525909692049026
+            },
+            "trunk.0.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.9167936085557788,
+              "running_mean_max_abs": 0.3983055055141449,
+              "running_var_l2": 4.120388141572274,
+              "running_var_max_abs": 0.7522913962602615
+            },
+            "trunk.1.bn1": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 1.8366214012608792,
+              "running_mean_max_abs": 0.6970066428184509,
+              "running_var_l2": 3.588459683059416,
+              "running_var_max_abs": 0.6806071698665619
+            },
+            "trunk.1.bn2": {
+              "num_batches_tracked_l2": 16.0,
+              "num_batches_tracked_max_abs": 16.0,
+              "running_mean_l2": 0.783565287377448,
+              "running_mean_max_abs": 0.39245542883872986,
+              "running_var_l2": 4.097678393224068,
+              "running_var_max_abs": 0.7449380457401276
+            }
+          },
+          "checkpoint": "research/g_v3/results/bn_probe/checkpoints/G0-seed-510901-update.pt",
+          "checkpoint_sha256": "aeb6dfe048e10c0b5dd14c8dad30b7ba2ad137523164ff25a621af48d61e78cb",
+          "evaluation_bn_buffers_equal_initial": false,
+          "paired_games": 16,
+          "puct_score_rate_vs_own_initial": 0.5,
+          "training": {
+            "cpu_seconds": 0.14499996199999998,
+            "learning_rate": 2e-05,
+            "policy_loss": 4.19239804148674,
+            "total_loss": 5.202329188585281,
+            "update_count": 16,
+            "updates": 16,
+            "value_loss": 1.0099311582744122,
+            "wall_seconds": 0.14500206500088098
+          },
+          "white_score_rate": 0.25
+        }
+      },
+      "seed": 510901,
+      "selfplay_game_count": 8
+    }
+  },
+  "selection_rule": {
+    "absolute_difference": 0.03125,
+    "combined_score_rates": {
+      "freeze": 0.4375,
+      "update": 0.40625
+    },
+    "restore_before_evaluation_is_selection_eligible": false,
+    "selected_common_mode": "freeze",
+    "tie_default": "freeze",
+    "tie_margin": 0.125
+  },
+  "selfplay_log": "research/g_v3/results/bn_probe/selfplay.jsonl",
+  "wall_seconds": 213.43332410400035
+}
