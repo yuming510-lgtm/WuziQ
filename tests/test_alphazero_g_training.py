@@ -7,7 +7,7 @@ import pytest
 import torch
 
 from src.research.alphazero_g.puct import PUCTConfig
-from src.research.alphazero_g.replay import ReplayBuffer
+from src.research.alphazero_g.replay import ReplayBuffer, load_game_log
 from src.research.alphazero_g.selfplay import play_selfplay_game
 from src.research.alphazero_g.training import (
     F2_SHA256,
@@ -18,6 +18,8 @@ from src.research.alphazero_g.training import (
     save_g_checkpoint,
     save_training_state,
 )
+from src.research.alphazero_g.experiment import build_g_schedule
+from src.research.alphazero_g.runner import run_training_arm
 
 
 class FixedPolicyValue(torch.nn.Module):
@@ -101,3 +103,57 @@ def test_g_checkpoint_is_f_compatible_and_loadable(tmp_path) -> None:
     loaded = load_g_checkpoint(path)
     assert _same_weights(model, loaded)
     assert loaded.checkpoint_metadata["arm_id"] == "G0"
+
+
+def _tiny_runner_root(path):
+    import subprocess
+
+    path.mkdir()
+    subprocess.run(["git", "init", "-q"], cwd=path, check=True)
+    subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=path, check=True)
+    subprocess.run(["git", "config", "user.name", "G test"], cwd=path, check=True)
+    (path / "README.md").write_text("test root\n")
+    subprocess.run(["git", "add", "README.md"], cwd=path, check=True)
+    subprocess.run(["git", "commit", "-qm", "test root"], cwd=path, check=True)
+    return path
+
+
+def _tiny_config():
+    schedule = build_g_schedule(5209, 1, 1, 1)
+    return {
+        "seed": 5209,
+        "arms": {
+            "G0": {"environment_steps": 20, "updates": 2, "simulations_per_move": 1},
+            "G-F2": {"environment_steps": 20, "updates": 2, "simulations_per_move": 1},
+        },
+        "stage_environment_steps": [20],
+        "stage_updates": [2],
+        "opening_schedule": schedule,
+        "initialization": {"G0": {"type": "random", "seed": 5210}},
+        "replay_capacity": 256,
+        "batch_size": 4,
+        "torch_threads": 1,
+        "device": "cpu",
+        "training": {"learning_rate": 1e-3, "weight_decay": 0.0, "temperature_moves": 12, "late_temperature": 0.1},
+    }
+
+
+def test_runner_game_checkpoint_resume_is_idempotent_and_exact(tmp_path) -> None:
+    interrupted_root = _tiny_runner_root(tmp_path / "interrupted")
+    uninterrupted_root = _tiny_runner_root(tmp_path / "uninterrupted")
+    config = _tiny_config()
+    first = run_training_arm(interrupted_root, config, "G0", stop_after_games=1)
+    assert first["completed"] is False
+    second = run_training_arm(interrupted_root, config, "G0")
+    baseline = run_training_arm(uninterrupted_root, config, "G0")
+    assert second["completed"] is True
+    assert baseline["completed"] is True
+    assert second["budgeted_environment_steps"] == 20
+    assert baseline["budgeted_environment_steps"] == 20
+    assert second["optimizer_updates"] == baseline["optimizer_updates"] == 2
+    resumed_model = load_g_checkpoint(interrupted_root / "research/g_v1/checkpoints/G0/final.pt")
+    baseline_model = load_g_checkpoint(uninterrupted_root / "research/g_v1/checkpoints/G0/final.pt")
+    assert _same_weights(resumed_model, baseline_model)
+    resumed_games, _ = load_game_log(interrupted_root / "research/g_v1/results/selfplay/G0.jsonl")
+    baseline_games, _ = load_game_log(uninterrupted_root / "research/g_v1/results/selfplay/G0.jsonl")
+    assert [game["game_id"] for game in resumed_games] == [game["game_id"] for game in baseline_games]

@@ -142,17 +142,17 @@
 
 ### Task 7: Blocking, resumable matched self-play training
 
-**Files:**
+- **Files:**
 - Create: `src/research/alphazero_g/runner.py`
 - Create: `scripts/run_g_v1.py`
 - Create: `research/g_v1/results/selfplay/`, `research/g_v1/results/training/`, staged checkpoints.
 - Test: `tests/test_alphazero_g_training.py`
 
-- [ ] **Step 1: Write failing tests** for per-game atomic persistence, kill/resume with unique-ID dedupe, exact arm environment-step/update counts, replay-only provenance and stage-complete resume.
-- [ ] **Step 2: Run RED** on runner tests; expected failure because no resumable experiment runner exists.
-- [ ] **Step 3: Implement** matched stage runner that self-plays both arms with the same registered sims, gathers exactly equal budgeted state counts, performs exact equal updates and freezes every registered checkpoint.
-- [ ] **Step 4: Run GREEN** on tiny configurations; interrupted/resumed and uninterrupted tiny runs must end with the same progress/target accounting and match results.
-- [ ] **Step 5: Commit** `feat(g-v1): run matched self-play training`.
+- [x] **Step 1: Write failing tests** for per-game atomic persistence, kill/resume with unique-ID dedupe, exact arm environment-step/update counts, replay-only provenance and stage-complete resume.
+- [x] **Step 2: Run RED** on runner tests; expected failure because no resumable experiment runner exists.
+- [x] **Step 3: Implement** matched stage runner that self-plays both arms with the same registered sims, gathers exactly equal budgeted state counts, performs exact equal updates and freezes every registered checkpoint.
+- [x] **Step 4: Run GREEN** on tiny configurations; interrupted/resumed and uninterrupted tiny runs must end with the same progress/target accounting and match results.
+- [x] **Step 5: Commit** `feat(g-v1): run matched self-play training`.
 - [ ] **Step 6: Execute** the pre-registered formal budget to completion in blocking mode, persisting every complete game/batch; at every crossed Drive threshold upload, download/hash-check, restore-test the new snapshot, then delete the preceding G V1 snapshot only.
 
 ### Task 8: Frozen evaluation, report, verification and branch delivery
