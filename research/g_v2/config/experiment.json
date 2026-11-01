@@ -1,81 +1,120 @@
 {
   "base_commit": "6e2bf48aa6b630c0fa4f20284ceb3b5aab295080",
   "batch_size": 16,
-  "blind_evaluation": {
-    "b_time_limit_seconds": 0.05,
-    "conditions": [
-      "F2-network",
-      "F2-PUCT64",
-      "G-F2-network",
-      "G-F2-PUCT64"
-    ],
-    "one_pass_only": true,
-    "opening_groups": 20,
-    "opponents": [
-      "A",
-      "B"
-    ],
-    "planned_games": 560
-  },
-  "board_size": 9,
   "candidate_learning_rates": {
     "lr_1e3": 0.001,
     "lr_1e4": 0.0001,
     "lr_3e5": 3e-05
   },
-  "data_source": "own completed self-play only; no F labels, no C/E5 labels, no artificial rewards",
-  "development_selection": {
+  "candidates": {
+    "lr_1e3": {
+      "learning_rate": 0.001,
+      "simulations_per_move": 64,
+      "states_per_candidate": 10000,
+      "updates_per_candidate": 625
+    },
+    "lr_1e4": {
+      "learning_rate": 0.0001,
+      "simulations_per_move": 64,
+      "states_per_candidate": 10000,
+      "updates_per_candidate": 625
+    },
+    "lr_3e5": {
+      "learning_rate": 3e-05,
+      "simulations_per_move": 64,
+      "states_per_candidate": 10000,
+      "updates_per_candidate": 625
+    }
+  },
+  "data_source": "own terminally labelled self-play only; no F labels, no teacher labels, no artificial rewards",
+  "estimates": {
+    "blind_cpu_seconds": 632.1787714053801,
+    "central_cpu_seconds": 4725.279988027105,
+    "conservative_cpu_seconds": 5906.599985033881,
+    "development_champion_cpu_seconds": 490.6115136000003,
+    "development_cpu_seconds": 1702.101804336001,
+    "optimistic_cpu_seconds": 3543.9599910203287,
+    "optimizer_cpu_seconds": 19.578741874999974,
+    "selfplay_cpu_seconds": 2146.407337647528
+  },
+  "evaluation": {
+    "b_time_limit_seconds": 0.05,
+    "blind_conditions": [
+      "F2-network",
+      "F2-PUCT64",
+      "G-F2-network",
+      "G-F2-PUCT64"
+    ],
+    "blind_games": 560,
+    "blind_groups": 20,
     "development_groups": 8,
-    "max_puct_drop_vs_f2_on_a_or_b": 0.125,
-    "min_black_score": 0.5,
-    "min_white_score": 0.5,
-    "paired_bootstrap_ci_lower_minimum": 0.5,
-    "promotion_score_minimum": 0.625
+    "development_matches_per_candidate_node": 112,
+    "development_nodes": [
+      1000,
+      2000,
+      5000,
+      10000
+    ]
   },
   "experiment_id": "wuziq-alphazero-g-v2",
   "f2_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
   "format_version": 1,
   "hard_cpu_hour_cap": 2.0,
-  "network": {
-    "board_size": 9,
-    "channels": 32,
-    "input_planes": 3,
-    "policy_actions": 81,
-    "residual_blocks": 2
-  },
   "opening_schedule_path": "research/g_v2/config/openings.json",
   "opening_schedule_sha256": "047c4a03d32c0066a0114e3f7a4a118991e109f09187ab9d0d0067fc492248ee",
-  "optimizer": "AdamW",
-  "proposed_stage_environment_steps": [
+  "preflight_commit": "9c339cf0f07c6a0f19116b00ee850027553ee2d3",
+  "preflight_path": "/workspace/WuziQ-g-v2/research/g_v2/results/preflight/preflight.json",
+  "preflight_sha256": "a0054fb1512b16075c8bc4e83859251a2dd44321b0906e290a4b552c118d3fac",
+  "rates": {
+    "evaluation_cpu_seconds_per_full_game": {
+      "network:A": 0.052189133999999804,
+      "network:B": 0.36944414800000036,
+      "network:F2": 0.018245660999999913,
+      "puct:A": 2.522253181,
+      "puct:B": 1.684389340000001,
+      "puct:F2": 1.2776341500000008
+    },
+    "optimizer_updates_per_cpu_second_by_candidate": {
+      "lr_1e3": 74.35929567693098,
+      "lr_1e4": 114.26905908062876,
+      "lr_3e5": 109.5711026553146
+    },
+    "selfplay_states_per_cpu_second_by_candidate": {
+      "lr_1e3": 16.35257845546808,
+      "lr_1e4": 12.114481144172522,
+      "lr_3e5": 14.095930691691674
+    },
+    "simulation_seconds_per_search": {
+      "16": 0.013784277000619719,
+      "32": 0.0203881136670437,
+      "64": 0.038678755333724744
+    }
+  },
+  "registered": true,
+  "replay_capacity": 20000,
+  "requested_states_per_candidate": 10000,
+  "schedule_sha256": "047c4a03d32c0066a0114e3f7a4a118991e109f09187ab9d0d0067fc492248ee",
+  "seed": 510701,
+  "simulation_budget": 64,
+  "stage_environment_steps": [
     1000,
     1000,
     3000,
-    5000,
-    10000
+    5000
   ],
-  "proposed_stage_nodes": [
+  "stage_nodes": [
     1000,
     2000,
     5000,
-    10000,
-    20000
+    10000
   ],
-  "proposed_states_per_candidate": 20000,
-  "registered": false,
-  "replay_capacity": 20000,
-  "replay_sampling": "uniform by game then position; arm-isolated; self-play only",
-  "scheduler": "CosineAnnealingLR eta_min=0.2*initial_lr over registered updates",
-  "seed": 510701,
-  "simulations_per_move": 64,
-  "snapshot_intervals_hours": [
-    1,
-    2,
-    4,
-    6,
-    10,
-    16,
-    26
+  "stage_updates": [
+    62,
+    63,
+    187,
+    313
   ],
+  "states_per_candidate": 10000,
   "update_every_budgeted_states": 16,
-  "weight_decay": 0.0001
+  "updates_per_candidate": 625
 }

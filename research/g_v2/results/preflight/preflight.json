@@ -1,0 +1,297 @@
+{
+  "code_commit": "9c339cf0f07c6a0f19116b00ee850027553ee2d3",
+  "evaluation_games": [
+    {
+      "agent_moves": 39,
+      "agent_seconds": 0.031765711017214926,
+      "completed": true,
+      "mode": "network",
+      "opponent": "A",
+      "opponent_seconds": 0.019676375002745772,
+      "post_opening_moves": 77,
+      "simulations_per_move": 0,
+      "total_cpu_seconds": 0.052189133999999804
+    },
+    {
+      "agent_moves": 9,
+      "agent_seconds": 0.00840303299628431,
+      "completed": true,
+      "mode": "network",
+      "opponent": "B",
+      "opponent_seconds": 0.36086404700472485,
+      "post_opening_moves": 17,
+      "simulations_per_move": 0,
+      "total_cpu_seconds": 0.36944414800000036
+    },
+    {
+      "agent_moves": 13,
+      "agent_seconds": 0.009389188002387527,
+      "completed": true,
+      "mode": "network",
+      "opponent": "F2",
+      "opponent_seconds": 0.008569462999730604,
+      "post_opening_moves": 25,
+      "simulations_per_move": 0,
+      "total_cpu_seconds": 0.018245660999999913
+    },
+    {
+      "agent_moves": 39,
+      "agent_seconds": 2.5019172320062353,
+      "completed": true,
+      "mode": "puct",
+      "opponent": "A",
+      "opponent_seconds": 0.020147434996033553,
+      "post_opening_moves": 77,
+      "simulations_per_move": 64,
+      "total_cpu_seconds": 2.522253181
+    },
+    {
+      "agent_moves": 14,
+      "agent_seconds": 1.0528035669958626,
+      "completed": true,
+      "mode": "puct",
+      "opponent": "B",
+      "opponent_seconds": 0.6311522180003521,
+      "post_opening_moves": 28,
+      "simulations_per_move": 64,
+      "total_cpu_seconds": 1.684389340000001
+    },
+    {
+      "agent_moves": 19,
+      "agent_seconds": 1.2605288680024387,
+      "completed": true,
+      "mode": "puct",
+      "opponent": "F2",
+      "opponent_seconds": 0.01661331998911919,
+      "post_opening_moves": 37,
+      "simulations_per_move": 64,
+      "total_cpu_seconds": 1.2776341500000008
+    }
+  ],
+  "format_version": 1,
+  "measurements_cpu_seconds": 12.129339587,
+  "measurements_wall_seconds": 12.138626411000587,
+  "note": "Measured on the connected worker using the frozen 9x9 32-channel/2-block F2 model, PUCT-64 self-play, and independent 1-thread CPU updates.",
+  "resources": {
+    "affinity_cpus": 3,
+    "cuda_available": false,
+    "device": "cpu",
+    "disk_free_bytes": 29363503104,
+    "load_average": [
+      0.3779296875,
+      0.251953125,
+      0.1416015625
+    ],
+    "logical_cpus": 3,
+    "max_rss_bytes": 228986880,
+    "memory_bytes": {
+      "MemAvailable": 9534988288,
+      "MemTotal": 10452459520
+    },
+    "torch_version": "2.15.0+cpu"
+  },
+  "schedule_sha256": "047c4a03d32c0066a0114e3f7a4a118991e109f09187ab9d0d0067fc492248ee",
+  "seed": 510703,
+  "selfplay_games": [
+    {
+      "budgeted_states": 11,
+      "completed": true,
+      "cpu_seconds": 0.6726767909999998,
+      "game_id": "g-v2-preflight-lr_1e3-seed-510703",
+      "lr_id": "lr_1e3",
+      "move_count": 15,
+      "simulations": 704,
+      "wall_seconds": 0.6726712099989527
+    },
+    {
+      "budgeted_states": 6,
+      "completed": true,
+      "cpu_seconds": 0.4952750290000001,
+      "game_id": "g-v2-preflight-lr_1e4-seed-510703",
+      "lr_id": "lr_1e4",
+      "move_count": 10,
+      "simulations": 384,
+      "wall_seconds": 0.4952595159993507
+    },
+    {
+      "budgeted_states": 38,
+      "completed": true,
+      "cpu_seconds": 2.695813482,
+      "game_id": "g-v2-preflight-lr_3e5-seed-510703",
+      "lr_id": "lr_3e5",
+      "move_count": 42,
+      "simulations": 2432,
+      "wall_seconds": 2.6957934769998246
+    }
+  ],
+  "simulation_benchmarks": [
+    {
+      "elapsed_seconds": [
+        0.021587007002381142,
+        0.017928090997884283,
+        0.017900980998092564
+      ],
+      "max_depth": 5,
+      "mean_seconds": 0.019138692999452662,
+      "network_evaluations": 17,
+      "position_id": "opening",
+      "repeats": 3,
+      "simulations": 16,
+      "simulations_per_second": 836.0027510999615,
+      "tree_nodes": 1275
+    },
+    {
+      "elapsed_seconds": [
+        0.03450163599700318,
+        0.039474519002396846,
+        0.03542504600045504
+      ],
+      "max_depth": 9,
+      "mean_seconds": 0.03646706699995169,
+      "network_evaluations": 33,
+      "position_id": "opening",
+      "repeats": 3,
+      "simulations": 32,
+      "simulations_per_second": 877.5040778585893,
+      "tree_nodes": 2439
+    },
+    {
+      "elapsed_seconds": [
+        0.07207684500099276,
+        0.11688722300095833,
+        0.07533218600292457
+      ],
+      "max_depth": 9,
+      "mean_seconds": 0.08809875133495855,
+      "network_evaluations": 65,
+      "position_id": "opening",
+      "repeats": 3,
+      "simulations": 64,
+      "simulations_per_second": 726.4575153473725,
+      "tree_nodes": 4790
+    },
+    {
+      "elapsed_seconds": [
+        0.013824877998558804,
+        0.014616307002143003,
+        0.01291164600115735
+      ],
+      "max_depth": 3,
+      "mean_seconds": 0.013784277000619719,
+      "network_evaluations": 14,
+      "position_id": "middle",
+      "repeats": 3,
+      "simulations": 16,
+      "simulations_per_second": 1160.7427795654908,
+      "tree_nodes": 891
+    },
+    {
+      "elapsed_seconds": [
+        0.019850204000249505,
+        0.020173011002043495,
+        0.021141125998838106
+      ],
+      "max_depth": 3,
+      "mean_seconds": 0.0203881136670437,
+      "network_evaluations": 19,
+      "position_id": "middle",
+      "repeats": 3,
+      "simulations": 32,
+      "simulations_per_second": 1569.5419656074555,
+      "tree_nodes": 1206
+    },
+    {
+      "elapsed_seconds": [
+        0.03593577399806236,
+        0.03773241100134328,
+        0.04236808100176859
+      ],
+      "max_depth": 3,
+      "mean_seconds": 0.038678755333724744,
+      "network_evaluations": 36,
+      "position_id": "middle",
+      "repeats": 3,
+      "simulations": 64,
+      "simulations_per_second": 1654.6551058274922,
+      "tree_nodes": 2275
+    },
+    {
+      "elapsed_seconds": [
+        0.0015111579996300861,
+        0.0014244830017560162,
+        0.0021273950005706865
+      ],
+      "max_depth": 1,
+      "mean_seconds": 0.0016876786673189297,
+      "network_evaluations": 1,
+      "position_id": "tactical",
+      "repeats": 3,
+      "simulations": 16,
+      "simulations_per_second": 9480.47771760831,
+      "tree_nodes": 74
+    },
+    {
+      "elapsed_seconds": [
+        0.001964593000593595,
+        0.0018982550027430989,
+        0.0018620590017235372
+      ],
+      "max_depth": 1,
+      "mean_seconds": 0.0019083023350200772,
+      "network_evaluations": 1,
+      "position_id": "tactical",
+      "repeats": 3,
+      "simulations": 32,
+      "simulations_per_second": 16768.831339119715,
+      "tree_nodes": 74
+    },
+    {
+      "elapsed_seconds": [
+        0.0027808630002255086,
+        0.0027298419990984257,
+        0.0025320370004919823
+      ],
+      "max_depth": 1,
+      "mean_seconds": 0.002680913999938639,
+      "network_evaluations": 1,
+      "position_id": "tactical",
+      "repeats": 3,
+      "simulations": 64,
+      "simulations_per_second": 23872.455439251255,
+      "tree_nodes": 74
+    }
+  ],
+  "torch_threads": 1,
+  "training_updates": [
+    {
+      "batch_size": 16,
+      "completed": true,
+      "cpu_seconds": 0.2689643549999996,
+      "lr_id": "lr_1e3",
+      "selfplay_rows": 11,
+      "updates": 20,
+      "updates_per_second": 74.35929567693098,
+      "wall_seconds": 0.26896241800204734
+    },
+    {
+      "batch_size": 16,
+      "completed": true,
+      "cpu_seconds": 0.17502550699999997,
+      "lr_id": "lr_1e4",
+      "selfplay_rows": 6,
+      "updates": 20,
+      "updates_per_second": 114.26905908062876,
+      "wall_seconds": 0.1750257679996139
+    },
+    {
+      "batch_size": 16,
+      "completed": true,
+      "cpu_seconds": 0.18252987799999953,
+      "lr_id": "lr_3e5",
+      "selfplay_rows": 38,
+      "updates": 20,
+      "updates_per_second": 109.5711026553146,
+      "wall_seconds": 0.18252991100234794
+    }
+  ]
+}
