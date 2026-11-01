@@ -432,6 +432,6 @@ def register_budget_in_config(preflight_path: Path, proposed_path: Path, schedul
     registered["opening_schedule_sha256"] = schedule["schedule_sha256"]
     registered["requested_states_per_candidate"] = int(normalized["states_per_candidate"])
     registered["preflight_sha256"] = hashlib.sha256(Path(preflight_path).read_bytes()).hexdigest()
-    registered["preflight_path"] = str(preflight_path)
+    registered["preflight_path"] = "research/g_v2/results/preflight/preflight.json"
     _atomic_json(Path(output_path), registered)
     return registered

@@ -120,4 +120,5 @@ def test_config_registration_preserves_model_metadata_and_binds_preflight_hash(t
     assert registered["network"] == {"board_size": 9, "channels": 32, "blocks": 2}
     assert registered["preflight_sha256"] == hashlib.sha256(paths["preflight"].read_bytes()).hexdigest()
     assert registered["opening_schedule_sha256"] == schedule["schedule_sha256"]
+    assert registered["preflight_path"] == "research/g_v2/results/preflight/preflight.json"
     assert json.loads(output.read_text())["registered"] is True
