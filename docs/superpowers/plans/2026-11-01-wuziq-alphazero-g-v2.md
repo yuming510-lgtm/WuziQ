@@ -75,7 +75,7 @@
 - Test: `tests/test_alphazero_g_v2_runner.py`
 
 **Interfaces:**
-- Produces `run_v2_candidate(root: Path, config: dict[str, Any], lr_id: str, stop_after_games: int | None = None) -> dict[str, Any]` for `lr_1e4`, `lr_3e5`, and `lr_1e3`.
+- Produces `run_v2_candidate(root: Path, config: dict[str, Any], lr_id: str, until_node: int | None = None, stop_after_games: int | None = None) -> dict[str, Any]` for `lr_1e4`, `lr_3e5`, and `lr_1e3`; it returns only at a registered cumulative node so the champion can be evaluated before the next training stage.
 - Produces one fsynced JSONL game log per candidate and an atomic exact-resume state containing model, optimizer, scheduler, replay, Python/NumPy/Torch RNGs, opening/game cursor, progress, and update count.
 - Candidate quotas and stage nodes derive only from the registered configuration; each stage triggers `floor(total_budgeted_states / 16)` cumulative batch-16 updates.
 
@@ -93,12 +93,12 @@
 - Test: `tests/test_alphazero_g_v2_selection.py`
 
 **Interfaces:**
-- Produces `run_v2_development(root: Path, checkpoint: Path, candidate_id: str, node: int, schedule: dict, seed: int) -> list[dict[str, Any]]` using pure network and PUCT64 versus frozen F2, A, and B (B fixed at 50 ms per move) on identical development opening/color pairs.
+- Produces `run_v2_development(root: Path, checkpoint: Path, candidate_id: str, node: int, schedule: dict, seed: int) -> list[dict[str, Any]]` using pure network and PUCT64 versus frozen F2, A, and B (B fixed at 50 ms per move) on identical development opening/color pairs, plus `run_v2_champion_matches(..., opponent_checkpoint: Path, ...)` for paired PUCT64 challenger/incumbent games without modifying V1 evaluation code.
 - Produces `select_v2_champion(results: list[dict[str, Any]], incumbent_id: str, incumbent_checkpoint: Path) -> dict[str, Any]`, accepting development records only and enforcing the preregistered promotion thresholds and tie-break.
 
-- [ ] **Step 1: Write failing tests** for paired 8-group score, bootstrap CI, color split, all promotion thresholds, incumbent retention, deterministic tie-break, and blind-record rejection.
+- [ ] **Step 1: Write failing tests** for paired 8-group score, generic checkpoint-vs-checkpoint color swaps, bootstrap CI, all promotion thresholds, incumbent retention, deterministic tie-break, and blind-record rejection.
 - [ ] **Step 2: Run** `pytest tests/test_alphazero_g_v2_selection.py -q`; confirm failures.
-- [ ] **Step 3: Implement** idempotent development match IDs, reuse `play_evaluation_match`, record all search/timing stats, and atomically persist selection history. A candidate that becomes incumbent later challenges the checkpoint it displaced; other candidates challenge the current incumbent.
+- [ ] **Step 3: Implement** idempotent development match IDs, reuse V1 evaluation only for A/B/F2 matches, add a V2-owned PUCT64 paired-checkpoint matcher, record all search/timing stats, and atomically persist selection history. A candidate that becomes incumbent later challenges the checkpoint it displaced; other candidates challenge the current incumbent.
 - [ ] **Step 4: Run** tests with synthetic results plus real F2-vs-F2 and short candidate matches; validate all games through existing replay validation.
 
 ### Task 5: Final paired blind evaluation and statistical summaries
