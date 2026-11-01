@@ -1,0 +1,532 @@
+{
+  "best_candidate_for_blind": {
+    "candidate_id": "lr_1e4",
+    "checkpoint": "research/g_v2/checkpoints/lr_1e4/node_10000.pt",
+    "checkpoint_id": "lr_1e4@10000",
+    "checkpoint_sha256": "5ac65c6be2fac6817e4918729a53c2e9518c7aace48a2c7191e4c05892548b0a",
+    "promoted_to_champion": false,
+    "selection_node": 10000,
+    "selection_rule": "development champion score, then paired CI lower bound, then LR order"
+  },
+  "champion": {
+    "candidate_id": "F2",
+    "checkpoint": "research/f_v2/checkpoints/best_f2.pt",
+    "checkpoint_id": "F2@0",
+    "checkpoint_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257"
+  },
+  "config_sha256": "e436874a72fd5a3b5fe1788dcb463882ab6bca554c8c94c0fa316fc9d8b9a6ff",
+  "format_version": 1,
+  "last_completed_node": 10000,
+  "last_stage": {
+    "candidate_training": [
+      {
+        "active_cpu_seconds": 659.0013967699941,
+        "budgeted_environment_steps": 10000,
+        "candidate_checkpoint_id": "lr_3e5@10000",
+        "candidate_id": "lr_3e5",
+        "optimizer_updates": 625
+      },
+      {
+        "active_cpu_seconds": 663.3119669100054,
+        "budgeted_environment_steps": 10000,
+        "candidate_checkpoint_id": "lr_1e4@10000",
+        "candidate_id": "lr_1e4",
+        "optimizer_updates": 625
+      },
+      {
+        "active_cpu_seconds": 679.9168408340063,
+        "budgeted_environment_steps": 10000,
+        "candidate_checkpoint_id": "lr_1e3@10000",
+        "candidate_id": "lr_1e3",
+        "optimizer_updates": 625
+      }
+    ],
+    "frozen_incumbent": {
+      "candidate_id": "F2",
+      "checkpoint": "research/f_v2/checkpoints/best_f2.pt",
+      "checkpoint_id": "F2@0",
+      "checkpoint_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257"
+    },
+    "node": 10000,
+    "result_count": 336,
+    "selected": {
+      "candidates": {
+        "lr_1e3": {
+          "candidate_checkpoint_id": "lr_1e3@10000",
+          "candidate_checkpoint_sha256": "426e2850f70b2893a7109d887742edb1eb4e58d54adf431e44a84d2375242dd1",
+          "challenge": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 0.0,
+                "score_rate": 0.0
+              },
+              "W": {
+                "games": 8,
+                "points": 0.0,
+                "score_rate": 0.0
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 16,
+            "paired_opening_bootstrap_ci95": [
+              0.0,
+              0.0
+            ],
+            "paired_opening_groups": 8,
+            "points": 0.0,
+            "score_rate": 0.0,
+            "wins": 0
+          },
+          "checkpoint": "research/g_v2/checkpoints/lr_1e3/node_10000.pt",
+          "comparison_id": "F2@0",
+          "criteria": {
+            "black_score": false,
+            "challenge_score": false,
+            "no_obvious_regression": false,
+            "paired_ci_lower": false,
+            "white_score": false
+          },
+          "eligible": false,
+          "f2_puct_baseline_a": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 5.0,
+                "score_rate": 0.625
+              }
+            },
+            "draws": 9,
+            "games": 16,
+            "losses": 2,
+            "paired_opening_bootstrap_ci95": [
+              0.4375,
+              0.75
+            ],
+            "paired_opening_groups": 8,
+            "points": 9.5,
+            "score_rate": 0.59375,
+            "wins": 5
+          },
+          "f2_puct_baseline_b": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 5.0,
+                "score_rate": 0.625
+              }
+            },
+            "draws": 1,
+            "games": 16,
+            "losses": 6,
+            "paired_opening_bootstrap_ci95": [
+              0.4375,
+              0.78125
+            ],
+            "paired_opening_groups": 8,
+            "points": 9.5,
+            "score_rate": 0.59375,
+            "wins": 9
+          },
+          "puct_vs_a": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 0.0,
+                "score_rate": 0.0
+              },
+              "W": {
+                "games": 8,
+                "points": 0.0,
+                "score_rate": 0.0
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 16,
+            "paired_opening_bootstrap_ci95": [
+              0.0,
+              0.0
+            ],
+            "paired_opening_groups": 8,
+            "points": 0.0,
+            "score_rate": 0.0,
+            "wins": 0
+          },
+          "puct_vs_b": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 1.0,
+                "score_rate": 0.125
+              },
+              "W": {
+                "games": 8,
+                "points": 1.0,
+                "score_rate": 0.125
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 14,
+            "paired_opening_bootstrap_ci95": [
+              0.0,
+              0.3125
+            ],
+            "paired_opening_groups": 8,
+            "points": 2.0,
+            "score_rate": 0.125,
+            "wins": 2
+          }
+        },
+        "lr_1e4": {
+          "candidate_checkpoint_id": "lr_1e4@10000",
+          "candidate_checkpoint_sha256": "5ac65c6be2fac6817e4918729a53c2e9518c7aace48a2c7191e4c05892548b0a",
+          "challenge": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 2.0,
+                "score_rate": 0.25
+              },
+              "W": {
+                "games": 8,
+                "points": 0.0,
+                "score_rate": 0.0
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 14,
+            "paired_opening_bootstrap_ci95": [
+              0.0,
+              0.3125
+            ],
+            "paired_opening_groups": 8,
+            "points": 2.0,
+            "score_rate": 0.125,
+            "wins": 2
+          },
+          "checkpoint": "research/g_v2/checkpoints/lr_1e4/node_10000.pt",
+          "comparison_id": "F2@0",
+          "criteria": {
+            "black_score": false,
+            "challenge_score": false,
+            "no_obvious_regression": false,
+            "paired_ci_lower": false,
+            "white_score": false
+          },
+          "eligible": false,
+          "f2_puct_baseline_a": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 5.0,
+                "score_rate": 0.625
+              }
+            },
+            "draws": 9,
+            "games": 16,
+            "losses": 2,
+            "paired_opening_bootstrap_ci95": [
+              0.4375,
+              0.75
+            ],
+            "paired_opening_groups": 8,
+            "points": 9.5,
+            "score_rate": 0.59375,
+            "wins": 5
+          },
+          "f2_puct_baseline_b": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 5.0,
+                "score_rate": 0.625
+              }
+            },
+            "draws": 1,
+            "games": 16,
+            "losses": 6,
+            "paired_opening_bootstrap_ci95": [
+              0.4375,
+              0.78125
+            ],
+            "paired_opening_groups": 8,
+            "points": 9.5,
+            "score_rate": 0.59375,
+            "wins": 9
+          },
+          "puct_vs_a": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 3.0,
+                "score_rate": 0.375
+              },
+              "W": {
+                "games": 8,
+                "points": 2.0,
+                "score_rate": 0.25
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 11,
+            "paired_opening_bootstrap_ci95": [
+              0.0625,
+              0.5625
+            ],
+            "paired_opening_groups": 8,
+            "points": 5.0,
+            "score_rate": 0.3125,
+            "wins": 5
+          },
+          "puct_vs_b": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 2.0,
+                "score_rate": 0.25
+              },
+              "W": {
+                "games": 8,
+                "points": 1.0,
+                "score_rate": 0.125
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 13,
+            "paired_opening_bootstrap_ci95": [
+              0.0625,
+              0.375
+            ],
+            "paired_opening_groups": 8,
+            "points": 3.0,
+            "score_rate": 0.1875,
+            "wins": 3
+          }
+        },
+        "lr_3e5": {
+          "candidate_checkpoint_id": "lr_3e5@10000",
+          "candidate_checkpoint_sha256": "c550494b4c99447468b7f759f33276d689a445ac022e89a2c6d203cd7cd23060",
+          "challenge": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 1.0,
+                "score_rate": 0.125
+              },
+              "W": {
+                "games": 8,
+                "points": 0.0,
+                "score_rate": 0.0
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 15,
+            "paired_opening_bootstrap_ci95": [
+              0.0,
+              0.1875
+            ],
+            "paired_opening_groups": 8,
+            "points": 1.0,
+            "score_rate": 0.0625,
+            "wins": 1
+          },
+          "checkpoint": "research/g_v2/checkpoints/lr_3e5/node_10000.pt",
+          "comparison_id": "F2@0",
+          "criteria": {
+            "black_score": false,
+            "challenge_score": false,
+            "no_obvious_regression": false,
+            "paired_ci_lower": false,
+            "white_score": false
+          },
+          "eligible": false,
+          "f2_puct_baseline_a": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 5.0,
+                "score_rate": 0.625
+              }
+            },
+            "draws": 9,
+            "games": 16,
+            "losses": 2,
+            "paired_opening_bootstrap_ci95": [
+              0.4375,
+              0.75
+            ],
+            "paired_opening_groups": 8,
+            "points": 9.5,
+            "score_rate": 0.59375,
+            "wins": 5
+          },
+          "f2_puct_baseline_b": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 5.0,
+                "score_rate": 0.625
+              }
+            },
+            "draws": 1,
+            "games": 16,
+            "losses": 6,
+            "paired_opening_bootstrap_ci95": [
+              0.4375,
+              0.78125
+            ],
+            "paired_opening_groups": 8,
+            "points": 9.5,
+            "score_rate": 0.59375,
+            "wins": 9
+          },
+          "puct_vs_a": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 4.5,
+                "score_rate": 0.5625
+              },
+              "W": {
+                "games": 8,
+                "points": 4.0,
+                "score_rate": 0.5
+              }
+            },
+            "draws": 1,
+            "games": 16,
+            "losses": 7,
+            "paired_opening_bootstrap_ci95": [
+              0.3125,
+              0.75
+            ],
+            "paired_opening_groups": 8,
+            "points": 8.5,
+            "score_rate": 0.53125,
+            "wins": 8
+          },
+          "puct_vs_b": {
+            "by_color": {
+              "B": {
+                "games": 8,
+                "points": 2.0,
+                "score_rate": 0.25
+              },
+              "W": {
+                "games": 8,
+                "points": 3.0,
+                "score_rate": 0.375
+              }
+            },
+            "draws": 0,
+            "games": 16,
+            "losses": 11,
+            "paired_opening_bootstrap_ci95": [
+              0.125,
+              0.4375
+            ],
+            "paired_opening_groups": 8,
+            "points": 5.0,
+            "score_rate": 0.3125,
+            "wins": 5
+          }
+        }
+      },
+      "champion": {
+        "candidate_id": "F2",
+        "checkpoint": "research/f_v2/checkpoints/best_f2.pt",
+        "checkpoint_id": "F2@0",
+        "checkpoint_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257"
+      },
+      "f2_puct_baseline_a": {
+        "by_color": {
+          "B": {
+            "games": 8,
+            "points": 4.5,
+            "score_rate": 0.5625
+          },
+          "W": {
+            "games": 8,
+            "points": 5.0,
+            "score_rate": 0.625
+          }
+        },
+        "draws": 9,
+        "games": 16,
+        "losses": 2,
+        "paired_opening_bootstrap_ci95": [
+          0.4375,
+          0.75
+        ],
+        "paired_opening_groups": 8,
+        "points": 9.5,
+        "score_rate": 0.59375,
+        "wins": 5
+      },
+      "f2_puct_baseline_b": {
+        "by_color": {
+          "B": {
+            "games": 8,
+            "points": 4.5,
+            "score_rate": 0.5625
+          },
+          "W": {
+            "games": 8,
+            "points": 5.0,
+            "score_rate": 0.625
+          }
+        },
+        "draws": 1,
+        "games": 16,
+        "losses": 6,
+        "paired_opening_bootstrap_ci95": [
+          0.4375,
+          0.78125
+        ],
+        "paired_opening_groups": 8,
+        "points": 9.5,
+        "score_rate": 0.59375,
+        "wins": 9
+      },
+      "promoted": false
+    }
+  },
+  "schedule_sha256": "047c4a03d32c0066a0114e3f7a4a118991e109f09187ab9d0d0067fc492248ee"
+}

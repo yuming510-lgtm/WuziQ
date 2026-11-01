@@ -28,6 +28,9 @@ def main() -> dict:
         summary["drive_status"] = json.loads(recovery.read_text())
     else:
         summary["drive_status"] = {"status": "未验证"}
+    verification = root / "research/g_v2/results/verification.json"
+    if verification.is_file():
+        summary["verification"] = json.loads(verification.read_text())
     outputs = render_v2_report(root, summary)
     integrity = write_v2_integrity_manifest(root)
     result = {"outputs": outputs, "integrity_artifacts": len(integrity["artifacts"]),

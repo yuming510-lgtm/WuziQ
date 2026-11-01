@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import statistics
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +17,7 @@ from ...gomoku import GomokuBoard
 from .evaluation import load_evaluation_log, summarize_matches
 from .replay import load_game_log
 from .training import F2_SHA256, load_g_checkpoint
+from .v2_budget import active_wall_seconds_committed
 from .v2_blind import build_v2_blind_plan, summarize_v2_results
 from .v2_schedule import validate_v2_schedule
 
@@ -42,7 +44,7 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], columns: list[str]) -> No
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     with temporary.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     temporary.replace(path)
@@ -246,6 +248,28 @@ def _training_milestones(root: Path, config: dict[str, Any], dev_records: list[d
             "optimizer_updates": cumulative_updates,
             "training_cpu_seconds": float(progress.get("active_cpu_seconds", 0.0)),
             "training_wall_seconds": float(progress.get("active_wall_seconds", 0.0)),
+            "selfplay_distribution": {
+                "outcomes": {
+                    outcome: sum(game["outcome"] == outcome for game in games)
+                    for outcome in ("B_win", "W_win", "draw")
+                },
+                "complete_games": len(games),
+                "mean_post_opening_plies": (
+                    statistics.fmean(len(game["moves"]) - len(game["opening"]) for game in games)
+                    if games else None
+                ),
+                "median_post_opening_plies": (
+                    statistics.median(len(game["moves"]) - len(game["opening"]) for game in games)
+                    if games else None
+                ),
+                "games_at_most_8_post_opening_plies": sum(
+                    len(game["moves"]) - len(game["opening"]) <= 8 for game in games
+                ),
+                "terminal_tail_environment_steps": sum(
+                    len(game["experience_rows"]) - int(game.get("budgeted_environment_steps", 0))
+                    for game in games
+                ),
+            },
             "completed": cumulative_budgeted == int(config["states_per_candidate"]),
             "milestones": milestones,
         }
@@ -320,8 +344,13 @@ def build_v2_report(root: str | Path) -> dict[str, Any]:
             "hard_cpu_hour_cap": float(config["hard_cpu_hour_cap"]),
             "unexecuted_nodes": [node for node in (20000,) if node not in config["stage_nodes"]],
             "formal_selfplay_game_records": candidate_records,
+            "budgeted_training_states": sum(item["states"] for item in training["candidates"].values()),
+            "actual_environment_steps": sum(
+                item["actual_environment_steps"] for item in training["candidates"].values()
+            ),
             "development_games": len(dev_records), "challenge_games": len(challenge_records),
             "blind_games": len(blind_records), "total_actual_cpu_seconds": total_cpu_seconds,
+            "total_active_wall_seconds": active_wall_seconds_committed(root_path),
         },
         "training": training,
         "selection": {
@@ -485,6 +514,8 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
     total_states = sum(item["states"] for item in candidates.values())
     total_updates = sum(item["optimizer_updates"] for item in candidates.values())
     blind_games = meta["blind_games"]
+    total_actual_steps = int(meta.get("actual_environment_steps", total_states))
+    total_budgeted_steps = int(meta.get("budgeted_training_states", total_states))
     primary = summary["blind"]["learning"].get("F2-PUCT64_to_G-F2-PUCT64")
     if primary:
         lo, hi = primary["g_view"]["paired_opening_bootstrap_ci95"] or (None, None)
@@ -497,6 +528,17 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
         growth_conclusion = "最终盲测未提供冻结 F2 与 G-F2 PUCT-64 的同预算配对结果。"
     champion = summary["selection"].get("champion", {})
     best = summary["selection"].get("best_candidate_for_blind", {})
+    blind_comparisons = summary["blind"]["comparisons"]
+    f2_search = summary["blind"]["search"].get("F2_network_to_PUCT64", {})
+    g_search = summary["blind"]["search"].get("G-F2_network_to_PUCT64", {})
+    g_network_a = blind_comparisons.get("G-F2-network__vs__A", {})
+    g_network_b = blind_comparisons.get("G-F2-network__vs__B", {})
+    g_puct_a = blind_comparisons.get("G-F2-PUCT64__vs__A", {})
+    g_puct_b = blind_comparisons.get("G-F2-PUCT64__vs__B", {})
+    f2_network_a = blind_comparisons.get("F2-network__vs__A", {})
+    f2_network_b = blind_comparisons.get("F2-network__vs__B", {})
+    f2_puct_a = blind_comparisons.get("F2-PUCT64__vs__A", {})
+    f2_puct_b = blind_comparisons.get("F2-PUCT64__vs__B", {})
     lines = [
         "# G-F2自我对弈在本轮预算下是否产生可复核成长",
         "",
@@ -504,27 +546,30 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
         "",
         f"- 本轮使用同一个冻结 F2 网络作为三条学习率候选的初始化；固定每步 PUCT-64，不引入教师标签、F 监督样本或人工战术奖励。正式训练完成 {total_states:,} 个预算内状态和 {total_updates:,} 次更新，实际盲测 {blind_games} 局。",
         f"- {growth_conclusion}",
+        f"- 按相同 64 模拟搜索比较，训练后 G-F2 得分率为 {primary['g_score_rate']:.3f}，冻结 F2 为 {primary['f2_score_rate']:.3f}；差值 {primary['g_minus_f2_score_rate']:+.3f}，因此本轮没有证明自我对弈学习带来棋力提升。" if primary else "- 本轮无法完成同预算的训练前后棋力比较。",
+        f"- 固定 checkpoint 的搜索收益：F2 从裸网络 {f2_search.get('network_score_rate', float('nan')):.3f} 提高到 PUCT-64 {f2_search.get('puct_score_rate', float('nan')):.3f}；G-F2 从 {g_search.get('network_score_rate', float('nan')):.3f} 提高到 {g_search.get('puct_score_rate', float('nan')):.3f}。这是增加搜索带来的收益，不是网络训练增益。",
         f"- 开发赛冠军仍为 `{champion.get('checkpoint_id', '未知')}`；供盲测的最佳开发候选为 `{best.get('checkpoint_id', '未知')}`。只有满足预注册冠军门槛的候选才替换 F2。",
-        f"- 实际总 CPU 时间约 {meta['total_actual_cpu_seconds'] / 3600:.2f} 小时；2 CPU 小时上限未扩大。20,000 状态节点为**未执行**，本轮每个学习率候选的登记上限为 10,000 状态。",
+        f"- 实际总 CPU 时间约 {meta['total_actual_cpu_seconds'] / 3600:.2f} CPU 小时，活动墙钟约 {meta.get('total_active_wall_seconds', 0.0) / 3600:.2f} 小时；2 CPU 小时上限未扩大。20,000 状态节点为**未执行**，本轮每个学习率候选登记上限为 10,000 状态。",
         "",
         "## 实验设计与计算预算",
         "",
         f"- 基线提交：`{meta['base_commit']}`；冻结 F2 SHA-256：`{meta['f2_sha256']}`；开局表 SHA-256：`{meta['schedule_sha256']}`。",
-        f"- 预检实测 {meta['preflight_wall_seconds']:.2f} 秒墙钟 / {meta['preflight_cpu_seconds']:.2f} CPU 秒；正式估算乐观、中位、保守分别为 {meta['optimistic_cpu_seconds']:.0f}/{meta['central_cpu_seconds']:.0f}/{meta['conservative_cpu_seconds']:.0f} CPU 秒。资源：CPU `{meta['resources'].get('cpu_count', '未知')}`，设备 `{meta['resources'].get('device', '未知')}`。",
-        "- 三个独立候选从同一 F2 权重开始，学习率分别为 3e-5、1e-4、1e-3；每候选相同状态配额、经验池规则、批次和更新频率。策略目标是自我对弈访问分布，价值目标是终局胜负。",
-        "- 训练里程碑为 1k、2k、5k、10k；20,000 状态节点**未执行**。三候选总计并行比较，不把增加搜索次数当作学习收益。",
+        f"- 预检实测 {meta['preflight_wall_seconds']:.2f} 秒墙钟 / {meta['preflight_cpu_seconds']:.2f} CPU 秒；正式估算乐观、中位、保守分别为 {meta['optimistic_cpu_seconds']:.0f}/{meta['central_cpu_seconds']:.0f}/{meta['conservative_cpu_seconds']:.0f} CPU 秒。资源：{meta['resources'].get('logical_cpus', meta['resources'].get('affinity_cpus', '未知'))} 个可用逻辑 CPU，设备 `{meta['resources'].get('device', '未知')}`，可用内存 {meta['resources'].get('memory_bytes', {}).get('MemAvailable', 0) / (1024**3):.1f} GiB，PyTorch {meta['resources'].get('torch_version', '未知')}。",
+        "- 网络复用冻结 F2 的 9×9、32 通道、2 残差块策略价值结构。三个独立候选从相同 F2 权重初始化，学习率为 3e-5、1e-4、1e-3；相同 PUCT-64、每 16 个预算状态更新一次、batch 16、独立经验池和优化器。策略目标是自我对弈访问分布，价值目标是终局胜负。",
+        "- 训练里程碑为 1k、2k、5k、10k；20,000 状态节点**未执行**。三个候选分别运行、使用相同训练预算并按同一开发计划比较；不把增加搜索次数当作学习收益。",
         "",
         "## 训练规模、过程损失与自我对弈分布",
         "",
-        "| 候选学习率 | 完整自我对弈局 | 状态数 | 更新数 | 训练CPU秒 | 执行状态 |",
-        "|---|---:|---:|---:|---:|---|",
+        "| 候选学习率 | 完整自我对弈局 | 预算状态 | 实际环境步 | 终局尾步 | 更新数 | 训练CPU秒 | 执行状态 |",
+        "|---|---:|---:|---:|---:|---:|---:|---|",
     ]
     for lr_id in LR_ORDER:
         item = candidates[lr_id]
-        lines.append(f"| {LR_LABELS[lr_id]} | {item['games']} | {item['states']:,} | {item['optimizer_updates']} | {item['training_cpu_seconds']:.1f} | {'完成' if item['completed'] else '未完成'} |")
+        actual_steps = int(item.get("actual_environment_steps", item["states"]))
+        lines.append(f"| {LR_LABELS[lr_id]} | {item['games']} | {item['states']:,} | {actual_steps:,} | {actual_steps - item['states']:,} | {item['optimizer_updates']} | {item['training_cpu_seconds']:.1f} | {'完成' if item['completed'] else '未完成'} |")
     lines.extend([
         "",
-        "各里程碑的训练损失、策略熵、价值误差、完整棋局数与模拟数保存在 [`growth.csv`](results/growth.csv) 和 [`final_summary.json`](results/final_summary.json)。自我对弈胜负颜色、局长、每步访问分布可从原始棋谱复算。",
+        f"实际环境步多于预算状态的部分来自完成当前整局以取得终局标签；超额状态未进入训练目标或经验池。三个候选实际完成 {total_actual_steps:,} 个环境步（登记预算 {total_budgeted_steps:,}），多出的 {total_actual_steps - total_budgeted_steps} 步仅为终局尾部。各节点损失、熵、价值误差、胜负颜色、完整局数与模拟数可从 [`growth.csv`](results/growth.csv)、`final_summary.json` 与逐局 JSONL 复算。",
         "",
         "## 棋力随训练状态与CPU时间变化",
         "",
@@ -540,6 +585,32 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
         "",
         "每个阶段的三个候选均挑战同一个冻结 incumbent，换色、成对开局。晋级门槛是得分率至少 0.625、配对开局 bootstrap 下界高于 0.5、黑白得分均不低于 0.5，并且对 A/B 的 PUCT 得分相对 F2 未下降超过 0.125。最终盲测不参与选择。",
         f"当前 incumbent：`{champion.get('checkpoint_id', '未知')}`。盲测候选：`{best.get('checkpoint_id', '未知')}`（选择节点 {best.get('selection_node', '未知')}）。如果没有候选通过晋级标准，冠军保留 F2，但仍盲测开发集上表现最好的候选。",
+        "可加载的盲测候选另存于 [`checkpoints/selected_g_f2.pt`](checkpoints/selected_g_f2.pt)，其元数据和 SHA-256 在 `checkpoints/selected_g_f2.json`；文件沿用 `load_g_checkpoint` 接口。它是供后续复现实验使用的候选，并未取代F2冠军。",
+        "",
+        "开发集阶段得分率均按候选视角统计；每格为16局（8个配对开局、换色）：",
+        "",
+        "| 学习率 | 训练状态 | 裸网络 vs F2 | PUCT-64 vs F2 | PUCT-64 vs A | PUCT-64 vs B |",
+        "|---:|---:|---:|---:|---:|---:|",
+    ])
+    for lr_id in LR_ORDER:
+        candidate = candidates[lr_id]
+        for milestone in candidate["milestones"]:
+            if not milestone["executed"]:
+                continue
+            def _dev_cell(value: dict[str, Any] | None) -> str:
+                if not value:
+                    return "未执行"
+                interval = value.get("paired_opening_bootstrap_ci95")
+                ci_text = "不可估" if interval is None else f"[{interval[0]:.2f},{interval[1]:.2f}]"
+                return f"{value['score_rate']:.3f} {ci_text}"
+            lines.append(
+                f"| {LR_LABELS[lr_id]} | {milestone['node']:,} | {_dev_cell(milestone.get('network_vs_f2'))} | "
+                f"{_dev_cell(milestone.get('puct_vs_f2'))} | {_dev_cell(milestone.get('puct_vs_a'))} | "
+                f"{_dev_cell(milestone.get('puct_vs_b'))} |"
+            )
+    lines.extend([
+        "",
+        "受控学习率结果显示 `1e-3` 退化最明显；`1e-4` 与 `3e-5` 也未随状态数增加而改善，且都没有阶段通过晋级标准。损失下降不是棋力提升的证据。",
         "",
         "## 独立盲测：同预算学习收益与固定检查点搜索收益",
         "",
@@ -560,12 +631,37 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
         "",
         "- 学习收益：比较 `F2-PUCT64` 与 `G-F2-PUCT64`，即同等搜索预算下比较训练前后网络。",
         "- 搜索收益：比较同一 checkpoint 的 network 与 PUCT-64，分别计算 F2 和 G。",
+        f"- 盲测对 A/B：G-F2 裸网络得分率为 A {g_network_a.get('score_rate', float('nan')):.3f}、B {g_network_b.get('score_rate', float('nan')):.3f}；G-F2+PUCT-64 为 A {g_puct_a.get('score_rate', float('nan')):.3f}、B {g_puct_b.get('score_rate', float('nan')):.3f}。对应冻结 F2 裸网络为 A {f2_network_a.get('score_rate', float('nan')):.3f}、B {f2_network_b.get('score_rate', float('nan')):.3f}；F2+PUCT-64 为 A {f2_puct_a.get('score_rate', float('nan')):.3f}、B {f2_puct_b.get('score_rate', float('nan')):.3f}。",
         "- 裸网络或 PUCT 对 A/B 的胜负和颜色分项见 [`blind_comparisons.csv`](results/blind_comparisons.csv)。两种收益不会相互混算。",
         "",
         "## 攻防、价值估计与局限",
         "",
-        "攻防诊断仅统计精确规则可证的即时五连机会与唯一必防点，不修改网络落子。策略准确性由开发对局之外的战术结果共同衡量；网络推理仍只采用合法落点掩码。价值 MSE 按每个决策方的最终胜负映射到 [-1,1] 计算。",
-        f"精确战术计数：`{json.dumps(summary['selection']['exact_tactics'], ensure_ascii=False, sort_keys=True)}`。价值误差：`{json.dumps(summary['selection']['outcome_value_metrics'], ensure_ascii=False, sort_keys=True)}`。",
+        "本轮对 G V1 退化假设的检查：价值回传与终局视角转换有自动化正确性测试；本轮三个臂采用相同每16状态更新一次、相同批量、回放容量及经验采样规则，因此更新频率和 replay 机制没有被混淆成学习率效应。三档学习率的成对开发结果随训练状态均未稳定上升，`1e-3` 末期最低；同时训练交叉熵/价值损失下降而开发棋力变差，符合对自生成目标拟合但出现策略遗忘或自我对弈分布漂移的表现。",
+        "每个候选自我对弈均使用完整终局标签。颜色和短局情况如下（短局定义为去除固定开局后不超过8手）：",
+        "",
+        "| 学习率 | 黑胜 | 白胜 | 平局 | 平均后续手数 | 中位后续手数 | ≤8手短局 | 终局超额步 |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ])
+    for lr_id in LR_ORDER:
+        distribution = candidates[lr_id].setdefault("selfplay_distribution", {})
+        distribution.setdefault("outcomes", {"B_win": 0, "W_win": 0, "draw": 0})
+        distribution.setdefault("mean_post_opening_plies", 0.0)
+        distribution.setdefault("median_post_opening_plies", 0.0)
+        distribution.setdefault("games_at_most_8_post_opening_plies", 0)
+        distribution.setdefault("complete_games", candidates[lr_id].get("games", 0))
+        distribution.setdefault("terminal_tail_environment_steps", 0)
+        lines.append(
+            f"| {LR_LABELS[lr_id]} | {distribution['outcomes']['B_win']} | {distribution['outcomes']['W_win']} | "
+            f"{distribution['outcomes']['draw']} | {distribution['mean_post_opening_plies']:.2f} | "
+            f"{distribution['median_post_opening_plies']:.0f} | "
+            f"{distribution['games_at_most_8_post_opening_plies']}/{distribution['complete_games']} | "
+            f"{distribution['terminal_tail_environment_steps']} |"
+        )
+    lines.extend([
+        "",
+        "三臂自我对弈都明显偏向执黑，且多数完整局在去除固定开局后8手内结束。V1 同样记录了较强黑胜偏差和短局；这为本轮价值目标分布偏斜、策略自我强化和能力遗忘提供了可观测线索，但单靠本实验不能判定其因果贡献。",
+        "攻防诊断仅统计开发棋谱中精确规则可证的即时五连机会与唯一必防点，不修改网络落子。价值误差使用开发集决策值与终局结果计算，不是独立校准集准确率。网络推理仍只采用合法落点掩码。",
+        f"开发集精确战术计数：`{json.dumps(summary['selection']['exact_tactics'], ensure_ascii=False, sort_keys=True)}`。开发集终局价值误差：`{json.dumps(summary['selection']['outcome_value_metrics'], ensure_ascii=False, sort_keys=True)}`。",
         "- 本轮只训练 F2 初始化候选，未训练 G0 随机初始化；因此不能回答从随机权重出发是否成长，也不能量化 F2 初始化相对随机初始化的加速。",
         "- 两小时预算下 20k 训练节点未运行；候选只到 10k。开发集仅8组开局，用于晋级，区间不适合作稳定棋力排序。最终盲测每比较20组开局、40局，仍属有限样本。",
         "- 训练中自我对弈对手是同一当前网络，可能出现共同弱点；候选机制和冻结 A/B/F2 评估能暴露部分退化，但不等价于更广泛对手群。",
@@ -581,6 +677,25 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
         "python -m pytest tests/test_alphazero_g_v2_*.py -q",
         "```",
         "",
+        "## 验收记录",
+        "",
+    ])
+    verification = summary.get("verification")
+    if verification:
+        tests = verification.get("full_applicable_suite", {})
+        replay = verification.get("replay_validation", {})
+        model = verification.get("model_loading", {})
+        budget = verification.get("budget", {})
+        lines.extend([
+            f"- 分支适用全仓测试：{tests.get('passed', 0)} 项通过、{tests.get('skipped', 0)} 项跳过；为遵守历史 V6.2/V6.3 分支身份检查，排除 {len(tests.get('excluded_branch_locked_files', []))} 个只允许在原分支运行的历史测试文件。",
+            f"- 棋谱回放：自我对弈 {replay.get('selfplay_games', 0)} 局、开发 {replay.get('development_games', 0)} 局、冠军挑战 {replay.get('champion_games', 0)} 局、盲测 {replay.get('blind_games', 0)} 局；重复ID {replay.get('duplicate_ids', '未知')}，盲测开局池隔离 `{replay.get('blind_openings_disjoint', False)}`。",
+            f"- G 检查点加载：`{model.get('path', '未知')}`，通过 `load_g_checkpoint`，SHA-256 `{model.get('sha256', '未知')}`。",
+            f"- CPU 预算：{budget.get('actual_cpu_seconds', 0):.1f}/{budget.get('cap_cpu_seconds', 0):.1f} 秒，预算内 `{budget.get('within_cap', False)}`。",
+            "",
+        ])
+    else:
+        lines.extend(["验收摘要待写入 `results/verification.json`。", ""])
+    lines.extend([
         f"Drive 恢复快照：{summary.get('drive_status', {}).get('status', '待写入或未验证')}。本研究没有神经网络训练之外的模型训练目标；报告只汇总算法开发、监督自对弈优化和实战评估，不包含虚构的 G0、20k 节点或未执行成绩。",
         "",
         "## 附件",
@@ -589,6 +704,7 @@ def render_v2_report(root: str | Path, summary: dict[str, Any]) -> dict[str, Any
         "- `results/blind_comparisons.csv`：全部盲测比较统计。",
         "- `results/final_summary.json`：可复算摘要。",
         "- `results/integrity.json`：数据与图表哈希。",
+        "- `checkpoints/lr_1e4/node_10000.pt`：盲测用开发集候选（由 `load_g_checkpoint` 兼容加载；未被晋级为 champion）。",
     ])
     report_path = root_path / "research/g_v2/REPORT.md"
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -604,6 +720,7 @@ def _integrity_manifest(root: Path) -> dict[str, Any]:
         "research/g_v2/results/selection/stages.jsonl", "research/g_v2/results/evaluation/development.jsonl",
         "research/g_v2/results/evaluation/champion.jsonl", "research/g_v2/results/evaluation/blind.jsonl",
         "research/g_v2/results/evaluation/blind_summary.json", "research/g_v2/results/final_summary.json",
+        "research/g_v2/results/verification.json",
         "research/g_v2/results/growth.csv", "research/g_v2/results/blind_comparisons.csv",
         "research/g_v2/REPORT.md", "research/g_v2/figures/growth_by_states.png",
         "research/g_v2/figures/growth_by_cpu.png", "research/g_v2/figures/network_vs_puct.png",
@@ -611,6 +728,12 @@ def _integrity_manifest(root: Path) -> dict[str, Any]:
     ]
     paths += [f"research/g_v2/results/selfplay/{lr}.jsonl" for lr in LR_ORDER]
     paths += [f"research/g_v2/checkpoints/{lr}/progress.json" for lr in LR_ORDER]
+    checkpoint_root = root / "research/g_v2/checkpoints"
+    paths += [
+        item.relative_to(root).as_posix()
+        for item in sorted(checkpoint_root.rglob("*"))
+        if item.is_file() and item.name != "progress.json"
+    ]
     artifacts = {}
     for relative in paths:
         file = root / relative

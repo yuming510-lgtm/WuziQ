@@ -1,0 +1,13 @@
+{
+  "architecture": "F2-compatible 9x9, 32-channel, 2-residual-block policy/value network",
+  "candidate_checkpoint_id": "lr_1e4@10000",
+  "candidate_id": "lr_1e4",
+  "checkpoint_path": "research/g_v2/checkpoints/selected_g_f2.pt",
+  "checkpoint_sha256": "5ac65c6be2fac6817e4918729a53c2e9518c7aace48a2c7191e4c05892548b0a",
+  "format_version": 1,
+  "load_api": "src.research.alphazero_g.training.load_g_checkpoint",
+  "promoted_to_champion": false,
+  "selection_basis": "development set, pre-registered tie-break rule; selected for blind evaluation only",
+  "source_checkpoint": "research/g_v2/checkpoints/lr_1e4/node_10000.pt",
+  "source_checkpoint_sha256": "5ac65c6be2fac6817e4918729a53c2e9518c7aace48a2c7191e4c05892548b0a"
+}
