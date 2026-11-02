@@ -7,6 +7,7 @@ import torch
 
 from src.research.alphazero_g.v3_schedule import build_v3_schedule
 from src.research.alphazero_g.v3_runner import (
+    completed_v3_node_progress,
     initialize_v3_arm,
     initialize_v3_starts,
     load_v3_state,
@@ -166,4 +167,38 @@ def test_start_initializer_accepts_routes_already_past_first_node(tmp_path, monk
     monkeypatch.setattr(runner, "run_v3_arm", fake_run)
     assert runner.initialize_v3_starts(root) == [(510931, "G0"), (510931, "G-F2")]
     assert len(calls) == 2
+
+
+def test_completed_node_lookup_skips_older_milestones_and_checks_checkpoint(tmp_path):
+    import hashlib
+    from src.research.alphazero_g.training import save_g_checkpoint
+
+    seed = 510941
+    root = _test_root(tmp_path / "milestone_lookup", seed)
+    config = json.loads((root / "research/g_v3/config/experiment.json").read_text())
+    model, _, _ = initialize_v3_arm(root, arm="G0", seed=seed)
+    relative = f"research/g_v3/checkpoints/G0/seed-{seed}/node_1000.pt"
+    checkpoint = root / relative
+    checkpoint.parent.mkdir(parents=True, exist_ok=True)
+    digest = save_g_checkpoint(checkpoint, model, {
+        "experiment": "g_v3", "arm": "G0", "seed": seed, "node": 1000,
+        "config_sha256": config["config_sha256"],
+    })
+    progress = {"arm": "G0", "seed": seed, "config_sha256": config["config_sha256"],
+                "budgeted_environment_steps": 2000, "game_count": 3,
+                "optimizer_updates": 125, "last_checkpoint": relative}
+    (checkpoint.parent / "progress.json").write_text(json.dumps(progress))
+    stage = {"checkpoint_id": f"G0-seed-{seed}@1000", "arm": "G0", "seed": seed,
+             "node": 1000, "checkpoint": relative, "checkpoint_sha256": digest,
+             "config_sha256": config["config_sha256"]}
+    stages = root / "research/g_v3/results/training/stages.jsonl"
+    stages.parent.mkdir(parents=True, exist_ok=True)
+    stages.write_text(json.dumps(stage) + "\n")
+
+    completed = completed_v3_node_progress(root, arm="G0", seed=seed, node=1000)
+    assert completed is not None
+    assert completed["completed"] is True
+    assert completed["target_node"] == 1000
+    assert completed["budgeted_environment_steps"] == 2000
+    assert completed_v3_node_progress(root, arm="G0", seed=seed, node=5000) is None
 

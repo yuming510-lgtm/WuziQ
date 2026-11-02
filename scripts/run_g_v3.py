@@ -14,7 +14,8 @@ if str(ROOT) not in sys.path:
 from src.research.alphazero_g.v3_budget import BudgetExhausted
 from src.research.alphazero_g.v3_evaluation import run_v3_development, run_v3_tactical_stage, run_v3_blind
 from src.research.alphazero_g.v3_runner import (
-    ARMS, initialize_v3_starts, load_v3_config, run_v3_arm,
+    ARMS, completed_v3_node_progress, initialize_v3_starts, load_v3_config,
+    run_v3_arm,
 )
 
 
@@ -42,10 +43,12 @@ def main() -> None:
             break
         for seed in seeds:
             for arm in ARMS:
-                result = run_v3_arm(
-                    root, arm=arm, seed=seed, until_node=node,
-                    stop_after_games=args.max_games_per_call,
-                )
+                result = completed_v3_node_progress(root, arm=arm, seed=seed, node=node)
+                if result is None:
+                    result = run_v3_arm(
+                        root, arm=arm, seed=seed, until_node=node,
+                        stop_after_games=args.max_games_per_call,
+                    )
                 summary["training"].append({
                     "arm": arm, "seed": seed, "node": node,
                     "budgeted_environment_steps": result["budgeted_environment_steps"],

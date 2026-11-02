@@ -20,6 +20,7 @@ from .training import (
     F2_SHA256,
     GTrainer,
     initialize_arm,
+    load_g_checkpoint,
     save_g_checkpoint,
 )
 from .v3_bn import capture_bn_buffers
@@ -644,3 +645,57 @@ def initialize_v3_starts(root: str | Path) -> list[tuple[int, str]]:
                 raise ValueError(f"failed to initialize {arm} seed {seed} node-0 state")
             initialized.append((seed, arm))
     return initialized
+
+
+def completed_v3_node_progress(
+    root: str | Path, *, arm: str, seed: int, node: int,
+) -> dict[str, Any] | None:
+    """Return a verified completed node so resumed schedulers can skip older work."""
+    if arm not in ARMS:
+        raise ValueError("arm must be G0 or G-F2")
+    root_path = Path(root).resolve()
+    config = load_v3_config(root_path)
+    if int(seed) not in list(map(int, config["seeds"])) or int(node) not in list(map(int, config["stage_nodes"])):
+        raise ValueError("route seed or node is not registered")
+    progress_path = root_path / f"research/g_v3/checkpoints/{arm}/seed-{int(seed)}/progress.json"
+    if not progress_path.is_file():
+        return None
+    progress = json.loads(progress_path.read_text(encoding="utf-8"))
+    if (progress.get("arm") != arm or int(progress.get("seed", -1)) != int(seed)
+            or progress.get("config_sha256") != config["config_sha256"]):
+        raise ValueError("route progress identity does not match the registered experiment")
+    if int(progress.get("budgeted_environment_steps", -1)) < int(node):
+        return None
+    checkpoint_relative = f"research/g_v3/checkpoints/{arm}/seed-{int(seed)}/node_{int(node)}.pt"
+    checkpoint_path = root_path / checkpoint_relative
+    if not checkpoint_path.is_file():
+        raise ValueError(f"completed route progress is missing {checkpoint_relative}")
+    stages_path = root_path / "research/g_v3/results/training/stages.jsonl"
+    matching = []
+    if stages_path.is_file():
+        for line in stages_path.read_text(encoding="utf-8").splitlines():
+            row = json.loads(line)
+            if row.get("checkpoint_id") == f"{arm}-seed-{int(seed)}@{int(node)}":
+                matching.append(row)
+    if len(matching) != 1:
+        raise ValueError("completed route node lacks one unique registered stage record")
+    row = matching[0]
+    digest = hashlib.sha256(checkpoint_path.read_bytes()).hexdigest()
+    if (row.get("checkpoint") != checkpoint_relative
+            or row.get("config_sha256") != config["config_sha256"]
+            or row.get("checkpoint_sha256") != digest):
+        raise ValueError("completed route node checkpoint does not match its stage record")
+    model = load_g_checkpoint(checkpoint_path, device="cpu")
+    metadata = getattr(model, "checkpoint_metadata", {})
+    if (metadata.get("arm") != arm or int(metadata.get("seed", -1)) != int(seed)
+            or int(metadata.get("node", -1)) != int(node)
+            or metadata.get("config_sha256") != config["config_sha256"]):
+        raise ValueError("completed route node checkpoint metadata is inconsistent")
+    del model
+    return {
+        **progress,
+        "completed": True,
+        "target_node": int(node),
+        "checkpoint": checkpoint_relative,
+        "checkpoint_sha256": digest,
+    }
