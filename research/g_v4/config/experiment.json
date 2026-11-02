@@ -1,0 +1,162 @@
+{
+  "base_commit": "2401e97b62b887fe66c9137815ac44b440d0fe9e",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v4",
+  "config_sha256": "25790d7763b3452589a9112872ec2dc81a4d4c6ffdcc4f54ea669e85a1c66a2b",
+  "continuation_audit_path": "research/g_v4/results/preflight/v3_continuation_audit.json",
+  "continuation_audit_sha256": "e30f179336926dcdadfa6f9bb49f5f4ab2e1d9b80b5d8fe490bd39b766d46529",
+  "estimated_resources": {
+    "cpu": "3 available CPU cores, single-threaded training/search",
+    "disk_free_bytes_measured_preflight": 28508680192,
+    "peak_rss_bytes_measured_preflight": null,
+    "storage_reserve_bytes": 2000000000
+  },
+  "evaluation": {
+    "B_time_limit_seconds": 0.05,
+    "blind_opening_groups": 20,
+    "blind_used_for_selection": false,
+    "candidate_modes": [
+      "network",
+      "puct64"
+    ],
+    "development_opening_groups": 12,
+    "estimated_development_and_blind_games": 11424,
+    "opponents": [
+      "own_start",
+      "stage_champion",
+      "G0-V3-20K",
+      "A",
+      "B",
+      "F2"
+    ],
+    "paired_color_games_per_group": 2,
+    "promotion": {
+      "each_color_at_least": 0.5,
+      "groups": 12,
+      "paired_ci95_lower_above": 0.5,
+      "score_rate_at_least": 0.625
+    }
+  },
+  "experiment_id": "wuziq-alphazero-g-v4",
+  "f2_sha256": "50164ad9b139e0c47c1b1af7497f670c26e9864a81c10c02de0ff4426b2d0257",
+  "format_version": 1,
+  "hard_cpu_hour_cap": 12.0,
+  "initialization": "G0 random weights; three new seeds, plus V3 G0@20K warm continuation",
+  "network": {
+    "channels": 32,
+    "policy_actions": 81,
+    "residual_blocks": 2,
+    "value_head": true
+  },
+  "opening_schedule_path": "research/g_v4/config/openings.json",
+  "opening_schedule_sha256": "483e5eb5fbd507b0f048629d60d3832e85c2588de11407025a4ce4f19624edfe",
+  "preflight_path": "research/g_v4/results/preflight/preflight.json",
+  "preflight_sha256": "598909c2494812ee8b054bc7648de8fddb6ed48edfede15e2d1b46eeb66a362d",
+  "registered": true,
+  "runtime_estimate": {
+    "basis": "Actual V4 preflight medians; conservative assumes 28% lower self-play throughput, 1.5x measured update/evaluation costs, and 40% overhead margin. Includes up to 300K new self-play states, all maximum registered development checkpoints, and 720 final blind games.",
+    "cpu_seconds": {
+      "central": 27071.940861566036,
+      "conservative": 42731.38242696318,
+      "optimistic": 22958.96877334203
+    },
+    "estimated_optimizer_updates": 18750,
+    "evaluation_game_estimate": 11424,
+    "fixed_overhead_cpu_seconds": 1532.3740110320398,
+    "hours": {
+      "central": 7.519983572657233,
+      "conservative": 11.869828451934216,
+      "optimistic": 6.377491325928341
+    },
+    "maximum_budgeted_states": 300000,
+    "measured_evaluation_cpu_seconds_per_game_median": 0.3747778909999999,
+    "measured_optimizer_cpu_seconds_per_update_median": 0.009142134599999973,
+    "measured_state_rate_median_per_cpu_second": 14.226984480806975
+  },
+  "runtime_estimate_phase_breakdown": {
+    "maximum_blind_games": 720,
+    "maximum_development_games": 10704,
+    "tactical_checkpoint_probes": "at most two 32-position exact-rule evaluations per initial/training milestone checkpoint; separately timed and charged in the CPU ledger"
+  },
+  "seed_plan": {
+    "continuation_job_seeds": [
+      540404,
+      540405
+    ],
+    "new_random_model_seeds": [
+      540401,
+      540402,
+      540403
+    ],
+    "opening_schedule_seeds": [
+      540401,
+      540402,
+      540403,
+      540404,
+      540405
+    ]
+  },
+  "stages": {
+    "A": {
+      "new_random_seeds": [
+        540401,
+        540402,
+        540403
+      ],
+      "states_each": 30000,
+      "states_total": 90000
+    },
+    "B": {
+      "continuation_mode": "weight_inheritance_optimizer_reset_replay_rebuilt_from_first_20k_v3_states",
+      "new_states": 100000,
+      "start_checkpoint": "G0-seed-510901@20000"
+    },
+    "C": {
+      "early_stop_after_consecutive_below_50pct_challenges": 3,
+      "maximum_new_states": 110000,
+      "requires_A_candidate_to_pass_v3_champion_gate": true
+    },
+    "maximum_total_new_states": 300000,
+    "minimum_planned_new_states": 190000
+  },
+  "training": {
+    "algorithm": "AlphaZero-style self-play reinforcement learning",
+    "batch_size": 16,
+    "bn_policy": "freeze",
+    "handcrafted_tactical_rewards": false,
+    "imitation_samples": false,
+    "late_temperature": 0.1,
+    "learning_rate": 0.0001,
+    "opening_mix": {
+      "empty": 0.5,
+      "random4": 0.5
+    },
+    "policy_target": "PUCT root visit distribution",
+    "replay_capacity_positions": 20000,
+    "scheduler": "CosineAnnealingLR",
+    "simulation_budget": 64,
+    "teacher_labels": false,
+    "temperature_moves": 12,
+    "update_every_budgeted_states": 16,
+    "value_target": "terminal outcome from side-to-move perspective",
+    "weight_decay": 0.0001
+  },
+  "v3_champion": {
+    "checkpoint": "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt",
+    "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+    "checkpoint_verified": true,
+    "latest_training_state_budgeted_states": 30000,
+    "latest_training_state_optimizer_updates": 1875,
+    "latest_training_state_replay_games": 678,
+    "latest_training_state_replay_positions": 20000,
+    "latest_v3_training_state": "research/g_v3/checkpoints/G0/seed-510901/training_state.pt",
+    "no_exact_20k_state_claim": true,
+    "node_20000_training_state_available": false,
+    "replay_reconstruction_budgeted_states": 20000,
+    "replay_source": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+    "v3_champion_id": "G0-seed-510901@20000",
+    "v3_completed_states": 30000,
+    "v3_optimizer_updates": 1875,
+    "v4_continuation_mode": "weight_inheritance_optimizer_reset_replay_rebuilt_from_first_20k_v3_states"
+  }
+}
