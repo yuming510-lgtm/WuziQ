@@ -238,9 +238,25 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
     state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
     runtime_cpu = cpu_seconds_committed(base)
     runtime_wall = active_wall_seconds_committed(base)
+    runtime_rows = _load_rows(base / "research/g_v4/results/runtime/cpu_events.jsonl")
+    cpu_by_category = {
+        category: float(sum(float(row["cpu_seconds"]) for row in runtime_rows if row["category"] == category))
+        for category in sorted({str(row["category"]) for row in runtime_rows})
+    }
+    formal_cpu = float(sum(value for category, value in cpu_by_category.items() if category != "preflight"))
+    ledger_preflight_cpu = float(cpu_by_category.get("preflight", 0.0))
+    registered_preflight_cpu = float(json.loads((result_dir / "preflight/preflight.json").read_text())
+                                     .get("measurement_cpu_seconds", 0.0))
+    total_cpu = runtime_cpu + registered_preflight_cpu
     _write_json(summary_dir / "runtime.json", {
-        "formal_cpu_seconds": runtime_cpu, "formal_instrumented_wall_seconds": runtime_wall,
-        "preflight_cpu_seconds": json.loads((result_dir / "preflight/preflight.json").read_text()).get("measurement_cpu_seconds"),
+        "formal_training_evaluation_and_orchestration_cpu_seconds": formal_cpu,
+        "ledger_preflight_diagnostic_cpu_seconds": ledger_preflight_cpu,
+        "registered_initial_preflight_cpu_seconds": registered_preflight_cpu,
+        "total_cpu_seconds_including_preflight": total_cpu,
+        "formal_instrumented_wall_seconds": runtime_wall,
+        "cpu_seconds_by_event_category": cpu_by_category,
+        "thread_probe": json.loads((result_dir / "runtime/thread_probe.json").read_text())
+        if (result_dir / "runtime/thread_probe.json").exists() else None,
         "hard_cpu_hour_cap": config["hard_cpu_hour_cap"],
     })
 
@@ -330,7 +346,6 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         subset = [game for game in selfplay if game.get("job_id") == job["job_id"]]
         outcome_counts[job["job_id"]] = dict(Counter(str(game["outcome"]) for game in subset))
     total_states = audit["budgeted_training_states"]
-    total_cpu = runtime_cpu + float(json.loads((result_dir / "preflight/preflight.json").read_text()).get("measurement_cpu_seconds", 0))
     phase_c = state.get("phase_c_decision") or {"started": False, "reason": "not reached"}
     final_candidate = state.get("final_candidate", {})
     blind_ci_note = "paired opening bootstrap 95% interval; exploratory sample size is 20 groups per listed matchup"
@@ -344,7 +359,8 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         "", "## 资源预检、训练预算和恢复依据", "",
         f"- 环境：{config['estimated_resources']['cpu']}；峰值内存预检 {config['estimated_resources']['peak_rss_bytes_measured_preflight']:,} B；预检磁盘可用 {config['estimated_resources']['disk_free_bytes_measured_preflight']:,} B；CPU-only。",
         f"- 预检后登记估算（CPU 时间）：乐观 {config['runtime_estimate']['hours']['optimistic']:.2f} 小时，中位 {config['runtime_estimate']['hours']['central']:.2f} 小时，保守 {config['runtime_estimate']['hours']['conservative']:.2f} 小时；硬上限 {config['hard_cpu_hour_cap']} CPU 小时。",
-        f"- 正式 CPU 计时 {runtime_cpu / 3600:.2f} 小时；包含 V4 预检约 {total_cpu / 3600:.2f} 小时。任务计时器记录的有效工作 wall time {runtime_wall / 3600:.2f} 小时。",
+        f"- 正式训练、评估和协调 CPU {formal_cpu / 3600:.2f} 小时；包括首轮预检与线程诊断的总 CPU {total_cpu / 3600:.2f} 小时。有效工作 wall time {runtime_wall / 3600:.2f} 小时。",
+        "- 初始 node-0 评估时发现 PyTorch 默认使用3线程。用相同4局固定种子分别重放3线程和1线程后，A/B/F2/G0 对阵的完整落子序列均与正式记录逐步一致；之后的正式训练/评估固定1线程。逐局耗时仍使用实际值，探针另计入 CPU 账本，详细数据见 `results/runtime/thread_probe.json`。",
         f"- V3 没有 20K 对应的优化器/经验池/随机态快照（当时最新状态为 {config['v3_champion']['latest_training_state_budgeted_states']:,} 状态、{config['v3_champion']['latest_training_state_optimizer_updates']:,} 次更新）。因此 B 阶段采用权重继承、AdamW/余弦调度器重置，并从完整 V3 对局记录重建 20K 经验状态；不称为精确续训。",
         f"- A 三个随机种子：{json.dumps(config['stages']['A']['new_random_seeds'])}；B 权重继承 V3 G0@20K，最多新增 100K；C 启动状态为 `{phase_c.get('started')}`，原因：{phase_c.get('reason', phase_c.get('candidate', {}).get('champion_checkpoint_id', ''))}。总预算上限 300K。",
         "", "## 成长曲线", "",
@@ -382,4 +398,4 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
             "report_sha256": hashlib.sha256(report_path.read_bytes()).hexdigest(),
             "audit": audit, "development_summary_rows": len(dev_summary),
             "blind_summary_rows": len(blind_summary), "tactical_runs": len(tactics),
-            "formal_cpu_seconds": runtime_cpu}
+            "formal_cpu_seconds": formal_cpu, "total_cpu_seconds_including_preflight": total_cpu}

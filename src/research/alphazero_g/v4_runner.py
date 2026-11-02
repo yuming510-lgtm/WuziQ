@@ -580,6 +580,7 @@ def evaluate_v4_checkpoint(
     phase: str = "development",
 ) -> dict[str, Any]:
     root_path = Path(root).resolve()
+    torch.set_num_threads(1)
     config = load_v4_config(root_path)
     if phase != "development":
         raise ValueError("only development grids are used for checkpoint selection")
@@ -1008,6 +1009,7 @@ def _run_blind_model(
 
 def run_v4_blind(root: str | Path, *, candidate_job: dict[str, Any] | None = None) -> dict[str, Any]:
     root_path = Path(root).resolve()
+    torch.set_num_threads(1)
     config = load_v4_config(root_path)
     state = _experiment_state(root_path, config)
     candidate = state.get("final_candidate") or choose_final_development_candidate(root_path, config, state)

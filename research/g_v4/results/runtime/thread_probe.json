@@ -1,0 +1,41 @@
+{
+  "all_sequences_identical": true,
+  "checks": [
+    {
+      "agent_color": "B",
+      "cpu_seconds_threads_1": 1.1473786070000003,
+      "cpu_seconds_threads_3": 3.96262675,
+      "opponent": "A",
+      "same_as_logged_formal_sequence": true,
+      "same_move_sequence": true
+    },
+    {
+      "agent_color": "W",
+      "cpu_seconds_threads_1": 0.5155875950000004,
+      "cpu_seconds_threads_3": 1.402784328,
+      "opponent": "B",
+      "same_as_logged_formal_sequence": true,
+      "same_move_sequence": true
+    },
+    {
+      "agent_color": "B",
+      "cpu_seconds_threads_1": 0.5330421259999998,
+      "cpu_seconds_threads_3": 2.0265734669999986,
+      "opponent": "F2",
+      "same_as_logged_formal_sequence": true,
+      "same_move_sequence": true
+    },
+    {
+      "agent_color": "W",
+      "cpu_seconds_threads_1": 1.100606568,
+      "cpu_seconds_threads_3": 4.0465926450000005,
+      "opponent": "G0",
+      "same_as_logged_formal_sequence": true,
+      "same_move_sequence": true
+    }
+  ],
+  "decision": "use torch.set_num_threads(1) for all remaining formal G V4 train and evaluation; same recorded moves in representative A/B/F2/G0 PUCT games",
+  "probe_cpu_seconds": 14.791269972999999,
+  "probe_wall_seconds": 9.011566767003387,
+  "torch_version": "2.15.0+cpu"
+}
