@@ -6,6 +6,7 @@ from pathlib import Path
 import torch
 
 from src.research.alphazero_g.v3_schedule import build_v3_schedule
+from src.research.alphazero_g.v3_evaluation import _selection_state, finalize_v3_champions
 from src.research.alphazero_g.v3_runner import (
     completed_v3_node_progress,
     initialize_v3_arm,
@@ -167,6 +168,30 @@ def test_start_initializer_accepts_routes_already_past_first_node(tmp_path, monk
     monkeypatch.setattr(runner, "run_v3_arm", fake_run)
     assert runner.initialize_v3_starts(root) == [(510931, "G0"), (510931, "G-F2")]
     assert len(calls) == 2
+
+
+def test_finalize_v3_champions_copies_selected_checkpoints_with_verified_hashes(tmp_path):
+    seed = 510941
+    root = _test_root(tmp_path / "finalize_champions", seed)
+    initialize_v3_starts(root)
+    config = json.loads((root / "research/g_v3/config/experiment.json").read_text())
+    selection = _selection_state(root, config)
+    selection_path = root / "research/g_v3/results/selection/state.json"
+    final_node = config["stage_nodes"][-1]
+    selection["decisions"] = [
+        {"candidate_id": f"{arm}-seed-{seed}@{final_node}"}
+        for arm in ("G0", "G-F2")
+    ]
+    selection_path.write_text(json.dumps(selection, sort_keys=True))
+
+    result = finalize_v3_champions(root)
+
+    assert set(result["models"]) == {f"G0:{seed}", f"G-F2:{seed}"}
+    for model in result["models"].values():
+        source = root / model["selected_source"]
+        alias = root / model["checkpoint"]
+        assert alias.read_bytes() == source.read_bytes()
+        assert hashlib.sha256(alias.read_bytes()).hexdigest() == model["sha256"]
 
 
 def test_completed_node_lookup_skips_older_milestones_and_checks_checkpoint(tmp_path):

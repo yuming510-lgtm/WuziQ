@@ -520,7 +520,7 @@ def finalize_v3_champions(root: str | Path) -> dict[str, Any]:
                 raise ValueError(f"{arm} seed {seed} has no terminal champion decision")
             source = root_path / champion["checkpoint"]
             raw = source.read_bytes()
-            digest = _sha(raw)
+            digest = hashlib.sha256(raw).hexdigest()
             if digest != champion["checkpoint_sha256"]:
                 raise ValueError(f"selected champion checkpoint checksum mismatch: {source}")
             target = root_path / f"research/g_v3/checkpoints/{arm}/seed-{seed}/final.pt"
@@ -536,7 +536,7 @@ def finalize_v3_champions(root: str | Path) -> dict[str, Any]:
                 os.fsync(parent_fd)
             finally:
                 os.close(parent_fd)
-            if _sha(target.read_bytes()) != digest:
+            if hashlib.sha256(target.read_bytes()).hexdigest() != digest:
                 raise ValueError("final champion alias failed its checksum verification")
             models[key] = {
                 "checkpoint_id": champion["checkpoint_id"],
