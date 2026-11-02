@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from src.research.alphazero_g.v3_schedule import _opening_digest, validate_v3_schedule
+from src.research.alphazero_g.evaluation import load_evaluation_log
 from src.research.alphazero_g.v4_budget import (
     cpu_seconds_committed, next_snapshot_threshold, record_cpu_event,
 )
@@ -112,6 +113,10 @@ def test_empty_v4_result_audit_replays_registered_metadata(tmp_path):
 
 
 def test_v4_snapshot_restores_registered_state_to_an_empty_directory(tmp_path):
+    expected_evaluation_games = sum(
+        len(load_evaluation_log(ROOT / f"research/g_v4/results/evaluation/{name}")[0])
+        for name in ("development.jsonl", "blind.jsonl")
+    )
     archive = tmp_path / "g_v4_recovery.zip"
     created = create_v4_snapshot(ROOT, archive)
     destination = tmp_path / "empty_restore"
@@ -119,6 +124,7 @@ def test_v4_snapshot_restores_registered_state_to_an_empty_directory(tmp_path):
     assert created["sha256"] == restored["archive_sha256"]
     assert restored["empty_restore"]
     assert restored["selfplay_game_records"] == 0
+    assert restored["evaluation_game_records"] == expected_evaluation_games
     assert (destination / V3_CHAMPION_REL).is_file()
     assert (destination / "research/g_v4/checkpoints/B-G0-v3-champion-continue/training_state.pt").is_file()
 

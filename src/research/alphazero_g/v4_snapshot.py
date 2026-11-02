@@ -172,7 +172,9 @@ def create_v4_snapshot(root: str | Path, output: str | Path) -> dict[str, Any]:
                          for name, data in contents.items()
                          if name.startswith("research/g_v4/results/selfplay/"))
     evaluation_games = sum(len([line for line in data.splitlines() if line])
-                           for name, data in contents.items() if "/results/evaluation/" in name)
+                           for name, data in contents.items()
+                           if name.startswith("research/g_v4/results/evaluation/")
+                           and not name.endswith("/tactics.jsonl"))
     manifest = {
         "format_version": 1, "experiment_id": config["experiment_id"],
         "branch": branch, "commit": commit, "config_sha256": config["config_sha256"],
