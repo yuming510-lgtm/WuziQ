@@ -148,3 +148,22 @@ def test_all_route_seed_initial_checkpoints_exist_before_first_promotion_state(t
     }
     assert not list((root / "research/g_v3/results/selfplay").glob("*.jsonl"))
 
+
+def test_start_initializer_accepts_routes_already_past_first_node(tmp_path, monkeypatch):
+    root = _test_root(tmp_path / "already_advanced", [510931])
+    import src.research.alphazero_g.v3_runner as runner
+
+    calls = []
+
+    def fake_run(root_path, *, arm, seed, until_node, stop_after_games):
+        calls.append((seed, arm, until_node, stop_after_games))
+        assert until_node == 30_000
+        checkpoint = root_path / f"research/g_v3/checkpoints/{arm}/seed-{seed}/node_0.pt"
+        checkpoint.parent.mkdir(parents=True, exist_ok=True)
+        checkpoint.write_bytes(b"initial")
+        return {"budgeted_environment_steps": 2_000}
+
+    monkeypatch.setattr(runner, "run_v3_arm", fake_run)
+    assert runner.initialize_v3_starts(root) == [(510931, "G0"), (510931, "G-F2")]
+    assert len(calls) == 2
+
