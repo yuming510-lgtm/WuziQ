@@ -1,24 +1,41 @@
 {
-  "experiment_id": "wuziq-alphazero-g-v4",
-  "drive_folder_name": "WuziQ G V4 Recovery",
   "drive_folder_id": "18cKYv8LqNpysonwLJyJdhVY6Ucu0yQos",
+  "drive_folder_name": "WuziQ G V4 Recovery",
   "drive_folder_url": "https://drive.google.com/drive/folders/18cKYv8LqNpysonwLJyJdhVY6Ucu0yQos",
-  "smoke_test": {
-    "upload": "passed",
-    "download": "passed",
-    "sha256_match": "9050b63dce9bf12c19ce0ba77c1dc1202b6b3544ed8b1ff6e0d72544a138319f",
-    "delete": "passed",
-    "verified_at_utc": "2026-11-02T11:24:00Z"
-  },
-  "local_initial_snapshot_restore_drill": "passed to empty directory before formal training",
   "drive_full_snapshot_restore_drill": {
-    "status": "passed",
     "bootstrap_file_id": "1k-GaDNVqgGD6e9jEMbhVQuI-s_WNXInZ",
     "bootstrap_sha256": "2a485cf8dbcc48b949f5daf0198a8ddbb461923a7b913522224b91433004b057",
     "download_sha256_match": true,
     "empty_directory_restore": true,
     "restored_checkpoint_files": 4,
+    "status": "passed",
     "verified_at_utc": "2026-11-02T11:35:00Z"
+  },
+  "experiment_id": "wuziq-alphazero-g-v4",
+  "latest_snapshot": {
+    "active_cpu_seconds": 24550.175253874964,
+    "active_wall_seconds": 24585.646401528356,
+    "config_sha256": "25790d7763b3452589a9112872ec2dc81a4d4c6ffdcc4f54ea669e85a1c66a2b",
+    "drive_download_sha256_match": true,
+    "drive_file_id": "1Rt9ul4XzyKidFU9NjmHH7qXBTWY-0h3k",
+    "empty_directory_restore": true,
+    "evaluation_game_records": 6288,
+    "previous_snapshot_deleted_after_new_snapshot_verified": true,
+    "previous_snapshot_id": "1aZXffCmQ1Fd3_bdBtdFfPkmCOt0vMPeX",
+    "selfplay_game_records": 7181,
+    "sha256": "0a943562cb747f519933252892cb8ca78c59254b961202f6f80187b2d435c767",
+    "size_bytes": 38376766,
+    "source_commit": "496d740be88ca216d3672f1dac099c14147d7845",
+    "title": "g_v4_recovery_final_190k.zip",
+    "validated_at_utc": "2026-11-02T19:33:33Z"
+  },
+  "local_initial_snapshot_restore_drill": "passed to empty directory before formal training",
+  "smoke_test": {
+    "delete": "passed",
+    "download": "passed",
+    "sha256_match": "9050b63dce9bf12c19ce0ba77c1dc1202b6b3544ed8b1ff6e0d72544a138319f",
+    "upload": "passed",
+    "verified_at_utc": "2026-11-02T11:24:00Z"
   },
   "snapshot_interval_active_hours": [
     1,
@@ -29,18 +46,5 @@
     39,
     65
   ],
-  "snapshot_retention": "one latest verified V4 snapshot in this folder; other experiment folders untouched",
-  "latest_snapshot": {
-    "drive_file_id": "1aZXffCmQ1Fd3_bdBtdFfPkmCOt0vMPeX",
-    "title": "g_v4_recovery_90k.zip",
-    "sha256": "0c7d15e3d79ddc9ce0224fb10891e5cde8d4b723821d0bea894e3c5df941dedc",
-    "size_bytes": 35908717,
-    "drive_download_sha256_match": true,
-    "empty_directory_restore": true,
-    "selfplay_game_records": 6714,
-    "evaluation_game_records": 5760,
-    "active_cpu_seconds": 22936.758694713983,
-    "active_wall_seconds": 22952.545702795353,
-    "validated_at_utc": "2026-11-02T18:38:28Z"
-  }
+  "snapshot_retention": "one latest verified V4 snapshot in this folder; other experiment folders untouched"
 }
