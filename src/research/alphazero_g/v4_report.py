@@ -16,7 +16,6 @@ import numpy as np
 from .evaluation import load_evaluation_log
 from .replay import load_game_log
 from .training import load_g_checkpoint
-from .v3_budget import cpu_seconds_committed, active_wall_seconds_committed
 from .v3_evaluation import build_v3_tactical_puzzles, evaluate_v3_tactics, summarize_v3_matches
 from .v4_budget import _load_rows, ensure_cpu_room, record_cpu_event
 from .v4_config import V3_CHAMPION_ID, V3_CHAMPION_REL, load_v4_config
@@ -49,7 +48,7 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         return
     fields = list(dict.fromkeys(key for row in rows for key in row))
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({key: json.dumps(value, ensure_ascii=False) if isinstance(value, (list, dict)) else value
@@ -62,6 +61,22 @@ def _write_json(path: Path, value: Any) -> None:
     temporary.write_text(json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2,
                                     allow_nan=False) + "\n", encoding="utf-8")
     temporary.replace(path)
+
+
+def _format_optional_bytes(value: Any) -> str:
+    if value is None:
+        return "未测得"
+    return f"{int(value):,} B"
+
+
+def _normalize_tactic_record(row: dict[str, Any]) -> dict[str, Any]:
+    normalized = dict(row)
+    normalized.setdefault("checkpoint_id", normalized.get("candidate_checkpoint_id"))
+    return normalized
+
+
+def _total_cpu_seconds(runtime_rows: list[dict[str, Any]], registered_preflight_seconds: float) -> float:
+    return sum(float(row["cpu_seconds"]) for row in runtime_rows) + float(registered_preflight_seconds)
 
 
 def _group(matches: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[str, Any]]:
@@ -199,12 +214,16 @@ def _checkpoint_tactics(root: Path, checkpoint_id: str, relative: str, mode: str
 def generate_v4_report(root: str | Path) -> dict[str, Any]:
     base = Path(root).resolve()
     config = load_v4_config(base)
+    preflight_data = json.loads((base / config["preflight_path"]).read_text(encoding="utf-8"))
+    preflight_resources = preflight_data.get("resources", {})
     audit = validate_v4_results(base)
     result_dir = base / "research/g_v4/results"
     summary_dir = result_dir / "summary"
     figures = base / "research/g_v4/figures"
     summary_dir.mkdir(parents=True, exist_ok=True)
     figures.mkdir(parents=True, exist_ok=True)
+    test_results_path = summary_dir / "test_results.json"
+    test_results = json.loads(test_results_path.read_text(encoding="utf-8")) if test_results_path.is_file() else None
     development = _read_jsonl(result_dir / "evaluation/development.jsonl")
     blind = _read_jsonl(result_dir / "evaluation/blind.jsonl")
     selfplay: list[dict[str, Any]] = []
@@ -212,8 +231,8 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         selfplay.extend(load_game_log(path)[0])
     stages = _read_jsonl(result_dir / "training/stages.jsonl")
     promotions = _read_jsonl(result_dir / "selection/promotions.jsonl")
-    dev_summary = _group(development, ("candidate_checkpoint_id", "opponent_checkpoint_id", "opponent_family", "mode")) if development else []
-    blind_summary = _group(blind, ("candidate_checkpoint_id", "opponent_checkpoint_id", "opponent_family", "mode")) if blind else []
+    dev_summary = _group(development, ("candidate_checkpoint_id", "opponent_checkpoint_id", "opponent_family", "mode", "v4_opponent_role")) if development else []
+    blind_summary = _group(blind, ("candidate_checkpoint_id", "opponent_checkpoint_id", "opponent_family", "mode", "v4_opponent_role")) if blind else []
     _write_csv(summary_dir / "development_summary.csv", dev_summary)
     _write_csv(summary_dir / "blind_summary.csv", blind_summary)
     _write_csv(summary_dir / "training_stages.csv", stages)
@@ -236,9 +255,9 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
     _write_json(summary_dir / "integrity_audit.json", audit)
     state_path = result_dir / "selection/experiment_state.json"
     state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
-    runtime_cpu = cpu_seconds_committed(base)
-    runtime_wall = active_wall_seconds_committed(base)
     runtime_rows = _load_rows(base / "research/g_v4/results/runtime/cpu_events.jsonl")
+    runtime_cpu = sum(float(row["cpu_seconds"]) for row in runtime_rows)
+    runtime_wall = sum(float(row.get("wall_seconds", 0.0)) for row in runtime_rows)
     cpu_by_category = {
         category: float(sum(float(row["cpu_seconds"]) for row in runtime_rows if row["category"] == category))
         for category in sorted({str(row["category"]) for row in runtime_rows})
@@ -247,7 +266,7 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
     ledger_preflight_cpu = float(cpu_by_category.get("preflight", 0.0))
     registered_preflight_cpu = float(json.loads((result_dir / "preflight/preflight.json").read_text())
                                      .get("measurement_cpu_seconds", 0.0))
-    total_cpu = runtime_cpu + registered_preflight_cpu
+    total_cpu = _total_cpu_seconds(runtime_rows, registered_preflight_cpu)
     _write_json(summary_dir / "runtime.json", {
         "formal_training_evaluation_and_orchestration_cpu_seconds": formal_cpu,
         "ledger_preflight_diagnostic_cpu_seconds": ledger_preflight_cpu,
@@ -264,7 +283,7 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
     tactics_path = result_dir / "evaluation/tactics.jsonl"
     tactics, tactic_ids = [], set()
     if tactics_path.exists():
-        tactics = _read_jsonl(tactics_path)
+        tactics = [_normalize_tactic_record(row) for row in _read_jsonl(tactics_path)]
         tactic_ids = {str(row["record_id"]) for row in tactics}
     expected_candidates = {str(row["checkpoint_id"]): str(row["checkpoint"]) for row in stages}
     for job in [phase_a_job(int(seed)) for seed in config["stages"]["A"]["new_random_seeds"]] + [phase_b_job()] + ([state["phase_c_job"]] if state.get("phase_c_job") else []):
@@ -301,7 +320,8 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         points = []
         for stage in job_rows:
             summary = next((row for row in dev_summary if row.get("candidate_checkpoint_id") == stage["checkpoint_id"]
-                            and row.get("opponent_checkpoint_id") == V3_CHAMPION_ID and row.get("mode") == "puct"), None)
+                            and row.get("opponent_checkpoint_id") == V3_CHAMPION_ID and row.get("mode") == "puct"
+                            and row.get("v4_opponent_role") == "G0-V3-20K"), None)
             if summary:
                 points.append((int(stage["new_states"]), float(summary["score_rate"])))
         if points:
@@ -316,7 +336,8 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         points = []
         for stage in job_rows:
             summary = next((row for row in dev_summary if row.get("candidate_checkpoint_id") == stage["checkpoint_id"]
-                            and row.get("opponent_checkpoint_id") == V3_CHAMPION_ID and row.get("mode") == "puct"), None)
+                            and row.get("opponent_checkpoint_id") == V3_CHAMPION_ID and row.get("mode") == "puct"
+                            and row.get("v4_opponent_role") == "G0-V3-20K"), None)
             if summary:
                 cpu = (float(stage.get("selfplay_cpu_seconds", 0)) + float(stage.get("optimizer_cpu_seconds", 0))) / 3600
                 points.append((cpu, float(summary["score_rate"])))
@@ -348,7 +369,13 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
     total_states = audit["budgeted_training_states"]
     phase_c = state.get("phase_c_decision") or {"started": False, "reason": "not reached"}
     final_candidate = state.get("final_candidate", {})
-    blind_ci_note = "paired opening bootstrap 95% interval; exploratory sample size is 20 groups per listed matchup"
+    blind_ci_note = "配对开局 bootstrap 95% 区间；每个列出的对阵仅有20组开局，属于探索性样本"
+    phase_c_reason = str(phase_c.get("reason", phase_c.get("candidate", {}).get("champion_checkpoint_id", "")))
+    if "No A-stage seed champion passed" in phase_c_reason:
+        phase_c_reason = "A阶段没有种子冠军通过预注册的 V3 G0@20K 门槛"
+    if "not reached" == phase_c_reason:
+        phase_c_reason = "尚未进入 C 阶段"
+    cpu_count = int(preflight_resources.get("affinity_cpus", 0))
     report = [
         "# WuziQ G V4：从零强化学习的稳定成长实验", "",
         f"- 分支：`{config['branch']}`；基线 G V3 提交：`{config['base_commit']}`。",
@@ -357,12 +384,12 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         f"- 实测新增状态：{total_states:,}；自我对弈 {audit['selfplay_games']} 局、{audit['selfplay_puct_simulations']:,} 次 MCTS 模拟。阶段状态：`{json.dumps(audit['training_states_by_job'], ensure_ascii=False)}`。",
         f"- 正式评估：开发赛 {audit['development_games']} 局；盲测 {audit['blind_games']} 局。盲测使用 {config['evaluation']['blind_opening_groups']} 个开发未见开局、双方换色，按 {blind_ci_note}。",
         "", "## 资源预检、训练预算和恢复依据", "",
-        f"- 环境：{config['estimated_resources']['cpu']}；峰值内存预检 {config['estimated_resources']['peak_rss_bytes_measured_preflight']:,} B；预检磁盘可用 {config['estimated_resources']['disk_free_bytes_measured_preflight']:,} B；CPU-only。",
+        f"- 环境：{cpu_count} 个可用 CPU 核心，单线程执行，CPU-only；实测峰值 RSS {_format_optional_bytes(preflight_resources.get('peak_rss_bytes'))}；预检可用内存 {_format_optional_bytes(preflight_resources.get('memory_available_bytes'))}/{_format_optional_bytes(preflight_resources.get('memory_total_bytes'))}；预检磁盘可用 {_format_optional_bytes(preflight_resources.get('disk_free_bytes'))}。登记配置中的峰值 RSS 摘要字段为空，数值以原始预检记录为准。",
         f"- 预检后登记估算（CPU 时间）：乐观 {config['runtime_estimate']['hours']['optimistic']:.2f} 小时，中位 {config['runtime_estimate']['hours']['central']:.2f} 小时，保守 {config['runtime_estimate']['hours']['conservative']:.2f} 小时；硬上限 {config['hard_cpu_hour_cap']} CPU 小时。",
         f"- 正式训练、评估和协调 CPU {formal_cpu / 3600:.2f} 小时；包括首轮预检与线程诊断的总 CPU {total_cpu / 3600:.2f} 小时。有效工作 wall time {runtime_wall / 3600:.2f} 小时。",
         "- 初始 node-0 评估时发现 PyTorch 默认使用3线程。用相同4局固定种子分别重放3线程和1线程后，A/B/F2/G0 对阵的完整落子序列均与正式记录逐步一致；之后的正式训练/评估固定1线程。逐局耗时仍使用实际值，探针另计入 CPU 账本，详细数据见 `results/runtime/thread_probe.json`。",
         f"- V3 没有 20K 对应的优化器/经验池/随机态快照（当时最新状态为 {config['v3_champion']['latest_training_state_budgeted_states']:,} 状态、{config['v3_champion']['latest_training_state_optimizer_updates']:,} 次更新）。因此 B 阶段采用权重继承、AdamW/余弦调度器重置，并从完整 V3 对局记录重建 20K 经验状态；不称为精确续训。",
-        f"- A 三个随机种子：{json.dumps(config['stages']['A']['new_random_seeds'])}；B 权重继承 V3 G0@20K，最多新增 100K；C 启动状态为 `{phase_c.get('started')}`，原因：{phase_c.get('reason', phase_c.get('candidate', {}).get('champion_checkpoint_id', ''))}。总预算上限 300K。",
+        f"- A 三个随机种子：{json.dumps(config['stages']['A']['new_random_seeds'])}；B 权重继承 V3 G0@20K，最多新增 100K；C 启动状态为 `{phase_c.get('started')}`，原因：{phase_c_reason}。总预算上限 300K。",
         "", "## 成长曲线", "",
         "![随状态变化](figures/g_v4_growth_by_states.png)", "",
         "![随 CPU 时间变化](figures/g_v4_growth_by_cpu.png)", "",
@@ -371,8 +398,35 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         "## 随机种子与续训成长", "",
         "`results/summary/development_summary.csv` 给出每个候选 checkpoint 对阶段起点/当前冠军、V3 G0@20K、A、B、F2 的网络及 PUCT-64 对局汇总。置信区间按配对开局 bootstrap 计算。晋级需要得分率≥62.5%、95%区间下限>50%、执黑/执白均≥50%，只由开发赛决定。",
     ]
+    if test_results:
+        v4_test = test_results["v4_specialized"]
+        full_test = test_results["repository_full_suite"]
+        report.append(f"相关验证：V4 专项测试 {v4_test['passed']} 项通过、{v4_test['failed']} 项失败；全仓测试 {full_test['passed']} 项通过、{full_test['failed']} 项失败（共 {full_test['collected']} 项）。")
+        report.append(f"全仓失败集中于旧版测试的分支身份保护，要求分别在 {', '.join(full_test['branch_pinned_projects'])} 分支运行；当前 V4 分支上这些旧分支测试拒绝启动。完整统计见 `results/summary/test_results.json`。")
     for row in promotions:
-        report.append(f"- `{row.get('candidate_id')}` 对 `{row.get('incumbent_id')}`：{row.get('wins', '—')}胜/平/负摘要以完整 CSV 为准；得分率 {float(row.get('score_rate', 0)):.3f}，配对95% CI {row.get('paired_opening_bootstrap_ci95')}，晋级={row.get('promote')}。")
+        challenge = [match for match in development
+                     if match.get("candidate_checkpoint_id") == row.get("candidate_id")
+                     and match.get("opponent_checkpoint_id") == row.get("incumbent_id")
+                     and match.get("mode") == "puct" and match.get("v4_opponent_role") == "stage_champion"]
+        counts = Counter(str(match.get("outcome_for_agent")) for match in challenge)
+        report.append(f"- `{row.get('candidate_id')}` 对 `{row.get('incumbent_id')}`：{counts.get('win', 0)}胜/{counts.get('draw', 0)}平/{counts.get('loss', 0)}负（{len(challenge)}局）；得分率 {float(row.get('score_rate', 0)):.3f}，配对95% CI {row.get('paired_opening_bootstrap_ci95')}，晋级={row.get('promote')}。")
+    global_gate = state.get("phase_a_global_gate", {})
+    if global_gate.get("per_seed"):
+        report += ["", "### A 阶段种子冠军对 V3 G0@20K 全局门槛", ""]
+        for item in global_gate["per_seed"]:
+            gate = item["promotion_vs_v3_champion"]
+            champ_id = item["champion_checkpoint_id"]
+            challenge = [match for match in development
+                         if match.get("candidate_checkpoint_id") == champ_id
+                         and match.get("opponent_checkpoint_id") == V3_CHAMPION_ID
+                         and match.get("mode") == "puct" and match.get("v4_opponent_role") == "G0-V3-20K"]
+            counts = Counter(str(match.get("outcome_for_agent")) for match in challenge)
+            colors = gate.get("by_color", {})
+            report.append(
+                f"- seed {item['seed']}，`{champ_id}`：{counts.get('win', 0)}胜/{counts.get('draw', 0)}平/{counts.get('loss', 0)}负（{len(challenge)}局），"
+                f"得分率 {gate['score_rate']:.3f}，95% CI {gate['paired_opening_bootstrap_ci95']}；"
+                f"执黑 {colors.get('B', {}).get('score_rate', 0):.3f}、执白 {colors.get('W', {}).get('score_rate', 0):.3f}；晋级={gate['promote']}。"
+            )
     report += ["", "## 最终盲测", "", "盲测未用于选择 checkpoint。开发集选出的冻结模型为：",
                f"- `{final_candidate.get('checkpoint_id')}`，SHA-256 `{final_candidate.get('checkpoint_sha256')}`。"]
     for row in blind_summary:
@@ -391,6 +445,11 @@ def generate_v4_report(root: str | Path) -> dict[str, Any]:
         "保存内容：`results/selfplay/` 原始棋谱、`results/evaluation/` 逐局对局、`checkpoints/` 模型和可精确恢复训练状态、`config/` 预注册参数及开局池、`figures/` 趋势图。",
         "复现：`python scripts/run_g_v4.py --initialize`，随后重复 `python scripts/run_g_v4.py --advance` 直到输出 `completed=true`；生成报告：`python scripts/report_g_v4.py`。空目录快照恢复：`python scripts/restore_g_v4_snapshot.py --archive <zip> --destination <empty-dir>`。",
         "结果判断仅由实测配对棋局、路线晋级记录和盲测组成。V4没有神经网络外部教师，也没有执行 G-F2 新训练、15×15或 G V5。",
+        "", "### 研究结论", "",
+        "- **G0 是否跨种子成长？** 三个独立随机种子各自至少有一个开发阶段冠军超过本种子的随机起点；三条路线在 30K 节点均未超过各自 20K 阶段冠军。因此能观察到种子内阶段性成长，但没有持续单调提升的证据。",
+        "- **长期续训是否有效？** 从 V3 G0@20K 权重继承的单一路线新增 100K 状态，十个 10K 检查点对冻结 V3 冠军的 PUCT-64 得分率全部低于 50%（8.3%–29.2%）。当前训练方案下，继续堆叠状态没有带来可验证收益，候选出现能力回退；本实验不能把回退归因到单一训练组件。",
+        "- **是否超过历史冠军？** 没有。最终保留 V3 `G0-seed-510901@20000`，A 阶段三种子都未通过其全局晋级门槛，故 C 阶段 110K 按注册规则跳过。盲测中该冠军对 A、B 的裸网络和 PUCT-64 各为 0胜/40负；对 F2 裸网络 0胜/40负、PUCT-64 1胜/39负。每项只有20组换色开局，结果属探索性证据。",
+        "- **下一步建议：** 先修改并验证训练稳定性与经验分布等算法因素，再决定是否扩量。当前证据不支持直接把预算从 300K 上限继续扩大；本轮也没有证明 G0 能稳定战胜 A、B 或历史冠军。",
     ]
     report_path = base / "research/g_v4/REPORT.md"
     report_path.write_text("\n".join(report) + "\n", encoding="utf-8")

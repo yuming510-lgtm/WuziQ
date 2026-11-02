@@ -1,0 +1,140 @@
+{
+  "blind_completed": true,
+  "blind_started": false,
+  "completed": true,
+  "config_sha256": "25790d7763b3452589a9112872ec2dc81a4d4c6ffdcc4f54ea669e85a1c66a2b",
+  "development_candidates": [],
+  "final_candidate": {
+    "checkpoint": "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt",
+    "checkpoint_id": "G0-seed-510901@20000",
+    "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+    "paired_ci95": [
+      0.5,
+      0.5
+    ],
+    "score_rate_vs_v3_champion": 0.5,
+    "selection_rule": "no V4 checkpoint passed the pre-registered promotion gate; retain frozen V3 champion"
+  },
+  "format_version": 1,
+  "phase": "DONE",
+  "phase_a_global_gate": {
+    "completed": true,
+    "per_seed": [
+      {
+        "champion_checkpoint_id": "A-G0-s540401@20000",
+        "checkpoint": "research/g_v4/checkpoints/A-G0-s540401/node_20000.pt",
+        "promotion_vs_v3_champion": {
+          "by_color": {
+            "B": {
+              "games": 12,
+              "score_rate": 0.4166666666666667
+            },
+            "W": {
+              "games": 12,
+              "score_rate": 0.25
+            }
+          },
+          "candidate_id": "A-G0-s540401@20000",
+          "games": 24,
+          "incumbent_id": "G0-seed-510901@20000",
+          "paired_opening_bootstrap_ci95": [
+            0.125,
+            0.5416666666666666
+          ],
+          "paired_opening_groups": 12,
+          "points": 4.0,
+          "promote": false,
+          "promotion_basis": "fixed PUCT-64 development matches against frozen V3 G0@20K",
+          "score_rate": 0.3333333333333333,
+          "thresholds": {
+            "lower_ci_minimum_exclusive": 0.5,
+            "min_color_score_rate": 0.5,
+            "min_score_rate": 0.625,
+            "required_groups": 12
+          }
+        },
+        "seed": 540401
+      },
+      {
+        "champion_checkpoint_id": "A-G0-s540402@20000",
+        "checkpoint": "research/g_v4/checkpoints/A-G0-s540402/node_20000.pt",
+        "promotion_vs_v3_champion": {
+          "by_color": {
+            "B": {
+              "games": 12,
+              "score_rate": 0.3333333333333333
+            },
+            "W": {
+              "games": 12,
+              "score_rate": 0.5833333333333334
+            }
+          },
+          "candidate_id": "A-G0-s540402@20000",
+          "games": 24,
+          "incumbent_id": "G0-seed-510901@20000",
+          "paired_opening_bootstrap_ci95": [
+            0.20833333333333334,
+            0.7083333333333334
+          ],
+          "paired_opening_groups": 12,
+          "points": 5.5,
+          "promote": false,
+          "promotion_basis": "fixed PUCT-64 development matches against frozen V3 G0@20K",
+          "score_rate": 0.4583333333333333,
+          "thresholds": {
+            "lower_ci_minimum_exclusive": 0.5,
+            "min_color_score_rate": 0.5,
+            "min_score_rate": 0.625,
+            "required_groups": 12
+          }
+        },
+        "seed": 540402
+      },
+      {
+        "champion_checkpoint_id": "A-G0-s540403@20000",
+        "checkpoint": "research/g_v4/checkpoints/A-G0-s540403/node_20000.pt",
+        "promotion_vs_v3_champion": {
+          "by_color": {
+            "B": {
+              "games": 12,
+              "score_rate": 0.4166666666666667
+            },
+            "W": {
+              "games": 12,
+              "score_rate": 0.5
+            }
+          },
+          "candidate_id": "A-G0-s540403@20000",
+          "games": 24,
+          "incumbent_id": "G0-seed-510901@20000",
+          "paired_opening_bootstrap_ci95": [
+            0.2916666666666667,
+            0.625
+          ],
+          "paired_opening_groups": 12,
+          "points": 5.5,
+          "promote": false,
+          "promotion_basis": "fixed PUCT-64 development matches against frozen V3 G0@20K",
+          "score_rate": 0.4583333333333333,
+          "thresholds": {
+            "lower_ci_minimum_exclusive": 0.5,
+            "min_color_score_rate": 0.5,
+            "min_score_rate": 0.625,
+            "required_groups": 12
+          }
+        },
+        "seed": 540403
+      }
+    ],
+    "qualified_seed_count": 0,
+    "rule": "A-stage per-seed champion must independently pass the registered 12-opening V3 G0@20K PUCT-64 gate; otherwise C is skipped.",
+    "second_tier_candidate": null
+  },
+  "phase_a_seed_index": 3,
+  "phase_b_initialized": false,
+  "phase_c_decision": {
+    "reason": "No A-stage seed champion passed the pre-registered G0-V3@20K gate.",
+    "started": false
+  },
+  "phase_c_initialized": false
+}

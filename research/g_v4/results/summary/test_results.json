@@ -1,0 +1,34 @@
+{
+  "python_compileall": "passed",
+  "repository_full_suite": {
+    "branch_pinned_projects": [
+      "research/alphazero-g-v2",
+      "research/alphazero-g-v3",
+      "research/champion-200s-v6-2",
+      "research/champion-tiebreak-v6-3"
+    ],
+    "collected": 432,
+    "command": "python -m pytest -q",
+    "failed": 24,
+    "failure_categories": {
+      "tests/test_alphazero_g_v2_snapshot.py": 3,
+      "tests/test_alphazero_g_v3_config.py": 2,
+      "tests/test_alphazero_g_v3_runner.py": 6,
+      "tests/test_alphazero_g_v3_snapshot.py": 2,
+      "tests/test_v6_2_snapshot.py": 2,
+      "tests/test_v6_3_runner.py": 6,
+      "tests/test_v6_3_schedule.py": 1,
+      "tests/test_v6_3_snapshot.py": 2
+    },
+    "passed": 408,
+    "reason": "These tests verify that their mutation and snapshot operations run on their own registered experiment branch; on research/alphazero-g-v4 the branch guards reject the operation before executing it.",
+    "warnings": 3
+  },
+  "v4_specialized": {
+    "collected": 12,
+    "command": "python -m pytest tests/test_alphazero_g_v4.py -q",
+    "failed": 0,
+    "passed": 12
+  },
+  "validation_date_utc": "2026-11-02"
+}

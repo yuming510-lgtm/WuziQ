@@ -1,0 +1,85 @@
+{
+  "config_sha256": "25790d7763b3452589a9112872ec2dc81a4d4c6ffdcc4f54ea669e85a1c66a2b",
+  "jobs": [
+    {
+      "job_id": "A-G0-s540401",
+      "new_states": 30000,
+      "nodes": [
+        10000,
+        20000,
+        30000
+      ],
+      "opening_seed": 540401,
+      "optimizer_mode": "fresh_random_initialization",
+      "phase": "A",
+      "replay_mode": "empty",
+      "replay_source_states": 0,
+      "seed": 540401,
+      "source_model": null,
+      "source_replay_log": null,
+      "start_checkpoint_id": "A-G0-s540401@0"
+    },
+    {
+      "job_id": "A-G0-s540402",
+      "new_states": 30000,
+      "nodes": [
+        10000,
+        20000,
+        30000
+      ],
+      "opening_seed": 540402,
+      "optimizer_mode": "fresh_random_initialization",
+      "phase": "A",
+      "replay_mode": "empty",
+      "replay_source_states": 0,
+      "seed": 540402,
+      "source_model": null,
+      "source_replay_log": null,
+      "start_checkpoint_id": "A-G0-s540402@0"
+    },
+    {
+      "job_id": "A-G0-s540403",
+      "new_states": 30000,
+      "nodes": [
+        10000,
+        20000,
+        30000
+      ],
+      "opening_seed": 540403,
+      "optimizer_mode": "fresh_random_initialization",
+      "phase": "A",
+      "replay_mode": "empty",
+      "replay_source_states": 0,
+      "seed": 540403,
+      "source_model": null,
+      "source_replay_log": null,
+      "start_checkpoint_id": "A-G0-s540403@0"
+    },
+    {
+      "job_id": "B-G0-v3-champion-continue",
+      "new_states": 100000,
+      "nodes": [
+        10000,
+        20000,
+        30000,
+        40000,
+        50000,
+        60000,
+        70000,
+        80000,
+        90000,
+        100000
+      ],
+      "opening_seed": 540404,
+      "optimizer_mode": "reinitialized_adamw_scheduler_from_weight_only_20k_checkpoint",
+      "phase": "B",
+      "replay_mode": "prefix",
+      "replay_source_states": 20000,
+      "seed": 540404,
+      "source_model": "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt",
+      "source_replay_log": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+      "start_checkpoint_id": "G0-seed-510901@20000"
+    }
+  ],
+  "note": "C job is created only if an A-stage seed champion passes the registered V3 champion gate."
+}

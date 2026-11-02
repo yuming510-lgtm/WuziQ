@@ -35,6 +35,37 @@ def test_v4_snapshot_cadence_uses_cumulative_runtime():
         next_snapshot_threshold(-1)
 
 
+def test_v4_report_formats_missing_peak_rss_without_crashing():
+    from src.research.alphazero_g.v4_report import _format_optional_bytes
+
+    assert _format_optional_bytes(None) == "未测得"
+    assert _format_optional_bytes(341946368) == "341,946,368 B"
+
+
+def test_v4_report_normalizes_legacy_tactical_checkpoint_field():
+    from src.research.alphazero_g.v4_report import _normalize_tactic_record
+
+    assert _normalize_tactic_record({"candidate_checkpoint_id": "old@10k"})["checkpoint_id"] == "old@10k"
+    assert _normalize_tactic_record({"checkpoint_id": "new@10k"})["checkpoint_id"] == "new@10k"
+
+
+def test_v4_report_total_cpu_includes_event_ledger_and_registered_preflight():
+    from src.research.alphazero_g.v4_report import _total_cpu_seconds
+
+    events = [{"cpu_seconds": 100.0}, {"cpu_seconds": 20.0}]
+    assert _total_cpu_seconds(events, 8.0) == 128.0
+
+
+def test_v4_report_csv_uses_clean_lf_line_endings(tmp_path):
+    from src.research.alphazero_g.v4_report import _write_csv
+
+    path = tmp_path / "summary.csv"
+    _write_csv(path, [{"name": "row", "value": 1}])
+    raw = path.read_bytes()
+    assert b"\r\n" not in raw
+    assert raw.endswith(b"\n")
+
+
 def test_v4_cpu_ledger_is_durable_and_deduplicated(tmp_path):
     assert record_cpu_event(tmp_path, "game:1", 2.0, wall_seconds=2.1, category="selfplay")
     assert not record_cpu_event(tmp_path, "game:1", 2.0, wall_seconds=2.1, category="selfplay")

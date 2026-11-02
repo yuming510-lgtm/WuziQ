@@ -904,7 +904,7 @@ def choose_final_development_candidate(root: Path, config: dict[str, Any], state
         selected = {"checkpoint_id": V3_CHAMPION_ID, "checkpoint": V3_CHAMPION_REL,
                     "checkpoint_sha256": _sha(root / V3_CHAMPION_REL),
                     "score_rate_vs_v3_champion": 0.5, "paired_ci95": [0.5, 0.5],
-                    "selection_rule": "no V4 checkpoint had a complete development comparison; retain frozen V3 champion"}
+                    "selection_rule": "no V4 checkpoint passed the pre-registered promotion gate; retain frozen V3 champion"}
     state["final_candidate"] = selected
     state["development_candidates"] = candidates
     _atomic_json(root / "research/g_v4/results/selection/experiment_state.json", state)
