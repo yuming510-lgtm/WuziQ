@@ -52,6 +52,38 @@ def test_v4_budget_routes_and_v3_continuation_are_explicit():
     assert 3 * 30_000 + 100_000 + 110_000 == 300_000
 
 
+def test_promotion_match_selection_disambiguates_duplicate_checkpoint_roles():
+    from src.research.alphazero_g.v3_evaluation import promotion_decision
+    from src.research.alphazero_g.v4_runner import _candidate_matches
+
+    candidate_id = "B@10000"
+    incumbent_id = V3_CHAMPION_ID
+    rows = []
+    for group_index in range(12):
+        for color in ("B", "W"):
+            common = {
+                "candidate_checkpoint_id": candidate_id,
+                "opponent_checkpoint_id": incumbent_id,
+                "mode": "puct",
+                "opening_group_id": f"opening-{group_index:02d}",
+                "agent_color": color,
+            }
+            rows.append({**common, "v4_opponent_role": "stage_champion", "score_for_agent": 1.0})
+            rows.append({**common, "v4_opponent_role": "G0-V3-20K", "score_for_agent": 0.0})
+
+    matches = _candidate_matches(
+        rows, candidate_id, incumbent_id, opponent_role="stage_champion",
+    )
+    assert len(matches) == 24
+    assert {row["v4_opponent_role"] for row in matches} == {"stage_champion"}
+    decision = promotion_decision(
+        matches, candidate_id=candidate_id, incumbent_id=incumbent_id,
+        seed=123,
+    )
+    assert decision["score_rate"] == 1.0
+    assert decision["by_color"]["B"]["games"] == 12
+
+
 def test_v4_schedule_excludes_all_nonempty_v3_openings():
     schedule = build_v4_opening_schedule(ROOT)
     validate_v3_schedule(schedule)
@@ -123,7 +155,7 @@ def test_v4_snapshot_restores_registered_state_to_an_empty_directory(tmp_path):
     restored = restore_v4_snapshot(archive, destination)
     assert created["sha256"] == restored["archive_sha256"]
     assert restored["empty_restore"]
-    assert restored["selfplay_game_records"] == 0
+    assert restored["selfplay_game_records"] == created["selfplay_game_records"]
     assert restored["evaluation_game_records"] == expected_evaluation_games
     assert (destination / V3_CHAMPION_REL).is_file()
     assert (destination / "research/g_v4/checkpoints/B-G0-v3-champion-continue/training_state.pt").is_file()

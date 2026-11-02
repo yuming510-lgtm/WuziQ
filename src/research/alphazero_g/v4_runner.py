@@ -672,9 +672,11 @@ def evaluate_v4_checkpoint(
 
 def _candidate_matches(
     rows: list[dict[str, Any]], candidate_id: str, opponent_id: str, *, mode: str = "puct",
+    opponent_role: str | None = None,
 ) -> list[dict[str, Any]]:
     return [row for row in rows if row.get("candidate_checkpoint_id") == candidate_id
-            and row.get("opponent_checkpoint_id") == opponent_id and row.get("mode") == mode]
+            and row.get("opponent_checkpoint_id") == opponent_id and row.get("mode") == mode
+            and (opponent_role is None or row.get("v4_opponent_role") == opponent_role)]
 
 
 def select_v4_node(root: str | Path, job: dict[str, Any], *, node: int) -> dict[str, Any]:
@@ -687,7 +689,9 @@ def select_v4_node(root: str | Path, job: dict[str, Any], *, node: int) -> dict[
         return next(row for row in selection["decisions"] if row.get("candidate_id") == candidate_id)
     records, _ = _evaluation_log(root_path)
     incumbent_id = str(selection["champion_checkpoint_id"])
-    matches = _candidate_matches(records, candidate_id, incumbent_id)
+    matches = _candidate_matches(
+        records, candidate_id, incumbent_id, opponent_role="stage_champion",
+    )
     decision = promotion_decision(
         matches, candidate_id=candidate_id, incumbent_id=incumbent_id,
         min_score_rate=float(config["evaluation"]["promotion"]["score_rate_at_least"]),
@@ -726,7 +730,9 @@ def select_v4_node(root: str | Path, job: dict[str, Any], *, node: int) -> dict[
 def _gate_against_v3(root: Path, candidate_id: str, seed: int) -> dict[str, Any] | None:
     config = load_v4_config(root)
     records, _ = _evaluation_log(root)
-    matches = _candidate_matches(records, candidate_id, V3_CHAMPION_ID)
+    matches = _candidate_matches(
+        records, candidate_id, V3_CHAMPION_ID, opponent_role="G0-V3-20K",
+    )
     if not matches:
         return None
     decision = promotion_decision(
@@ -841,7 +847,9 @@ def _phase_a_result(root: Path, config: dict[str, Any]) -> dict[str, Any]:
 
 def _candidate_score_against_v3(root: Path, candidate_id: str) -> tuple[float, list[float]]:
     records, _ = _evaluation_log(root)
-    matches = _candidate_matches(records, candidate_id, V3_CHAMPION_ID)
+    matches = _candidate_matches(
+        records, candidate_id, V3_CHAMPION_ID, opponent_role="G0-V3-20K",
+    )
     if not matches:
         return -1.0, [-1.0, -1.0]
     summary = summarize_v3_matches(matches)
