@@ -14,6 +14,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+plt.rcParams["font.sans-serif"] = ["Noto Sans CJK SC", "DejaVu Sans"]
+plt.rcParams["axes.unicode_minus"] = False
+
 from .evaluation import load_evaluation_log
 from .replay import load_game_log
 from .training import load_g_checkpoint
@@ -77,6 +80,40 @@ def _group_matches(matches: list[dict[str, Any]], keys: tuple[str, ...]) -> list
     result = []
     for key, subset in sorted(groups.items(), key=lambda item: tuple(str(x) for x in item[0])):
         result.append({**dict(zip(keys, key, strict=True)), **summarize_v3_matches(subset)})
+    return result
+
+
+def _row_belongs_to_arm(row: dict[str, Any], arm: str) -> bool:
+    """Match a route family to its versioned checkpoint IDs in summary rows."""
+    arm_id = str(row.get("arm_id", ""))
+    return arm_id == arm or arm_id.startswith(f"{arm}-seed-")
+
+
+def _final_blind_comparisons(
+    blind_summary: list[dict[str, Any]], final_models: dict[str, Any],
+) -> dict[str, dict[str, Any]]:
+    """Resolve each selected checkpoint against the actual opponent families in match logs."""
+    result: dict[str, dict[str, Any]] = {}
+    for model_key, model in sorted(final_models.get("models", {}).items()):
+        arm, _seed = str(model_key).split(":", maxsplit=1)
+        checkpoint_id = str(model["checkpoint_id"])
+        own_family = "G0" if arm == "G0" else "F2"
+        other_family = "G-F2" if arm == "G0" else "G0"
+        rows = [row for row in blind_summary if row.get("arm_id") == checkpoint_id]
+        by_family = {
+            family: {
+                mode: next((row for row in rows
+                            if row.get("opponent_family") == family and row.get("mode") == mode), None)
+                for mode in ("network", "puct")
+            }
+            for family in ("A", "B", "F2", "G0", "G-F2")
+        }
+        result[str(model_key)] = {
+            "checkpoint_id": checkpoint_id,
+            "own_initial": by_family[own_family],
+            "other_route": by_family[other_family],
+            "opponents": by_family,
+        }
     return result
 
 
@@ -302,11 +339,11 @@ def generate_v3_report(root: str | Path) -> dict[str, Any]:
     # compare to A and their registered initial model (F2 is G-F2's alias).
     fig, ax = plt.subplots(figsize=(8.7, 5.3))
     for arm in ARMS:
-        base_opponent = "own_initial" if arm == "G0" else "F2"
+        base_opponent = "G0" if arm == "G0" else "F2"
         for opponent, marker in ((base_opponent, "o"), ("A", "s")):
             points = []
             for node in map(int, config["stage_nodes"]):
-                rows = [r for r in dev_summary if r["arm_id"] == arm
+                rows = [r for r in dev_summary if _row_belongs_to_arm(r, arm)
                         and r["opponent_family"] == opponent and r["mode"] == "puct"
                         and str(r["candidate_checkpoint_id"]).endswith(f"@{node}")]
                 if rows:
@@ -322,11 +359,11 @@ def generate_v3_report(root: str | Path) -> dict[str, Any]:
 
     fig, ax = plt.subplots(figsize=(8.7, 5.3))
     for arm in ARMS:
-        base_opponent = "own_initial" if arm == "G0" else "F2"
+        base_opponent = "G0" if arm == "G0" else "F2"
         points = []
         for node in map(int, config["stage_nodes"]):
             sr = [r for r in stages if r["arm"] == arm and int(r["node_states"]) == node]
-            mr = [r for r in dev_summary if r["arm_id"] == arm
+            mr = [r for r in dev_summary if _row_belongs_to_arm(r, arm)
                   and r["opponent_family"] == base_opponent and r["mode"] == "puct"
                   and str(r["candidate_checkpoint_id"]).endswith(f"@{node}")]
             if sr and mr:
@@ -347,7 +384,7 @@ def generate_v3_report(root: str | Path) -> dict[str, Any]:
         for mode, marker, label in (("network", "--o", "裸网络"), ("puct", "-s", "PUCT-64")):
             points = []
             for node in map(int, config["stage_nodes"]):
-                rows = [r for r in dev_summary if r["arm_id"] == arm
+                rows = [r for r in dev_summary if _row_belongs_to_arm(r, arm)
                         and r["mode"] == mode and r["opponent_family"] in core_opponents
                         and str(r["candidate_checkpoint_id"]).endswith(f"@{node}")]
                 if rows:
@@ -379,19 +416,8 @@ def generate_v3_report(root: str | Path) -> dict[str, Any]:
 
     blind_summary = _group_matches(blind, ("arm_id", "opponent_family", "mode"))
     _write_csv(summary_dir / "blind_summary.csv", blind_summary)
-    own_blind = {}
-    cross_blind = {}
-    for arm in ARMS:
-        own_opponent = "own_initial" if arm == "G0" else "F2"
-        for mode in ("network", "puct"):
-            own_blind[(arm, mode)] = next(
-                (row for row in blind_summary if row["arm_id"] == arm
-                 and row["opponent_family"] == own_opponent and row["mode"] == mode), None,
-            )
-        cross_blind[arm] = next(
-            (row for row in blind_summary if row["arm_id"] == arm
-             and row["opponent_family"] == "other_route" and row["mode"] == "puct"), None,
-        )
+    final_models = json.loads((result_dir / "selection/final_models.json").read_text(encoding="utf-8"))
+    blind_comparisons = _final_blind_comparisons(blind_summary, final_models)
 
     runtime = {
         "formal_cpu_seconds": cpu_seconds_committed(root_path),
@@ -430,38 +456,37 @@ def generate_v3_report(root: str | Path) -> dict[str, Any]:
         "数值明细见 results/summary/training_stages.csv、match_summaries.csv、blind_summary.csv 和 tactical_accuracy.csv。", "",
         "## 最终盲测结果", "",
     ]
-    for arm in ARMS:
+    for model_key, comparisons in sorted(blind_comparisons.items()):
         for mode in ("network", "puct"):
-            row = own_blind[(arm, mode)]
+            row = comparisons["own_initial"][mode]
             if row is None:
-                report.append(f"- {arm} {mode}：缺少与初始化模型的盲测数据。")
+                report.append(f"- {model_key} {mode}：缺少与初始化模型的盲测数据。")
             else:
                 report.append(
-                    f"- {arm} {mode} 对自身初始化（G0@0 或 F2）：{row['wins']} 胜、{row['draws']} 平、{row['losses']} 负；"
-                    f"得分率 {row['score_rate']:.3f}，按 seed×开局组配对的 95% bootstrap 区间 {_ci_text(row['paired_opening_bootstrap_ci95'])}。"
+                    f"- {model_key} ({comparisons['checkpoint_id']}) {mode} 对自身初始化："
+                    f"{row['wins']} 胜、{row['draws']} 平、{row['losses']} 负；得分率 {row['score_rate']:.3f}，"
+                    f"按20个配对开局的 95% bootstrap 区间 {_ci_text(row['paired_opening_bootstrap_ci95'])}。"
                 )
-        cross = cross_blind[arm]
+        cross = comparisons["other_route"]["puct"]
         if cross:
             report.append(
-                f"- {arm} PUCT-64 对另一条路线最终冠军：{cross['wins']}-{cross['draws']}-{cross['losses']}，"
+                f"- {model_key} PUCT-64 对另一条路线最终冠军：{cross['wins']}-{cross['draws']}-{cross['losses']}，"
                 f"得分率 {cross['score_rate']:.3f}，95% CI {_ci_text(cross['paired_opening_bootstrap_ci95'])}。"
             )
-    for arm in ARMS:
         for opponent in ("A", "B", "F2"):
-            row = next((item for item in blind_summary if item["arm_id"] == arm
-                        and item["opponent_family"] == opponent and item["mode"] == "puct"), None)
+            row = comparisons["opponents"][opponent]["puct"]
             if row:
                 report.append(
-                    f"- {arm} PUCT-64 对 {opponent}：{row['wins']}-{row['draws']}-{row['losses']}，"
+                    f"- {model_key} PUCT-64 对 {opponent}：{row['wins']}-{row['draws']}-{row['losses']}，"
                     f"得分率 {row['score_rate']:.3f}，95% CI {_ci_text(row['paired_opening_bootstrap_ci95'])}。"
                 )
     report += ["", "## 关键问题与证据边界", ""]
-    for arm in ARMS:
-        row = own_blind[(arm, "puct")]
+    for model_key, comparisons in sorted(blind_comparisons.items()):
+        row = comparisons["own_initial"]["puct"]
         if row:
             lower = row["paired_opening_bootstrap_ci95"][0] if row["paired_opening_bootstrap_ci95"] else None
             report.append(
-                f"- {arm} 训练后相对初始化模型的 PUCT-64 得分率为 {row['score_rate']:.3f}，"
+                f"- {model_key} 训练后相对初始化模型的 PUCT-64 得分率为 {row['score_rate']:.3f}，"
                 f"95% CI {_ci_text(row['paired_opening_bootstrap_ci95'])}；"
                 f"{'区间下限高于 50%' if lower is not None and lower > 0.5 else '没有得到区间下限高于 50% 的证据'}。"
             )
