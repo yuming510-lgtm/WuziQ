@@ -169,7 +169,8 @@ def create_v4_snapshot(root: str | Path, output: str | Path) -> dict[str, Any]:
     active_cpu = cpu_seconds_committed(root_path)
     active_wall = active_wall_seconds_committed(root_path)
     selfplay_games = sum(len([line for line in data.splitlines() if line])
-                         for name, data in contents.items() if "/results/selfplay/" in name)
+                         for name, data in contents.items()
+                         if name.startswith("research/g_v4/results/selfplay/"))
     evaluation_games = sum(len([line for line in data.splitlines() if line])
                            for name, data in contents.items() if "/results/evaluation/" in name)
     manifest = {

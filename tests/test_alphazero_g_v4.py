@@ -15,6 +15,7 @@ from src.research.alphazero_g.v4_config import (
     load_v4_config,
 )
 from src.research.alphazero_g.v4_report import validate_v4_results
+from src.research.alphazero_g.v4_snapshot import create_v4_snapshot, restore_v4_snapshot
 from src.research.alphazero_g.v4_runner import (
     phase_a_job, phase_b_job, phase_c_job, choose_final_development_candidate,
 )
@@ -108,4 +109,16 @@ def test_empty_v4_result_audit_replays_registered_metadata(tmp_path):
     assert result["budgeted_training_states"] == 0
     assert result["all_selfplay_and_evaluation_games_replayed"]
     assert result["training_states_by_job"][phase_b_job()["job_id"]] == 0
+
+
+def test_v4_snapshot_restores_registered_state_to_an_empty_directory(tmp_path):
+    archive = tmp_path / "g_v4_recovery.zip"
+    created = create_v4_snapshot(ROOT, archive)
+    destination = tmp_path / "empty_restore"
+    restored = restore_v4_snapshot(archive, destination)
+    assert created["sha256"] == restored["archive_sha256"]
+    assert restored["empty_restore"]
+    assert restored["selfplay_game_records"] == 0
+    assert (destination / V3_CHAMPION_REL).is_file()
+    assert (destination / "research/g_v4/checkpoints/B-G0-v3-champion-continue/training_state.pt").is_file()
 
