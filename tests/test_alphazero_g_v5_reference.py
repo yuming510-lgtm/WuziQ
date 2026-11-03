@@ -1,10 +1,16 @@
 import numpy as np
 import torch
 import json
+from pathlib import Path
 
 from third_party.AlphaZero_Gomoku.game import Board, Game
 from third_party.AlphaZero_Gomoku.mcts_alphaZero import MCTS
-from src.research.alphazero_g.v5_evaluation import generate_opening_pool, play_match, summarize_paired_games
+from src.research.alphazero_g.v5_evaluation import (
+    evaluate_reference_tactics,
+    generate_opening_pool,
+    play_match,
+    summarize_paired_games,
+)
 from src.research.alphazero_g.v5_audit import audit_evaluation_game
 from src.research.alphazero_g.v5_reference import ReferencePolicyValueNet, instrumented_player, make_board
 from src.research.alphazero_g.v5_training import augment_reference_data
@@ -185,3 +191,14 @@ def test_complete_evaluation_game_replays_against_independent_oracle(tmp_path):
     path = tmp_path / "v5-audit-smoke.json"
     path.write_text(json.dumps(game), encoding="utf-8")
     assert audit_evaluation_game(path)["game_id"] == "v5-audit-smoke"
+
+
+def test_reference_tactics_accepts_frozen_v42_puzzle_format():
+    puzzles = json.loads(Path("research/g_v4_2/config/tactical_puzzles.json").read_text(encoding="utf-8"))
+    model = ReferencePolicyValueNet(9, seed=902)
+
+    result = evaluate_reference_tactics(model, [puzzles[0]], simulations=1, seed=903)
+
+    assert result["puzzles"] == 1
+    assert result["rows"][0]["puzzle_id"] == puzzles[0]["puzzle_id"]
+    assert result["rows"][0]["target_actions"] == puzzles[0]["optimal_actions"]

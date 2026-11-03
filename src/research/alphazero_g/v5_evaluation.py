@@ -478,15 +478,22 @@ def evaluate_reference_tactics(
     rng = np.random.default_rng(int(seed))
     rows = []
     for puzzle in puzzles:
-        board = _puzzle_board(puzzle)
+        normalized_puzzle = {
+            **puzzle,
+            "board_size": int(puzzle.get("board_size", model.board_size)),
+            "n_in_row": int(puzzle.get("n_in_row", 5)),
+            "moves": puzzle.get("moves", puzzle.get("position", [])),
+            "target_actions": puzzle.get("target_actions", puzzle.get("optimal_actions", [])),
+        }
+        board = _puzzle_board(normalized_puzzle)
         priors, _value = model.policy_value_fn(board)
         policy_move = int(max(priors, key=lambda row: (float(row[1]), -int(row[0])))[0])
         player = instrumented_player(model.policy_value_fn, c_puct=5.0,
                                      n_playout=int(simulations) + 1, is_selfplay=False)
         result_move, _ = player.get_action(board, temp=1e-3, return_prob=1)
-        targets = set(map(int, puzzle["target_actions"]))
+        targets = set(map(int, normalized_puzzle["target_actions"]))
         rows.append({
-            "puzzle_id": puzzle["puzzle_id"], "category": puzzle["category"],
+            "puzzle_id": normalized_puzzle["puzzle_id"], "category": normalized_puzzle["category"],
             "network_move": policy_move, "network_correct": policy_move in targets,
             "puct_move": int(result_move), "puct_correct": int(result_move) in targets,
             "target_actions": sorted(targets),
