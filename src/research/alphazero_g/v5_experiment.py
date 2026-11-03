@@ -58,6 +58,36 @@ def _load_reference_node(path: Path, board_size: int) -> ReferencePolicyValueNet
     return model
 
 
+def six_by_six_gate_status(
+    stage_rows: list[dict[str, Any]], settings: dict[str, Any]
+) -> tuple[bool, list[int]]:
+    """Apply the registered gate to the latest required late-stage checkpoints.
+
+    Early 2K/5K results are useful for plotting but cannot substitute for the
+    configured number of later checks. This keeps the continuation decision
+    from being made on a short-lived early peak.
+    """
+    gate = settings["continue_to_9x9_gate"]
+    required = int(gate["required_later_nodes"])
+    maximum = int(settings["maximum_environment_states"])
+    late_rows = sorted(
+        (row for row in stage_rows
+         if int(row["node"]) >= maximum // 2 and int(row["node"]) <= maximum),
+        key=lambda row: int(row["node"]),
+    )
+    selected = late_rows[-required:]
+    if len(selected) != required:
+        return False, [int(row["node"]) for row in selected]
+    passed = all(
+        float(row["match"]["score_rate"])
+        >= float(gate["candidate_min_score_rate_vs_frozen_random_initial"])
+        and float(row["match"]["paired_opening_bootstrap_ci95"][0])
+        > float(gate["paired_ci95_lower_above"])
+        for row in selected
+    )
+    return passed, [int(row["node"]) for row in selected]
+
+
 def _append_match_set(
     *,
     root: Path,
@@ -183,12 +213,7 @@ def _run_6x6(root: Path, config: dict[str, Any], schedule: dict[str, Any],
         stage_rows.append({"node": milestone, "match": match,
                            "network_tactics": puzzle["network_accuracy"],
                            "puct64_tactics": puzzle["puct_accuracy"]})
-    gates = [row for row in stage_rows if row["node"] in (5000, 10000)]
-    gate_passed = len(gates) == 2 and all(
-        row["match"]["score_rate"] >= float(settings["continue_to_9x9_gate"]["candidate_min_score_rate_vs_frozen_random_initial"])
-        and row["match"]["paired_opening_bootstrap_ci95"][0] > float(settings["continue_to_9x9_gate"]["paired_ci95_lower_above"])
-        for row in gates
-    )
+    gate_passed, gate_nodes = six_by_six_gate_status(stage_rows, settings)
     if not gate_passed and train_result.get("completed") and time.process_time() < cpu_stop:
         train_result = train_reference_arm(
             root, arm=arm, board_size=6, n_in_row=4,
@@ -233,20 +258,27 @@ def _run_6x6(root: Path, config: dict[str, Any], schedule: dict[str, Any],
         }
         _atomic_json(root / "research/g_v5/results/six_by_six_summary.json", result)
         return result
-    late = [row for row in stage_rows if row["node"] in (10000, 15000, 20000)]
-    gate_nodes = late[-2:]
-    gate_passed = len(gate_nodes) == 2 and all(
-        row["match"]["score_rate"] >= float(settings["continue_to_9x9_gate"]["candidate_min_score_rate_vs_frozen_random_initial"])
-        and row["match"]["paired_opening_bootstrap_ci95"][0] > float(settings["continue_to_9x9_gate"]["paired_ci95_lower_above"])
-        for row in gate_nodes
-    )
+    gate_passed, gate_nodes = six_by_six_gate_status(stage_rows, settings)
     selection = max(stage_rows, key=lambda row: (row["match"]["score_rate"], -row["node"])) if stage_rows else None
     frozen_node = int(selection["node"]) if selection else 0
     if frozen_node > 0:
         frozen_model = _load_reference_node(model_dir / f"node_{frozen_node}.pt", 6)
+        previous_summary_path = root / "research/g_v5/results/six_by_six_summary.json"
+        previous_summary = (json.loads(previous_summary_path.read_text(encoding="utf-8"))
+                            if previous_summary_path.exists() else {})
+        previous_blind = previous_summary.get("blind_result")
+        prior_revealed_blind = previous_summary.get("prior_revealed_blind")
+        blind_openings = schedule["six_by_six"]["blind"]
+        blind_phase = "6x6-blind-final"
+        extension_openings_path = root / "research/g_v5/config/extension_6x6_blind_openings.json"
+        if extension_openings_path.exists() and previous_blind is not None:
+            if previous_blind.get("phase") == "6x6-blind-final":
+                prior_revealed_blind = previous_blind
+            blind_openings = json.loads(extension_openings_path.read_text(encoding="utf-8"))
+            blind_phase = "6x6-blind-extension-final"
         blind = _append_match_set(
-            root=root, phase="6x6-blind-final", candidate_name=f"ref6x6@{frozen_node}",
-            opponent_name="ref6x6@0", openings=schedule["six_by_six"]["blind"],
+            root=root, phase=blind_phase, candidate_name=f"ref6x6@{frozen_node}",
+            opponent_name="ref6x6@0", openings=blind_openings,
             pairs=int(settings["blind_pairs"]), candidate_reference_model=frozen_model,
             opponent_reference_model=initial, simulations=64, board_size=6, n_in_row=4,
             cpu_deadline=cpu_stop,
@@ -260,6 +292,7 @@ def _run_6x6(root: Path, config: dict[str, Any], schedule: dict[str, Any],
         "gate_nodes": [int(row["node"]) for row in gate_nodes],
         "dev_selected_node": frozen_node,
         "blind_result": blind,
+        "prior_revealed_blind": prior_revealed_blind,
     }
     expected_stage_games = []
     for row in stage_rows:
