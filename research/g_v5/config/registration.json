@@ -1,0 +1,19 @@
+{
+  "branch": "research/alphazero-g-v5",
+  "config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+  "experiment_id": "wuziq-alphazero-g-v5-reference-and-closed-loop",
+  "format_version": 1,
+  "historical_midgame_prefix_pool_sha256": "79215f8380b513a20c3a1d0e960cf090a59cee056fcde56abd079485274454fe",
+  "historical_midgame_prefixes": 96,
+  "opening_schedule_sha256": "75b23473d28c0cb4dbb09b88876aa90d0472656d2672cfbfc83f999f35afa461",
+  "preflight_estimates_cpu_hours": {
+    "basis": "one complete self-play game per cell and batch-512 optimizer throughput; project each route to registered state counts, then add 1.5 CPU hours for paired evaluation/audit; factors cover game-length/CPU variance",
+    "conservative_cpu_hours": 5.5415384219332555,
+    "normal_cpu_hours": 4.0259615137082845,
+    "optimistic_cpu_hours": 2.813499987128308
+  },
+  "registered_at_utc": "2026-11-03T15:02:41Z",
+  "registered_code_commit": "d0ee9894b3dcbe9e9fe5423cd488f36a7a976483",
+  "six_by_six_puzzles": 64,
+  "six_by_six_tactics_sha256": "72178877d1891584bfaafdc6fb56775cba1685ccf49d73fc7f7328f27e1844e2"
+}
