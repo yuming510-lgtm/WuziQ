@@ -1,0 +1,140 @@
+{
+  "format_version": 1,
+  "experiment_id": "wuziq-alphazero-g-v5-reference-and-closed-loop",
+  "branch": "research/alphazero-g-v5",
+  "base_commit": "37ec1423a2d971e52fea5e9bd708b0fe2fd54e5e",
+  "reference": {
+    "repository": "https://github.com/junxiaosong/AlphaZero_Gomoku",
+    "commit": "0b4917ccd84ea2771706701015eb26182c1159f4",
+    "license": "MIT",
+    "native_architecture": "4-plane CNN 32/64/128 with policy/value heads; no BatchNorm",
+    "native_training": {
+      "c_puct": 5.0,
+      "temperature": 1.0,
+      "dirichlet_alpha": 0.3,
+      "root_noise_fraction": 0.25,
+      "replay_buffer_size": 10000,
+      "batch_size": 512,
+      "epochs_per_update": 5,
+      "learning_rate": 0.002,
+      "kl_target": 0.02,
+      "augmentation": "8 D4 rotations/reflections",
+      "optimizer": "Adam, weight_decay=1e-4"
+    },
+    "compatibility_only_changes": [
+      "train_step returns scalar tensors with .item() for PyTorch 2.15",
+      "inference calls run under torch.inference_mode(); search and loss math unchanged"
+    ],
+    "configured_playouts_include_initial_root_expansion": true
+  },
+  "compute": {
+    "cpu_hour_hard_cap": 10.0,
+    "cpu_hour_reserve_for_final_audit": 0.5,
+    "device": "cpu",
+    "torch_threads": 1,
+    "drive_folder_id": "1WryQSvcCc62cAWtg_xDmE3gzlp4-3BuI",
+    "drive_folder_name": "WuziQ G V5 Recovery",
+    "snapshot_intervals_hours": [1, 2, 4, 6, 10, 16, 26],
+    "snapshot_folder_max_files": 1
+  },
+  "training": {
+    "buffer_size": 10000,
+    "batch_size": 512,
+    "epochs": 5,
+    "learning_rate": 0.002,
+    "kl_target": 0.02,
+    "root_noise_alpha": 0.3,
+    "root_noise_fraction": 0.25,
+    "temperature": 1.0,
+    "selfplay_seat_policy": "same current network on both colors",
+    "selfplay_source_policy": "reference MCTS only; no external model acts during training",
+    "checkpoint_boundary": "after every complete game and optimizer update",
+    "checkpoint_contents": ["weights", "Adam state", "replay buffer", "Python/NumPy/Torch RNG", "game/state/update counters"]
+  },
+  "phase_priority": [
+    "reference-rule-and-search-validation",
+    "6x6-connect-four-selfplay-learning-gate",
+    "9x9-reference-64-versus-frozen-G0",
+    "9x9-reference-200-and-historical-midgame-restart",
+    "9x9-reference-400"
+  ],
+  "six_by_six": {
+    "board_size": 6,
+    "n_in_row": 4,
+    "simulations_per_move": 400,
+    "network_seed": 560601,
+    "training_seed": 560602,
+    "maximum_environment_states": 20000,
+    "milestones": [2000, 5000, 10000, 15000, 20000],
+    "development_opening_seed": 560603,
+    "blind_opening_seed": 560604,
+    "development_pairs_at_intermediate_nodes": 8,
+    "development_pairs_at_gate_nodes": 20,
+    "blind_pairs": 20,
+    "continue_to_9x9_gate": {
+      "candidate_min_score_rate_vs_frozen_random_initial": 0.6,
+      "paired_ci95_lower_above": 0.5,
+      "required_later_nodes": 2,
+      "maximum_states_before_gate": 20000
+    }
+  },
+  "nine_by_nine": {
+    "board_size": 9,
+    "n_in_row": 5,
+    "network_seed": 590501,
+    "training_seed": 590502,
+    "evaluation_c_puct": 5.0,
+    "evaluation_root_action_visits": [64],
+    "development_opening_seed": 590503,
+    "blind_opening_seed": 590504,
+    "historical_opening_seed": 590505,
+    "opening_plies": 6,
+    "development_pairs": 8,
+    "historical_pairs": 16,
+    "blind_pairs": 20,
+    "arms": {
+      "reference64_empty": {
+        "simulations_per_move": 64,
+        "opening_distribution": "empty board",
+        "maximum_environment_states": 8000,
+        "milestones": [1000, 2500, 5000, 8000]
+      },
+      "reference200_empty": {
+        "simulations_per_move": 200,
+        "opening_distribution": "empty board",
+        "maximum_environment_states": 3000,
+        "milestones": [1000, 2000, 3000]
+      },
+      "reference400_empty": {
+        "simulations_per_move": 400,
+        "opening_distribution": "empty board",
+        "maximum_environment_states": 1500,
+        "milestones": [500, 1000, 1500]
+      },
+      "reference64_historical_midgame": {
+        "simulations_per_move": 64,
+        "opening_distribution": "random legal middle-game prefix from historical G0 self-play; prefixes only, no G0 actions/labels used as targets",
+        "maximum_environment_states": 3000,
+        "milestones": [1000, 2000, 3000]
+      }
+    },
+    "historical_checkpoints": [
+      {"id": "G0-V3-510901-5K", "path": "research/g_v3/checkpoints/G0/seed-510901/node_5000.pt"},
+      {"id": "G0-V3-510901-10K", "path": "research/g_v3/checkpoints/G0/seed-510901/node_10000.pt"},
+      {"id": "G0-V3-510901-20K", "path": "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt"},
+      {"id": "G0-V4-540402-30K", "path": "research/g_v4/checkpoints/A-G0-s540402/node_30000.pt"},
+      {"id": "G0-V4.2-history-pool-10K", "path": "research/g_v4_2/checkpoints/history_pool/node_10000.pt"}
+    ],
+    "historical_direct_comparison": ["G0-V3-510901-10K", "G0-V3-510901-20K"],
+    "evaluation_opponents": ["A", "B-50ms", "G0 historical checkpoints"],
+    "blind_model_selection": "development games only; blind opens are untouched until final candidate freeze"
+  },
+  "forbidden_training_inputs": [
+    "A/B/C/E/F model weights",
+    "A/B/C/E/F action labels or games",
+    "human action labels",
+    "handcrafted tactical rewards",
+    "inference-time tactical move rules"
+  ],
+  "independent_rules_oracle": "plain-array five/four-in-a-row checker used only for validation and evaluation diagnostics"
+}

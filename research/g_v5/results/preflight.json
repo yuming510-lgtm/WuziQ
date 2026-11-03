@@ -1,0 +1,68 @@
+{
+  "batch512_optimizer_seconds_per_update": {
+    "6": 0.11246187519999892,
+    "9": 0.2599435348
+  },
+  "benchmark_games": [
+    {
+      "board_size": 6,
+      "complete_game_plies": 19,
+      "mean_search_cpu_seconds_per_state": 0.2167503791578947,
+      "mean_search_depth": 3.1052631578947367,
+      "n_in_row": 4,
+      "selfplay_cpu_seconds": 4.1239968860000005,
+      "selfplay_cpu_seconds_per_state": 0.21705246768421055,
+      "simulations_configured": 400
+    },
+    {
+      "board_size": 9,
+      "complete_game_plies": 26,
+      "mean_search_cpu_seconds_per_state": 0.05035804603846154,
+      "mean_search_depth": 2.1153846153846154,
+      "n_in_row": 5,
+      "selfplay_cpu_seconds": 1.315616639,
+      "selfplay_cpu_seconds_per_state": 0.050600639961538456,
+      "simulations_configured": 64
+    },
+    {
+      "board_size": 9,
+      "complete_game_plies": 38,
+      "mean_search_cpu_seconds_per_state": 0.1826515916578945,
+      "mean_search_depth": 2.973684210526316,
+      "n_in_row": 5,
+      "selfplay_cpu_seconds": 6.952432765000001,
+      "selfplay_cpu_seconds_per_state": 0.18295875697368424,
+      "simulations_configured": 200
+    },
+    {
+      "board_size": 9,
+      "complete_game_plies": 56,
+      "mean_search_cpu_seconds_per_state": 0.36565853689285693,
+      "mean_search_depth": 2.9464285714285716,
+      "n_in_row": 5,
+      "selfplay_cpu_seconds": 20.497051989000003,
+      "selfplay_cpu_seconds_per_state": 0.3660187855178572,
+      "simulations_configured": 400
+    }
+  ],
+  "cpu_hour_hard_cap": 10.0,
+  "estimates": {
+    "basis": "one complete self-play game per cell and batch-512 optimizer throughput; project each route to registered state counts, then add 1.5 CPU hours for paired evaluation/audit; factors cover game-length/CPU variance",
+    "conservative_cpu_hours": 5.5415384219332555,
+    "normal_cpu_hours": 4.0259615137082845,
+    "optimistic_cpu_hours": 2.813499987128308
+  },
+  "format_version": 1,
+  "measured_at_utc": "2026-11-03T14:59:53Z",
+  "preflight_cpu_seconds": 35.702767703,
+  "resources": {
+    "cpu_affinity_count": 3,
+    "cpu_quota_cores": 2.0,
+    "gpu_available": false,
+    "memory_limit_bytes": 8589934592,
+    "python": "3.12.14",
+    "torch": "2.15.0+cpu",
+    "workspace_disk_available_bytes": 22819475456
+  },
+  "torch_threads": 1
+}
