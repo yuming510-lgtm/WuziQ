@@ -1,0 +1,356 @@
+{
+  "arms": {
+    "baseline": {
+      "opponent_pool": "current",
+      "sampling_mode": "uniform_game",
+      "search_variant": "baseline"
+    },
+    "history_pool": {
+      "opponent_pool": "historical_g0",
+      "sampling_mode": "uniform_game",
+      "search_variant": "baseline"
+    },
+    "search_target": {
+      "opponent_pool": "current",
+      "sampling_mode": "uniform_game",
+      "search_variant": "selected_diagnostic"
+    }
+  },
+  "base_commit": "4dd0c449c7a4afe1a4f68b3e2a234cdd70e186df",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v4-2",
+  "compute": {
+    "cpu_hour_cap": 5.0,
+    "device": "cpu",
+    "drive_folder_id": "1SU-tHwFH79oY1KtVXgK3VsTFR3ECk1jR",
+    "drive_folder_name": "WuziQ G V4.2 Recovery",
+    "snapshot_intervals_hours": [
+      1,
+      2,
+      4,
+      6,
+      10,
+      16,
+      26
+    ],
+    "torch_threads": 1
+  },
+  "config_sha256": "ffa4c84a5a13ee78da5bb4d91ff91dd4af7bbce9fd9c418c78a56116803ce987",
+  "diagnostics": {
+    "formal_simulations": 64,
+    "historical_candidate_count": 12,
+    "historical_checkpoint_audit_path": "research/g_v4_1/results/diagnostics/historical_g0_checkpoint_audit.json",
+    "historical_checkpoint_audit_sha256": "b45ec8d2c9624855c1492d2fbc5f55ccdec720679bc49d30b830a4d2562672b2",
+    "search_selection": {
+      "blocking_accuracy_minimum_ratio_to_baseline": 0.9,
+      "metric": "macro_exact_tactical_accuracy_across_categories_and_top3_history_models",
+      "minimum_absolute_gain": 0.05,
+      "tie_order": [
+        "c_puct_5",
+        "prior_smoothing_10pct",
+        "value_neutral",
+        "c_puct_10"
+      ],
+      "validation_after_selection": true,
+      "validation_minimum_absolute_gain": 0.0
+    },
+    "simulations": [
+      64,
+      128,
+      256
+    ],
+    "tactical_per_category": 16,
+    "tactical_seed": 742202,
+    "tactical_split": {
+      "search_development_per_category": 8,
+      "search_validation_per_category": 8
+    }
+  },
+  "evaluation": {
+    "blind_groups": 20,
+    "blind_used_for_selection": false,
+    "development_groups": 16,
+    "formal_simulations": 64,
+    "historical_groups": 16,
+    "opponents": [
+      "A",
+      "B",
+      "G0-V3-510901-20K"
+    ],
+    "paired_colors": [
+      "B",
+      "W"
+    ],
+    "promotion": {
+      "each_color_at_least": 0.5,
+      "paired_ci95_lower_above": 0.5,
+      "score_rate_at_least": 0.625
+    },
+    "stage_groups": 16
+  },
+  "experiment_id": "wuziq-alphazero-g-v4-2",
+  "forbidden_training_inputs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "F",
+    "F1",
+    "F2",
+    "teacher_labels",
+    "handcrafted_tactical_reward"
+  ],
+  "format_version": 1,
+  "historical_candidates": [
+    {
+      "candidate_id": "G0-V3-510901-5K",
+      "checkpoint_path": "research/g_v3/checkpoints/G0/seed-510901/node_5000.pt",
+      "checkpoint_sha256": "8f063e35e1a00bc7296b07d821fad32df81b6fae71bbae02af07c9c21d7a47cf",
+      "lineage_segments": [
+        {
+          "budgeted_states": 5000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 5000
+    },
+    {
+      "candidate_id": "G0-V3-510901-10K",
+      "checkpoint_path": "research/g_v3/checkpoints/G0/seed-510901/node_10000.pt",
+      "checkpoint_sha256": "8f297c3bc57fe95d5d64996a0792a221c705f7b3ec85bb1f0fd9ae4c57cb6cb0",
+      "lineage_segments": [
+        {
+          "budgeted_states": 10000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 10000
+    },
+    {
+      "candidate_id": "G0-V3-510901-20K",
+      "checkpoint_path": "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt",
+      "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+      "lineage_segments": [
+        {
+          "budgeted_states": 20000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 20000
+    },
+    {
+      "candidate_id": "G0-V3-510902-30K",
+      "checkpoint_path": "research/g_v3/checkpoints/G0/seed-510902/node_30000.pt",
+      "checkpoint_sha256": "dcf0703fbe2b6b5c55a4056459476d79e2ac852d373faff24f15bd58b10b202b",
+      "lineage_segments": [
+        {
+          "budgeted_states": 30000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510902.jsonl",
+          "sha256": "0b38bbb73cbc2c9461efebdfd1145b7868e01cba63b4ef24a9e7491f3b6a4c61"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4-540401-30K",
+      "checkpoint_path": "research/g_v4/checkpoints/A-G0-s540401/node_30000.pt",
+      "checkpoint_sha256": "064870fe54efc0cd00696b210bc7d455fbfd25fb6b120464740009c582a0c025",
+      "lineage_segments": [
+        {
+          "budgeted_states": 30000,
+          "path": "research/g_v4/results/selfplay/A-G0-s540401.jsonl",
+          "sha256": "afc378c7716d19468e598afb28d6786f689c0059fc527f1c0cf4f5022401c8de"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4-540402-30K",
+      "checkpoint_path": "research/g_v4/checkpoints/A-G0-s540402/node_30000.pt",
+      "checkpoint_sha256": "9141a86c5acaa2bf033465f352385b60ae9f3c34c0ededaaa0a9dcf88cf52b4c",
+      "lineage_segments": [
+        {
+          "budgeted_states": 30000,
+          "path": "research/g_v4/results/selfplay/A-G0-s540402.jsonl",
+          "sha256": "4467588d58528cb32392e5857da195ff6d457d17ab60bd607da41937743b1600"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4-540403-30K",
+      "checkpoint_path": "research/g_v4/checkpoints/A-G0-s540403/node_30000.pt",
+      "checkpoint_sha256": "b8358086be19816c31596ca471c7ec19a2ca172380858667caaf4261286612f0",
+      "lineage_segments": [
+        {
+          "budgeted_states": 30000,
+          "path": "research/g_v4/results/selfplay/A-G0-s540403.jsonl",
+          "sha256": "96a58a59682240f7755e4237ab30d7850e75a5515c1ae5a327d32937cf75753b"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4-CONT-100K",
+      "checkpoint_path": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_100000.pt",
+      "checkpoint_sha256": "d71f8abf5f7af3b6751771f131ed7475eb9b5e9c6f86870d829d30732a6e1426",
+      "lineage_segments": [
+        {
+          "budgeted_states": 100000,
+          "path": "research/g_v4/results/selfplay/B-G0-v3-champion-continue.jsonl",
+          "sha256": "379657e70334ec67ab23bfbad7fba9a45a29bc53d8a200c609cdacbe2a653faf"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 100000
+    },
+    {
+      "candidate_id": "G0-V4_1-control_v4-10K",
+      "checkpoint_path": "research/g_v4_1/checkpoints/control_v4/node_10000.pt",
+      "checkpoint_sha256": "cd59c87c78fac1f0ec58e966b43895182bcc86e8e813e75a7012d131d35f2bf2",
+      "lineage_segments": [
+        {
+          "budgeted_states": 20000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        },
+        {
+          "budgeted_states": 10000,
+          "path": "research/g_v4_1/results/selfplay/control_v4.jsonl",
+          "sha256": "da316de57797371e53acc5e5b6d92bd84c9cb7339c0b57fd0028ca3987d0a7c6"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4_1-state_uniform-10K",
+      "checkpoint_path": "research/g_v4_1/checkpoints/state_uniform/node_10000.pt",
+      "checkpoint_sha256": "df30619ad4f7f592a262b0f507596e7b5ea8cbd8b5bcd392ac983a503f75894e",
+      "lineage_segments": [
+        {
+          "budgeted_states": 20000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        },
+        {
+          "budgeted_states": 10000,
+          "path": "research/g_v4_1/results/selfplay/state_uniform.jsonl",
+          "sha256": "da688ed19ce69343ca13c87889b51298ea6d1696cb2f9b661000d9b1d2e89609"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4_1-winner_balanced-10K",
+      "checkpoint_path": "research/g_v4_1/checkpoints/winner_balanced/node_10000.pt",
+      "checkpoint_sha256": "01d463ac4ae06be5b2435eb4d3d206b77dd51278b4e6b9f253aca60cfcd2da9f",
+      "lineage_segments": [
+        {
+          "budgeted_states": 20000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        },
+        {
+          "budgeted_states": 10000,
+          "path": "research/g_v4_1/results/selfplay/winner_balanced.jsonl",
+          "sha256": "dda3c05e84e23306c369c89f5cc64a44f74a96934f3c0cd31b28c4ec07f60605"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    },
+    {
+      "candidate_id": "G0-V4_1-low_lr-10K",
+      "checkpoint_path": "research/g_v4_1/checkpoints/low_lr/node_10000.pt",
+      "checkpoint_sha256": "4eb6b8389f25b73a4b25f974c9adbd82b6c0b3945fd9fe3cad29237c8befa11b",
+      "lineage_segments": [
+        {
+          "budgeted_states": 20000,
+          "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+          "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42"
+        },
+        {
+          "budgeted_states": 10000,
+          "path": "research/g_v4_1/results/selfplay/low_lr.jsonl",
+          "sha256": "67afa3515a535e124fb67f8f5cb00f7b42aef1e7a8df05eaa76015f769d1f580"
+        }
+      ],
+      "training_family": "G0",
+      "training_states": 30000
+    }
+  ],
+  "historical_g0_training_only_sources": true,
+  "network": {
+    "channels": 32,
+    "policy_actions": 81,
+    "residual_blocks": 2,
+    "value_head": true
+  },
+  "opening_schedule_path": "research/g_v4_2/config/openings.json",
+  "opening_schedule_sha256": "7df8d9e1d3e86839987f617be34f03fa2bc7441973369d24cdb03d53919b0181",
+  "search_variants": {
+    "baseline": {
+      "c_puct": 1.5,
+      "leaf_value_scale": 1.0,
+      "prior_smoothing_fraction": 0.0
+    },
+    "c_puct_10": {
+      "c_puct": 10.0,
+      "leaf_value_scale": 1.0,
+      "prior_smoothing_fraction": 0.0
+    },
+    "c_puct_5": {
+      "c_puct": 5.0,
+      "leaf_value_scale": 1.0,
+      "prior_smoothing_fraction": 0.0
+    },
+    "prior_smoothing_10pct": {
+      "c_puct": 1.5,
+      "leaf_value_scale": 1.0,
+      "prior_smoothing_fraction": 0.1
+    },
+    "value_neutral": {
+      "c_puct": 1.5,
+      "leaf_value_scale": 0.0,
+      "prior_smoothing_fraction": 0.0
+    }
+  },
+  "training": {
+    "batch_size": 16,
+    "batchnorm": "freeze",
+    "checkpoint_every_states": 256,
+    "history_opponents": [
+      "G0-V3-510901-5K",
+      "G0-V3-510901-10K",
+      "G0-V3-510901-20K",
+      "G0-V4-540402-30K",
+      "G0-V4_1-control_v4-10K"
+    ],
+    "late_temperature": 0.1,
+    "learning_rate": 0.0001,
+    "maximum_total_new_states": 30000,
+    "optimizer": "AdamW",
+    "optimizer_reset": true,
+    "policy_target": "PUCT root visits",
+    "replay_capacity_positions": 20000,
+    "replay_sampling": "uniform_game",
+    "root_noise_fraction": 0.25,
+    "simulations_per_move": 64,
+    "states_per_arm": 10000,
+    "temperature_moves": 12,
+    "update_every_states": 16,
+    "weight_decay": 0.0001
+  }
+}

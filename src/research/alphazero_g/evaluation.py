@@ -77,6 +77,7 @@ def play_evaluation_match(
     opponent_mode: str = "network",
     opponent_simulations: int | None = None,
     config: PUCTConfig | None = None,
+    opponent_config: PUCTConfig | None = None,
     opponent_model: PolicyValueNet | None = None,
     device: str = "cpu",
 ) -> dict[str, Any]:
@@ -134,7 +135,7 @@ def play_evaluation_match(
             opponent_sha256 = state_hash.hexdigest()
     puct = PUCTSearch(model, config=config or PUCTConfig(), device=device) if mode == "puct" else None
     opponent_puct = (
-        PUCTSearch(frozen_model, config=config or PUCTConfig(), device=device)
+        PUCTSearch(frozen_model, config=opponent_config or config or PUCTConfig(), device=device)
         if opponent in {"F1", "F2", "MODEL"} and opponent_mode == "puct" and frozen_model is not None else None
     )
     ai_config = SearchConfig(time_limit_seconds=0.05) if opponent == "B" else SearchConfig(time_limit_seconds=1e9)
@@ -245,6 +246,11 @@ def play_evaluation_match(
             "agent_color": agent_color,
             "seed": int(seed),
             "simulations_per_agent_move": int(simulations) if mode == "puct" else 0,
+            "search_config": (config or PUCTConfig()).__dict__ if mode == "puct" else None,
+            "opponent_search_config": (
+                (opponent_config or config or PUCTConfig()).__dict__
+                if opponent in {"F1", "F2", "MODEL"} and opponent_mode == "puct" else None
+            ),
             "completed": True,
             "termination": termination,
             "winner_color": winner,

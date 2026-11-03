@@ -37,6 +37,8 @@ class PUCTConfig:
     c_puct: float = 1.5
     dirichlet_alpha: float = 0.3
     root_noise_fraction: float = 0.25
+    prior_smoothing_fraction: float = 0.0
+    leaf_value_scale: float = 1.0
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.c_puct) or self.c_puct < 0:
@@ -45,6 +47,10 @@ class PUCTConfig:
             raise ValueError("dirichlet_alpha must be finite and positive")
         if not math.isfinite(self.root_noise_fraction) or not 0 <= self.root_noise_fraction <= 1:
             raise ValueError("root_noise_fraction must be in [0,1]")
+        if not math.isfinite(self.prior_smoothing_fraction) or not 0 <= self.prior_smoothing_fraction <= 1:
+            raise ValueError("prior_smoothing_fraction must be in [0,1]")
+        if not math.isfinite(self.leaf_value_scale) or not 0 <= self.leaf_value_scale <= 1:
+            raise ValueError("leaf_value_scale must be in [0,1]")
 
 
 @dataclass
@@ -171,7 +177,12 @@ class PUCTSearch:
         probabilities[~legal] = 0.0
         probabilities[legal] = np.maximum(probabilities[legal], 1e-12)
         probabilities /= probabilities.sum()
-        return probabilities, float(value[0].clamp(-1, 1).cpu().item())
+        smoothing = self.config.prior_smoothing_fraction
+        if smoothing:
+            probabilities *= 1.0 - smoothing
+            probabilities[legal] += smoothing / int(legal.sum())
+        leaf_value = float(value[0].clamp(-1, 1).cpu().item()) * self.config.leaf_value_scale
+        return probabilities, leaf_value
 
     def _select_child(self, node: PUCTNode) -> tuple[int, PUCTNode]:
         if not node.children:
