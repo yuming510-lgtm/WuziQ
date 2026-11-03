@@ -1,0 +1,454 @@
+{
+  "blind_groups": 20,
+  "blind_used_for_selection": false,
+  "candidate_beats_v3_champion_with_paired_ci_lower_above_50pct": false,
+  "champion_decision": "G0-V3-510901-20K",
+  "champion_promotion_requires_development_gate": true,
+  "config_sha256": "ffa4c84a5a13ee78da5bb4d91ff91dd4af7bbce9fd9c418c78a56116803ce987",
+  "format_version": 1,
+  "frozen_candidate": {
+    "arm_id": "history_pool",
+    "blind_results_used_for_selection": false,
+    "candidate_id": "history_pool@1000",
+    "checkpoint_path": "research/g_v4_2/checkpoints/final_best_dev.pt",
+    "checkpoint_sha256": "956c3b8c05e8939e7eac78abe032c3e95bc4153c0ecf50e44f94bc66b2f54690",
+    "development_promotion_gate_passed": true,
+    "frozen_before_blind_evaluation": true,
+    "promotion_gate_passed_on_development": true,
+    "score_vs_A": 0.0,
+    "score_vs_B": 0.0,
+    "score_vs_v3_champion": 0.71875,
+    "selection_candidates": [
+      {
+        "arm_id": "baseline",
+        "candidate_id": "baseline@1000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/baseline/node_1000.pt",
+        "checkpoint_sha256": "4eeb27546901c8c0f3c7d4f67c54248bfcb2d3f5811b14f5c09bc1c692e8b47f",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.4375,
+        "tactical_accuracy": 0.1875,
+        "training_states": 1000
+      },
+      {
+        "arm_id": "baseline",
+        "candidate_id": "baseline@2000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/baseline/node_2000.pt",
+        "checkpoint_sha256": "4db12098076b15275a55d08987cffe71c54ecf98e4cd66225d0f5d69b2993d4d",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.15625,
+        "tactical_accuracy": 0.09375,
+        "training_states": 2000
+      },
+      {
+        "arm_id": "baseline",
+        "candidate_id": "baseline@5000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/baseline/node_5000.pt",
+        "checkpoint_sha256": "9a31324d9f7079b81c7aa472ad0744b53447f4c3bac8a54acb45c860596bf831",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.09375,
+        "tactical_accuracy": 0.0625,
+        "training_states": 5000
+      },
+      {
+        "arm_id": "baseline",
+        "candidate_id": "baseline@10000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/baseline/node_10000.pt",
+        "checkpoint_sha256": "6e0de6affcc022c9bc802babe1e5bc58ed77c83132dc6b8cb58b856b9062cc20",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.0625,
+        "tactical_accuracy": 0.09375,
+        "training_states": 10000
+      },
+      {
+        "arm_id": "search_target",
+        "candidate_id": "search_target@1000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/search_target/node_1000.pt",
+        "checkpoint_sha256": "1ee4116d7e6082969976629143e43c10368105ddcf76b00dae8386e3a34a9127",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.3125,
+        "tactical_accuracy": 0.25,
+        "training_states": 1000
+      },
+      {
+        "arm_id": "search_target",
+        "candidate_id": "search_target@2000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/search_target/node_2000.pt",
+        "checkpoint_sha256": "5913cc2ed34a6a6a9f0542e9c97073e398a604626d06e33bd599129529e7a6fd",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.15625,
+        "tactical_accuracy": 0.25,
+        "training_states": 2000
+      },
+      {
+        "arm_id": "search_target",
+        "candidate_id": "search_target@5000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/search_target/node_5000.pt",
+        "checkpoint_sha256": "9a4b8edbb43ad0ee92a2cbf558e8715d10e4ac39a14fb26f6148a779fa965c82",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.15625,
+        "tactical_accuracy": 0.1875,
+        "training_states": 5000
+      },
+      {
+        "arm_id": "search_target",
+        "candidate_id": "search_target@10000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/search_target/node_10000.pt",
+        "checkpoint_sha256": "a183ca06ea3c076f41d5d58f82448eb2162a172f747528b5c0a9e395fb1f7ec6",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.40625,
+        "tactical_accuracy": 0.1875,
+        "training_states": 10000
+      },
+      {
+        "arm_id": "history_pool",
+        "candidate_id": "history_pool@1000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/history_pool/node_1000.pt",
+        "checkpoint_sha256": "47f1deecafec3cc65b64bd8244990c0a9c1c57d17b1ac8d365e04d9322296c8f",
+        "promotion_gate_passed_on_development": true,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.71875,
+        "tactical_accuracy": 0.21875,
+        "training_states": 1000
+      },
+      {
+        "arm_id": "history_pool",
+        "candidate_id": "history_pool@2000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/history_pool/node_2000.pt",
+        "checkpoint_sha256": "8c5e745f1c6bbe87c799557cb9b62d65663d4e7e8eaed0409770b259458915ea",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.5625,
+        "tactical_accuracy": 0.1875,
+        "training_states": 2000
+      },
+      {
+        "arm_id": "history_pool",
+        "candidate_id": "history_pool@5000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/history_pool/node_5000.pt",
+        "checkpoint_sha256": "39f583b5e386c8adc21e142c7854d68ef3f06f7fa013452161ffd263c00fdd4d",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.03125,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.40625,
+        "tactical_accuracy": 0.21875,
+        "training_states": 5000
+      },
+      {
+        "arm_id": "history_pool",
+        "candidate_id": "history_pool@10000",
+        "checkpoint_path": "research/g_v4_2/checkpoints/history_pool/node_10000.pt",
+        "checkpoint_sha256": "608429ba47c780fd6baa324d0fdf9f2d980c9f886fa53e7f76d4fa75ed162fa7",
+        "promotion_gate_passed_on_development": false,
+        "score_vs_A": 0.0,
+        "score_vs_B": 0.0,
+        "score_vs_v3_champion": 0.28125,
+        "tactical_accuracy": 0.1875,
+        "training_states": 10000
+      }
+    ],
+    "tactical_accuracy": 0.21875,
+    "training_states": 1000
+  },
+  "games": {
+    "candidate_network_vs_A-rule": 40,
+    "candidate_network_vs_B-50ms": 40,
+    "candidate_vs_A-rule": 40,
+    "candidate_vs_B-50ms": 40,
+    "candidate_vs_G0-V3-510901-20K": 40,
+    "v3_champion_vs_A-rule": 40,
+    "v3_champion_vs_B-50ms": 40
+  },
+  "opening_schedule_sha256": "7df8d9e1d3e86839987f617be34f03fa2bc7441973369d24cdb03d53919b0181",
+  "paired_score_differences": {
+    "candidate_vs_A-rule": {
+      "mean_score_rate_difference": 0.0,
+      "paired_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 20
+    },
+    "candidate_vs_B-50ms": {
+      "mean_score_rate_difference": 0.0,
+      "paired_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 20
+    },
+    "puct64_minus_network_vs_A-rule": {
+      "mean_score_rate_difference": 0.0,
+      "paired_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 20
+    },
+    "puct64_minus_network_vs_B-50ms": {
+      "mean_score_rate_difference": 0.0,
+      "paired_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 20
+    }
+  },
+  "summaries": {
+    "candidate_network_vs_A-rule": {
+      "agent_simulations": 0,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 466,
+      "draws": 0,
+      "games": 40,
+      "losses": 40,
+      "mean_agent_cpu_seconds_per_game": 0.01197154158144258,
+      "mean_agent_nodes_per_game": 0.0,
+      "mean_agent_search_depth": 0.0,
+      "mean_cpu_seconds_per_game": 0.02253723215003447,
+      "mean_opponent_cpu_seconds_per_game": 0.01028427427445422,
+      "mean_opponent_search_depth": 0.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 40,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 0.9014892860013788,
+      "wins": 0
+    },
+    "candidate_network_vs_B-50ms": {
+      "agent_simulations": 0,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 133,
+      "draws": 0,
+      "games": 40,
+      "losses": 40,
+      "mean_agent_cpu_seconds_per_game": 0.0039712725694698746,
+      "mean_agent_nodes_per_game": 0.0,
+      "mean_agent_search_depth": 0.0,
+      "mean_cpu_seconds_per_game": 0.17656063637507485,
+      "mean_opponent_cpu_seconds_per_game": 0.17249552845169092,
+      "mean_opponent_search_depth": 1.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 40,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 7.062425455002995,
+      "wins": 0
+    },
+    "candidate_vs_A-rule": {
+      "agent_simulations": 26816,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 419,
+      "draws": 0,
+      "games": 40,
+      "losses": 40,
+      "mean_agent_cpu_seconds_per_game": 0.8402648144336127,
+      "mean_agent_nodes_per_game": 42799.425,
+      "mean_agent_search_depth": 2.95,
+      "mean_cpu_seconds_per_game": 0.8495986973000299,
+      "mean_opponent_cpu_seconds_per_game": 0.009068045758613152,
+      "mean_opponent_search_depth": 0.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 40,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 33.9839478920012,
+      "wins": 0
+    },
+    "candidate_vs_B-50ms": {
+      "agent_simulations": 8512,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 133,
+      "draws": 0,
+      "games": 40,
+      "losses": 40,
+      "mean_agent_cpu_seconds_per_game": 0.2745963217705139,
+      "mean_agent_nodes_per_game": 15659.85,
+      "mean_agent_search_depth": 2.9,
+      "mean_cpu_seconds_per_game": 0.4471553949000281,
+      "mean_opponent_cpu_seconds_per_game": 0.17246747772369417,
+      "mean_opponent_search_depth": 1.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 40,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 17.886215796001125,
+      "wins": 0
+    },
+    "candidate_vs_G0-V3-510901-20K": {
+      "agent_simulations": 28032,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 10.0,
+          "score_rate": 0.5
+        },
+        "W": {
+          "games": 20,
+          "points": 11.0,
+          "score_rate": 0.55
+        }
+      },
+      "candidate_moves": 438,
+      "draws": 0,
+      "games": 40,
+      "losses": 19,
+      "mean_agent_cpu_seconds_per_game": 0.8855643019531272,
+      "mean_agent_nodes_per_game": 45372.1,
+      "mean_agent_search_depth": 2.6,
+      "mean_cpu_seconds_per_game": 1.73175790279995,
+      "mean_opponent_cpu_seconds_per_game": 0.8458399593655486,
+      "mean_opponent_search_depth": 2.05,
+      "paired_opening_bootstrap_ci95": [
+        0.375,
+        0.675
+      ],
+      "paired_opening_groups": 40,
+      "points": 21.0,
+      "score_rate": 0.525,
+      "total_cpu_seconds": 69.270316111998,
+      "wins": 21
+    },
+    "v3_champion_vs_A-rule": {
+      "agent_simulations": 25984,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 406,
+      "draws": 0,
+      "games": 40,
+      "losses": 40,
+      "mean_agent_cpu_seconds_per_game": 0.8115331033957773,
+      "mean_agent_nodes_per_game": 42879.25,
+      "mean_agent_search_depth": 2.15,
+      "mean_cpu_seconds_per_game": 0.8209432469499461,
+      "mean_opponent_cpu_seconds_per_game": 0.009274536277371227,
+      "mean_opponent_search_depth": 0.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 40,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 32.837729877997845,
+      "wins": 0
+    },
+    "v3_champion_vs_B-50ms": {
+      "agent_simulations": 8576,
+      "by_color": {
+        "B": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 20,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 134,
+      "draws": 0,
+      "games": 40,
+      "losses": 40,
+      "mean_agent_cpu_seconds_per_game": 0.2776154371997109,
+      "mean_agent_nodes_per_game": 15875.0,
+      "mean_agent_search_depth": 1.875,
+      "mean_cpu_seconds_per_game": 0.4512593723500459,
+      "mean_opponent_cpu_seconds_per_game": 0.17355790597430315,
+      "mean_opponent_search_depth": 1.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 40,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 18.050374894001834,
+      "wins": 0
+    }
+  }
+}

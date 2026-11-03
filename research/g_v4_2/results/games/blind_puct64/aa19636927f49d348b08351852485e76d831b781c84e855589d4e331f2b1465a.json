@@ -1,0 +1,211 @@
+{
+  "agent_color": "B",
+  "arm_id": "history_pool@1000",
+  "candidate_checkpoint_id": "history_pool@1000",
+  "completed": true,
+  "format_version": 1,
+  "game_id": "g42-61aa794a715714c96d0a9392",
+  "mode": "puct",
+  "move_count": 12,
+  "moves": [
+    {
+      "col": 2,
+      "opening": true,
+      "player": "B",
+      "row": 1
+    },
+    {
+      "col": 6,
+      "opening": true,
+      "player": "W",
+      "row": 5
+    },
+    {
+      "col": 4,
+      "opening": true,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 5,
+      "opening": true,
+      "player": "W",
+      "row": 2
+    },
+    {
+      "actor": "agent",
+      "col": 4,
+      "elapsed_seconds": 0.08084221300669014,
+      "network_evaluations": 65,
+      "nodes": 4908,
+      "opening": false,
+      "player": "B",
+      "root_value": -0.007141461595892906,
+      "row": 4,
+      "search_depth": 3,
+      "search_entropy": -0.0,
+      "simulations": 64
+    },
+    {
+      "actor": "A",
+      "col": 5,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0009183069923892617,
+      "nodes": 76,
+      "opening": false,
+      "player": "W",
+      "row": 5,
+      "search_depth": 0,
+      "simulations": 0,
+      "timed_out": false
+    },
+    {
+      "actor": "agent",
+      "col": 0,
+      "elapsed_seconds": 0.08000626901048236,
+      "network_evaluations": 65,
+      "nodes": 4780,
+      "opening": false,
+      "player": "B",
+      "root_value": -0.0019130194559693336,
+      "row": 0,
+      "search_depth": 2,
+      "search_entropy": -0.0,
+      "simulations": 64
+    },
+    {
+      "actor": "A",
+      "col": 5,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0009536560100968927,
+      "nodes": 74,
+      "opening": false,
+      "player": "W",
+      "row": 4,
+      "search_depth": 0,
+      "simulations": 0,
+      "timed_out": false
+    },
+    {
+      "actor": "agent",
+      "col": 3,
+      "elapsed_seconds": 0.07875252599478699,
+      "network_evaluations": 65,
+      "nodes": 4650,
+      "opening": false,
+      "player": "B",
+      "root_value": -0.005613277666270733,
+      "row": 0,
+      "search_depth": 2,
+      "search_entropy": -0.0,
+      "simulations": 64
+    },
+    {
+      "actor": "A",
+      "col": 5,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0010019189794547856,
+      "nodes": 72,
+      "opening": false,
+      "player": "W",
+      "row": 3,
+      "search_depth": 0,
+      "simulations": 0,
+      "timed_out": false
+    },
+    {
+      "actor": "agent",
+      "col": 4,
+      "elapsed_seconds": 0.07548796501941979,
+      "network_evaluations": 65,
+      "nodes": 4520,
+      "opening": false,
+      "player": "B",
+      "root_value": -0.010691146366298199,
+      "row": 0,
+      "search_depth": 2,
+      "search_entropy": -0.0,
+      "simulations": 64
+    },
+    {
+      "actor": "A",
+      "col": 5,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0009414550149813294,
+      "nodes": 70,
+      "opening": false,
+      "player": "W",
+      "row": 6,
+      "search_depth": 0,
+      "simulations": 0,
+      "timed_out": false
+    }
+  ],
+  "opening": [
+    {
+      "col": 2,
+      "player": "B",
+      "row": 1
+    },
+    {
+      "col": 6,
+      "player": "W",
+      "row": 5
+    },
+    {
+      "col": 4,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 5,
+      "player": "W",
+      "row": 2
+    }
+  ],
+  "opening_group_id": "g-v3-blind-0010",
+  "opening_kind": "random4",
+  "opponent": "A",
+  "opponent_checkpoint_id": "A-rule",
+  "opponent_checkpoint_sha256": null,
+  "opponent_mode": "traditional",
+  "opponent_search_config": null,
+  "opponent_search_variant": null,
+  "outcome_for_agent": "loss",
+  "phase": "final_blind_puct64",
+  "score_for_agent": 0.0,
+  "search_config": {
+    "c_puct": 1.5,
+    "dirichlet_alpha": 0.3,
+    "leaf_value_scale": 1.0,
+    "prior_smoothing_fraction": 0.0,
+    "root_noise_fraction": 0.25
+  },
+  "search_variant": {
+    "c_puct": 1.5,
+    "dirichlet_alpha": 0.3,
+    "leaf_value_scale": 1.0,
+    "prior_smoothing_fraction": 0.0,
+    "root_noise_fraction": 0.25
+  },
+  "seed": 3033565127303798068,
+  "simulations_per_agent_move": 64,
+  "source": "evaluation",
+  "stats": {
+    "agent_max_search_depth": 3,
+    "agent_network_evaluations": 260,
+    "agent_nodes": 18858,
+    "agent_seconds": 0.3150889730313793,
+    "agent_simulations": 256,
+    "opponent_cutoffs": 0,
+    "opponent_max_search_depth": 0,
+    "opponent_network_evaluations": 0,
+    "opponent_nodes": 292,
+    "opponent_seconds": 0.0038153369969222695,
+    "opponent_simulations": 0,
+    "total_cpu_seconds": 0.3190161160000571,
+    "total_wall_seconds": 0.31900349899660796
+  },
+  "termination": "five_in_row",
+  "winner_color": "W"
+}

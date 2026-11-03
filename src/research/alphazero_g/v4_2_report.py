@@ -44,6 +44,49 @@ def _line_with_ci(ax, rows: list[tuple[int, dict[str, Any]]], label: str, color:
     ax.errorbar(x, y, yerr=np.asarray([lows, highs]), fmt="none", capsize=3, color=color)
 
 
+def _frozen_search_comparison_lines(diagnostics: dict[str, Any]) -> list[str]:
+    """Format same-checkpoint search-vs-baseline games without merging candidates."""
+    rows = [
+        "| 冻结检查点 | 搜索配置对基线 PUCT-64 | 场次 | 胜-平-负 | 得分率（配对95%区间） | CPU秒/局 | 平均树深 | 节点/局 |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    summaries = diagnostics.get("frozen_search_match_summary", {})
+    candidate_ids = diagnostics.get("top3_history_models_selected_on_development_games", [])
+    for candidate_id in candidate_ids:
+        for variant, summary in sorted(summaries.get(candidate_id, {}).items()):
+            rows.append(
+                f"| {candidate_id} | {variant} | {summary['games']} | "
+                f"{summary['wins']}-{summary['draws']}-{summary['losses']} | "
+                f"{_score_cell(summary)} | {summary['mean_agent_cpu_seconds_per_game']:.3f} | "
+                f"{summary['mean_agent_search_depth']:.2f} | "
+                f"{summary['mean_agent_nodes_per_game']:.0f} |"
+            )
+    return rows
+
+
+def _training_tactical_lines(training: dict[str, Any]) -> list[str]:
+    """Separate network policy accuracy from PUCT tactical decisions."""
+    rows = [
+        "| 训练臂 | 新增状态 | 裸策略头直接胜点准确率 | PUCT直接胜点 | PUCT唯一必防 | PUCT虚假威胁 | PUCT边线胜点 | 直接胜点价值MAE |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    stage_summaries = training.get("stage_summaries", {})
+    for arm_id in training.get("active_arms", []):
+        for stage in stage_summaries.get(arm_id, []):
+            tactical = stage.get("tactical_search_puct64", {})
+            categories = tactical.get("categories", {})
+            direct = categories.get("direct_win", {})
+            rows.append(
+                f"| {arm_id} | {int(stage['training_states']):,} | "
+                f"{_pct(direct.get('network_accuracy'))} | {_pct(direct.get('accuracy'))} | "
+                f"{_pct(categories.get('unique_block', {}).get('accuracy'))} | "
+                f"{_pct(categories.get('false_threat', {}).get('accuracy'))} | "
+                f"{_pct(categories.get('edge_win', {}).get('accuracy'))} | "
+                f"{tactical.get('immediate_win_network_value_mae_vs_exact_win', float('nan')):.3f} |"
+            )
+    return rows
+
+
 def _write_figures(root: Path, config: dict[str, Any], diagnostics: dict[str, Any],
                    training: dict[str, Any], blind: dict[str, Any]) -> list[str]:
     figures = root / "research/g_v4_2/figures"
@@ -163,7 +206,7 @@ def build_v4_2_report(root: str | Path) -> Path:
     lines.extend([
         "# WuziQ G V4.2：AlphaZero 搜索与训练协同优化",
         "",
-        "> 本报告记录规则/搜索算法与AlphaZero式自我对弈实验，没有神经网络训练以外的教师监督；未使用A/B/C/E/F棋谱、标签或权重作为G0训练输入。A/B只在评估时出现。",
+        "> 本报告记录规则/搜索算法诊断与AlphaZero式纯自我对弈实验；未使用A/B/C/E/F棋谱、标签或权重作为G0训练输入。A/B只在评估时出现。",
         "",
         "## 摘要",
         "",
@@ -200,6 +243,14 @@ def build_v4_2_report(root: str | Path) -> Path:
     lines.extend([
         "",
         f"冻结权重的自动选型最终为`{diagnostics['search_selection']['selected']}`。选型门槛是开发题宏平均至少提升5个百分点、阻挡类保持基线90%以上，并在未参与选择的验证题上不退步且满足同样的阻挡保留条件。未达门槛时，不启用搜索改进训练臂。",
+        "",
+        "### 冻结权重的直接搜索对局",
+        "",
+        "以下是在相同冻结检查点、相同8组开发开局及换色条件下，所列搜索配置对阵该检查点的基线PUCT-64。每个检查点/配置只有16局，属探索性对照；结果可检查战术题收益是否延伸到实际决策，不能单独证明稳定棋力提升。",
+        "",
+        *_frozen_search_comparison_lines(diagnostics),
+        "",
+        "搜索对局收益会随检查点变化，因此`value_neutral`是按预登记战术开发/验证门槛选择，不表示对所有网络都统一最强。历史模型的策略头直接胜点准确率为0/48，最优动作平均先验质量约1.7%，而基线PUCT根访问能找到约70.8%；训练后策略头直接胜点准确率仍为0。history_pool@10K对直接胜点的网络价值MAE为1.826。一个与数据相符的解释是：自我对弈若错过潜在胜点，最终输棋标签会把该状态教成负价值；这说明可能的标签/搜索反馈回路，但本实验没有证明它是唯一根因。",
         "",
         "| 类别 | 题数 | 基线正确 | 基线最优策略先验质量 | 基线根访问质量 |",
         "|---|---:|---:|---:|---:|",
@@ -258,6 +309,15 @@ def build_v4_2_report(root: str | Path) -> Path:
             )
         lines.append("")
 
+    lines.extend([
+        "### 各阶段的战术类别与网络头",
+        "",
+        "每类使用8道开发诊断题。裸策略头准确率只看网络先验最高落点；PUCT列看64次搜索后的落点。直接胜点价值MAE以精确胜点的+1为参照。",
+        "",
+        *_training_tactical_lines(training),
+        "",
+    ])
+
     internal_path = root_path / "research/g_v4_2/results/training/arm_internal_summary.json"
     if internal_path.exists():
         internal = load_json(internal_path)
@@ -284,6 +344,49 @@ def build_v4_2_report(root: str | Path) -> Path:
     lines.append(f"最终判定：盲测中候选相对V3 G0@20K的得分率为{_score_cell(blind['summaries'][f'candidate_vs_{"G0-V3-510901-20K"}'])}；只有开发挑战门槛通过且该直接盲测的配对区间下限超过50%才替换冠军。本次冠军记录为`{blind['champion_decision']}`。20组开局样本仍有限，区间反映配对开局波动，不应视作对所有开局的稳定等级。")
 
     lines.extend(["", "## 主要结论", ""])
+    top3 = diagnostics["top3_history_models_selected_on_development_games"]
+    historical_direct = [diagnostics["historical_tactical_summary"][candidate_id]["categories"]["direct_win"]
+                         for candidate_id in top3]
+    historical_block = [diagnostics["historical_tactical_summary"][candidate_id]["categories"]["unique_block"]
+                        for candidate_id in top3]
+    direct_network_accuracy = sum(int(row["network_correct"]) for row in historical_direct) / max(
+        1, sum(int(row["puzzles"]) for row in historical_direct)
+    )
+    direct_puct_accuracy = sum(int(row["correct"]) for row in historical_direct) / max(
+        1, sum(int(row["puzzles"]) for row in historical_direct)
+    )
+    block_puct_accuracy = sum(int(row["correct"]) for row in historical_block) / max(
+        1, sum(int(row["puzzles"]) for row in historical_block)
+    )
+    baseline_search_accuracy = float(diagnostics["search_development_metrics"]["baseline"]["accuracy"])
+    selected_search = diagnostics["search_selection"]["selected"]
+    selected_search_accuracy = float(diagnostics["search_development_metrics"][selected_search]["accuracy"])
+    validation_base = float(diagnostics["search_validation_metrics"]["baseline"]["accuracy"])
+    validation_selected = float(diagnostics["search_validation_metrics"][selected_search]["accuracy"])
+    expanded = diagnostics["expanded_simulation_diagnostics"]
+    depth_summary = []
+    for simulations in (64, 128, 256):
+        subset = [row for row in expanded if int(row["simulations"]) == simulations]
+        if subset:
+            depth_summary.append((simulations, float(np.mean([row["correct"] for row in subset])),
+                                  float(np.mean([row["max_depth"] for row in subset]))))
+    stage_by_arm = training.get("stage_summaries", {})
+    baseline_stages = sorted(stage_by_arm.get("baseline", []), key=lambda row: int(row["training_states"]))
+    history_stages = sorted(stage_by_arm.get("history_pool", []), key=lambda row: int(row["training_states"]))
+    baseline_first = baseline_stages[0]["matches"]["G0-V3-510901-20K"]["score_rate"] if baseline_stages else None
+    baseline_last = baseline_stages[-1]["matches"]["G0-V3-510901-20K"]["score_rate"] if baseline_stages else None
+    history_first = history_stages[0]["matches"]["G0-V3-510901-20K"]["score_rate"] if history_stages else None
+    history_last = history_stages[-1]["matches"]["G0-V3-510901-20K"]["score_rate"] if history_stages else None
+    depth_text = ", ".join(f"{s}次：正确率{_pct(acc)}、平均深度{depth:.2f}" for s, acc, depth in depth_summary)
+    lines.extend([
+        "### 搜索缺陷与训练退化证据",
+        "",
+        f"- 历史前三检查点的直接胜点题上，裸策略头只选中{sum(int(row['network_correct']) for row in historical_direct)}/{sum(int(row['puzzles']) for row in historical_direct)}，PUCT-64根落点达到{_pct(direct_puct_accuracy)}；唯一必防题仅{_pct(block_puct_accuracy)}正确。主要短板是策略先验对战术落点赋权不足且防守更弱，而不只是候选集缺点。",
+        f"- 对冻结权重，`{selected_search}`把战术开发正确率从{_pct(baseline_search_accuracy)}提高至{_pct(selected_search_accuracy)}，独立验证从{_pct(validation_base)}提高至{_pct(validation_selected)}；各检查点与基线PUCT的直接对局见上表，结果并不一致。因此价值中性化有战术题证据，但不能称为普遍更强。",
+        f"- 搜索诊断为{depth_text}。树深随模拟数增加而提高，但提升幅度有限；这支持64次搜索容易停留在浅层的观察。128/256结果只描述搜索预算收益，不作为训练收益。",
+        f"- 同一PUCT-64开发赛中，baseline对旧冠军得分率从1K的{_pct(baseline_first)}到10K的{_pct(baseline_last)}；history_pool从{_pct(history_first)}到{_pct(history_last)}。历史池短期取得优势，但10K时已回落。证据显示本轮训练未能稳定保留既有攻防能力，不能用损失下降当作棋力成长。",
+        "",
+    ])
     candidate_a = blind["summaries"].get("candidate_vs_A-rule", {})
     candidate_champion = blind["summaries"].get(f"candidate_vs_{'G0-V3-510901-20K'}", {})
     if candidate_a:

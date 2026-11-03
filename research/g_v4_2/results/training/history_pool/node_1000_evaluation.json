@@ -1,0 +1,958 @@
+{
+  "arm_id": "history_pool",
+  "challenger_gate_vs_v3_g0_20k": {
+    "by_color": {
+      "B": {
+        "games": 16,
+        "score_rate": 0.625
+      },
+      "W": {
+        "games": 16,
+        "score_rate": 0.8125
+      }
+    },
+    "candidate_id": "history_pool@1000",
+    "games": 32,
+    "incumbent_id": "G0-V3-510901-20K",
+    "paired_opening_bootstrap_ci95": [
+      0.5625,
+      0.875
+    ],
+    "paired_opening_groups": 16,
+    "points": 11.5,
+    "promote": true,
+    "score_rate": 0.71875,
+    "thresholds": {
+      "lower_ci_minimum_exclusive": 0.5,
+      "min_color_score_rate": 0.5,
+      "min_score_rate": 0.625,
+      "required_groups": 16
+    }
+  },
+  "completed_selfplay_games": 114,
+  "evaluation_cpu_seconds": 104.24851255199837,
+  "matches": {
+    "A-rule": {
+      "agent_simulations": 23808,
+      "by_color": {
+        "B": {
+          "games": 16,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 16,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 372,
+      "draws": 0,
+      "games": 32,
+      "losses": 32,
+      "mean_agent_cpu_seconds_per_game": 0.9878747902821488,
+      "mean_agent_nodes_per_game": 47528.0625,
+      "mean_agent_search_depth": 3.0,
+      "mean_cpu_seconds_per_game": 0.9983983726562542,
+      "mean_opponent_cpu_seconds_per_game": 0.010417967625471647,
+      "mean_opponent_search_depth": 0.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 32,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 31.948747925000134,
+      "wins": 0
+    },
+    "B-50ms": {
+      "agent_simulations": 6784,
+      "by_color": {
+        "B": {
+          "games": 16,
+          "points": 0.0,
+          "score_rate": 0.0
+        },
+        "W": {
+          "games": 16,
+          "points": 0.0,
+          "score_rate": 0.0
+        }
+      },
+      "candidate_moves": 106,
+      "draws": 0,
+      "games": 32,
+      "losses": 32,
+      "mean_agent_cpu_seconds_per_game": 0.2874456828139955,
+      "mean_agent_nodes_per_game": 15566.78125,
+      "mean_agent_search_depth": 2.90625,
+      "mean_cpu_seconds_per_game": 0.4595043753124486,
+      "mean_opponent_cpu_seconds_per_game": 0.17194876761914202,
+      "mean_opponent_search_depth": 1.0,
+      "paired_opening_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_opening_groups": 32,
+      "points": 0.0,
+      "score_rate": 0.0,
+      "total_cpu_seconds": 14.704140009998355,
+      "wins": 0
+    },
+    "G0-V3-510901-20K": {
+      "agent_simulations": 22656,
+      "by_color": {
+        "B": {
+          "games": 16,
+          "points": 10.0,
+          "score_rate": 0.625
+        },
+        "W": {
+          "games": 16,
+          "points": 13.0,
+          "score_rate": 0.8125
+        }
+      },
+      "candidate_moves": 354,
+      "draws": 0,
+      "games": 32,
+      "losses": 9,
+      "mean_agent_cpu_seconds_per_game": 0.9100883828377846,
+      "mean_agent_nodes_per_game": 45400.125,
+      "mean_agent_search_depth": 2.53125,
+      "mean_cpu_seconds_per_game": 1.7998632692812464,
+      "mean_opponent_cpu_seconds_per_game": 0.8894074412737609,
+      "mean_opponent_search_depth": 2.03125,
+      "paired_opening_bootstrap_ci95": [
+        0.5625,
+        0.875
+      ],
+      "paired_opening_groups": 32,
+      "points": 23.0,
+      "score_rate": 0.71875,
+      "total_cpu_seconds": 57.595624616999885,
+      "wins": 23
+    }
+  },
+  "optimizer": {
+    "cpu_seconds": 0.6373092240000915,
+    "learning_rate": 9.807320624792403e-05,
+    "policy_loss": 4.144488634601716,
+    "total_loss": 4.585285056021906,
+    "update_count": 62,
+    "updates": 62,
+    "value_loss": 0.4407964113108333,
+    "wall_seconds": 0.6372842800046783
+  },
+  "selfplay_cpu_seconds_since_previous_node": 171.01446106600224,
+  "tactical_records": [
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.079358100891113,
+      "network_value": -0.9109737277030945,
+      "optimal_actions": [
+        13
+      ],
+      "policy_prior_mass_on_optimal": 0.006218448746949434,
+      "position_symmetry_key": "............................................WW................WBBBB.....W........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-direct_win-0000",
+      "root_prior_mass_on_optimal": 0.006218448347414992,
+      "root_value": -0.011584035120904446,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.096507549285889,
+      "network_value": -0.9062367081642151,
+      "optimal_actions": [
+        21,
+        71
+      ],
+      "policy_prior_mass_on_optimal": 0.013764181174337864,
+      "position_symmetry_key": "................W.............WB.......B.......B....W..B..................W......",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-direct_win-0001",
+      "root_prior_mass_on_optimal": 0.013764180095389888,
+      "root_value": 0.007884924300014973,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.07282018661499,
+      "network_value": -0.9094955325126648,
+      "optimal_actions": [
+        11,
+        16
+      ],
+      "policy_prior_mass_on_optimal": 0.011538663879036903,
+      "position_symmetry_key": "..................................B........BW.......BW...W...B....W..............",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-direct_win-0002",
+      "root_prior_mass_on_optimal": 0.011538663604715298,
+      "root_value": -0.002811022102832794,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 3,
+      "network_policy_entropy": 4.087844371795654,
+      "network_value": -0.89952552318573,
+      "optimal_actions": [
+        20
+      ],
+      "policy_prior_mass_on_optimal": 0.02812202461063862,
+      "position_symmetry_key": "....................WBBB.B.........W.........W.............................W.....",
+      "puct_action": 20,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-direct_win-0003",
+      "root_prior_mass_on_optimal": 0.02812202703193753,
+      "root_value": 0.9689199039712548,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 217
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 29,
+      "network_policy_entropy": 4.081404685974121,
+      "network_value": -0.904811441898346,
+      "optimal_actions": [
+        66
+      ],
+      "policy_prior_mass_on_optimal": 0.021608678624033928,
+      "position_symmetry_key": "...............W...........W................B...............B.......B...W...B.W..",
+      "puct_action": 66,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-direct_win-0004",
+      "root_prior_mass_on_optimal": 0.021608678720948665,
+      "root_value": 0.5641313781961799,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 2076
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.076883316040039,
+      "network_value": -0.8972159624099731,
+      "optimal_actions": [
+        13
+      ],
+      "policy_prior_mass_on_optimal": 0.0063913301564753056,
+      "position_symmetry_key": "................W.W.........B.................B........B........B.....W...W......",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-direct_win-0005",
+      "root_prior_mass_on_optimal": 0.006391329830329857,
+      "root_value": -0.004144542850553989,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 15,
+      "network_policy_entropy": 4.096954345703125,
+      "network_value": -0.909373939037323,
+      "optimal_actions": [
+        48
+      ],
+      "policy_prior_mass_on_optimal": 0.024892613291740417,
+      "position_symmetry_key": ".................W..............W.W..........BBB.B...................W...........",
+      "puct_action": 48,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-direct_win-0006",
+      "root_prior_mass_on_optimal": 0.02489261475154323,
+      "root_value": 0.7806829614564776,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 1075
+    },
+    {
+      "category": "direct_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.092223167419434,
+      "network_value": -0.8881773352622986,
+      "optimal_actions": [
+        19,
+        69
+      ],
+      "policy_prior_mass_on_optimal": 0.005773226730525494,
+      "position_symmetry_key": "..........................W..B.........B.........B.....W..WB........W............",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-direct_win-0007",
+      "root_prior_mass_on_optimal": 0.005773227123515995,
+      "root_value": 0.00988330040127039,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.092217922210693,
+      "network_value": -0.9085374474525452,
+      "optimal_actions": [
+        78
+      ],
+      "policy_prior_mass_on_optimal": 0.010987204499542713,
+      "position_symmetry_key": "...........W....W.W.........................B........B......W..........B........B",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-edge_win-0000",
+      "root_prior_mass_on_optimal": 0.010987204527277639,
+      "root_value": 0.004655458964407444,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 13,
+      "network_policy_entropy": 4.094578266143799,
+      "network_value": -0.923194944858551,
+      "optimal_actions": [
+        32,
+        77
+      ],
+      "policy_prior_mass_on_optimal": 0.03985820710659027,
+      "position_symmetry_key": ".................W...............................BBBB..............W....WW.......",
+      "puct_action": 32,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-edge_win-0001",
+      "root_prior_mass_on_optimal": 0.0398582069677957,
+      "root_value": 0.812729031778872,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 932
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 25,
+      "network_policy_entropy": 4.093552589416504,
+      "network_value": -0.8939213156700134,
+      "optimal_actions": [
+        12,
+        62
+      ],
+      "policy_prior_mass_on_optimal": 0.033956971019506454,
+      "position_symmetry_key": "............................B......W..B....W....B.........B....................WW",
+      "puct_action": 12,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-edge_win-0002",
+      "root_prior_mass_on_optimal": 0.03395697129988332,
+      "root_value": 0.6301159467548132,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 1790
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.070460796356201,
+      "network_value": -0.9149147868156433,
+      "optimal_actions": [
+        26,
+        71
+      ],
+      "policy_prior_mass_on_optimal": 0.012796076945960522,
+      "position_symmetry_key": "........W..........................B........BW.......B........B..W...........W...",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-edge_win-0003",
+      "root_prior_mass_on_optimal": 0.012796076586569814,
+      "root_value": 0.002722121775150299,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.090988636016846,
+      "network_value": -0.9222279191017151,
+      "optimal_actions": [
+        44
+      ],
+      "policy_prior_mass_on_optimal": 0.012987508438527584,
+      "position_symmetry_key": ".................................W..W.......B.......B.......B.......BW...W.......",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-edge_win-0004",
+      "root_prior_mass_on_optimal": 0.012987508449338358,
+      "root_value": -0.0014097178354859352,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.079011917114258,
+      "network_value": -0.9219793081283569,
+      "optimal_actions": [
+        76
+      ],
+      "policy_prior_mass_on_optimal": 0.011855624616146088,
+      "position_symmetry_key": "..........................B.......WBW......W.........B........B........W.........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-edge_win-0005",
+      "root_prior_mass_on_optimal": 0.011855624323902822,
+      "root_value": -0.002358265221118927,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.104435443878174,
+      "network_value": -0.8966813683509827,
+      "optimal_actions": [
+        54,
+        59
+      ],
+      "policy_prior_mass_on_optimal": 0.022362297400832176,
+      "position_symmetry_key": "...................BBBB..W.................W.........................W....W......",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-edge_win-0006",
+      "root_prior_mass_on_optimal": 0.022362296700458535,
+      "root_value": 0.011539238505065441,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "edge_win",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 55,
+      "network_policy_entropy": 4.08706521987915,
+      "network_value": -0.9158400297164917,
+      "optimal_actions": [
+        35,
+        75
+      ],
+      "policy_prior_mass_on_optimal": 0.028816241770982742,
+      "position_symmetry_key": "...........................................B..W....BW....W.B.......B..........W..",
+      "puct_action": 75,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-edge_win-0007",
+      "root_prior_mass_on_optimal": 0.02881624225979968,
+      "root_value": 0.15776929259300232,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 3933
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.094323635101318,
+      "network_value": -0.9205527901649475,
+      "optimal_actions": [
+        53
+      ],
+      "policy_prior_mass_on_optimal": 0.015087492763996124,
+      "position_symmetry_key": "................................B........W........W........W.....BBBW............",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0000",
+      "root_prior_mass_on_optimal": 0.015087493848629637,
+      "root_value": -0.0023639919236302376,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 30,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.118745803833008,
+      "network_value": -0.915107011795044,
+      "optimal_actions": [
+        68
+      ],
+      "policy_prior_mass_on_optimal": 0.021581564098596573,
+      "position_symmetry_key": ".............................BWWWW......B........B........B......................",
+      "puct_action": 0,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0001",
+      "root_prior_mass_on_optimal": 0.021581563469034146,
+      "root_value": 0.001925986260175705,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4650
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.098547458648682,
+      "network_value": -0.8975704908370972,
+      "optimal_actions": [
+        41
+      ],
+      "policy_prior_mass_on_optimal": 0.013513275422155857,
+      "position_symmetry_key": "...................................B...W.......W.......W...B...W....B........B...",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0002",
+      "root_prior_mass_on_optimal": 0.013513275896267298,
+      "root_value": -0.005652016028761864,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.096611499786377,
+      "network_value": -0.8727667331695557,
+      "optimal_actions": [
+        15
+      ],
+      "policy_prior_mass_on_optimal": 0.0035603910218924284,
+      "position_symmetry_key": "..................................W........W...B....W....B...W.....B..B..........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0003",
+      "root_prior_mass_on_optimal": 0.003560390495073522,
+      "root_value": -0.000754072330892086,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 2,
+      "network_action": 20,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.118219375610352,
+      "network_value": -0.9084815979003906,
+      "optimal_actions": [
+        80
+      ],
+      "policy_prior_mass_on_optimal": 0.020538831129670143,
+      "position_symmetry_key": "...............................BB.......WB......W..B....W.......W................",
+      "puct_action": 0,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0004",
+      "root_prior_mass_on_optimal": 0.02053883117190937,
+      "root_value": 0.005905669182538986,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4650
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.086526870727539,
+      "network_value": -0.9195799827575684,
+      "optimal_actions": [
+        77
+      ],
+      "policy_prior_mass_on_optimal": 0.013203379698097706,
+      "position_symmetry_key": ".................B.......B.......B..W........W........W........W........B........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0005",
+      "root_prior_mass_on_optimal": 0.01320338067864144,
+      "root_value": -0.005237065255641937,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.098227024078369,
+      "network_value": -0.9134013056755066,
+      "optimal_actions": [
+        25
+      ],
+      "policy_prior_mass_on_optimal": 0.0035027421545237303,
+      "position_symmetry_key": ".........................B........B........B............BWWWW....................",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0006",
+      "root_prior_mass_on_optimal": 0.0035027424542742164,
+      "root_value": -0.007575350813567638,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "false_threat",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.095215797424316,
+      "network_value": -0.9217856526374817,
+      "optimal_actions": [
+        68
+      ],
+      "policy_prior_mass_on_optimal": 0.018488354980945587,
+      "position_symmetry_key": "...................................B.......B.......B...........BWWWW.............",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-false_threat-0007",
+      "root_prior_mass_on_optimal": 0.018488353630485233,
+      "root_value": -0.008024310693144798,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.100652694702148,
+      "network_value": -0.9035014510154724,
+      "optimal_actions": [
+        63
+      ],
+      "policy_prior_mass_on_optimal": 0.002645798260346055,
+      "position_symmetry_key": ".........................W.......W.......W.B.....W...B...B.....B.................",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0000",
+      "root_prior_mass_on_optimal": 0.002645798219249248,
+      "root_value": -0.012075182981789112,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": true,
+      "network_evaluations": 35,
+      "network_policy_entropy": 4.086922645568848,
+      "network_value": -0.8999835252761841,
+      "optimal_actions": [
+        40
+      ],
+      "policy_prior_mass_on_optimal": 0.05055106058716774,
+      "position_symmetry_key": "...............B...........B.......B.............W........W........W........W.B..",
+      "puct_action": 40,
+      "puct_correct": true,
+      "puzzle_id": "g-v4-2-unique_block-0001",
+      "root_prior_mass_on_optimal": 0.05055105952694233,
+      "root_value": -0.0505168866366148,
+      "root_visit_mass_on_optimal": 1.0,
+      "simulations": 64,
+      "tree_nodes": 2518
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.102818012237549,
+      "network_value": -0.9242541193962097,
+      "optimal_actions": [
+        77
+      ],
+      "policy_prior_mass_on_optimal": 0.014198229648172855,
+      "position_symmetry_key": ".........................B......................BWWWW.................B..B.......",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0002",
+      "root_prior_mass_on_optimal": 0.014198231151049146,
+      "root_value": -0.0021491562947630882,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.090528964996338,
+      "network_value": -0.9023138880729675,
+      "optimal_actions": [
+        36
+      ],
+      "policy_prior_mass_on_optimal": 0.013357659801840782,
+      "position_symmetry_key": "......................B..B....B..............W........W........W........W.....B..",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0003",
+      "root_prior_mass_on_optimal": 0.01335765936656932,
+      "root_value": 0.00924489926546812,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.088047027587891,
+      "network_value": -0.8941959738731384,
+      "optimal_actions": [
+        16
+      ],
+      "policy_prior_mass_on_optimal": 0.008161977864801884,
+      "position_symmetry_key": "..............B...........B...........................B..........WWWWB...........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0004",
+      "root_prior_mass_on_optimal": 0.008161977805857859,
+      "root_value": -0.0017710812389850616,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.072948455810547,
+      "network_value": -0.919021487236023,
+      "optimal_actions": [
+        78
+      ],
+      "policy_prior_mass_on_optimal": 0.010341987013816833,
+      "position_symmetry_key": "...................................WBB......W........W........W.B......B.........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0005",
+      "root_prior_mass_on_optimal": 0.010341987014226619,
+      "root_value": -0.009790992364287376,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.088603496551514,
+      "network_value": -0.8993120789527893,
+      "optimal_actions": [
+        63
+      ],
+      "policy_prior_mass_on_optimal": 0.002411796245723963,
+      "position_symmetry_key": ".............B............W........W........W........W........BB.......B.........",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0006",
+      "root_prior_mass_on_optimal": 0.002411795977861397,
+      "root_value": 0.0026579219847917557,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    },
+    {
+      "category": "unique_block",
+      "label_source": "exact_legal_five_in_a_row_rules",
+      "max_depth": 3,
+      "network_action": 40,
+      "network_correct": false,
+      "network_evaluations": 65,
+      "network_policy_entropy": 4.0944952964782715,
+      "network_value": -0.921866774559021,
+      "optimal_actions": [
+        52
+      ],
+      "policy_prior_mass_on_optimal": 0.021246857941150665,
+      "position_symmetry_key": ".......................B........W..B.....W........WB.......W...B.................",
+      "puct_action": 40,
+      "puct_correct": false,
+      "puzzle_id": "g-v4-2-unique_block-0007",
+      "root_prior_mass_on_optimal": 0.021246856958026136,
+      "root_value": -0.005896435119211674,
+      "root_visit_mass_on_optimal": 0.0,
+      "simulations": 64,
+      "tree_nodes": 4648
+    }
+  ],
+  "tactical_search_puct64": {
+    "accuracy": 0.21875,
+    "categories": {
+      "direct_win": {
+        "accuracy": 0.375,
+        "correct": 3,
+        "mean_depth": 2.625,
+        "mean_network_policy_entropy": 4.085499465465546,
+        "mean_network_value": -0.9032262712717056,
+        "mean_optimal_prior_mass": 0.014788645901717246,
+        "mean_root_value": 0.2891203585313633,
+        "mean_root_visit_mass": 0.375,
+        "network_accuracy": 0.0,
+        "network_correct": 0,
+        "puzzles": 8
+      },
+      "edge_win": {
+        "accuracy": 0.375,
+        "correct": 3,
+        "mean_depth": 2.75,
+        "mean_network_policy_entropy": 4.089038848876953,
+        "mean_network_value": -0.9121621400117874,
+        "mean_optimal_prior_mass": 0.02170251647476107,
+        "mean_root_value": 0.20197038841433823,
+        "mean_root_visit_mass": 0.375,
+        "network_accuracy": 0.0,
+        "network_correct": 0,
+        "puzzles": 8
+      },
+      "false_threat": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "mean_depth": 2.75,
+        "mean_network_policy_entropy": 4.100802183151245,
+        "mean_network_value": -0.9086556956171989,
+        "mean_optimal_prior_mass": 0.013684503908734769,
+        "mean_root_value": -0.0027218939503654838,
+        "mean_root_visit_mass": 0.0,
+        "network_accuracy": 0.0,
+        "network_correct": 0,
+        "puzzles": 8
+      },
+      "unique_block": {
+        "accuracy": 0.125,
+        "correct": 1,
+        "mean_depth": 3.0,
+        "mean_network_policy_entropy": 4.090627074241638,
+        "mean_network_value": -0.9080561622977257,
+        "mean_optimal_prior_mass": 0.015364420920377597,
+        "mean_root_value": -0.008787114173173904,
+        "mean_root_visit_mass": 0.125,
+        "network_accuracy": 0.125,
+        "network_correct": 1,
+        "puzzles": 8
+      }
+    },
+    "correct": 7,
+    "immediate_win_network_value_mae_vs_exact_win": 1.9076942056417465,
+    "immediate_win_policy_prior_mass": 0.018245581188239157,
+    "immediate_win_root_visit_mass": 0.375,
+    "puzzles": 32
+  },
+  "training_states": 1000
+}
