@@ -261,6 +261,16 @@ def _run_6x6(root: Path, config: dict[str, Any], schedule: dict[str, Any],
         "dev_selected_node": frozen_node,
         "blind_result": blind,
     }
+    expected_stage_games = []
+    for row in stage_rows:
+        requested_pairs = (int(settings["development_pairs_at_intermediate_nodes"])
+                           if row["node"] == 2000 else int(settings["development_pairs_at_gate_nodes"]))
+        expected_stage_games.append(int(row["match"].get("games", 0)) == 2 * requested_pairs)
+    result["complete"] = (
+        bool(train_result.get("completed")) and all(expected_stage_games)
+        and (blind is not None and int(blind.get("games", 0)) == 2 * int(settings["blind_pairs"]))
+    )
+    result["partial"] = not result["complete"]
     _atomic_json(root / "research/g_v5/results/six_by_six_summary.json", result)
     return result
 
@@ -360,9 +370,15 @@ def _run_9x9(root: Path, config: dict[str, Any], schedule: dict[str, Any],
         result = {"arm": arm, "training": settings, "stages": stage_results,
                   "simulations_per_move": spec["simulations_per_move"],
                   "opening_distribution": spec["opening_distribution"]}
+        dev_summaries = [row for row in stage_results if "candidate" in row]
+        expected_dev_summaries = len(spec["milestones"]) * 4
+        result["complete"] = (
+            bool(settings.get("completed")) and len(dev_summaries) == expected_dev_summaries
+            and all(int(row.get("games", 0)) == 2 * int(nine["development_pairs"]) for row in dev_summaries)
+        )
         results.append(result)
         _atomic_json(root / "research/g_v5/results/9x9_arms.json", results)
-    complete_count = sum(bool(row["training"].get("completed")) for row in results)
+    complete_count = sum(bool(row.get("complete")) for row in results)
     return {"arms": results, "complete_arm_count": complete_count,
             "planned_arm_count": len(arm_order)}
 
@@ -469,6 +485,7 @@ def _final_9x9(root: Path, config: dict[str, Any], schedule: dict[str, Any],
             len(frozen) == 6 and all(row.get("games", 0) == 2 * int(config["nine_by_nine"]["blind_pairs"]) for row in frozen)
             and len(historical_blind) == 6 and all(row.get("games", 0) == 2 * int(config["nine_by_nine"]["blind_pairs"]) for row in historical_blind)
             and len(search_budget_rows) == 3 and all(row.get("games", 0) == 2 * int(config["nine_by_nine"]["development_pairs"]) for row in search_budget_rows)
+            and len(puzzle_budgets) == 3
         ),
     }
     _atomic_json(root / "research/g_v5/results/final_9x9.json", result)
@@ -512,7 +529,7 @@ def run_v5(root: str | Path | None = None) -> dict[str, Any]:
     _write_progress(root, phase="six_by_six_complete", six_by_six_gate=six_result["continue_to_9x9_gate_passed"],
                     cumulative_cpu_seconds=spent_cpu + time.process_time() - cpu_started)
 
-    if six_result.get("partial"):
+    if six_result.get("partial") or not six_result.get("complete", True):
         summary = {"format_version": 1, "experiment_id": config["experiment_id"],
                    "config_sha256": config["config_sha256"], "partial": True,
                    "cpu_seconds_this_session": time.process_time() - cpu_started,
