@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "v5_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. pytest -q tests/test_alphazero_g_v5_*.py",
+  "v5_passed": 14,
+  "v5_failed": 0,
+  "v5_warnings": 4,
+  "v5_warning": "Vendored upstream PyTorch policy network calls log_softmax without dim; source was kept unchanged for reference fidelity.",
+  "repository_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. pytest -q",
+  "repository_passed": 465,
+  "repository_failed": 29,
+  "repository_warnings": 5,
+  "repository_duration_seconds": 75.05,
+  "repository_failure_class": "All 29 failures are historical V2/V3/V4/V6 tests that enforce their own registered research branch. They fail at the branch guard before exercising V5 code; the V5-specific suite passes.",
+  "failed_test_files": {
+    "tests/test_alphazero_g_v2_snapshot.py": 3,
+    "tests/test_alphazero_g_v3_config.py": 2,
+    "tests/test_alphazero_g_v3_runner.py": 6,
+    "tests/test_alphazero_g_v3_snapshot.py": 2,
+    "tests/test_alphazero_g_v4.py": 1,
+    "tests/test_alphazero_g_v4_1_audit.py": 1,
+    "tests/test_alphazero_g_v4_1_config.py": 2,
+    "tests/test_alphazero_g_v4_2_registration.py": 1,
+    "tests/test_v6_2_snapshot.py": 2,
+    "tests/test_v6_3_runner.py": 6,
+    "tests/test_v6_3_schedule.py": 1,
+    "tests/test_v6_3_snapshot.py": 2
+  }
+}
