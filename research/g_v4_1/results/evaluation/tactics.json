@@ -1,0 +1,6422 @@
+{
+  "elapsed_cpu_seconds": 17.356453371,
+  "elapsed_wall_seconds": 17.35775495300186,
+  "format_version": 1,
+  "independent_blind_data_used": false,
+  "label_source": "exact five-in-a-row rules only; no teacher or training labels",
+  "mother_position_count": 4,
+  "puzzle_count": 32,
+  "results": [
+    {
+      "accuracy": 0.28125,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.125,
+          "correct": 1,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "G0-V3-20K",
+      "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+      "correct": 9,
+      "mode": "network",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.003495966000000017,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.249835014343262,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.12003076821565628
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009521939999999063,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.248426914215088,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.12770812213420868
+        },
+        {
+          "action": 72,
+          "action_coordinate": [
+            8,
+            0
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011344420000001243,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.248592376708984,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.12910985946655273
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008777160000001949,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.250916004180908,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.14053821563720703
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0007393420000001427,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.2482147216796875,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.13524986803531647
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011500620000002293,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.249508380889893,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.12190674245357513
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0007948469999998764,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.250328540802002,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.06607232987880707
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0007805510000000737,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.249622344970703,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.17038895189762115
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.00135717599999996,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.2460856437683105,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.08227962255477905
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0013089180000003253,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.245444297790527,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.0006730816094204783
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001012248999999965,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.2476019859313965,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.04132157936692238
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001098834000000437,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.247613906860352,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.07977449893951416
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001300767000000036,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.246519565582275,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.03283573314547539
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009798499999997823,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.246034145355225,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.07762902975082397
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010170610000002078,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.247767448425293,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.10319545865058899
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010004960000000729,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.246097564697266,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 0,
+          "value_prediction": -0.04051244258880615
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008231969999998867,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.248197555541992,
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.04582905024290085
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007517919999999734,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.246230125427246,
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.0842837542295456
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007737090000001778,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.246164321899414,
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.028728680685162544
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008080480000001167,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.249030590057373,
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.03274910897016525
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0009373260000002936,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.247054100036621,
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.044849444180727005
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008237890000000192,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.249244213104248,
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.028338422998785973
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007571929999996563,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.246245384216309,
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 0,
+          "value_prediction": -0.10028719902038574
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007860860000001857,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.247975826263428,
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.012423576787114143
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010835950000003258,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.251129627227783,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.12716948986053467
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001240307000000218,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.24938440322876,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.11244234442710876
+        },
+        {
+          "action": 27,
+          "action_coordinate": [
+            3,
+            0
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001499383999999715,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.249699592590332,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.1138853132724762
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009480340000003196,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.251481533050537,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.14338001608848572
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "false_threat",
+          "correct": true,
+          "cpu_seconds": 0.0009507390000003113,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.249485492706299,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.1333889663219452
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010201720000000414,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.2509894371032715,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.13075993955135345
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010069220000001877,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.250124454498291,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.05818140134215355
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001346917000000225,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.250765800476074,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.1541055142879486
+        }
+      ],
+      "simulations_per_move": 0
+    },
+    {
+      "accuracy": 0.46875,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.25,
+          "correct": 2,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 0.625,
+          "correct": 5,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "G0-V3-20K",
+      "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+      "correct": 15,
+      "mode": "puct",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.08609488800000031,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4647,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07563950500000027,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4635,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 72,
+          "action_coordinate": [
+            8,
+            0
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.08238953899999979,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4633,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.13038916899999986,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4629,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07513663500000023,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4631,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0740239840000001,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4632,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07094250400000002,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4094,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07562490300000002,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4623,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07766198599999985,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4663,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07322036600000015,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4678,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07304129300000017,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4680,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 0,
+          "action_coordinate": [
+            0,
+            0
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.07220764699999993,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07182768400000006,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 0,
+          "action_coordinate": [
+            0,
+            0
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.06854516499999974,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07480373500000059,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4654,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 2,
+          "action_coordinate": [
+            0,
+            2
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.07264560600000003,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 76,
+          "action_coordinate": [
+            8,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.046667552999999806,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2646,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.014428192999999645,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 937,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.021532945999999775,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1363,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 44,
+          "action_coordinate": [
+            4,
+            8
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.02609902799999997,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1436,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 76,
+          "action_coordinate": [
+            8,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.02546766399999978,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1582,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.025672434999999716,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1509,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.008605972999999878,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 506,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 44,
+          "action_coordinate": [
+            4,
+            8
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.03137440299999916,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1930,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "false_threat",
+          "correct": true,
+          "cpu_seconds": 0.07218811799999969,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4284,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 72,
+          "action_coordinate": [
+            8,
+            0
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0723632839999997,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4494,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 27,
+          "action_coordinate": [
+            3,
+            0
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07426418200000029,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4633,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.12280900900000002,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4486,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "false_threat",
+          "correct": true,
+          "cpu_seconds": 0.06936481400000005,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4348,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0743599210000001,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4558,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0746141429999998,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4672,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0710275170000001,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4555,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 64
+        }
+      ],
+      "simulations_per_move": 64
+    },
+    {
+      "accuracy": 0.25,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "control_v4",
+      "checkpoint_sha256": "cd59c87c78fac1f0ec58e966b43895182bcc86e8e813e75a7012d131d35f2bf2",
+      "correct": 8,
+      "mode": "network",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009953219999996321,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.218773365020752,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.25606629252433777
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008279700000004553,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.217271327972412,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.28058117628097534
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0007702349999991753,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.217849254608154,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.27038663625717163
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011600200000003724,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.221426010131836,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.26326337456703186
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0010271550000000573,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.216648578643799,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.25878670811653137
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009255829999998966,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.2202959060668945,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.27067652344703674
+        },
+        {
+          "action": 58,
+          "action_coordinate": [
+            6,
+            4
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008020650000002405,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.219798564910889,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.1614229679107666
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008618579999994935,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.218384742736816,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.3678724765777588
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010260859999995375,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.20421028137207,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.08647483587265015
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0011282260000005095,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.203921318054199,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.056144166737794876
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010916950000003922,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.206398010253906,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.09199841320514679
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0011497029999993913,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.206358909606934,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.1883557289838791
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010430880000003029,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.204189777374268,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.08696017414331436
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001071276000000232,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.204557418823242,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.1736055314540863
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001080835999999863,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.207352638244629,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.10161478817462921
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009887070000003106,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.203074932098389,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 0,
+          "value_prediction": -0.12013591080904007
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0010466079999993383,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.202578544616699,
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.09669392555952072
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0013354189999992272,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.20112943649292,
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.16859672963619232
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0011621870000002588,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.1984968185424805,
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.04760243743658066
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0010778560000002102,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.20586633682251,
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.0463068000972271
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008334410000001569,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.2008137702941895,
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.09551191329956055
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0009888919999996304,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.205694675445557,
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.029031628742814064
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0009650560000000752,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.19924783706665,
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 0,
+          "value_prediction": -0.20421959459781647
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0012234749999997518,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.204522609710693,
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.0640687346458435
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009772930000000457,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.220753192901611,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.2697059214115143
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0011115750000003644,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.218716621398926,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.2536475360393524
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.000985394000000639,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.2186784744262695,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.2558042109012604
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.000980527999999481,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.221821308135986,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.27342578768730164
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010391339999999971,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.217376708984375,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.25581109523773193
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0013098160000000192,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.221315383911133,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.29073283076286316
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010826169999997859,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.219412326812744,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.1422327309846878
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010000019999996113,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.219759464263916,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.3723788857460022
+        }
+      ],
+      "simulations_per_move": 0
+    },
+    {
+      "accuracy": 0.4375,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "control_v4",
+      "checkpoint_sha256": "cd59c87c78fac1f0ec58e966b43895182bcc86e8e813e75a7012d131d35f2bf2",
+      "correct": 14,
+      "mode": "puct",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07775456500000022,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.076547068,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07237884500000025,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07755891700000017,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0783568240000001,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.071414914,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 58,
+          "action_coordinate": [
+            6,
+            4
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07763947900000012,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4624,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.08350577800000014,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07298655099999962,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4435,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0763547210000004,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4675,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.06709153799999967,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4175,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07230482199999955,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.1273793009999995,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4391,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07310326600000039,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4609,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.06636599299999979,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3851,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07596522299999986,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.07568022400000007,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4488,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.02300318599999951,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1297,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.048704460000000616,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3361,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 44,
+          "action_coordinate": [
+            4,
+            8
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.045290468999999334,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2579,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 76,
+          "action_coordinate": [
+            8,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.031379355999999525,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2004,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.043477746999999844,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2721,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.034205234999999945,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1801,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.07046267800000017,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4351,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06335265600000017,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4054,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06893974799999913,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4197,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 48,
+          "action_coordinate": [
+            5,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06740677600000033,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4197,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0680691419999988,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4125,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06639704400000035,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4126,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 48,
+          "action_coordinate": [
+            5,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06865495999999993,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4195,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 58,
+          "action_coordinate": [
+            6,
+            4
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07527735799999924,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4554,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06322004199999931,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3982,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 64
+        }
+      ],
+      "simulations_per_move": 64
+    },
+    {
+      "accuracy": 0.25,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "state_uniform",
+      "checkpoint_sha256": "df30619ad4f7f592a262b0f507596e7b5ea8cbd8b5bcd392ac983a503f75894e",
+      "correct": 8,
+      "mode": "network",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0012258200000001551,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.219506740570068,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.2674182653427124
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0014502339999999947,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.217946529388428,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.2932598292827606
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011582949999997538,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.218360424041748,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.29830268025398254
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009197840000005897,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.221080780029297,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.3204807639122009
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008934739999997277,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.217040061950684,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.31251397728919983
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0010655160000005992,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.219573974609375,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.31425565481185913
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008415960000007772,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.22036075592041,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.17869283258914948
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009720120000000776,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.219414234161377,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.37864866852760315
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010226289999994975,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.206450939178467,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.0949697494506836
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009654459999985932,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.205004692077637,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.04169486463069916
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.00116288799999964,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.208657264709473,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.0777498334646225
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010930780000002471,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.207562446594238,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.15699002146720886
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.000940561000000173,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.206847667694092,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.06173984333872795
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001347254000000575,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.205804824829102,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.1509878784418106
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010306349999993358,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.209405422210693,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.14978037774562836
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001001987000000426,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.204306602478027,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 0,
+          "value_prediction": -0.13390536606311798
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008052519999992569,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.204018592834473,
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.12137770652770996
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007250879999993742,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.20207405090332,
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.18515917658805847
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0009165900000009941,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.20156717300415,
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.029546521604061127
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008147720000000191,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.207617282867432,
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.03786148875951767
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0009496640000001833,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.203120708465576,
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.06739303469657898
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0010246719999997822,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.208014488220215,
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.023656710982322693
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.001003173999999163,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.200628280639648,
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 0,
+          "value_prediction": -0.20637565851211548
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0011886539999999002,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.205145835876465,
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.08631329238414764
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001201316999999591,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.221302509307861,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.27773478627204895
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0011329389999996664,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.219069004058838,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.27546972036361694
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010159590000000662,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.21967887878418,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.28606125712394714
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0012739139999986548,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.22160530090332,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.32387810945510864
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010321849999996857,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.218616485595703,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.31382086873054504
+        },
+        {
+          "action": 48,
+          "action_coordinate": [
+            5,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009801669999998097,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.22164249420166,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.32404839992523193
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0013837369999993854,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.220201015472412,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.16307036578655243
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009371449999999726,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.22038459777832,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.3655390739440918
+        }
+      ],
+      "simulations_per_move": 0
+    },
+    {
+      "accuracy": 0.375,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.625,
+          "correct": 5,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 0.875,
+          "correct": 7,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "state_uniform",
+      "checkpoint_sha256": "df30619ad4f7f592a262b0f507596e7b5ea8cbd8b5bcd392ac983a503f75894e",
+      "correct": 12,
+      "mode": "puct",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.13674105199999964,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07710299500000062,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.08023357600000125,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0760338970000003,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07397818899999997,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07732860300000155,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07800140500000019,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4620,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07578653499999888,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07772705399999857,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4639,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07515088599999942,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4674,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07181741399999986,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4462,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07457994999999862,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07594324699999966,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4533,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0742131749999988,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0764946920000007,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 2,
+          "action_coordinate": [
+            0,
+            2
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.07593459899999999,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.07227409299999898,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4410,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.015293872000000874,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1009,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0705152860000009,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4294,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 44,
+          "action_coordinate": [
+            4,
+            8
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.09625314100000004,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2578,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 76,
+          "action_coordinate": [
+            8,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.046384329000000335,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3082,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.04165854600000074,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2576,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.0385243750000015,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2233,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.07129061200000031,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4348,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06878638400000092,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4195,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 48,
+          "action_coordinate": [
+            5,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06732115699999852,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3985,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07545216100000118,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4407,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06385108500000136,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4054,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07456141900000013,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4124,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 48,
+          "action_coordinate": [
+            5,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0639529509999992,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4124,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07140287900000075,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4480,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 48,
+          "action_coordinate": [
+            5,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.05988272499999958,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3912,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 64
+        }
+      ],
+      "simulations_per_move": 64
+    },
+    {
+      "accuracy": 0.25,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "winner_balanced",
+      "checkpoint_sha256": "01d463ac4ae06be5b2435eb4d3d206b77dd51278b4e6b9f253aca60cfcd2da9f",
+      "correct": 8,
+      "mode": "network",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0012194090000008373,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.218693256378174,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.3104475438594818
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011194270000007833,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.21806001663208,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.34363648295402527
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011277480000000395,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.217965126037598,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.39017122983932495
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009798459999998954,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.220030307769775,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.3522452116012573
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0011928119999993214,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.2167158126831055,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.38677236437797546
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0010703219999985691,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.219548225402832,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.37174659967422485
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009531210000002233,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.219838619232178,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.22291211783885956
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0007830420000001226,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.218371868133545,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.4178374111652374
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009628350000010499,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.200909614562988,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.09892097860574722
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009494270000001137,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.199974060058594,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.0241842158138752
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009961450000002259,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.20311975479126,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.0014287559315562248
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.000988977000000446,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.202989101409912,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.14522995054721832
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010627909999989527,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.202023983001709,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.0024850317277014256
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001116838999999814,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.199652194976807,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.10269123315811157
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001109549000000598,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.203270435333252,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.16597726941108704
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0011557329999991595,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.20009708404541,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 0,
+          "value_prediction": -0.13292334973812103
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.000876309999998881,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.199882507324219,
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.13583257794380188
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0011209759999992741,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.201233863830566,
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.14307379722595215
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0011527560000015313,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.19870662689209,
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.022666310891509056
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.000977833999998623,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.2024335861206055,
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.038054708391427994
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.000726489999999913,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.199275970458984,
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.0028466617222875357
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007915010000001388,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.204991340637207,
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.017661847174167633
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.000941719000000063,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.1976823806762695,
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 0,
+          "value_prediction": -0.17737627029418945
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007800660000008008,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.201352119445801,
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.14376568794250488
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009816530000001933,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.220920085906982,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.31834128499031067
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0011634980000003736,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.220042705535889,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.3186540901660919
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0013507069999985077,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.219817161560059,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.36965155601501465
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001115328999999221,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.221434593200684,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.357025682926178
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009495030000010729,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.218304634094238,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.37648797035217285
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001084854000000135,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.2214789390563965,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.3924805223941803
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.000997293000001065,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.219986915588379,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.18314717710018158
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0011608909999996087,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.220622539520264,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.41554659605026245
+        }
+      ],
+      "simulations_per_move": 0
+    },
+    {
+      "accuracy": 0.28125,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.375,
+          "correct": 3,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "winner_balanced",
+      "checkpoint_sha256": "01d463ac4ae06be5b2435eb4d3d206b77dd51278b4e6b9f253aca60cfcd2da9f",
+      "correct": 9,
+      "mode": "puct",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.08344163699999996,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07901107800000062,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07289628899999911,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07339383499999919,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07661386400000048,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07588917499999859,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07850715700000066,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4620,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07496714700000062,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07714756300000047,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4633,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07193185799999924,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4671,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.12970970199999954,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4673,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 0,
+          "action_coordinate": [
+            0,
+            0
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.0814532899999989,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07362113199999953,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4674,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0775697820000012,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07443031500000075,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 2,
+          "action_coordinate": [
+            0,
+            2
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.07825140100000105,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0748778399999992,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4412,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.034006739999998814,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 2018,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.061677014999999,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3578,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.06438804700000134,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4003,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 76,
+          "action_coordinate": [
+            8,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.05093245700000004,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2862,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.06329196599999953,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3938,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.02685129700000033,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 1586,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0693172449999988,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4338,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07538439200000013,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4196,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06469741499999948,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4054,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0649887979999999,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4124,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06664968900000012,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4053,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06772493899999965,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3912,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 20,
+          "action_coordinate": [
+            2,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07707021199999886,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4265,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07809875799999944,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4479,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 50,
+          "action_coordinate": [
+            5,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07568941799999962,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4052,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 64
+        }
+      ],
+      "simulations_per_move": 64
+    },
+    {
+      "accuracy": 0.25,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "low_lr",
+      "checkpoint_sha256": "4eb6b8389f25b73a4b25f974c9adbd82b6c0b3945fd9fe3cad29237c8befa11b",
+      "correct": 8,
+      "mode": "network",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0013613509999998996,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.230083465576172,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.18577969074249268
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009894409999997578,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.228362083435059,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.21347564458847046
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0010834539999997617,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.2289628982543945,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.21806611120700836
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008410479999998444,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.231410503387451,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.21286974847316742
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0009307039999999489,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            39
+          ],
+          "policy_entropy": 4.228147029876709,
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.21516110002994537
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0010804820000007709,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            31
+          ],
+          "policy_entropy": 4.229855060577393,
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.20827317237854004
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0008284760000005775,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            41
+          ],
+          "policy_entropy": 4.230750560760498,
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.11154863238334656
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.0007551850000009352,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            49
+          ],
+          "policy_entropy": 4.229684352874756,
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.2684420943260193
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010495800000001054,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.2213544845581055,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.09062833338975906
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0014770290000001296,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.220324516296387,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.014368006959557533
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010034020000002641,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.223345756530762,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.055081069469451904
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010075540000009653,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.223069667816162,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.11278362572193146
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.001131486000000237,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.2219624519348145,
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.04172370582818985
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010089420000003457,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.220729351043701,
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.10497181117534637
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0010854670000011168,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.223703384399414,
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.11822321265935898
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.0009763910000000209,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            40
+          ],
+          "policy_entropy": 4.220714569091797,
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 0,
+          "value_prediction": -0.07327591627836227
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0008393859999991093,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.2223639488220215,
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.07455260306596756
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007808570000005233,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.221196174621582,
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 0,
+          "value_prediction": -0.12740956246852875
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007442209999997118,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.2198686599731445,
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 0,
+          "value_prediction": -0.03375774249434471
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.000833799000000468,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.224218368530273,
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 0,
+          "value_prediction": -0.04725988954305649
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.000757969000000358,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.221132755279541,
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 0,
+          "value_prediction": -0.06749162822961807
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007500970000009488,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.2246527671813965,
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 0,
+          "value_prediction": -0.03318674489855766
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0007772060000004188,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.219707489013672,
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 0,
+          "value_prediction": -0.15134389698505402
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.0010150119999998708,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.22336483001709,
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.030261579900979996
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001006311999999454,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.231677532196045,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 0,
+          "value_prediction": 0.19475477933883667
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009567260000000744,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.22972297668457,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 0,
+          "value_prediction": 0.1882542222738266
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0013114240000007271,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.229929447174072,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 0,
+          "value_prediction": 0.1961205005645752
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010629679999993868,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.232423305511475,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 0,
+          "value_prediction": 0.21830148994922638
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0012951389999997787,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            4
+          ],
+          "policy_entropy": 4.22956657409668,
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 0,
+          "value_prediction": 0.20988887548446655
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0010219930000019417,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            44
+          ],
+          "policy_entropy": 4.231640815734863,
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 0,
+          "value_prediction": 0.21796047687530518
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.001114069999999856,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            76
+          ],
+          "policy_entropy": 4.230504989624023,
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 0,
+          "value_prediction": 0.09592243283987045
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0009913289999978758,
+          "depth": 0,
+          "mode": "network",
+          "nodes": 0,
+          "optimal_actions": [
+            36
+          ],
+          "policy_entropy": 4.2313127517700195,
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 0,
+          "value_prediction": 0.2535957098007202
+        }
+      ],
+      "simulations_per_move": 0
+    },
+    {
+      "accuracy": 0.40625,
+      "categories": {
+        "direct_win": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "edge": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "puzzles": 8
+        },
+        "false_threat": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "puzzles": 8
+        },
+        "unique_block": {
+          "accuracy": 0.875,
+          "correct": 7,
+          "puzzles": 8
+        }
+      },
+      "checkpoint_id": "low_lr",
+      "checkpoint_sha256": "4eb6b8389f25b73a4b25f974c9adbd82b6c0b3945fd9fe3cad29237c8befa11b",
+      "correct": 13,
+      "mode": "puct",
+      "puzzles": 32,
+      "records": [
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.13820801500000002,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4622,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07917611399999913,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.077901734000001,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4620,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.09783079799999683,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4621,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.13177734900000004,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4620,
+          "optimal_actions": [
+            39
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.07997633900000167,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4620,
+          "optimal_actions": [
+            31
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 60,
+          "action_coordinate": [
+            6,
+            6
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.10829479800000286,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4637,
+          "optimal_actions": [
+            41
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "direct_win",
+          "correct": false,
+          "cpu_seconds": 0.093959341999998,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4619,
+          "optimal_actions": [
+            49
+          ],
+          "puzzle_id": "g-v3-tactic-direct_win-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.08144374099999752,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4657,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.08751376199999683,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4675,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.14832189600000234,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4605,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.09078234499999738,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.08936146199999939,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4605,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.07436595100000076,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4681,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "unique_block",
+          "correct": true,
+          "cpu_seconds": 0.10008581900000024,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4353,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 2,
+          "action_coordinate": [
+            0,
+            2
+          ],
+          "category": "unique_block",
+          "correct": false,
+          "cpu_seconds": 0.11733605000000225,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 4682,
+          "optimal_actions": [
+            40
+          ],
+          "puzzle_id": "g-v3-tactic-unique_block-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.08686782100000201,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4563,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.02087610999999967,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1081,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.06341210400000108,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3509,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 44,
+          "action_coordinate": [
+            4,
+            8
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.09420153499999984,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2581,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 76,
+          "action_coordinate": [
+            8,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.0276800229999985,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 1719,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 36,
+          "action_coordinate": [
+            4,
+            0
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.040452013000003006,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 2508,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 4,
+          "action_coordinate": [
+            0,
+            4
+          ],
+          "category": "edge",
+          "correct": true,
+          "cpu_seconds": 0.03162980600000154,
+          "depth": 1,
+          "mode": "puct",
+          "nodes": 1730,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 40,
+          "action_coordinate": [
+            4,
+            4
+          ],
+          "category": "edge",
+          "correct": false,
+          "cpu_seconds": 0.059384127999997816,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 3713,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-edge-r3-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07028951400000238,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4339,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f0",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.06850725800000035,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4340,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f0",
+          "simulations": 64
+        },
+        {
+          "action": 56,
+          "action_coordinate": [
+            6,
+            2
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07027505299999959,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4269,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f0",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07139327199999812,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4338,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f0",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.07035531600000056,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4268,
+          "optimal_actions": [
+            4
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r0-f1",
+          "simulations": 64
+        },
+        {
+          "action": 24,
+          "action_coordinate": [
+            2,
+            6
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0721492899999987,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4479,
+          "optimal_actions": [
+            44
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r1-f1",
+          "simulations": 64
+        },
+        {
+          "action": 32,
+          "action_coordinate": [
+            3,
+            5
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0769092779999987,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4572,
+          "optimal_actions": [
+            76
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r2-f1",
+          "simulations": 64
+        },
+        {
+          "action": 30,
+          "action_coordinate": [
+            3,
+            3
+          ],
+          "category": "false_threat",
+          "correct": false,
+          "cpu_seconds": 0.0755477070000019,
+          "depth": 2,
+          "mode": "puct",
+          "nodes": 4266,
+          "optimal_actions": [
+            36
+          ],
+          "puzzle_id": "g-v3-tactic-false_threat-r3-f1",
+          "simulations": 64
+        }
+      ],
+      "simulations_per_move": 64
+    }
+  ],
+  "symmetry_variants_per_mother_position": 8
+}

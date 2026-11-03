@@ -1,0 +1,167 @@
+{
+  "arms": {
+    "control_v4": {
+      "learning_rate": 0.0001,
+      "sampling_mode": "uniform_game",
+      "selfplay_opponent": "current_g0"
+    },
+    "low_lr": {
+      "learning_rate": 3e-05,
+      "sampling_mode": "uniform_game",
+      "selfplay_opponent": "current_g0"
+    },
+    "state_uniform": {
+      "learning_rate": 0.0001,
+      "sampling_mode": "uniform_state",
+      "selfplay_opponent": "current_g0"
+    },
+    "winner_balanced": {
+      "learning_rate": 0.0001,
+      "sampling_mode": "winner_balanced",
+      "selfplay_opponent": "current_g0"
+    }
+  },
+  "base_commit": "d3c434d5d31a2e2c052aa0bd4b50c0424e88ca7a",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v4-1",
+  "compute": {
+    "cpu_hour_cap": 6.0,
+    "device": "cpu",
+    "snapshot_intervals_hours": [
+      1,
+      2,
+      4,
+      6,
+      10,
+      16,
+      26
+    ],
+    "torch_threads": 1
+  },
+  "config_sha256": "7dfae380adda329d6d8ebda073e9aafbf9274d793b8d5a775616a3a4cf827c3e",
+  "diagnostics": {
+    "crossplay_modes": [
+      "network/network",
+      "network/puct64",
+      "puct64/network",
+      "puct64/puct64"
+    ],
+    "diagnostic_only_budgets_not_counted_as_learning": true,
+    "diagnostic_simulations": [
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "root_puct_config": {
+      "c_puct": 1.5,
+      "root_noise": false,
+      "temperature": 0.0
+    }
+  },
+  "drive": {
+    "folder_id": "1ERsFskhQ9m5cZWlF4mlfarRh3spFEuCO",
+    "folder_name": "WuziQ G V4.1 Recovery",
+    "keep_one_verified_snapshot": true
+  },
+  "evaluation": {
+    "B_time_limit_seconds": 0.05,
+    "blind_group_ids": [
+      "g-v4-1-blind-0000",
+      "g-v4-1-blind-0001",
+      "g-v4-1-blind-0002",
+      "g-v4-1-blind-0003",
+      "g-v4-1-blind-0004",
+      "g-v4-1-blind-0005",
+      "g-v4-1-blind-0006",
+      "g-v4-1-blind-0007",
+      "g-v4-1-blind-0008",
+      "g-v4-1-blind-0009",
+      "g-v4-1-blind-0010",
+      "g-v4-1-blind-0011",
+      "g-v4-1-blind-0012",
+      "g-v4-1-blind-0013",
+      "g-v4-1-blind-0014",
+      "g-v4-1-blind-0015",
+      "g-v4-1-blind-0016",
+      "g-v4-1-blind-0017",
+      "g-v4-1-blind-0018",
+      "g-v4-1-blind-0019"
+    ],
+    "blind_groups": 20,
+    "blind_used_for_selection": false,
+    "development_groups": 12,
+    "modes": [
+      "network",
+      "puct64"
+    ],
+    "opponents": [
+      "G0-V3-20K",
+      "A",
+      "B",
+      "other_v4_1_arms"
+    ],
+    "promotion": {
+      "each_color_at_least": 0.5,
+      "paired_ci95_lower_above": 0.5,
+      "score_rate_at_least": 0.625
+    }
+  },
+  "experiment_id": "wuziq-alphazero-g-v4-1",
+  "forbidden_training_inputs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "F",
+    "F1",
+    "F2",
+    "teacher_labels",
+    "imitation_rows",
+    "handcrafted_tactical_reward"
+  ],
+  "format_version": 1,
+  "initial_checkpoint": "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt",
+  "initial_checkpoint_id": "G0-seed-510901@20000",
+  "initial_checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+  "initial_replay": {
+    "budgeted_states": 20000,
+    "capacity_positions": 20000,
+    "source": "research/g_v3/results/selfplay/G0-seed-510901.jsonl"
+  },
+  "initial_state_mode": "weight_inheritance_optimizer_scheduler_reset_replay_rebuilt",
+  "network": {
+    "channels": 32,
+    "policy_actions": 81,
+    "residual_blocks": 2,
+    "value_head": true
+  },
+  "note": "Training-only selfplay, no G-F2 arm and no post-training G reinforcement-learning variant.",
+  "opening_schedule_path": "research/g_v4_1/config/openings.json",
+  "opening_schedule_sha256": "e05d7bcaa03f10701eb07d4a74efe235cc31db18af389c811cd1e63942702626",
+  "random_seed": 741201,
+  "training": {
+    "batch_size": 16,
+    "bn_policy": "freeze",
+    "c_puct": 1.5,
+    "late_temperature": 0.1,
+    "maximum_total_new_states": 40000,
+    "new_states_per_arm": 10000,
+    "opening_mix": {
+      "empty": 0.5,
+      "random4": 0.5
+    },
+    "optimizer": "AdamW",
+    "root_noise_fraction": 0.25,
+    "scheduler": "CosineAnnealingLR",
+    "scheduler_eta_min_ratio": 0.2,
+    "simulations_per_move": 64,
+    "temperature_moves": 12,
+    "training_root_noise": true,
+    "update_every_budgeted_states": 16,
+    "updates_per_budgeted_state": 0.0625,
+    "weight_decay": 0.0001
+  },
+  "v3_base_commit": "2401e97b62b887fe66c9137815ac44b440d0fe9e"
+}

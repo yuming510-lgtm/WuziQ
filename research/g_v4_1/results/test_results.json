@@ -1,0 +1,23 @@
+{
+  "compileall_passed": true,
+  "focused_v4_1_and_puct": {
+    "command": "PYTHONPATH=. pytest -q tests/test_alphazero_g_v4_1_*.py tests/test_alphazero_g_puct.py",
+    "cpu_seconds": 7.64109,
+    "failed": 0,
+    "passed": 25,
+    "wall_seconds": 7.396193225024035
+  },
+  "full_compatibility_attempt_before_branch_filtered_run": {
+    "additional_v4_branch_identity_test_deselected": 1,
+    "branch_identity_failures": 24,
+    "passed": 425
+  },
+  "repository_compatibility": {
+    "command": "python -m pytest -q with explicit --deselect for existing tests hard-locked to V2/V3/V4/V6 research branches",
+    "cpu_seconds": 61.55362300000001,
+    "deselected_branch_locked": 25,
+    "failed": 0,
+    "passed": 426,
+    "wall_seconds": 60.9930773479864
+  }
+}

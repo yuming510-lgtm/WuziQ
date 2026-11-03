@@ -1,0 +1,125 @@
+{
+  "blind_results_used": false,
+  "candidate_summaries": [
+    {
+      "arm_id": "control_v4",
+      "promoted": false,
+      "summary": {
+        "by_color": {
+          "B": {
+            "games": 12,
+            "points": 4.0,
+            "score_rate": 0.3333333333333333
+          },
+          "W": {
+            "games": 12,
+            "points": 6.0,
+            "score_rate": 0.5
+          }
+        },
+        "draws": 0,
+        "games": 24,
+        "losses": 14,
+        "paired_opening_bootstrap_ci95": [
+          0.2916666666666667,
+          0.5
+        ],
+        "paired_opening_groups": 12,
+        "points": 10.0,
+        "score_rate": 0.4166666666666667,
+        "wins": 10
+      }
+    },
+    {
+      "arm_id": "state_uniform",
+      "promoted": false,
+      "summary": {
+        "by_color": {
+          "B": {
+            "games": 12,
+            "points": 5.0,
+            "score_rate": 0.4166666666666667
+          },
+          "W": {
+            "games": 12,
+            "points": 3.0,
+            "score_rate": 0.25
+          }
+        },
+        "draws": 0,
+        "games": 24,
+        "losses": 16,
+        "paired_opening_bootstrap_ci95": [
+          0.125,
+          0.5833333333333334
+        ],
+        "paired_opening_groups": 12,
+        "points": 8.0,
+        "score_rate": 0.3333333333333333,
+        "wins": 8
+      }
+    },
+    {
+      "arm_id": "winner_balanced",
+      "promoted": false,
+      "summary": {
+        "by_color": {
+          "B": {
+            "games": 12,
+            "points": 6.0,
+            "score_rate": 0.5
+          },
+          "W": {
+            "games": 12,
+            "points": 4.0,
+            "score_rate": 0.3333333333333333
+          }
+        },
+        "draws": 0,
+        "games": 24,
+        "losses": 14,
+        "paired_opening_bootstrap_ci95": [
+          0.20833333333333334,
+          0.6260416666666515
+        ],
+        "paired_opening_groups": 12,
+        "points": 10.0,
+        "score_rate": 0.4166666666666667,
+        "wins": 10
+      }
+    },
+    {
+      "arm_id": "low_lr",
+      "promoted": false,
+      "summary": {
+        "by_color": {
+          "B": {
+            "games": 12,
+            "points": 4.0,
+            "score_rate": 0.3333333333333333
+          },
+          "W": {
+            "games": 12,
+            "points": 3.0,
+            "score_rate": 0.25
+          }
+        },
+        "draws": 0,
+        "games": 24,
+        "losses": 17,
+        "paired_opening_bootstrap_ci95": [
+          0.125,
+          0.5
+        ],
+        "paired_opening_groups": 12,
+        "points": 7.0,
+        "score_rate": 0.2916666666666667,
+        "wins": 7
+      }
+    }
+  ],
+  "config_sha256": "7dfae380adda329d6d8ebda073e9aafbf9274d793b8d5a775616a3a4cf827c3e",
+  "promotion_passed": false,
+  "selected_arm": "winner_balanced",
+  "selection_rule": "pre-registered developer-only promotion gate then score then CPU"
+}

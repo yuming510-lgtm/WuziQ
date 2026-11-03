@@ -95,11 +95,20 @@ class GTrainer:
         self.rng = np.random.default_rng(self.seed)
         self.update_count = 0
 
-    def train_updates(self, replay: ReplayBuffer, *, updates: int, batch_size: int) -> dict[str, float | int]:
+    def train_updates(
+        self,
+        replay: ReplayBuffer,
+        *,
+        updates: int,
+        batch_size: int,
+        sampling_mode: str = "uniform_game",
+    ) -> dict[str, float | int]:
         if isinstance(updates, bool) or int(updates) != updates or updates < 0:
             raise ValueError("updates must be a nonnegative integer")
         if isinstance(batch_size, bool) or int(batch_size) != batch_size or batch_size < 1:
             raise ValueError("batch_size must be a positive integer")
+        if sampling_mode not in {"uniform_game", "uniform_state", "winner_balanced"}:
+            raise ValueError("unsupported replay sampling mode")
         if updates and replay.position_count <= 0:
             raise ValueError("self-play replay must contain rows before training")
         if self.update_count + int(updates) > self.expected_updates:
@@ -111,7 +120,7 @@ class GTrainer:
         cpu_started = time.process_time()
         wall_started = time.perf_counter()
         for _ in range(int(updates)):
-            batch = replay.sample(int(batch_size))
+            batch = replay.sample(int(batch_size), mode=sampling_mode)
             augmented: list[dict[str, Any]] = []
             for sample in batch:
                 augmented.append(augment_sample(

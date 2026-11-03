@@ -1,0 +1,2825 @@
+{
+  "elapsed_cpu_seconds": 140.129667289,
+  "elapsed_wall_seconds": 140.170859439997,
+  "experiment_id": "wuziq-alphazero-g-v4-1",
+  "historical_checkpoint_tactical_sweep": {
+    "data_scope": "all historical V3/V4 G0 policy-value checkpoints; duplicate byte-identical files evaluated once",
+    "evaluations": [
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/final.pt",
+          "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/final.pt",
+        "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.46875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.625,
+            "correct": 5,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/final.pt",
+          "research/g_v3/checkpoints/G0/seed-510901/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/final.pt",
+        "checkpoint_sha256": "ed6e2e6b5a25f355db5b31a9c58ba22158af2b345f86b3bcd3add9c3a49da7f9",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 15,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_0.pt",
+        "checkpoint_sha256": "b3c6cb13b175cccc0f7e6de3b76a877e46d5376efb131143aa6695d4983455a5",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.4375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.875,
+            "correct": 7,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_0.pt",
+        "checkpoint_sha256": "b3c6cb13b175cccc0f7e6de3b76a877e46d5376efb131143aa6695d4983455a5",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 14,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_1000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_1000.pt",
+        "checkpoint_sha256": "1de1f477dd0dab8785c7d2f29ac7715d1fec80fe99aecc4056844965acc72b93",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 1000
+      },
+      {
+        "accuracy": 0.46875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_1000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_1000.pt",
+        "checkpoint_sha256": "1de1f477dd0dab8785c7d2f29ac7715d1fec80fe99aecc4056844965acc72b93",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 15,
+        "total_puzzles": 32,
+        "training_states": 1000
+      },
+      {
+        "accuracy": 0.15625,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.625,
+            "correct": 5,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_10000.pt",
+        "checkpoint_sha256": "8f297c3bc57fe95d5d64996a0792a221c705f7b3ec85bb1f0fd9ae4c57cb6cb0",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 5,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.53125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_10000.pt",
+        "checkpoint_sha256": "8f297c3bc57fe95d5d64996a0792a221c705f7b3ec85bb1f0fd9ae4c57cb6cb0",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 17,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.0625,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_2000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_2000.pt",
+        "checkpoint_sha256": "c67d2a36615210da7839b235d3937802f1e0d0ccb5b1135455605ecd6f4175bc",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 2,
+        "total_puzzles": 32,
+        "training_states": 2000
+      },
+      {
+        "accuracy": 0.46875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_2000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_2000.pt",
+        "checkpoint_sha256": "c67d2a36615210da7839b235d3937802f1e0d0ccb5b1135455605ecd6f4175bc",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 15,
+        "total_puzzles": 32,
+        "training_states": 2000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_30000.pt",
+        "checkpoint_sha256": "04628a3485bf223e30031365e1bc1e41872f65b63b28801090d61ae660784606",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.34375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.5,
+            "correct": 4,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.875,
+            "correct": 7,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_30000.pt",
+        "checkpoint_sha256": "04628a3485bf223e30031365e1bc1e41872f65b63b28801090d61ae660784606",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 11,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_5000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_5000.pt",
+        "checkpoint_sha256": "8f063e35e1a00bc7296b07d821fad32df81b6fae71bbae02af07c9c21d7a47cf",
+        "cohort_id": "V3 seed 510901",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 5000
+      },
+      {
+        "accuracy": 0.53125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510901/node_5000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510901/node_5000.pt",
+        "checkpoint_sha256": "8f063e35e1a00bc7296b07d821fad32df81b6fae71bbae02af07c9c21d7a47cf",
+        "cohort_id": "V3 seed 510901",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 17,
+        "total_puzzles": 32,
+        "training_states": 5000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/final.pt",
+          "research/g_v3/checkpoints/G0/seed-510902/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/final.pt",
+        "checkpoint_sha256": "215603ed71d4aad7ea2ba000d883adaa5790b8a1b5220d3ff4ea2acf888996fe",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.34375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.5,
+            "correct": 4,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/final.pt",
+          "research/g_v3/checkpoints/G0/seed-510902/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/final.pt",
+        "checkpoint_sha256": "215603ed71d4aad7ea2ba000d883adaa5790b8a1b5220d3ff4ea2acf888996fe",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 11,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_1000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_1000.pt",
+        "checkpoint_sha256": "4fa76aaf4fdf120fa86fb1792ca51841c90721aef66dab3e584efa6eb414fbf3",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 1000
+      },
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_1000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_1000.pt",
+        "checkpoint_sha256": "4fa76aaf4fdf120fa86fb1792ca51841c90721aef66dab3e584efa6eb414fbf3",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 1000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_10000.pt",
+        "checkpoint_sha256": "5d092d9e113da9b040587e865fb3f47984e66c2945eb053b5a68fbb578e444a3",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.03125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_10000.pt",
+        "checkpoint_sha256": "5d092d9e113da9b040587e865fb3f47984e66c2945eb053b5a68fbb578e444a3",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 1,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_2000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_2000.pt",
+        "checkpoint_sha256": "44989f8e92b066d758e4c17234aa9c509a0dfe32006aafab4ddf96c7ccd9db1a",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 2000
+      },
+      {
+        "accuracy": 0.1875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.375,
+            "correct": 3,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_2000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_2000.pt",
+        "checkpoint_sha256": "44989f8e92b066d758e4c17234aa9c509a0dfe32006aafab4ddf96c7ccd9db1a",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 6,
+        "total_puzzles": 32,
+        "training_states": 2000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_20000.pt",
+        "checkpoint_sha256": "aa213b66dce18b8a25977afb8056adc36da860d0bd074876bd9ff297c50c455e",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_20000.pt",
+        "checkpoint_sha256": "aa213b66dce18b8a25977afb8056adc36da860d0bd074876bd9ff297c50c455e",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_30000.pt",
+        "checkpoint_sha256": "dcf0703fbe2b6b5c55a4056459476d79e2ac852d373faff24f15bd58b10b202b",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_30000.pt",
+        "checkpoint_sha256": "dcf0703fbe2b6b5c55a4056459476d79e2ac852d373faff24f15bd58b10b202b",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_5000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_5000.pt",
+        "checkpoint_sha256": "56ff985de18ff1e4d976b923e88d865aebc5750c73dac65b2a9445734b64cc92",
+        "cohort_id": "V3 seed 510902",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 5000
+      },
+      {
+        "accuracy": 0.09375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.375,
+            "correct": 3,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v3/checkpoints/G0/seed-510902/node_5000.pt"
+        ],
+        "checkpoint_id": "research/g_v3/checkpoints/G0/seed-510902/node_5000.pt",
+        "checkpoint_sha256": "56ff985de18ff1e4d976b923e88d865aebc5750c73dac65b2a9445734b64cc92",
+        "cohort_id": "V3 seed 510902",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 3,
+        "total_puzzles": 32,
+        "training_states": 5000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_0.pt",
+        "checkpoint_sha256": "ef6b6c31ce20f71feac53f16a83a2635ffb4345eaf8920cc427805ebb151a701",
+        "cohort_id": "V4 seed 540401",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.625,
+            "correct": 5,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.5,
+            "correct": 4,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_0.pt",
+        "checkpoint_sha256": "ef6b6c31ce20f71feac53f16a83a2635ffb4345eaf8920cc427805ebb151a701",
+        "cohort_id": "V4 seed 540401",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_10000.pt",
+        "checkpoint_sha256": "06c6a0bf4e00664626193d6c3a93e5a202f261e690b847f1f7c4e970a9acb0f7",
+        "cohort_id": "V4 seed 540401",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_10000.pt",
+        "checkpoint_sha256": "06c6a0bf4e00664626193d6c3a93e5a202f261e690b847f1f7c4e970a9acb0f7",
+        "cohort_id": "V4 seed 540401",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 12,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_20000.pt",
+        "checkpoint_sha256": "9448c517377c66cef8597e61b1f3fdfb68a7e62c1614e234918b6a88db8eeea3",
+        "cohort_id": "V4 seed 540401",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_20000.pt",
+        "checkpoint_sha256": "9448c517377c66cef8597e61b1f3fdfb68a7e62c1614e234918b6a88db8eeea3",
+        "cohort_id": "V4 seed 540401",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_30000.pt",
+        "checkpoint_sha256": "064870fe54efc0cd00696b210bc7d455fbfd25fb6b120464740009c582a0c025",
+        "cohort_id": "V4 seed 540401",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540401/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540401/node_30000.pt",
+        "checkpoint_sha256": "064870fe54efc0cd00696b210bc7d455fbfd25fb6b120464740009c582a0c025",
+        "cohort_id": "V4 seed 540401",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_0.pt",
+        "checkpoint_sha256": "124176adc8f8bae4b7bfbfecd625044003cff1a06880023def4f5412121fd7ca",
+        "cohort_id": "V4 seed 540402",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.53125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_0.pt",
+        "checkpoint_sha256": "124176adc8f8bae4b7bfbfecd625044003cff1a06880023def4f5412121fd7ca",
+        "cohort_id": "V4 seed 540402",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 17,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.3125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_10000.pt",
+        "checkpoint_sha256": "07e9674f9e022121aab6b106c6e6c56f8739bf488b69d00ea1323f5dfbe12277",
+        "cohort_id": "V4 seed 540402",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 10,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.625,
+        "categories": {
+          "direct_win": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.375,
+            "correct": 3,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_10000.pt",
+        "checkpoint_sha256": "07e9674f9e022121aab6b106c6e6c56f8739bf488b69d00ea1323f5dfbe12277",
+        "cohort_id": "V4 seed 540402",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 20,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.1875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_20000.pt",
+        "checkpoint_sha256": "966d226274fe21af39fc40a74cacc67eaa95d35143b6e1922791e50c55ac6ba3",
+        "cohort_id": "V4 seed 540402",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 6,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.53125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_20000.pt",
+        "checkpoint_sha256": "966d226274fe21af39fc40a74cacc67eaa95d35143b6e1922791e50c55ac6ba3",
+        "cohort_id": "V4 seed 540402",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 17,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_30000.pt",
+        "checkpoint_sha256": "9141a86c5acaa2bf033465f352385b60ae9f3c34c0ededaaa0a9dcf88cf52b4c",
+        "cohort_id": "V4 seed 540402",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.75,
+        "categories": {
+          "direct_win": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540402/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540402/node_30000.pt",
+        "checkpoint_sha256": "9141a86c5acaa2bf033465f352385b60ae9f3c34c0ededaaa0a9dcf88cf52b4c",
+        "cohort_id": "V4 seed 540402",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 24,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_0.pt",
+        "checkpoint_sha256": "fa40b0ad0b9d5c99ba48cdc7c20dcb6ec18e60d3a482ed5c1d755e8134e087f6",
+        "cohort_id": "V4 seed 540403",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_0.pt",
+        "checkpoint_sha256": "fa40b0ad0b9d5c99ba48cdc7c20dcb6ec18e60d3a482ed5c1d755e8134e087f6",
+        "cohort_id": "V4 seed 540403",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 12,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.1875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_10000.pt",
+        "checkpoint_sha256": "07823a33a21addcb3e0f3eb93888d54a75fd47ecdc24bac3c39662086d1b2609",
+        "cohort_id": "V4 seed 540403",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 6,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.34375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_10000.pt",
+        "checkpoint_sha256": "07823a33a21addcb3e0f3eb93888d54a75fd47ecdc24bac3c39662086d1b2609",
+        "cohort_id": "V4 seed 540403",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 11,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.09375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.375,
+            "correct": 3,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_20000.pt",
+        "checkpoint_sha256": "ede9916296838724e3cfe9bbf5813d9b2bcd08b2e1148deeb19338cae82908d2",
+        "cohort_id": "V4 seed 540403",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 3,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_20000.pt",
+        "checkpoint_sha256": "ede9916296838724e3cfe9bbf5813d9b2bcd08b2e1148deeb19338cae82908d2",
+        "cohort_id": "V4 seed 540403",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.0,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_30000.pt",
+        "checkpoint_sha256": "b8358086be19816c31596ca471c7ec19a2ca172380858667caaf4261286612f0",
+        "cohort_id": "V4 seed 540403",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 0,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/A-G0-s540403/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/A-G0-s540403/node_30000.pt",
+        "checkpoint_sha256": "b8358086be19816c31596ca471c7ec19a2ca172380858667caaf4261286612f0",
+        "cohort_id": "V4 seed 540403",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_0.pt",
+        "checkpoint_sha256": "c1bec671c148fd6de2ca7b7af3f7fa1dab3a8767055bcc9ef0b44dab03c86c8e",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.46875,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 0.625,
+            "correct": 5,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_0.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_0.pt",
+        "checkpoint_sha256": "c1bec671c148fd6de2ca7b7af3f7fa1dab3a8767055bcc9ef0b44dab03c86c8e",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 15,
+        "total_puzzles": 32,
+        "training_states": 0
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_10000.pt",
+        "checkpoint_sha256": "456f0b12f20c64bcb0ca0d019a4c96cd6a7ac54d459109299bc460be52ef82e8",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.375,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.5,
+            "correct": 4,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_10000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_10000.pt",
+        "checkpoint_sha256": "456f0b12f20c64bcb0ca0d019a4c96cd6a7ac54d459109299bc460be52ef82e8",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 12,
+        "total_puzzles": 32,
+        "training_states": 10000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_100000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_100000.pt",
+        "checkpoint_sha256": "d71f8abf5f7af3b6751771f131ed7475eb9b5e9c6f86870d829d30732a6e1426",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 100000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_100000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_100000.pt",
+        "checkpoint_sha256": "d71f8abf5f7af3b6751771f131ed7475eb9b5e9c6f86870d829d30732a6e1426",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 100000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_20000.pt",
+        "checkpoint_sha256": "7c6cdbdcc44282f333feb5f99cf98f20ef5003f6331a060cc86d4149d5b94e83",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.28125,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_20000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_20000.pt",
+        "checkpoint_sha256": "7c6cdbdcc44282f333feb5f99cf98f20ef5003f6331a060cc86d4149d5b94e83",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 9,
+        "total_puzzles": 32,
+        "training_states": 20000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_30000.pt",
+        "checkpoint_sha256": "1da7da1fff7ca720dabd6ed3eb32e1b506616a74c25d786836f1e8cec662f2db",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_30000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_30000.pt",
+        "checkpoint_sha256": "1da7da1fff7ca720dabd6ed3eb32e1b506616a74c25d786836f1e8cec662f2db",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 30000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_40000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_40000.pt",
+        "checkpoint_sha256": "9cf66ebeb09033489a776e64e0593d4c8fb7fd2b1d49bd0a44aa74d317a3c9d0",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 40000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_40000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_40000.pt",
+        "checkpoint_sha256": "9cf66ebeb09033489a776e64e0593d4c8fb7fd2b1d49bd0a44aa74d317a3c9d0",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 40000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_50000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_50000.pt",
+        "checkpoint_sha256": "f80359f804c9eeac8276d618a8c29b84e265e36c4c88134f7158f7de06fdad95",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 50000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_50000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_50000.pt",
+        "checkpoint_sha256": "f80359f804c9eeac8276d618a8c29b84e265e36c4c88134f7158f7de06fdad95",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 50000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_60000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_60000.pt",
+        "checkpoint_sha256": "43ffc61ff9bd1825b8ee665b7caa8e016172ec6632cf6cf2e7beae4a39ba9704",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 60000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_60000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_60000.pt",
+        "checkpoint_sha256": "43ffc61ff9bd1825b8ee665b7caa8e016172ec6632cf6cf2e7beae4a39ba9704",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 60000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_70000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_70000.pt",
+        "checkpoint_sha256": "f02d033ee8e035964b3a96914d005db2a3beb74b5f6cf5225054b13497e4226e",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 70000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_70000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_70000.pt",
+        "checkpoint_sha256": "f02d033ee8e035964b3a96914d005db2a3beb74b5f6cf5225054b13497e4226e",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 70000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_80000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_80000.pt",
+        "checkpoint_sha256": "78e8c36a23ff10460a41ac1f5c5f3b2b3f8db48155d4c87626f1bb97c7a21405",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 80000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_80000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_80000.pt",
+        "checkpoint_sha256": "78e8c36a23ff10460a41ac1f5c5f3b2b3f8db48155d4c87626f1bb97c7a21405",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 80000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_90000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_90000.pt",
+        "checkpoint_sha256": "cc6a0bcd94fe382c0417dfa6df3dd8135c5c300e3fc0e7239abbed75b7523879",
+        "cohort_id": "V4 continuation",
+        "mode": "network",
+        "simulations_per_puct_move": 0,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 90000
+      },
+      {
+        "accuracy": 0.25,
+        "categories": {
+          "direct_win": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "edge": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "false_threat": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "puzzles": 8
+          },
+          "unique_block": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "puzzles": 8
+          }
+        },
+        "checkpoint_aliases": [
+          "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_90000.pt"
+        ],
+        "checkpoint_id": "research/g_v4/checkpoints/B-G0-v3-champion-continue/node_90000.pt",
+        "checkpoint_sha256": "cc6a0bcd94fe382c0417dfa6df3dd8135c5c300e3fc0e7239abbed75b7523879",
+        "cohort_id": "V4 continuation",
+        "mode": "puct",
+        "simulations_per_puct_move": 64,
+        "total_correct": 8,
+        "total_puzzles": 32,
+        "training_states": 90000
+      }
+    ],
+    "format_version": 1,
+    "historical_checkpoint_files": 39,
+    "puzzle_count_per_mode": 32,
+    "puzzle_source": "4 rule-generated positions with D4 symmetry, exact five-in-a-row labels",
+    "unique_checkpoint_weight_files": 37
+  },
+  "historical_selfplay_audit": {
+    "cross_log_duplicate_ids": [],
+    "format_version": 1,
+    "globally_unique_game_ids": 9154,
+    "logs": [
+      {
+        "budgeted_states": 30000,
+        "cohort": "V3 G0",
+        "draws": 0,
+        "duplicate_ids": 0,
+        "entropy_count": 30094,
+        "games": 1002,
+        "mean_game_moves": 32.053892215568865,
+        "mean_policy_entropy": 3.4490039715107113,
+        "mean_post_opening_plies": 30.03393213572854,
+        "path": "research/g_v3/results/selfplay/G0-seed-510901.jsonl",
+        "root_value_count": 30094,
+        "root_value_mae": 0.9642724828867846,
+        "root_value_mse": 0.9606859634701764,
+        "sha256": "5779d69f7dde3308dcb828a36583b026ecfc047b928876dcfd6b8beba9f2ac42",
+        "states": 30094,
+        "total_moves": 32118,
+        "total_plies": 30094,
+        "unique_game_ids": 1002,
+        "winner_black": 542,
+        "winner_white": 460
+      },
+      {
+        "budgeted_states": 30000,
+        "cohort": "V3 G0",
+        "draws": 0,
+        "duplicate_ids": 0,
+        "entropy_count": 30110,
+        "games": 971,
+        "mean_game_moves": 33.027806385169924,
+        "mean_policy_entropy": 3.6956930611026877,
+        "mean_post_opening_plies": 31.00926879505664,
+        "path": "research/g_v3/results/selfplay/G0-seed-510902.jsonl",
+        "root_value_count": 30110,
+        "root_value_mae": 0.9753073434090107,
+        "root_value_mse": 0.9662001588934994,
+        "sha256": "0b38bbb73cbc2c9461efebdfd1145b7868e01cba63b4ef24a9e7491f3b6a4c61",
+        "states": 30110,
+        "total_moves": 32070,
+        "total_plies": 30110,
+        "unique_game_ids": 971,
+        "winner_black": 530,
+        "winner_white": 441
+      },
+      {
+        "budgeted_states": 30000,
+        "cohort": "V4 G0",
+        "draws": 0,
+        "duplicate_ids": 0,
+        "entropy_count": 30049,
+        "games": 997,
+        "mean_game_moves": 32.141424272818455,
+        "mean_policy_entropy": 3.4943684322438697,
+        "mean_post_opening_plies": 30.139418254764294,
+        "path": "research/g_v4/results/selfplay/A-G0-s540401.jsonl",
+        "root_value_count": 30049,
+        "root_value_mae": 0.9639707395117866,
+        "root_value_mse": 0.9566402908124316,
+        "sha256": "afc378c7716d19468e598afb28d6786f689c0059fc527f1c0cf4f5022401c8de",
+        "states": 30049,
+        "total_moves": 32045,
+        "total_plies": 30049,
+        "unique_game_ids": 997,
+        "winner_black": 545,
+        "winner_white": 452
+      },
+      {
+        "budgeted_states": 30000,
+        "cohort": "V4 G0",
+        "draws": 0,
+        "duplicate_ids": 0,
+        "entropy_count": 30085,
+        "games": 1031,
+        "mean_game_moves": 31.17458777885548,
+        "mean_policy_entropy": 3.708369649867237,
+        "mean_post_opening_plies": 29.180407371483994,
+        "path": "research/g_v4/results/selfplay/A-G0-s540402.jsonl",
+        "root_value_count": 30085,
+        "root_value_mae": 0.9746445559129718,
+        "root_value_mse": 0.9661785955860641,
+        "sha256": "4467588d58528cb32392e5857da195ff6d457d17ab60bd607da41937743b1600",
+        "states": 30085,
+        "total_moves": 32141,
+        "total_plies": 30085,
+        "unique_game_ids": 1031,
+        "winner_black": 559,
+        "winner_white": 472
+      },
+      {
+        "budgeted_states": 30000,
+        "cohort": "V4 G0",
+        "draws": 0,
+        "duplicate_ids": 0,
+        "entropy_count": 30061,
+        "games": 945,
+        "mean_game_moves": 33.80846560846561,
+        "mean_policy_entropy": 3.7408479730330098,
+        "mean_post_opening_plies": 31.81058201058201,
+        "path": "research/g_v4/results/selfplay/A-G0-s540403.jsonl",
+        "root_value_count": 30061,
+        "root_value_mae": 0.9789378259372462,
+        "root_value_mse": 0.9723677835516968,
+        "sha256": "96a58a59682240f7755e4237ab30d7850e75a5515c1ae5a327d32937cf75753b",
+        "states": 30061,
+        "total_moves": 31949,
+        "total_plies": 30061,
+        "unique_game_ids": 945,
+        "winner_black": 465,
+        "winner_white": 480
+      },
+      {
+        "budgeted_states": 100000,
+        "cohort": "V4 G0",
+        "draws": 0,
+        "duplicate_ids": 0,
+        "entropy_count": 100092,
+        "games": 4208,
+        "mean_game_moves": 25.78422053231939,
+        "mean_policy_entropy": 2.4620596961254053,
+        "mean_post_opening_plies": 23.7861216730038,
+        "path": "research/g_v4/results/selfplay/B-G0-v3-champion-continue.jsonl",
+        "root_value_count": 100092,
+        "root_value_mae": 0.5388080606953589,
+        "root_value_mse": 0.5358991136411287,
+        "sha256": "379657e70334ec67ab23bfbad7fba9a45a29bc53d8a200c609cdacbe2a653faf",
+        "states": 100092,
+        "total_moves": 108500,
+        "total_plies": 100092,
+        "unique_game_ids": 4208,
+        "winner_black": 3234,
+        "winner_white": 974
+      }
+    ],
+    "total_budgeted_states": 250000,
+    "total_games": 9154,
+    "total_states": 250491
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "all_selfplay_and_evaluation_games_replayed_legal": true,
+  "base_commit": "d3c434d5d31a2e2c052aa0bd4b50c0424e88ca7a",
+  "blind_used_for_selection": false,
+  "branch": "research/alphazero-g-v4-1",
+  "config_sha256": "7dfae380adda329d6d8ebda073e9aafbf9274d793b8d5a775616a3a4cf827c3e",
+  "evaluation": [
+    {
+      "comparisons": 34,
+      "games": 816,
+      "legal_completed_matches": 816,
+      "opening_groups_per_comparison": 12,
+      "phase": "development",
+      "score_data_matches_raw_records": true,
+      "unique_game_ids": 816
+    },
+    {
+      "comparisons": 9,
+      "games": 360,
+      "legal_completed_matches": 360,
+      "opening_groups_per_comparison": 20,
+      "phase": "blind",
+      "score_data_matches_raw_records": true,
+      "unique_game_ids": 360
+    }
+  ],
+  "experiment_id": "wuziq-alphazero-g-v4-1",
+  "historical_checkpoint_files": 39,
+  "historical_checkpoint_hash_aliases_verified": 78,
+  "historical_unique_checkpoint_weights": 37,
+  "historical_v3_v4_g0_budgeted_states": 250000,
+  "historical_v3_v4_g0_games_replayed": 9154,
+  "promotion_passed": false,
+  "selected_arm": "winner_balanced",
+  "total_budgeted_training_states": 40000,
+  "total_evaluation_games": 1176,
+  "total_training_games": 1369,
+  "training_arms": [
+    {
+      "arm_id": "control_v4",
+      "budgeted_states": 10000,
+      "checkpoint_sha256": "cd59c87c78fac1f0ec58e966b43895182bcc86e8e813e75a7012d131d35f2bf2",
+      "complete_games": 346,
+      "draws": 0,
+      "simulations": 640704,
+      "unique_game_ids": 346,
+      "winner_black": 195,
+      "winner_white": 151
+    },
+    {
+      "arm_id": "state_uniform",
+      "budgeted_states": 10000,
+      "checkpoint_sha256": "df30619ad4f7f592a262b0f507596e7b5ea8cbd8b5bcd392ac983a503f75894e",
+      "complete_games": 350,
+      "draws": 0,
+      "simulations": 640064,
+      "unique_game_ids": 350,
+      "winner_black": 191,
+      "winner_white": 159
+    },
+    {
+      "arm_id": "winner_balanced",
+      "budgeted_states": 10000,
+      "checkpoint_sha256": "01d463ac4ae06be5b2435eb4d3d206b77dd51278b4e6b9f253aca60cfcd2da9f",
+      "complete_games": 336,
+      "draws": 0,
+      "simulations": 640512,
+      "unique_game_ids": 336,
+      "winner_black": 180,
+      "winner_white": 156
+    },
+    {
+      "arm_id": "low_lr",
+      "budgeted_states": 10000,
+      "checkpoint_sha256": "4eb6b8389f25b73a4b25f974c9adbd82b6c0b3945fd9fe3cad29237c8befa11b",
+      "complete_games": 337,
+      "draws": 0,
+      "simulations": 641024,
+      "unique_game_ids": 337,
+      "winner_black": 182,
+      "winner_white": 155
+    }
+  ],
+  "unique_evaluation_game_ids": 1176,
+  "unique_training_game_ids": 1369
+}

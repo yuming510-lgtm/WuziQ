@@ -148,6 +148,12 @@ class ReplayBuffer:
         self._games: list[dict[str, Any]] = []
         self._digests: dict[str, str] = {}
         self._position_count = 0
+        self._position_offsets = np.zeros(0, dtype=np.int64)
+
+    def _refresh_position_offsets(self) -> None:
+        self._position_offsets = np.cumsum(
+            [len(game["experience_rows"]) for game in self._games], dtype=np.int64
+        )
 
     @property
     def position_count(self) -> int:
@@ -169,22 +175,61 @@ class ReplayBuffer:
         self._games.append(clean)
         self._digests[game_id] = digest
         self._position_count += len(clean["experience_rows"])
+        self._refresh_position_offsets()
         while self._position_count > self.capacity and self._games:
             removed = self._games.pop(0)
             removed_id = str(removed["game_id"])
             self._position_count -= len(removed["experience_rows"])
             del self._digests[removed_id]
+            self._refresh_position_offsets()
         return True
 
-    def sample(self, batch_size: int) -> list[dict[str, Any]]:
+    def sample(self, batch_size: int, *, mode: str = "uniform_game") -> list[dict[str, Any]]:
         if isinstance(batch_size, bool) or int(batch_size) != batch_size or batch_size < 1:
             raise ValueError("batch_size must be a positive integer")
         if not self._games:
             raise ValueError("cannot sample an empty replay buffer")
-        indices = self._rng.integers(0, len(self._games), size=int(batch_size))
+        if mode not in {"uniform_game", "uniform_state", "winner_balanced"}:
+            raise ValueError("sampling mode must be uniform_game, uniform_state, or winner_balanced")
         result: list[dict[str, Any]] = []
-        for game_index in indices:
-            rows = self._games[int(game_index)]["experience_rows"]
+        if mode == "uniform_state":
+            if self._position_count <= 0:
+                raise ValueError("replay contains no sampleable states")
+            flat_indices = self._rng.integers(0, self._position_count, size=int(batch_size))
+            for flat_index in flat_indices:
+                game_index = int(np.searchsorted(self._position_offsets, flat_index, side="right"))
+                offset = 0 if game_index == 0 else int(self._position_offsets[game_index - 1])
+                row_index = int(flat_index) - offset
+                result.append(copy.deepcopy(self._games[game_index]["experience_rows"][row_index]))
+            return result
+
+        if mode == "uniform_game":
+            indices = self._rng.integers(0, len(self._games), size=int(batch_size))
+            for game_index in indices:
+                rows = self._games[int(game_index)]["experience_rows"]
+                row_index = int(self._rng.integers(0, len(rows)))
+                result.append(copy.deepcopy(rows[row_index]))
+            return result
+
+        winners = {
+            color: [index for index, game in enumerate(self._games) if game.get("winner_color") == color]
+            for color in ("B", "W")
+        }
+        draws = [index for index, game in enumerate(self._games) if game.get("winner_color") is None]
+        if not winners["B"] or not winners["W"]:
+            # Until both decisive outcomes exist, retain the registered baseline sampler.
+            return self.sample(batch_size, mode="uniform_game")
+        draw_rate = len(draws) / len(self._games)
+        categories: list[str | None] = ["B", "W"]
+        probabilities = [(1.0 - draw_rate) / 2.0, (1.0 - draw_rate) / 2.0]
+        if draws:
+            categories.append(None)
+            probabilities.append(draw_rate)
+        for _ in range(int(batch_size)):
+            category = self._rng.choice(categories, p=probabilities)
+            candidates = draws if category is None else winners[str(category)]
+            game_index = int(candidates[int(self._rng.integers(0, len(candidates)))])
+            rows = self._games[game_index]["experience_rows"]
             row_index = int(self._rng.integers(0, len(rows)))
             result.append(copy.deepcopy(rows[row_index]))
         return result
@@ -206,6 +251,7 @@ class ReplayBuffer:
         self._games = rebuilt._games
         self._digests = rebuilt._digests
         self._position_count = rebuilt._position_count
+        self._position_offsets = rebuilt._position_offsets
         self._rng.bit_generator.state = copy.deepcopy(state["rng_state"])
 
 

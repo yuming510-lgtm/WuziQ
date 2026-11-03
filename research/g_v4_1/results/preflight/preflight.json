@@ -1,0 +1,290 @@
+{
+  "estimate": {
+    "cpu_hour_cap": 6.0,
+    "diagnostic_cpu_seconds": 104.76,
+    "evaluation_cpu_seconds": {
+      "central": 415.7982736920003,
+      "conservative": 831.5965473840006,
+      "optimistic": 332.63861895360026
+    },
+    "evaluation_games": {
+      "network": 496,
+      "puct": 680,
+      "total": 1176
+    },
+    "optimizer_cpu_seconds": {
+      "central": 25.860824375000036,
+      "conservative": 38.79123656250005,
+      "optimistic": 20.68865950000003
+    },
+    "optimizer_updates": 2500,
+    "resource_envelopes": {
+      "central": {
+        "evaluation_cpu_seconds": 415.7982736920003,
+        "total_cpu_seconds": 4372.312912934627,
+        "total_wall_minutes_sequential": 72.87188188224378,
+        "training_cpu_seconds": 2998.2440566557016
+      },
+      "conservative": {
+        "evaluation_cpu_seconds": 831.5965473840006,
+        "total_cpu_seconds": 9664.078524973565,
+        "total_wall_minutes_sequential": 161.0679754162261,
+        "training_cpu_seconds": 5996.488113311403
+      },
+      "optimistic": {
+        "evaluation_cpu_seconds": 332.63861895360026,
+        "total_cpu_seconds": 3245.6789439198856,
+        "total_wall_minutes_sequential": 54.094649065331424,
+        "training_cpu_seconds": 2398.5952453245613
+      }
+    },
+    "total_cpu_seconds": {
+      "central": 3528.257955489702,
+      "conservative": 7795.810868424329,
+      "optimistic": 2674.7473729027765
+    },
+    "total_wall_minutes_sequential": {
+      "central": 58.8042992581617,
+      "conservative": 129.9301811404055,
+      "optimistic": 44.57912288171294
+    },
+    "training_selfplay_cpu_seconds": {
+      "central": 2972.3832322807016,
+      "conservative": 5944.766464561403,
+      "optimistic": 3715.479040350877
+    },
+    "training_states": 40000
+  },
+  "evaluation_games": [
+    {
+      "completed": true,
+      "cpu_seconds": 0.013266759000000405,
+      "mode": "network",
+      "moves": 18,
+      "opponent": "A",
+      "simulations": 0,
+      "wall_seconds": 0.01326447501196526
+    },
+    {
+      "completed": true,
+      "cpu_seconds": 0.1845854899999999,
+      "mode": "network",
+      "moves": 12,
+      "opponent": "B",
+      "simulations": 0,
+      "wall_seconds": 0.18458409199956805
+    },
+    {
+      "completed": true,
+      "cpu_seconds": 0.6023494760000005,
+      "mode": "puct",
+      "moves": 20,
+      "opponent": "A",
+      "simulations": 512,
+      "wall_seconds": 0.6023498919967096
+    },
+    {
+      "completed": true,
+      "cpu_seconds": 0.47627086500000004,
+      "mode": "puct",
+      "moves": 12,
+      "opponent": "B",
+      "simulations": 256,
+      "wall_seconds": 0.4762723059975542
+    }
+  ],
+  "experiment_id": "wuziq-alphazero-g-v4-1",
+  "formal_training_started": false,
+  "format_version": 1,
+  "measurements": {
+    "diagnostic_cpu_seconds": 104.76,
+    "evaluation_cpu_seconds_per_network_game": 0.09892612450000016,
+    "evaluation_cpu_seconds_per_puct_game": 0.5393101705000003,
+    "optimizer_cpu_seconds_per_update": 0.010344329750000015,
+    "selfplay_states_per_cpu_second": 13.457214926255693,
+    "training_states": 40000,
+    "update_every_states": 16
+  },
+  "optimizer_benchmark": {
+    "batch_size": 16,
+    "cpu_seconds_inclusive": 1.4085370810000004,
+    "cpu_seconds_reported": 0.20688659500000028,
+    "updates": 20,
+    "updates_per_cpu_second": 96.67131889332884,
+    "wall_seconds_reported": 0.20688630099175498
+  },
+  "preflight_cpu_seconds": 9.455625142,
+  "resources": {
+    "affinity_cpu_count": 3,
+    "affinity_cpu_ids": [
+      0,
+      1,
+      2
+    ],
+    "cgroup_cpu_quota": 2.0,
+    "cuda_available": false,
+    "device": "cpu",
+    "disk_free_bytes": 24898039808,
+    "logical_cpu_count": 3,
+    "memory_available_bytes": 6281138176,
+    "memory_total_bytes": 10452459520,
+    "peak_rss_bytes": 382197760,
+    "torch_threads": 1,
+    "torch_version": "2.15.0+cpu"
+  },
+  "seed": 741101,
+  "selfplay_games": [
+    {
+      "completed": true,
+      "cpu_seconds": 3.0896281849999996,
+      "game_id": "g-v4-1-preflight-00",
+      "move_count": 42,
+      "opening_kind": "empty",
+      "simulations": 2688,
+      "states": 42,
+      "wall_seconds": 3.089846443006536
+    },
+    {
+      "completed": true,
+      "cpu_seconds": 1.1460179210000003,
+      "game_id": "g-v4-1-preflight-01",
+      "move_count": 15,
+      "opening_kind": "empty",
+      "simulations": 960,
+      "states": 15,
+      "wall_seconds": 1.1460107430175412
+    }
+  ],
+  "simulation_benchmarks": [
+    {
+      "cpu_seconds_each": [
+        0.030576372999999935,
+        0.02011313299999995
+      ],
+      "max_depth": 1,
+      "mean_cpu_seconds": 0.025344752999999942,
+      "network_evaluations": 17,
+      "position_id": "opening",
+      "simulations": 16,
+      "simulations_per_cpu_second": 631.2943748159644,
+      "tree_nodes": 1345
+    },
+    {
+      "cpu_seconds_each": [
+        0.039806347000000075,
+        0.03870430899999988
+      ],
+      "max_depth": 1,
+      "mean_cpu_seconds": 0.03925532799999998,
+      "network_evaluations": 33,
+      "position_id": "opening",
+      "simulations": 32,
+      "simulations_per_cpu_second": 815.1759679603242,
+      "tree_nodes": 2609
+    },
+    {
+      "cpu_seconds_each": [
+        0.0798595769999999,
+        0.07207129499999998
+      ],
+      "max_depth": 1,
+      "mean_cpu_seconds": 0.07596543599999994,
+      "network_evaluations": 65,
+      "position_id": "opening",
+      "simulations": 64,
+      "simulations_per_cpu_second": 842.4884180221127,
+      "tree_nodes": 5137
+    },
+    {
+      "cpu_seconds_each": [
+        0.2119489809999997,
+        0.1499359600000001
+      ],
+      "max_depth": 2,
+      "mean_cpu_seconds": 0.1809424704999999,
+      "network_evaluations": 129,
+      "position_id": "opening",
+      "simulations": 128,
+      "simulations_per_cpu_second": 707.4071645329949,
+      "tree_nodes": 10145
+    },
+    {
+      "cpu_seconds_each": [
+        0.3061908440000001,
+        0.3541341899999999
+      ],
+      "max_depth": 4,
+      "mean_cpu_seconds": 0.330162517,
+      "network_evaluations": 257,
+      "position_id": "opening",
+      "simulations": 256,
+      "simulations_per_cpu_second": 775.3757220114724,
+      "tree_nodes": 20013
+    },
+    {
+      "cpu_seconds_each": [
+        0.027237919999999693,
+        0.020109809000000034
+      ],
+      "max_depth": 1,
+      "mean_cpu_seconds": 0.023673864499999864,
+      "network_evaluations": 17,
+      "position_id": "midgame",
+      "simulations": 16,
+      "simulations_per_cpu_second": 675.8507889575905,
+      "tree_nodes": 1226
+    },
+    {
+      "cpu_seconds_each": [
+        0.03543053200000035,
+        0.038719549000000075
+      ],
+      "max_depth": 1,
+      "mean_cpu_seconds": 0.03707504050000021,
+      "network_evaluations": 33,
+      "position_id": "midgame",
+      "simulations": 32,
+      "simulations_per_cpu_second": 863.1143639613776,
+      "tree_nodes": 2378
+    },
+    {
+      "cpu_seconds_each": [
+        0.06904396000000013,
+        0.07252186400000005
+      ],
+      "max_depth": 1,
+      "mean_cpu_seconds": 0.07078291200000009,
+      "network_evaluations": 65,
+      "position_id": "midgame",
+      "simulations": 64,
+      "simulations_per_cpu_second": 904.1730297843627,
+      "tree_nodes": 4682
+    },
+    {
+      "cpu_seconds_each": [
+        0.14487313599999974,
+        0.1442369659999998
+      ],
+      "max_depth": 2,
+      "mean_cpu_seconds": 0.14455505099999977,
+      "network_evaluations": 129,
+      "position_id": "midgame",
+      "simulations": 128,
+      "simulations_per_cpu_second": 885.4758039551326,
+      "tree_nodes": 9235
+    },
+    {
+      "cpu_seconds_each": [
+        0.302055223,
+        0.35683876800000025
+      ],
+      "max_depth": 3,
+      "mean_cpu_seconds": 0.3294469955000001,
+      "network_evaluations": 257,
+      "position_id": "midgame",
+      "simulations": 256,
+      "simulations_per_cpu_second": 777.0597501169195,
+      "tree_nodes": 18260
+    }
+  ]
+}
