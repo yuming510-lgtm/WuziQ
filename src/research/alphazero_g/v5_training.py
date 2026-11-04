@@ -294,6 +294,10 @@ def train_reference_arm(
     root = Path(root)
     config_hash = str(config["config_sha256"])
     artifact_root = _artifact_root(root, artifact_dir)
+    training_progress_path = artifact_root / "results/progress.json"
+    if artifact_dir is not None:
+        # A versioned runner may maintain its own top-level task progress file.
+        training_progress_path = artifact_root / "results/training_progress.json"
     arm_dir = artifact_root / "checkpoints" / arm
     arm_dir.mkdir(parents=True, exist_ok=True)
     current_path = arm_dir / "training_state.pt"
@@ -395,7 +399,7 @@ def train_reference_arm(
             cumulative_cpu_seconds=total_cpu_seconds,
         )
         _atomic_torch_save(current_path, payload)
-        _atomic_json(artifact_root / "results/progress.json", {
+        _atomic_json(training_progress_path, {
             "format_version": 1, "experiment_id": config["experiment_id"],
             "config_sha256": config_hash, "active_arm": arm,
             "games_completed": game_count, "environment_states": state_count,

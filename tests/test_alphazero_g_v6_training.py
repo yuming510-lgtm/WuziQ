@@ -26,6 +26,9 @@ def _tiny_config() -> dict:
 
 def test_training_artifact_namespace_keeps_v5_default_path_and_writes_v6_separately(tmp_path: Path) -> None:
     torch.set_num_threads(1)
+    task_progress = tmp_path / "research/g_v6/results/progress.json"
+    task_progress.parent.mkdir(parents=True)
+    task_progress.write_text('{"phase":"runner-owned"}', encoding="utf-8")
     try:
         result = train_reference_arm(
             tmp_path, arm="namespace_smoke", board_size=6, n_in_row=4,
@@ -38,6 +41,8 @@ def test_training_artifact_namespace_keeps_v5_default_path_and_writes_v6_separat
     assert result["completed"] is True
     assert (tmp_path / "research/g_v6/checkpoints/namespace_smoke/training_state.pt").is_file()
     assert len(list((tmp_path / "research/g_v6/raw/selfplay/namespace_smoke").glob("*.json"))) == 1
+    assert task_progress.read_text(encoding="utf-8") == '{"phase":"runner-owned"}'
+    assert (tmp_path / "research/g_v6/results/training_progress.json").is_file()
     assert not (tmp_path / "research/g_v5/checkpoints/namespace_smoke/training_state.pt").exists()
 
 
