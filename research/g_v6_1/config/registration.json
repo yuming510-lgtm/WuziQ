@@ -1,0 +1,360 @@
+{
+  "algorithm_state": "frozen V6 checkpoints; no training, weight update, hyperparameter tuning, or model modification",
+  "baseline_v6_commit": "0405b288d44e0cc35cfefb08a17f0714a1b3683e",
+  "blind_match_pairs_per_selected_model_opponent_and_budget": 40,
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-1-tournament",
+  "challenge_match_pairs_per_model_opponent_and_budget": 20,
+  "cpu_estimates_before_formal_runs": {
+    "conservative": {
+      "assumed_total_game_plies_excluding_opening": 70,
+      "fits_10_cpu_hour_cap": false,
+      "p0_direct_and_A_B_development_cpu_hours": 9.278957055666666,
+      "p1_tactics_cpu_hours": 0.21209044698666665,
+      "p2_blind_cpu_hours_one_candidate_per_budget": 2.0619904568148146,
+      "preflight_cpu_hours": 0.0028613895227777774,
+      "total_projected_cpu_hours": 11.555899348990923
+    },
+    "normal": {
+      "assumed_total_game_plies_excluding_opening": 50,
+      "fits_10_cpu_hour_cap": true,
+      "p0_direct_and_A_B_development_cpu_hours": 6.627826468333332,
+      "p1_tactics_cpu_hours": 0.21209044698666665,
+      "p2_blind_cpu_hours_one_candidate_per_budget": 1.472850326296296,
+      "preflight_cpu_hours": 0.0028613895227777774,
+      "total_projected_cpu_hours": 8.315628631139072
+    },
+    "optimistic": {
+      "assumed_total_game_plies_excluding_opening": 30,
+      "fits_10_cpu_hour_cap": true,
+      "p0_direct_and_A_B_development_cpu_hours": 3.976695880999999,
+      "p1_tactics_cpu_hours": 0.21209044698666665,
+      "p2_blind_cpu_hours_one_candidate_per_budget": 0.8837101957777777,
+      "preflight_cpu_hours": 0.0028613895227777774,
+      "total_projected_cpu_hours": 5.075357913287221
+    }
+  },
+  "cpu_hard_cap_seconds": 36000,
+  "direct_match_pairs_per_pairing_and_budget": 40,
+  "experiment_id": "wuziq-alphazero-g-v6-1-checkpoint-tournament",
+  "format_version": 1,
+  "historical_v6_tactics_sha256": "a8443f69ccb631973ab09f79f166459a9894e3bd6ddcc33f47cd3a7a58ab6dbf",
+  "models": {
+    "G10K": {
+      "board_size": 9,
+      "config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+      "environment_states": 10004,
+      "games_completed": 482,
+      "inference_legal_moves": 81,
+      "inference_legal_probability_mass": 1.0000000443760655,
+      "inference_value": 0.06413252651691437,
+      "n_in_row": 5,
+      "network_state_shapes": {
+        "act_conv1.bias": [
+          4
+        ],
+        "act_conv1.weight": [
+          4,
+          128,
+          1,
+          1
+        ],
+        "act_fc1.bias": [
+          81
+        ],
+        "act_fc1.weight": [
+          81,
+          324
+        ],
+        "conv1.bias": [
+          32
+        ],
+        "conv1.weight": [
+          32,
+          4,
+          3,
+          3
+        ],
+        "conv2.bias": [
+          64
+        ],
+        "conv2.weight": [
+          64,
+          32,
+          3,
+          3
+        ],
+        "conv3.bias": [
+          128
+        ],
+        "conv3.weight": [
+          128,
+          64,
+          3,
+          3
+        ],
+        "val_conv1.bias": [
+          2
+        ],
+        "val_conv1.weight": [
+          2,
+          128,
+          1,
+          1
+        ],
+        "val_fc1.bias": [
+          64
+        ],
+        "val_fc1.weight": [
+          64,
+          162
+        ],
+        "val_fc2.bias": [
+          1
+        ],
+        "val_fc2.weight": [
+          1,
+          64
+        ]
+      },
+      "path": "research/g_v6/checkpoints/reference400_empty/node_10000.pt",
+      "reference_architecture_config": "4-plane CNN 32/64/128 with policy/value heads; no BatchNorm",
+      "sha256": "5aece10655c0ae4f606888163fe96f7b3b8a48e9bfbc29a8919a5ad45ed72137",
+      "simulations_per_move": 400
+    },
+    "G15K": {
+      "board_size": 9,
+      "config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+      "environment_states": 15006,
+      "games_completed": 744,
+      "inference_legal_moves": 81,
+      "inference_legal_probability_mass": 0.9999999270949047,
+      "inference_value": 0.06764127314090729,
+      "n_in_row": 5,
+      "network_state_shapes": {
+        "act_conv1.bias": [
+          4
+        ],
+        "act_conv1.weight": [
+          4,
+          128,
+          1,
+          1
+        ],
+        "act_fc1.bias": [
+          81
+        ],
+        "act_fc1.weight": [
+          81,
+          324
+        ],
+        "conv1.bias": [
+          32
+        ],
+        "conv1.weight": [
+          32,
+          4,
+          3,
+          3
+        ],
+        "conv2.bias": [
+          64
+        ],
+        "conv2.weight": [
+          64,
+          32,
+          3,
+          3
+        ],
+        "conv3.bias": [
+          128
+        ],
+        "conv3.weight": [
+          128,
+          64,
+          3,
+          3
+        ],
+        "val_conv1.bias": [
+          2
+        ],
+        "val_conv1.weight": [
+          2,
+          128,
+          1,
+          1
+        ],
+        "val_fc1.bias": [
+          64
+        ],
+        "val_fc1.weight": [
+          64,
+          162
+        ],
+        "val_fc2.bias": [
+          1
+        ],
+        "val_fc2.weight": [
+          1,
+          64
+        ]
+      },
+      "path": "research/g_v6/checkpoints/reference400_empty/node_15000.pt",
+      "reference_architecture_config": "4-plane CNN 32/64/128 with policy/value heads; no BatchNorm",
+      "sha256": "b32d3292efdc96366cb630d4df920cd60bfdbe3bcd16fdb64fdc4619cc9ec862",
+      "simulations_per_move": 400
+    },
+    "G20K": {
+      "board_size": 9,
+      "config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+      "environment_states": 20001,
+      "games_completed": 1012,
+      "inference_legal_moves": 81,
+      "inference_legal_probability_mass": 1.0000000610634743,
+      "inference_value": -0.02999984286725521,
+      "n_in_row": 5,
+      "network_state_shapes": {
+        "act_conv1.bias": [
+          4
+        ],
+        "act_conv1.weight": [
+          4,
+          128,
+          1,
+          1
+        ],
+        "act_fc1.bias": [
+          81
+        ],
+        "act_fc1.weight": [
+          81,
+          324
+        ],
+        "conv1.bias": [
+          32
+        ],
+        "conv1.weight": [
+          32,
+          4,
+          3,
+          3
+        ],
+        "conv2.bias": [
+          64
+        ],
+        "conv2.weight": [
+          64,
+          32,
+          3,
+          3
+        ],
+        "conv3.bias": [
+          128
+        ],
+        "conv3.weight": [
+          128,
+          64,
+          3,
+          3
+        ],
+        "val_conv1.bias": [
+          2
+        ],
+        "val_conv1.weight": [
+          2,
+          128,
+          1,
+          1
+        ],
+        "val_fc1.bias": [
+          64
+        ],
+        "val_fc1.weight": [
+          64,
+          162
+        ],
+        "val_fc2.bias": [
+          1
+        ],
+        "val_fc2.weight": [
+          1,
+          64
+        ]
+      },
+      "path": "research/g_v6/checkpoints/reference400_empty/node_20000.pt",
+      "reference_architecture_config": "4-plane CNN 32/64/128 with policy/value heads; no BatchNorm",
+      "sha256": "b6e14e947fd176794ca050faab3b7f6331ec881ffd01d8584b1e8943b48cbc05",
+      "simulations_per_move": 400
+    }
+  },
+  "n_in_row": 5,
+  "network_architecture": "4-plane CNN 32/64/128 with policy/value heads; no BatchNorm",
+  "new_tactics": {
+    "categories": [
+      "direct_win",
+      "unique_block",
+      "forced_threat_3ply",
+      "false_threat"
+    ],
+    "count": 128,
+    "historical_canonical_positions_excluded": 137678,
+    "per_category": 32,
+    "seed": 610612
+  },
+  "new_tactics_sha256": "b75420fa33e2183f4de7a2ee0479e99a44286bdbf34fac48e9c0a9a7f3b1c21c",
+  "opening_plies": 6,
+  "opening_schedule_seeds": {
+    "blind": 610611,
+    "development": 610610
+  },
+  "opening_schedule_sha256": "ad73ae1d3924f25df4f6c1613b9e422d9460c930300b009a3692dbe4c09abf71",
+  "opponent_aliases": {
+    "A-Minimax": {
+      "repository_engine": "B",
+      "source": "src/ai.py choose_move; native repository A is a separate rule selector",
+      "time_limit_seconds": 0.05
+    },
+    "B-AB-50ms": {
+      "repository_engine": "C",
+      "source": "src/ai.py choose_move; Alpha-Beta implementation",
+      "time_limit_seconds": 0.05
+    }
+  },
+  "preflight_cpu_seconds": 10.301002281999999,
+  "preflight_required_before_formal_runs": true,
+  "preflight_sha256": "16a170b02433f9597724d26c0954cbbaa4db352cafc750d12ec57892e86fd55c",
+  "registered_at_utc": "2026-11-04T00:00:00Z",
+  "registration_code_commit": "f9016143b2a800d60a311bd68edd5a3d6659700a",
+  "registration_sha256": "99f72c275ee5e098f5322b7a5207aeb1fdcabcd45955dd33a9679cac56fb0946",
+  "resource_snapshot": {
+    "cpu_count_visible": 3,
+    "cpu_quota": "200000 100000",
+    "device": "CPU (checkpoint inference only)",
+    "memory_limit": "8589934592",
+    "torch_threads": 1,
+    "torch_version": "2.15.0+cpu"
+  },
+  "rules": "freestyle Gomoku; five in a row wins; same V6 reference engine, independent grid oracle",
+  "search": {
+    "actual_root_action_visits": "N; upstream configured playouts = N+1 due initial root expansion",
+    "budgets": [
+      64,
+      400
+    ],
+    "c_puct": 5.0,
+    "root_noise": false,
+    "temperature": 0.001,
+    "tree_reuse_between_moves": false
+  },
+  "selection_is_development_only": true,
+  "selection_rule": [
+    "For each search budget separately, the primary metric is equal-weight mean paired score against the other two frozen checkpoints.",
+    "Only exact primary point-estimate ties are resolved lexicographically by score versus A-Minimax, then versus B-AB-50ms, then PUCT tactic accuracy; A/B results are kept separate.",
+    "Every metric and paired 95% CI is retained; point-estimate selection does not imply a statistically established rank.",
+    "Freeze one selected candidate per budget; if the selected identity is identical across budgets, run it once at both budgets.",
+    "Blind results are not available to or used by the selector."
+  ],
+  "selection_rule_id": "h2h_then_A_then_B_then_tactics",
+  "tactic_generation_audit_sha256": "ea9b0422444af037dd28dcb3f2914588e4ce12e9f8886aa136ea9cb16645753e",
+  "training_performed": false
+}

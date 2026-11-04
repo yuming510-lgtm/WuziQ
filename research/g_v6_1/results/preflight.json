@@ -1,0 +1,118 @@
+{
+  "completed_formal_games": 0,
+  "cpu_cap_feasible_by_preflight": true,
+  "cpu_cap_seconds": 36000,
+  "environment": {
+    "cpu_count_visible": 3,
+    "cpu_quota": "200000 100000",
+    "device": "CPU (checkpoint inference only)",
+    "memory_limit": "8589934592",
+    "torch_threads": 1,
+    "torch_version": "2.15.0+cpu"
+  },
+  "estimate_is_conservative_proxy": true,
+  "estimate_method": "Per-model search CPU measured in six complete preflight games, divided by candidate MCTS decisions; extrapolated over expected turns for each phase, with separate 30/50/70-ply scenarios.",
+  "experiment_id": "wuziq-alphazero-g-v6-1-checkpoint-tournament",
+  "formal_match_results_included": false,
+  "format_version": 1,
+  "formula": {
+    "A_B_development": "3 checkpoints x 2 distinct opponents x 20 paired openings x 2 colors x max observed game CPU, per budget",
+    "blind": "conservative 3 candidates x 2 opponents x 40 paired openings x 2 colors x max observed game CPU, per budget",
+    "direct": "3 pairings x 40 paired openings x 2 colors x 2 neural sides x max observed game CPU, per budget",
+    "tactics": "3 checkpoints x 2 budgets x (128 new + 64 historical) positions, using observed average per-puzzle proxy"
+  },
+  "max_observed_model_cpu_seconds_per_search_decision": {
+    "400": 1.0126863349999997,
+    "64": 0.31287895866666676
+  },
+  "preflight_cpu_seconds": 10.301002281999999,
+  "preflight_games": [
+    {
+      "candidate_cpu_seconds": 0.9386368760000003,
+      "candidate_simulations_observed": 192,
+      "game_cpu_seconds": 1.030958129,
+      "game_moves": 11,
+      "model": "G10K",
+      "simulations": 64,
+      "termination": "five_in_row"
+    },
+    {
+      "candidate_cpu_seconds": 2.326268848999999,
+      "candidate_simulations_observed": 1200,
+      "game_cpu_seconds": 2.417344288,
+      "game_moves": 11,
+      "model": "G10K",
+      "simulations": 400,
+      "termination": "five_in_row"
+    },
+    {
+      "candidate_cpu_seconds": 0.4071803869999986,
+      "candidate_simulations_observed": 192,
+      "game_cpu_seconds": 0.49770663999999964,
+      "game_moves": 11,
+      "model": "G15K",
+      "simulations": 64,
+      "termination": "five_in_row"
+    },
+    {
+      "candidate_cpu_seconds": 2.560075910000002,
+      "candidate_simulations_observed": 1200,
+      "game_cpu_seconds": 2.650569421,
+      "game_moves": 11,
+      "model": "G15K",
+      "simulations": 400,
+      "termination": "five_in_row"
+    },
+    {
+      "candidate_cpu_seconds": 0.4753737969999996,
+      "candidate_simulations_observed": 192,
+      "game_cpu_seconds": 0.565827874,
+      "game_moves": 11,
+      "model": "G20K",
+      "simulations": 64,
+      "termination": "five_in_row"
+    },
+    {
+      "candidate_cpu_seconds": 3.038059004999999,
+      "candidate_simulations_observed": 1200,
+      "game_cpu_seconds": 3.1286017729999998,
+      "game_moves": 11,
+      "model": "G20K",
+      "simulations": 400,
+      "termination": "five_in_row"
+    }
+  ],
+  "preflight_only": true,
+  "preflight_wall_seconds": 10.41108283000358,
+  "projected_worst_case_formal_cpu_hours": 11.555899348990923,
+  "projected_worst_case_formal_cpu_seconds": 41601.237656367324,
+  "updated_total_cpu_estimates": {
+    "conservative": {
+      "assumed_total_game_plies_excluding_opening": 70,
+      "fits_10_cpu_hour_cap": false,
+      "p0_direct_and_A_B_development_cpu_hours": 9.278957055666666,
+      "p1_tactics_cpu_hours": 0.21209044698666665,
+      "p2_blind_cpu_hours_one_candidate_per_budget": 2.0619904568148146,
+      "preflight_cpu_hours": 0.0028613895227777774,
+      "total_projected_cpu_hours": 11.555899348990923
+    },
+    "normal": {
+      "assumed_total_game_plies_excluding_opening": 50,
+      "fits_10_cpu_hour_cap": true,
+      "p0_direct_and_A_B_development_cpu_hours": 6.627826468333332,
+      "p1_tactics_cpu_hours": 0.21209044698666665,
+      "p2_blind_cpu_hours_one_candidate_per_budget": 1.472850326296296,
+      "preflight_cpu_hours": 0.0028613895227777774,
+      "total_projected_cpu_hours": 8.315628631139072
+    },
+    "optimistic": {
+      "assumed_total_game_plies_excluding_opening": 30,
+      "fits_10_cpu_hour_cap": true,
+      "p0_direct_and_A_B_development_cpu_hours": 3.976695880999999,
+      "p1_tactics_cpu_hours": 0.21209044698666665,
+      "p2_blind_cpu_hours_one_candidate_per_budget": 0.8837101957777777,
+      "preflight_cpu_hours": 0.0028613895227777774,
+      "total_projected_cpu_hours": 5.075357913287221
+    }
+  }
+}
