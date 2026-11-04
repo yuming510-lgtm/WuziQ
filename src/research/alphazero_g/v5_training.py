@@ -155,9 +155,18 @@ def _run_game(
             return record, np.stack(states), np.stack(policies), values
 
 
+def _artifact_root(root: Path, artifact_dir: str | Path | None) -> Path:
+    """Resolve an optional output namespace; the default remains the V5 layout."""
+    if artifact_dir is None:
+        return root / "research/g_v5"
+    path = Path(artifact_dir)
+    return path if path.is_absolute() else root / path
+
+
 def _save_game(root: Path, arm: str, record: dict[str, Any], states: np.ndarray,
-               policies: np.ndarray, values: np.ndarray) -> tuple[Path, Path]:
-    base = root / "research/g_v5/raw/selfplay" / arm
+               policies: np.ndarray, values: np.ndarray,
+               artifact_dir: str | Path | None = None) -> tuple[Path, Path]:
+    base = _artifact_root(root, artifact_dir) / "raw/selfplay" / arm
     game_path = base / f"{record['game_id']}.json"
     sample_path = base / f"{record['game_id']}.npz"
     _atomic_npz(sample_path, states=states.astype(np.float16), policies=policies.astype(np.float16), values=values.astype(np.int8))
@@ -279,11 +288,13 @@ def train_reference_arm(
     opening_provider=None,
     initial_model_state: dict[str, torch.Tensor] | None = None,
     stop_at_cpu_seconds: float | None = None,
+    artifact_dir: str | Path | None = None,
 ) -> dict[str, Any]:
     """Train one independent reference model, checkpointing after each game."""
     root = Path(root)
     config_hash = str(config["config_sha256"])
-    arm_dir = root / "research/g_v5/checkpoints" / arm
+    artifact_root = _artifact_root(root, artifact_dir)
+    arm_dir = artifact_root / "checkpoints" / arm
     arm_dir.mkdir(parents=True, exist_ok=True)
     current_path = arm_dir / "training_state.pt"
     initial_path = arm_dir / "node_0.pt"
@@ -323,8 +334,8 @@ def train_reference_arm(
             # A transferred state dict is weights-only; optimizer starts fresh.
             model.optimizer = torch.optim.Adam(model.network.parameters(), weight_decay=1e-4)
     base_cpu_seconds = cumulative_cpu_seconds
-    history_path = root / "research/g_v5/results/training" / f"{arm}.jsonl"
-    stage_path = root / "research/g_v5/results/training" / f"{arm}_metrics.jsonl"
+    history_path = artifact_root / "results/training" / f"{arm}.jsonl"
+    stage_path = artifact_root / "results/training" / f"{arm}_metrics.jsonl"
     stage_path.parent.mkdir(parents=True, exist_ok=True)
     seen_milestones: set[int] = set()
     seen_games: set[str] = set()
@@ -341,7 +352,7 @@ def train_reference_arm(
         if stop_at_cpu_seconds is not None and time.process_time() >= float(stop_at_cpu_seconds):
             break
         game_id = f"{arm}-game-{game_count:06d}"
-        game_path = root / "research/g_v5/raw/selfplay" / arm / f"{game_id}.json"
+        game_path = artifact_root / "raw/selfplay" / arm / f"{game_id}.json"
         if game_path.exists() and game_path.with_suffix(".npz").exists():
             record = json.loads(game_path.read_text(encoding="utf-8"))
             play_data = _load_game_samples(game_path)
@@ -352,7 +363,7 @@ def train_reference_arm(
                 size=board_size, n_in_row=n_in_row, simulations=simulations, model=model,
                 game_id=game_id, seed=game_seed, opening=opening,
             )
-            _save_game(root, arm, record, states, probs, values)
+            _save_game(root, arm, record, states, probs, values, artifact_dir=artifact_root)
             play_data = [(states[i], probs[i], float(values[i])) for i in range(len(values))]
         replay.extend(augment_reference_data(play_data))
         loss = entropy = 0.0
@@ -384,7 +395,7 @@ def train_reference_arm(
             cumulative_cpu_seconds=total_cpu_seconds,
         )
         _atomic_torch_save(current_path, payload)
-        _atomic_json(root / "research/g_v5/results/progress.json", {
+        _atomic_json(artifact_root / "results/progress.json", {
             "format_version": 1, "experiment_id": config["experiment_id"],
             "config_sha256": config_hash, "active_arm": arm,
             "games_completed": game_count, "environment_states": state_count,
