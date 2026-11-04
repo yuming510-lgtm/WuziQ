@@ -62,6 +62,15 @@ def _load_node(path: Path, board_size: int = 9) -> ReferencePolicyValueNet:
     return model
 
 
+def _milestone_counts(checkpoint: dict[str, Any], training_metric: dict[str, Any]) -> tuple[int, int]:
+    """V5 milestone files expose counters under different names from full states."""
+    games = checkpoint.get("game_count", checkpoint.get("games_completed", training_metric.get("game_count")))
+    updates = checkpoint.get("update_count", checkpoint.get("optimizer_updates", training_metric.get("update_count")))
+    if games is None or updates is None:
+        raise ValueError("V6 milestone is missing game or optimizer update counters")
+    return int(games), int(updates)
+
+
 def _all_opponent_paths(root: Path) -> dict[str, Path]:
     cfg = _load_json(root / "research/g_v5/config/experiment.json")
     result: dict[str, Path] = {}
@@ -102,6 +111,7 @@ def run_development_stage(
                     training_metric = item
     if training_metric is None:
         raise ValueError(f"V6 training metric row is missing for milestone {milestone}")
+    milestone_games, milestone_updates = _milestone_counts(checkpoint, training_metric)
     candidate = _load_node(node_path)
     initial_path = root / "research/g_v6/checkpoints/reference400_empty/node_0.pt"
     initial_model = _load_node(initial_path)
@@ -114,8 +124,8 @@ def run_development_stage(
         raise ValueError("existing V6 stage results do not match checkpoint/opening registration")
     result = previous or {
         "milestone": int(milestone), "actual_states": actual_states,
-        "games_completed": int(checkpoint["game_count"]),
-        "optimizer_updates": int(checkpoint["update_count"]),
+        "games_completed": milestone_games,
+        "optimizer_updates": milestone_updates,
         "training_metric": training_metric,
         "checkpoint_path": str(node_path.relative_to(root)),
         "checkpoint_sha256": _sha(node_path),

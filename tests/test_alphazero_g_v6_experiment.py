@@ -58,3 +58,11 @@ def test_checkpoint_selection_rejects_incomplete_stage_results() -> None:
     with pytest.raises(ValueError, match="incomplete"):
         module.select_development_candidate(rows)
 
+
+def test_v5_milestone_checkpoint_counters_are_read_from_metric_schema() -> None:
+    module = _experiment_module()
+    checkpoint = {"environment_states": 2_003, "games_completed": 63}
+    training_metric = {"game_count": 63, "update_count": 62}
+
+    assert module._milestone_counts(checkpoint, training_metric) == (63, 62)
+
