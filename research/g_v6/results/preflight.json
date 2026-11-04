@@ -1,0 +1,98 @@
+{
+  "benchmark": {
+    "actual_decision_states": 13,
+    "average_historical_game_cpu_seconds": 12.672674861063783,
+    "average_historical_states_per_game": 32.212765957446805,
+    "board_size": 9,
+    "configured_playouts_per_move": 400,
+    "evaluation_game_seconds_by_budget": {
+      "400": 4.544979370437488,
+      "64": 0.7665075016983502
+    },
+    "game_cpu_seconds": 5.3316059970000005,
+    "game_wall_seconds": 5.3324777579982765,
+    "historical_game_seconds_per_state_median": 0.3755660903333322,
+    "n_in_row": 5,
+    "optimizer_update_cpu_seconds": 1.754211627,
+    "tactic_seconds_per_position_by_budget": {
+      "400": 0.3639829309999998,
+      "64": 0.050053364000000045
+    }
+  },
+  "benchmark_is_training_data": false,
+  "cpu_cap_seconds": 36000,
+  "estimated_wall_hours_at_cpu_quota": {
+    "conservative": 3.220925505836107,
+    "normal": 2.0130784411475666,
+    "optimistic": 1.6104627529180535
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-9x9-400-equalized-training",
+  "format_version": 1,
+  "resource": {
+    "cpu_model": "",
+    "cpu_quota": 2.0,
+    "device": "cpu",
+    "disk_free_bytes": 21333610496,
+    "logical_cpu_count": 3,
+    "memory_limit_bytes": 8589934592,
+    "torch": "2.15.0+cpu",
+    "torch_threads": 1
+  },
+  "resume_validation": {
+    "arm_id": "reference400_empty",
+    "board_size": 9,
+    "environment_states": 1514,
+    "game_count": 47,
+    "model_matches_node_1500": true,
+    "model_restored": true,
+    "node_1500_sha256": "40dfaf47eeac2e9c5799d79b1f2f1a11241c319a5d0fbbdd442e390af3c3f581",
+    "numpy_rng_restored": true,
+    "optimizer_restored": true,
+    "optimizer_slots": 16,
+    "optimizer_updates": 46,
+    "python_rng_restored": true,
+    "replay_restored": true,
+    "replay_rows": 10000,
+    "replay_sha256": "a1616925bcbe0fca604be382f5efc5f214c178996f8cde5bc4925577adeffdcd",
+    "simulations_per_move": 400,
+    "torch_rng_restored": true,
+    "training_state_sha256": "92e464dd76a87babd82c5879cd96c4c319670b4821ec9c4b7649e2d7f90e7803",
+    "v5_config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+    "v5_cumulative_training_cpu_seconds": 687.6886792850001,
+    "valid": true
+  },
+  "workload_estimate": {
+    "cpu_seconds_by_component": {
+      "audit_report_reserve": 900.0,
+      "optimizer_updates": 1006.917473898,
+      "paired_evaluations": 2974.4326483960695,
+      "preflight": 8.236080148,
+      "selfplay": 7581.543727734001,
+      "tactics": 132.49161439999995
+    },
+    "estimated_remaining_games": 574,
+    "estimated_remaining_optimizer_updates": 574,
+    "estimated_total_cpu_hours": {
+      "conservative": 5.601609575367143,
+      "normal": 3.501005984604464,
+      "optimistic": 2.8008047876835716
+    },
+    "evaluation_games_by_budget": {
+      "400": 560,
+      "64": 560
+    },
+    "measured_game_cpu_seconds": 5.3316059970000005,
+    "measured_game_cpu_seconds_per_state": 0.41012353823076925,
+    "measured_game_states": 13,
+    "measured_optimizer_update_cpu_seconds": 1.754211627,
+    "planned_blind_games": 160,
+    "planned_blind_games_per_budget": 80,
+    "planned_development_games": 960,
+    "planned_development_games_per_budget": 480,
+    "remaining_training_states": 18486,
+    "tactical_positions_by_budget": {
+      "400": 320,
+      "64": 320
+    }
+  }
+}

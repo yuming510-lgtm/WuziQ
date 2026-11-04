@@ -1,0 +1,21 @@
+{
+  "blind_results_used_for_selection": false,
+  "experiment_id": "wuziq-alphazero-g-v6-9x9-400-equalized-training",
+  "format_version": 1,
+  "frozen_before_blind": true,
+  "selected": {
+    "actual_states": 10004,
+    "checkpoint_path": "research/g_v6/checkpoints/reference400_empty/node_10000.pt",
+    "checkpoint_sha256": "5aece10655c0ae4f606888163fe96f7b3b8a48e9bfbc29a8919a5ad45ed72137",
+    "development_seed": 696103,
+    "milestone": 10000,
+    "opponent": "G0-V3-510901-10K",
+    "paired_ci95": [
+      0.8125,
+      1.0
+    ],
+    "score_rate": 0.9375,
+    "selection_budget": 64
+  },
+  "selection_rule": "highest PUCT-64 paired score against frozen G0-V3-510901-10K on development set; ties choose the earlier milestone"
+}

@@ -186,7 +186,11 @@ def audit_v6(root: str | Path) -> dict[str, Any]:
         if not blind.get("selection", {}).get("frozen_before_blind") or blind.get("selection", {}).get("blind_results_used_for_selection"):
             raise ValueError("V6 final blind model selection was not locked to development-only data")
         if selected.get("checkpoint_sha256"):
-            frozen = base / selected["checkpoint_path"]
+            # Selection metadata stores a repository-relative path (as do the
+            # runner outputs). Joining it to ``base`` duplicates
+            # ``research/g_v6`` and makes a valid frozen candidate appear
+            # missing during the final audit.
+            frozen = root / selected["checkpoint_path"]
             if _sha(frozen) != selected["checkpoint_sha256"]:
                 raise ValueError("V6 blind candidate checkpoint differs from frozen selection")
 

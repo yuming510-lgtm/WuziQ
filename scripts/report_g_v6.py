@@ -136,14 +136,16 @@ def _v5_comparison() -> list[str]:
             if stage.get("candidate") == "reference400_empty@1500":
                 lines.append(
                     f"| V5 reference400@1500 | PUCT-64 | {stage.get('opponent', '—')} | "
-                    f"{_fmt_wdl(stage)} | {_fmt_pct(stage.get('score_rate'))} | {_fmt_ci(stage)} |"
+                    f"{int(stage.get('games', 0))} | {_fmt_wdl(stage)} | "
+                    f"{_fmt_pct(stage.get('score_rate'))} | {_fmt_ci(stage)} |"
                 )
     final = _json(ROOT / "research/g_v5/results/final_9x9.json", {}) or {}
     selected = final.get("selected_candidate", {}).get("candidate_id", "reference200_empty@2000")
     for row in final.get("blind_results", []):
         lines.append(
             f"| V5 {selected} | PUCT-64 | {row.get('opponent', '—')} | "
-            f"{_fmt_wdl(row)} | {_fmt_pct(row.get('score_rate'))} | {_fmt_ci(row)} |"
+            f"{int(row.get('games', 0))} | {_fmt_wdl(row)} | "
+            f"{_fmt_pct(row.get('score_rate'))} | {_fmt_ci(row)} |"
         )
     return lines
 
@@ -225,6 +227,15 @@ def generate_report(root: Path = ROOT) -> str:
     pre = preflight.get("workload_estimate", {}).get("estimated_total_cpu_hours", {})
     resource = preflight.get("resource", {})
     v6_train_cpu = float(training.get("v6_training_cpu_seconds", 0.0)) / 3600
+    added_games = max(0, int(training.get("game_count", 0)) - int(registration.get("resume_initial_games", 47)))
+    added_updates = max(1, int(training.get("update_count", 0)) - int(registration.get("resume_initial_updates", 46)))
+    selfplay_runner_cpu = sum(
+        float(_json(path, {}).get("runner_cpu_seconds", 0.0))
+        for path in (BASE / "raw/selfplay/reference400_empty").glob("*.json")
+    )
+    additional_training_seconds = max(0.0, float(training.get("v6_training_cpu_seconds", 0.0)) - selfplay_runner_cpu)
+    update_cpu_seconds = additional_training_seconds / added_updates
+    states_per_added_game = added_states / max(1, added_games)
     report = f"""# WuziQ G V6：9×9等预算AlphaZero训练验证
 
 - 状态：**{status}**。分支：`research/alphazero-g-v6`。
@@ -238,7 +249,13 @@ def generate_report(root: Path = ROOT) -> str:
 
 {('完整盲测已完成。' if progress_complete else '实验尚未全部完成；本报告汇总已可靠落盘阶段，剩余部分可从V6完整训练状态和逐局ID续跑。')}
 
-主要结论由盲测中的PUCT-64与PUCT-400分列判断。搜索次数不同的结果不混作网络学习收益。固定checkpoint的PUCT-64/400差别属于搜索收益；同预算不同训练节点的变化才用于分析训练收益。盲测开局只在开发集模型冻结后使用。
+20,001状态模型在开发集用PUCT-64和PUCT-400分别对冻结随机初始网络取得16/16胜；对历史G0 10K的得分率从2K节点的31.3%升到10K节点的93.8%，之后在15K和20K节点回落到81.3%和75.0%。这显示9×9的自博弈确实学到超过自身初始策略的能力，但训练增长并非随状态数单调提升。
+
+对A的开发成绩随节点起伏：PUCT-64分别为0%、3.1%、18.8%、12.5%、15.6%；PUCT-400为3.1%、6.3%、12.5%、21.9%、28.1%。开发样本每条件仅16局，不能据此声称稳定超过A。冻结的10K候选在新盲测中对A取得PUCT-64的0胜1平39负（得分1.25%），PUCT-400的2胜7平31负（13.75%）；对B-50ms分别为2胜0平38负（5%）。因此训练让网络学会了部分策略和攻防，但尚未接近A到可竞争水平。
+
+PUCT-400对A的得分比同一冻结候选PUCT-64高12.5个百分点；这是固定网络增加搜索的收益，不能算训练进步。各节点的同预算对照、独立战术集和最终新开局盲测分开列示，不能把搜索提升、训练损失下降或有限开发集优势混为一谈。盲测开局是在候选冻结后使用的。
+
+跨棋盘参考：V5的6×6连四、15K模型在20组全新换色开局上以PUCT-64对随机初始网络取得38胜2负（95.0%，配对95%区间87.5%–100%）。V6的9×9规则、对手和训练起点不同，不能作严格因果比较；但本轮开发集对随机初始网络的16/16胜与最终仍难以对抗A，说明相同搜索次数/状态量不能把6×6成绩直接外推到9×9。
 
 ## V5与V6预算对照
 
@@ -298,9 +315,17 @@ loss下降不作为棋力提升证据。策略熵和价值/策略损失在阶段
 
 预检实测400模拟完整局CPU {float(preflight.get('benchmark', {}).get('game_cpu_seconds', 0)):.2f}秒、{preflight.get('benchmark', {}).get('actual_decision_states', 0)}个决策状态；单次真实optimizer update {float(preflight.get('benchmark', {}).get('optimizer_update_cpu_seconds', 0)):.3f}秒。20K目标总CPU估算：乐观{float(pre.get('optimistic', 0)):.2f}小时、正常{float(pre.get('normal', 0)):.2f}小时、保守{float(pre.get('conservative', 0)):.2f}小时；实耗{total_cpu/3600:.2f}小时。
 
+实耗高于预检保守估计：新增{added_games}局自博弈，平均每局{states_per_added_game:.2f}个训练状态（预检参考历史均值{float(preflight.get('benchmark', {}).get('average_historical_states_per_game', 0)):.2f}）；预检估为剩余{int(preflight.get('workload_estimate', {}).get('estimated_remaining_games', 0))}局，实际因训练局更短而完成目标需更多局。CPU实测每新增训练局的批次更新约{update_cpu_seconds:.2f}秒，高于预检单次update {float(preflight.get('benchmark', {}).get('optimizer_update_cpu_seconds', 0)):.2f}秒。保守估计5.60小时，实耗9.61小时；总量仍低于10小时上限，余量约{max(0.0, 10-total_cpu/3600):.2f}小时。
+
 ## 结论
 
 {_conclusions(stages, blind, current_states, registration)}
+
+### 三个研究问题
+
+1. **9×9在相近搜索预算与20K状态规模下能否学习？**能看到真实的自博弈学习：全部节点都在开发集击败随机初始化参考网络；相对冻结G0-10K的PUCT-64表现先从31.3%升至93.8%，但随后降至75.0%。这是有限开发集上的明显提升证据，不是持续单调成长，也不是对强棋手的胜利证明。
+2. **提升体现在哪里？**20K节点独立战术题上，裸网络总体正确率43.8%，PUCT-64为51.6%，PUCT-400为59.4%；直接取胜题分别为56.3%/68.8%/68.8%，唯一必防题为62.5%/62.5%/62.5%。这些结果说明学到一些基础攻防，但仍有大量战术题未解。对A的最终新开局盲测仅1.25%（PUCT-64）和13.75%（PUCT-400），仍显著弱于A的实战表现。
+3. **若还没明显成长，下一步查什么？**本轮证明训练目标能带来基础成长，但没有跨到A/B棋力层级。下一步应优先扩大独立对局与战术题覆盖，诊断策略先验、价值估值和搜索访问分布如何造成实战差距；不应把简单增加训练状态或搜索预算当成已验证方案。
 
 ## 复现
 
