@@ -225,7 +225,47 @@ def run_preflight(root: str | Path = ROOT) -> dict[str, Any]:
         raise ValueError("V6.1 registration must be inference-only")
     existing = root / "research/g_v6_1/results/preflight.json"
     if existing.is_file():
-        return json.loads(existing.read_text())
+        result = json.loads(existing.read_text())
+        # Convert the short complete-game samples into per-neural-decision CPU
+        # costs, then scale by 30/50/70 future plies. The 70-ply case is a
+        # conservative long-game scenario and may exceed the 10 CPU-hour cap.
+        per_decision: dict[str, float] = {}
+        for budget in SIMULATION_BUDGETS:
+            rates = []
+            for row in result["preflight_games"]:
+                if int(row["simulations"]) != budget:
+                    continue
+                candidate_decisions = max(1, (int(row["game_moves"]) - 6 + 1) // 2)
+                rates.append(float(row["candidate_cpu_seconds"]) / candidate_decisions)
+            per_decision[str(budget)] = max(rates)
+        scenarios = {}
+        for scenario, total_plies in (("optimistic", 30), ("normal", 50), ("conservative", 70)):
+            p0 = 360 * total_plies * sum(per_decision.values())
+            p1 = 3 * (TACTIC_COUNT + 64) * sum(per_decision.values())
+            # One winner per budget by the frozen selection rule; the two
+            # budget winners may be different checkpoints. This is 80*T
+            # candidate decisions at each budget after color pairing.
+            p2 = 80 * total_plies * sum(per_decision.values())
+            scenarios[scenario] = {
+                "assumed_total_game_plies_excluding_opening": total_plies,
+                "p0_direct_and_A_B_development_cpu_hours": p0 / 3600,
+                "p1_tactics_cpu_hours": p1 / 3600,
+                "p2_blind_cpu_hours_one_candidate_per_budget": p2 / 3600,
+                "preflight_cpu_hours": float(result["preflight_cpu_seconds"]) / 3600,
+                "total_projected_cpu_hours": (p0 + p1 + p2 + float(result["preflight_cpu_seconds"])) / 3600,
+                "fits_10_cpu_hour_cap": p0 + p1 + p2 + float(result["preflight_cpu_seconds"]) <= CPU_LIMIT_SECONDS,
+            }
+        result["max_observed_model_cpu_seconds_per_search_decision"] = per_decision
+        result["updated_total_cpu_estimates"] = scenarios
+        result["estimate_method"] = (
+            "Per-model search CPU measured in six complete preflight games, divided by candidate MCTS decisions; "
+            "extrapolated over expected turns for each phase, with separate 30/50/70-ply scenarios."
+        )
+        result["projected_worst_case_formal_cpu_seconds"] = scenarios["conservative"]["total_projected_cpu_hours"] * 3600
+        result["projected_worst_case_formal_cpu_hours"] = scenarios["conservative"]["total_projected_cpu_hours"]
+        result["cpu_cap_feasible_by_preflight"] = scenarios["normal"]["fits_10_cpu_hour_cap"]
+        _atomic_json(existing, result)
+        return result
     torch.set_num_threads(1)
     frozen = load_frozen_checkpoints(root)
     results, started_cpu, started_wall = [], time.process_time(), time.perf_counter()
