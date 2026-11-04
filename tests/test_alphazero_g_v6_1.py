@@ -6,12 +6,17 @@ from pathlib import Path
 import pytest
 
 from src.research.alphazero_g.v6_1_tournament import (
+    BLIND_PAIRS,
     load_frozen_checkpoints,
     make_selection,
     summarize_tournament_games,
     validate_opening_sets,
 )
 from src.research.alphazero_g.v6_1_tactics import generate_tactical_suite, validate_tactical_suite
+
+
+def test_blind_evaluation_is_registered_for_40_paired_openings() -> None:
+    assert BLIND_PAIRS == 40
 
 
 def test_selection_uses_dev_only_fixed_precedence_and_keeps_budget_winners_separate() -> None:

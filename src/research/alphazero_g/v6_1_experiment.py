@@ -21,6 +21,7 @@ from .v6_1_tournament import (
     CHALLENGE_PAIRS,
     CPU_LIMIT_SECONDS,
     DIRECT_PAIRS,
+    BLIND_PAIRS,
     EXPERIMENT_ID,
     ROOT,
     SIMULATION_BUDGETS,
