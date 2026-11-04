@@ -1,0 +1,268 @@
+{
+  "board_size": 9,
+  "candidate": "G10K",
+  "candidate_color": "W",
+  "candidate_cpu_seconds": 3.8505068459999165,
+  "configured_root_action_visits": 400,
+  "engine_mapping": {
+    "A-Minimax": "src.ai.choose_move('B', time_limit_seconds=0.05)",
+    "B-AB-50ms": "src.ai.choose_move('C', time_limit_seconds=0.05)"
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-1-checkpoint-tournament",
+  "format_version": 1,
+  "game_id": "v61m-2b79dd92d765dce6",
+  "model_sha256": {
+    "A-Minimax": null,
+    "G10K": "5aece10655c0ae4f606888163fe96f7b3b8a48e9bfbc29a8919a5ad45ed72137"
+  },
+  "move_count": 16,
+  "moves": [
+    {
+      "col": 3,
+      "opening": true,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 2,
+      "opening": true,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "col": 3,
+      "opening": true,
+      "player": "B",
+      "row": 1
+    },
+    {
+      "col": 0,
+      "opening": true,
+      "player": "W",
+      "row": 1
+    },
+    {
+      "col": 8,
+      "opening": true,
+      "player": "B",
+      "row": 5
+    },
+    {
+      "col": 4,
+      "opening": true,
+      "player": "W",
+      "row": 2
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 3,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.045114530000319064,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04511756601277739,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 3,
+      "search_cpu_seconds": 0.04507624999678228,
+      "search_depth": 1,
+      "search_nodes": 712,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G10K",
+      "col": 3,
+      "cpu_seconds": 0.8156610529995305,
+      "elapsed_seconds": 0.8156588640122209,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 74,
+      "row": 2,
+      "search_cpu_seconds": 0.8154311600001165,
+      "search_depth": 10,
+      "search_nodes": 26341,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 3,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.04506397499972081,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0450673250015825,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 5,
+      "search_cpu_seconds": 0.04501809200155549,
+      "search_depth": 1,
+      "search_nodes": 690,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G10K",
+      "col": 3,
+      "cpu_seconds": 0.7887461150003219,
+      "elapsed_seconds": 0.788722883007722,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 72,
+      "row": 6,
+      "search_cpu_seconds": 0.7885315530002117,
+      "search_depth": 8,
+      "search_nodes": 25593,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 4,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.04506557800050359,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04506793001201004,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 4,
+      "search_cpu_seconds": 0.045022148013231345,
+      "search_depth": 1,
+      "search_nodes": 680,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G10K",
+      "col": 5,
+      "cpu_seconds": 0.7854011310000715,
+      "elapsed_seconds": 0.7853789399960078,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 70,
+      "row": 2,
+      "search_cpu_seconds": 0.7852127070000279,
+      "search_depth": 8,
+      "search_nodes": 21994,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 2,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.045089870000083465,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04509399500966538,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 2,
+      "search_cpu_seconds": 0.04504035100399051,
+      "search_depth": 1,
+      "search_nodes": 652,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G10K",
+      "col": 6,
+      "cpu_seconds": 0.8513566170004196,
+      "elapsed_seconds": 0.8513839820079738,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 68,
+      "row": 2,
+      "search_cpu_seconds": 0.8511483919992315,
+      "search_depth": 8,
+      "search_nodes": 18506,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 5,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.04512203200010845,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04512471599446144,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 5,
+      "search_cpu_seconds": 0.04504973700386472,
+      "search_depth": 1,
+      "search_nodes": 678,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G10K",
+      "col": 7,
+      "cpu_seconds": 0.609341929999573,
+      "elapsed_seconds": 0.6094067939993693,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 66,
+      "row": 2,
+      "search_cpu_seconds": 0.6091692019999755,
+      "search_depth": 6,
+      "search_nodes": 4591,
+      "simulations": 400,
+      "timed_out": false
+    }
+  ],
+  "n_in_row": 5,
+  "opening": [
+    {
+      "col": 3,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 2,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "col": 3,
+      "player": "B",
+      "row": 1
+    },
+    {
+      "col": 0,
+      "player": "W",
+      "row": 1
+    },
+    {
+      "col": 8,
+      "player": "B",
+      "row": 5
+    },
+    {
+      "col": 4,
+      "player": "W",
+      "row": 2
+    }
+  ],
+  "opening_group_id": "v61-development-610618-008",
+  "opening_seed": 610618,
+  "opponent": "A-Minimax",
+  "opponent_cpu_seconds": 0.22545598500073538,
+  "phase": "development",
+  "points": 1.0,
+  "reference_configured_playouts": 401,
+  "seed": 71788914,
+  "simulations_per_reference_turn": 400,
+  "termination": "five_in_row",
+  "total_cpu_seconds": 4.0767015969995555,
+  "total_wall_seconds": 4.07671272099833,
+  "winner_color": "W"
+}

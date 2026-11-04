@@ -1,0 +1,301 @@
+{
+  "board_size": 9,
+  "candidate": "G20K",
+  "candidate_color": "W",
+  "candidate_cpu_seconds": 7.137517223999907,
+  "configured_root_action_visits": 400,
+  "engine_mapping": {
+    "A-Minimax": "src.ai.choose_move('B', time_limit_seconds=0.05)",
+    "B-AB-50ms": "src.ai.choose_move('C', time_limit_seconds=0.05)"
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-1-checkpoint-tournament",
+  "format_version": 1,
+  "game_id": "v61m-42d144c27812cc04",
+  "model_sha256": {
+    "A-Minimax": null,
+    "G20K": "b6e14e947fd176794ca050faab3b7f6331ec881ffd01d8584b1e8943b48cbc05"
+  },
+  "move_count": 18,
+  "moves": [
+    {
+      "col": 5,
+      "opening": true,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 6,
+      "opening": true,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "col": 5,
+      "opening": true,
+      "player": "B",
+      "row": 5
+    },
+    {
+      "col": 4,
+      "opening": true,
+      "player": "W",
+      "row": 6
+    },
+    {
+      "col": 6,
+      "opening": true,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 0,
+      "opening": true,
+      "player": "W",
+      "row": 1
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 4,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.04508557200000496,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.045088875995134,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 4,
+      "search_cpu_seconds": 0.04503916601242963,
+      "search_depth": 1,
+      "search_nodes": 689,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G20K",
+      "col": 3,
+      "cpu_seconds": 1.2035389159999568,
+      "elapsed_seconds": 1.203530625993153,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 74,
+      "row": 4,
+      "search_cpu_seconds": 1.203315850000024,
+      "search_depth": 10,
+      "search_nodes": 24176,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 7,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.0450800680000043,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04508428899862338,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 4,
+      "search_cpu_seconds": 0.0450277640047716,
+      "search_depth": 1,
+      "search_nodes": 653,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G20K",
+      "col": 8,
+      "cpu_seconds": 1.2889253879999956,
+      "elapsed_seconds": 1.2888859550002962,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 72,
+      "row": 4,
+      "search_cpu_seconds": 1.2887340330000256,
+      "search_depth": 8,
+      "search_nodes": 22077,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 5,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.04507589799999323,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04507953400025144,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 3,
+      "search_cpu_seconds": 0.04503017300157808,
+      "search_depth": 1,
+      "search_nodes": 673,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G20K",
+      "col": 5,
+      "cpu_seconds": 1.1949527159999889,
+      "elapsed_seconds": 1.1949124100065092,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 70,
+      "row": 6,
+      "search_cpu_seconds": 1.194747092,
+      "search_depth": 8,
+      "search_nodes": 23718,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 5,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.045067794000033246,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.045072662003804,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 2,
+      "search_cpu_seconds": 0.04501381600857712,
+      "search_depth": 1,
+      "search_nodes": 646,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G20K",
+      "col": 5,
+      "cpu_seconds": 1.2022087060000217,
+      "elapsed_seconds": 1.2024179299914977,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 68,
+      "row": 1,
+      "search_cpu_seconds": 1.2019308449999926,
+      "search_depth": 7,
+      "search_nodes": 22190,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 6,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.045082778999983475,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0450879809941398,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 2,
+      "search_cpu_seconds": 0.045029722998151556,
+      "search_depth": 1,
+      "search_nodes": 641,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G20K",
+      "col": 4,
+      "cpu_seconds": 1.1799236869999845,
+      "elapsed_seconds": 1.179895442997804,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 66,
+      "row": 5,
+      "search_cpu_seconds": 1.1797272900000166,
+      "search_depth": 7,
+      "search_nodes": 18545,
+      "simulations": 400,
+      "timed_out": false
+    },
+    {
+      "actor": "A-Minimax",
+      "col": 3,
+      "configured_time_budget_seconds": 0.05,
+      "cpu_seconds": 0.04509981999996171,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04510508899693377,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 5,
+      "search_cpu_seconds": 0.04504445999918971,
+      "search_depth": 1,
+      "search_nodes": 600,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "G20K",
+      "col": 2,
+      "cpu_seconds": 1.06796781099996,
+      "elapsed_seconds": 1.067940742999781,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 400,
+      "root_children": 64,
+      "row": 3,
+      "search_cpu_seconds": 1.0674761330000138,
+      "search_depth": 5,
+      "search_nodes": 2486,
+      "simulations": 400,
+      "timed_out": false
+    }
+  ],
+  "n_in_row": 5,
+  "opening": [
+    {
+      "col": 5,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 6,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "col": 5,
+      "player": "B",
+      "row": 5
+    },
+    {
+      "col": 4,
+      "player": "W",
+      "row": 6
+    },
+    {
+      "col": 6,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 0,
+      "player": "W",
+      "row": 1
+    }
+  ],
+  "opening_group_id": "v61-blind-610630-019",
+  "opening_seed": 610630,
+  "opponent": "A-Minimax",
+  "opponent_cpu_seconds": 0.2704919309999809,
+  "phase": "final_blind",
+  "points": 1.0,
+  "reference_configured_playouts": 401,
+  "seed": 2156685222,
+  "simulations_per_reference_turn": 400,
+  "termination": "five_in_row",
+  "total_cpu_seconds": 7.408992877000003,
+  "total_wall_seconds": 7.4090127119998215,
+  "winner_color": "W"
+}

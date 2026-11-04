@@ -1,0 +1,174 @@
+{
+  "blind_candidates": [
+    "G20K"
+  ],
+  "blind_results_used_for_selection": false,
+  "checkpoint_sha256": {
+    "G10K": "5aece10655c0ae4f606888163fe96f7b3b8a48e9bfbc29a8919a5ad45ed72137",
+    "G15K": "b32d3292efdc96366cb630d4df920cd60bfdbe3bcd16fdb64fdc4619cc9ec862",
+    "G20K": "b6e14e947fd176794ca050faab3b7f6331ec881ffd01d8584b1e8943b48cbc05"
+  },
+  "development_metrics": {
+    "400": {
+      "G10K": {
+        "h2h_ci95": [
+          0.14375,
+          0.25625
+        ],
+        "h2h_component_score_rates": [
+          0.25,
+          0.15
+        ],
+        "h2h_rate": 0.2,
+        "tactic_network_top1_accuracy": 0.40625,
+        "tactic_puct_accuracy": 0.6171875,
+        "tactic_target_visit_mass": 0.42531249999248294,
+        "vs_A_minimax_ci95": [
+          0.025,
+          0.2
+        ],
+        "vs_A_minimax_rate": 0.1,
+        "vs_B_ab50_ci95": [
+          0.0,
+          0.075
+        ],
+        "vs_B_ab50_rate": 0.025
+      },
+      "G15K": {
+        "h2h_ci95": [
+          0.40625,
+          0.528125
+        ],
+        "h2h_component_score_rates": [
+          0.75,
+          0.18125
+        ],
+        "h2h_rate": 0.465625,
+        "tactic_network_top1_accuracy": 0.5859375,
+        "tactic_puct_accuracy": 0.7890625,
+        "tactic_target_visit_mass": 0.6073437499891442,
+        "vs_A_minimax_ci95": [
+          0.15,
+          0.35
+        ],
+        "vs_A_minimax_rate": 0.25,
+        "vs_B_ab50_ci95": [
+          0.0,
+          0.0
+        ],
+        "vs_B_ab50_rate": 0.0
+      },
+      "G20K": {
+        "h2h_ci95": [
+          0.775,
+          0.8875
+        ],
+        "h2h_component_score_rates": [
+          0.85,
+          0.81875
+        ],
+        "h2h_rate": 0.834375,
+        "tactic_network_top1_accuracy": 0.6640625,
+        "tactic_puct_accuracy": 0.796875,
+        "tactic_target_visit_mass": 0.6326367187386778,
+        "vs_A_minimax_ci95": [
+          0.125,
+          0.425
+        ],
+        "vs_A_minimax_rate": 0.275,
+        "vs_B_ab50_ci95": [
+          0.0,
+          0.15
+        ],
+        "vs_B_ab50_rate": 0.075
+      }
+    },
+    "64": {
+      "G10K": {
+        "h2h_ci95": [
+          0.10625000000000001,
+          0.20625
+        ],
+        "h2h_component_score_rates": [
+          0.225,
+          0.0875
+        ],
+        "h2h_rate": 0.15625,
+        "tactic_network_top1_accuracy": 0.40625,
+        "tactic_puct_accuracy": 0.46875,
+        "tactic_target_visit_mass": 0.2978515624676094,
+        "vs_A_minimax_ci95": [
+          0.0,
+          0.15
+        ],
+        "vs_A_minimax_rate": 0.075,
+        "vs_B_ab50_ci95": [
+          0.0,
+          0.0
+        ],
+        "vs_B_ab50_rate": 0.0
+      },
+      "G15K": {
+        "h2h_ci95": [
+          0.475,
+          0.6000000000000001
+        ],
+        "h2h_component_score_rates": [
+          0.775,
+          0.3
+        ],
+        "h2h_rate": 0.5375,
+        "tactic_network_top1_accuracy": 0.5859375,
+        "tactic_puct_accuracy": 0.6640625,
+        "tactic_target_visit_mass": 0.4501953124501137,
+        "vs_A_minimax_ci95": [
+          0.05,
+          0.25
+        ],
+        "vs_A_minimax_rate": 0.15,
+        "vs_B_ab50_ci95": [
+          0.0,
+          0.0
+        ],
+        "vs_B_ab50_rate": 0.0
+      },
+      "G20K": {
+        "h2h_ci95": [
+          0.75,
+          0.8625
+        ],
+        "h2h_component_score_rates": [
+          0.9125,
+          0.7
+        ],
+        "h2h_rate": 0.8062499999999999,
+        "tactic_network_top1_accuracy": 0.6640625,
+        "tactic_puct_accuracy": 0.6953125,
+        "tactic_target_visit_mass": 0.5405273436897301,
+        "vs_A_minimax_ci95": [
+          0.075,
+          0.275
+        ],
+        "vs_A_minimax_rate": 0.175,
+        "vs_B_ab50_ci95": [
+          0.0,
+          0.0
+        ],
+        "vs_B_ab50_rate": 0.0
+      }
+    }
+  },
+  "frozen_before_blind": true,
+  "rule": [
+    "For each budget, choose the highest equal-weight mean paired score against the other two frozen checkpoints.",
+    "Only exact H2H point-estimate ties are resolved by score against A-Minimax, then B-AlphaBeta-50ms, then exact tactical accuracy.",
+    "A/B remain separate development metrics; they are never added into a single opponent win rate.",
+    "If every registered metric is exactly tied, retain all tied models for blind evaluation.",
+    "The 95% paired bootstrap intervals determine whether a point-estimate ordering is statistically unresolved."
+  ],
+  "selected_by_budget": {
+    "400": "G20K",
+    "64": "G20K"
+  },
+  "selection_rule_id": "h2h_then_A_then_B_then_tactics"
+}
