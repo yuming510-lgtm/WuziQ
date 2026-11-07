@@ -59,8 +59,11 @@ def _tracked_files(root: Path) -> list[Path]:
         if item.is_file():
             files.append(item)
         elif item.is_dir():
-            files.extend(path for path in item.rglob("*") if path.is_file()
-                         and "charts" not in path.parts)
+            files.extend(
+                path for path in item.rglob("*")
+                if path.is_file() and "charts" not in path.parts
+                and path.name not in {"snapshot_status.json", "integrity_audit.json", "REPORT.md"}
+            )
         else:
             raise FileNotFoundError(item)
     source = root / "src"
