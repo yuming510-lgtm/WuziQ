@@ -1,0 +1,203 @@
+{
+  "board_size": 9,
+  "candidate": "ref-v6-2-g1500",
+  "candidate_color": "B",
+  "candidate_cpu_seconds": 4.7241849979996005,
+  "configured_search_budget_root_visits": 400,
+  "format_version": 1,
+  "game_id": "v6m-c1c022c1",
+  "move_count": 12,
+  "moves": [
+    {
+      "col": 3,
+      "opening": true,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 4,
+      "opening": true,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "col": 3,
+      "opening": true,
+      "player": "B",
+      "row": 3
+    },
+    {
+      "col": 7,
+      "opening": true,
+      "player": "W",
+      "row": 6
+    },
+    {
+      "col": 1,
+      "opening": true,
+      "player": "B",
+      "row": 5
+    },
+    {
+      "col": 2,
+      "opening": true,
+      "player": "W",
+      "row": 5
+    },
+    {
+      "actor": "ref-v6-2-g1500",
+      "col": 4,
+      "configured_playouts": 401,
+      "cpu_seconds": 1.6508195970000088,
+      "elapsed_seconds": 1.6508781709999312,
+      "first_leaf_value": -0.8812466859817505,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 400,
+      "root_children": 75,
+      "root_network_value": -0.8812466859817505,
+      "root_visits": 400,
+      "row": 3,
+      "search_cpu_seconds": 1.6506244540000807,
+      "search_depth": 8,
+      "search_nodes": 28806,
+      "simulations": 400,
+      "tree_depth": 8,
+      "tree_nodes": 28806
+    },
+    {
+      "actor": "B-50ms",
+      "col": 3,
+      "cpu_seconds": 0.04507431500042003,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04507954900327604,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 0,
+      "row": 6,
+      "search_depth": 1,
+      "search_nodes": 622,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "ref-v6-2-g1500",
+      "col": 2,
+      "configured_playouts": 401,
+      "cpu_seconds": 1.565603307999936,
+      "elapsed_seconds": 1.5655548840004485,
+      "first_leaf_value": -0.3464253544807434,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 400,
+      "root_children": 73,
+      "root_network_value": -0.3464253544807434,
+      "root_visits": 400,
+      "row": 3,
+      "search_cpu_seconds": 1.5653548810000757,
+      "search_depth": 10,
+      "search_nodes": 23954,
+      "simulations": 400,
+      "tree_depth": 10,
+      "tree_nodes": 23954
+    },
+    {
+      "actor": "B-50ms",
+      "col": 1,
+      "cpu_seconds": 0.0450700510000388,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.045074829999066424,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 0,
+      "row": 4,
+      "search_depth": 1,
+      "search_nodes": 608,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "ref-v6-2-g1500",
+      "col": 5,
+      "configured_playouts": 401,
+      "cpu_seconds": 1.5077620929996556,
+      "elapsed_seconds": 1.5077255869982764,
+      "first_leaf_value": 0.07223048061132431,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 400,
+      "root_children": 71,
+      "root_network_value": 0.07223048061132431,
+      "root_visits": 400,
+      "row": 3,
+      "search_cpu_seconds": 1.5075243939995744,
+      "search_depth": 7,
+      "search_nodes": 11360,
+      "simulations": 400,
+      "tree_depth": 7,
+      "tree_nodes": 11360
+    },
+    {
+      "actor": "B-50ms",
+      "col": 0,
+      "cpu_seconds": 0.045106967000265286,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04511204300069949,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 0,
+      "row": 3,
+      "search_depth": 1,
+      "search_nodes": 578,
+      "simulations": 0,
+      "timed_out": true
+    }
+  ],
+  "n_in_row": 5,
+  "opening": [
+    {
+      "col": 3,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 4,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "col": 3,
+      "player": "B",
+      "row": 3
+    },
+    {
+      "col": 7,
+      "player": "W",
+      "row": 6
+    },
+    {
+      "col": 1,
+      "player": "B",
+      "row": 5
+    },
+    {
+      "col": 2,
+      "player": "W",
+      "row": 5
+    }
+  ],
+  "opening_group_id": "v6-2-development-861201-001",
+  "opening_seed": 861202,
+  "opponent": "B-50ms",
+  "opponent_cpu_seconds": 0.13525133300072412,
+  "phase": "development-games-1500",
+  "points": 0.0,
+  "reference_configured_playouts": 401,
+  "seed": 4272220619,
+  "simulations_per_reference_turn": 400,
+  "source": "evaluation",
+  "termination": "five_in_row",
+  "total_cpu_seconds": 4.860268206000001,
+  "total_wall_seconds": 4.860168314997281,
+  "winner_color": "W"
+}
