@@ -53,8 +53,9 @@ def main() -> None:
     v6_incremental_training_cpu = float(train_summary["v6_training_cpu_seconds"])
     per_game_values = [float(row["runner_cpu_seconds"]) for row in games]
     tail = per_game_values[-200:]
-    remaining_to_2k = 2_000 - 1_012
-    remaining_to_3k = 3_000 - 1_012
+    current_games = int(resume["staged_checkpoint"]["game_count"])
+    remaining_to_2k = max(0, 2_000 - current_games)
+    remaining_to_3k = max(0, 3_000 - current_games)
     v6_cpu_per_game = v6_incremental_training_cpu / len(games)
     # Recent game lengths grew; use the full observed trainer cost as the optimistic
     # rate, then inflate for the recent tail and long-game variance.
@@ -118,6 +119,7 @@ def main() -> None:
         "estimate_method": "Use V6 measured self-play plus optimizer CPU/game, V6.1 actual paired-evaluation CPU/game, and explicit tactic/audit reserves; projected conditions are derived from this registered schedule.",
         "remaining_new_training_games_to_2000": remaining_to_2k,
         "remaining_new_training_games_to_3000": remaining_to_3k,
+        "estimate_starting_game_count": current_games,
         "estimates_cpu_hours": estimates,
         "session_cpu_cap_hours": 10,
         "total_new_cpu_cap_hours": 30,
