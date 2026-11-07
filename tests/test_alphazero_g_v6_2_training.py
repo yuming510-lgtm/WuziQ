@@ -6,7 +6,7 @@ import pytest
 
 from src.research.alphazero_g import v5_training
 from src.research.alphazero_g.v6_2_registration import create_opening_schedule
-from src.research.alphazero_g.v6_2_training import train_to_games
+from src.research.alphazero_g.v6_2_training import registration_value, train_to_games
 
 
 def test_reference_training_can_stop_on_exact_cumulative_game_count(tmp_path, monkeypatch):
@@ -136,3 +136,11 @@ def test_training_beyond_2000_requires_the_registered_gate(tmp_path):
 
     with pytest.raises(ValueError, match="advancement gate"):
         train_to_games(tmp_path, target_games=2_500, session_cpu_seconds=60)
+
+
+def test_cpu_budget_is_read_from_registered_compute_section(tmp_path):
+    config = tmp_path / "research/g_v6_2/config/registration.json"
+    config.parent.mkdir(parents=True)
+    config.write_text(json.dumps({"compute": {"cpu_hard_cap_total_new_hours": 30}}), encoding="utf-8")
+
+    assert registration_value(tmp_path, "cpu_hard_cap_total_new_hours") == 30

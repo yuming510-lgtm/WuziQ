@@ -278,7 +278,9 @@ def save_milestone(root: str | Path, target_games: int, previous_games: int) -> 
 
 def registration_value(root: Path, key: str) -> Any:
     registration = json.loads((root / ARTIFACT / "config/registration.json").read_text(encoding="utf-8"))
-    return registration[key]
+    if key in registration:
+        return registration[key]
+    return registration["compute"][key]
 
 
 def train_to_games(
