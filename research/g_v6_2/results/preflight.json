@@ -1,0 +1,133 @@
+{
+  "actual_benchmark": {
+    "cumulative_games_after_benchmark": 1013,
+    "cumulative_states_after_benchmark": 20014,
+    "cumulative_updates_after_benchmark": 1012,
+    "game_id": "reference400_empty-game-001012",
+    "game_runner_cpu_seconds": 16.275328196,
+    "included_in_v6_2_training_not_discarded": true,
+    "measurement_method": "Copied the frozen full V6 state to an isolated scratch directory, ran the unchanged 400-simulation self-play plus one optimizer update, then moved that completed game and post-game full state into the V6.2 namespace; the same seed/RNG stream is used, so it is not repeated.",
+    "one_complete_selfplay_game_including_optimizer_update": true,
+    "process_cpu_seconds": 50.32964651400048
+  },
+  "created_at_utc": "2026-11-07T06:31:03Z",
+  "environment": {
+    "cpu_quota_cores": 2,
+    "device": "CPU; CUDA unavailable",
+    "disk_free_bytes": 18522578944,
+    "logical_cpus": 3,
+    "memory_limit_bytes": 8589934592,
+    "torch": "2.15.0+cpu",
+    "torch_threads": 1
+  },
+  "estimate_method": "Estimate frozen before long run using V6 mean incremental training CPU/game (30.36s), latest 200-game self-play lengths, V6.1 measured evaluation CPU/game, and one fully measured retained continuation game (50.33 CPU s); normal/conservative rates are raised to 40/55s per game. Evaluation game counts follow the frozen V6.2 schedule.",
+  "estimated_training_cpu_seconds_per_game": {
+    "conservative": 55,
+    "normal": 40,
+    "optimistic": 34
+  },
+  "estimates_cpu_hours": {
+    "conservative": {
+      "audit_report_hours": 0.6,
+      "evaluation_games_to_2000": 1560,
+      "evaluation_games_to_3000_including_blind": 2040,
+      "evaluation_hours_to_3000_including_blind": 5.1,
+      "tactics_hours": 0.4,
+      "to_2000_total_cpu_hours": 19.994444444444444,
+      "to_3000_total_cpu_hours_if_gate_passes": 36.47222222222222,
+      "training_hours_to_2000": 15.094444444444445,
+      "training_hours_to_3000": 30.372222222222224
+    },
+    "normal": {
+      "audit_report_hours": 0.4,
+      "evaluation_games_to_2000": 1560,
+      "evaluation_games_to_3000_including_blind": 2040,
+      "evaluation_hours_to_3000_including_blind": 3.5087988580909633,
+      "tactics_hours": 0.25,
+      "to_2000_total_cpu_hours": 14.310976904553222,
+      "to_3000_total_cpu_hours_if_gate_passes": 26.24768774697985,
+      "training_hours_to_2000": 10.977777777777778,
+      "training_hours_to_3000": 22.08888888888889
+    },
+    "optimistic": {
+      "audit_report_hours": 0.25,
+      "evaluation_games_to_2000": 1560,
+      "evaluation_games_to_3000_including_blind": 2040,
+      "evaluation_hours_to_3000_including_blind": 2.8333333333333335,
+      "tactics_hours": 0.15,
+      "to_2000_total_cpu_hours": 11.897777777777778,
+      "to_3000_total_cpu_hours_if_gate_passes": 22.008888888888887,
+      "training_hours_to_2000": 9.331111111111111,
+      "training_hours_to_3000": 18.775555555555556
+    }
+  },
+  "history_basis": {
+    "last_200_game_runner_cpu_mean": 21.297419699075,
+    "last_200_game_runner_cpu_median": 20.161165435499925,
+    "last_200_game_runner_cpu_p90": 32.007564132,
+    "v61_evaluation_cpu_seconds_per_game": 6.191997984866406,
+    "v61_evaluation_games": 1280,
+    "v6_added_games": 965,
+    "v6_added_training_cpu_seconds": 29293.81639677899,
+    "v6_full_incremental_cpu_seconds_per_game": 30.356286421532634
+  },
+  "remaining_games_after_retained_preflight_game": {
+    "to_2000": 987,
+    "to_3000": 1987
+  },
+  "remaining_new_training_games_to_2000": 988,
+  "remaining_new_training_games_to_3000": 1988,
+  "resource_snapshot": {
+    "cpu_cgroup_quota": "200000 100000",
+    "cuda_available": false,
+    "disk_free_bytes_at_registration": 18522578944,
+    "effective_cpu_cores": 2,
+    "logical_cpus": 3,
+    "memory_limit_bytes": 8589934592,
+    "torch_version": "2.15.0+cpu"
+  },
+  "restore_validation": {
+    "format_version": 1,
+    "source_checkpoint": {
+      "adam_restored": true,
+      "cumulative_training_cpu_seconds": 29981.114918568994,
+      "environment_states": 20001,
+      "game_count": 1012,
+      "model_restored": true,
+      "numpy_rng_restored": true,
+      "optimizer_slots": 16,
+      "optimizer_updates": 1011,
+      "path": "research/g_v6/checkpoints/reference400_empty/training_state.pt",
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "replay_rows": 10000,
+      "replay_sha256": "4782bb1c313ea5d604e444d189aebcb993c4db68c084633624fecc7b03e87d95",
+      "sha256": "b14d36916c545da78149a7ef70e6c2285c6ccabbfd2c9e36e77cbdf825758e0d",
+      "torch_rng_restored": true,
+      "valid": true
+    },
+    "source_model_matches_node_20000": true,
+    "staged_checkpoint": {
+      "adam_restored": true,
+      "cumulative_training_cpu_seconds": 29981.114918568994,
+      "environment_states": 20001,
+      "game_count": 1012,
+      "model_restored": true,
+      "numpy_rng_restored": true,
+      "optimizer_slots": 16,
+      "optimizer_updates": 1011,
+      "path": "research/g_v6_2/checkpoints/reference400_empty/training_state.pt",
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "replay_rows": 10000,
+      "replay_sha256": "4782bb1c313ea5d604e444d189aebcb993c4db68c084633624fecc7b03e87d95",
+      "sha256": "b14d36916c545da78149a7ef70e6c2285c6ccabbfd2c9e36e77cbdf825758e0d",
+      "torch_rng_restored": true,
+      "valid": true
+    },
+    "v6_source_unchanged": true
+  },
+  "session_cpu_cap_hours": 10,
+  "status": "Preflight complete. One measured continuation game is retained as the first V6.2 game; continue from game 1,013 without replaying it.",
+  "total_new_cpu_cap_hours": 30
+}

@@ -27,6 +27,8 @@ class ReferencePolicyValueNet:
                 self.upstream = UpstreamNet(self.board_size, self.board_size, use_gpu=False)
         self.network = self.upstream.policy_value_net
         self.optimizer = self.upstream.optimizer
+        self.last_policy_loss = 0.0
+        self.last_value_loss = 0.0
 
     def policy_value_fn(self, board: Board):
         # The vendored function, including its state encoder and legal move
@@ -55,6 +57,8 @@ class ReferencePolicyValueNet:
         value_loss = F.mse_loss(values.view(-1), winners)
         policy_loss = -torch.mean(torch.sum(targets * log_probs, dim=1))
         loss = value_loss + policy_loss
+        self.last_policy_loss = float(policy_loss.detach().item())
+        self.last_value_loss = float(value_loss.detach().item())
         loss.backward()
         self.optimizer.step()
         entropy = -torch.mean(torch.sum(torch.exp(log_probs) * log_probs, dim=1))

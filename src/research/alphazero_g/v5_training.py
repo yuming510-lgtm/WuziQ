@@ -282,6 +282,7 @@ def train_reference_arm(
     n_in_row: int,
     simulations: int,
     target_states: int,
+    target_games: int | None = None,
     milestones: list[int],
     seed: int,
     config: dict[str, Any],
@@ -289,6 +290,7 @@ def train_reference_arm(
     initial_model_state: dict[str, torch.Tensor] | None = None,
     stop_at_cpu_seconds: float | None = None,
     artifact_dir: str | Path | None = None,
+    progress_experiment_id: str | None = None,
 ) -> dict[str, Any]:
     """Train one independent reference model, checkpointing after each game."""
     root = Path(root)
@@ -352,7 +354,9 @@ def train_reference_arm(
             if line:
                 seen_milestones.add(int(json.loads(line)["milestone_states"]))
     loss = entropy = 0.0
-    while state_count < int(target_states):
+    while state_count < int(target_states) and (
+        target_games is None or game_count < int(target_games)
+    ):
         if stop_at_cpu_seconds is not None and time.process_time() >= float(stop_at_cpu_seconds):
             break
         game_id = f"{arm}-game-{game_count:06d}"
@@ -386,6 +390,8 @@ def train_reference_arm(
         if game_id not in seen_games:
             with history_path.open("a", encoding="utf-8") as handle:
                 handle.write(json.dumps({"game_id": game_id, "loss": loss, "entropy": entropy,
+                                         "policy_loss": float(getattr(model, "last_policy_loss", 0.0)),
+                                         "value_loss": float(getattr(model, "last_value_loss", 0.0)),
                                          "lr_multiplier": lr_multiplier, "update_count": update_count},
                                         ensure_ascii=False) + "\n")
                 handle.flush()
@@ -400,7 +406,7 @@ def train_reference_arm(
         )
         _atomic_torch_save(current_path, payload)
         _atomic_json(training_progress_path, {
-            "format_version": 1, "experiment_id": config["experiment_id"],
+            "format_version": 1, "experiment_id": progress_experiment_id or config["experiment_id"],
             "config_sha256": config_hash, "active_arm": arm,
             "games_completed": game_count, "environment_states": state_count,
             "optimizer_updates": update_count, "replay_rows": len(replay),
@@ -463,5 +469,6 @@ def train_reference_arm(
     return {"arm_id": arm, "game_count": game_count, "environment_states": state_count,
             "update_count": update_count, "checkpoint": str(current_path),
             "model": str(model_path), "replay_rows": len(replay),
-            "completed": state_count >= int(target_states),
+            "completed": (state_count >= int(target_states)
+                          or (target_games is not None and game_count >= int(target_games))),
             "cumulative_cpu_seconds": base_cpu_seconds + time.process_time() - session_cpu_started}

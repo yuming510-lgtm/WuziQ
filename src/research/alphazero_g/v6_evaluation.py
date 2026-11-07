@@ -65,6 +65,7 @@ def run_match_set(
     board_size: int = 9,
     n_in_row: int = 5,
     cpu_deadline: float | None = None,
+    artifact_dir: str | Path = "research/g_v6",
 ) -> dict[str, Any]:
     """Run or resume paired color-swapped games, persisting each full game atomically."""
     root = Path(root)
@@ -72,7 +73,10 @@ def run_match_set(
         raise ValueError("V6 opening schedule does not cover the requested paired games")
     if int(simulations) not in {2, 64, 400}:
         raise ValueError("V6 registered evaluation budget is not supported")
-    base = (root / "research/g_v6/results/matches" / _slug(phase)
+    artifact_root = Path(artifact_dir)
+    if not artifact_root.is_absolute():
+        artifact_root = root / artifact_root
+    base = (artifact_root / "results/matches" / _slug(phase)
             / f"{_slug(candidate_name)}_vs_{_slug(opponent_name)}_puct{int(simulations)}")
     complete_rows: list[dict[str, Any]] = []
     completed_pairs = 0

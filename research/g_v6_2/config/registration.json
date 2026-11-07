@@ -1,0 +1,119 @@
+{
+  "base_v6_commit": "0405b288d44e0cc35cfefb08a17f0714a1b3683e",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-2-selfplay-scale",
+  "compute": {
+    "cpu_hard_cap_each_run_hours": 10,
+    "cpu_hard_cap_total_new_hours": 30,
+    "device": "cpu",
+    "drive_folder_id": "1csQOmFn1Bz62hHO22wIrdETp6mB415Wl",
+    "drive_folder_name": "WuziQ G V6.2 Recovery",
+    "snapshot_policy": "new upload, readback, SHA-256, empty restore before deleting previous V6.2 snapshot",
+    "torch_threads": 1
+  },
+  "conditional_expansion": {
+    "2k_primary_budget": 400,
+    "2k_primary_opponent": "frozen G20K",
+    "2k_primary_pairs": 80,
+    "advance_to_2500_and_3000_if": "score rate > 0.55 and paired bootstrap CI95 lower bound > 0.50",
+    "otherwise": "stop training at 2,000 games and report; no metric or opening changes"
+  },
+  "evaluation": {
+    "blind_openings": 40,
+    "blind_pairs_per_candidate_opponent_budget": 40,
+    "blind_seed": 861202,
+    "blind_selection": "development only; maximize paired PUCT-400 score against G20K; exact ties choose the lower cumulative game count",
+    "budgets_root_action_visits": [
+      64,
+      400
+    ],
+    "development_openings": 80,
+    "development_pairs_per_stage": 20,
+    "development_seed": 861201,
+    "final_blind_must_not_affect_selection": true,
+    "opponents": [
+      "G20K",
+      "A-Minimax",
+      "B-AB-50ms"
+    ]
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-2-9x9-selfplay-scale",
+  "forbidden_training_inputs": [
+    "A/B or any historical G0 action labels or games",
+    "teacher models, external games, or F-series data",
+    "handcrafted tactical rewards or inference rules",
+    "held-out tactical puzzles or evaluation openings"
+  ],
+  "format_version": 1,
+  "n_in_row": 5,
+  "opening_schedule_sha256": "c5d6a2789cc9bac99aaa87a899b21476667cdd01f0ba5a42f20775065e641a0a",
+  "opening_validation": {
+    "all_openings_legal_and_nonterminal": true,
+    "blind_openings": 40,
+    "development_openings": 80,
+    "historical_d4_overlap": 0,
+    "unique_d4_positions": 120
+  },
+  "reference_config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+  "reference_implementation": "frozen V5 vendored junxiaosong/AlphaZero_Gomoku reference code used by V6",
+  "registered_at_utc": "2026-11-07T06:31:01Z",
+  "registration_code_commit": "0405b288d44e0cc35cfefb08a17f0714a1b3683e",
+  "registration_sha256": "9fbe0c07327a4d17b78a104c687550660f2c8cb84855b7aa2f1fbba7fcaf5df0",
+  "resource_snapshot": {
+    "cpu_cgroup_quota": "200000 100000",
+    "cuda_available": false,
+    "disk_free_bytes_at_registration": 18522578944,
+    "effective_cpu_cores": 2,
+    "logical_cpus": 3,
+    "memory_limit_bytes": 8589934592,
+    "torch_version": "2.15.0+cpu"
+  },
+  "resume_cumulative_cpu_seconds": 29981.114918568994,
+  "resume_initial_games": 1012,
+  "resume_initial_states": 20001,
+  "resume_initial_updates": 1011,
+  "resume_model_sha256": "b6e14e947fd176794ca050faab3b7f6331ec881ffd01d8584b1e8943b48cbc05",
+  "resume_seed": 590502,
+  "resume_source": "research/g_v6/checkpoints/reference400_empty/training_state.pt",
+  "resume_state_sha256": "b14d36916c545da78149a7ef70e6c2285c6ccabbfd2c9e36e77cbdf825758e0d",
+  "resume_validation_commit": "f24da8acc6cd819ef865ba0cc7394ebcf000ce6d63386b32b36bc506002fe050",
+  "tactics": {
+    "historical_64_path": "research/g_v6_2/config/tactics_historical_v6_64.json",
+    "historical_64_sha256": "f98c66459a48ff81be2129b2fa7dfe58cbc6220c3296b30e39bfa4bec619bec6",
+    "new_128_path": "research/g_v6_2/config/tactics_new_128.json",
+    "new_128_sha256": "b75420fa33e2183f4de7a2ee0479e99a44286bdbf34fac48e9c0a9a7f3b1c21c",
+    "rule": "evaluation only; never added to self-play or replay buffer"
+  },
+  "target_cumulative_games": [
+    1250,
+    1500,
+    1750,
+    2000,
+    2500,
+    3000
+  ],
+  "training_parameters": {
+    "batch_size": 512,
+    "buffer_size": 10000,
+    "c_puct": 5.0,
+    "checkpoint_boundary": "after every complete game and optimizer update",
+    "checkpoint_contents": [
+      "weights",
+      "Adam state",
+      "replay buffer",
+      "Python/NumPy/Torch RNG",
+      "game/state/update counters"
+    ],
+    "epochs": 5,
+    "kl_target": 0.02,
+    "learning_rate": 0.002,
+    "root_noise_alpha": 0.3,
+    "root_noise_fraction": 0.25,
+    "selfplay_opening": "empty board, unchanged from V6",
+    "selfplay_players": "same current model plays both colors",
+    "selfplay_seat_policy": "same current network on both colors",
+    "selfplay_source_policy": "reference MCTS only; no external model acts during training",
+    "simulations_per_selfplay_move": 400,
+    "temperature": 1.0
+  }
+}
