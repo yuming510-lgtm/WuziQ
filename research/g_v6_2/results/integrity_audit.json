@@ -1,21 +1,66 @@
 {
-  "format_version": 1,
-  "experiment_id": "wuziq-alphazero-g-v6-2-9x9-selfplay-scale",
-  "registration_sha256": "13c4692bba8402228ea01e78903612287745f15d6044d8db2ac90a8078182135",
+  "advancement_gate": {},
+  "all_completed_games_legal_and_terminal": true,
   "base_v6_commit": "0405b288d44e0cc35cfefb08a17f0714a1b3683e",
-  "v6_integrity_revalidated": true,
   "baseline_v6_integrity": {
-    "training_state_sha256": "b14d36916c545da78149a7ef70e6c2285c6ccabbfd2c9e36e77cbdf825758e0d",
+    "evaluation_games_verified": 1120,
     "selfplay_games_verified": 965,
-    "evaluation_games_verified": 1120
+    "training_state_sha256": "b14d36916c545da78149a7ef70e6c2285c6ccabbfd2c9e36e77cbdf825758e0d"
   },
+  "cumulative_new_cpu_seconds_accounted": 18011.248573199995,
+  "current_checkpoint": {
+    "adam_restored": true,
+    "cumulative_training_cpu_seconds": 44993.611793863995,
+    "environment_states": 24778,
+    "game_count": 1250,
+    "model_restored": true,
+    "numpy_rng_restored": true,
+    "optimizer_slots": 16,
+    "optimizer_updates": 1249,
+    "path": "research/g_v6_2/checkpoints/reference400_empty/training_state.pt",
+    "python_rng_restored": true,
+    "replay_restored": true,
+    "replay_rows": 10000,
+    "replay_sha256": "2ac59c60a5255aed6df5d027bfa34fbfdd2ac8fbe98de5b35b57f5a566d841e6",
+    "sha256": "dd4f6c0d1225c270e0b9c551b01048c84a8bfb183e0f1da96301de6ae26b6a12",
+    "torch_rng_restored": true,
+    "valid": true
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-2-9x9-selfplay-scale",
+  "final_blind_complete": false,
+  "format_version": 1,
+  "milestones_verified": [
+    {
+      "games": 1250,
+      "validation": {
+        "adam_restored": true,
+        "cumulative_training_cpu_seconds": 44993.611793863995,
+        "environment_states": 24778,
+        "game_count": 1250,
+        "model_restored": true,
+        "numpy_rng_restored": true,
+        "optimizer_slots": 16,
+        "optimizer_updates": 1249,
+        "path": "research/g_v6_2/checkpoints/reference400_empty/training_state_games_1250.pt",
+        "python_rng_restored": true,
+        "replay_restored": true,
+        "replay_rows": 10000,
+        "replay_sha256": "2ac59c60a5255aed6df5d027bfa34fbfdd2ac8fbe98de5b35b57f5a566d841e6",
+        "sha256": "dd4f6c0d1225c270e0b9c551b01048c84a8bfb183e0f1da96301de6ae26b6a12",
+        "torch_rng_restored": true,
+        "valid": true
+      }
+    }
+  ],
   "opening_validation": {
-    "development_openings": 80,
+    "all_openings_legal_and_nonterminal": true,
     "blind_openings": 40,
-    "unique_d4_positions": 120,
+    "development_openings": 80,
     "historical_d4_overlap": 0,
-    "all_openings_legal_and_nonterminal": true
+    "unique_d4_positions": 120
   },
+  "paired_openings_complete": 120,
+  "paired_openings_incomplete": 0,
   "puzzle_sets": {
     "historical_v6_64": {
       "count": 64,
@@ -26,35 +71,12 @@
       "sha256": "b75420fa33e2183f4de7a2ee0479e99a44286bdbf34fac48e9c0a9a7f3b1c21c"
     }
   },
-  "current_checkpoint": {
-    "path": "research/g_v6_2/checkpoints/reference400_empty/training_state.pt",
-    "sha256": "877dfc81ba88c1873d00b44b7e92ab8d92105865c68c9261774c2617c75f0c1a",
-    "game_count": 1070,
-    "environment_states": 21241,
-    "optimizer_updates": 1069,
-    "optimizer_slots": 16,
-    "replay_rows": 10000,
-    "replay_sha256": "1934953ccdce44806f41f060a5f5e09cb20d2b43f9be5896a277e02fd672a66a",
-    "cumulative_training_cpu_seconds": 33654.05173522899,
-    "model_restored": true,
-    "adam_restored": true,
-    "replay_restored": true,
-    "python_rng_restored": true,
-    "numpy_rng_restored": true,
-    "torch_rng_restored": true,
-    "valid": true
-  },
-  "v6_2_added_games": 58,
-  "v6_2_added_states": 1240,
-  "v6_2_selfplay_games_verified": 58,
-  "v6_2_unique_selfplay_ids": 58,
-  "v6_2_evaluation_games_verified": 0,
-  "v6_2_unique_evaluation_ids": 0,
-  "paired_openings_complete": 0,
-  "paired_openings_incomplete": 0,
-  "milestones_verified": [],
-  "advancement_gate": {},
-  "final_blind_complete": false,
-  "cumulative_new_cpu_seconds_accounted": 3672.936816659996,
-  "all_completed_games_legal_and_terminal": true
+  "registration_sha256": "13c4692bba8402228ea01e78903612287745f15d6044d8db2ac90a8078182135",
+  "v6_2_added_games": 238,
+  "v6_2_added_states": 4777,
+  "v6_2_evaluation_games_verified": 240,
+  "v6_2_selfplay_games_verified": 238,
+  "v6_2_unique_evaluation_ids": 240,
+  "v6_2_unique_selfplay_ids": 238,
+  "v6_integrity_revalidated": true
 }
