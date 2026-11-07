@@ -355,6 +355,27 @@ def train_to_games(
         "checkpoint_path": str(state_path.relative_to(root)),
     }
     _atomic_json(root / ARTIFACT / "results/training_progress.json", progress)
+    experiment_progress = {
+        "experiment_id": progress["experiment_id"],
+        "phase": "self_play_training" if not progress["completed"] else "training_milestone_complete",
+        "baseline_games": INITIAL_GAMES,
+        "baseline_states": INITIAL_STATES,
+        "baseline_updates": INITIAL_UPDATES,
+        "games_completed": int(state_after["game_count"]),
+        "training_states_cumulative": int(state_after["environment_states"]),
+        "optimizer_updates_cumulative": int(state_after["update_count"]),
+        "last_game_id": f"{ARM}-game-{int(state_after['game_count']) - 1:06d}",
+        "next_game_id": f"{ARM}-game-{int(state_after['game_count']):06d}",
+        "next_milestone_games": int(target_games),
+        "training_state_sha256": _sha(state_path),
+        "training_cpu_seconds_since_v6": progress["training_cpu_seconds_since_v6"],
+        "cpu_used_before_session_seconds": used_cpu,
+        "cpu_allowed_for_session_seconds": allowed_cpu,
+        "session_cpu_seconds": session_cpu,
+        "completed": bool(settings["completed"]),
+        "resume_requires_full_state": True,
+    }
+    _atomic_json(root / ARTIFACT / "results/progress.json", experiment_progress)
     if int(state_after["game_count"]) == int(target_games):
         previous_games = _previous_milestone_game(root, int(target_games))
         progress["milestone"] = save_milestone(root, int(target_games), previous_games)
