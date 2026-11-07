@@ -11,6 +11,38 @@
     "process_cpu_seconds": 50.32964651400048
   },
   "created_at_utc": "2026-11-07T06:57:17Z",
+  "empirical_reforecast_after_games_1070": {
+    "cpu_cap_remaining_hours": 28.97973977315,
+    "estimates_cpu_hours": {
+      "conservative": {
+        "to_2000": 27.803083023425835,
+        "to_3000_if_gate_passes": 53.630054016356844
+      },
+      "normal": {
+        "to_2000": 22.14644589601809,
+        "to_3000_if_gate_passes": 43.2013432286698
+      },
+      "optimistic": {
+        "to_2000": 18.926011683399405,
+        "to_3000_if_gate_passes": 37.18337191644537
+      }
+    },
+    "evaluation_cpu_seconds_per_game_basis": 6.191997984866406,
+    "evaluation_games_projected": {
+      "to_2000": 1560,
+      "to_3000": 2040
+    },
+    "latest_session_cpu_seconds_per_game": 63.56290762877193,
+    "measured_mean_training_cpu_seconds_per_game": 63.32649683896545,
+    "method": "Empirical continuation rate from the first complete V6.2 training batch; preserve original preregistered estimate above. Evaluation cost uses measured V6.1 CPU/game. Optimistic uses observed mean, normal 1.15x mean, conservative 1.40x mean.",
+    "new_games_since_v6": 58,
+    "remaining_training_games": {
+      "to_2000": 930,
+      "to_3000": 1930
+    },
+    "training_cpu_seconds_since_v6": 3672.936816659996,
+    "updated_after_games_completed": 1070
+  },
   "environment": {
     "cpu_quota_cores": 2,
     "device": "CPU; CUDA unavailable",
