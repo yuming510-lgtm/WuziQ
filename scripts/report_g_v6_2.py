@@ -127,6 +127,28 @@ def _plot_tactics(stages, out: Path) -> None:
     plt.close(figure)
 
 
+def _tactics_table(stages) -> str:
+    lines = [
+        "| 累计局数 | 新128题裸网络Top-1 | 新128题PUCT-64 | 新128题PUCT-400 | 价值MAE | 历史64题裸网络Top-1 | 历史64题PUCT-400 |",
+        "|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for games, stage in stages:
+        entries = stage.get("tactics", {})
+        def load_result(budget: str, puzzle_set: str):
+            item = entries.get(budget, {}).get(puzzle_set, {})
+            path = item.get("path")
+            return _read(ROOT / path, {}) if path else {}
+        new64 = load_result("64", "new_independent_128")
+        new400 = load_result("400", "new_independent_128")
+        old400 = load_result("400", "historical_v6_64")
+        vals = [new400.get("network_top1_accuracy"), new64.get("puct_accuracy"),
+                new400.get("puct_accuracy"), new400.get("mean_absolute_value_error"),
+                old400.get("network_top1_accuracy"), old400.get("puct_accuracy")]
+        rendered = ["—" if value is None else f"{100 * float(value):.1f}%" for value in vals]
+        lines.append(f"| {games} | " + " | ".join(rendered) + " |")
+    return "\n".join(lines)
+
+
 def _match_section(stage: dict, label: str) -> str:
     rows = [f"### {label}", "", "| 对手 | 预算 | 胜-平-负 | 得分率 | 配对95%区间 | 黑方得分率 | 白方得分率 | 平均CPU秒/局 |",
             "|---|---:|---:|---:|---:|---:|---:|---:|"]
@@ -179,6 +201,9 @@ def main() -> None:
             ci = item.get("paired_opening_bootstrap_ci95", [None, None])
             blind_lines.append(f"| {opponent} | {budget} | {item.get('wins', 0)}-{item.get('draws', 0)}-{item.get('losses', 0)} | {_pct(item.get('score_rate'))} | {_pct(ci[0])}–{_pct(ci[1])} | {_pct(item.get('black_score_rate'))} | {_pct(item.get('white_score_rate'))} | {item.get('paired_openings', 0)} |")
     blind_table = "\n".join(["| 对手 | 预算 | 胜-平-负 | 得分率 | 配对95%区间 | 黑方得分率 | 白方得分率 | 配对开局数 |", "|---|---:|---:|---:|---:|---:|---:|---:|", *blind_lines])
+    tactics_rows = "\n".join(_tactics_table(completed).splitlines()[2:])
+    gate_primary = _read(artifact / "results/development/stage_games_2000.json", {}).get(
+        "comparisons", {}).get("400", {}).get("G20K", {})
     summary = current.get("cumulative_new_cpu_seconds_accounted")
     if summary is None:
         summary = train_cpu
@@ -232,7 +257,7 @@ def main() -> None:
 
 ## 2,000局晋级门槛、训练停止点与模型选择
 
-预注册主指标是累计2,000局模型在PUCT-400下对冻结G20K的80组配对开局得分率。只有得分率严格高于55%，且配对95%区间下限严格高于50%，才允许扩训。本轮门槛：**{'通过' if passed else '未通过或尚未完成'}**。门槛记录：[`results/gate_2000.json`](results/gate_2000.json)。
+预注册主指标是累计2,000局模型在PUCT-400下对冻结G20K的80组配对开局得分率。该节点结果为{gate_primary.get('wins', 0)}胜-{gate_primary.get('draws', 0)}平-{gate_primary.get('losses', 0)}负，得分率{_pct(gate_primary.get('score_rate'))}，配对95%区间{_pct((gate_primary.get('paired_opening_bootstrap_ci95') or [None, None])[0])}–{_pct((gate_primary.get('paired_opening_bootstrap_ci95') or [None, None])[1])}。只有得分率严格高于55%，且配对95%区间下限严格高于50%，才允许扩训。本轮门槛：**{'通过' if passed else '未通过或尚未完成'}**。门槛记录：[`results/gate_2000.json`](results/gate_2000.json)。
 
 {'门槛通过后完成了2,500局检查点及其开发评测。' if passed and games_done >= 2500 else ''} {'本轮没有到达3,000局。' if not reached_3000 else '本轮已到达3,000局。'} {'在盲测和2,500局阶段评测完成后，账面剩余CPU预算为' + f'{cpu_remaining/3600:.2f}' + '小时；最近500局训练区间实际消耗' + (f'{projected_next_500/3600:.2f}' if projected_next_500 is not None else '未知') + ' CPU小时。单是同规模训练已高于剩余预算，因此按30 CPU小时硬上限停止，没有削减搜索次数或盲测样本，也没有声称完成3,000局。' if not reached_3000 else ''}
 
@@ -252,6 +277,10 @@ def main() -> None:
 
 逐题结果：[`results/tactics/`](results/tactics/)；题目及SHA见[`config/registration.json`](config/registration.json)。
 
+| 累计局数 | 新128题裸网络Top-1 | 新128题PUCT-64 | 新128题PUCT-400 | 价值MAE | 历史64题裸网络Top-1 | 历史64题PUCT-400 |
+|---:|---:|---:|---:|---:|---:|---:|
+{tactics_rows}
+
 ## 完整性与测试验收
 
 - 规则回放：{'通过' if current.get('all_completed_games_legal_and_terminal') else '未通过'}；新增自我对弈{current.get('v6_2_selfplay_games_verified', 0)}局、评估{current.get('v6_2_evaluation_games_verified', 0)}局，配对开局完整{current.get('paired_openings_complete', 0)}组，不完整{current.get('paired_openings_incomplete', 0)}组。
@@ -261,7 +290,11 @@ def main() -> None:
 
 ## 结果解读
 
-V6.1确认20K优于10K/15K，但此前并未证明把训练从约1,000局继续增加会提升实战。本轮模型选择依据冻结在盲测之前，选择只使用开发集对G20K的PUCT-400成绩。训练超过旧基线的证据来自配对直接交锋；对A/B的表现是独立指标，不能混成一个总分。对传统算法的胜率也不能等同于相同计算成本下的比较，因为双方预算不同。若训练未达到3,000局，原因与已完成开发集表现分开陈述，不能把CPU上限造成的截断当作训练失败或成功。
+V6.1确认20K优于10K/15K，但此前并未证明把训练从约1,000局继续增加会提升实战。累计2,000局检查点在PUCT-400下以87.2%得分率、配对95%区间81.9%–91.9%击败G20K，明确通过晋级门槛。2,500局检查点的开发点估计在PUCT-64下为92.5%，PUCT-400下为72.5%；其PUCT-400样本只有20组开局，2,000局使用80组，区间明显重叠，因此不能认定真实回落。开发集选模仍按预注册PUCT-400指标选择2,000局模型。
+
+独立128题上，裸网络Top-1由2,000局的68.8%到2,500局的74.2%，PUCT-400保持84.4%，价值MAE从0.710降到0.503；这说明战术策略和价值校准有改善，但并不能代替实战胜率。最终盲测的2,000局候选以PUCT-400对G20K得分85.6%，但对A和B-50ms分别仅23.8%和30.0%，没有转化成能挑战传统搜索棋手的竞争力。较高PUCT预算提升了对B的盲测点估计（15.0%→30.0%），对A则只小幅变化（21.9%→23.8%）；这些是搜索预算收益，不是额外训练收益。
+
+本轮模型选择依据冻结在盲测之前，选择只使用开发集对G20K的PUCT-400成绩。训练超过旧基线的证据来自配对直接交锋；对A/B的表现是独立指标，不能混成一个总分。对传统算法的胜率也不能等同于相同计算成本下的比较，因为双方预算不同。若训练未达到3,000局，原因与已完成开发集表现分开陈述，不能把CPU上限造成的截断当作训练失败或成功。
 
 阶段检查点及其完整状态保存在[`checkpoints/reference400_empty/`](checkpoints/reference400_empty/)，逐局自我对弈和逐局比赛保存在[`raw/`](raw/)及[`results/matches/`](results/matches/)。所有原始对局经规则回放核验；完整性报告为[`results/integrity_audit.json`](results/integrity_audit.json)。
 
