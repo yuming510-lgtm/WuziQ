@@ -1,0 +1,30 @@
+{
+  "experiment_audit": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. python scripts/audit_g_v6_2.py",
+    "all_completed_games_legal_and_terminal": true,
+    "selfplay_games": 1488,
+    "evaluation_games": 1800,
+    "complete_paired_openings": 900,
+    "incomplete_paired_openings": 0,
+    "checkpoint_games": 2500,
+    "checkpoint_states": 45284,
+    "checkpoint_optimizer_updates": 2499,
+    "checkpoint_valid": true,
+    "training_cpu_intervals_verified": true
+  },
+  "focused_tests": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. pytest -q tests/test_alphazero_g_v6_2_training.py tests/test_v6_2_analysis.py tests/test_v6_2_preflight.py tests/test_v6_2_runner.py tests/test_v6_2_schedule.py",
+    "passed": 20,
+    "failed": 0
+  },
+  "expanded_related_tests": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. pytest -q tests/test_alphazero_g_v6_2_training.py tests/test_v6_2_*.py",
+    "passed": 20,
+    "failed": 2,
+    "failed_tests": [
+      "tests/test_v6_2_snapshot.py::test_snapshot_restores_to_empty_directory_with_matching_hashes",
+      "tests/test_v6_2_snapshot.py::test_snapshot_restore_rejects_tampered_content_and_nonempty_target"
+    ],
+    "reason": "These separate champion V6.2 snapshot tests require their registered branch research/champion-200s-v6-2; this G training task runs on research/alphazero-g-v6-2-selfplay-scale. The failures occurred before snapshot creation in the branch identity guard and do not exercise the G V6.2 recovery archive."
+  }
+}

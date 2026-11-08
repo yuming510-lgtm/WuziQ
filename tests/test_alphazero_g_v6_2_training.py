@@ -6,7 +6,9 @@ import pytest
 
 from src.research.alphazero_g import v5_training
 from src.research.alphazero_g.v6_2_registration import create_opening_schedule
-from src.research.alphazero_g.v6_2_training import registration_value, train_to_games
+from src.research.alphazero_g.v6_2_training import (
+    _training_cpu_interval, registration_value, train_to_games,
+)
 
 
 def test_reference_training_can_stop_on_exact_cumulative_game_count(tmp_path, monkeypatch):
@@ -144,3 +146,9 @@ def test_cpu_budget_is_read_from_registered_compute_section(tmp_path):
     config.write_text(json.dumps({"compute": {"cpu_hard_cap_total_new_hours": 30}}), encoding="utf-8")
 
     assert registration_value(tmp_path, "cpu_hard_cap_total_new_hours") == 30
+
+
+def test_milestone_cpu_interval_uses_consistent_v6_2_baseline():
+    assert _training_cpu_interval(82_238.75, 59_822.72) == pytest.approx(22_416.03)
+    with pytest.raises(ValueError, match="cannot move backwards"):
+        _training_cpu_interval(10, 11)

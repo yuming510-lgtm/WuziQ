@@ -1,0 +1,37 @@
+{
+  "blind_results_used_for_selection": false,
+  "development_candidates": [
+    {
+      "checkpoint_path": "research/g_v6_2/checkpoints/reference400_empty/node_games_2000.pt",
+      "checkpoint_sha256": "a613b8ceaa2e40dc0d51d5133968a9b50f41a32460d7b2e9aed56797c2194c03",
+      "game_count": 2000,
+      "paired_ci95": [
+        0.81875,
+        0.91875
+      ],
+      "score_rate": 0.871875
+    },
+    {
+      "checkpoint_path": "research/g_v6_2/checkpoints/reference400_empty/node_games_2500.pt",
+      "checkpoint_sha256": "70c1ca4b7e1db3a7f19be49aec5387b8b8596a1b6b83a7b0527ba38d869b9463",
+      "game_count": 2500,
+      "paired_ci95": [
+        0.575,
+        0.875
+      ],
+      "score_rate": 0.725
+    }
+  ],
+  "frozen_before_blind": true,
+  "selected": {
+    "checkpoint_path": "research/g_v6_2/checkpoints/reference400_empty/node_games_2000.pt",
+    "checkpoint_sha256": "a613b8ceaa2e40dc0d51d5133968a9b50f41a32460d7b2e9aed56797c2194c03",
+    "game_count": 2000,
+    "paired_ci95": [
+      0.81875,
+      0.91875
+    ],
+    "score_rate": 0.871875
+  },
+  "selection_rule": "development only; maximize paired PUCT-400 score against G20K; exact ties choose the lower cumulative game count"
+}

@@ -101,8 +101,14 @@ def audit_v6_2(root: str | Path) -> dict[str, Any]:
     milestone_rows = []
     milestones_path = artifact / "results/milestones.json"
     milestones = json.loads(milestones_path.read_text(encoding="utf-8")) if milestones_path.is_file() else {"milestones": []}
+    previous_milestone_cpu = 0.0
     for entry in milestones.get("milestones", []):
         games = int(entry["games_completed"])
+        cumulative_cpu = float(entry["cumulative_training_cpu_seconds"])
+        expected_interval = cumulative_cpu - previous_milestone_cpu
+        if abs(float(entry["interval_training_cpu_seconds"]) - expected_interval) > 1e-5:
+            raise ValueError(f"V6.2 milestone CPU interval is inconsistent: {games}")
+        previous_milestone_cpu = cumulative_cpu
         full_path = artifact / f"checkpoints/{ARM}/training_state_games_{games}.pt"
         node_path = artifact / f"checkpoints/{ARM}/node_games_{games}.pt"
         if _sha(full_path) != entry["full_checkpoint_sha256"] or _sha(node_path) != entry["model_checkpoint_sha256"]:
@@ -184,6 +190,7 @@ def audit_v6_2(root: str | Path) -> dict[str, Any]:
         "paired_openings_complete": complete_pairs,
         "paired_openings_incomplete": incomplete_pairs,
         "milestones_verified": milestone_rows,
+        "milestone_training_cpu_intervals_verified": True,
         "advancement_gate": gate,
         "final_blind_complete": bool(blind.get("complete")),
         "cumulative_new_cpu_seconds_accounted": total_cpu_used_seconds(root),

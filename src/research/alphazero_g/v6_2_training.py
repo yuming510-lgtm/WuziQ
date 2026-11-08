@@ -242,7 +242,7 @@ def save_milestone(root: str | Path, target_games: int, previous_games: int) -> 
     prior_state_path = root / ARTIFACT / "results/milestones.json"
     prior = json.loads(prior_state_path.read_text(encoding="utf-8")) if prior_state_path.is_file() else {"milestones": []}
     prior_cumulative = (float(prior["milestones"][-1]["cumulative_training_cpu_seconds"])
-                        if prior["milestones"] else float(registration_value(root, "resume_cumulative_cpu_seconds")))
+                        if prior["milestones"] else 0.0)
     cumulative_new_cpu = float(state["cumulative_cpu_seconds"]) - float(
         registration_value(root, "resume_cumulative_cpu_seconds")
     )
@@ -262,7 +262,7 @@ def save_milestone(root: str | Path, target_games: int, previous_games: int) -> 
         "last_game_policy_entropy": float(selected_history[-1]["entropy"]),
         "learning_rate_multiplier": float(state["lr_multiplier"]),
         "cumulative_training_cpu_seconds": cumulative_new_cpu,
-        "interval_training_cpu_seconds": float(state["cumulative_cpu_seconds"]) - prior_cumulative,
+        "interval_training_cpu_seconds": _training_cpu_interval(cumulative_new_cpu, prior_cumulative),
         "full_checkpoint_path": str(full_path.relative_to(root)),
         "full_checkpoint_sha256": _sha(full_path),
         "model_checkpoint_path": str(model_path.relative_to(root)),
@@ -391,6 +391,16 @@ def _previous_milestone_game(root: Path, target_games: int) -> int:
     completed = [int(row["games_completed"]) for row in prior["milestones"]
                  if int(row["games_completed"]) < int(target_games)]
     return max(completed) if completed else INITIAL_GAMES
+
+
+def _training_cpu_interval(cumulative_new_cpu_seconds: float,
+                           previous_cumulative_new_cpu_seconds: float) -> float:
+    """Return a milestone interval from values measured from the same V6 baseline."""
+    current = float(cumulative_new_cpu_seconds)
+    previous = float(previous_cumulative_new_cpu_seconds)
+    if current < previous:
+        raise ValueError("cumulative training CPU time cannot move backwards")
+    return current - previous
 
 
 def total_cpu_used_seconds(root: str | Path = ROOT) -> float:
