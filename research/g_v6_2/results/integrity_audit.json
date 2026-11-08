@@ -1,5 +1,19 @@
 {
-  "advancement_gate": {},
+  "advancement_gate": {
+    "decision": "advance to 2,500 and 3,000 games",
+    "experiment_id": "wuziq-alphazero-g-v6-2-9x9-selfplay-scale",
+    "paired_ci95": [
+      0.81875,
+      0.91875
+    ],
+    "paired_openings": 80,
+    "passed": true,
+    "primary": "2,000-game candidate vs frozen G20K, PUCT-400, 80 paired openings",
+    "primary_complete": true,
+    "score_rate": 0.871875,
+    "threshold_ci95_lower_strictly_above": 0.5,
+    "threshold_score_rate_strictly_above": 0.55
+  },
   "all_completed_games_legal_and_terminal": true,
   "base_v6_commit": "0405b288d44e0cc35cfefb08a17f0714a1b3683e",
   "baseline_v6_integrity": {
@@ -7,22 +21,22 @@
     "selfplay_games_verified": 965,
     "training_state_sha256": "b14d36916c545da78149a7ef70e6c2285c6ccabbfd2c9e36e77cbdf825758e0d"
   },
-  "cumulative_new_cpu_seconds_accounted": 55201.018221292,
+  "cumulative_new_cpu_seconds_accounted": 73102.89001847996,
   "current_checkpoint": {
     "adam_restored": true,
-    "cumulative_training_cpu_seconds": 76179.42850318998,
-    "environment_states": 32890,
-    "game_count": 1750,
+    "cumulative_training_cpu_seconds": 89803.83250589097,
+    "environment_states": 36623,
+    "game_count": 2000,
     "model_restored": true,
     "numpy_rng_restored": true,
     "optimizer_slots": 16,
-    "optimizer_updates": 1749,
+    "optimizer_updates": 1999,
     "path": "research/g_v6_2/checkpoints/reference400_empty/training_state.pt",
     "python_rng_restored": true,
     "replay_restored": true,
     "replay_rows": 10000,
-    "replay_sha256": "acc4a19e3b008f565709fe02973a830095e21734ad43f90b3d8ef9a4204be21b",
-    "sha256": "3d3b7c78950bfc1c4c6b7381693bd38ed59b16fb7f75dc4a377688157a24e2f9",
+    "replay_sha256": "d12e152639422cc042b41481bb7c075eb88520d65ef8460ce3dc4f1e923bfbbf",
+    "sha256": "7423aa7f6b8f7ef6c3c963d6d23dae582877d6172e7c6e50bd86da27a9d0295d",
     "torch_rng_restored": true,
     "valid": true
   },
@@ -92,6 +106,27 @@
         "torch_rng_restored": true,
         "valid": true
       }
+    },
+    {
+      "games": 2000,
+      "validation": {
+        "adam_restored": true,
+        "cumulative_training_cpu_seconds": 89803.83250589097,
+        "environment_states": 36623,
+        "game_count": 2000,
+        "model_restored": true,
+        "numpy_rng_restored": true,
+        "optimizer_slots": 16,
+        "optimizer_updates": 1999,
+        "path": "research/g_v6_2/checkpoints/reference400_empty/training_state_games_2000.pt",
+        "python_rng_restored": true,
+        "replay_restored": true,
+        "replay_rows": 10000,
+        "replay_sha256": "d12e152639422cc042b41481bb7c075eb88520d65ef8460ce3dc4f1e923bfbbf",
+        "sha256": "7423aa7f6b8f7ef6c3c963d6d23dae582877d6172e7c6e50bd86da27a9d0295d",
+        "torch_rng_restored": true,
+        "valid": true
+      }
     }
   ],
   "opening_validation": {
@@ -101,7 +136,7 @@
     "historical_d4_overlap": 0,
     "unique_d4_positions": 120
   },
-  "paired_openings_complete": 360,
+  "paired_openings_complete": 540,
   "paired_openings_incomplete": 0,
   "puzzle_sets": {
     "historical_v6_64": {
@@ -114,11 +149,11 @@
     }
   },
   "registration_sha256": "13c4692bba8402228ea01e78903612287745f15d6044d8db2ac90a8078182135",
-  "v6_2_added_games": 738,
-  "v6_2_added_states": 12889,
-  "v6_2_evaluation_games_verified": 720,
-  "v6_2_selfplay_games_verified": 738,
-  "v6_2_unique_evaluation_ids": 720,
-  "v6_2_unique_selfplay_ids": 738,
+  "v6_2_added_games": 988,
+  "v6_2_added_states": 16622,
+  "v6_2_evaluation_games_verified": 1080,
+  "v6_2_selfplay_games_verified": 988,
+  "v6_2_unique_evaluation_ids": 1080,
+  "v6_2_unique_selfplay_ids": 988,
   "v6_integrity_revalidated": true
 }

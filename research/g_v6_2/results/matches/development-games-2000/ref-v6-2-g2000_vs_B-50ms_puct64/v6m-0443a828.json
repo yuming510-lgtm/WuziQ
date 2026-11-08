@@ -1,0 +1,182 @@
+{
+  "board_size": 9,
+  "candidate": "ref-v6-2-g2000",
+  "candidate_color": "W",
+  "candidate_cpu_seconds": 0.36247052900003496,
+  "configured_search_budget_root_visits": 64,
+  "format_version": 1,
+  "game_id": "v6m-0443a828",
+  "move_count": 11,
+  "moves": [
+    {
+      "col": 4,
+      "opening": true,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 5,
+      "opening": true,
+      "player": "W",
+      "row": 5
+    },
+    {
+      "col": 0,
+      "opening": true,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 0,
+      "opening": true,
+      "player": "W",
+      "row": 6
+    },
+    {
+      "col": 8,
+      "opening": true,
+      "player": "B",
+      "row": 3
+    },
+    {
+      "col": 3,
+      "opening": true,
+      "player": "W",
+      "row": 3
+    },
+    {
+      "actor": "B-50ms",
+      "col": 3,
+      "cpu_seconds": 0.04505866300002026,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04506148899963591,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 8,
+      "search_depth": 1,
+      "search_nodes": 644,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "ref-v6-2-g2000",
+      "col": 5,
+      "configured_playouts": 65,
+      "cpu_seconds": 0.18697132600001964,
+      "elapsed_seconds": 0.18697169399820268,
+      "first_leaf_value": 0.9906013011932373,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 64,
+      "root_children": 74,
+      "root_network_value": 0.9906013011932373,
+      "root_visits": 64,
+      "row": 4,
+      "search_cpu_seconds": 0.18677289499999006,
+      "search_depth": 7,
+      "search_nodes": 4632,
+      "simulations": 64,
+      "tree_depth": 7,
+      "tree_nodes": 4632
+    },
+    {
+      "actor": "B-50ms",
+      "col": 2,
+      "cpu_seconds": 0.04505051999998955,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0450760350067867,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 8,
+      "search_depth": 1,
+      "search_nodes": 627,
+      "simulations": 0,
+      "timed_out": true
+    },
+    {
+      "actor": "ref-v6-2-g2000",
+      "col": 4,
+      "configured_playouts": 65,
+      "cpu_seconds": 0.1754992030000153,
+      "elapsed_seconds": 0.17549389699706808,
+      "first_leaf_value": 0.9999704360961914,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 64,
+      "root_children": 72,
+      "root_network_value": 0.9999704360961914,
+      "root_visits": 64,
+      "row": 5,
+      "search_cpu_seconds": 0.17533133099999532,
+      "search_depth": 7,
+      "search_nodes": 4233,
+      "simulations": 64,
+      "tree_depth": 7,
+      "tree_nodes": 4233
+    },
+    {
+      "actor": "B-50ms",
+      "col": 1,
+      "cpu_seconds": 0.04506871999998907,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0450728040013928,
+      "opening": false,
+      "player": "B",
+      "root_action_visits": 0,
+      "row": 8,
+      "search_depth": 1,
+      "search_nodes": 555,
+      "simulations": 0,
+      "timed_out": true
+    }
+  ],
+  "n_in_row": 5,
+  "opening": [
+    {
+      "col": 4,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 5,
+      "player": "W",
+      "row": 5
+    },
+    {
+      "col": 0,
+      "player": "B",
+      "row": 8
+    },
+    {
+      "col": 0,
+      "player": "W",
+      "row": 6
+    },
+    {
+      "col": 8,
+      "player": "B",
+      "row": 3
+    },
+    {
+      "col": 3,
+      "player": "W",
+      "row": 3
+    }
+  ],
+  "opening_group_id": "v6-2-development-861201-010",
+  "opening_seed": 861211,
+  "opponent": "B-50ms",
+  "opponent_cpu_seconds": 0.13517790299999888,
+  "phase": "development-games-2000",
+  "points": 0.0,
+  "reference_configured_playouts": 65,
+  "seed": 1659892082,
+  "simulations_per_reference_turn": 64,
+  "source": "evaluation",
+  "termination": "five_in_row",
+  "total_cpu_seconds": 0.4979537209999876,
+  "total_wall_seconds": 0.4979377400013618,
+  "winner_color": "B"
+}
