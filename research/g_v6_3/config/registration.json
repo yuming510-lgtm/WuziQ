@@ -1,0 +1,69 @@
+{
+  "base_commit": "3630283639363a24c10f84e8473c3b7798261d32",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-3-5k",
+  "challenge": {
+    "games_per_model_opponent": 80,
+    "models": [
+      "G2500-frozen",
+      "G5000-final"
+    ],
+    "opening_schedule_sha256": "c469e044300b869467f502c4dbbcd92f40e22c48b719276ad2808bd307378efe",
+    "opponent_configs": {
+      "A": {
+        "engine": "src.ai.choose_move model A",
+        "note": "rules AI natural decision time; no artificial wait",
+        "time_limit_seconds": 1000000000.0
+      },
+      "B": {
+        "engine": "src.ai.choose_move model B (pure Minimax)",
+        "time_limit_seconds": 0.05
+      },
+      "C": {
+        "engine": "src.ai.choose_move model C (Alpha-Beta)",
+        "time_limit_seconds": 0.05
+      }
+    },
+    "opponents": [
+      "A-rule",
+      "B-pure-minimax-50ms",
+      "C-alpha-beta-50ms"
+    ],
+    "paired_openings": 40,
+    "puct_simulations": 400,
+    "total_games": 480
+  },
+  "cpu_budget_new_experiment_hours": 50,
+  "experiment_id": "wuziq-alphazero-g-v6-3-5k-continuation",
+  "format_version": 1,
+  "n_in_row": 5,
+  "reference_config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+  "registered_at_utc": "2026-11-11T11:36:58Z",
+  "seed": 590502,
+  "selfplay_opening": "empty board; identical to V6.2 source",
+  "snapshot_policy": {
+    "interval_cpu_seconds": 10800,
+    "interval_games": 250,
+    "keep_latest_verified": 2,
+    "trigger": "first of 250 completed games or 3 cumulative new training CPU hours"
+  },
+  "source_branch": "research/alphazero-g-v6-2-selfplay-scale",
+  "source_checkpoint": "research/g_v6_2/checkpoints/reference400_empty/training_state_games_2500.pt",
+  "source_checkpoint_sha256": "72f3f989472c4656b292d6d28bcc05ea0f01dae14541cdc132a2a28301ded5ed",
+  "source_cumulative_training_cpu_seconds": 112219.86845673996,
+  "source_games": 2500,
+  "source_model_sha256": "70c1ca4b7e1db3a7f19be49aec5387b8b8596a1b6b83a7b0527ba38d869b9463",
+  "source_states": 45284,
+  "source_updates": 2499,
+  "target_games_cumulative": 5000,
+  "training_config_is_unmodified_v5_reference": true,
+  "training_cpu_budget_hours": 45,
+  "training_milestones_games": [
+    3000,
+    3500,
+    4000,
+    4500,
+    5000
+  ],
+  "training_simulations_per_move": 400
+}
