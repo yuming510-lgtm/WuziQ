@@ -16,7 +16,7 @@ from src.research.alphazero_g.v6_3_training import (
 def test_frozen_g2500_state_restores_all_training_components():
     prepared = prepare_experiment(ROOT)
     validation = validate_training_state(
-        ROOT / ARTIFACT / "checkpoints/reference400_empty/training_state.pt",
+        ROOT / ARTIFACT / "checkpoints/reference400_empty/training_state_games_2500.pt",
         expected_games=BASE_GAMES,
     )
     assert validation["environment_states"] == BASE_STATES
@@ -76,3 +76,30 @@ def test_duplicate_challenge_game_requires_same_registered_pair():
     with pytest.raises(ValueError, match="collision"):
         evaluation._validate_existing(game, game_id="v63-example", candidate="G2500",
                                       opponent="B", opening=opening, color="B")
+
+
+def test_snapshot_registry_requires_download_hash_and_restore(tmp_path, monkeypatch):
+    import json
+    from scripts import register_g_v6_3_snapshot
+
+    artifact = tmp_path / "research/g_v6_3"
+    (artifact / "results").mkdir(parents=True)
+    (artifact / "results/snapshot_status.json").write_text(json.dumps({
+        "drive_folder_id": "drive-folder", "verified_snapshots": []
+    }), encoding="utf-8")
+    monkeypatch.setattr(register_g_v6_3_snapshot, "ARTIFACT", artifact)
+    with pytest.raises(ValueError, match="only be registered"):
+        register_g_v6_3_snapshot.register(
+            sequence=1, games=2500, training_cpu_seconds=0,
+            file_name="s.zip", drive_file_id="file", drive_url="url",
+            sha256="a", size_bytes=1, code_commit="commit", package_cpu_seconds=0,
+            download_sha256="a", empty_restore_verified=False,
+        )
+    row = register_g_v6_3_snapshot.register(
+        sequence=1, games=2500, training_cpu_seconds=0,
+        file_name="s.zip", drive_file_id="file", drive_url="url",
+        sha256="a", size_bytes=1, code_commit="commit", package_cpu_seconds=0,
+        download_sha256="a", empty_restore_verified=True,
+    )
+    assert row["empty_directory_restore_verified"] is True
+    assert json.loads((artifact / "results/snapshot_status.json").read_text())["latest_verified_sequence"] == 1

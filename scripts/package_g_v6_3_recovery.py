@@ -49,6 +49,7 @@ def _source_files(root: Path) -> list[Path]:
         root / "scripts/package_g_v6_3_recovery.py",
         root / "scripts/audit_g_v6_3.py",
         root / "scripts/report_g_v6_3.py",
+        root / "scripts/register_g_v6_3_snapshot.py",
         root / "requirements-research.txt",
     ]
     third_party = root / "third_party/AlphaZero_Gomoku"
