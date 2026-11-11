@@ -106,6 +106,14 @@ def test_incomplete_color_pair_is_saved_but_excluded_from_paired_statistics():
     assert {row["opening_group_id"] for row in rows} == {"open-1"}
 
 
+def test_g2500_and_g5000_use_shared_fixed_rng_seed_per_paired_game():
+    seed_2500 = evaluation._paired_game_seed("A", "opening-7", "B")
+    seed_5000 = evaluation._paired_game_seed("A", "opening-7", "B")
+    assert seed_2500 == seed_5000
+    assert seed_2500 != evaluation._paired_game_seed("A", "opening-7", "W")
+    assert seed_2500 != evaluation._paired_game_seed("B", "opening-7", "B")
+
+
 def test_snapshot_registry_requires_download_hash_and_restore(tmp_path, monkeypatch):
     import json
     from scripts import register_g_v6_3_snapshot

@@ -43,6 +43,14 @@ def _stable_id(*parts: str) -> str:
     return f"v63-{digest}"
 
 
+def _paired_game_seed(opponent: str, opening_group_id: str, color: str) -> int:
+    """Share a fixed RNG seed between G2500/G5000 for the same paired game."""
+    digest = hashlib.sha256(
+        f"v6.3|{opponent}|{opening_group_id}|{color}".encode("utf-8")
+    ).digest()
+    return int.from_bytes(digest[:4], "big")
+
+
 def _make_agent(name: str, model: ReferencePolicyValueNet | None) -> dict[str, Any]:
     if name.startswith("G"):
         if model is None:
@@ -251,8 +259,7 @@ def run_all(root: str | Path = ROOT, *, cpu_soft_limit_seconds: float | None = N
                         _validate_existing(game, game_id=game_id, candidate=model_name,
                                            opponent=opponent, opening=opening, color=color)
                     else:
-                        game_seed = int.from_bytes(hashlib.sha256(
-                            f"{game_id}|{opening['seed']}".encode("utf-8")).digest()[:4], "big")
+                        game_seed = _paired_game_seed(opponent, str(opening["opening_group_id"]), color)
                         game = play_match(game_id=game_id, candidate_name=model_name,
                                           opponent_name=opponent, opening=opening,
                                           candidate_color=color, seed=game_seed,
