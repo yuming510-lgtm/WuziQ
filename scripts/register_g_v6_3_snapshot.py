@@ -34,6 +34,8 @@ def register(*, sequence: int, games: int, training_cpu_seconds: float,
     status["verified_snapshots"] = records[-2:]
     status["latest_verified_sequence"] = int(sequence)
     status["latest_verified_snapshot"] = row
+    status["snapshot_count_total"] = int(sequence)
+    status["total_packaging_cpu_seconds"] = float(status.get("total_packaging_cpu_seconds", 0.0)) + float(package_cpu_seconds)
     path.write_text(json.dumps(status, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     return row
 

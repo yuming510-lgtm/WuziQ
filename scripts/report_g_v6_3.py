@@ -200,7 +200,9 @@ def build_report(root: str | Path = ROOT) -> dict:
     stage_metrics = {str(row["games"]): _training_metrics(root, row["games"]) for row in trajectory[1:]}
     new_training_cpu = float(trajectory[-1]["new_training_cpu_seconds"])
     matches_cpu = float(challenge.get("evaluation_cpu_seconds", 0.0))
-    total_core_hours = (new_training_cpu + matches_cpu) / 3600.0
+    backup_cpu = float(drive.get("total_packaging_cpu_seconds", 0.0))
+    audit_cpu = float(audit.get("audit_cpu_seconds", 0.0))
+    total_core_hours = (new_training_cpu + matches_cpu + backup_cpu + audit_cpu) / 3600.0
     registration = _json(artifact / "config/registration.json", {})
     result_lines = []
     for opponent, label in (("A", "A 原规则 AI"), ("B", "B 纯 Minimax 50ms"), ("C", "C Alpha-Beta 50ms")):
@@ -238,6 +240,7 @@ def build_report(root: str | Path = ROOT) -> dict:
 - 当前累计：**G{games_current:,}**，累计训练状态 **{trajectory[-1]['states']:,}**，新增训练 CPU **{new_training_cpu / 3600:.2f} 小时**。
 - 训练到 G5000：**{'完成' if is_training_complete else '未完成'}**；最终挑战赛：**{'完成' if challenge_complete else '未完成/未开始'}**。
 - 实验新增 CPU（训练与已完成挑战）：**{total_core_hours:.2f} 小时**；注册硬上限 50 CPU 小时。
+- 另计恢复包压缩 CPU {backup_cpu:.1f}秒、最终棋谱审计 CPU {audit_cpu:.1f}秒；云端传输等待不计为本机CPU。
 - 棋力结论只按同一批 40 个新开局、双方换色的直接对局判断。训练 loss 仅作为训练状态，不解释为棋力提升。
 
 ## 训练参数与起点

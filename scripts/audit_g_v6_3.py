@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -171,7 +172,9 @@ def audit(root: Path = ROOT) -> dict:
 
 
 def main() -> None:
+    started_cpu = time.process_time()
     result = audit(ROOT)
+    result["audit_cpu_seconds"] = time.process_time() - started_cpu
     path = ROOT / ARTIFACT / "results/integrity_audit.json"
     temp = path.with_suffix(".json.tmp")
     temp.write_text(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2), encoding="utf-8")
