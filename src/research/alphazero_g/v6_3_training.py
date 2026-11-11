@@ -18,7 +18,7 @@ from .v5_reference import ReferencePolicyValueNet, instrumented_player, make_boa
 from .v5_training import load_training_checkpoint, train_reference_arm
 from .v5_evaluation import generate_opening_pool, opening_key
 from .v6_registration import _same
-from .v6_2_training import validate_full_training_state
+from .v6_2_training import _replay_digest, validate_full_training_state
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -101,7 +101,8 @@ def validate_training_state(path: str | Path, *, expected_games: int | None = No
         checks = {
             "model_restored": _same(model.get_policy_param(), payload["model_state"]),
             "adam_restored": _same(model.optimizer.state_dict(), payload["optimizer_state"]),
-            "replay_restored": len(loaded[4]) == len(payload["replay_buffer"]),
+            "replay_restored": len(loaded[4]) == len(payload["replay_buffer"])
+                and _replay_digest(loaded[4]) == _replay_digest(payload["replay_buffer"]),
             "python_rng_restored": random.getstate() == payload["python_rng_state"],
             "numpy_rng_restored": _numpy_rng_equal(np.random.get_state(), payload["numpy_rng_state"]),
             "torch_rng_restored": torch.equal(torch.get_rng_state(), payload["torch_rng_state"]),
@@ -119,6 +120,7 @@ def validate_training_state(path: str | Path, *, expected_games: int | None = No
         "optimizer_updates": int(payload["update_count"]),
         "optimizer_slots": len(payload["optimizer_state"]["state"]),
         "replay_rows": len(loaded[4]),
+        "replay_sha256": _replay_digest(loaded[4]),
         "cumulative_training_cpu_seconds": float(payload["cumulative_cpu_seconds"]),
         **checks, "valid": True,
     }

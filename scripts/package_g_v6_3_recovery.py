@@ -13,6 +13,7 @@ import torch
 
 from src.research.alphazero_g.v5_reference import ReferencePolicyValueNet
 from src.research.alphazero_g.v5_training import load_training_checkpoint
+from src.research.alphazero_g.v6_2_training import _replay_digest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +47,8 @@ def _source_files(root: Path) -> list[Path]:
         root / "src/research/alphazero_g/v5_training.py",
         root / "src/research/alphazero_g/v5_reference.py",
         root / "src/research/alphazero_g/v5_evaluation.py",
+        root / "src/research/alphazero_g/v6_registration.py",
+        root / "src/research/alphazero_g/v6_2_training.py",
         root / "src/research/alphazero_g/v6_3_training.py",
         root / "src/research/alphazero_g/v6_3_evaluation.py",
         root / "src/ai.py", root / "src/gomoku.py",
@@ -135,7 +138,8 @@ def verify_empty_restore(archive_path: str | Path, destination: str | Path) -> d
             "model_restored": all(torch.equal(model.get_policy_param()[key], payload["model_state"][key])
                                    for key in payload["model_state"]),
             "adam_restored": bool(model.optimizer.state_dict()["state"]),
-            "replay_restored": len(loaded[4]) == len(payload["replay_buffer"]),
+            "replay_restored": len(loaded[4]) == len(payload["replay_buffer"])
+                and _replay_digest(loaded[4]) == _replay_digest(payload["replay_buffer"]),
             "python_rng_restored": __import__("random").getstate() == payload["python_rng_state"],
             "numpy_rng_restored": np.random.get_state()[0] == payload["numpy_rng_state"][0]
                 and np.array_equal(np.random.get_state()[1], payload["numpy_rng_state"][1]),
