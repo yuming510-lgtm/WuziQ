@@ -350,6 +350,8 @@ def run_training_batch(root: str | Path = ROOT, *, batch_games: int = SNAPSHOT_I
     state_path = artifact / "checkpoints" / ARM / "training_state.pt"
     current_validation = validate_training_state(state_path)
     current_games = int(current_validation["game_count"])
+    prior_progress = json.loads((artifact / "results/v6_3_progress.json").read_text(encoding="utf-8"))
+    training_started_at = prior_progress.get("training_started_at_utc")
     if current_games >= TARGET_GAMES:
         return {"stopped": "target_reached", **current_validation}
     baseline = float(torch.load(artifact / "checkpoints" / ARM / "training_state_games_2500.pt",
@@ -385,6 +387,7 @@ def run_training_batch(root: str | Path = ROOT, *, batch_games: int = SNAPSHOT_I
         "last_batch_cpu_seconds": time.process_time() - start_cpu,
         "last_batch_completed_games": game_count - current_games,
         "checkpoint_sha256": final_validation["sha256"],
+        "training_started_at_utc": training_started_at,
         "phase": "self_play_training" if game_count < TARGET_GAMES else "training_complete",
         "updated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
