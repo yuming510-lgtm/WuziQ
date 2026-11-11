@@ -33,7 +33,10 @@ def _artifact_files(root: Path) -> list[Path]:
         raise FileNotFoundError(artifact)
     return sorted(path for path in artifact.rglob("*") if path.is_file()
                   and not path.name.endswith(".tmp")
-                  and "recovery_archives" not in path.parts)
+                  and "recovery_archives" not in path.parts
+                  and "charts" not in path.relative_to(artifact).parts
+                  and path.name not in {"REPORT.md", "training_trajectory.csv", "match_summary.csv",
+                                        "integrity_audit.json"})
 
 
 def _source_files(root: Path) -> list[Path]:
