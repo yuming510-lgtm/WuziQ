@@ -5,9 +5,14 @@ import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import subprocess
+import sys
 import tempfile
 import time
 import zipfile
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 import torch
 
@@ -16,7 +21,6 @@ from src.research.alphazero_g.v5_training import load_training_checkpoint
 from src.research.alphazero_g.v6_2_training import _replay_digest
 
 
-ROOT = Path(__file__).resolve().parents[1]
 ARTIFACT = Path("research/g_v6_3")
 ARM = "reference400_empty"
 

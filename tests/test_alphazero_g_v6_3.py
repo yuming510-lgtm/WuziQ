@@ -156,3 +156,16 @@ def test_snapshot_registry_requires_download_hash_and_restore(tmp_path, monkeypa
     )
     assert row["empty_directory_restore_verified"] is True
     assert json.loads((artifact / "results/snapshot_status.json").read_text())["latest_verified_sequence"] == 1
+
+
+def test_recovery_packager_script_bootstraps_repository_import_path(tmp_path):
+    import subprocess
+    import sys
+
+    script = ROOT / "scripts/package_g_v6_3_recovery.py"
+    result = subprocess.run(
+        [sys.executable, str(script), "--help"], cwd=tmp_path,
+        capture_output=True, text=True, check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "recovery snapshot" in result.stdout
