@@ -6,6 +6,7 @@ import json
 from pathlib import Path, PurePosixPath
 import subprocess
 import tempfile
+import time
 import zipfile
 
 import torch
@@ -64,6 +65,7 @@ def _source_files(root: Path) -> list[Path]:
 
 
 def create_archive(root: str | Path = ROOT, output: str | Path | None = None) -> dict:
+    started_cpu = time.process_time()
     root = Path(root).resolve()
     if output is None:
         output = Path(tempfile.gettempdir()) / "wuziq-g-v6-3-recovery.zip"
@@ -89,7 +91,8 @@ def create_archive(root: str | Path = ROOT, output: str | Path | None = None) ->
                          json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2))
     return {"path": str(output), "sha256": _sha_file(output), "size_bytes": output.stat().st_size,
             "file_count": len(files), "code_commit": code_commit, "branch": branch,
-            "games_completed": _current_game_count(root)}
+            "games_completed": _current_game_count(root),
+            "packaging_cpu_seconds": time.process_time() - started_cpu}
 
 
 def _current_game_count(root: Path) -> int:
