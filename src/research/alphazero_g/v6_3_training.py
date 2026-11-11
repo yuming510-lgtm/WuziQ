@@ -458,6 +458,8 @@ def preflight(root: str | Path = ROOT) -> dict[str, Any]:
     report = {
         "registered_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "cpu_logical_count": os.cpu_count(), "cpu_quota_cores": cpu_quota,
+        "effective_training_parallelism": 1.0,
+        "wall_estimate_basis": "the reference self-play/training loop is one serial worker with PyTorch threads fixed at 1; CPU quota does not halve its wall time",
         "torch_threads": torch.get_num_threads(), "torch_version": torch.__version__,
         "memory_limit_bytes": 8 * 1024**3, "workspace_disk_free_bytes": shutil.disk_usage(root).free,
         "single_decision_benchmark": bench,
@@ -472,7 +474,7 @@ def preflight(root: str | Path = ROOT) -> dict[str, Any]:
         "cpu_hard_cap_hours": 50,
         "planned_stage_caps": {"training_hours": 45, "evaluation_plus_audit_hours": 5},
         "wall_clock_hours_at_quota_if_cpu_bound": {
-            key: value / cpu_quota for key, value in estimates["total_cpu_hours"].items()
+            key: value / 1.0 for key, value in estimates["total_cpu_hours"].items()
         },
     }
     atomic_json(root / ARTIFACT / "results/preflight.json", report)

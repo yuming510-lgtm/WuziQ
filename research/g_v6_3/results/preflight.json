@@ -3,6 +3,7 @@
   "cpu_hard_cap_hours": 50,
   "cpu_logical_count": 3,
   "cpu_quota_cores": 2.0,
+  "effective_training_parallelism": 1.0,
   "estimates": {
     "final_480_match_cpu_hours": {
       "conservative": 2.2767579211366638,
@@ -31,21 +32,21 @@
     "evaluation_plus_audit_hours": 5,
     "training_hours": 45
   },
-  "registered_at_utc": "2026-11-11T11:36:59Z",
+  "registered_at_utc": "2026-11-11T12:06:07Z",
   "single_decision_benchmark": {
     "board": "9x9 open board",
     "chosen_move": 38,
     "historical_latest_500_games_cpu_seconds": 22416.035950849,
     "historical_latest_500_games_rate_seconds_per_game": 44.832071901698,
-    "measured_cpu_seconds": 1.0444631810000002,
-    "measured_wall_seconds": 1.047856892000027,
+    "measured_cpu_seconds": 1.0117830410000002,
+    "measured_wall_seconds": 1.019372767999812,
     "search_stats": {
       "configured_playouts": 401,
       "first_leaf_value": 0.12698808312416077,
       "root_children": 81,
       "root_network_value": 0.12698808312416077,
       "root_visits": 400,
-      "search_cpu_seconds": 1.0441223290000003,
+      "search_cpu_seconds": 1.0113478699999998,
       "tree_depth": 7,
       "tree_nodes": 31299
     },
@@ -55,9 +56,10 @@
   "torch_threads": 1,
   "torch_version": "2.15.0+cpu",
   "wall_clock_hours_at_quota_if_cpu_bound": {
-    "conservative": 21.37507808286257,
-    "normal": 16.325610939579583,
-    "optimistic": 13.022542786311389
+    "conservative": 42.75015616572514,
+    "normal": 32.651221879159166,
+    "optimistic": 26.045085572622778
   },
-  "workspace_disk_free_bytes": 18084507648
+  "wall_estimate_basis": "the reference self-play/training loop is one serial worker with PyTorch threads fixed at 1; CPU quota does not halve its wall time",
+  "workspace_disk_free_bytes": 18075856896
 }
