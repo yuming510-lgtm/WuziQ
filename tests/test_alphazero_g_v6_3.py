@@ -114,6 +114,23 @@ def test_g2500_and_g5000_use_shared_fixed_rng_seed_per_paired_game():
     assert seed_2500 != evaluation._paired_game_seed("B", "opening-7", "B")
 
 
+def test_report_computes_same_opening_g5000_minus_g2500_delta(tmp_path):
+    import json
+    from scripts.report_g_v6_3 import _model_differences
+
+    for model, points in (("G2500", (1.0, 0.0)), ("G5000", (1.0, 1.0))):
+        directory = tmp_path / "research/g_v6_3/results/matches" / f"{model}_vs_A"
+        directory.mkdir(parents=True)
+        for color, score in zip(("B", "W"), points):
+            (directory / f"v63-{model}-{color}.json").write_text(json.dumps({
+                "opening_group_id": "opening-1", "candidate_color": color, "points": score,
+            }), encoding="utf-8")
+    result = _model_differences(tmp_path)
+    assert result["A"]["paired_openings"] == 1
+    assert result["A"]["score_rate_delta"] == pytest.approx(0.5)
+    assert result["A"]["ci95"] == pytest.approx([0.5, 0.5])
+
+
 def test_snapshot_registry_requires_download_hash_and_restore(tmp_path, monkeypatch):
     import json
     from scripts import register_g_v6_3_snapshot

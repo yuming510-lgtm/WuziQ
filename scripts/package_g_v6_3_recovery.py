@@ -38,7 +38,7 @@ def _artifact_files(root: Path) -> list[Path]:
                   and "recovery_archives" not in path.parts
                   and "charts" not in path.relative_to(artifact).parts
                   and path.name not in {"REPORT.md", "training_trajectory.csv", "match_summary.csv",
-                                        "integrity_audit.json"})
+                                        "integrity_audit.json", "paired_model_differences.json"})
 
 
 def _source_files(root: Path) -> list[Path]:

@@ -114,6 +114,40 @@ def _summaries(root: Path) -> dict[str, dict]:
     return result
 
 
+def _model_differences(root: Path) -> dict[str, dict]:
+    matches = root / ARTIFACT / "results/matches"
+    result = {}
+    for opponent in ("A", "B", "C"):
+        scores = {}
+        for model in ("G2500", "G5000"):
+            rows = _games_for_condition(matches / f"{model}_vs_{opponent}")
+            by_opening = {}
+            for row in rows:
+                by_opening.setdefault(str(row["opening_group_id"]), []).append(row)
+            scores[model] = {
+                opening: float(np.mean([float(row["points"]) for row in pair]))
+                for opening, pair in by_opening.items()
+                if len(pair) == 2 and {str(row["candidate_color"]) for row in pair} == {"B", "W"}
+            }
+        common = sorted(set(scores["G2500"]) & set(scores["G5000"]))
+        if not common:
+            result[opponent] = {"paired_openings": 0, "score_rate_delta": None, "ci95": None}
+            continue
+        delta = np.asarray([scores["G5000"][key] - scores["G2500"][key] for key in common], dtype=np.float64)
+        seed = int(hashlib.sha256(f"v6.3|paired-model-delta|{opponent}".encode()).hexdigest()[:8], 16)
+        rng = np.random.default_rng(seed)
+        indexes = rng.integers(0, len(delta), size=(10_000, len(delta)))
+        bootstrap = delta[indexes].mean(axis=1)
+        result[opponent] = {
+            "paired_openings": len(common),
+            "score_rate_delta": float(delta.mean()),
+            "ci95": [float(np.quantile(bootstrap, 0.025)), float(np.quantile(bootstrap, 0.975))],
+            "bootstrap_seed": seed,
+            "paired_opening_differences": {key: float(scores["G5000"][key] - scores["G2500"][key]) for key in common},
+        }
+    return result
+
+
 def _write_charts(root: Path, trajectory: list[dict], summaries: dict[str, dict]) -> None:
     charts = root / ARTIFACT / "charts"
     charts.mkdir(parents=True, exist_ok=True)
@@ -166,6 +200,7 @@ def build_report(root: str | Path = ROOT) -> dict:
     artifact = root / ARTIFACT
     trajectory = _trajectory(root)
     summaries = _summaries(root)
+    model_differences = _model_differences(root)
     _write_charts(root, trajectory, summaries)
     with (artifact / "results/training_trajectory.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(trajectory[0]))
@@ -180,6 +215,10 @@ def build_report(root: str | Path = ROOT) -> dict:
         writer.writeheader()
         for condition, summary in summaries.items():
             writer.writerow({"condition": condition, **summary})
+    (artifact / "results/paired_model_differences.json").write_text(
+        json.dumps(model_differences, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     progress = _json(artifact / "results/v6_3_progress.json", {})
     challenge = _json(artifact / "results/final_challenge.json", {})
@@ -232,6 +271,20 @@ def build_report(root: str | Path = ROOT) -> dict:
         f"[Drive 快照]({item.get('drive_url', '')})，SHA-256 `{item['sha256']}`"
         for item in snapshot_rows
     ) or "尚无已验证快照。"
+    comparison_lines = []
+    for opponent, label in (("A", "A"), ("B", "B@50ms"), ("C", "C@50ms")):
+        old = summaries[f"G2500_vs_{opponent}"]
+        new = summaries[f"G5000_vs_{opponent}"]
+        delta = model_differences[opponent]
+        if old.get("games") and new.get("games") and delta.get("paired_openings"):
+            comparison_lines.append(
+                f"- **{label}**：G2500 {old['score_rate']:.1%}；G5000 {new['score_rate']:.1%}；"
+                f"同开局G5000−G2500得分率差 {delta['score_rate_delta']:+.1%}，"
+                f"配对95%区间 [{delta['ci95'][0]:+.1%}, {delta['ci95'][1]:+.1%}]"
+                f"（{delta['paired_openings']}组）。"
+            )
+        else:
+            comparison_lines.append(f"- **{label}**：挑战赛尚无完整配对结果，不作提升判断。")
     report = f"""# WuziQ AlphaZero G V6.3：从 G2500 续训至 G5000
 
 ## 实验状态
@@ -277,15 +330,7 @@ G2500 起始恢复校验：权重 SHA-256 `{registration.get('source_model_sha25
 
 ### 逐组结论
 
-""" + "\n".join(
-        f"- **{label}**：G2500 {summaries[f'G2500_vs_{opponent}'].get('score_rate', float('nan')):.1%}；"
-        f"G5000 {summaries[f'G5000_vs_{opponent}'].get('score_rate', float('nan')):.1%}；"
-        f"同一配对开局得分率变化 "
-        f"{(summaries[f'G5000_vs_{opponent}'].get('paired_opening_score_rate', float('nan')) - summaries[f'G2500_vs_{opponent}'].get('paired_opening_score_rate', float('nan'))):+.1%}。"
-        if summaries[f'G2500_vs_{opponent}'].get('games') and summaries[f'G5000_vs_{opponent}'].get('games')
-        else f"- **{label}**：挑战赛未完成，当前数据不用于最终比较。"
-        for opponent, label in (("A", "A"), ("B", "B@50ms"), ("C", "C@50ms"))
-    ) + f"""
+""" + "\n".join(comparison_lines) + f"""
 
 ## 训练状态与完整性
 
