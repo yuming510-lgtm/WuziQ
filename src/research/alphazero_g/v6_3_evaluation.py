@@ -182,6 +182,20 @@ def _validate_existing(game: dict[str, Any], *, game_id: str, candidate: str,
         raise ValueError("stored V6.3 game is incomplete")
 
 
+def _complete_pair_rows(rows: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        groups.setdefault(str(row["opening_group_id"]), []).append(row)
+    paired = []
+    for opening_id, pair in sorted(groups.items()):
+        colors = [str(row["candidate_color"]) for row in pair]
+        if len(colors) != len(set(colors)):
+            raise ValueError(f"opening {opening_id} repeats a candidate color")
+        if len(pair) == 2 and set(colors) == {"B", "W"}:
+            paired.extend(pair)
+    return paired, len(paired) // 2
+
+
 def run_all(root: str | Path = ROOT, *, cpu_soft_limit_seconds: float | None = None) -> dict[str, Any]:
     root = Path(root).resolve()
     artifact = root / ARTIFACT
@@ -249,14 +263,16 @@ def run_all(root: str | Path = ROOT, *, cpu_soft_limit_seconds: float | None = N
                 if len(rows) and (total_match_cpu_before + (float(state["cumulative_cpu_seconds"]) - training_base) >= stop_total):
                     break
             all_rows[condition] = rows
-            summary = summarize_paired_games(rows, seed=int.from_bytes(hashlib.sha256(condition.encode()).digest()[:4], "big"))
+            paired_rows, completed_pairs = _complete_pair_rows(rows)
+            summary = summarize_paired_games(paired_rows, seed=int.from_bytes(hashlib.sha256(condition.encode()).digest()[:4], "big"))
             summary.update({
                 "candidate": model_name, "opponent": opponent,
                 "search_budget": "candidate PUCT-400; opponent A natural / B,C 50ms",
                 "planned_pairs": PAIRS, "planned_games": GAMES_PER_CONDITION,
-                "completed_pairs": len([opening for opening in schedule["openings"]
-                                         if sum(row["opening_group_id"] == opening["opening_group_id"] for row in rows) == 2]),
-                "complete": len(rows) == GAMES_PER_CONDITION,
+                "completed_pairs": completed_pairs,
+                "raw_completed_games": len(rows),
+                "unpaired_completed_games": len(rows) - 2 * completed_pairs,
+                "complete": len(rows) == GAMES_PER_CONDITION and completed_pairs == PAIRS,
                 "candidate_model_sha256": sha_file(artifact / "checkpoints" / ARM /
                                                      f"node_games_{2500 if model_name == 'G2500' else 5000}.pt"),
                 "game_rows": [{key: row.get(key) for key in (
@@ -279,7 +295,7 @@ def run_all(root: str | Path = ROOT, *, cpu_soft_limit_seconds: float | None = N
         "training_new_cpu_seconds": float(state["cumulative_cpu_seconds"]) - training_base,
         "evaluation_cpu_seconds": total_match_cpu_before,
         "planned_games": 480,
-        "completed_games": sum(int(summary.get("games", 0)) for summary in completed_summaries.values()),
+        "completed_games": sum(int(summary.get("raw_completed_games", 0)) for summary in completed_summaries.values()),
         "complete": len(completed_summaries) == 6 and all(row.get("complete") for row in completed_summaries.values()),
         "conditions": completed_summaries,
     }

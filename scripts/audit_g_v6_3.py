@@ -114,9 +114,22 @@ def audit(root: Path = ROOT) -> dict:
                 rows.append(game)
                 all_match_rows.append(audit_row)
             if rows:
-                summary = summarize_paired_games(rows, seed=int(hashlib.sha256(condition.encode()).hexdigest()[:8], 16))
+                by_opening = {}
+                for row in rows:
+                    by_opening.setdefault(str(row["opening_group_id"]), []).append(row)
+                paired_rows = []
+                for opening_id, pair in sorted(by_opening.items()):
+                    colors = [str(row["candidate_color"]) for row in pair]
+                    if len(colors) != len(set(colors)):
+                        raise ValueError(f"challenge pair repeats a color: {opening_id}")
+                    if len(pair) == 2 and set(colors) == {"B", "W"}:
+                        paired_rows.extend(pair)
+                summary = summarize_paired_games(
+                    paired_rows, seed=int(hashlib.sha256(condition.encode()).hexdigest()[:8], 16)
+                )
+                summary["raw_completed_games"] = len(rows)
                 expected_games = 80
-                summary["complete"] = len(rows) == expected_games
+                summary["complete"] = len(rows) == expected_games and summary["paired_openings"] == 40
                 if summary["complete"] and len({row["opening_group_id"] for row in rows}) != 40:
                     raise ValueError("complete condition is missing paired opening diversity")
                 condition_results[condition] = summary

@@ -18,6 +18,7 @@ import numpy as np
 import torch
 
 from src.research.alphazero_g.v5_evaluation import summarize_paired_games
+from src.research.alphazero_g.v6_3_evaluation import _complete_pair_rows
 from src.research.alphazero_g.v6_3_training import (
     ARTIFACT, ARM, MILESTONES, sha_file, validate_training_state,
 )
@@ -99,12 +100,13 @@ def _summaries(root: Path) -> dict[str, dict]:
             condition = f"{model}_vs_{opponent}"
             rows = _games_for_condition(matches / condition) if (matches / condition).is_dir() else []
             if rows:
+                paired_rows, completed_pairs = _complete_pair_rows(rows)
                 summary = summarize_paired_games(
-                    rows, seed=int(hashlib.sha256(condition.encode()).hexdigest()[:8], 16)
+                    paired_rows, seed=int(hashlib.sha256(condition.encode()).hexdigest()[:8], 16)
                 )
-                summary["complete"] = len(rows) == 80
-                summary["completed_pairs"] = len({row["opening_group_id"] for row in rows
-                                                   if sum(r["opening_group_id"] == row["opening_group_id"] for r in rows) == 2})
+                summary["complete"] = len(rows) == 80 and completed_pairs == 40
+                summary["completed_pairs"] = completed_pairs
+                summary["raw_completed_games"] = len(rows)
                 summary["mean_total_cpu_seconds"] = float(np.mean([row["total_cpu_seconds"] for row in rows]))
                 result[condition] = summary
             else:

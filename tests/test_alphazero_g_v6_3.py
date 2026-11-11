@@ -78,6 +78,19 @@ def test_duplicate_challenge_game_requires_same_registered_pair():
                                       opponent="B", opening=opening, color="B")
 
 
+def test_incomplete_color_pair_is_saved_but_excluded_from_paired_statistics():
+    complete = [
+        {"opening_group_id": "open-1", "candidate_color": "B", "points": 1.0},
+        {"opening_group_id": "open-1", "candidate_color": "W", "points": 0.0},
+    ]
+    rows, count = evaluation._complete_pair_rows(complete + [
+        {"opening_group_id": "open-2", "candidate_color": "B", "points": 1.0}
+    ])
+    assert count == 1
+    assert len(rows) == 2
+    assert {row["opening_group_id"] for row in rows} == {"open-1"}
+
+
 def test_snapshot_registry_requires_download_hash_and_restore(tmp_path, monkeypatch):
     import json
     from scripts import register_g_v6_3_snapshot
