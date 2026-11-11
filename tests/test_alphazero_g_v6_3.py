@@ -63,6 +63,21 @@ def test_original_a_minimax_b_and_alpha_beta_c_keep_their_engine_identity(identi
     assert metrics["timed_out"] is True
 
 
+@pytest.mark.parametrize("identity", ["A", "B", "C"])
+def test_original_opponents_return_legal_moves_with_registered_metrics(identity):
+    board = evaluation.make_board(9, 5, 0)
+    board.do_move(40)
+    move, metrics = evaluation._agent_choice({"kind": identity}, board, "W", 20261111)
+    assert 0 <= move[0] < 9 and 0 <= move[1] < 9
+    assert move != (4, 4)
+    assert metrics["search_depth"] >= 0
+    assert metrics["search_nodes"] >= 0
+    assert metrics["cpu_seconds"] >= 0
+    if identity in {"B", "C"}:
+        assert metrics["elapsed_seconds"] >= 0
+        assert isinstance(metrics["timed_out"], bool)
+
+
 def test_duplicate_challenge_game_requires_same_registered_pair():
     opening = {"opening_group_id": "open-1", "seed": 77}
     game = {
