@@ -201,6 +201,27 @@ def test_split_snapshot_parts_round_trip_and_rejects_corruption(tmp_path):
         join_archive(manifest, part_dir, tmp_path / "corrupt.zip")
 
 
+def test_historical_audit_reports_unlogged_initial_games_without_rejecting_valid_checkpoint():
+    from scripts.audit_g_v6_3 import summarize_historical_training_coverage
+
+    prior = {
+        "all_completed_games_legal_and_terminal": True,
+        "baseline_v6_integrity": {"selfplay_games_verified": 965},
+        "v6_2_added_games": 1488,
+        "v6_2_selfplay_games_verified": 1488,
+        "v6_2_unique_selfplay_ids": 1488,
+        "current_checkpoint": {"valid": True, "game_count": 2500, "environment_states": 45284,
+                               "optimizer_updates": 2499},
+    }
+    result = summarize_historical_training_coverage(prior)
+    assert result == {
+        "checkpoint_games": 2500,
+        "checkpoint_state_valid": True,
+        "replay_games_previously_verified": 2453,
+        "initial_legacy_games_without_replay_records": 47,
+    }
+
+
 def test_recovery_packager_script_bootstraps_repository_import_path(tmp_path):
     import subprocess
     import sys

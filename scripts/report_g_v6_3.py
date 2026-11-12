@@ -208,7 +208,8 @@ def build_report(root: str | Path = ROOT) -> dict:
         writer.writerows(trajectory)
     fields = ("condition", "games", "completed_pairs", "wins", "draws", "losses", "points",
               "score_rate", "paired_opening_score_rate", "black_score_rate",
-              "white_score_rate", "paired_opening_bootstrap_ci95", "mean_moves",
+              "white_score_rate", "paired_openings", "raw_completed_games",
+              "paired_opening_bootstrap_ci95", "mean_moves",
               "mean_candidate_cpu_seconds", "mean_opponent_cpu_seconds", "mean_total_cpu_seconds", "complete")
     with (artifact / "results/match_summary.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
@@ -266,11 +267,23 @@ def build_report(root: str | Path = ROOT) -> dict:
             f"{metrics.get('mean_policy_entropy', float('nan')):.3f} |"
         )
     snapshot_rows = drive.get("verified_snapshots", [])
-    snapshot_links = "\n".join(
-        f"- 第{item['sequence']}份，G{item['games_completed']}："
-        f"[Drive 快照]({item.get('drive_url', '')})，SHA-256 `{item['sha256']}`"
-        for item in snapshot_rows
-    ) or "尚无已验证快照。"
+    snapshot_link_rows = []
+    for item in snapshot_rows:
+        if item.get("multipart"):
+            part_links = "、".join(
+                f"[分卷{part['index']}/{len(item['parts'])}]({part['drive_url']})"
+                for part in item["parts"]
+            )
+            snapshot_link_rows.append(
+                f"- 第{item['sequence']}份，G{item['games_completed']}：{part_links}；"
+                f"合并包 SHA-256 `{item['sha256']}`（分卷已回读并完成空目录恢复）。"
+            )
+        else:
+            snapshot_link_rows.append(
+                f"- 第{item['sequence']}份，G{item['games_completed']}："
+                f"[Drive 快照]({item.get('drive_url', '')})，SHA-256 `{item['sha256']}`"
+            )
+    snapshot_links = "\n".join(snapshot_link_rows) or "尚无已验证快照。"
     comparison_lines = []
     for opponent, label in (("A", "A"), ("B", "B@50ms"), ("C", "C@50ms")):
         old = summaries[f"G2500_vs_{opponent}"]
@@ -336,6 +349,7 @@ G2500 起始恢复校验：权重 SHA-256 `{registration.get('source_model_sha25
 
 - 本阶段新增训练局：{len(list((artifact / 'raw/selfplay' / ARM).glob('*.json')))}；逐局棋谱和策略/价值训练数组保存在 `raw/selfplay/{ARM}/`。
 - 检查点：G2500基线及G3000/G3500/G4000/G4500/G5000（未完成节点在审计中标明）；每500局保存完整权重、Adam、回放池和随机状态。
+- V6.2历史G2500检查点计数为2,500局；已保存并逐局回放验证的历史自我对弈棋谱为{audit.get('historical_training_coverage',{}).get('replay_games_previously_verified','未知')}局。V6/V6.2历史记录中另有{audit.get('historical_training_coverage',{}).get('initial_legacy_games_without_replay_records','未知')}局没有可供本轮复核的逐局棋谱；这不影响已恢复G2500完整训练状态的权重、Adam、回放池及随机数状态校验，但不将缺失的历史棋谱称为已审计。
 - 棋谱/ID/样本一致性审计：**{'通过' if audit.get('all_new_completed_games_legal_and_terminal') else '待最终审计'}**；训练完整状态校验：**{'通过' if state_validation_ok else '待最终审计'}**。
 - Drive专用目录：[WuziQ G V6.3 Recovery]({drive.get('drive_folder_url','https://drive.google.com/drive/folders/'+str(drive.get('drive_folder_id','')))}); 保留最近两份通过下载、SHA-256和空目录恢复检查的快照：
 {snapshot_links}

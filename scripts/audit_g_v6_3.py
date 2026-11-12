@@ -26,6 +26,31 @@ def _sha(path: Path) -> str:
     return digest.hexdigest()
 
 
+def summarize_historical_training_coverage(prior: dict) -> dict:
+    """Describe the verified replay history without equating checkpoint count with replay count."""
+    checkpoint = prior.get("current_checkpoint", {})
+    baseline = prior.get("baseline_v6_integrity", {})
+    baseline_rows = int(baseline.get("selfplay_games_verified", 0))
+    added_rows = int(prior.get("v6_2_selfplay_games_verified", 0))
+    if (not prior.get("all_completed_games_legal_and_terminal")
+            or not checkpoint.get("valid")
+            or int(checkpoint.get("game_count", 0)) != 2500
+            or int(checkpoint.get("environment_states", 0)) != 45284
+            or int(checkpoint.get("optimizer_updates", 0)) != 2499
+            or int(prior.get("v6_2_added_games", -1)) != added_rows
+            or int(prior.get("v6_2_unique_selfplay_ids", -1)) != added_rows):
+        raise ValueError("V6.2 G2500 checkpoint or previously audited replay history is invalid")
+    verified_rows = baseline_rows + added_rows
+    if verified_rows > 2500:
+        raise ValueError("historical replay coverage exceeds the G2500 checkpoint counter")
+    return {
+        "checkpoint_games": 2500,
+        "checkpoint_state_valid": True,
+        "replay_games_previously_verified": verified_rows,
+        "initial_legacy_games_without_replay_records": 2500 - verified_rows,
+    }
+
+
 def audit(root: Path = ROOT) -> dict:
     artifact = root / ARTIFACT
     state_path = artifact / "checkpoints" / ARM / "training_state.pt"
@@ -145,14 +170,13 @@ def audit(root: Path = ROOT) -> dict:
             if name in final.get("conditions", {}) and int(final["conditions"][name]["games"]) != int(summary["games"]):
                 raise ValueError(f"aggregate summary does not match raw records: {name}")
     prior = json.loads((root / "research/g_v6_2/results/integrity_audit.json").read_text(encoding="utf-8"))
-    if not prior.get("all_completed_games_legal_and_terminal") or int(prior.get("v6_2_selfplay_games_verified", 0)) != 2500:
-        raise ValueError("V6.2 G2500 historical game audit is not complete")
+    historical_coverage = summarize_historical_training_coverage(prior)
     return {
         "format_version": 1,
         "experiment_id": "wuziq-alphazero-g-v6-3-5k-continuation",
         "training_current_state": state_validation,
         "new_training_games_verified": len(training_rows),
-        "historical_v6_2_training_games_previously_verified": 2500,
+        "historical_training_coverage": historical_coverage,
         "total_training_games_covered": 2500 + len(training_rows),
         "new_training_states_verified": total_new_states,
         "cumulative_training_states": expected_states,
