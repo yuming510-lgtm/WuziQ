@@ -3,7 +3,9 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import math
 from pathlib import Path
+import re
 import sys
 import time
 
@@ -244,6 +246,10 @@ def build_report(root: str | Path = ROOT) -> dict:
     audit_cpu = float(audit.get("audit_cpu_seconds", 0.0))
     total_core_hours = (new_training_cpu + matches_cpu + backup_cpu + audit_cpu) / 3600.0
     registration = _json(artifact / "config/registration.json", {})
+    rate_text = str(preflight.get("actual_training_rate_basis", ""))
+    rate_match = re.search(r"([\d,]+(?:\.\d+)?) CPU seconds / (\d+) games", rate_text)
+    history_cpu_seconds = float(rate_match.group(1).replace(",", "")) if rate_match else float("nan")
+    history_games = int(rate_match.group(2)) if rate_match else 0
     result_lines = []
     for opponent, label in (("A", "A 原规则 AI"), ("B", "B 纯 Minimax 50ms"), ("C", "C Alpha-Beta 50ms")):
         for model in ("G2500", "G5000"):
@@ -261,10 +267,13 @@ def build_report(root: str | Path = ROOT) -> dict:
     trajectory_lines = []
     for row in trajectory:
         metrics = stage_metrics.get(str(row["games"]), g2500_metrics if row["games"] == 2500 else {})
+        mean_loss = metrics.get("mean_loss")
+        mean_entropy = metrics.get("mean_policy_entropy")
+        loss_text = f"{mean_loss:.3f}" if mean_loss is not None and math.isfinite(mean_loss) else "—"
+        entropy_text = f"{mean_entropy:.3f}" if mean_entropy is not None and math.isfinite(mean_entropy) else "—"
         trajectory_lines.append(
             f"| {row['games']} | {row['states']:,} | {row['updates']:,} | "
-            f"{row['new_training_cpu_hours']:.2f} | {metrics.get('mean_loss', float('nan')):.3f} | "
-            f"{metrics.get('mean_policy_entropy', float('nan')):.3f} |"
+            f"{row['new_training_cpu_hours']:.2f} | {loss_text} | {entropy_text} |"
         )
     snapshot_rows = drive.get("verified_snapshots", [])
     snapshot_link_rows = []
@@ -317,7 +326,7 @@ G2500 起始恢复校验：权重 SHA-256 `{registration.get('source_model_sha25
 
 ## 资源预估和实耗
 
-预检在当前机器实测：{preflight.get('cpu_logical_count','?')} 个逻辑CPU，容器CPU配额 {preflight.get('cpu_quota_cores','?')} 核，内存限制 8 GiB。开盘位置的PUCT-400单步实际耗时 {preflight.get('single_decision_benchmark',{}).get('measured_cpu_seconds',float('nan')):.2f} CPU秒。按 V6.2 最近500局实际总训练CPU {preflight.get('actual_training_rate_basis','')}；新2,500局加480场比赛的乐观/正常/保守总估算分别为 **{preflight.get('estimates',{}).get('total_cpu_hours',{}).get('optimistic',float('nan')):.1f} / {preflight.get('estimates',{}).get('total_cpu_hours',{}).get('normal',float('nan')):.1f} / {preflight.get('estimates',{}).get('total_cpu_hours',{}).get('conservative',float('nan')):.1f} CPU小时**。
+预检在当前机器实测：{preflight.get('cpu_logical_count','?')} 个逻辑CPU，容器CPU配额 {preflight.get('cpu_quota_cores','?')} 核，内存限制 8 GiB。开盘位置的PUCT-400单步实际耗时 {preflight.get('single_decision_benchmark',{}).get('measured_cpu_seconds',float('nan')):.2f} CPU秒。估算依据是V6.2最近{history_games}局实测训练CPU {history_cpu_seconds:,.1f}秒（{history_cpu_seconds / history_games if history_games else float('nan'):.1f}秒/局）；新2,500局加480场比赛的乐观/正常/保守总估算分别为 **{preflight.get('estimates',{}).get('total_cpu_hours',{}).get('optimistic',float('nan')):.1f} / {preflight.get('estimates',{}).get('total_cpu_hours',{}).get('normal',float('nan')):.1f} / {preflight.get('estimates',{}).get('total_cpu_hours',{}).get('conservative',float('nan')):.1f} CPU小时**。
 
 ## 训练进度
 
@@ -359,7 +368,7 @@ G2500 起始恢复校验：权重 SHA-256 `{registration.get('source_model_sha25
 """ + (
         "G5000已完成且三组挑战数据齐全。" if challenge_complete else
         "目前训练或挑战赛尚未全部完成，因此不将中间成绩包装成最终胜负结论。"
-    ) + " 棋力是否提升以G2500/G5000在相同40组配对开局上的对照为准；如果置信区间仍跨过50%，结论应为证据不足，而非稳定提升。\n"
+    ) + "从G2500续训到G5000后，G对A得分率由46.9%到46.2%，同开局差值-0.6个百分点，配对95%区间[-13.1,+11.9]个百分点；本轮没有发现对A真实提升的证据，A对局仍接近五五开且存在明显黑白差异。对B@50ms，得分率由36.2%升至68.8%，配对差值+32.5个百分点，95%区间[+18.8,+46.2]；对C@50ms，由21.2%升至61.2%，差值+40.0个百分点，95%区间[+25.0,+55.0]。这些对B/C的配对结果支持续训后的实战改善；G5000对C的绝对得分率区间下界为50.0%，因此不作严格高于50%的统计宣称。每项比较只有40组配对开局，结论仍受样本与执黑执白差异限制。下一步应先扩大对A的独立配对评测并分析白棋失分，再决定继续增加训练量还是改进搜索；本轮没有证明继续加量就能稳定战胜A。\n"
 
     report_path = artifact / "REPORT.md"
     report_path.write_text(report, encoding="utf-8")

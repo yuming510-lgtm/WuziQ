@@ -1,0 +1,230 @@
+{
+  "all_challenge_game_ids_unique": true,
+  "all_new_completed_games_legal_and_terminal": true,
+  "all_training_game_ids_unique": true,
+  "audit_cpu_seconds": 15.755387254999999,
+  "challenge_complete": true,
+  "challenge_conditions": {
+    "G2500_vs_A": {
+      "black_score_rate": 0.4,
+      "complete": true,
+      "draws": 31,
+      "games": 80,
+      "losses": 27,
+      "mean_candidate_cpu_seconds": 17.23854542232501,
+      "mean_moves": 52.65,
+      "mean_opponent_cpu_seconds": 0.01620214003752507,
+      "paired_opening_bootstrap_ci95": [
+        0.3875,
+        0.55625
+      ],
+      "paired_opening_score_rate": 0.46875,
+      "paired_openings": 40,
+      "points": 37.5,
+      "raw_completed_games": 80,
+      "score_rate": 0.46875,
+      "white_score_rate": 0.5375,
+      "wins": 22
+    },
+    "G2500_vs_B": {
+      "black_score_rate": 0.425,
+      "complete": true,
+      "draws": 0,
+      "games": 80,
+      "losses": 51,
+      "mean_candidate_cpu_seconds": 4.437045844800011,
+      "mean_moves": 17.7625,
+      "mean_opponent_cpu_seconds": 0.26914417831250714,
+      "paired_opening_bootstrap_ci95": [
+        0.25,
+        0.475
+      ],
+      "paired_opening_score_rate": 0.3625,
+      "paired_openings": 40,
+      "points": 29.0,
+      "raw_completed_games": 80,
+      "score_rate": 0.3625,
+      "white_score_rate": 0.3,
+      "wins": 29
+    },
+    "G2500_vs_C": {
+      "black_score_rate": 0.25,
+      "complete": true,
+      "draws": 0,
+      "games": 80,
+      "losses": 63,
+      "mean_candidate_cpu_seconds": 5.073528848262422,
+      "mean_moves": 19.2375,
+      "mean_opponent_cpu_seconds": 0.30526664433747613,
+      "paired_opening_bootstrap_ci95": [
+        0.125,
+        0.3125
+      ],
+      "paired_opening_score_rate": 0.2125,
+      "paired_openings": 40,
+      "points": 17.0,
+      "raw_completed_games": 80,
+      "score_rate": 0.2125,
+      "white_score_rate": 0.175,
+      "wins": 17
+    },
+    "G5000_vs_A": {
+      "black_score_rate": 0.5875,
+      "complete": true,
+      "draws": 34,
+      "games": 80,
+      "losses": 26,
+      "mean_candidate_cpu_seconds": 17.503742068837397,
+      "mean_moves": 59.0125,
+      "mean_opponent_cpu_seconds": 0.019548441812577266,
+      "paired_opening_bootstrap_ci95": [
+        0.375,
+        0.55
+      ],
+      "paired_opening_score_rate": 0.4625,
+      "paired_openings": 40,
+      "points": 37.0,
+      "raw_completed_games": 80,
+      "score_rate": 0.4625,
+      "white_score_rate": 0.3375,
+      "wins": 20
+    },
+    "G5000_vs_B": {
+      "black_score_rate": 0.875,
+      "complete": true,
+      "draws": 0,
+      "games": 80,
+      "losses": 25,
+      "mean_candidate_cpu_seconds": 4.747258682387627,
+      "mean_moves": 19.5125,
+      "mean_opponent_cpu_seconds": 0.3006098603375051,
+      "paired_opening_bootstrap_ci95": [
+        0.5875,
+        0.775
+      ],
+      "paired_opening_score_rate": 0.6875,
+      "paired_openings": 40,
+      "points": 55.0,
+      "raw_completed_games": 80,
+      "score_rate": 0.6875,
+      "white_score_rate": 0.5,
+      "wins": 55
+    },
+    "G5000_vs_C": {
+      "black_score_rate": 0.75,
+      "complete": true,
+      "draws": 0,
+      "games": 80,
+      "losses": 31,
+      "mean_candidate_cpu_seconds": 5.530210951562646,
+      "mean_moves": 20.8125,
+      "mean_opponent_cpu_seconds": 0.3321939660125565,
+      "paired_opening_bootstrap_ci95": [
+        0.5,
+        0.725
+      ],
+      "paired_opening_score_rate": 0.6125,
+      "paired_openings": 40,
+      "points": 49.0,
+      "raw_completed_games": 80,
+      "score_rate": 0.6125,
+      "white_score_rate": 0.475,
+      "wins": 49
+    }
+  },
+  "challenge_games_verified": 480,
+  "cumulative_training_states": 87999,
+  "experiment_id": "wuziq-alphazero-g-v6-3-5k-continuation",
+  "format_version": 1,
+  "historical_training_coverage": {
+    "checkpoint_games": 2500,
+    "checkpoint_state_valid": true,
+    "initial_legacy_games_without_replay_records": 47,
+    "replay_games_previously_verified": 2453
+  },
+  "milestone_checkpoints": [
+    {
+      "adam_restored": true,
+      "full_state_sha256": "c97949185a8ea6b230079f2d767cae0d5deebb5dd0adb9f8729292168d0019fd",
+      "games": 3000,
+      "model_restored": true,
+      "model_sha256": "1a185a1090dad8c3e45cb8744ebfb291ca43d44fc890e6275b002c55e79061a3",
+      "numpy_rng_restored": true,
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "torch_rng_restored": true
+    },
+    {
+      "adam_restored": true,
+      "full_state_sha256": "114c0345d0d34c9955bb4d9cc0e0c60544b0135cd6b33e0a06cef081f3832b97",
+      "games": 3500,
+      "model_restored": true,
+      "model_sha256": "1bd8bf57d17a155d831505f3a41f30117a4460f3c574a8941c824767af5aac08",
+      "numpy_rng_restored": true,
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "torch_rng_restored": true
+    },
+    {
+      "adam_restored": true,
+      "full_state_sha256": "6b6cd643b326e40c8d15e821a28d0d9725ad31cbfdbd30bae77f9836c669a221",
+      "games": 4000,
+      "model_restored": true,
+      "model_sha256": "8594cb1ccb5ea50b615c9d08780750e52165e77ca3cec9ce85196f12576ec17a",
+      "numpy_rng_restored": true,
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "torch_rng_restored": true
+    },
+    {
+      "adam_restored": true,
+      "full_state_sha256": "9e1439116e12491795f10624e5323957c32ae12e1b8607672528813ffb34db5e",
+      "games": 4500,
+      "model_restored": true,
+      "model_sha256": "8cb6dd51604cec4ca7434db8c5e0e2e7b6d37f8e9186aeeb5c765eb0e23019c5",
+      "numpy_rng_restored": true,
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "torch_rng_restored": true
+    },
+    {
+      "adam_restored": true,
+      "full_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2",
+      "games": 5000,
+      "model_restored": true,
+      "model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+      "numpy_rng_restored": true,
+      "python_rng_restored": true,
+      "replay_restored": true,
+      "torch_rng_restored": true
+    }
+  ],
+  "new_training_games_verified": 2500,
+  "new_training_states_verified": 42715,
+  "opening_schedule": {
+    "groups": 40,
+    "legal_and_nonterminal": true,
+    "sha256": "511179319928c01d0dba9ffac91b63b3e91336471e368924c65e30adee8bdcba",
+    "unique_d4_openings": 40
+  },
+  "total_training_games_covered": 5000,
+  "training_current_state": {
+    "adam_restored": true,
+    "cumulative_training_cpu_seconds": 173763.51157836895,
+    "environment_states": 87999,
+    "game_count": 5000,
+    "model_restored": true,
+    "numpy_rng_restored": true,
+    "optimizer_slots": 16,
+    "optimizer_updates": 4999,
+    "path": "/workspace/WuziQ-g-v6-2-selfplay-scale/research/g_v6_3/checkpoints/reference400_empty/training_state.pt",
+    "python_rng_restored": true,
+    "replay_restored": true,
+    "replay_rows": 10000,
+    "replay_sha256": "338c8d3bff835b5004140f007e35a34c0ab9c3d3df1c39ae4639fb30318a754a",
+    "sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2",
+    "torch_rng_restored": true,
+    "valid": true
+  },
+  "training_metrics_rows_verified": 2500
+}
