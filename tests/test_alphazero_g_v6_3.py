@@ -158,6 +158,49 @@ def test_snapshot_registry_requires_download_hash_and_restore(tmp_path, monkeypa
     assert json.loads((artifact / "results/snapshot_status.json").read_text())["latest_verified_sequence"] == 1
 
 
+def test_snapshot_registry_records_verified_multipart_archive(tmp_path, monkeypatch):
+    import json
+    from scripts import register_g_v6_3_snapshot
+
+    artifact = tmp_path / "research/g_v6_3"
+    (artifact / "results").mkdir(parents=True)
+    (artifact / "results/snapshot_status.json").write_text(json.dumps({
+        "drive_folder_id": "drive-folder", "verified_snapshots": []
+    }), encoding="utf-8")
+    monkeypatch.setattr(register_g_v6_3_snapshot, "ARTIFACT", artifact)
+    parts = [{"file_name": "s.part-001", "drive_file_id": "p1", "drive_url": "url1",
+              "sha256": "a", "size_bytes": 3},
+             {"file_name": "s.part-002", "drive_file_id": "p2", "drive_url": "url2",
+              "sha256": "b", "size_bytes": 2}]
+    row = register_g_v6_3_snapshot.register(
+        sequence=1, games=5000, training_cpu_seconds=10,
+        file_name="s.zip", drive_file_id="p1", drive_url="url1",
+        sha256="whole", size_bytes=5, code_commit="commit", package_cpu_seconds=1,
+        download_sha256="whole", empty_restore_verified=True, drive_parts=parts,
+    )
+    assert row["multipart"] is True
+    assert row["parts"] == parts
+    assert len(json.loads((artifact / "results/snapshot_status.json").read_text())["verified_snapshots"]) == 1
+
+
+def test_split_snapshot_parts_round_trip_and_rejects_corruption(tmp_path):
+    from scripts.split_g_v6_3_snapshot import join_archive, split_archive
+
+    archive = tmp_path / "snapshot.zip"
+    archive.write_bytes(bytes(range(251)) * 3)
+    part_dir = tmp_path / "parts"
+    manifest = split_archive(archive, part_dir, part_size=500)
+    assert len(manifest["parts"]) == 2
+    joined = tmp_path / "joined.zip"
+    result = join_archive(manifest, part_dir, joined)
+    assert result["sha256"] == manifest["sha256"]
+    assert joined.read_bytes() == archive.read_bytes()
+
+    (part_dir / manifest["parts"][0]["file_name"]).write_bytes(b"bad")
+    with pytest.raises(ValueError, match="part hash mismatch"):
+        join_archive(manifest, part_dir, tmp_path / "corrupt.zip")
+
+
 def test_recovery_packager_script_bootstraps_repository_import_path(tmp_path):
     import subprocess
     import sys
