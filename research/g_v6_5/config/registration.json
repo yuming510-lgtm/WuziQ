@@ -1,0 +1,40 @@
+{
+  "additional_games": 3000,
+  "base_commit": "66b88d2270c799870aa81651fe3c07be18479cf0",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-5-selfplay-scale",
+  "cpu_budget_new_experiment_hours": 40,
+  "drive_folder_id": "1b3bTfx8Eqczy0D8sQAgDdDhKbuVgWfNR",
+  "experiment_id": "wuziq-alphazero-g-v6-5-selfplay-scale",
+  "format_version": 1,
+  "n_in_row": 5,
+  "reference_config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+  "registered_at_utc": "2026-11-14T01:18:36Z",
+  "seed": 590502,
+  "snapshot_policy": {
+    "interval_cpu_seconds": 10800,
+    "interval_games": 250,
+    "retain_latest_two_rolling_and_G5000_source_plus_G6000_G7000_G8000_milestones": true,
+    "trigger": "first of 250 completed games or 3 added CPU hours"
+  },
+  "source_branch": "research/alphazero-g-v6-3-5k",
+  "source_cumulative_training_cpu_seconds": 173763.51157836895,
+  "source_games": 5000,
+  "source_model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+  "source_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2",
+  "source_states": 87999,
+  "source_updates": 4999,
+  "source_v6_3_archive_sha256": "c7a615c112324d955e32122f66f6930254510d111ff23606f7805e58f61af592",
+  "source_v6_3_drive_folder_id": "1u3556ink-VFf9a7AbS701flr0V0spSzQ",
+  "target_games_cumulative": 8000,
+  "training_algorithm_modified": false,
+  "training_config_copied_unchanged_from_v6_3": true,
+  "training_config_sha256": "d3f268d6bd13093c8729cb827ac6118782d90eb9235b296e80053902b26a0c1e",
+  "training_milestones_games": [
+    6000,
+    7000,
+    8000
+  ],
+  "training_simulations_per_move": 400,
+  "training_sources": "current G0 self-play only; no teacher, tactical reward, or rule patch"
+}

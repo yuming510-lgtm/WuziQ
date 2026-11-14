@@ -1,0 +1,57 @@
+{
+  "cpu_quota_cores": 2.0,
+  "cuda_available": false,
+  "disk_free_bytes": 16119099392,
+  "disk_projection": "V6.3 full recovery archive was 184 MB uncompressed and 37 MB compressed at G5000; V6.5 local plus Drive staging provisioned below 1.5 GB, with 17 GB presently free",
+  "estimates": {
+    "snapshot_cpu_hours": {
+      "conservative": 1.5,
+      "normal": 0.75,
+      "optimistic": 0.25
+    },
+    "total_cpu_hours": {
+      "conservative": 28.168912019372563,
+      "normal": 21.264547707209665,
+      "optimistic": 16.661638165767734
+    },
+    "training_cpu_hours": {
+      "conservative": 26.668912019372563,
+      "normal": 20.514547707209665,
+      "optimistic": 16.411638165767734
+    }
+  },
+  "hard_cap_cpu_hours": 40,
+  "historical_training_rate": {
+    "completed_games": 2500,
+    "cpu_seconds": 61543.64312162899,
+    "cpu_seconds_per_game": 24.617457248651597,
+    "source": "actual V6.3 G2500-to-G5000 continuation full-state counters"
+  },
+  "logical_cpu_count": 3,
+  "memory_limit_bytes": 8589934592,
+  "planned_new_games": 3000,
+  "registered_at_utc": "2026-11-14T01:18:41Z",
+  "single_decision_benchmark": {
+    "board": "9x9 open board",
+    "chosen_move": 49,
+    "measured_cpu_seconds": 0.8034220250000002,
+    "measured_wall_seconds": 0.8124314180004149,
+    "root_action_visits": 399,
+    "search_stats": {
+      "configured_playouts": 400,
+      "first_leaf_value": 0.5246047973632812,
+      "root_children": 81,
+      "root_network_value": 0.5246047973632812,
+      "root_visits": 399,
+      "search_cpu_seconds": 0.802458069,
+      "tree_depth": 11,
+      "tree_nodes": 30843
+    },
+    "simulations_requested": 400,
+    "upstream_configured_playouts": 400
+  },
+  "torch_threads": 1,
+  "torch_version": "2.15.0+cpu",
+  "training_parallelism": 1,
+  "wall_estimate_basis": "serial self-play with one PyTorch thread; expected wall time tracks one-process CPU time, subject to host contention"
+}
