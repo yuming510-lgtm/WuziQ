@@ -80,7 +80,7 @@ G5000 合计作出 347 次决策，真实完成 **138,800 次 MCTS 模拟**，�
 - 棋谱审计：计划24局、实际24局、唯一 ID 24个、全部独立规则回放合法、终局与胜负一致、开局组均完成黑白配对、无多余或缺失对局。
 - 自动化测试：V6.4赛程、对局回放、配对、快照恢复与图表测试共15项；原五子棋规则/搜索测试29项，共44项通过。
 - 历史 G5000 恢复包 #12 的 SHA-256 和空目录恢复校验已通过；模型、Adam、回放池与随机状态均可从 V6.3 Drive 原包恢复。V6.4 未训练，因此恢复快照只引用冻结模型身份和原 V6.3 恢复源，不覆盖该原包。
-- V6.4 Drive 恢复目录：[WuziQ G5000 V6.4 Recovery](https://drive.google.com/drive/folders/1cvdyNM-M8RgYwnS7Y4moCRBAbXB_pXIB)。已上传、回下载、SHA-256 比对并在空目录恢复验证的快照数量：6；目录保留初始、分阶段和最终恢复点。
+- V6.4 Drive 恢复目录：[WuziQ G5000 V6.4 Recovery](https://drive.google.com/drive/folders/1cvdyNM-M8RgYwnS7Y4moCRBAbXB_pXIB)。已上传、回下载、SHA-256 比对并在空目录恢复验证的快照数量：7；目录保留初始、分阶段和最终恢复点。
 - 原始棋谱：`results/matches/`；完整比分：`results/game_results.csv`、`results/condition_summary.csv`；逐棋谱 SHA-256：`results/game_sha256.json`；审计：`results/audit.json`；开局与环境：`config/`；图表：`charts/ladder_score_rate.svg`。
 - 复现：`python scripts/prepare_g_v6_4.py --historical-root <V6.3恢复树>`；`python scripts/preflight_g_v6_4.py --checkpoint-dir <已校验检查点目录>`；`python scripts/run_g_v6_4.py --checkpoint-dir <已校验检查点目录>`；`python scripts/audit_g_v6_4.py`；`python scripts/report_g_v6_4.py`。
 - 适用恢复包后，执行器以固定 game ID 自动跳过已校验对局；单局中断会从同一预注册开局重赛，不会重复计入统计。
