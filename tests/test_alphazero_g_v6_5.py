@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 
+import numpy as np
 import pytest
+import torch
 
 from src.research.alphazero_g import v6_5_audit, v6_5_training, v6_5_snapshot
 
@@ -48,6 +50,46 @@ def test_independent_replay_rejects_moves_after_win_and_wrong_result():
     record["winner_color"] = "W"
     with pytest.raises(ValueError, match="winner/outcome"):
         v6_5_audit.audit_game_record(record)
+
+
+def test_partial_audit_accepts_one_durable_pending_game_after_interruption(tmp_path, monkeypatch):
+    artifact = tmp_path / "research/g_v6_5"
+    raw = artifact / "raw/selfplay/reference400_empty"
+    raw.mkdir(parents=True)
+    history = artifact / "results/training/reference400_empty.jsonl"
+    history.parent.mkdir(parents=True)
+
+    def save_game(index):
+        record = _winning_record()
+        record["game_id"] = f"reference400_empty-game-{index:06d}"
+        record["seed"] = v6_5_training.SEED + index * 10007
+        game_path = raw / f"{record['game_id']}.json"
+        game_path.write_text(json.dumps(record), encoding="utf-8")
+        values = np.array([1 if i % 2 == 0 else -1 for i in range(9)], dtype=np.int8)
+        np.savez_compressed(
+            game_path.with_suffix(".npz"),
+            states=np.zeros((9, 4, 9, 9), dtype=np.float16),
+            policies=np.zeros((9, 81), dtype=np.float16),
+            values=values,
+        )
+
+    save_game(5000)  # completed and included in the saved checkpoint
+    save_game(5001)  # durable game samples written before interruption
+    history.write_text(json.dumps({"game_id": "reference400_empty-game-005000"}) + "\n", encoding="utf-8")
+    baseline = artifact / "checkpoints/reference400_empty/training_state_games_5000.pt"
+    baseline.parent.mkdir(parents=True)
+    torch.save({"environment_states": 10}, baseline)
+    monkeypatch.setattr(v6_5_training, "validate_training_state", lambda *_a, **_k: {
+        "game_count": 5001, "environment_states": 19, "optimizer_updates": 5000,
+        "cumulative_training_cpu_seconds": 12.0, "valid": True,
+    })
+
+    audit = v6_5_audit.audit_experiment(tmp_path, require_complete=False)
+
+    assert audit["new_games_replayed"] == 1
+    assert audit["legal_terminal_games"] == 1
+    assert audit["pending_recovery_game_id"] == "reference400_empty-game-005001"
+    assert audit["pending_recovery_game_valid"] is True
 
 
 def test_drive_snapshot_registration_requires_download_and_empty_restore(tmp_path):

@@ -114,6 +114,8 @@ def audit_experiment(root: str | Path = training.ROOT, *, require_complete: bool
     directory = artifact / "raw/selfplay" / training.ARM
     expected_ids = {f"{training.ARM}-game-{index:06d}" for index in range(training.BASE_GAMES, current_games)}
     records: dict[str, dict[str, Any]] = {}
+    pending_id = f"{training.ARM}-game-{current_games:06d}"
+    pending_record: dict[str, Any] | None = None
     for path in sorted(directory.glob("*.json")) if directory.is_dir() else []:
         record = json.loads(path.read_text(encoding="utf-8"))
         game_id = str(record.get("game_id", ""))
@@ -122,15 +124,18 @@ def audit_experiment(root: str | Path = training.ROOT, *, require_complete: bool
         if path.stem != game_id:
             raise ValueError(f"self-play filename and game ID disagree: {path.name}")
         index = int(game_id.rsplit("-", 1)[-1])
-        if index < training.BASE_GAMES or index >= current_games:
+        if index < training.BASE_GAMES or index > current_games:
             raise ValueError(f"self-play record outside checkpoint range: {game_id}")
         expected_seed = training.SEED + index * 10007
         if int(record.get("seed", -1)) != expected_seed:
             raise ValueError(f"deterministic seed mismatch for {game_id}")
         records[game_id] = record
-    if set(records) != expected_ids:
+        if index == current_games:
+            pending_record = record
+    expected_or_pending_ids = expected_ids | ({pending_id} if pending_record is not None else set())
+    if set(records) != expected_or_pending_ids:
         missing = sorted(expected_ids - set(records))
-        extras = sorted(set(records) - expected_ids)
+        extras = sorted(set(records) - expected_or_pending_ids)
         raise ValueError(f"self-play IDs do not match the checkpoint boundary; missing={missing[:5]}, extras={extras[:5]}")
     if len(list(directory.glob("*.npz"))) != len(records):
         raise ValueError("self-play JSON and NPZ counts differ")
@@ -138,12 +143,17 @@ def audit_experiment(root: str | Path = training.ROOT, *, require_complete: bool
     total_states = 0
     total_moves = 0
     colors = {"B": 0, "W": 0, "draw": 0}
-    for game_id, record in sorted(records.items()):
+    for game_id in sorted(expected_ids):
+        record = records[game_id]
         result = audit_game_record(record, directory / f"{game_id}.npz")
         replayed.append(result)
         total_states += int(record["training_state_count"])
         total_moves += int(record["move_count"])
         colors[result["winner_color"] or "draw"] += 1
+    pending_valid = False
+    if pending_record is not None:
+        audit_game_record(pending_record, directory / f"{pending_id}.npz")
+        pending_valid = True
     baseline_path = artifact / "checkpoints" / training.ARM / "training_state_games_5000.pt"
     baseline = torch.load(baseline_path, map_location="cpu", weights_only=False)
     expected_state_delta = current_states - int(baseline["environment_states"])
@@ -166,8 +176,10 @@ def audit_experiment(root: str | Path = training.ROOT, *, require_complete: bool
         "target_games": training.TARGET_GAMES,
         "games_completed": current_games,
         "new_games_replayed": len(replayed),
-        "unique_game_ids": len(records),
+        "unique_game_ids": len(expected_ids),
         "legal_terminal_games": len(replayed),
+        "pending_recovery_game_id": pending_id if pending_record is not None else None,
+        "pending_recovery_game_valid": pending_valid,
         "new_training_states": total_states,
         "checkpoint_training_state_delta": expected_state_delta,
         "cumulative_training_states": current_states,
