@@ -1,0 +1,171 @@
+{
+  "alpha_beta_settings": {
+    "candidate_radius": 2,
+    "max_depth": 69
+  },
+  "base_commit": "66b88d2270c799870aa81651fe3c07be18479cf0",
+  "board_size": 9,
+  "candidate": {
+    "model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+    "name": "G5000",
+    "search": {
+      "c_puct": 5.0,
+      "configured_playouts": 401,
+      "simulations": 400,
+      "type": "frozen AlphaZero PUCT"
+    },
+    "training_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2"
+  },
+  "experiment_id": "wuziq-g5000-ladder-v6-4",
+  "games_per_opponent": 6,
+  "n_in_row": 5,
+  "opening_plies": 6,
+  "opening_seed": 640614,
+  "openings": [
+    {
+      "moves": [
+        {
+          "col": 4,
+          "player": "B",
+          "row": 0
+        },
+        {
+          "col": 6,
+          "player": "W",
+          "row": 7
+        },
+        {
+          "col": 0,
+          "player": "B",
+          "row": 0
+        },
+        {
+          "col": 5,
+          "player": "W",
+          "row": 7
+        },
+        {
+          "col": 5,
+          "player": "B",
+          "row": 8
+        },
+        {
+          "col": 7,
+          "player": "W",
+          "row": 5
+        }
+      ],
+      "opening_group_id": "v6-4-640614-000",
+      "seed": 640614
+    },
+    {
+      "moves": [
+        {
+          "col": 3,
+          "player": "B",
+          "row": 7
+        },
+        {
+          "col": 0,
+          "player": "W",
+          "row": 7
+        },
+        {
+          "col": 2,
+          "player": "B",
+          "row": 0
+        },
+        {
+          "col": 1,
+          "player": "W",
+          "row": 3
+        },
+        {
+          "col": 1,
+          "player": "B",
+          "row": 2
+        },
+        {
+          "col": 3,
+          "player": "W",
+          "row": 5
+        }
+      ],
+      "opening_group_id": "v6-4-640614-001",
+      "seed": 640615
+    },
+    {
+      "moves": [
+        {
+          "col": 3,
+          "player": "B",
+          "row": 2
+        },
+        {
+          "col": 2,
+          "player": "W",
+          "row": 7
+        },
+        {
+          "col": 0,
+          "player": "B",
+          "row": 8
+        },
+        {
+          "col": 5,
+          "player": "W",
+          "row": 3
+        },
+        {
+          "col": 2,
+          "player": "B",
+          "row": 8
+        },
+        {
+          "col": 5,
+          "player": "W",
+          "row": 0
+        }
+      ],
+      "opening_group_id": "v6-4-640614-002",
+      "seed": 640616
+    }
+  ],
+  "opponents": [
+    {
+      "engine": "rules-A",
+      "name": "A",
+      "time_limit_seconds": null
+    },
+    {
+      "engine": "alpha-beta-C",
+      "name": "C@200ms",
+      "time_limit_seconds": 0.2
+    },
+    {
+      "engine": "alpha-beta-C",
+      "name": "C@1s",
+      "time_limit_seconds": 1.0
+    },
+    {
+      "engine": "alpha-beta-C",
+      "name": "C@5s",
+      "time_limit_seconds": 5.0
+    }
+  ],
+  "planned_games": 24,
+  "schedule_sha256": "fb196631f19499f55e49ad89b73c2dbc604ee29ca0372dbe1abd5e00e338694d",
+  "schema_version": 1,
+  "score_rule": {
+    "draw": 0.5,
+    "loss": 0.0,
+    "win": 1.0
+  },
+  "validation": {
+    "all_openings_legal_and_nonterminal": true,
+    "color_pairs_per_opponent": 3,
+    "historical_d4_overlap": 0,
+    "same_openings_for_all_opponents": true,
+    "unique_d4_openings": 3
+  }
+}

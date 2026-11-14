@@ -1,0 +1,116 @@
+{
+  "alpha_beta_settings": {
+    "candidate_radius": 2,
+    "max_depth": 69
+  },
+  "base_commit": "66b88d2270c799870aa81651fe3c07be18479cf0",
+  "board_size": 9,
+  "branch": "research/g5000-ladder-v6-4",
+  "candidate": {
+    "model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+    "name": "G5000",
+    "search": {
+      "c_puct": 5.0,
+      "configured_playouts": 401,
+      "simulations": 400,
+      "type": "frozen AlphaZero PUCT"
+    },
+    "training_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2"
+  },
+  "cpu_snapshot_interval_seconds": 3600,
+  "experiment_id": "wuziq-g5000-ladder-v6-4",
+  "game_ids": [
+    "v64-e8f4b4c07d31a81c",
+    "v64-44325ab80345b41f",
+    "v64-c1246045b1fdc51f",
+    "v64-0ae8492b76ced403",
+    "v64-d3d0d8503d9e2b20",
+    "v64-e753a3cda63aa0d0",
+    "v64-261eaf4799f94d54",
+    "v64-8e4d359b667738c7",
+    "v64-e4b370b37333192d",
+    "v64-433826c2f2863154",
+    "v64-0557ba47eaaa3080",
+    "v64-6d0c126e5ad859d5",
+    "v64-ff551c9b31b241d6",
+    "v64-a3588912d7e08b8c",
+    "v64-bef9d160c2bb834d",
+    "v64-f2bd524924f31073",
+    "v64-170a06ce6edbecb2",
+    "v64-bd5a60b1551c38a4",
+    "v64-f4417eb25fd094c9",
+    "v64-3f5b929788e7e93f",
+    "v64-df6133c5bab68e57",
+    "v64-19493ae406fb9830",
+    "v64-f8f0dc9f7f5c3071",
+    "v64-a58f8dffc4f67614"
+  ],
+  "historical_opening_scan": {
+    "overlap": 0,
+    "roots": [
+      "/workspace/WuziQ-g-v6-2-selfplay-scale",
+      "/tmp/WuziQ-G-V6.4-G5000-empty-restore-20261114"
+    ],
+    "sha256": "6e59a011ba438b30193d3fdc13a374f0202cd11a4805744b2151888026e4700f",
+    "unique_d4_opening_keys": 37262
+  },
+  "n_in_row": 5,
+  "opening_groups": 3,
+  "opening_plies": 6,
+  "opening_seed": 640614,
+  "opponents": [
+    {
+      "engine": "rules-A",
+      "name": "A",
+      "time_limit_seconds": null
+    },
+    {
+      "engine": "alpha-beta-C",
+      "name": "C@200ms",
+      "time_limit_seconds": 0.2
+    },
+    {
+      "engine": "alpha-beta-C",
+      "name": "C@1s",
+      "time_limit_seconds": 1.0
+    },
+    {
+      "engine": "alpha-beta-C",
+      "name": "C@5s",
+      "time_limit_seconds": 5.0
+    }
+  ],
+  "planned_games": 24,
+  "preflight": {
+    "actual_candidate_puct400_cpu_seconds_per_move": 2.4058656199999997,
+    "actual_opponent_cpu_seconds_per_move": {
+      "A": 0.001150659999999526,
+      "C@1s": 0.994083872,
+      "C@200ms": 0.19510624000000032,
+      "C@5s": 4.993981335000001
+    },
+    "basis": "preflight measured single decision on registered 6-ply opening; 12/20/30 side turns per game",
+    "cpu_count": 3,
+    "disk_free_bytes": 17712988160,
+    "estimated_cpu_seconds": {
+      "conservative": 3414.481470792,
+      "optimistic": 1138.160490264,
+      "typical": 2276.320980528
+    },
+    "memory": {
+      "MemAvailable": "9008976 kB",
+      "MemTotal": "10207480 kB"
+    },
+    "timestamp_utc": "2026-11-13T23:50:15Z",
+    "torch_threads": 3
+  },
+  "preflight_resource_assumptions": "CPU-only; values recorded by preflight_g_v6_4.py before games",
+  "schedule_path": "research/g_v6_4/config/opening_schedule.json",
+  "schedule_sha256": "fb196631f19499f55e49ad89b73c2dbc604ee29ca0372dbe1abd5e00e338694d",
+  "source_drive_snapshot": {
+    "folder_url": "https://drive.google.com/drive/folders/1u3556ink-VFf9a7AbS701flr0V0spSzQ",
+    "sequence": 12,
+    "sha256": "c7a615c112324d955e32122f66f6930254510d111ff23606f7805e58f61af592",
+    "training_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2"
+  }
+}
