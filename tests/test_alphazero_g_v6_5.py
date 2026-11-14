@@ -122,3 +122,9 @@ def test_snapshot_restore_requires_empty_destination(tmp_path):
     (destination / "existing").write_text("keep", encoding="utf-8")
     with pytest.raises(ValueError, match="must be empty"):
         v6_5_snapshot.restore_snapshot(archive, destination)
+
+
+def test_report_exposes_frozen_training_provenance_metadata():
+    from scripts import report_g_v6_5
+
+    assert report_g_v6_5.training.SOURCE_COMMIT == v6_5_training.SOURCE_COMMIT

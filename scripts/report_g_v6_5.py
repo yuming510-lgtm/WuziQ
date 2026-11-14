@@ -17,6 +17,7 @@ import torch
 
 from src.research.alphazero_g.v6_5_audit import audit_experiment
 from src.research.alphazero_g.v6_5_training import ARTIFACT, ARM, BASE_GAMES, MILESTONES, TARGET_GAMES, _baseline_cpu_seconds, sha_file
+from src.research.alphazero_g import v6_5_training as training
 
 
 def _read_jsonl(path: Path) -> list[dict]:
