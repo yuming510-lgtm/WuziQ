@@ -79,6 +79,7 @@
 - 每局原始 JSON：`results/matches/<series>/<game_id>.json`；单局原子落盘，`results/progress.json`按局更新。
 - 统计：`results/summary.json`、`results/games.csv`、`results/condition_summary.csv`、`results/audit.json`。
 - 固定计划：`config/registration.json`、`config/opening_schedule.json`、`config/match_plan.json`。
+- V6.6 Google Drive 恢复目录：[WuziQ G V6.6 Recovery](https://drive.google.com/drive/folders/1uOc9NRe8-GKHeHyoqdesNfyVUZYqj5_R)；已验证快照文件 ID、SHA-256 与保留策略记录在 `results/drive_backup_status.json`。
 - 复现检查：`PYTHONPATH=. pytest -q tests/test_alphazero_g_v6_6.py`；运行/审计：`PYTHONPATH=. python scripts/run_g_v6_6.py run-batch --batch-games 10`、`PYTHONPATH=. python scripts/run_g_v6_6.py audit`。
 - 与本轮直接相关的V6.6/V6.5/V6.3测试通过 29/29。全仓库测试结果为 514 passed、29 failed；失败项属于旧V2/V3/V4/V6.3分支身份绑定的历史测试，它们要求当前Git分支分别等于各自旧分支名，在独立V6.6分支上触发保护性拒绝；本轮未修改那些历史分支守卫。
 - SHA-256、文件数、规则回放、配对开局数及重复ID检查见 `results/audit.json`。
