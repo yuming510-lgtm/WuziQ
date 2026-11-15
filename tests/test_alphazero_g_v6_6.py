@@ -6,8 +6,11 @@ import pytest
 
 from src.research.alphazero_g.v6_6_evaluation import (
     BASELINE_OPPONENTS,
+    MODEL_SHA256,
     build_match_plan,
+    audit_game,
     finalize_v6_5_progress,
+    _plan_task,
 )
 
 
@@ -88,4 +91,37 @@ def test_v66_refuses_to_mark_an_incomplete_v65_run_complete(tmp_path):
 
     with pytest.raises(ValueError, match="not at G8000"):
         finalize_v6_5_progress(progress, expected_games=8000)
+
+
+def test_v66_replay_auditor_checks_winner_model_identity_and_mcts_budget():
+    opening = _openings(1)[0]
+    task = _plan_task("G8000", "A", opening, "B", series="test", opponent_budget=None, series_seed="test")
+    moves = [{**move, "opening": True} for move in opening["moves"]]
+    for index, (color, row, col) in enumerate([
+        ("B", 2, 2), ("W", 0, 0), ("B", 2, 3), ("W", 0, 1),
+        ("B", 2, 4), ("W", 0, 2), ("B", 2, 5), ("W", 0, 3), ("B", 2, 6),
+    ]):
+        actor = "G8000" if color == "B" else "A"
+        move = {"player": color, "row": row, "col": col, "opening": False, "actor": actor,
+                "elapsed_seconds": 0.01, "search_depth": 0, "search_nodes": 10, "simulations": 0}
+        if actor == "G8000":
+            move.update({"simulations": 400, "root_action_visits": 400})
+        moves.append(move)
+    game = {
+        "game_id": task["game_id"], "series": task["series"], "candidate": "G8000", "opponent": "A",
+        "candidate_color": "B", "opening_group_id": opening["opening_group_id"],
+        "opening_seed": opening["seed"], "opening": opening["moves"], "seed": task["seed"],
+        "candidate_model_sha256": MODEL_SHA256["G8000"], "opponent_model_sha256": None,
+        "candidate_simulations_per_move": 400, "opponent_time_limit_seconds": None,
+        "moves": moves, "move_count": len(moves), "termination": "five_in_row",
+        "winner_color": "B", "points": 1.0,
+    }
+    assert audit_game(game, task)["valid"] is True
+    bad = {**game, "candidate_model_sha256": MODEL_SHA256["G5000"]}
+    with pytest.raises(ValueError, match="candidate checkpoint identity"):
+        audit_game(bad, task)
+    bad_moves = [dict(move) for move in moves]
+    bad_moves[6]["root_action_visits"] = 399
+    with pytest.raises(ValueError, match="root visits"):
+        audit_game({**game, "moves": bad_moves}, task)
 

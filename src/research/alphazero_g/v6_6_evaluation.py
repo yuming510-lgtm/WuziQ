@@ -664,6 +664,14 @@ def audit_game(game: dict[str, Any], task: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("game ends before its frozen opening is complete")
     if game.get("candidate_model_sha256") != MODEL_SHA256[task["candidate"]]:
         raise ValueError("candidate checkpoint identity does not match the task")
+    if game.get("opponent_model_sha256") != MODEL_SHA256.get(task["opponent"]):
+        raise ValueError("opponent checkpoint identity does not match the task")
+    if int(game.get("candidate_simulations_per_move", -1)) != PUCT_SIMULATIONS:
+        raise ValueError("stored candidate simulation budget differs from registration")
+    if game.get("opponent_time_limit_seconds") != task.get("opponent_time_limit_seconds"):
+        raise ValueError("stored opponent time limit differs from the frozen task")
+    if game.get("opening") != task.get("opening") or int(game.get("opening_seed", -1)) != int(task["opening_seed"]):
+        raise ValueError("stored opening or opening seed differs from the pre-registered task")
     expected_color = "B"
     for index, move in enumerate(moves):
         color = str(move["player"])
@@ -674,6 +682,18 @@ def audit_game(game: dict[str, Any], task: dict[str, Any]) -> dict[str, Any]:
             expected = task["opening"][index]
             if (color, row, col) != (str(expected["player"]), int(expected["row"]), int(expected["col"])):
                 raise ValueError("stored opening differs from the pre-registered schedule")
+        else:
+            expected_actor = task["candidate"] if color == task["candidate_color"] else task["opponent"]
+            if move.get("actor") != expected_actor:
+                raise ValueError(f"wrong model actor recorded at ply {index}")
+            elapsed = float(move.get("elapsed_seconds", -1.0))
+            if not np.isfinite(elapsed) or elapsed < 0:
+                raise ValueError(f"missing/invalid decision time at ply {index}")
+            if expected_actor in MODELS:
+                if int(move.get("simulations", -1)) != PUCT_SIMULATIONS or int(move.get("root_action_visits", -1)) != PUCT_SIMULATIONS:
+                    raise ValueError(f"MCTS did not complete exactly {PUCT_SIMULATIONS} root visits at ply {index}")
+            elif int(move.get("search_depth", -1)) < 0 or int(move.get("search_nodes", -1)) < 0:
+                raise ValueError(f"missing traditional search counters at ply {index}")
         action = row * BOARD_SIZE + col
         if action not in board.availables or oracle.get((row, col)) is not None:
             raise ValueError(f"occupied move at ply {index}")
@@ -773,6 +793,9 @@ def summarize_v6_6(root: str | Path = ROOT) -> dict[str, Any]:
                 "mean_search_depth": float(np.mean([m.get("search_depth", 0) for game in selected for m in game["moves"] if m.get("actor") == candidate])),
                 "mean_search_nodes": float(np.mean([m.get("search_nodes", 0) for game in selected for m in game["moves"] if m.get("actor") == candidate])),
                 "mean_simulations": float(np.mean([m.get("simulations", 0) for game in selected for m in game["moves"] if m.get("actor") == candidate])),
+                "opponent_mean_search_depth": float(np.mean([m.get("search_depth", 0) for game in selected for m in game["moves"] if m.get("actor") == opponent])),
+                "opponent_mean_search_nodes": float(np.mean([m.get("search_nodes", 0) for game in selected for m in game["moves"] if m.get("actor") == opponent])),
+                "opponent_mean_cutoffs": float(np.mean([m.get("cutoffs", 0) for game in selected for m in game["moves"] if m.get("actor") == opponent])),
                 "timeouts": sum(bool(m.get("timed_out")) for game in selected for m in game["moves"] if m.get("actor") == opponent),
             })
     direct_tasks = [task for task in plan if task["series"] == "G8000_vs_G5000"]
@@ -787,7 +810,13 @@ def summarize_v6_6(root: str | Path = ROOT) -> dict[str, Any]:
                            "candidate_black": color_summary["B"], "candidate_white": color_summary["W"],
                            "candidate_cpu_seconds": float(np.mean([g["candidate_cpu_seconds"] for g in direct])),
                            "opponent_cpu_seconds": float(np.mean([g["opponent_cpu_seconds"] for g in direct])),
-                           "mean_plies": float(np.mean([g["move_count"] for g in direct]))})
+                           "mean_plies": float(np.mean([g["move_count"] for g in direct])),
+                           "candidate_mean_search_depth": float(np.mean([m.get("search_depth", 0) for g in direct for m in g["moves"] if m.get("actor") == "G8000"])),
+                           "candidate_mean_search_nodes": float(np.mean([m.get("search_nodes", 0) for g in direct for m in g["moves"] if m.get("actor") == "G8000"])),
+                           "candidate_mean_simulations": float(np.mean([m.get("simulations", 0) for g in direct for m in g["moves"] if m.get("actor") == "G8000"])),
+                           "opponent_mean_search_depth": float(np.mean([m.get("search_depth", 0) for g in direct for m in g["moves"] if m.get("actor") == "G5000"])),
+                           "opponent_mean_search_nodes": float(np.mean([m.get("search_nodes", 0) for g in direct for m in g["moves"] if m.get("actor") == "G5000"])),
+                           "opponent_mean_simulations": float(np.mean([m.get("simulations", 0) for g in direct for m in g["moves"] if m.get("actor") == "G5000"]))})
     # Paired improvement uses matching opening, color, seed, and opponent budget.
     improvements = []
     for opponent in BASELINE_OPPONENTS:
