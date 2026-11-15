@@ -108,7 +108,11 @@ def main() -> None:
     check.add_argument("--archive", type=Path, required=True)
     check.add_argument("--destination", type=Path, required=True)
     args = parser.parse_args()
-    result = create(args.output, snapshot_id=args.snapshot_id) if args.command == "create" else restore(args.archive, args.destination)
+    if args.command == "create":
+        detailed = create(args.output, snapshot_id=args.snapshot_id)
+        result = {key: detailed[key] for key in ("snapshot_id", "git_commit", "file_count", "archive_sha256", "archive_size_bytes")}
+    else:
+        result = restore(args.archive, args.destination)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
