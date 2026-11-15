@@ -1,0 +1,152 @@
+{
+  "completed_at_utc": "2026-11-15T12:30:25Z",
+  "estimate": {
+    "basis": "V6.3 measured game lengths; one 25-ply midgame decision per frozen agent; 25% orchestration overhead; central estimate widened x0.7/x1.7.",
+    "central_cpu_hours": 5.2683442629855035,
+    "conservative_cpu_hours": 8.956185247075355,
+    "estimated_artifact_storage_mib": 80,
+    "optimistic_cpu_hours": 3.6878409840898523,
+    "preflight_probe_wall_seconds": null
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-6-acceptance",
+  "measurements": {
+    "A": {
+      "configured_time_limit_seconds": 1000000000.0,
+      "cpu_seconds": 0.003392993999999483,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.0008025199999792676,
+      "move": [
+        5,
+        6
+      ],
+      "root_action_visits": 0,
+      "search_depth": 0,
+      "search_nodes": 56,
+      "simulations": 0,
+      "timed_out": false
+    },
+    "B@50ms": {
+      "configured_time_limit_seconds": 0.05,
+      "cpu_seconds": 0.016566322000000078,
+      "cutoffs": 0,
+      "elapsed_seconds": 0.04506972100011808,
+      "move": [
+        2,
+        5
+      ],
+      "root_action_visits": 0,
+      "search_depth": 1,
+      "search_nodes": 113,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "C@1s": {
+      "configured_time_limit_seconds": 1.0,
+      "cpu_seconds": 0.9951001690000005,
+      "cutoffs": 936,
+      "elapsed_seconds": 0.9950579119999929,
+      "move": [
+        2,
+        1
+      ],
+      "root_action_visits": 0,
+      "search_depth": 3,
+      "search_nodes": 5072,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "C@200ms": {
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.19509566099999986,
+      "cutoffs": 127,
+      "elapsed_seconds": 0.19501186899992717,
+      "move": [
+        2,
+        5
+      ],
+      "root_action_visits": 0,
+      "search_depth": 2,
+      "search_nodes": 1505,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "C@50ms": {
+      "configured_time_limit_seconds": 0.05,
+      "cpu_seconds": 0.044477811000000145,
+      "cutoffs": 45,
+      "elapsed_seconds": 0.045011381999984224,
+      "move": [
+        2,
+        5
+      ],
+      "root_action_visits": 0,
+      "search_depth": 1,
+      "search_nodes": 259,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "C@5s": {
+      "configured_time_limit_seconds": 5.0,
+      "cpu_seconds": 2.648900631,
+      "cutoffs": 3294,
+      "elapsed_seconds": 2.649463570999842,
+      "move": [
+        2,
+        1
+      ],
+      "root_action_visits": 0,
+      "search_depth": 4,
+      "search_nodes": 9786,
+      "simulations": 0,
+      "timed_out": false
+    },
+    "G5000": {
+      "configured_playouts": 401,
+      "cpu_seconds": 2.013816422,
+      "first_leaf_value": 0.9577563405036926,
+      "move": [
+        2,
+        5
+      ],
+      "root_action_visits": 400,
+      "root_children": 56,
+      "root_network_value": 0.9577563405036926,
+      "root_visits": 400,
+      "search_cpu_seconds": 2.0123687759999997,
+      "search_depth": 9,
+      "search_nodes": 8729,
+      "simulations": 400,
+      "tree_depth": 9,
+      "tree_nodes": 8729
+    },
+    "G8000": {
+      "configured_playouts": 401,
+      "cpu_seconds": 1.8301887319999999,
+      "first_leaf_value": 0.9999918341636658,
+      "move": [
+        2,
+        5
+      ],
+      "root_action_visits": 400,
+      "root_children": 56,
+      "root_network_value": 0.9999918341636658,
+      "root_visits": 400,
+      "search_cpu_seconds": 1.8299514810000002,
+      "search_depth": 5,
+      "search_nodes": 4533,
+      "simulations": 400,
+      "tree_depth": 5,
+      "tree_nodes": 4533
+    }
+  },
+  "probe_position_plies": 25,
+  "resource": {
+    "disk_free_gib": 14.616954803466797,
+    "estimated_cpu_quota": 2.0,
+    "logical_cpu_count": 3,
+    "memory": {
+      "available_gib": 8.640064239501953,
+      "total_gib": 9.734611511230469
+    }
+  }
+}

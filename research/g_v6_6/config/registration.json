@@ -1,0 +1,89 @@
+{
+  "algorithm_changes": false,
+  "base_commit": "ba41fa266ef725815cdef44ebf753aedfaecba3a",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-6-acceptance",
+  "checkpoint_paths": {
+    "G5000": "research/g_v6_6/checkpoints/G5000.pt",
+    "G8000": "research/g_v6_6/checkpoints/G8000.pt"
+  },
+  "drive_folder_id": "1uOc9NRe8-GKHeHyoqdesNfyVUZYqj5_R",
+  "experiment_id": "wuziq-alphazero-g-v6-6-acceptance",
+  "format_version": 1,
+  "frozen_at_utc": "2026-11-15T12:30:12Z",
+  "match_plan_sha256": "01cf5dde3b02d39e4fe3755f933d4582ade8d6387f02cd9ab07516e44aa57a7e",
+  "models": {
+    "G5000": {
+      "environment_states": 87999,
+      "full_state_restored": true,
+      "game_count": 5000,
+      "model_loadable": true,
+      "model_matches_full_state": true,
+      "model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+      "optimizer_slots": 16,
+      "optimizer_updates": 4999,
+      "replay_rows": 10000,
+      "source_model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+      "source_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2"
+    },
+    "G8000": {
+      "environment_states": 139884,
+      "full_state_restored": true,
+      "game_count": 8000,
+      "model_loadable": true,
+      "model_matches_full_state": true,
+      "model_sha256": "490b70eabb75de1b076e1eb9d13a9d82d2ccc213f3b769bfe6c98eddcb679272",
+      "optimizer_slots": 16,
+      "optimizer_updates": 7999,
+      "replay_rows": 10000,
+      "source_model_sha256": "490b70eabb75de1b076e1eb9d13a9d82d2ccc213f3b769bfe6c98eddcb679272",
+      "source_state_sha256": "6b56dee19e66365fd3623a80817e397eb71875861e1f28be8809447daef88a82"
+    }
+  },
+  "n_in_row": 5,
+  "opening_schedule_sha256": "efdf7901171d88b4e4f00867e0f0a74ff1a3b985f24a909f05242fd0918e10e7",
+  "planned_games": 504,
+  "puct_simulations": 400,
+  "source_drive_archives": {
+    "G5000": {
+      "file_id": "1rwXJd863iQymbt_-OfuoFxS0Taor1PQQ",
+      "sha256": "e102465b3893c95524c2fcfb4913e23d60cda22d4bd1aa3debc55d98c17379ab"
+    },
+    "G8000": {
+      "file_id": "1koTkXhGJyrvk09RC5gwhk0G1DSXyGrSA",
+      "sha256": "0b80829fef0b62c7bef653c5c6a9afa0ac0bbd946c8491dce6297cf091d260e0"
+    }
+  },
+  "v6_5_progress_after": {
+    "active_arm": "reference400_empty",
+    "completed": true,
+    "completion_flag_corrected_by": "wuziq-alphazero-g-v6-6-acceptance",
+    "completion_flag_correction": "metadata only; checkpoint bytes and training state unchanged",
+    "config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+    "cumulative_cpu_seconds": 232367.2766464459,
+    "environment_states": 139884,
+    "experiment_id": "wuziq-alphazero-g-v6-5-selfplay-scale",
+    "format_version": 1,
+    "games_completed": 8000,
+    "last_game_cpu_seconds": 16.631083014999604,
+    "last_game_id": "reference400_empty-game-007999",
+    "optimizer_updates": 7999,
+    "phase": "training_complete",
+    "replay_rows": 10000
+  },
+  "v6_5_progress_before": {
+    "active_arm": "reference400_empty",
+    "completed": false,
+    "config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+    "cumulative_cpu_seconds": 232367.2766464459,
+    "environment_states": 139884,
+    "experiment_id": "wuziq-alphazero-g-v6-5-selfplay-scale",
+    "format_version": 1,
+    "games_completed": 8000,
+    "last_game_cpu_seconds": 16.631083014999604,
+    "last_game_id": "reference400_empty-game-007999",
+    "optimizer_updates": 7999,
+    "phase": "self_play_training",
+    "replay_rows": 10000
+  }
+}
