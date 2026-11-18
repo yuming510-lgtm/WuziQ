@@ -1,0 +1,122 @@
+{
+  "completed_at_utc": "2026-11-18T05:06:19Z",
+  "estimate": {
+    "basis": "V6.6 average game lengths plus measured 25-ply decisions; C uses explicit depth 69/radius 2 and the full time budget where needed. V6.6 game lengths are only a workload proxy because their C search used depth 4. Estimates include 30% persistence/verification overhead and 0.7x/1.7x bands.",
+    "central_cpu_hours": 2.4598022167744396,
+    "central_wall_hours": 1.6857225195459506,
+    "conservative_cpu_hours": 4.181663768516547,
+    "conservative_wall_hours": 2.865728283228116,
+    "estimated_artifact_storage_mib": 80,
+    "optimistic_cpu_hours": 1.7218615517421076,
+    "optimistic_wall_hours": 1.1800057636821655
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-6b-c-protocol-replay",
+  "historical_v6_6_mean_plies_by_opponent": {
+    "C@1s": 22.075,
+    "C@200ms": 29.825,
+    "C@5s": 23.708333333333332
+  },
+  "measurements": {
+    "C@1s": {
+      "configured_candidate_radius": 2,
+      "configured_max_depth": 69,
+      "configured_time_limit_seconds": 1.0,
+      "cpu_seconds": 0.9951684999999992,
+      "cutoffs": 735,
+      "elapsed_seconds": 0.9952483649999522,
+      "move": [
+        5,
+        5
+      ],
+      "root_action_visits": 0,
+      "search_depth": 3,
+      "search_nodes": 7762,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "C@200ms": {
+      "configured_candidate_radius": 2,
+      "configured_max_depth": 69,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.1780094459999999,
+      "cutoffs": 195,
+      "elapsed_seconds": 0.19501694999985375,
+      "move": [
+        5,
+        3
+      ],
+      "root_action_visits": 0,
+      "search_depth": 2,
+      "search_nodes": 894,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "C@5s": {
+      "configured_candidate_radius": 2,
+      "configured_max_depth": 69,
+      "configured_time_limit_seconds": 5.0,
+      "cpu_seconds": 4.987264721000001,
+      "cutoffs": 5747,
+      "elapsed_seconds": 4.995017418000089,
+      "move": [
+        5,
+        5
+      ],
+      "root_action_visits": 0,
+      "search_depth": 4,
+      "search_nodes": 17905,
+      "simulations": 0,
+      "timed_out": true
+    },
+    "G5000": {
+      "configured_playouts": 401,
+      "cpu_seconds": 2.17207113,
+      "elapsed_seconds": 1.0631348510000862,
+      "first_leaf_value": 0.5737512707710266,
+      "move": [
+        5,
+        5
+      ],
+      "root_action_visits": 400,
+      "root_children": 56,
+      "root_network_value": 0.5737512707710266,
+      "root_visits": 400,
+      "search_cpu_seconds": 2.171526756,
+      "search_depth": 7,
+      "search_nodes": 13617,
+      "simulations": 400,
+      "tree_depth": 7,
+      "tree_nodes": 13617
+    },
+    "G8000": {
+      "configured_playouts": 401,
+      "cpu_seconds": 1.7914733200000006,
+      "elapsed_seconds": 0.8966810630001874,
+      "first_leaf_value": -0.9999909400939941,
+      "move": [
+        5,
+        5
+      ],
+      "root_action_visits": 400,
+      "root_children": 56,
+      "root_network_value": -0.9999909400939941,
+      "root_visits": 400,
+      "search_cpu_seconds": 1.7908244559999993,
+      "search_depth": 8,
+      "search_nodes": 6715,
+      "simulations": 400,
+      "tree_depth": 8,
+      "tree_nodes": 6715
+    }
+  },
+  "probe_position_plies": 25,
+  "resource": {
+    "disk_free_gib": 12.877754211425781,
+    "estimated_cpu_quota": 2.0,
+    "logical_cpu_count": 3,
+    "memory": {
+      "available_gib": 8.831417083740234,
+      "total_gib": 9.734611511230469
+    }
+  }
+}

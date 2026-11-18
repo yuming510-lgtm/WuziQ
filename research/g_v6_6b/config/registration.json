@@ -1,0 +1,64 @@
+{
+  "algorithm_changes": false,
+  "base_commit": "ec8eb2dcee6db6b359556b448ecc489ada708222",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-6b-replay",
+  "c_search_protocol": {
+    "candidate_radius": 2,
+    "max_depth": 69,
+    "timeouts_return_last_complete_depth": true
+  },
+  "checkpoint_paths": {
+    "G5000": "research/g_v6_6b/checkpoints/G5000.pt",
+    "G8000": "research/g_v6_6b/checkpoints/G8000.pt"
+  },
+  "drive_folder_id": "1V_-xNxwIkjd8lIbJU2JkkW38KQGxGXMW",
+  "experiment_id": "wuziq-alphazero-g-v6-6b-c-protocol-replay",
+  "format_version": 1,
+  "frozen_at_utc": "2026-11-18T05:05:40Z",
+  "match_plan_sha256": "654d68344d808b968a487e1272dd0c42dd90f72debdbf136bb3bb2a9a5626459",
+  "models": {
+    "G5000": {
+      "archive_sha256": "e102465b3893c95524c2fcfb4913e23d60cda22d4bd1aa3debc55d98c17379ab",
+      "environment_states": 87999,
+      "full_state_restored": true,
+      "game_count": 5000,
+      "model_loadable": true,
+      "model_matches_full_state": true,
+      "model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+      "optimizer_slots": 16,
+      "optimizer_updates": 4999,
+      "replay_rows": 10000,
+      "source_model_sha256": "cc383f0667cfe02b8e8ccbaecf51eccc2c4f088d56c836a4e91e016cfae3ee97",
+      "source_state_sha256": "0fb9886068a014d000227ae7b275ff9043322a678d7f259e9730d44ac95398d2"
+    },
+    "G8000": {
+      "archive_sha256": "0b80829fef0b62c7bef653c5c6a9afa0ac0bbd946c8491dce6297cf091d260e0",
+      "environment_states": 139884,
+      "full_state_restored": true,
+      "game_count": 8000,
+      "model_loadable": true,
+      "model_matches_full_state": true,
+      "model_sha256": "490b70eabb75de1b076e1eb9d13a9d82d2ccc213f3b769bfe6c98eddcb679272",
+      "optimizer_slots": 16,
+      "optimizer_updates": 7999,
+      "replay_rows": 10000,
+      "source_model_sha256": "490b70eabb75de1b076e1eb9d13a9d82d2ccc213f3b769bfe6c98eddcb679272",
+      "source_state_sha256": "6b56dee19e66365fd3623a80817e397eb71875861e1f28be8809447daef88a82"
+    }
+  },
+  "n_in_row": 5,
+  "opening_schedule_sha256": "ceff32a0f5242bc34288245eb86734e422c695e95f7ea72e73736fb375e2b180",
+  "planned_games": 200,
+  "puct_simulations": 400,
+  "source_drive_archives": {
+    "G5000": {
+      "archive_sha256": "e102465b3893c95524c2fcfb4913e23d60cda22d4bd1aa3debc55d98c17379ab",
+      "file_id": "1rwXJd863iQymbt_-OfuoFxS0Taor1PQQ"
+    },
+    "G8000": {
+      "archive_sha256": "0b80829fef0b62c7bef653c5c6a9afa0ac0bbd946c8491dce6297cf091d260e0",
+      "file_id": "1koTkXhGJyrvk09RC5gwhk0G1DSXyGrSA"
+    }
+  }
+}
