@@ -538,6 +538,21 @@ def run_batch(root: str | Path = ROOT, *, batch_games: int = 10) -> dict[str, An
             "updated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         })
     cpu_seconds_this_batch = time.process_time() - batch_started_cpu
+    # Reconcile progress from durable game files even when a prior process stopped
+    # between the atomic game write and its progress update.
+    atomic_json(progress_path, {
+        "experiment_id": EXPERIMENT_ID,
+        "planned_games": len(plan),
+        "completed_games": len(existing),
+        "completed_game_ids": sorted(existing),
+        "last_completed_game_id": completed_now[-1] if completed_now else old_progress.get("last_completed_game_id"),
+        "cpu_seconds_this_batch": cpu_seconds_this_batch,
+        "cumulative_runner_cpu_seconds": cumulative_runner_cpu + cpu_seconds_this_batch,
+        "cumulative_match_cpu_seconds": sum(float(row.get("total_cpu_seconds", 0.0)) for row in existing.values()),
+        "run_started_at_utc": run_started_at,
+        "complete": len(existing) == len(plan),
+        "updated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    })
     return {
         "completed_before": len(existing) - len(completed_now),
         "completed_now": len(completed_now),

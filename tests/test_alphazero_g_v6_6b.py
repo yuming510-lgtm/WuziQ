@@ -3,6 +3,7 @@ from __future__ import annotations
 from types import SimpleNamespace
 
 import pytest
+import json
 
 from src import ai
 from src.ai import SearchConfig
@@ -97,3 +98,40 @@ def test_v66_frozen_weights_match_registered_sha256() -> None:
         path = root / "research/g_v6_6/checkpoints" / f"{model}.pt"
         assert v66b.sha_file(path) == expected
         v66b.load_frozen_model(path, model)
+
+
+def test_resume_reconciles_progress_with_already_durable_game(tmp_path, monkeypatch) -> None:
+    artifact = tmp_path / v66b.ARTIFACT
+    (artifact / "config").mkdir(parents=True)
+    schedule = {"openings": []}
+    schedule_hash = v66b._canonical_hash(schedule)
+    schedule["schedule_sha256"] = schedule_hash
+    (artifact / "config/opening_schedule.json").write_text(json.dumps(schedule), encoding="utf-8")
+    task = {
+        "game_id": "resume-id", "series": "G5000_vs_C_200ms", "candidate": "G5000",
+        "opponent": "C@200ms", "opening_group_id": "opening-1", "candidate_color": "B", "seed": 1,
+    }
+    plan = [task]
+    plan_hash = v66b._canonical_hash(plan)
+    registration = {
+        "opening_schedule_sha256": schedule_hash, "match_plan_sha256": plan_hash,
+        "c_search_protocol": {**v66b.ALPHA_BETA_SETTINGS, "timeouts_return_last_complete_depth": True},
+        "checkpoint_paths": {"G5000": "unused-G5000.pt", "G8000": "unused-G8000.pt"},
+    }
+    (artifact / "config/registration.json").write_text(json.dumps(registration), encoding="utf-8")
+    (artifact / "config/match_plan.json").write_text(json.dumps({"plan_sha256": plan_hash}), encoding="utf-8")
+    game_path = v66b._series_dir(tmp_path, task) / "resume-id.json"
+    game_path.parent.mkdir(parents=True, exist_ok=True)
+    game_path.write_text(json.dumps({"game_id": "resume-id"}), encoding="utf-8")
+    (artifact / "results/progress.json").parent.mkdir(parents=True, exist_ok=True)
+    (artifact / "results/progress.json").write_text(json.dumps({
+        "planned_games": 1, "completed_games": 0, "completed_game_ids": [],
+    }), encoding="utf-8")
+    monkeypatch.setattr(v66b, "build_match_plan", lambda openings: plan)
+    monkeypatch.setattr(v66b, "load_frozen_model", lambda path, name: object())
+    monkeypatch.setattr(v66b, "_validate_existing", lambda game, task: None)
+    result = v66b.run_batch(tmp_path, batch_games=1)
+    progress = json.loads((artifact / "results/progress.json").read_text(encoding="utf-8"))
+    assert result["completed_total"] == 1
+    assert progress["completed_games"] == 1
+    assert progress["completed_game_ids"] == ["resume-id"]
