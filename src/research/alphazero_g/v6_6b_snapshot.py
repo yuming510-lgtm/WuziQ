@@ -33,6 +33,7 @@ def _snapshot_files(root: Path) -> list[Path]:
         "src/research/alphazero_g/v6_6b_evaluation.py",
         "src/research/alphazero_g/v6_6b_snapshot.py",
         "scripts/run_g_v6_6b.py", "scripts/snapshot_g_v6_6b.py",
+        "scripts/record_g_v6_6b_snapshot.py",
         "tests/test_alphazero_g_v6_6b.py",
     ]
     files.extend(root / relative for relative in source_names)
