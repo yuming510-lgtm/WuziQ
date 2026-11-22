@@ -77,6 +77,16 @@ def _charts(root: Path, stages: list[dict[str, Any]], summaries: dict[tuple[int,
     fig.savefig(p1, dpi=160)
     plt.close(fig)
 
+    cumulative_states = [int(baseline["environment_states"])] + [int(row["training_states_cumulative"]) for row in stages]
+    fig, ax = plt.subplots(figsize=(8, 4.8))
+    ax.plot(games, cumulative_states, marker="o", linewidth=2, color="#3c9850")
+    ax.set(title="累计训练状态数", xlabel="累计自我对弈局数", ylabel="累计训练状态")
+    ax.grid(alpha=.25)
+    fig.tight_layout()
+    p_states = chart_dir / "training_states_curve.png"
+    fig.savefig(p_states, dpi=160)
+    plt.close(fig)
+
     fig, ax = plt.subplots(figsize=(8, 4.8))
     x = [int(row["games"]) for row in stages]
     for key, label, color in (("interval_mean_loss", "总损失", "#2864a5"),
@@ -118,7 +128,8 @@ def _charts(root: Path, stages: list[dict[str, Any]], summaries: dict[tuple[int,
     p3 = chart_dir / "match_score_trends.png"
     fig.savefig(p3, dpi=160)
     plt.close(fig)
-    return [str(p1.relative_to(root)), str(p2.relative_to(root)), str(p3.relative_to(root))]
+    return [str(p1.relative_to(root)), str(p_states.relative_to(root)),
+            str(p2.relative_to(root)), str(p3.relative_to(root))]
 
 
 def build_report(root: str | Path = ".") -> dict[str, Any]:
@@ -247,6 +258,8 @@ def build_report(root: str | Path = ".") -> dict[str, Any]:
 {chr(10).join(stage_table)}
 
 ![训练CPU曲线](charts/training_cpu_curve.png)
+
+![累计训练状态曲线](charts/training_states_curve.png)
 
 ![训练损失曲线](charts/training_loss_curve.png)
 
