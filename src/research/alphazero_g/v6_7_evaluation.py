@@ -255,6 +255,7 @@ def run_condition(root: str | Path, *, candidate_games: int, opponent_name: str,
     color_seed_offset = DEV_SEED if pool == "development" else BLIND_SEED
     for pair_index, opening in enumerate(openings):
         for color_index, candidate_color in enumerate(("B", "W")):
+            seed = int(color_seed_offset + pair_index * 2 + color_index)
             game_id = f"G{candidate_games}_vs_{opponent_name.replace('@', '').replace('-', '')}_{pool}_{pair_index:02d}_{candidate_color}"
             path = _game_path(root, game_id)
             if path.is_file():
@@ -262,11 +263,12 @@ def run_condition(root: str | Path, *, candidate_games: int, opponent_name: str,
                 if (record.get("candidate_model_sha256") != candidate_sha
                         or record.get("opponent") != opponent_name
                         or record.get("opening_group_id") != opening["opening_group_id"]
-                        or record.get("candidate_color") != candidate_color):
+                        or record.get("candidate_color") != candidate_color
+                        or int(record.get("seed", -1)) != seed
+                        or int(record.get("candidate_games", -1)) != candidate_games):
                     raise ValueError(f"existing evaluation game conflicts with frozen schedule: {game_id}")
                 games.append(record)
                 continue
-            seed = int(color_seed_offset + pair_index * 2 + color_index)
             record = play_match(root=root, game_id=game_id, candidate_games=candidate_games,
                                 opponent_name=opponent_name, opening=opening,
                                 candidate_color=candidate_color, seed=seed,
