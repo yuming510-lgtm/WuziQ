@@ -65,7 +65,7 @@ def _charts(root: Path, stages: list[dict[str, Any]], summaries: dict[tuple[int,
     artifact = training.artifact_path(root)
     chart_dir = artifact / "charts"
     chart_dir.mkdir(parents=True, exist_ok=True)
-    plt.rcParams.update({"font.family": "DejaVu Sans", "axes.unicode_minus": False})
+    plt.rcParams.update({"font.family": "Noto Sans CJK SC", "axes.unicode_minus": False})
     games = [8_000] + [int(row["games"]) for row in stages]
     training_hours = [0.0] + [float(row["new_training_cpu_seconds"]) / 3600 for row in stages]
     fig, ax = plt.subplots(figsize=(8, 4.8))
@@ -138,6 +138,11 @@ def build_report(root: str | Path = ".") -> dict[str, Any]:
     completed_games = int(state["game_count"])
     complete = completed_games == training.TARGET_GAMES
     total_cpu = training.total_new_cpu_seconds(root)
+    try:
+        started_wall = time.strptime(progress.get("started_at_utc", ""), "%Y-%m-%dT%H:%M:%SZ")
+        wall_elapsed_seconds = max(0.0, time.time() - time.mktime(started_wall))
+    except (ValueError, TypeError):
+        wall_elapsed_seconds = 0.0
     baseline_games = int(baseline.get("games", training.BASE_GAMES))
 
     stage_table = [
@@ -225,6 +230,7 @@ def build_report(root: str | Path = ".") -> dict[str, Any]:
 - 训练基线：冻结 G8000；模型 SHA-256 `{training.SOURCE_MODEL_SHA256}`，完整训练状态 SHA-256 `{training.SOURCE_STATE_SHA256}`。
 - 当前：G{completed_games}，累计 {state['environment_states']:,} 个训练状态、{state['optimizer_updates']:,} 次更新；新增训练 {progress.get('new_training_cpu_seconds', 0)/3600:.2f} CPU小时。
 - 完成状态：{'完成G20000' if complete else '未完成；报告仅覆盖已验收进度'}。本轮未修改网络、PUCT-400、Adam、Replay Buffer、学习率或训练目标。
+- 从 G8000 恢复登记至本次报告生成的墙钟时长约 {wall_elapsed_seconds/3600:.2f} 小时；其中包含训练、评测、备份及等待时间。
 - 新增数据来源为同一G网络的纯自我对弈；未使用教师模型、人工棋谱、战术奖励或规则补丁。
 - Codex 运行时的具体模型档位无法从实验容器独立核实。
 
@@ -290,5 +296,6 @@ Drive恢复使用 `scripts/restore_g_v6_7_snapshot.py <verified-snapshot.zip> <e
     return {"report": str(report_path), "report_bytes": report_path.stat().st_size,
             "chart_paths": charts, "training_curve_csv": str(curve_csv),
             "completed_games": completed_games, "evaluation_games": total_matches,
+            "wall_elapsed_hours": wall_elapsed_seconds / 3600,
             "total_new_cpu_hours": total_cpu / 3600, "complete": complete}
 
