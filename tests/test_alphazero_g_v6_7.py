@@ -15,6 +15,7 @@ def test_v67_training_milestones_and_batch_boundaries():
     assert next_batch_target(8_000) == 8_250
     assert next_batch_target(9_900) == 10_000
     assert next_batch_target(19_900) == 20_000
+    assert next_batch_target(9_512, last_snapshot_games=9_500) == 9_750
 
 
 def test_v67_snapshot_is_due_on_first_of_250_games_or_three_cpu_hours():

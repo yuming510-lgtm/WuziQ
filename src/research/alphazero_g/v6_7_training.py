@@ -105,12 +105,13 @@ def validate_training_state(path: str | Path | None = None, *, root: str | Path 
     return result
 
 
-def next_batch_target(games: int) -> int:
+def next_batch_target(games: int, *, last_snapshot_games: int | None = None) -> int:
     games = int(games)
     if games >= TARGET_GAMES:
         return TARGET_GAMES
     milestone = min((value for value in MILESTONES if value > games), default=TARGET_GAMES)
-    return min(games + SNAPSHOT_INTERVAL_GAMES, milestone, TARGET_GAMES)
+    boundary_start = games if last_snapshot_games is None else int(last_snapshot_games)
+    return min(boundary_start + SNAPSHOT_INTERVAL_GAMES, milestone, TARGET_GAMES)
 
 
 def snapshot_due(games: int, last_snapshot_games: int, total_cpu_seconds: float,
@@ -409,7 +410,8 @@ def run_training_batch(root: str | Path = ROOT) -> dict[str, Any]:
     if allowed <= 1:
         return {"stopped": "cpu_budget_exhausted", "state": current_validation,
                 "training_cpu_seconds": training_added, "total_new_cpu_seconds": total_added}
-    target = next_batch_target(current_games)
+    target = next_batch_target(current_games,
+                               last_snapshot_games=int(progress.get("last_snapshot_games", BASE_GAMES)))
     started_cpu = time.process_time()
     result = train_reference_arm(
         root, arm=ARM, board_size=9, n_in_row=5, simulations=SIMULATIONS,
