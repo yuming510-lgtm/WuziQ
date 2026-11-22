@@ -1,0 +1,166 @@
+{
+  "additional_games": 12000,
+  "base_commit": "ba41fa266ef725815cdef44ebf753aedfaecba3a",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-7-selfplay-20k",
+  "created_at_utc": "2026-11-22T14:50:11Z",
+  "evaluation_protocol": {
+    "blind_only_at_g20000_after_development_evaluation": true,
+    "blind_opening_seed": 670702,
+    "c_protocol": {
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "max_depth": 69,
+      "timeout_returns_last_complete_depth": true
+    },
+    "development_opening_seed": 670701,
+    "g_protocol": "same original 9x9 PUCT-400 reference engine",
+    "opening_pairs_per_condition": 10,
+    "opening_plies": 6,
+    "opponents": [
+      "G8000",
+      "A",
+      "C@50ms",
+      "C@200ms"
+    ]
+  },
+  "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
+  "format_version": 1,
+  "milestones_games": [
+    10000,
+    12000,
+    16000,
+    20000
+  ],
+  "n_in_row": 5,
+  "opening_pools_sha256": "442c2790342fd5f4d557e24b7e34a0343473085d603f43308e02b7beb87f1603",
+  "preflight": {
+    "evaluation_forecast": {
+      "conservative_cpu_hours": 0.540661982326389,
+      "games_per_opponent": 100,
+      "normal_cpu_hours": 0.32439718939583334,
+      "optimistic_cpu_hours": 0.16219859469791667,
+      "pilot_cpu_seconds_per_game": {
+        "A": 7.114477885999998,
+        "C@200ms": 11.173666052000002,
+        "C@50ms": 4.344814648,
+        "G8000": 8.509171596
+      },
+      "pilot_games_excluded_from_formal_results": true,
+      "pilot_opening_disjoint_from_registered_pools": true,
+      "planned_formal_games": 400
+    },
+    "pilot_cpu_seconds": 32.109292757,
+    "pilot_opening": {
+      "moves": [
+        {
+          "col": 2,
+          "player": "B",
+          "row": 1
+        },
+        {
+          "col": 0,
+          "player": "W",
+          "row": 5
+        },
+        {
+          "col": 3,
+          "player": "B",
+          "row": 6
+        },
+        {
+          "col": 6,
+          "player": "W",
+          "row": 7
+        },
+        {
+          "col": 2,
+          "player": "B",
+          "row": 0
+        },
+        {
+          "col": 2,
+          "player": "W",
+          "row": 5
+        }
+      ],
+      "opening_group_id": "v5-9x9-670700-000",
+      "seed": 670700
+    },
+    "resources": {
+      "cpu_count_visible": 3,
+      "cpu_quota": "200000 100000",
+      "disk_free_bytes": 13544951808,
+      "disk_total_bytes": 33770192896,
+      "memory_limit_bytes": "8589934592",
+      "python": "Python 3.12.14",
+      "torch": "2.15.0+cpu",
+      "torch_threads": 1,
+      "total_budget_cpu_hours": 110.0,
+      "training_budget_cpu_hours": 100.0
+    },
+    "total_forecast_cpu_hours": {
+      "conservative_cpu_hours": 91.19132198200843,
+      "normal_cpu_hours": 71.44028949684356,
+      "optimistic_cpu_hours": 58.254912440656106
+    },
+    "training_forecast": {
+      "conservative_training_cpu_hours": 84.65065999968205,
+      "expected_training_cpu_hours": 65.11589230744772,
+      "historical_cpu_seconds": 58604.303076702956,
+      "historical_cpu_seconds_per_game": 19.53476769223432,
+      "historical_games": 3000,
+      "optimistic_training_cpu_hours": 52.09271384595819,
+      "remaining_games": 12000
+    }
+  },
+  "reference_config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+  "seed": 590502,
+  "simulations_per_move": 400,
+  "snapshot_policy": {
+    "drive_folder_id": "1bkakjo5fdhgELAzyuOohDE8wynVBY1fh",
+    "permanent_milestones": [
+      10000,
+      12000,
+      16000,
+      20000
+    ],
+    "rolling_to_retain": 2,
+    "trigger": "first of 250 games or 3 CPU hours"
+  },
+  "source_branch": "research/alphazero-g-v6-5-selfplay-scale",
+  "source_drive_archive_id": "1koTkXhGJyrvk09RC5gwhk0G1DSXyGrSA",
+  "source_drive_folder_id": "1u3556ink-VFf9a7AbS701flr0V0spSzQ",
+  "source_games": 8000,
+  "source_model_sha256": "490b70eabb75de1b076e1eb9d13a9d82d2ccc213f3b769bfe6c98eddcb679272",
+  "source_restore_relative_path": "research/g_v6_7/checkpoints/reference400_empty/training_state_games_8000.pt",
+  "source_states": 139884,
+  "source_training_state_sha256": "6b56dee19e66365fd3623a80817e397eb71875861e1f28be8809447daef88a82",
+  "source_updates": 7999,
+  "source_v6_5_archive_sha256": "0b80829fef0b62c7bef653c5c6a9afa0ac0bbd946c8491dce6297cf091d260e0",
+  "source_validation": {
+    "adam_restored": true,
+    "cumulative_training_cpu_seconds": 232367.8146550719,
+    "environment_states": 139884,
+    "game_count": 8000,
+    "model_restored": true,
+    "numpy_rng_restored": true,
+    "optimizer_slots": 16,
+    "optimizer_updates": 7999,
+    "python_rng_restored": true,
+    "replay_restored": true,
+    "replay_rows": 10000,
+    "replay_sha256": "74e6248f95ae1863164e5d806584f47f4b389ab5a4bba5a1e1c65e763d5095e9",
+    "sha256": "6b56dee19e66365fd3623a80817e397eb71875861e1f28be8809447daef88a82",
+    "torch_rng_restored": true,
+    "valid": true
+  },
+  "target_games_cumulative": 20000,
+  "training_algorithm_changed": false,
+  "training_config_sha256": "d3f268d6bd13093c8729cb827ac6118782d90eb9235b296e80053902b26a0c1e",
+  "training_input": "same-network AlphaZero self-play only; no teacher data, handcrafted reward, or inference rule patch",
+  "training_limits": {
+    "total_new_cpu_hours": 110,
+    "training_cpu_reserve_hours": 100
+  }
+}

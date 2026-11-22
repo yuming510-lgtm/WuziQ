@@ -1,0 +1,86 @@
+{
+  "evaluation_forecast": {
+    "conservative_cpu_hours": 0.540661982326389,
+    "games_per_opponent": 100,
+    "normal_cpu_hours": 0.32439718939583334,
+    "optimistic_cpu_hours": 0.16219859469791667,
+    "pilot_cpu_seconds_per_game": {
+      "A": 7.114477885999998,
+      "C@200ms": 11.173666052000002,
+      "C@50ms": 4.344814648,
+      "G8000": 8.509171596
+    },
+    "pilot_games_excluded_from_formal_results": true,
+    "pilot_opening_disjoint_from_registered_pools": true,
+    "planned_formal_games": 400
+  },
+  "hard_cap_cpu_hours": 110,
+  "opening_pool_sha256": "442c2790342fd5f4d557e24b7e34a0343473085d603f43308e02b7beb87f1603",
+  "pilot_games": [
+    {
+      "candidate_cpu_seconds": 4.432590259000001,
+      "candidate_score": 1.0,
+      "game_id": "PREFLIGHT_G8000_vs_G8000",
+      "move_count": 23,
+      "opponent": "G8000",
+      "opponent_cpu_seconds": 4.075025290000001,
+      "total_cpu_seconds": 8.509171596
+    },
+    {
+      "candidate_cpu_seconds": 7.101145863999998,
+      "candidate_score": 1.0,
+      "game_id": "PREFLIGHT_G8000_vs_A",
+      "move_count": 31,
+      "opponent": "A",
+      "opponent_cpu_seconds": 0.010820411999997503,
+      "total_cpu_seconds": 7.114477885999998
+    },
+    {
+      "candidate_cpu_seconds": 4.073059046000001,
+      "candidate_score": 1.0,
+      "game_id": "PREFLIGHT_G8000_vs_C50ms",
+      "move_count": 19,
+      "opponent": "C@50ms",
+      "opponent_cpu_seconds": 0.2705142380000005,
+      "total_cpu_seconds": 4.344814648
+    },
+    {
+      "candidate_cpu_seconds": 8.243973086999997,
+      "candidate_score": 0.0,
+      "game_id": "PREFLIGHT_G8000_vs_C200ms",
+      "move_count": 36,
+      "opponent": "C@200ms",
+      "opponent_cpu_seconds": 2.926250707999987,
+      "total_cpu_seconds": 11.173666052000002
+    }
+  ],
+  "preflight_cpu_seconds": 32.295531669,
+  "preflight_wall_seconds": 32.34242457500113,
+  "resources": {
+    "cpu_count_visible": 3,
+    "cpu_quota": "200000 100000",
+    "disk_free_bytes": 13544951808,
+    "disk_total_bytes": 33770192896,
+    "memory_limit_bytes": "8589934592",
+    "python": "Python 3.12.14",
+    "torch": "2.15.0+cpu",
+    "torch_threads": 1,
+    "total_budget_cpu_hours": 110.0,
+    "training_budget_cpu_hours": 100.0
+  },
+  "timestamp_utc": "2026-11-22T14:54:57Z",
+  "total_forecast_cpu_hours": {
+    "conservative_cpu_hours": 91.19132198200843,
+    "normal_cpu_hours": 71.44028949684356,
+    "optimistic_cpu_hours": 58.254912440656106
+  },
+  "training_forecast": {
+    "conservative_training_cpu_hours": 84.65065999968205,
+    "expected_training_cpu_hours": 65.11589230744772,
+    "historical_cpu_seconds": 58604.303076702956,
+    "historical_cpu_seconds_per_game": 19.53476769223432,
+    "historical_games": 3000,
+    "optimistic_training_cpu_hours": 52.09271384595819,
+    "remaining_games": 12000
+  }
+}
