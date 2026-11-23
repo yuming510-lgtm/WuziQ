@@ -174,6 +174,11 @@ def restore_snapshot(archive_path: str | Path, destination: str | Path) -> dict:
 def register_snapshot(root: str | Path, row: dict[str, Any]) -> dict[str, Any]:
     if row.get("sha256") != row.get("downloaded_sha256") or not row.get("empty_directory_restore"):
         raise ValueError("cannot register a Drive snapshot before download and empty-directory restore pass")
+    required = ("snapshot_id", "games_completed", "training_state_sha256", "total_new_cpu_seconds",
+                "folder_id", "sha256", "downloaded_sha256", "empty_directory_restore")
+    missing = [key for key in required if key not in row]
+    if missing:
+        raise ValueError(f"snapshot record is missing required field(s): {', '.join(missing)}")
     root = Path(root).resolve()
     path = training.artifact_path(root) / "results/drive_backup_status.json"
     status = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {
@@ -184,14 +189,20 @@ def register_snapshot(root: str | Path, row: dict[str, Any]) -> dict[str, Any]:
     entries = status.setdefault("snapshots", [])
     if any(item.get("snapshot_id") == row.get("snapshot_id") for item in entries):
         raise ValueError("duplicate Drive snapshot registration")
+    progress = json.loads(training.progress_path(root).read_text(encoding="utf-8"))
+    if int(progress.get("games_completed", -1)) != int(row["games_completed"]):
+        raise ValueError("snapshot game count does not match the current saved progress")
+    state = training.validate_training_state(root=root, expected_games=int(row["games_completed"]))
+    if state["sha256"] != row["training_state_sha256"]:
+        raise ValueError("snapshot training state does not match the current checkpoint")
+    # Advance the verified checkpoint pointer only after all registration preconditions pass.
+    training.mark_snapshot_verified(root, games=int(row["games_completed"]),
+                                    total_cpu_seconds=float(row["total_new_cpu_seconds"]),
+                                    snapshot_record=row)
     entries.append(row)
     status["latest_verified_snapshot"] = row["snapshot_id"]
     status["latest_games"] = int(row["games_completed"])
     status["updated_at_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     training.atomic_json(path, status)
-    progress = json.loads(training.progress_path(root).read_text(encoding="utf-8"))
-    training.mark_snapshot_verified(root, games=int(row["games_completed"]),
-                                    total_cpu_seconds=float(row["total_new_cpu_seconds"]),
-                                    snapshot_record=row)
     return status
 

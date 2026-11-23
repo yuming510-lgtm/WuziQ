@@ -1,0 +1,45 @@
+{
+  "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
+  "events": [
+    {
+      "event": "environment_restart_at_G11163",
+      "last_pre_restart_verified_drive_games": 11000,
+      "local_full_state_games": 11163,
+      "local_state_sha256": "1a81ede067543d0320c88b3ef0248b447327c22a81ac95d799ab77e0af4e8eaf",
+      "adam_replay_and_rng_validation": true,
+      "drive_G11000_empty_directory_restore": true,
+      "resolution": "Preserved the validated local G11163 checkpoint, uploaded and restored a new Drive recovery snapshot before resuming."
+    },
+    {
+      "event": "duplicate_history_append_during_overlapping_batch_invocations",
+      "duplicate_game_id": "reference400_empty-game-010254",
+      "duplicate_rows_were_identical": true,
+      "duplicate_rows_removed": 1,
+      "checkpoint_game_count_was_double_incremented": false,
+      "optimizer_updates_were_double_counted": false,
+      "resolution": "Removed the identical duplicate JSONL metrics row and recorded this reconciliation; the raw game and checkpoint sequence retained one unique game ID."
+    },
+    {
+      "event": "stale_snapshot_progress_and_noop_batch_at_G11250",
+      "last_validated_drive_game_count": 11250,
+      "drive_training_state_sha256": "55d0eabc1be4f217aad43230055694567a4df852b871c281c59a02694729b91b",
+      "local_noop_state_sha256_before_restore": "db1242ecbda16b58b475e690c58f6c75a824b284e36139dfa23551d733b11b2d",
+      "game_count_before_and_after_noop": 11250,
+      "resolution": "Restored the exact G11250 full training state from the verified Drive archive, reconciled progress with its manifest, added transaction checks for snapshot registration, a stale-target stop, and an exclusive batch lock."
+    }
+  ],
+  "verified_recovery_point": {
+    "games_completed": 11250,
+    "environment_states": 196573,
+    "optimizer_updates": 11249,
+    "replay_rows": 10000,
+    "training_state_sha256": "55d0eabc1be4f217aad43230055694567a4df852b871c281c59a02694729b91b",
+    "drive_archive_sha256": "10d62da81ddf6712260b75a06dac735690e46a36dbe2a4f52ab63da20ab08bb5",
+    "download_sha256_verified": true,
+    "empty_directory_restore_verified": true,
+    "adam_restored": true,
+    "python_rng_restored": true,
+    "numpy_rng_restored": true,
+    "torch_rng_restored": true
+  }
+}

@@ -1,6 +1,7 @@
 """V6.7 orchestration for an unchanged V6.5 AlphaZero training loop."""
 from __future__ import annotations
 
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -8,6 +9,7 @@ from pathlib import Path
 import shutil
 import time
 from typing import Any
+import fcntl
 
 import numpy as np
 import torch
@@ -112,6 +114,27 @@ def next_batch_target(games: int, *, last_snapshot_games: int | None = None) -> 
     milestone = min((value for value in MILESTONES if value > games), default=TARGET_GAMES)
     boundary_start = games if last_snapshot_games is None else int(last_snapshot_games)
     return min(boundary_start + SNAPSHOT_INTERVAL_GAMES, milestone, TARGET_GAMES)
+
+
+def batch_target_is_stale(*, current_games: int, target_games: int) -> bool:
+    """A stale target must trigger recovery/snapshot handling, never a no-op training call."""
+    return int(target_games) <= int(current_games)
+
+
+@contextmanager
+def exclusive_training_lock(lock_path: str | Path):
+    """Prevent two resumptions from mutating the same full-state checkpoint concurrently."""
+    path = Path(lock_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a+") as handle:
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise RuntimeError("a V6.7 training batch is already running") from exc
+        try:
+            yield
+        finally:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 def snapshot_due(games: int, last_snapshot_games: int, total_cpu_seconds: float,
@@ -412,6 +435,35 @@ def run_training_batch(root: str | Path = ROOT) -> dict[str, Any]:
                 "training_cpu_seconds": training_added, "total_new_cpu_seconds": total_added}
     target = next_batch_target(current_games,
                                last_snapshot_games=int(progress.get("last_snapshot_games", BASE_GAMES)))
+    if batch_target_is_stale(current_games=current_games, target_games=target):
+        drive_path = artifact / "results/drive_backup_status.json"
+        drive_status = json.loads(drive_path.read_text(encoding="utf-8")) if drive_path.is_file() else {}
+        snapshots = drive_status.get("snapshots", [])
+        latest = snapshots[-1] if snapshots else None
+        if (latest and int(latest.get("games_completed", -1)) == current_games
+                and latest.get("training_state_sha256") == current_validation["sha256"]
+                and latest.get("sha256") == latest.get("downloaded_sha256")
+                and latest.get("empty_directory_restore")
+                and "total_new_cpu_seconds" in latest):
+            updated_progress = mark_snapshot_verified(
+                root, games=current_games,
+                total_cpu_seconds=float(latest["total_new_cpu_seconds"]),
+                snapshot_record=latest)
+            return {"stopped": "verified_snapshot_reconciled", "snapshot_due": False,
+                    "state": current_validation, "progress": updated_progress,
+                    "total_new_cpu_seconds": total_added}
+        stale_progress = {**progress,
+                          "games_completed": current_games,
+                          "training_states_cumulative": int(current_validation["environment_states"]),
+                          "optimizer_updates_cumulative": int(current_validation["optimizer_updates"]),
+                          "training_state_sha256": current_validation["sha256"],
+                          "snapshot_due": True,
+                          "phase": "self_play_training",
+                          "updated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+        atomic_json(progress_path(root), stale_progress)
+        return {"stopped": "stale_batch_target", "snapshot_due": True,
+                "state": current_validation, "progress": stale_progress,
+                "total_new_cpu_seconds": total_added}
     started_cpu = time.process_time()
     result = train_reference_arm(
         root, arm=ARM, board_size=9, n_in_row=5, simulations=SIMULATIONS,
@@ -470,6 +522,11 @@ def mark_snapshot_verified(root: str | Path, *, games: int, total_cpu_seconds: f
         raise ValueError("cannot mark a different checkpoint as remotely saved")
     if not snapshot_record.get("empty_directory_restore") or snapshot_record.get("sha256") != snapshot_record.get("downloaded_sha256"):
         raise ValueError("unverified Drive snapshot cannot advance progress")
+    if float(snapshot_record.get("total_new_cpu_seconds", -1)) < 0:
+        raise ValueError("verified Drive snapshot is missing its CPU accounting")
+    state = validate_training_state(state_path(root), root=root, expected_games=int(games))
+    if state["sha256"] != snapshot_record.get("training_state_sha256"):
+        raise ValueError("Drive snapshot checkpoint SHA does not match the local full training state")
     updated = {**progress, "last_snapshot_games": int(games),
                "last_snapshot_total_cpu_seconds": float(total_cpu_seconds),
                "last_verified_snapshot": snapshot_record,
