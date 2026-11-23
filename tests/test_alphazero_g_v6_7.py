@@ -8,9 +8,11 @@ from src.research.alphazero_g.v6_7_training import (
 )
 from src.research.alphazero_g.v6_7_snapshot import register_snapshot, restore_snapshot
 import json
+import hashlib
 import zipfile
 import pytest
 from src.research.alphazero_g import v6_7_training as training
+from src.research.alphazero_g import v6_7_snapshot as snapshot
 
 
 def test_v67_training_milestones_and_batch_boundaries():
@@ -115,3 +117,56 @@ def test_v67_restore_rejects_path_traversal_before_extracting(tmp_path):
     else:
         raise AssertionError("unsafe member path was accepted")
     assert not (tmp_path / "escape.txt").exists()
+
+
+def test_v67_restore_reconciles_progress_to_downloaded_checkpoint(tmp_path, monkeypatch):
+    archive = tmp_path / "snapshot.zip"
+    destination = tmp_path / "empty"
+    destination.mkdir()
+    state_relative = "research/g_v6_7/checkpoints/reference400_empty/training_state.pt"
+    progress_relative = "research/g_v6_7/results/progress.json"
+    training_progress_relative = "research/g_v6_7/results/training_progress.json"
+    state_bytes = b"complete training state"
+    stale_progress = {"games_completed": 12_750, "snapshot_due": True,
+                      "last_snapshot_games": 12_500}
+    stale_training_progress = {"games_completed": 12_750, "active_arm": "reference400_empty",
+                               "replay_rows": 10_000}
+    files = {
+        state_relative: state_bytes,
+        progress_relative: (json.dumps(stale_progress) + "\n").encode(),
+        training_progress_relative: (json.dumps(stale_training_progress) + "\n").encode(),
+    }
+    file_hashes = {name: hashlib.sha256(content).hexdigest() for name, content in files.items()}
+    state_sha = hashlib.sha256(state_bytes).hexdigest()
+    manifest = {
+        "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
+        "snapshot_label": "rolling-G13000",
+        "games_completed": 13_000,
+        "environment_states": 227_437,
+        "optimizer_updates": 12_999,
+        "training_state_sha256": state_sha,
+        "new_experiment_cpu_seconds": 78_500.0,
+        "file_hashes": file_hashes,
+        "file_count": len(files),
+        "source_v6_5_archive_sha256": "source-sha",
+    }
+    with zipfile.ZipFile(archive, "w") as handle:
+        for name, content in files.items():
+            handle.writestr(name, content)
+        handle.writestr("V6_7_RECOVERY_MANIFEST.json", json.dumps(manifest))
+
+    monkeypatch.setattr(training, "validate_training_state", lambda *args, **kwargs: {
+        "game_count": 13_000, "environment_states": 227_437,
+        "optimizer_updates": 12_999, "replay_rows": 10_000,
+        "sha256": state_sha,
+    })
+    result = snapshot.restore_snapshot(archive, destination)
+
+    restored_progress = json.loads((destination / progress_relative).read_text())
+    restored_training_progress = json.loads((destination / training_progress_relative).read_text())
+    assert result["progress_reconciled_to_snapshot"] is True
+    assert restored_progress["games_completed"] == 13_000
+    assert restored_progress["last_snapshot_games"] == 13_000
+    assert restored_progress["last_snapshot_total_cpu_seconds"] == 78_500.0
+    assert restored_progress["snapshot_due"] is False
+    assert restored_training_progress["games_completed"] == 13_000

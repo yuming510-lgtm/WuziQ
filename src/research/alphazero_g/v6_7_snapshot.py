@@ -165,9 +165,56 @@ def restore_snapshot(archive_path: str | Path, destination: str | Path) -> dict:
             raise ValueError("restored model node differs from the full training-state weights")
         if manifest.get("model_node_sha256") and sha_file(current_node) != manifest["model_node_sha256"]:
             raise ValueError("restored model node SHA-256 differs from the manifest")
+    # The archive is created before its Drive upload can be verified, so its
+    # serialized progress necessarily points at the previous snapshot. Once
+    # the caller has downloaded and hash-checked this archive, restore must
+    # advance the restored progress pointer to the checkpoint in the archive;
+    # otherwise the next batch is treated as stale and cannot be resumed
+    # cleanly through the normal registration path.
+    restored_progress = False
+    snapshot_cpu = manifest.get("new_experiment_cpu_seconds")
+    if snapshot_cpu is not None:
+        games = int(manifest["games_completed"])
+        progress_path = training.progress_path(destination)
+        if progress_path.is_file():
+            progress = json.loads(progress_path.read_text(encoding="utf-8"))
+            recovery_record = {
+                "snapshot_id": f"restored-{manifest['snapshot_label']}-{archive_sha[:12]}",
+                "label": manifest["snapshot_label"],
+                "games_completed": games,
+                "training_state_sha256": manifest["training_state_sha256"],
+                "sha256": archive_sha,
+                "downloaded_sha256": archive_sha,
+                "empty_directory_restore": True,
+                "total_new_cpu_seconds": float(snapshot_cpu),
+                "restored_from_archive": True,
+            }
+            progress.update({
+                "games_completed": games,
+                "training_states_cumulative": int(manifest["environment_states"]),
+                "optimizer_updates_cumulative": int(manifest["optimizer_updates"]),
+                "training_state_sha256": manifest["training_state_sha256"],
+                "last_snapshot_games": games,
+                "last_snapshot_total_cpu_seconds": float(snapshot_cpu),
+                "last_verified_snapshot": recovery_record,
+                "recovered_complete_games_since_snapshot": 0,
+                "snapshot_due": False,
+                "phase": "self_play_training",
+                "updated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            })
+            training.atomic_json(progress_path, progress)
+            training_progress_path = training.artifact_path(destination) / "results" / "training_progress.json"
+            if training_progress_path.is_file():
+                training_progress = json.loads(training_progress_path.read_text(encoding="utf-8"))
+                training_progress.update(progress)
+                training_progress["active_arm"] = training.ARM
+                training_progress["replay_rows"] = int(validation["replay_rows"])
+                training.atomic_json(training_progress_path, training_progress)
+            restored_progress = True
     return {"empty_directory_restore": True, "archive_sha256": archive_sha,
             "snapshot_label": manifest["snapshot_label"], "games_completed": manifest["games_completed"],
             "file_count": manifest["file_count"], "training_state": validation,
+            "progress_reconciled_to_snapshot": restored_progress,
             "source_v6_5_archive_sha256": manifest["source_v6_5_archive_sha256"]}
 
 
