@@ -1,0 +1,11 @@
+{
+  "checkpoint_games_completed": 11163,
+  "duplicate_game_ids": [
+    "reference400_empty-game-010254"
+  ],
+  "duplicate_rows_removed": 1,
+  "duplicates_were_byte-equivalent_json_objects": true,
+  "note": "Each duplicate was the same JSON metrics row and represented no additional checkpoint update or counted game.",
+  "optimizer_updates": 11162,
+  "reason": "Two concurrent batch invocations attempted the same deterministic game ID during environment recovery."
+}
