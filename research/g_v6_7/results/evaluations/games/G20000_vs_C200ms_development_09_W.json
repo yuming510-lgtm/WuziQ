@@ -1,0 +1,283 @@
+{
+  "board_size": 9,
+  "c_protocol": {
+    "algorithm": "Alpha-Beta",
+    "candidate_radius": 2,
+    "max_depth": 69,
+    "timeout_returns_last_complete_depth": true
+  },
+  "candidate": "G20000",
+  "candidate_color": "W",
+  "candidate_cpu_seconds": 2.0759935209999867,
+  "candidate_games": 20000,
+  "candidate_model_sha256": "aa8b69920675c9cd43a9b8a960abf3a43b88ebf6ad92dff2d2fb0ed2f4fcecbc",
+  "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
+  "format_version": 1,
+  "game_id": "G20000_vs_C200ms_development_09_W",
+  "move_count": 17,
+  "moves": [
+    {
+      "col": 7,
+      "opening": true,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 2,
+      "opening": true,
+      "player": "W",
+      "row": 8
+    },
+    {
+      "col": 5,
+      "opening": true,
+      "player": "B",
+      "row": 6
+    },
+    {
+      "col": 5,
+      "opening": true,
+      "player": "W",
+      "row": 4
+    },
+    {
+      "col": 7,
+      "opening": true,
+      "player": "B",
+      "row": 7
+    },
+    {
+      "col": 1,
+      "opening": true,
+      "player": "W",
+      "row": 7
+    },
+    {
+      "actor": "C@200ms",
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "col": 7,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.1955892240000594,
+      "cutoffs": 212,
+      "elapsed_seconds": 0.19557936400087783,
+      "max_depth": 69,
+      "opening": false,
+      "player": "B",
+      "row": 6,
+      "search_depth": 2,
+      "search_nodes": 1794,
+      "timed_out": true
+    },
+    {
+      "actor": "G20000",
+      "algorithm": "AlphaZero-reference-PUCT",
+      "col": 7,
+      "configured_simulations": 400,
+      "cpu_seconds": 0.41312563600001795,
+      "elapsed_seconds": 0.4131187009988935,
+      "network_root_value": -0.9998819828033447,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 399,
+      "row": 5,
+      "search_depth": 10,
+      "search_nodes": 24840,
+      "timed_out": false
+    },
+    {
+      "actor": "C@200ms",
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "col": 4,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.1950925080000161,
+      "cutoffs": 188,
+      "elapsed_seconds": 0.19509126400225796,
+      "max_depth": 69,
+      "opening": false,
+      "player": "B",
+      "row": 6,
+      "search_depth": 2,
+      "search_nodes": 1987,
+      "timed_out": true
+    },
+    {
+      "actor": "G20000",
+      "algorithm": "AlphaZero-reference-PUCT",
+      "col": 6,
+      "configured_simulations": 400,
+      "cpu_seconds": 0.5370678150000003,
+      "elapsed_seconds": 0.5370390230018529,
+      "network_root_value": -0.9842164516448975,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 399,
+      "row": 6,
+      "search_depth": 9,
+      "search_nodes": 25194,
+      "timed_out": false
+    },
+    {
+      "actor": "C@200ms",
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "col": 5,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.19510661499998605,
+      "cutoffs": 222,
+      "elapsed_seconds": 0.19509677200039732,
+      "max_depth": 69,
+      "opening": false,
+      "player": "B",
+      "row": 7,
+      "search_depth": 2,
+      "search_nodes": 1519,
+      "timed_out": true
+    },
+    {
+      "actor": "G20000",
+      "algorithm": "AlphaZero-reference-PUCT",
+      "col": 5,
+      "configured_simulations": 400,
+      "cpu_seconds": 0.41388266800004203,
+      "elapsed_seconds": 0.4138799050015223,
+      "network_root_value": 0.2824117839336395,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 399,
+      "row": 3,
+      "search_depth": 8,
+      "search_nodes": 25338,
+      "timed_out": false
+    },
+    {
+      "actor": "C@200ms",
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "col": 4,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.19507231199997932,
+      "cutoffs": 249,
+      "elapsed_seconds": 0.1950625179997587,
+      "max_depth": 69,
+      "opening": false,
+      "player": "B",
+      "row": 7,
+      "search_depth": 2,
+      "search_nodes": 1436,
+      "timed_out": true
+    },
+    {
+      "actor": "G20000",
+      "algorithm": "AlphaZero-reference-PUCT",
+      "col": 6,
+      "configured_simulations": 400,
+      "cpu_seconds": 0.37634326499994586,
+      "elapsed_seconds": 0.37632331699933275,
+      "network_root_value": 0.24045312404632568,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 399,
+      "row": 4,
+      "search_depth": 7,
+      "search_nodes": 18419,
+      "timed_out": false
+    },
+    {
+      "actor": "C@200ms",
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "col": 6,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.19503662900001473,
+      "cutoffs": 124,
+      "elapsed_seconds": 0.19507084300130373,
+      "max_depth": 69,
+      "opening": false,
+      "player": "B",
+      "row": 7,
+      "search_depth": 2,
+      "search_nodes": 2107,
+      "timed_out": true
+    },
+    {
+      "actor": "G20000",
+      "algorithm": "AlphaZero-reference-PUCT",
+      "col": 8,
+      "configured_simulations": 400,
+      "cpu_seconds": 0.3355741369999805,
+      "elapsed_seconds": 0.33562386899939156,
+      "network_root_value": 0.3675054609775543,
+      "opening": false,
+      "player": "W",
+      "root_action_visits": 399,
+      "row": 7,
+      "search_depth": 5,
+      "search_nodes": 6938,
+      "timed_out": false
+    },
+    {
+      "actor": "C@200ms",
+      "algorithm": "Alpha-Beta",
+      "candidate_radius": 2,
+      "col": 3,
+      "configured_time_limit_seconds": 0.2,
+      "cpu_seconds": 0.195027305999929,
+      "cutoffs": 90,
+      "elapsed_seconds": 0.1950704049995693,
+      "max_depth": 69,
+      "opening": false,
+      "player": "B",
+      "row": 7,
+      "search_depth": 3,
+      "search_nodes": 2167,
+      "timed_out": true
+    }
+  ],
+  "n_in_row": 5,
+  "opening": [
+    {
+      "col": 7,
+      "player": "B",
+      "row": 4
+    },
+    {
+      "col": 2,
+      "player": "W",
+      "row": 8
+    },
+    {
+      "col": 5,
+      "player": "B",
+      "row": 6
+    },
+    {
+      "col": 5,
+      "player": "W",
+      "row": 4
+    },
+    {
+      "col": 7,
+      "player": "B",
+      "row": 7
+    },
+    {
+      "col": 1,
+      "player": "W",
+      "row": 7
+    }
+  ],
+  "opening_group_id": "v5-9x9-670701-009",
+  "opponent": "C@200ms",
+  "opponent_cpu_seconds": 1.1709245939999846,
+  "opponent_model_sha256": "not_applicable",
+  "points": 0.0,
+  "seed": 670720,
+  "simulations_per_reference_turn": 400,
+  "source": "evaluation",
+  "termination": "five_in_row",
+  "total_cpu_seconds": 3.247987356000067,
+  "total_wall_seconds": 3.2480185790009273,
+  "winner_color": "B"
+}

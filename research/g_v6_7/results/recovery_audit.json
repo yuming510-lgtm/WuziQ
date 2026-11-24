@@ -132,22 +132,34 @@
       "optimizer_updates": 15589,
       "replay_rows": 10000,
       "resolution": "Environment switch stopped batch at atomically saved G15590; exact full state validated. 59 games are preserved and will not be replayed. Taking early Drive snapshot before resuming."
+    },
+    {
+      "drive_snapshot_id": "rolling-G16250-recovery-b1a4ff1b5dce",
+      "environment_states": 285868,
+      "event": "execution_environment_switch_reconciled_at_G16362",
+      "full_state_validated": true,
+      "last_verified_drive_games": 16250,
+      "local_full_state_games": 16362,
+      "local_state_sha256": "e20bbb1ea7408b2aec3646cf54013695502772a4f3b0f0fba3e0dfea33568b26",
+      "optimizer_updates": 16361,
+      "replay_rows": 10000,
+      "resolution": "Environment switch stopped the batch after atomic completion of G16362. All 112 games after the verified G16250 Drive backup remain in the local full state and will not be replayed; next scheduled target remains G16500."
     }
   ],
   "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
   "verified_recovery_point": {
     "adam_restored": true,
     "download_sha256_verified": true,
-    "drive_archive_sha256": "2921e322d99153be16fa5d52176ced7d800d8fcc17722bd9c5c28f4c4d4ca82e",
+    "drive_archive_sha256": "b1a4ff1b5dce9e4958481d9db569336f8dc458ed9b64dc1eba43f6716959a309",
     "drive_file_ids": [
-      "1Uu6FsnpoWGGkx-bkL30spX4vkmaj3mZ_",
-      "15QP66-y8IHaOQMg7GzJcwJu3QPig2dGb"
+      "1ADhg_vsNjzdYlYCqafb8ITpFNetnqC-g",
+      "1vVZtY--Q2hihAo9q-7-09LjPvYUUQDX3"
     ],
     "empty_directory_restore_verified": true,
-    "games_completed": 15531,
+    "games_completed": 16250,
     "numpy_rng_restored": true,
     "python_rng_restored": true,
     "torch_rng_restored": true,
-    "training_state_sha256": "9643a30f5c75126c50e1e29addaefe1b384f3993c3050834dee68cd8de9afaf0"
+    "training_state_sha256": "8d8dfdfc2ff133d7ced7236dd7db975c232969cbd45e9c19345dbae0019a5d19"
   }
 }

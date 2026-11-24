@@ -54,7 +54,7 @@ def _write_training_csv(root: Path, stages: list[dict[str, Any]], baseline: dict
             "mean_policy_entropy_since_previous": stage.get("interval_mean_policy_entropy"),
         })
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     return path
