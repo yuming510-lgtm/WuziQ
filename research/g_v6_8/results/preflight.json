@@ -1,0 +1,34 @@
+{
+  "created_at_utc": "2026-11-24T23:56:09Z",
+  "estimate_method": "one scheduled G5000 game per opponent extrapolated to 240 games/opponent; 0.75x/1x/1.5x cost band",
+  "estimate_uncertainty": "single game per opponent; A/C search depth and game length cause variance",
+  "estimated_completed_games": 960,
+  "estimated_cpu_hours": {
+    "conservative": 9.660565685799998,
+    "normal": 6.440377123866666,
+    "optimistic": 4.830282842899999
+  },
+  "estimated_total_cpu_seconds_normal": 23185.357645919998,
+  "estimated_wall_hours_at_two_cpu_quota": {
+    "conservative": 4.830282842899999,
+    "normal": 3.220188561933333,
+    "optimistic": 2.4151414214499995
+  },
+  "models_load_verified": 6,
+  "official_pilot_games_included_in_960": [
+    "G5000_vs_A_opening_00_B",
+    "G5000_vs_B50ms_opening_00_B",
+    "G5000_vs_C50ms_opening_00_B",
+    "G5000_vs_C200ms_opening_00_B"
+  ],
+  "pilot_cpu_seconds_by_opponent": {
+    "A": 25.664191524,
+    "B@50ms": 15.570226232000003,
+    "C@200ms": 27.144131662999996,
+    "C@50ms": 28.227107438999994
+  },
+  "pilot_cpu_seconds_total": 96.60565685799999,
+  "torch_threads": 3,
+  "torch_interop_threads": 3,
+  "torch_cuda_available": false
+}

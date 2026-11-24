@@ -257,7 +257,8 @@ def prepare_experiment(root: str | Path = ROOT) -> dict[str, Any]:
         "memory_limit_bytes": read_text("/sys/fs/cgroup/memory.max"),
         "memory_current_bytes": read_text("/sys/fs/cgroup/memory.current"),
         "disk_total_bytes": disk.total, "disk_free_bytes": disk.free,
-        "torch_version": torch.__version__, "torch_threads": 1,
+        "torch_version": torch.__version__, "torch_threads": torch.get_num_threads(),
+        "torch_interop_threads": torch.get_num_interop_threads(),
         "cuda_available": bool(torch.cuda.is_available()),
         "cuda_device_count": int(torch.cuda.device_count()) if torch.cuda.is_available() else 0,
     }
