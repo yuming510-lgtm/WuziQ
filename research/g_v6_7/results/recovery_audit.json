@@ -1,45 +1,153 @@
 {
-  "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
   "events": [
     {
+      "adam_replay_and_rng_validation": true,
+      "drive_G11000_empty_directory_restore": true,
       "event": "environment_restart_at_G11163",
       "last_pre_restart_verified_drive_games": 11000,
       "local_full_state_games": 11163,
       "local_state_sha256": "1a81ede067543d0320c88b3ef0248b447327c22a81ac95d799ab77e0af4e8eaf",
-      "adam_replay_and_rng_validation": true,
-      "drive_G11000_empty_directory_restore": true,
       "resolution": "Preserved the validated local G11163 checkpoint, uploaded and restored a new Drive recovery snapshot before resuming."
     },
     {
-      "event": "duplicate_history_append_during_overlapping_batch_invocations",
-      "duplicate_game_id": "reference400_empty-game-010254",
-      "duplicate_rows_were_identical": true,
-      "duplicate_rows_removed": 1,
       "checkpoint_game_count_was_double_incremented": false,
+      "duplicate_game_id": "reference400_empty-game-010254",
+      "duplicate_rows_removed": 1,
+      "duplicate_rows_were_identical": true,
+      "event": "duplicate_history_append_during_overlapping_batch_invocations",
       "optimizer_updates_were_double_counted": false,
       "resolution": "Removed the identical duplicate JSONL metrics row and recorded this reconciliation; the raw game and checkpoint sequence retained one unique game ID."
     },
     {
-      "event": "stale_snapshot_progress_and_noop_batch_at_G11250",
-      "last_validated_drive_game_count": 11250,
       "drive_training_state_sha256": "55d0eabc1be4f217aad43230055694567a4df852b871c281c59a02694729b91b",
-      "local_noop_state_sha256_before_restore": "db1242ecbda16b58b475e690c58f6c75a824b284e36139dfa23551d733b11b2d",
+      "event": "stale_snapshot_progress_and_noop_batch_at_G11250",
       "game_count_before_and_after_noop": 11250,
+      "last_validated_drive_game_count": 11250,
+      "local_noop_state_sha256_before_restore": "db1242ecbda16b58b475e690c58f6c75a824b284e36139dfa23551d733b11b2d",
       "resolution": "Restored the exact G11250 full training state from the verified Drive archive, reconciled progress with its manifest, added transaction checks for snapshot registration, a stale-target stop, and an exclusive batch lock."
+    },
+    {
+      "adam_replay_and_rng_validation": true,
+      "environment_states": 227018,
+      "event": "environment_restart_reconciled_at_G12977",
+      "last_pre_restart_verified_drive_games": 12750,
+      "local_full_state_games": 12977,
+      "local_state_sha256": "5ef275ea920fac57237147f6ecdf4f915c529a3a41834a93c83f31f0dc4abf05",
+      "main_progress_games_before_resume": 12750,
+      "optimizer_updates": 12976,
+      "replay_rows": 10000,
+      "resolution": "Validated the newer atomic local G12977 full state, resumed exactly 23 games to G13000 without restarting completed work, then uploaded, downloaded, SHA-256 checked and restored an empty-directory G13000 recovery archive before registering it.",
+      "training_progress_games": 12977
+    },
+    {
+      "drive_snapshot_id": "rolling-G13750-a43d66c9811d",
+      "drive_snapshot_sha256": "a43d66c9811d",
+      "environment_states": 241607,
+      "event": "execution_environment_interrupt_reconciled_at_G13821",
+      "full_state_validated": true,
+      "last_verified_drive_games": 13750,
+      "local_full_state_games": 13821,
+      "local_state_sha256": "6b8ea7da6c9164ee7080cf72f4dd4f6028ca1483718c5a751fbcc809c8e4b2e1",
+      "optimizer_updates": 13820,
+      "replay_rows": 10000,
+      "resolution": "The environment switch stopped the in-flight batch after an atomically saved G13821 game. The complete local checkpoint and its Adam, replay buffer and RNG state were validated; the next batch will resume from G13821. The verified Drive point remains G13750 until the next rolling upload."
+    },
+    {
+      "drive_part_ids": [
+        "1L_axarZgZDZ_SkdzmH6nSfXuaBoHBhmq",
+        "1W_EO88G5mRaXf9snioIXSfEuAD1UWsh-"
+      ],
+      "empty_directory_restore": true,
+      "event": "drive_upload_interruption_recovered_at_G14000",
+      "local_archive_sha256": "2c47262325c6f2b3acb75f9b3614c73231f3d371d6c7fdf12d12665897a2ddfe",
+      "reassembled_download_sha256": "2c47262325c6f2b3acb75f9b3614c73231f3d371d6c7fdf12d12665897a2ddfe",
+      "resolution": "The environment interruption occurred after both archive parts reached Drive but before registration. The existing parts were fetched, reassembled, hash-checked and restored into an empty directory; the verified snapshot was then registered without creating duplicate Drive parts.",
+      "training_state_sha256": "4b04bba796c06bf85d0b56922a805dc97a1a287a37dd0289fb25ffa2208a3bcb"
+    },
+    {
+      "environment_states": 247286,
+      "event": "execution_environment_switch_reconciled_at_G14145",
+      "full_state_validated": true,
+      "last_verified_drive_games": 14000,
+      "local_full_state_games": 14145,
+      "local_state_sha256": "f5eb2d6998856c9e82036625739ad41d2209cf09af8b811ce5249b8bba590d42",
+      "optimizer_updates": 14144,
+      "replay_rows": 10000,
+      "resolution": "The active batch stopped at a complete per-game checkpoint when the execution environment switched. Continue from this exact model/Adam/replay/RNG state; the next scheduled Drive snapshot remains G14250."
+    },
+    {
+      "environment_states": 252338,
+      "event": "execution_environment_switch_reconciled_at_G14440",
+      "full_state_validated": true,
+      "last_verified_drive_games": 14250,
+      "local_full_state_games": 14440,
+      "local_state_sha256": "e9b0c1d48145c516434d74ad4fa5bf246022987c8d793c0623f3eb54a44658ca",
+      "optimizer_updates": 14439,
+      "replay_rows": 10000,
+      "resolution": "The process stopped after a complete atomic game checkpoint. The exact G14440 full state is preserved locally; a recovery snapshot will be registered before the next training batch."
+    },
+    {
+      "environment_states": 257039,
+      "event": "execution_environment_switch_reconciled_at_G14710",
+      "full_state_validated": true,
+      "last_verified_drive_games": 14690,
+      "local_full_state_games": 14710,
+      "local_state_sha256": "2490605661672f5a7f1244c98244db88c80c04feac04d62498dcf6625139ddd6",
+      "optimizer_updates": 14709,
+      "replay_rows": 10000,
+      "resolution": "An environment switch stopped the training process after a complete per-game checkpoint. The next step records an early verified Drive recovery point before continuing; no completed games are replayed."
+    },
+    {
+      "drive_snapshot_id": "rolling-G14960-recovery-91f9807e3580",
+      "environment_states": 261960,
+      "event": "execution_environment_switch_reconciled_at_G14984",
+      "full_state_validated": true,
+      "last_verified_drive_games": 14960,
+      "local_full_state_games": 14984,
+      "local_state_sha256": "1abe4503e242d46d32ced60f5a013bdc5e78d03f5d7df43e2d5b4e68770500a8",
+      "optimizer_updates": 14983,
+      "replay_rows": 10000,
+      "resolution": "Environment startup stopped the in-flight batch at an atomically saved complete game G14984. Progress reconciled to the validated checkpoint; 24 completed games since the G14960 Drive snapshot are preserved and will not be replayed."
+    },
+    {
+      "drive_snapshot_id": "rolling-G15210-recovery-04bb88f0346c",
+      "environment_states": 267049,
+      "event": "execution_environment_switch_reconciled_at_G15281",
+      "full_state_validated": true,
+      "last_verified_drive_games": 15210,
+      "local_full_state_games": 15281,
+      "local_state_sha256": "345610b26ef843e9fa0a51821c2b2568a432fe69e35ab3d1385adad4282fffb7",
+      "optimizer_updates": 15280,
+      "replay_rows": 10000,
+      "resolution": "Environment switch stopped batch at atomically saved G15281; exact full training state validated. 71 complete games since the last Drive snapshot are preserved, not replayed. Create an early verified snapshot before training resumes."
+    },
+    {
+      "drive_snapshot_id": "rolling-G15531-recovery-2921e322d991",
+      "environment_states": 272332,
+      "event": "execution_environment_switch_reconciled_at_G15590",
+      "full_state_validated": true,
+      "last_verified_drive_games": 15531,
+      "local_full_state_games": 15590,
+      "local_state_sha256": "a5d98d998a94736b139b5426635a3cc9998da5183cd6ca852e1ea00fcfc07537",
+      "optimizer_updates": 15589,
+      "replay_rows": 10000,
+      "resolution": "Environment switch stopped batch at atomically saved G15590; exact full state validated. 59 games are preserved and will not be replayed. Taking early Drive snapshot before resuming."
     }
   ],
+  "experiment_id": "wuziq-alphazero-g-v6-7-selfplay-20k",
   "verified_recovery_point": {
-    "games_completed": 11250,
-    "environment_states": 196573,
-    "optimizer_updates": 11249,
-    "replay_rows": 10000,
-    "training_state_sha256": "55d0eabc1be4f217aad43230055694567a4df852b871c281c59a02694729b91b",
-    "drive_archive_sha256": "10d62da81ddf6712260b75a06dac735690e46a36dbe2a4f52ab63da20ab08bb5",
-    "download_sha256_verified": true,
-    "empty_directory_restore_verified": true,
     "adam_restored": true,
-    "python_rng_restored": true,
+    "download_sha256_verified": true,
+    "drive_archive_sha256": "2921e322d99153be16fa5d52176ced7d800d8fcc17722bd9c5c28f4c4d4ca82e",
+    "drive_file_ids": [
+      "1Uu6FsnpoWGGkx-bkL30spX4vkmaj3mZ_",
+      "15QP66-y8IHaOQMg7GzJcwJu3QPig2dGb"
+    ],
+    "empty_directory_restore_verified": true,
+    "games_completed": 15531,
     "numpy_rng_restored": true,
-    "torch_rng_restored": true
+    "python_rng_restored": true,
+    "torch_rng_restored": true,
+    "training_state_sha256": "9643a30f5c75126c50e1e29addaefe1b384f3993c3050834dee68cd8de9afaf0"
   }
 }
