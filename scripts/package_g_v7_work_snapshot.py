@@ -1,5 +1,4 @@
-Møã—<Ýí:ÛÍ÷}¿vkGõw½´ßn5ÓÚiÝMøã—<,Uîš,´m´*ÉÚ¦Èh¶ö¥‰Ö­Š‰ìr¸©¶ÏéiÉè/ï
-+’ÉÚ¦Èh¶œ¸ûë®*m³úÞ²Ú+zûÂŠä²v©²-§.>ûgâ•ë…©àyÞ"žÇ«¶*'³îzW­Š‰ì#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Create a recovery snapshot and immutable game-data chunk for one V7 segment."""
 from __future__ import annotations
 
@@ -46,6 +45,7 @@ CODE_PATHS = (
     "third_party/AlphaZero_Gomoku/mcts_alphaZero.py",
     "third_party/AlphaZero_Gomoku/policy_value_net_pytorch.py",
     "scripts/run_g_v7_work_p6_50k.py",
+    "scripts/audit_g_v7_work_chunk.py",
     "scripts/package_g_v7_work_snapshot.py",
     "scripts/restore_g_v7_work_snapshot.py",
     "scripts/run_g_v7_work_p6_50k_evaluation.py",
