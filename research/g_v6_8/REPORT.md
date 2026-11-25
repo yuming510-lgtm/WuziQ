@@ -92,5 +92,5 @@
 - 原始记录：`results/games/`；开局和模型清单：`config/`；汇总：`results/summaries/`；完整审计：`results/audit.json`。
 - 可分析的汇总表：`results/scores.csv`；包含24个条件的胜平负、得分率、配对区间、颜色成绩、同开局G5000差值及CPU成本。
 - 复现：`PYTHONPATH=. python scripts/run_g_v6_8.py --max-new-games 40` 重复运行会跳过已完成且配置一致的棋局；完成后 `PYTHONPATH=. python scripts/run_g_v6_8.py --audit` 与 `--report`。
-- Drive恢复目录：https://drive.google.com/drive/folders/1G2H0BDZ6uiZjEZreDyFuFKVEyxXLLhlS。快照经下载SHA-256核验并在空目录恢复后登记；本地与远端提交信息记在`results/drive_backup_status.json`。
+- Drive恢复目录：https://drive.google.com/drive/folders/1G2H0BDZ6uiZjEZreDyFuFKVEyxXLLhlS。快照的文件ID、校验值和恢复验证记录保存在`results/drive_backup_status.json`。
 - 最终完整恢复包：[final-G00960](https://drive.google.com/file/d/1Q_I8nLSUpzFQj04gUMxRultdkwS_eIcO/view?usp=drivesdk)；SHA-256 `02432bff783ec8dcbff279504a51835d555a6812b00bb6dc3226c0b6b093408e`；空目录恢复核验 1004 个文件。
