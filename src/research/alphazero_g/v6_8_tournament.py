@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import time
 import zipfile
+from datetime import datetime
 from typing import Any
 
 import matplotlib
@@ -866,8 +867,12 @@ def report(root: str | Path = ROOT) -> dict[str, Any]:
     _write_chart(root, summaries)
     manifest = json.loads((root / ARTIFACT / "config/model_manifest.json").read_text(encoding="utf-8"))
     schedule = json.loads((root / ARTIFACT / "config/opening_schedule.json").read_text(encoding="utf-8"))
+    preflight = json.loads((root / ARTIFACT / "results/preflight.json").read_text(encoding="utf-8"))
+    progress = json.loads((root / ARTIFACT / "results/progress.json").read_text(encoding="utf-8"))
     backup_status_path = root / ARTIFACT / "results/drive_backup_status.json"
     backup_status = json.loads(backup_status_path.read_text(encoding="utf-8")) if backup_status_path.is_file() else {}
+    final_snapshot = next((item for item in reversed(backup_status.get("snapshots", []))
+                           if item.get("kind") == "final" and item.get("games_completed") == 960), None)
     by = {(s["candidate_games"], s["opponent"]): s for s in summaries}
     rows = []
     stage_lines = []
@@ -899,6 +904,10 @@ def report(root: str | Path = ROOT) -> dict[str, Any]:
     training_composite = {str(g): round(avg, 6) for g, avg in stage_lines}
     all_games = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((files / "results/games").glob("*.json"))]
     total_cpu_hours = sum(float(row.get("total_cpu_seconds", 0)) for row in all_games) / 3600
+    preflight_at = datetime.fromisoformat(preflight["created_at_utc"].replace("Z", "+00:00"))
+    final_game_at = datetime.fromisoformat(progress["updated_at_utc"].replace("Z", "+00:00"))
+    wall_elapsed = max(0, int((final_game_at - preflight_at).total_seconds()))
+    wall_elapsed_text = f"{wall_elapsed // 3600}小时{(wall_elapsed % 3600) // 60}分钟{wall_elapsed % 60}秒"
     scores_csv = files / "results/scores.csv"
     with scores_csv.open("w", encoding="utf-8", newline="") as handle:
         handle.write("games,opponent,games_played,wins,draws,losses,score_rate,ci95_low,ci95_high,black_score_rate,white_score_rate,same_opening_delta_vs_G5000,delta_ci95_low,delta_ci95_high,mean_candidate_cpu_seconds,mean_opponent_cpu_seconds\n")
@@ -916,6 +925,7 @@ def report(root: str | Path = ROOT) -> dict[str, Any]:
 - 所有条件共用{OPENING_GROUPS}个合法六手开局；按D4对称归一化，与本机可检索历史实验开局重叠数为0。开局表SHA-256：`{schedule['opening_schedule_sha256']}`。
 - G模型每步配置400次PUCT模拟（V6参考实现根扩展方式下记录399次根边访问）。温度、根噪声、候选网络均固定，未作训练或调参。
 - 资源预检：3个可见逻辑CPU、cgroup最多2核时间、内存上限8GiB；GPU不可用（PyTorch为CPU构建）；960局棋手进程累计CPU约{total_cpu_hours:.2f}小时，按逐局CPU实测求和。
+- 从预检记录到最后一局持久化约{wall_elapsed_text}；CPU时间为逐局进程CPU时间求和，与墙钟时间口径不同。
 
 ## 检查点身份
 
@@ -954,6 +964,7 @@ def report(root: str | Path = ROOT) -> dict[str, Any]:
 - 可分析的汇总表：`results/scores.csv`；包含24个条件的胜平负、得分率、配对区间、颜色成绩、同开局G5000差值及CPU成本。
 - 复现：`PYTHONPATH=. python scripts/run_g_v6_8.py --max-new-games 40` 重复运行会跳过已完成且配置一致的棋局；完成后 `PYTHONPATH=. python scripts/run_g_v6_8.py --audit` 与 `--report`。
 - Drive恢复目录：{backup_status.get('folder_url', '最终恢复链接见results/drive_backup_status.json')}。快照经下载SHA-256核验并在空目录恢复后登记；本地与远端提交信息记在`results/drive_backup_status.json`。
+{f"- 最终完整恢复包：[final-G00960]({final_snapshot['drive_url']})；SHA-256 `{final_snapshot['local_sha256']}`；空目录恢复核验 {final_snapshot['restored_files_verified']} 个文件。" if final_snapshot else "- 最终完整恢复包尚未登记；请检查`results/drive_backup_status.json`。"}
 """
     report_path = files / "REPORT.md"
     report_path.write_text(text, encoding="utf-8")
