@@ -1,0 +1,87 @@
+{
+  "affinity_cpu_count": 9,
+  "affinity_cpu_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "baseline_audit": {
+    "adam_restored": true,
+    "cumulative_training_cpu_seconds": 397075.726405704,
+    "environment_states": 348216,
+    "game_count": 20000,
+    "model_restored": true,
+    "numpy_rng_restored": true,
+    "optimizer_slots": 16,
+    "optimizer_updates": 19999,
+    "path": "/workspace/scratch/cb76ae7319e8/WuziQ/research/g_v7_work_p6_50k/inputs/G20000_training_state.pt",
+    "python_rng_restored": true,
+    "replay_restored": true,
+    "replay_rows": 10000,
+    "replay_sha256": "5bf87fecc611fe032fab4aec912b94da8d22e364d231f0070fb64216f19260d2",
+    "sha256": "f932ec34eaf4da6ac63bc77b6636e0517235a8986bbcf981139afa4cae7b7719",
+    "torch_rng_restored": true,
+    "valid": true
+  },
+  "blas_thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "checked_at_local": "2026-11-26T03:45:35+0800",
+  "cpu_quota": {
+    "/sys/fs/cgroup/cpu.max": null,
+    "/sys/fs/cgroup/cpu/cpu.cfs_quota_us": null
+  },
+  "cpu_stat": {
+    "/sys/fs/cgroup/cpu.stat": null,
+    "/sys/fs/cgroup/cpu/cpu.stat": null
+  },
+  "disk_free_bytes": 12894552064,
+  "disk_total_bytes": 20957446144,
+  "experiment_id": "wuziq-alphazero-g-v7-work-p6-50k",
+  "github": {
+    "base_commit": "9d2ac584c69d3e5f40ae7dc5dbb63697e3117068",
+    "branch": "research/alphazero-g-v7-work-p6-50k",
+    "code_fetch": "success; local baseline commit is present",
+    "head": "9d2ac584c69d3e5f40ae7dc5dbb63697e3117068",
+    "repository": "yuming510-lgtm/WuziQ"
+  },
+  "google_drive": {
+    "checkpoint_source_commit": "911242c10c8a374740db072f71a6b5f450a837e6",
+    "empty_directory_restore_and_full_state_audit": "success",
+    "source_archive_sha256": "5d41512351907c2653a7018569e2200aa2a8a4e22c1d439baca03794f8be43f1",
+    "source_download": "success; both original recovery shards downloaded",
+    "source_folder_id": "1bkakjo5fdhgELAzyuOohDE8wynVBY1fh",
+    "target_recovery_root": "https://drive.google.com/drive/folders/1BrIaJHAmdtTn1BHbQDWz7ReKrwLCXpSX"
+  },
+  "gpu": {
+    "cuda_available": false,
+    "device_count": 0,
+    "devices": []
+  },
+  "logical_cpu_count": 9,
+  "memory_available_bytes": 9512243200,
+  "memory_limit": {
+    "/sys/fs/cgroup/memory.max": null,
+    "/sys/fs/cgroup/memory/memory.limit_in_bytes": null
+  },
+  "memory_total_bytes": 10451427328,
+  "numpy": "2.5.1",
+  "physical_cpu_count": 9,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "run_id": "V7_WORK_P6_50K",
+  "torch": "2.13.0+cpu",
+  "torch_interop_threads": 1,
+  "torch_intraop_threads": 1
+}

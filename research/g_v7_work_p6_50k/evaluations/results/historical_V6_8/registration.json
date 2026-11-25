@@ -1,0 +1,57 @@
+{
+  "base_commit": "911242c10c8a374740db072f71a6b5f450a837e6",
+  "branch": "research/alphazero-g-v6-8-stage-comparison",
+  "candidate_simulations": 400,
+  "checkpoint_manifest_sha256": "afabb98776fd2cf0db35257cdfe6423a40f7b65b24ff22028f49f3e86f3daaa6",
+  "created_at_utc": "2026-11-25T03:20:10Z",
+  "experiment_id": "wuziq-alphazero-g-v6-8-stage-comparison",
+  "models": [
+    5000,
+    8000,
+    10000,
+    12000,
+    16000,
+    20000
+  ],
+  "models_frozen": true,
+  "opening_plies": 6,
+  "opening_schedule_sha256": "e7650c70c087b1ed6e1a3ece41d5e84b85e8a9f0b4c422bb6c13f57a014a313a",
+  "opening_seed": 680801,
+  "opponent_protocol": {
+    "A": {
+      "artificial_wait": false,
+      "engine": "original rule AI",
+      "time_limit_seconds": null
+    },
+    "B@50ms": {
+      "candidate_radius": 2,
+      "engine": "pure Minimax, Alpha-Beta disabled",
+      "max_depth": 4,
+      "settings_source": "historical SearchConfig defaults",
+      "time_limit_seconds": 0.05
+    },
+    "C@200ms": {
+      "candidate_radius": 2,
+      "engine": "Minimax + Alpha-Beta",
+      "max_depth": 69,
+      "time_limit_seconds": 0.2,
+      "timeout_returns_last_complete_depth": true
+    },
+    "C@50ms": {
+      "candidate_radius": 2,
+      "engine": "Minimax + Alpha-Beta",
+      "max_depth": 69,
+      "time_limit_seconds": 0.05,
+      "timeout_returns_last_complete_depth": true
+    }
+  },
+  "opponents": [
+    "A",
+    "B@50ms",
+    "C@50ms",
+    "C@200ms"
+  ],
+  "pairs_per_condition": 20,
+  "planned_games": 960,
+  "training": false
+}
