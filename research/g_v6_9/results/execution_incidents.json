@@ -1,0 +1,22 @@
+[
+  {
+    "run_id": "P2-R1",
+    "status": "excluded_invalid",
+    "reason": "Interrupted resume produced 107 metrics rows, duplicate game ordinals/IDs, and 102 committed updates rather than 100; run excluded from all comparisons.",
+    "resolution": "Fixed ordinal-gap resume handling and reran from the untouched G20000 baseline as P2-CLEAN-1; full audit passed."
+  },
+  {
+    "run_id": "P6-R1-SPAWN",
+    "status": "preheat_terminated_no_measurement",
+    "reason": "The six-worker spawn attempt exited with code 137 before a measured checkpoint was written; the hard cgroup memory/CPU limits were not exposed.",
+    "resolution": "Used fork for P6 and P8; both completed and passed full audits. Start method is recorded in every valid summary."
+  },
+  {
+    "run_id": "RESUME-GAP-SMOKE",
+    "status": "resume_correctness_passed_not_in_performance_set",
+    "reason": "Interrupted after ordinal 1 committed while ordinal 0 remained unfinished; resume completed ordinals 1, 2, 0, 3 with four unique IDs and exactly four updates.",
+    "checkpoint_game_count": 20004,
+    "checkpoint_optimizer_updates": 20003,
+    "full_audit_valid": true
+  }
+]
