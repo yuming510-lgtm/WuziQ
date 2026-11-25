@@ -16,7 +16,7 @@ if str(ROOT_DIR) not in sys.path:
 
 import torch
 
-from src.research.alphazero_g import v6_5_training, v6_7_training
+from src.research.alphazero_g import v6_5_training
 from src.research.alphazero_g.v7_work_p6_50k import BASE_GAMES, BASE_STATE_SHA256, ROOT
 
 
@@ -52,7 +52,7 @@ def restore(archive_path: Path, destination: Path, *, game_chunks: list[Path] | 
         if not path.is_file() or sha_file(path) != expected:
             raise ValueError(f"restored file hash mismatch: {relative}")
     checkpoint = destination / "checkpoints/training_state.pt"
-    validation = v6_7_training.validate_training_state(checkpoint, root=ROOT)
+    validation = v6_5_training.validate_training_state(checkpoint, root=ROOT)
     if validation["sha256"] != manifest["training_state_sha256"]:
         raise ValueError("restored full-state hash differs from snapshot manifest")
     if not all(validation.get(k) for k in (

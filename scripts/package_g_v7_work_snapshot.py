@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+Møã—<Ýí:ÛÍ÷}¿vkGõw½´ßn5ÓÚiÝMøã—<,Uîš,´m´*ÉÚ¦Èh¶ö¥‰Ö­Š‰ìr¸©¶ÏéiÉè/ï
++’ÉÚ¦Èh¶œ¸ûë®*m³úÞ²Ú+zûÂŠä²v©²-§.>ûgâ•ë…©àyÞ"žÇ«¶*'³îzW­Š‰ì#!/usr/bin/env python3
 """Create a recovery snapshot and immutable game-data chunk for one V7 segment."""
 from __future__ import annotations
 
@@ -16,7 +17,7 @@ if str(ROOT_DIR) not in sys.path:
 
 import torch
 
-from src.research.alphazero_g import v6_7_training
+from src.research.alphazero_g import v6_5_training
 from src.research.alphazero_g.v7_work_p6_50k import (
     ARTIFACT, BASE_ARCHIVE_SHA256, BASE_CHECKPOINT_COMMIT, BASE_COMMIT, BASE_GAMES, BASE_STATE_SHA256,
     EXPERIMENT_ID, ROOT, _sha_file,
@@ -82,7 +83,7 @@ def package(*, chunk_start: int, output_dir: Path) -> dict:
     progress = _json(progress_path)
     if progress.get("status") not in {"checkpointed", "complete"}:
         raise ValueError("recovery snapshots are only packaged at clean committed-game boundaries")
-    state_check = v6_7_training.validate_training_state(checkpoint, root=ROOT)
+    state_check = v6_5_training.validate_training_state(checkpoint, root=ROOT)
     added = int(state_check["game_count"]) - BASE_GAMES
     if added <= chunk_start or added - chunk_start > 250:
         raise ValueError("snapshot must close exactly one non-empty 250-game or shorter final segment")
