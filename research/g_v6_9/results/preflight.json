@@ -1,0 +1,43 @@
+{
+  "completion_estimates_cpu_hours": {
+    "conservative": 148.69464255265396,
+    "normal": 114.38049427127228,
+    "optimistic": 91.50439541701783
+  },
+  "cost_projection": {
+    "assumed_training_parallelism": 1,
+    "estimated_wall_hours_single_threaded": {
+      "conservative": 148.69464255265396,
+      "normal": 114.38049427127228,
+      "optimistic": 91.50439541701783
+    },
+    "historical_cpu_seconds_per_game": 13.725659312552674,
+    "historical_mean_moves": 17.361,
+    "pilot_cpu_seconds_per_move": 0.4719249536190477,
+    "pilot_scaled_cpu_seconds_per_game": 8.193089119780288,
+    "selected_normal_cpu_seconds_per_game": 13.725659312552674
+  },
+  "pilot_complete_training_step_cpu_seconds": 22.689582796010654,
+  "pilot_excluded_from_formal_training": true,
+  "pilot_game_id": "reference400_empty-game-020000",
+  "pilot_moves": 42,
+  "pilot_runner_cpu_seconds": 19.820848052000002,
+  "pilot_states": 42,
+  "pilot_wall_seconds": 22.772515613003634,
+  "resources": {
+    "conservative_training_cpu_hours": 148.69464255265396,
+    "cpu_estimate_basis": "observed V6.7 G8000-G20000 training CPU seconds, extrapolated to the remaining 30K games",
+    "cpu_quota": "200000 100000",
+    "current_games": 20000,
+    "disk_free_bytes": 9512947712,
+    "disk_total_bytes": 33770192896,
+    "historical_cpu_seconds_per_game": 13.725659312552674,
+    "historical_training_cpu_hours_for_remaining": 114.38049427127228,
+    "memory_limit_bytes": "8589934592",
+    "optimistic_training_cpu_hours": 91.50439541701783,
+    "remaining_games": 30000,
+    "torch": "2.15.0+cpu",
+    "torch_threads": 1,
+    "visible_cpus": 3
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "additional_games": 30000,
+  "base_commit": "ed7890e61034455c19b2c3bb37d6c6f3b7c8df6a",
+  "board_size": 9,
+  "branch": "research/alphazero-g-v6-9-train-50k",
+  "config_sha256": "d3f268d6bd13093c8729cb827ac6118782d90eb9235b296e80053902b26a0c1e",
+  "experiment_id": "wuziq-alphazero-g-v6-9-selfplay-50k",
+  "format_version": 1,
+  "milestones_games": [
+    25000,
+    30000,
+    35000,
+    40000,
+    45000,
+    50000
+  ],
+  "n_in_row": 5,
+  "reference_config_sha256": "ed39282807bc1d6a681ffa3afdeb4452587d117b29b18d372e06cb98c079d660",
+  "registered_at_utc": "2026-11-25T09:05:36Z",
+  "seed": 590502,
+  "simulations_per_move": 400,
+  "snapshot_policy": {
+    "drive_folder_id": "1Tk9gkA0MwzMMB6rueZB-IpFWLVrVx6Qq",
+    "permanent_milestones": [
+      20000,
+      25000,
+      30000,
+      35000,
+      40000,
+      45000,
+      50000
+    ],
+    "retain_latest_two_rolling": true,
+    "trigger": "first of 250 completed games or 3 CPU hours"
+  },
+  "source_drive_archive_sha256": "860218130788b7710df95441bac0439dbec53e4520ecc66b2f5ccc8d85e60911",
+  "source_drive_folder_id": "1bkakjo5fdhgELAzyuOohDE8wynVBY1fh",
+  "source_games": 20000,
+  "source_model_sha256": "aa8b69920675c9cd43a9b8a960abf3a43b88ebf6ad92dff2d2fb0ed2f4fcecbc",
+  "source_states": 348216,
+  "source_training_branch": "research/alphazero-g-v6-7-selfplay-20k",
+  "source_training_commit": "911242c10c8a374740db072f71a6b5f450a837e6",
+  "source_training_state_sha256": "f932ec34eaf4da6ac63bc77b6636e0517235a8986bbcf981139afa4cae7b7719",
+  "source_updates": 19999,
+  "target_games_cumulative": 50000,
+  "training_algorithm_modified": false,
+  "training_data": "current G0 self-play only; no teacher data, external labels, or shaped rewards"
+}

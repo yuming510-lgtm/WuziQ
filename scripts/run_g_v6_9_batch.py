@@ -1,0 +1,12 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from src.research.alphazero_g.v6_9_training import exclusive_training_lock, run_training_batch
+
+
+if __name__ == "__main__":
+    lock = Path("/tmp/wuziq-alphazero-g-v6-9-training.lock")
+    with exclusive_training_lock(lock):
+        print(json.dumps(run_training_batch(), ensure_ascii=False, sort_keys=True, indent=2))
