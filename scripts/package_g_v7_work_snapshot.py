@@ -122,6 +122,7 @@ def package(*, chunk_start: int, output_dir: Path) -> dict:
         "run_summary.json": summary_path,
         "per_game.jsonl": metrics_path,
         "baseline_provenance.json": RUN_DIR / "results/baseline_provenance.json",
+        "environment_events.json": RUN_DIR / "results/environment_events.json",
         "training_registration.json": ROOT / ARTIFACT / "config/training_registration.json",
         "preflight.json": ROOT / ARTIFACT / "config/preflight.json",
         "drive_locations.json": ROOT / ARTIFACT / "config/drive_locations.json",
