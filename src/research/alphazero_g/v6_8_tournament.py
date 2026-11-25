@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import subprocess
 import time
 import zipfile
 from typing import Any
@@ -815,6 +816,7 @@ def create_snapshot(root: str | Path = ROOT, *, label: str) -> dict[str, Any]:
     progress = json.loads(progress_path.read_text(encoding="utf-8")) if progress_path.is_file() else {"completed_games": 0}
     manifest = {"format_version": 1, "experiment_id": "wuziq-alphazero-g-v6-8-stage-comparison",
                 "label": label, "source_commit": SOURCE_COMMIT,
+                "code_commit": subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip(),
                 "completed_games": int(progress.get("completed_games", 0)),
                 "planned_games": 960, "files": files,
                 "created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
