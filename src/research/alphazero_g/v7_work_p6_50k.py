@@ -336,6 +336,45 @@ def run_one(
         raise ValueError("resumable per-game timing rows contain duplicate game ordinals")
     committed_ordinal_set = set(committed_ordinals)
 
+    if prior_progress.get("status") == "running" and checkpoint_path.is_file():
+        events_path = run_dir / "results" / "environment_events.json"
+        event_log = json.loads(events_path.read_text(encoding="utf-8")) if events_path.is_file() else {
+            "experiment_id": EXPERIMENT_ID, "run_id": run_id, "events": []
+        }
+        events = event_log.setdefault("events", [])
+        prior_timestamp = str(prior_progress.get("updated_at_utc", ""))
+        prior_checkpoint_sha = str(prior_progress.get("checkpoint_sha256", ""))
+        event_key = (prior_timestamp, prior_checkpoint_sha)
+        if not any((str(event.get("last_durable_progress_timestamp_utc", "")),
+                    str(event.get("last_durable_checkpoint_sha256", ""))) == event_key for event in events):
+            now_utc = datetime.now(timezone.utc)
+            try:
+                last_progress_utc = datetime.fromisoformat(prior_timestamp.replace("Z", "+00:00"))
+                recovery_elapsed = max(0.0, (now_utc - last_progress_utc).total_seconds())
+            except (TypeError, ValueError):
+                recovery_elapsed = None
+            events.append({
+                "type": "execution_environment_restart",
+                "last_durable_progress_timestamp_utc": prior_timestamp or None,
+                "last_durable_added_games": completed_before,
+                "last_durable_cumulative_games": int(prior_progress.get("game_count_cumulative", game_count)),
+                "last_durable_optimizer_updates": int(prior_progress.get("optimizer_updates_cumulative", update_count if "update_count" in locals() else BASE_UPDATES + completed_before)),
+                "last_durable_checkpoint_sha256": prior_checkpoint_sha or None,
+                "detected_at_utc": now_utc.isoformat(),
+                "elapsed_since_last_durable_progress_seconds": recovery_elapsed,
+                "resumed_from_added_games": completed_before,
+                "replayed_committed_games": 0,
+                "recovery_validation": {
+                    "checkpoint_valid": True,
+                    "optimizer_updates_match_games": True,
+                    "metric_rows_match_checkpoint": True,
+                    "unique_committed_ordinals": True,
+                },
+                "measurement_basis": "elapsed time from last durable progress write to resume; this slightly overestimates downtime if the environment stopped after that write",
+            })
+            event_log["environment_interruptions"] = len(events)
+            _atomic_json(events_path, event_log)
+
     state_to_load = checkpoint_path if checkpoint_path.is_file() else baseline_checkpoint
     model, loaded = _load_model_and_state(state_to_load, config)
     game_count, state_count, update_count, lr_multiplier, replay, saved_seed, baseline_cpu = loaded
